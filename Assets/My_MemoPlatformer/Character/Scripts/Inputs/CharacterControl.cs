@@ -6,7 +6,7 @@ namespace My_MemoPlatformer
 {
     public enum TransitionParameter
     {
-        Move,Jump
+        Move,Jump,ForceTransition
     }
 
 

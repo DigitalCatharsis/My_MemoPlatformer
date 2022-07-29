@@ -67,6 +67,8 @@
     <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\Inputs\VirtualInputManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\Inputs\KeyboardInput.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\Inputs\NIS\NIS_PlayerControls.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\Inputs\StatesScripts\ForceTransition.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\Inputs\StatesScripts\Landing.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\BOXOPHOBIC\Skybox Cubemap Extended\Core\Shaders\Skybox Cubemap Extended.shader" />

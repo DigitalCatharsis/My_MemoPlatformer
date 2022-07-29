@@ -24,6 +24,7 @@ namespace My_MemoPlatformer
             _controls.Land.Jump.performed += ctx =>
             {
                 _jump = ctx.ReadValue<float>();
+                Debug.Log(_jump);
             };                  
         }
         private void Update()
@@ -46,6 +47,9 @@ namespace My_MemoPlatformer
             {
                 VirtualInputManager.Instance.MoveLeft = false;
             }
+
+
+
 
             if (_jump > 0)
             {
