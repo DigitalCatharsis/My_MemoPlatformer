@@ -11,17 +11,36 @@ namespace My_MemoPlatformer
 
         public List<StateData> ListAbilityData = new List<StateData>();    
 
-        public void UpdateAll(CharacterState characterStateBase, Animator animator)
+        public void UpdateAll(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             foreach (StateData d in ListAbilityData)
             {
-                d.UpdateAbility(characterStateBase, animator);
+                d.UpdateAbility(characterState, animator, stateInfo);
             }
         }
 
+        public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
+            foreach (StateData d in ListAbilityData)
+            {
+                d.OnEnter(this, animator, stateInfo);
+            }
+        }
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            UpdateAll(this, animator);
+            foreach (StateData d in ListAbilityData)
+            {
+                UpdateAll(this, animator, stateInfo);
+            }
+            
+        }
+
+        public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
+            foreach (StateData d in ListAbilityData)
+            {
+                d.OnExit(this, animator, stateInfo);
+            }
         }
 
         public CharacterControl GetCharacterControl(Animator animator) //Глобальный метод для поиска аниматора у родителя. Используется в дочерних стейтах

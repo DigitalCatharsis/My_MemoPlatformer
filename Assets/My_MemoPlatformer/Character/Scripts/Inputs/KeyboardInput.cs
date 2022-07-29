@@ -9,8 +9,10 @@ namespace My_MemoPlatformer
         private NIS_PlayerControls _controls;
 
         private float _direction;
+
+        private float _jump;
         private void Awake()
-        {
+        {            
             _controls = new NIS_PlayerControls();
             _controls.Enable();
 
@@ -19,7 +21,10 @@ namespace My_MemoPlatformer
                 _direction = ctx.ReadValue<float>();
             };
 
-            //_controls.Land.Jump.performed += ctx => Jump();                       
+            _controls.Land.Jump.performed += ctx =>
+            {
+                _jump = ctx.ReadValue<float>();
+            };                  
         }
         private void Update()
         {
@@ -41,12 +46,20 @@ namespace My_MemoPlatformer
             {
                 VirtualInputManager.Instance.MoveLeft = false;
             }
-            //if (_direction == 0)
-            //{
-            //    VirtualInputManager.Instance.MoveRight = false;
-            //    VirtualInputManager.Instance.MoveLeft = false;
-            //}
+
+            if (_jump > 0)
+            {
+                VirtualInputManager.Instance.Jump = true;
+            }
+            else
+            {
+                VirtualInputManager.Instance.Jump = false;
+            }
+
         }
+
+
+
     }
 }
 

@@ -7,8 +7,9 @@ namespace My_MemoPlatformer
 
     public abstract class StateData : ScriptableObject
     {
-        public float Duration;
-
-        public abstract void UpdateAbility(CharacterState characterStateBase, Animator animator);
+        public abstract void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo);
+        public abstract void OnEnter(CharacterState characterState, Animator animator,AnimatorStateInfo stateInfo);
+        public abstract void OnExit(CharacterState characterState, Animator animator,AnimatorStateInfo stateInfo);
     }
+
 }

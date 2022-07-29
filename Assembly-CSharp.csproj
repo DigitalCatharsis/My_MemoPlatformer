@@ -57,9 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\Inputs\StatesScripts\StateData.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\SimpleCameraController.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\Inputs\StatesScripts\MoveForward.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\Singleton.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Scripts\Singleton.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\Inputs\CharacterControl.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\Inputs\ManualInput.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\Inputs\StatesScripts\Idle.cs" />
