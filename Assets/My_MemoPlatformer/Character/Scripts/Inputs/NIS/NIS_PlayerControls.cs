@@ -38,7 +38,7 @@ public partial class @NIS_PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Jump"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""07c4aa94-5736-4e89-b7ec-a751ecc66ce1"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
