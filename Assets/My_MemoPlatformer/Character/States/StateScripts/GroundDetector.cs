@@ -40,22 +40,24 @@ namespace My_MemoPlatformer
 
         bool IsGrounded(CharacterControl control)
         {
-            if (control.Rigid_Body.velocity.y > -0.01f && control.Rigid_Body.velocity.y <= 0.0f)
+            if (control.Rigid_Body.velocity.y > -0.001f && control.Rigid_Body.velocity.y <= 0.0f)
             {
                 return true;
             }
 
-            foreach (GameObject o in control.bottomSpheres)
+            if(control.Rigid_Body.velocity.y < 0f)
             {
-                Debug.DrawRay(o.transform.position, -Vector3.up * 0.7f, Color.yellow);
-
-                RaycastHit hit;
-                if (Physics.Raycast(o.transform.position, -Vector3.up, out hit, distance))
+                foreach (GameObject o in control.bottomSpheres)
                 {
-                    return true;
+                    Debug.DrawRay(o.transform.position, -Vector3.up * 0.7f, Color.yellow);
+
+                    RaycastHit hit;
+                    if (Physics.Raycast(o.transform.position, -Vector3.up, out hit, distance))
+                    {
+                        return true;
+                    }
                 }
             }
-
             return false;
         }
     }

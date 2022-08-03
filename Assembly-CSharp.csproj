@@ -56,21 +56,21 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\StatesScripts\Landing.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\StatesScripts\StateData.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\States\StateScripts\Landing.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\States\StateScripts\StateData.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Scripts\SimpleCameraController.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\StatesScripts\MoveForward.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\States\StateScripts\MoveForward.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Scripts\Singleton.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\CharacterControl.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\Inputs\ManualInput.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\StatesScripts\Idle.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\CharacterState.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\Inputs\VirtualInputManager.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\StatesScripts\ForceTransition.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\Inputs\KeyboardInput.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\Inputs\NIS\NIS_PlayerControls.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\StatesScripts\Jump.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\Scripts\StatesScripts\GroundDetector.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\BaseScripts\CharacterControl.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\BaseScripts\Inputs\ManualInput.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\States\StateScripts\Idle.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\BaseScripts\CharacterState.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\BaseScripts\Inputs\VirtualInputManager.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\States\StateScripts\ForceTransition.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\BaseScripts\Inputs\KeyboardInput.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\BaseScripts\Inputs\NIS\NIS_PlayerControls.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\States\StateScripts\Jump.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\States\StateScripts\GroundDetector.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\BOXOPHOBIC\Skybox Cubemap Extended\Core\Shaders\Skybox Cubemap Extended.shader" />

@@ -10,6 +10,7 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            animator.SetBool(TransitionParameter.Jump.ToString(), false);
         }
 
 

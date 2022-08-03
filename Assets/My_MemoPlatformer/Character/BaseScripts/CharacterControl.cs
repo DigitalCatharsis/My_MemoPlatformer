@@ -24,6 +24,7 @@ namespace My_MemoPlatformer
         public bool Jump;
         [SerializeField] private GameObject ColliderEdgePrefab;
         public List<GameObject> bottomSpheres = new List<GameObject>();
+        public List<GameObject> frontSpheres = new List<GameObject>();
 
         private Rigidbody _rigid;
         public Rigidbody Rigid_Body
@@ -51,25 +52,40 @@ namespace My_MemoPlatformer
 
             GameObject bottomFront = CreateEdgeSphere(new Vector3(0f, bottom, front));
             GameObject bottomBack = CreateEdgeSphere(new Vector3(0f, bottom, back));
+            GameObject topFront = CreateEdgeSphere(new Vector3(0f, top, front));
+            //GameObject topBack = CreateEdgeSphere(new Vector3(0f, top, front));
 
             bottomFront.transform.parent = this.transform; //Делаем его дочерним
             bottomBack.transform.parent = this.transform;
+            topFront.transform.parent = this.transform;
 
             bottomSpheres.Add(bottomFront);
             bottomSpheres.Add(bottomBack);
 
-            float sec = (bottomFront.transform.position - bottomBack.transform.position).magnitude / 5f; //Получаем одну секцию длинны, деленной на пять
+            frontSpheres.Add(bottomFront);
+            frontSpheres.Add(topFront);
+            //frontSpheres.Add(topBack);
 
-            for (int i=0; i < 4; i++)
-            {
-                Vector3 pos = bottomBack.transform.position + (Vector3.forward) * sec * (i + 1);  //Получаем секцию
+            float horSec = (bottomFront.transform.position - bottomBack.transform.position).magnitude / 5f; //Получаем одну секцию длинны, деленной на пять            
+            CreateMiddleSpheres(bottomFront, -this.transform.forward, horSec, 4, bottomSpheres);
+            
 
-                GameObject newObj =  CreateEdgeSphere(pos); //Спавним в каждой секции сферу
-                newObj.transform.parent = this.transform; //Делаем его дочерним
-                bottomSpheres.Add(newObj);  //добавляем в список
-            }
+            float verSec = (bottomFront.transform.position - topFront.transform.position).magnitude / 10f; //Получаем одну секцию длинны, деленной на 10
+            CreateMiddleSpheres(bottomFront, this.transform.up, verSec, 9, frontSpheres);
         }
 
+        public void CreateMiddleSpheres(GameObject start, Vector3 dir, float sec, int interation, List<GameObject> spheresList)
+        {
+
+            for (int i = 0; i < interation; i++)
+            {
+                Vector3 pos = start.transform.position + (dir * sec * (i + 1));  //Получаем секцию
+
+                GameObject newObj = CreateEdgeSphere(pos); //Спавним в каждой секции сферу
+                newObj.transform.parent = this.transform; //Делаем его дочерним
+                spheresList.Add(newObj);  //добавляем в список
+            }
+        }
         private GameObject CreateEdgeSphere (Vector3 pos)
         {
             GameObject obj = Instantiate(ColliderEdgePrefab,pos,Quaternion.identity);

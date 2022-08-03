@@ -13,6 +13,7 @@ namespace My_MemoPlatformer
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             characterState.GetCharacterControl(animator).Rigid_Body.AddForce(Vector3.up * JumpForce);
+            animator.SetBool(TransitionParameter.Grounded.ToString(), false);
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
