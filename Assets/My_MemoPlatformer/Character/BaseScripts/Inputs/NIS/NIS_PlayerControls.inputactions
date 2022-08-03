@@ -7,7 +7,7 @@
             "actions": [
                 {
                     "name": "Move",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "87991c87-ce61-4a86-802f-c76e9a09b796",
                     "expectedControlType": "",
                     "processors": "",
@@ -16,7 +16,7 @@
                 },
                 {
                     "name": "Jump",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "07c4aa94-5736-4e89-b7ec-a751ecc66ce1",
                     "expectedControlType": "Button",
                     "processors": "",

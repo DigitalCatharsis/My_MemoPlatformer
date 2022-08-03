@@ -26,6 +26,10 @@ namespace My_MemoPlatformer
         public List<GameObject> bottomSpheres = new List<GameObject>();
         public List<GameObject> frontSpheres = new List<GameObject>();
 
+        [SerializeField] public float gravityMultipliyer;
+        [SerializeField] public float pullMultipliyer;
+
+
         private Rigidbody _rigid;
         public Rigidbody Rigid_Body
         {
@@ -72,6 +76,19 @@ namespace My_MemoPlatformer
 
             float verSec = (bottomFront.transform.position - topFront.transform.position).magnitude / 10f; //Получаем одну секцию длинны, деленной на 10
             CreateMiddleSpheres(bottomFront, this.transform.up, verSec, 9, frontSpheres);
+        }
+
+        private void FixedUpdate()
+        {
+            if (Rigid_Body.velocity.y < 0f)
+            {
+                Rigid_Body.velocity += (-Vector3.up * gravityMultipliyer);
+            }
+
+            if (Rigid_Body.velocity.y > 0f && !Jump)
+            {
+                Rigid_Body.velocity += (-Vector3.up * pullMultipliyer);
+            }
         }
 
         public void CreateMiddleSpheres(GameObject start, Vector3 dir, float sec, int interation, List<GameObject> spheresList)
