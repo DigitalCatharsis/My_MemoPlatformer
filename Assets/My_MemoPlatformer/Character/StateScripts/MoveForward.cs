@@ -44,10 +44,11 @@ namespace My_MemoPlatformer
 
             if (control.MoveRight)
             {
+
+                control.transform.rotation = Quaternion.Euler(0f, 0, 0f);
                 if (!CheckFront(control))
                 {
                     control.transform.Translate(Vector3.forward * Speed * SpeedGraph.Evaluate(stateInfo.normalizedTime) * Time.deltaTime);
-                    control.transform.rotation = Quaternion.Euler(0f, 0, 0f);
                 }
 
             }
@@ -55,10 +56,11 @@ namespace My_MemoPlatformer
             if (control.MoveLeft)
             {
                 {
+
+                    control.transform.rotation = Quaternion.Euler(0f, 180, 0f);
                     if (!CheckFront(control))
                     {
                         control.transform.Translate(Vector3.forward * Speed * SpeedGraph.Evaluate(stateInfo.normalizedTime) * Time.deltaTime);
-                        control.transform.rotation = Quaternion.Euler(0f, 180, 0f);
                     }
                 }
             }
