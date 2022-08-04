@@ -18,7 +18,7 @@ namespace My_MemoPlatformer
         // [SerializeField] private Camera _Playercamera;
         //private Vector3 _cameraOffset = new Vector3(0, 2.0f, -12.0f);
 
-        [SerializeField] Animator _animator;
+        [SerializeField] private Animator _animator;
         public bool MoveRight;
         public bool MoveLeft;
         public bool Jump;

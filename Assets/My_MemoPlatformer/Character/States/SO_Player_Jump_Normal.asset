@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b095a8e4be93540459b40b21115b915c, type: 3}
   m_Name: SO_Player_Jump_Normal
   m_EditorClassIdentifier: 
-  jumpForce: 380
-  gravity:
+  _jumpForce: 360
+  _gravity:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -37,7 +37,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  pull:
+  _pull:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
