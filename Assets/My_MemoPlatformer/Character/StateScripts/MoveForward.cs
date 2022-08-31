@@ -12,6 +12,7 @@ namespace My_MemoPlatformer
         [SerializeField] private float Speed;
         [SerializeField] private float BlockDistance;
 
+        private bool _self;
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
@@ -70,11 +71,25 @@ namespace My_MemoPlatformer
         {
             foreach (GameObject o in control.frontSpheres)
             {
+                _self = false;
                 Debug.DrawRay(o.transform.position, control.transform.forward * 0.3f, Color.yellow);
                 RaycastHit hit;
                 if (Physics.Raycast(o.transform.position, control.transform.forward, out hit, BlockDistance))
                 {
-                    return true;
+                    foreach(Collider c in control.RagdollParts)
+                    {
+                        if(c.gameObject == hit.collider.gameObject) //if raycast hitting collider from ragdoll ignore it
+                        {
+                            _self = true;
+                            break;
+                        }
+                    }
+
+                    if (!_self)
+                    {
+                        return true;
+                    } 
+                    
                 }
             }
             return false;

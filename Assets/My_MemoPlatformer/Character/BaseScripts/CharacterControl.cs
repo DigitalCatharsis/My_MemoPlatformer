@@ -25,6 +25,7 @@ namespace My_MemoPlatformer
         [SerializeField] private GameObject ColliderEdgePrefab;
         public List<GameObject> bottomSpheres = new List<GameObject>();
         public List<GameObject> frontSpheres = new List<GameObject>();
+        public List<Collider> RagdollParts = new List<Collider>();
 
         [SerializeField] public float gravityMultipliyer;
         [SerializeField] public float pullMultipliyer;
@@ -43,9 +44,63 @@ namespace My_MemoPlatformer
             }
         }
 
-
-
         private void Awake()
+        {
+            SetRagdollParts();
+            SetColliderSpheres();
+        }
+
+        private void SetRagdollParts()
+        {
+            Collider[] colliders = this.gameObject.GetComponentsInChildren<Collider>(); //Get all the colliders in the hierarchy
+
+            foreach(Collider c in colliders)
+            {
+                if (c.gameObject != this.gameObject)  //if the collider that we found is not the same as in the charactercontrol
+                {
+                    c.isTrigger = true;
+                    RagdollParts.Add(c);
+                } 
+            }
+        }
+
+        //private IEnumerator Start()
+        //{
+        //    yield return new WaitForSeconds(5f);
+        //    Rigid_Body.AddForce(200f * Vector3.up);
+        //    yield return new WaitForSeconds(0.5f);
+        //    TurnOnRagdoll();
+        //}
+
+        private void TurnOnRagdoll()
+        {
+            Rigid_Body.useGravity = false;
+            Rigid_Body.velocity = Vector3.zero;
+            this.gameObject.GetComponent<BoxCollider>().enabled = false;
+            _animator.enabled = false;
+            _animator.avatar = null;
+
+            foreach (Collider c in RagdollParts)
+            {
+                c.isTrigger = false;
+                c.attachedRigidbody.velocity = Vector3.zero;
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (Rigid_Body.velocity.y < 0f)
+            {
+                Rigid_Body.velocity += (-Vector3.up * gravityMultipliyer);
+            }
+
+            if (Rigid_Body.velocity.y > 0f && !Jump)
+            {
+                Rigid_Body.velocity += (-Vector3.up * pullMultipliyer);
+            }
+        }
+
+        private void SetColliderSpheres()
         {
             BoxCollider box = GetComponent<BoxCollider>();
 
@@ -72,23 +127,10 @@ namespace My_MemoPlatformer
 
             float horSec = (bottomFront.transform.position - bottomBack.transform.position).magnitude / 5f; //Получаем одну секцию длинны, деленной на пять            
             CreateMiddleSpheres(bottomFront, -this.transform.forward, horSec, 4, bottomSpheres);
-            
+
 
             float verSec = (bottomFront.transform.position - topFront.transform.position).magnitude / 10f; //Получаем одну секцию длинны, деленной на 10
             CreateMiddleSpheres(bottomFront, this.transform.up, verSec, 9, frontSpheres);
-        }
-
-        private void FixedUpdate()
-        {
-            if (Rigid_Body.velocity.y < 0f)
-            {
-                Rigid_Body.velocity += (-Vector3.up * gravityMultipliyer);
-            }
-
-            if (Rigid_Body.velocity.y > 0f && !Jump)
-            {
-                Rigid_Body.velocity += (-Vector3.up * pullMultipliyer);
-            }
         }
 
         public void CreateMiddleSpheres(GameObject start, Vector3 dir, float sec, int interation, List<GameObject> spheresList)
