@@ -9,7 +9,8 @@ namespace My_MemoPlatformer
     {
         public bool MoveRight;
         public bool MoveLeft;
-        public bool Jump; 
+        public bool Jump;
+        public bool Attack;
     }
 
 }

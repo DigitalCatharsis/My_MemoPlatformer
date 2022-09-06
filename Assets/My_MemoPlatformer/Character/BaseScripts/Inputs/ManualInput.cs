@@ -42,6 +42,16 @@ namespace My_MemoPlatformer
             {
                 characterControl.Jump = false;
             }
+
+            if (VirtualInputManager.Instance.Attack)
+            {
+                characterControl.Attack = true;
+            }
+            else
+            {
+                characterControl.Attack = false;
+            }
+
         }
     }
 

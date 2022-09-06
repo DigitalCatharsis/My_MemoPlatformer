@@ -82,7 +82,7 @@ namespace My_MemoPlatformer
 
         void Update()
         {
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.RightArrow))
             {
                 VirtualInputManager.Instance.MoveRight = true;
             }
@@ -91,7 +91,7 @@ namespace My_MemoPlatformer
                 VirtualInputManager.Instance.MoveRight = false;
             }
 
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
                 VirtualInputManager.Instance.MoveLeft = true;
             }
@@ -107,6 +107,15 @@ namespace My_MemoPlatformer
             else
             {
                 VirtualInputManager.Instance.Jump = false;
+            }
+
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                VirtualInputManager.Instance.Attack = true;
+            }
+            else
+            {
+                VirtualInputManager.Instance.Attack = false;
             }
         }
 

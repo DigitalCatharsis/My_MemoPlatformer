@@ -9,7 +9,8 @@ namespace My_MemoPlatformer
         Move,
         Jump,
         ForceTransition,
-        Grounded
+        Grounded,
+        Attack,
     }
 
 
@@ -22,6 +23,8 @@ namespace My_MemoPlatformer
         public bool MoveRight;
         public bool MoveLeft;
         public bool Jump;
+        public bool Attack;
+
         [SerializeField] private GameObject ColliderEdgePrefab;
         public List<GameObject> bottomSpheres = new List<GameObject>();
         public List<GameObject> frontSpheres = new List<GameObject>();
