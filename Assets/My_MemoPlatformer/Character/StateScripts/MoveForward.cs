@@ -44,7 +44,7 @@ namespace My_MemoPlatformer
         {
             if (!CheckFront(control))
             {
-                control.transform.Translate(Vector3.forward * _speed * _speedGraph.Evaluate(stateInfo.normalizedTime) * Time.deltaTime);
+                control.MoveForward(_speed, _speedGraph.Evaluate(stateInfo.normalizedTime));
             }
         }
 
@@ -68,7 +68,7 @@ namespace My_MemoPlatformer
                 control.transform.rotation = Quaternion.Euler(0f, 0, 0f);
                 if (!CheckFront(control))
                 {
-                    control.transform.Translate(Vector3.forward * _speed * _speedGraph.Evaluate(stateInfo.normalizedTime) * Time.deltaTime);
+                    control.MoveForward(_speed, _speedGraph.Evaluate(stateInfo.normalizedTime));
                 }
             }
 
@@ -79,7 +79,7 @@ namespace My_MemoPlatformer
                     control.transform.rotation = Quaternion.Euler(0f, 180, 0f);
                     if (!CheckFront(control))
                     {
-                        control.transform.Translate(Vector3.forward * _speed * _speedGraph.Evaluate(stateInfo.normalizedTime) * Time.deltaTime);
+                        control.MoveForward(_speed, _speedGraph.Evaluate(stateInfo.normalizedTime));
                     }
                 }
             }
@@ -113,7 +113,7 @@ namespace My_MemoPlatformer
         {
             CharacterControl control = col.transform.root.GetComponent<CharacterControl>();
 
-            if (control = null)
+            if (control == null)
             {
                 return false;
             }

@@ -19,7 +19,7 @@ namespace My_MemoPlatformer
         // [SerializeField] private Camera _Playercamera;
         //private Vector3 _cameraOffset = new Vector3(0, 2.0f, -12.0f);
 
-        [SerializeField] private Animator _animator;
+        [SerializeField] private Animator SkinnedMeshAnimator;
         public bool MoveRight;
         public bool MoveLeft;
         public bool Jump;
@@ -29,6 +29,7 @@ namespace My_MemoPlatformer
         public List<GameObject> bottomSpheres = new List<GameObject>();
         public List<GameObject> frontSpheres = new List<GameObject>();
         public List<Collider> RagdollParts = new List<Collider>();
+        public List<Collider> CollidingParts = new List<Collider>();
 
         [SerializeField] public float gravityMultipliyer;
         [SerializeField] public float pullMultipliyer;
@@ -49,9 +50,57 @@ namespace My_MemoPlatformer
 
         private void Awake()
         {
+            bool SwitchBack = false;
+
+            if (!IsFacingForward()) 
+            {
+                SwitchBack = true;
+            }
+
+            FaceForward(true);
             SetRagdollParts();
             SetColliderSpheres();
+
+            if (SwitchBack)
+            {
+                FaceForward(false);
+            }
         }
+
+        private void OnTriggerEnter(Collider col) //callback function whenever somth touches or enters or otuches raggdoll body parts
+        {
+            if (RagdollParts.Contains(col))
+            {
+                return;
+            }
+
+            CharacterControl control = col.transform.root.GetComponent<CharacterControl>();
+
+            if (control == null) 
+            {
+                return ;
+            }
+
+            if (col.gameObject == control.gameObject) //not a boxcolllider itself
+            {
+                return;
+            }
+
+            if (!CollidingParts.Contains(col))
+            {
+                CollidingParts.Add(col);
+            }
+
+        }
+
+        private void OnTriggerExit(Collider col)
+        {
+            if (CollidingParts.Contains(col))
+            {
+                CollidingParts.Remove(col);
+            }
+        }
+
 
         private void SetRagdollParts()
         {
@@ -80,8 +129,8 @@ namespace My_MemoPlatformer
             Rigid_Body.useGravity = false;
             Rigid_Body.velocity = Vector3.zero;
             this.gameObject.GetComponent<BoxCollider>().enabled = false;
-            _animator.enabled = false;
-            _animator.avatar = null;
+            SkinnedMeshAnimator.enabled = false;
+            SkinnedMeshAnimator.avatar = null;
 
             foreach (Collider c in RagdollParts)
             {
@@ -159,10 +208,39 @@ namespace My_MemoPlatformer
             //  _Playercamera.transform.position = transform.position + _cameraOffset;
         }
 
-
         private void LateUpdate()
         {
             SetCamera();
+        }
+
+        public void MoveForward(float speed, float speedGraph)
+        {
+            transform.Translate(Vector3.forward * speed * speedGraph * Time.deltaTime);
+        }
+
+        public void FaceForward (bool forward)
+        {
+            if (forward)
+            {
+                transform.rotation = Quaternion.Euler(0f,0f,0f);
+                
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            }
+        }
+
+        public bool IsFacingForward()
+        {
+            if (transform.forward.z > 0f)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
     }

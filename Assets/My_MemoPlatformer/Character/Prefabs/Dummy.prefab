@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee80179171b79c54e86b124755c65156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 2949046915898000141}
+  SkinnedMeshAnimator: {fileID: 2949046915898000141}
   MoveRight: 0
   MoveLeft: 0
   Jump: 0
@@ -70,6 +70,7 @@ MonoBehaviour:
   bottomSpheres: []
   frontSpheres: []
   RagdollParts: []
+  CollidingParts: []
   gravityMultipliyer: 0
   pullMultipliyer: 0
 --- !u!114 &5257276571747773379
