@@ -18,38 +18,38 @@ namespace My_MemoPlatformer
         {
             if (VirtualInputManager.Instance.MoveRight)
             {
-                characterControl.MoveRight = true;
+                characterControl.moveRight = true;
             }
             else
             {
-                characterControl.MoveRight = false;
+                characterControl.moveRight = false;
             }
 
             if (VirtualInputManager.Instance.MoveLeft)
             {
-                characterControl.MoveLeft = true;
+                characterControl.moveLeft = true;
             }
             else
             {
-                characterControl.MoveLeft = false;
+                characterControl.moveLeft = false;
             }
 
             if (VirtualInputManager.Instance.Jump)
             {
-                characterControl.Jump = true;
+                characterControl.jump = true;
             }
             else
             {
-                characterControl.Jump = false;
+                characterControl.jump = false;
             }
 
             if (VirtualInputManager.Instance.Attack)
             {
-                characterControl.Attack = true;
+                characterControl.attack = true;
             }
             else
             {
-                characterControl.Attack = false;
+                characterControl.attack = false;
             }
 
         }

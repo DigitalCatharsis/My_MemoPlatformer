@@ -19,17 +19,17 @@ namespace My_MemoPlatformer
         // [SerializeField] private Camera _Playercamera;
         //private Vector3 _cameraOffset = new Vector3(0, 2.0f, -12.0f);
 
-        [SerializeField] private Animator SkinnedMeshAnimator;
-        public bool MoveRight;
-        public bool MoveLeft;
-        public bool Jump;
-        public bool Attack;
+        [SerializeField] public Animator skinnedMeshAnimator;
+        public bool moveRight;
+        public bool moveLeft;
+        public bool jump;
+        public bool attack;
 
-        [SerializeField] private GameObject ColliderEdgePrefab;
+        [SerializeField] private GameObject colliderEdgePrefab;
         public List<GameObject> bottomSpheres = new List<GameObject>();
         public List<GameObject> frontSpheres = new List<GameObject>();
-        public List<Collider> RagdollParts = new List<Collider>();
-        public List<Collider> CollidingParts = new List<Collider>();
+        public List<Collider> ragdollParts = new List<Collider>();
+        public List<Collider> collidingParts = new List<Collider>();
 
         [SerializeField] public float gravityMultipliyer;
         [SerializeField] public float pullMultipliyer;
@@ -50,18 +50,18 @@ namespace My_MemoPlatformer
 
         private void Awake()
         {
-            bool SwitchBack = false;
+            bool switchBack = false;
 
             if (!IsFacingForward()) 
             {
-                SwitchBack = true;
+                switchBack = true;
             }
 
             FaceForward(true);
             SetRagdollParts();
             SetColliderSpheres();
 
-            if (SwitchBack)
+            if (switchBack)
             {
                 FaceForward(false);
             }
@@ -69,7 +69,7 @@ namespace My_MemoPlatformer
 
         private void OnTriggerEnter(Collider col) //callback function whenever somth touches or enters or otuches raggdoll body parts
         {
-            if (RagdollParts.Contains(col))
+            if (ragdollParts.Contains(col))
             {
                 return;
             }
@@ -86,18 +86,18 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (!CollidingParts.Contains(col))
+            if (!collidingParts.Contains(col))
             {
-                CollidingParts.Add(col);
+                collidingParts.Add(col);
             }
 
         }
 
         private void OnTriggerExit(Collider col)
         {
-            if (CollidingParts.Contains(col))
+            if (collidingParts.Contains(col))
             {
-                CollidingParts.Remove(col);
+                collidingParts.Remove(col);
             }
         }
 
@@ -111,7 +111,7 @@ namespace My_MemoPlatformer
                 if (c.gameObject != this.gameObject)  //if the collider that we found is not the same as in the charactercontrol
                 {
                     c.isTrigger = true;
-                    RagdollParts.Add(c);
+                    ragdollParts.Add(c);
                 } 
             }
         }
@@ -129,10 +129,10 @@ namespace My_MemoPlatformer
             Rigid_Body.useGravity = false;
             Rigid_Body.velocity = Vector3.zero;
             this.gameObject.GetComponent<BoxCollider>().enabled = false;
-            SkinnedMeshAnimator.enabled = false;
-            SkinnedMeshAnimator.avatar = null;
+            skinnedMeshAnimator.enabled = false;
+            skinnedMeshAnimator.avatar = null;
 
-            foreach (Collider c in RagdollParts)
+            foreach (Collider c in ragdollParts)
             {
                 c.isTrigger = false;
                 c.attachedRigidbody.velocity = Vector3.zero;
@@ -146,7 +146,7 @@ namespace My_MemoPlatformer
                 Rigid_Body.velocity += (-Vector3.up * gravityMultipliyer);
             }
 
-            if (Rigid_Body.velocity.y > 0f && !Jump)
+            if (Rigid_Body.velocity.y > 0f && !jump)
             {
                 Rigid_Body.velocity += (-Vector3.up * pullMultipliyer);
             }
@@ -199,7 +199,7 @@ namespace My_MemoPlatformer
         }
         private GameObject CreateEdgeSphere (Vector3 pos)
         {
-            GameObject obj = Instantiate(ColliderEdgePrefab,pos,Quaternion.identity);
+            GameObject obj = Instantiate(colliderEdgePrefab,pos,Quaternion.identity);
             return obj;
         }
 

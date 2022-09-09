@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b095a8e4be93540459b40b21115b915c, type: 3}
   m_Name: SO_Player_Jump_Normal
   m_EditorClassIdentifier: 
-  _jumpForce: 360
-  _gravity:
+  jumpForce: 360
+  gravity:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -25,6 +25,15 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0
       outWeight: 0
+    - serializedVersion: 3
+      time: 0.37
+      value: 0.32
+      inSlope: 0.018945605
+      outSlope: 0.018945605
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 0.1
@@ -37,7 +46,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _pull:
+  pull:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -49,6 +58,15 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0
       outWeight: 0
+    - serializedVersion: 3
+      time: 0.36
+      value: 0.32
+      inSlope: 0.02748005
+      outSlope: 0.02748005
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 0.1

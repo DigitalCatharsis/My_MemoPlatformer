@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2073025e3373c5344b7da775f3caeb3b, type: 3}
   m_Name: SO_Player_Jump_Lading_ForceTransition
   m_EditorClassIdentifier: 
-  TransitionTiming: 0.44
+  transitionTiming: 0.44

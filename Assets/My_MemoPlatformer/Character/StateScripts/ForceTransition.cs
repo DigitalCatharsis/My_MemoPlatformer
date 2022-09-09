@@ -9,7 +9,7 @@ namespace My_MemoPlatformer
     public class ForceTransition : StateData
     {
         [Range(0.01f, 1f)]
-        public float TransitionTiming;
+        public float transitionTiming;
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
@@ -19,7 +19,7 @@ namespace My_MemoPlatformer
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             // AnimatorStateInfo.normalizedTime  - The integer part is the number of time a state has been looped. The fractional part is the % (0-1) of progress in the current loop.
-            if (stateInfo.normalizedTime >= TransitionTiming)
+            if (stateInfo.normalizedTime >= transitionTiming)
             {
                 animator.SetBool(TransitionParameter.ForceTransition.ToString(), true);
             }

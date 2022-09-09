@@ -8,10 +8,10 @@ namespace My_MemoPlatformer
     [CreateAssetMenu(fileName = "New state", menuName = " My_MemoPlatformer/AbilityData/MoveForward")]
     public class MoveForward : StateData
     {
-        [SerializeField] private bool _constant; //move no matter what
-        [SerializeField] private AnimationCurve _speedGraph;
-        [SerializeField] private float _speed;
-        [SerializeField] private float _blockDistance;
+        [SerializeField] private bool constant; //move no matter what
+        [SerializeField] private AnimationCurve speedGraph;
+        [SerializeField] private float speed;
+        [SerializeField] private float blockDistance;
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
@@ -25,12 +25,12 @@ namespace My_MemoPlatformer
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
 
-            if (control.Jump)
+            if (control.jump)
             {
                 animator.SetBool(TransitionParameter.Jump.ToString(), true);
             }
 
-            if (_constant)
+            if (constant)
             {
                 ConstantMove(control, animator, stateInfo);
             }
@@ -44,42 +44,42 @@ namespace My_MemoPlatformer
         {
             if (!CheckFront(control))
             {
-                control.MoveForward(_speed, _speedGraph.Evaluate(stateInfo.normalizedTime));
+                control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
             }
         }
 
         private void ControlledMove(CharacterControl control, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (control.MoveRight && control.MoveLeft)
+            if (control.moveRight && control.moveLeft)
             {
                 animator.SetBool(TransitionParameter.Move.ToString(), false);
                 return;
             }
 
-            if (!control.MoveRight && !control.MoveLeft)
+            if (!control.moveRight && !control.moveLeft)
             {
                 animator.SetBool(TransitionParameter.Move.ToString(), false);
                 return;
             }
 
-            if (control.MoveRight)
+            if (control.moveRight)
             {
 
                 control.transform.rotation = Quaternion.Euler(0f, 0, 0f);
                 if (!CheckFront(control))
                 {
-                    control.MoveForward(_speed, _speedGraph.Evaluate(stateInfo.normalizedTime));
+                    control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                 }
             }
 
-            if (control.MoveLeft)
+            if (control.moveLeft)
             {
                 {
 
                     control.transform.rotation = Quaternion.Euler(0f, 180, 0f);
                     if (!CheckFront(control))
                     {
-                        control.MoveForward(_speed, _speedGraph.Evaluate(stateInfo.normalizedTime));
+                        control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                     }
                 }
             }
@@ -93,9 +93,9 @@ namespace My_MemoPlatformer
             {
                 Debug.DrawRay(o.transform.position, control.transform.forward * 0.3f, Color.yellow);
                 RaycastHit hit;
-                if (Physics.Raycast(o.transform.position, control.transform.forward, out hit, _blockDistance))
+                if (Physics.Raycast(o.transform.position, control.transform.forward, out hit, blockDistance))
                 {
-                    if (!control.RagdollParts.Contains(hit.collider))  //ѕроверка, что задетый коллайдер не часть колайдеров radoll
+                    if (!control.ragdollParts.Contains(hit.collider))  //ѕроверка, что задетый коллайдер не часть колайдеров radoll
                     {
                         if (!IsBodyPart(hit.collider))  // ѕроверка, что мы не задеваем...коллайдер меша. ¬ инспекторе - это пр€моугольный коллайдер
                         {
@@ -123,7 +123,7 @@ namespace My_MemoPlatformer
                 return false;
             }
 
-            if (control.RagdollParts.Contains(col)) //thats a part of ragdoll
+            if (control.ragdollParts.Contains(col)) //thats a part of ragdoll
             {
                 return true;
             }

@@ -19,21 +19,21 @@ namespace My_MemoPlatformer
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
 
-            if (control.Attack)
+            if (control.attack)
             {
                 animator.SetBool(TransitionParameter.Attack.ToString(), true);
             }
 
-            if (control.Jump)
+            if (control.jump)
             {
                 animator.SetBool(TransitionParameter.Jump.ToString(), true);
             }
 
-            if (control.MoveRight)
+            if (control.moveRight)
             {
                 animator.SetBool(TransitionParameter.Move.ToString(), true);
             }
-            if (control.MoveLeft)
+            if (control.moveLeft)
             {
                 animator.SetBool(TransitionParameter.Move.ToString(), true);
             }

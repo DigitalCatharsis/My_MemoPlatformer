@@ -56,19 +56,22 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\My_MemoPlatformer\Scripts\Managers\AttackManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\Landing.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\StateData.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\AttackInfo\AttackInfo.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\MoveForward.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Scripts\Singleton.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Scripts\Managers\Singleton.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Scripts\DamageDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\BaseScripts\CharacterControl.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\BaseScripts\Inputs\ManualInput.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Scripts\ManualInput.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\Idle.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\BaseScripts\CharacterState.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\BaseScripts\Inputs\VirtualInputManager.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Scripts\Managers\VirtualInputManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\Jump.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\ForceTransition.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\GroundDetector.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\BaseScripts\Inputs\KeyboardInput.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Scripts\KeyboardInput.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\Attack.cs" />
   </ItemGroup>
   <ItemGroup>

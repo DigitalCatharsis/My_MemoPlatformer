@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2062229375}
   - component: {fileID: 2062229377}
   - component: {fileID: 1679541605}
+  - component: {fileID: 2212924188337768878}
   m_Layer: 0
   m_Name: PlayerChar
   m_TagString: Untagged
@@ -47,8 +48,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4725182, y: 1.8486648, z: 0.35920876}
-  m_Center: {x: 0.009659849, y: 0.24855924, z: 0.06217894}
+  m_Size: {x: 0.4725182, y: 1.8974321, z: 0.409655}
+  m_Center: {x: 0.009659857, y: 0.2683562, z: 0.03695582}
 --- !u!114 &2062229375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,16 +62,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee80179171b79c54e86b124755c65156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkinnedMeshAnimator: {fileID: 6924433668402755407}
-  MoveRight: 0
-  MoveLeft: 0
-  Jump: 0
-  Attack: 0
-  ColliderEdgePrefab: {fileID: 6977181466952526126, guid: 14252d4c16f30bc44b4e47de024c6ff3, type: 3}
+  skinnedMeshAnimator: {fileID: 6924433668402755407}
+  moveRight: 0
+  moveLeft: 0
+  jump: 0
+  attack: 0
+  colliderEdgePrefab: {fileID: 6977181466952526126, guid: 14252d4c16f30bc44b4e47de024c6ff3, type: 3}
   bottomSpheres: []
   frontSpheres: []
-  RagdollParts: []
-  CollidingParts: []
+  ragdollParts: []
+  collidingParts: []
   gravityMultipliyer: 0
   pullMultipliyer: 0
 --- !u!114 &2062229377
@@ -99,8 +100,20 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
+  m_Constraints: 114
+  m_CollisionDetection: 1
+--- !u!114 &2212924188337768878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112489828913930244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ce156c695f6fa4dadd5a2b226dc977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6924433668395385391
 PrefabInstance:
   m_ObjectHideFlags: 0
