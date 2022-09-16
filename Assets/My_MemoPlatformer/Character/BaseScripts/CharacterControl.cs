@@ -67,51 +67,18 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void OnTriggerEnter(Collider col) //callback function whenever somth touches or enters or otuches raggdoll body parts
-        {
-            if (ragdollParts.Contains(col))
-            {
-                return;
-            }
-
-            CharacterControl control = col.transform.root.GetComponent<CharacterControl>();
-
-            if (control == null) 
-            {
-                return ;
-            }
-
-            if (col.gameObject == control.gameObject) //not a boxcolllider itself
-            {
-                return;
-            }
-
-            if (!collidingParts.Contains(col))
-            {
-                collidingParts.Add(col);
-            }
-
-        }
-
-        private void OnTriggerExit(Collider col)
-        {
-            if (collidingParts.Contains(col))
-            {
-                collidingParts.Remove(col);
-            }
-        }
-
-
         private void SetRagdollParts()
         {
             Collider[] colliders = this.gameObject.GetComponentsInChildren<Collider>(); //Get all the colliders in the hierarchy
 
             foreach(Collider c in colliders)
             {
-                if (c.gameObject != this.gameObject)  //if the collider that we found is not the same as in the charactercontrol
+                if (c.gameObject != this.gameObject)  //if the collider that we found is not the same as in the charactercontrol (//not a boxcolllider itself)
                 {
+                    //thats means its a ragdoll
                     c.isTrigger = true;
                     ragdollParts.Add(c);
+                    c.gameObject.AddComponent<TriggerDetector>();
                 } 
             }
         }

@@ -19,17 +19,17 @@ namespace My_MemoPlatformer
         public bool isRegistered;
         public bool isFinished;
 
-        public void ResetInfo(Attack attack)
+        public void ResetInfo(Attack attack, CharacterControl attacker)
         {
             isRegistered = false;
             isFinished = false;
             attackAbility = attack;
+            this.attacker = attacker;
         }
 
-        public void Register(Attack attack, CharacterControl attacker)
+        public void Register(Attack attack)
         {
             isRegistered = true;
-            this.attacker = attacker;
 
             attackAbility = attack;
             colliderNames = attack.colliderNames; 

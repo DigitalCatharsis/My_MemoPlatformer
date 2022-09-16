@@ -26,7 +26,7 @@ namespace My_MemoPlatformer
             GameObject obj = Instantiate(Resources.Load("AttackInfo", typeof(GameObject))) as GameObject;
             AttackInfo info = obj.GetComponent<AttackInfo>();
 
-            info.ResetInfo(this);
+            info.ResetInfo(this, characterState.GetCharacterControl(animator));
 
             if (!AttackManager.Instance.currentAttacks.Contains(info)) //Making a list of current attacks
             {
@@ -60,7 +60,7 @@ namespace My_MemoPlatformer
 
                     if (!info.isRegistered && info.attackAbility == this)
                     {
-                        info.Register(this, characterState.GetCharacterControl(animator));
+                        info.Register(this);
                     }
 
                 }

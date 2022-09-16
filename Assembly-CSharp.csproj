@@ -73,6 +73,7 @@
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\GroundDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Scripts\KeyboardInput.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\Attack.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Scripts\TriggerDetector.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\BOXOPHOBIC\Skybox Cubemap Extended\Core\Shaders\Skybox Cubemap Extended.shader" />

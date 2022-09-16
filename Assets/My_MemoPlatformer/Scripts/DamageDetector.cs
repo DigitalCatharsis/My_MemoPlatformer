@@ -83,6 +83,9 @@ namespace My_MemoPlatformer
             Debug.Log(info.attacker.gameObject.name + " hits " + this.gameObject.name);
             control.skinnedMeshAnimator.runtimeAnimatorController = info.attackAbility.GetDeathAnimator();
             info.currentHits++;
+
+            control.GetComponent<BoxCollider>().enabled = false;
+            control.Rigid_Body.useGravity = false;
         }
 
     }
