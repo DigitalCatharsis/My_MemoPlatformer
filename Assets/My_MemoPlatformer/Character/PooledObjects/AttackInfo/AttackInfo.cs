@@ -39,5 +39,11 @@ namespace My_MemoPlatformer
             maxHits = attack.maxHits;
             currentHits = 0;
         }
+
+        private void OnDisable()
+        {
+            isFinished = true;
+        }
+
     }
 }

@@ -54,7 +54,11 @@ namespace My_MemoPlatformer
                     RaycastHit hit;
                     if (Physics.Raycast(o.transform.position, -Vector3.up, out hit, distance))
                     {
-                        return true;
+                        if (!control.ragdollParts.Contains(hit.collider))
+                        {
+                            return true;
+                        }
+                        
                     }
                 }
             }

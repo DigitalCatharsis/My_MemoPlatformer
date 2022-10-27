@@ -18,14 +18,17 @@ namespace My_MemoPlatformer
         public int maxHits;
         public List<RuntimeAnimatorController> deathAnimators = new List<RuntimeAnimatorController>(); //list of death anination associated with attack?
 
+        private List<AttackInfo> finishedAttacks = new List<AttackInfo> ();
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             animator.SetBool(TransitionParameter.Attack.ToString(), false);
 
-            GameObject obj = Instantiate(Resources.Load("AttackInfo", typeof(GameObject))) as GameObject;
+            //GameObject obj = Instantiate(Resources.Load("AttackInfo", typeof(GameObject))) as GameObject;
+            GameObject obj = PoolManager.Instance.GetObject(PoolObjectType.ATTACKINFO); //obj.GetComponent<AttackInfo>();
             AttackInfo info = obj.GetComponent<AttackInfo>();
 
+            obj.SetActive(false); //set it active when we first get it
             info.ResetInfo(this, characterState.GetCharacterControl(animator));
 
             if (!AttackManager.Instance.currentAttacks.Contains(info)) //Making a list of current attacks
@@ -36,10 +39,7 @@ namespace My_MemoPlatformer
 
         }
 
-        public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
-            ClearAttack();
-        }
+    
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
@@ -79,21 +79,34 @@ namespace My_MemoPlatformer
                     if (info.attackAbility == this && !info.isFinished)
                     {
                         info.isFinished = true;
-                        Destroy(info.gameObject);
+                        info.GetComponent<PoolObject>().TurnOff();
+                        //Destroy(info.gameObject);
                         //info.deregister(this, characterState.GetCharacterControl(animator));
                     }
 
                 }
             }
         }
-
+        public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
+        {
+            ClearAttack();
+        }
         private void ClearAttack()
         {
-            for (int i = 0; i < AttackManager.Instance.currentAttacks.Count; i++)
+
+            foreach (AttackInfo info in AttackManager.Instance.currentAttacks)
             {
-                if (AttackManager.Instance.currentAttacks[i] == null || AttackManager.Instance.currentAttacks[i].isFinished)
+                if (info == null || info.isFinished)
                 {
-                    AttackManager.Instance.currentAttacks.RemoveAt(i);
+                    finishedAttacks.Add(info);
+                }
+            }
+
+            foreach (AttackInfo info in finishedAttacks)
+            {
+                if (AttackManager.Instance.currentAttacks.Contains(info))
+                {
+                    AttackManager.Instance.currentAttacks.Remove(info);
                 }
             }
         }

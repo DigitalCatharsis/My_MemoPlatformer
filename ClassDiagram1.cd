@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="My_MemoPlatformer.CharacterControl">
+    <Position X="20" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCEAQAAggAAAAAgAQCIYJAIAFAAACAAAEAiGAACUA=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Character\BaseScripts\CharacterControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="My_MemoPlatformer.CharacterState">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAYAAgAIAAAAEAIAAAAA=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Character\BaseScripts\CharacterState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="My_MemoPlatformer.AttackInfo">
+    <Position X="8" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAABBEIQAAABAAAAAQAABAAAAAAAAAAQBQAA=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Character\PooledObjects\AttackInfo\AttackInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="My_MemoPlatformer.Attack">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAEAAAAAAEIAAAABAAAAASAASAAACBIAAABACAAQ=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Character\StateScripts\Attack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="My_MemoPlatformer.ForceTransition">
+    <Position X="13" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAQAAAAAIAAAAACAAA=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Character\StateScripts\ForceTransition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="My_MemoPlatformer.GroundDetector">
+    <Position X="17.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAEAQAAAAAIAACAACAAA=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Character\StateScripts\GroundDetector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="My_MemoPlatformer.Idle">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAIAAAAACAAA=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Character\StateScripts\Idle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="My_MemoPlatformer.Jump">
+    <Position X="6.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAQAEAAAICAAAACAAA=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Character\StateScripts\Jump.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="My_MemoPlatformer.Landing">
+    <Position X="11.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAIAAAAACAAA=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Character\StateScripts\Landing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="My_MemoPlatformer.MoveForward">
+    <Position X="15.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQCAAAAQAAAAAQEAAABQAQAAAIAIAAACAAA=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Character\StateScripts\MoveForward.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="My_MemoPlatformer.StateData">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAIAAAAACAAA=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Character\StateScripts\StateData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="My_MemoPlatformer.DamageDetector">
+    <Position X="11.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAgAQBAAAAAAAAAAAAAAAAAAAAAAAgAAAAEA=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Scripts\DamageDetector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="My_MemoPlatformer.KeyboardInput">
+    <Position X="3.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Scripts\KeyboardInput.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="My_MemoPlatformer.AttackManager">
+    <Position X="6.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Scripts\Managers\AttackManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="My_MemoPlatformer.Singleton&lt;T&gt;" Collapsed="true">
+    <Position X="2" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Scripts\Managers\Singleton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="My_MemoPlatformer.VirtualInputManager">
+    <Position X="2" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAIAAAAAIQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Scripts\Managers\VirtualInputManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="My_MemoPlatformer.ManualInput">
+    <Position X="0.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Scripts\ManualInput.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="My_MemoPlatformer.TriggerDetector">
+    <Position X="9.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAIAAQAAAAAAAAEA=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Scripts\TriggerDetector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PoolObjectLoader">
+    <Position X="14.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Character\PooledObjects\PoolObjectLoader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="My_MemoPlatformer.TransitionParameter">
+    <Position X="22.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAoAIAAAAAAABAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\My_MemoPlatformer\Character\BaseScripts\CharacterControl.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
