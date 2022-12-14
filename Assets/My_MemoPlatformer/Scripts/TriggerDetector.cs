@@ -5,9 +5,21 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
+
+    public enum GeneralBodyPart
+    {
+        Upper,
+        Lower,
+        Arm,
+        Leg,
+    }
+
+
     public class TriggerDetector : MonoBehaviour
     {
+        public GeneralBodyPart generalBodyPart;
 
+        public List<Collider> collidingParts = new List<Collider>();
         private CharacterControl owner;
 
         private void Awake()
@@ -37,18 +49,18 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (!owner.collidingParts.Contains(col))
+            if (!collidingParts.Contains(col))
             {
-                owner.collidingParts.Add(col);
+                collidingParts.Add(col);
             }
 
         }
 
         private void OnTriggerExit(Collider attacker)
         {
-            if (owner.collidingParts.Contains(attacker))
+            if (collidingParts.Contains(attacker))
             {
-                owner.collidingParts.Remove(attacker);
+                collidingParts.Remove(attacker);
             }
         }
     }

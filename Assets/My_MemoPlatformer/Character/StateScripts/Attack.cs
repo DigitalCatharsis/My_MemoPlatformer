@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    [CreateAssetMenu(fileName = "New state", menuName = " My_MemoPlatformer/AbilityData/Attack")]
+    [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/Attack")]
     public class Attack : StateData
     {
 
@@ -16,7 +16,7 @@ namespace My_MemoPlatformer
         public bool mustFaceAttacker;
         public float lethalRange;
         public int maxHits;
-        public List<RuntimeAnimatorController> deathAnimators = new List<RuntimeAnimatorController>(); //list of death anination associated with attack?
+        //public List<RuntimeAnimatorController> deathAnimators = new List<RuntimeAnimatorController>(); //list of death anination associated with attack?
 
         private List<AttackInfo> finishedAttacks = new List<AttackInfo> ();
 
@@ -25,7 +25,7 @@ namespace My_MemoPlatformer
             animator.SetBool(TransitionParameter.Attack.ToString(), false);
 
             //GameObject obj = Instantiate(Resources.Load("AttackInfo", typeof(GameObject))) as GameObject;
-            GameObject obj = PoolManager.Instance.GetObject(PoolObjectType.ATTACKINFO); //obj.GetComponent<AttackInfo>();
+            GameObject obj = PoolManager.Instance.GetObject(PoolObjectType.ATTACKINFO); //Ссылкаемя на объект в пул менеджере
             AttackInfo info = obj.GetComponent<AttackInfo>();
 
             obj.SetActive(false); //set it active when we first get it
@@ -111,10 +111,10 @@ namespace My_MemoPlatformer
             }
         }
 
-        public RuntimeAnimatorController GetDeathAnimator()
-        {
-            int index = Random.Range(0, deathAnimators.Count);
-            return deathAnimators[index];
-        }
+        //public RuntimeAnimatorController GetDeathAnimator()
+        //{
+        //    int index = Random.Range(0, deathAnimators.Count);
+        //    return deathAnimators[index];
+        //}
     }
 }

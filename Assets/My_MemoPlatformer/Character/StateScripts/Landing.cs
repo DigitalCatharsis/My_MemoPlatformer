@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    [CreateAssetMenu(fileName = "New state", menuName = " My_MemoPlatformer/AbilityData/Landing")]
+    [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/Landing")]
     public class Landing : StateData
     {
 

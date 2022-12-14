@@ -5,7 +5,7 @@ using UnityEngine;
 namespace My_MemoPlatformer
 {
 
-    [CreateAssetMenu(fileName = "New state", menuName = " My_MemoPlatformer/AbilityData/ForceTransition")]
+    [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/ForceTransition")]
     public class ForceTransition : StateData
     {
         [Range(0.01f, 1f)]

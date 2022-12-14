@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    [CreateAssetMenu(fileName = "New state", menuName = " My_MemoPlatformer/AbilityData/GroundDetector")]
+    [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/GroundDetector")]
     public class GroundDetector : StateData
     {
         [SerializeField] private float distance;

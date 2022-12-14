@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    [CreateAssetMenu(fileName = "New state", menuName = " My_MemoPlatformer/AbilityData/Jump")]
+    [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/Jump")]
     public class Jump : StateData
     {
         [SerializeField] private float jumpForce;

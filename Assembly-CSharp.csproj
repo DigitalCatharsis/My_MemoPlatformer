@@ -57,18 +57,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\My_MemoPlatformer\Character\PooledObjects\PoolObject.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Scripts\Managers\AttackManager.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Managers\AttackManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\Landing.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\StateData.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\PooledObjects\AttackInfo\AttackInfo.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\MoveForward.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Scripts\Managers\Singleton.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Managers\Singleton.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Scripts\DamageDetector.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\BaseScripts\CharacterControl.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\CharacterControl\CharacterControl.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Scripts\ManualInput.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\Idle.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\BaseScripts\CharacterState.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Scripts\Managers\VirtualInputManager.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Managers\VirtualInputManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Scripts\TriggerDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\Jump.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\ForceTransition.cs" />
@@ -77,6 +77,9 @@
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\Attack.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\PooledObjects\PoolObjectLoader.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\PooledObjects\PoolManager.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Managers\DeathAnimationManager.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\Death\Resources\DeathAnimationLoader.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\Death\DeathAnimationData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\BOXOPHOBIC\Skybox Cubemap Extended\Core\Shaders\Skybox Cubemap Extended.shader" />

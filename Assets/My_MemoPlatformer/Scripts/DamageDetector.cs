@@ -8,6 +8,7 @@ namespace My_MemoPlatformer
     public class DamageDetector : MonoBehaviour  //Compare collision info versus attack input that is being registered
     {
         CharacterControl control;
+        GeneralBodyPart _damagePart; 
 
         private void Awake()
         {
@@ -64,24 +65,33 @@ namespace My_MemoPlatformer
 
         private bool IsCollided(AttackInfo info)
         {
-            foreach (Collider collider in control.collidingParts) //control.collidingParts - список коллайдеров, задевающих владельца control
+            foreach (TriggerDetector trigger in control.GetAllTriggers())
             {
-                foreach (string name in info.colliderNames)  //
+                foreach (Collider collider in trigger.collidingParts) //control.collidingParts - список коллайдеров, задевающих владельца control
                 {
-                    if(name == collider.gameObject.name)  //Сопоставляем список действующих на владельца control колладеров с теми коллайдерами, которые активны за нужный attack
+                    foreach (string name in info.colliderNames)  //
                     {
-                        TakeDamage(info);
-                        return true;
+                        if (name == collider.gameObject.name)  //Сопоставляем список действующих на владельца control колладеров с теми коллайдерами, которые активны за нужный attack
+                        {
+                            _damagePart = trigger.generalBodyPart;
+                            TakeDamage(info);
+                            return true;
+                        }
                     }
                 }
             }
+
+
             return false;
         }
 
         private void TakeDamage(AttackInfo info)
         {
             Debug.Log(info.attacker.gameObject.name + " hits " + this.gameObject.name);
-            control.skinnedMeshAnimator.runtimeAnimatorController = info.attackAbility.GetDeathAnimator();
+            Debug.Log(this.gameObject.name + " hit " + _damagePart.ToString());
+
+            //control.skinnedMeshAnimator.runtimeAnimatorController = info.attackAbility.GetDeathAnimator();
+            control.skinnedMeshAnimator.runtimeAnimatorController = DeathAnimationManager.Instance.GetAnimator(_damagePart);
             info.currentHits++;
 
             control.GetComponent<BoxCollider>().enabled = false;

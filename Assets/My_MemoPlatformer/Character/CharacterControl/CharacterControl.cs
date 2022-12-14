@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace My_MemoPlatformer
 {
@@ -29,11 +30,12 @@ namespace My_MemoPlatformer
         public List<GameObject> bottomSpheres = new List<GameObject>();
         public List<GameObject> frontSpheres = new List<GameObject>();
         public List<Collider> ragdollParts = new List<Collider>();
-        public List<Collider> collidingParts = new List<Collider>();
+
 
         [SerializeField] public float gravityMultipliyer;
         [SerializeField] public float pullMultipliyer;
 
+        private List<TriggerDetector> _triggerDetectors = new List<TriggerDetector>();
 
         private Rigidbody _rigid;
         public Rigidbody Rigid_Body
@@ -67,8 +69,25 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void SetRagdollParts()
+        public List<TriggerDetector> GetAllTriggers()
         {
+            if (_triggerDetectors.Count == 0)
+            {
+                TriggerDetector[] arr = this.gameObject.GetComponentsInChildren<TriggerDetector>();
+                foreach (TriggerDetector d in arr)
+                {
+                    _triggerDetectors.Add(d);
+                }
+            }
+
+            return _triggerDetectors;
+        }
+
+
+        public void SetRagdollParts()
+        {
+            ragdollParts.Clear();
+
             Collider[] colliders = this.gameObject.GetComponentsInChildren<Collider>(); //Get all the colliders in the hierarchy
 
             foreach(Collider c in colliders)
@@ -78,7 +97,11 @@ namespace My_MemoPlatformer
                     //thats means its a ragdoll
                     c.isTrigger = true;
                     ragdollParts.Add(c);
-                    c.gameObject.AddComponent<TriggerDetector>();
+
+                    if (c.GetComponent<TriggerDetector>() == null)
+                    {
+                        c.gameObject.AddComponent<TriggerDetector>();
+                    }                    
                 } 
             }
         }
