@@ -61,6 +61,7 @@
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\Landing.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\StateData.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\PooledObjects\AttackInfo\AttackInfo.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\Death\Resources\DeathAnimationLoader.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\MoveForward.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\Singleton.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Scripts\DamageDetector.cs" />
@@ -74,12 +75,11 @@
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\ForceTransition.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\GroundDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Scripts\KeyboardInput.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\Character\Death\DeathAnimationData.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\Attack.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\PooledObjects\PoolObjectLoader.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Character\PooledObjects\PoolManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\DeathAnimationManager.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\Death\Resources\DeathAnimationLoader.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\Death\DeathAnimationData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\BOXOPHOBIC\Skybox Cubemap Extended\Core\Shaders\Skybox Cubemap Extended.shader" />

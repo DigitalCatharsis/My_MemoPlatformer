@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2073025e3373c5344b7da775f3caeb3b, type: 3}
-  m_Name: SP_Player_SoccerTackle_ForceTransition
+  m_Script: {fileID: 11500000, guid: a0a31e85d36702348afc1f483d518a94, type: 3}
+  m_Name: SoccerTackle
   m_EditorClassIdentifier: 
-  transitionTiming: 0
+  GeneralBodyParts: 0100000003000000
+  Animator: {fileID: 9100000, guid: c3eaf3d2381d60949a36874a622fa4b8, type: 2}
+  IsFacingAttacker: 1
