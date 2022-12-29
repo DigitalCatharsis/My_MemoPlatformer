@@ -56,7 +56,7 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\My_MemoPlatformer\Character\CharacterControl\Editor\CharacterControlEditor.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\CharacterControl\Editor\CharacterControlEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

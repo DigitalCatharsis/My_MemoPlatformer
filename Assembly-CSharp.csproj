@@ -56,29 +56,29 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\My_MemoPlatformer\Character\PooledObjects\PoolObject.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\PooledObjects\PoolObject.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\AttackManager.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\Landing.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\StateData.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\PooledObjects\AttackInfo\AttackInfo.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\Death\Resources\DeathAnimationLoader.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\MoveForward.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\States\StateScripts\Landing.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\States\StateScripts\StateData.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\PooledObjects\AttackInfo\AttackInfo.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\Death\Resources\DeathAnimationLoader.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\States\StateScripts\MoveForward.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\Singleton.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Scripts\DamageDetector.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\CharacterControl\CharacterControl.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Scripts\ManualInput.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\Idle.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\BaseScripts\CharacterState.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Managers\VirtualInputManager.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Scripts\TriggerDetector.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\Jump.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\ForceTransition.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\GroundDetector.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Scripts\KeyboardInput.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\Death\DeathAnimationData.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\StateScripts\Attack.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\PooledObjects\PoolObjectLoader.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\Character\PooledObjects\PoolManager.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\Scripts\DamageDetector.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\CharacterControl\CharacterControl.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\InputDevices\ManualInput.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\States\StateScripts\Idle.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\Scripts\CharacterState.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\InputDevices\VirtualInputManager.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\Scripts\TriggerDetector.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\States\StateScripts\Jump.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\States\StateScripts\ForceTransition.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\States\StateScripts\GroundDetector.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\InputDevices\KeyboardInput.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\Death\DeathAnimationData.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\States\StateScripts\Attack.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\PooledObjects\PoolObjectLoader.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\PooledObjects\PoolManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\DeathAnimationManager.cs" />
   </ItemGroup>
   <ItemGroup>
