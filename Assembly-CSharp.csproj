@@ -80,6 +80,7 @@
     <Compile Include="Assets\My_MemoPlatformer\PooledObjects\PoolObjectLoader.cs" />
     <Compile Include="Assets\My_MemoPlatformer\PooledObjects\PoolManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\DeathAnimationManager.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\CharacterControl\MaterialChanger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\BOXOPHOBIC\Skybox Cubemap Extended\Core\Shaders\Skybox Cubemap Extended.shader" />

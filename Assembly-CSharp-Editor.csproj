@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\My_MemoPlatformer\CharactersRB\CharacterControl\Editor\CharacterControlEditor.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\CharacterControl\Editor\MaterialChangerEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
