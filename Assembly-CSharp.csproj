@@ -58,34 +58,29 @@
   <ItemGroup>
     <Compile Include="Assets\My_MemoPlatformer\PooledObjects\PoolObject.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\AttackManager.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\States\StateScripts\Landing.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\States\StateScripts\StateData.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Landing.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\StateData.cs" />
     <Compile Include="Assets\My_MemoPlatformer\PooledObjects\AttackInfo\AttackInfo.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\Death\Resources\DeathAnimationLoader.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\States\StateScripts\MoveForward.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\Resources\DeathAnimationLoader.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\MoveForward.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\Singleton.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\Scripts\DamageDetector.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\CharacterControl\CharacterControl.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts\DamageDetector.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\CharacterControl\CharacterControl.cs" />
     <Compile Include="Assets\My_MemoPlatformer\InputDevices\ManualInput.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\States\StateScripts\Idle.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\Scripts\CharacterState.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Idle.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts\CharacterState.cs" />
     <Compile Include="Assets\My_MemoPlatformer\InputDevices\VirtualInputManager.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\Scripts\TriggerDetector.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\States\StateScripts\Jump.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\States\StateScripts\ForceTransition.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\States\StateScripts\GroundDetector.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts\TriggerDetector.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Jump.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\ForceTransition.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\GroundDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\InputDevices\KeyboardInput.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\Death\DeathAnimationData.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\States\StateScripts\Attack.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\DeathAnimationData.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Attack.cs" />
     <Compile Include="Assets\My_MemoPlatformer\PooledObjects\PoolObjectLoader.cs" />
     <Compile Include="Assets\My_MemoPlatformer\PooledObjects\PoolManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\DeathAnimationManager.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\CharactersRB\CharacterControl\MaterialChanger.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\BOXOPHOBIC\Skybox Cubemap Extended\Core\Shaders\Skybox Cubemap Extended.shader" />
-    <None Include="Assets\BOXOPHOBIC\Skybox Cubemap Extended\Core\Shaders\Skybox Cubemap Blend.shader" />
-    <None Include="Assets\BodyGuards\ReadMe.txt.txt" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\CharacterControl\MaterialChanger.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -810,18 +805,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Boxophobic.Utils.Editor.csproj">
-      <Project>{9B15E6CB-FB0A-69AE-EB36-BF72E175C2DF}</Project>
-      <Name>Boxophobic.Utils.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Boxophobic.SkyboxCubemapExtended.Editor.csproj">
-      <Project>{2C0162EC-F66C-0A37-89E8-74706C0409FA}</Project>
-      <Name>Boxophobic.SkyboxCubemapExtended.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Boxophobic.Utils.Scripts.csproj">
-      <Project>{62A8644A-1652-CA5F-91CB-BB6AD1C5472E}</Project>
-      <Name>Boxophobic.Utils.Scripts</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
