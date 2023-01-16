@@ -1193,15 +1193,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 0}
-  CurrentObjects:
-  - {fileID: 8276515644033745595}
-  - {fileID: 1834953633333121579}
-  CurrentMaterials:
-  - {fileID: -840037777384891287, guid: fd074a6f4c9d6cf4983c0592e5b4f76a, type: 3}
-  - {fileID: -4565884009001823619, guid: fd074a6f4c9d6cf4983c0592e5b4f76a, type: 3}
-  NewMaterials:
-  - {fileID: 2100000, guid: 50a0a6b01bcd9734194b03e32e9b5954, type: 2}
-  - {fileID: 2100000, guid: cc59d8a33302d8946a6cc9e6c6e9607e, type: 2}
+  CurrentObjects: []
+  CurrentMaterials: []
+  NewMaterials: []
 --- !u!1 &3421970840792435037
 GameObject:
   m_ObjectHideFlags: 0
@@ -1817,7 +1811,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: fd074a6f4c9d6cf4983c0592e5b4f76a, type: 3}
   m_Controller: {fileID: 9100000, guid: 58869432d74a2994180019d6ab098333, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
