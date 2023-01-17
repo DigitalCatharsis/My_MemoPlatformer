@@ -11,6 +11,7 @@ namespace My_MemoPlatformer
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             animator.SetBool(TransitionParameter.Jump.ToString(), false);
+            animator.SetBool(TransitionParameter.Attack.ToString(), false);
         }
 
 
@@ -41,6 +42,7 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            animator.SetBool(TransitionParameter.Attack.ToString(), false);
         }
     }
 

@@ -8,6 +8,9 @@ namespace My_MemoPlatformer
 
     public class CameraManager : Singleton<CameraManager>
     {
+        private Coroutine _routine;
+
+
         private CameraContoller _cameraController;
         public CameraContoller Cam_Controller
         {
@@ -21,7 +24,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        private Coroutine _routine;
+        
 
         //Controlling how long camera shake is. After some amount of second return to default camera
         IEnumerator _CamShake(float sec)

@@ -17,8 +17,6 @@ namespace My_MemoPlatformer
 
     public class CharacterControl : MonoBehaviour
     {
-        // [SerializeField] private Camera _Playercamera;
-        //private Vector3 _cameraOffset = new Vector3(0, 2.0f, -12.0f);
 
         [SerializeField] public Animator skinnedMeshAnimator;
         public bool moveRight;
@@ -191,16 +189,6 @@ namespace My_MemoPlatformer
         {
             GameObject obj = Instantiate(colliderEdgePrefab,pos,Quaternion.identity);
             return obj;
-        }
-
-        private void SetCamera()
-        {
-            //  _Playercamera.transform.position = transform.position + _cameraOffset;
-        }
-
-        private void LateUpdate()
-        {
-            SetCamera();
         }
 
         public void MoveForward(float speed, float speedGraph)
