@@ -87,6 +87,8 @@ namespace My_MemoPlatformer
 
         private void TakeDamage(AttackInfo info)
         {
+            CameraManager.Instance.ShakeCamera(0.35f);
+
             Debug.Log(info.attacker.gameObject.name + " hits " + this.gameObject.name);
             Debug.Log(this.gameObject.name + " hit " + _damagePart.ToString());
 
