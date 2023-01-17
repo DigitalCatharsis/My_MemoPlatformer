@@ -80,8 +80,6 @@ namespace My_MemoPlatformer
                     }
                 }
             }
-
-
             return false;
         }
 
