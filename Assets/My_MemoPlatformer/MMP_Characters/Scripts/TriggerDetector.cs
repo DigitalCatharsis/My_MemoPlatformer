@@ -32,19 +32,23 @@ namespace My_MemoPlatformer
         {
 
 
-            if (owner.ragdollParts.Contains(col))
+            if (owner.ragdollParts.Contains(col))  //touching another owners collider
             {
                 return;
             }
 
             CharacterControl attacker = col.transform.root.GetComponent<CharacterControl>();
 
-            if (attacker == null)
+            if (attacker == null) //not a player, just a physical object
             {
                 return;
             }
 
-            if (col.gameObject == attacker.gameObject) //not a boxcolllider itself
+            //if we past two tests above, thats means its another character
+
+
+
+            if (col.gameObject == attacker.gameObject) //not a boxcolllider itself in the top of hierarchy
             {
                 return;
             }

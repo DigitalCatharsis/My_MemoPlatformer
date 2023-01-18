@@ -26,17 +26,15 @@ namespace My_MemoPlatformer
             GameObject obj = PoolManager.Instance.GetObject(PoolObjectType.ATTACKINFO); //Ссылкаемя на объект в пул менеджере
             AttackInfo info = obj.GetComponent<AttackInfo>();
 
-            obj.SetActive(false); //set it active when we first get it
+            obj.SetActive(true); //set it active when we first get it
             info.ResetInfo(this, characterState.GetCharacterControl(animator));
 
             if (!AttackManager.Instance.currentAttacks.Contains(info)) //Making a list of current attacks
             {
                 AttackManager.Instance.currentAttacks.Add(info);
-
             }
 
         }
-
     
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

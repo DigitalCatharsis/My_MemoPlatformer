@@ -7,9 +7,11 @@ namespace My_MemoPlatformer
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/GroundDetector")]
     public class GroundDetector : StateData
     {
-        [SerializeField] private float distance;
+        
 
-        [Range(0.01f, 1f)][SerializeField] private float Checktime; //Сначала нужно подняться в воздух, а потом проверять isgrounded. Чето типа fail-safe
+        [SerializeField][Range(0.01f, 1f)]
+        private float Checktime; //Сначала нужно подняться в воздух, а потом проверять isgrounded. Чето типа fail-safe
+        [SerializeField] private float distance;
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
 

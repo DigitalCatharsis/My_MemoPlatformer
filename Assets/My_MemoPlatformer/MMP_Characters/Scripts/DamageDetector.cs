@@ -13,18 +13,17 @@ namespace My_MemoPlatformer
         private void Awake()
         {
             control = GetComponent<CharacterControl>();
-
         }
 
         private void Update()
         {
             if (AttackManager.Instance.currentAttacks.Count > 0)
             {
-                checkAttack();
+                CheckAttack();
             }
         }
 
-        private void checkAttack()
+        private void CheckAttack()
         {
             foreach(AttackInfo info in AttackManager.Instance.currentAttacks)
             {
@@ -69,11 +68,11 @@ namespace My_MemoPlatformer
             {
                 foreach (Collider collider in trigger.collidingParts) //control.collidingParts - список коллайдеров, задевающих владельца control
                 {
-                    foreach (string name in info.colliderNames)  //
+                    foreach (string name in info.colliderNames)  //Имена атакующих коллайдеров
                     {
-                        if (name == collider.gameObject.name)  //Сопоставляем список действующих на владельца control колладеров с теми коллайдерами, которые активны за нужный attack
+                        if (name == collider.gameObject.name)  //Смотрим, что коллайдер атакующий
                         {
-                            _damagePart = trigger.generalBodyPart;
+                            _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
                             TakeDamage(info);
                             return true;
                         }
