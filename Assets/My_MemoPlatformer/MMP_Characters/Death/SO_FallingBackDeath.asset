@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0a31e85d36702348afc1f483d518a94, type: 3}
-  m_Name: FallingBackDeath
+  m_Name: SO_FallingBackDeath
   m_EditorClassIdentifier: 
   GeneralBodyParts: 0000000002000000
   Animator: {fileID: 9100000, guid: efd5e830c12c3be4da169d8a46619995, type: 2}

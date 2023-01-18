@@ -10,7 +10,7 @@ namespace My_MemoPlatformer
         public CharacterControl attacker = null;
         public Attack attackAbility;
         public List<string> colliderNames = new List<string>(); //name of the bodypards that gonna carry the attack
-
+        public bool LaunchIntoAir;
         public bool mustCollide;
         public bool mustFaceAttacker;
         public float lethalRange;
@@ -33,6 +33,7 @@ namespace My_MemoPlatformer
 
             attackAbility = attack;
             colliderNames = attack.colliderNames; 
+            LaunchIntoAir = attack.LaunchIntoAir;
             mustCollide = attack.mustCollide;
             mustFaceAttacker = attack.mustFaceAttacker;
             lethalRange = attack.lethalRange;

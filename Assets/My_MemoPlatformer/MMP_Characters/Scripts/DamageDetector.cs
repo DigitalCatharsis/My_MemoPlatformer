@@ -90,7 +90,7 @@ namespace My_MemoPlatformer
             Debug.Log(this.gameObject.name + " hit " + _damagePart.ToString());
 
             //control.skinnedMeshAnimator.runtimeAnimatorController = info.attackAbility.GetDeathAnimator();
-            control.skinnedMeshAnimator.runtimeAnimatorController = DeathAnimationManager.Instance.GetAnimator(_damagePart);
+            control.skinnedMeshAnimator.runtimeAnimatorController = DeathAnimationManager.Instance.GetAnimator(_damagePart, info);
             info.currentHits++;
 
             control.GetComponent<BoxCollider>().enabled = false;

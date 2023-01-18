@@ -22,7 +22,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        public RuntimeAnimatorController GetAnimator (GeneralBodyPart generalBodyPart)
+        public RuntimeAnimatorController GetAnimator (GeneralBodyPart generalBodyPart, AttackInfo info)
         {
             SetupDeathAnimationLoader();
 
@@ -30,14 +30,24 @@ namespace My_MemoPlatformer
 
             foreach (DeathAnimationData data in deathAnimationLoader.DeathAnimationDataList)
             {
-                foreach (GeneralBodyPart part in data.GeneralBodyParts)
+                if (info.LaunchIntoAir)
                 {
-                    if (part == generalBodyPart)
+                    if (data.LaunchIntoAir)
                     {
                         Candidates.Add(data.Animator);
-                        break;
                     }
                 }
+                else
+                {
+                    foreach (GeneralBodyPart part in data.GeneralBodyParts)
+                    {
+                        if (part == generalBodyPart)
+                        {
+                            Candidates.Add(data.Animator);
+                            break;
+                        }
+                    }
+                }                
             }
 
             return Candidates[Random.Range(0,Candidates.Count)];

@@ -10,6 +10,7 @@ namespace My_MemoPlatformer
     {
         public List<GeneralBodyPart> GeneralBodyParts = new List<GeneralBodyPart>();
         public RuntimeAnimatorController Animator;
+        public bool LaunchIntoAir;
         public bool IsFacingAttacker;
     }
 }

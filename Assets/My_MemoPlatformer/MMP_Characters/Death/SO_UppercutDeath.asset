@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0a31e85d36702348afc1f483d518a94, type: 3}
-  m_Name: SoccerTackle
+  m_Name: SO_UppercutDeath
   m_EditorClassIdentifier: 
-  GeneralBodyParts: 0100000003000000
-  Animator: {fileID: 9100000, guid: c3eaf3d2381d60949a36874a622fa4b8, type: 2}
-  IsFacingAttacker: 1
+  GeneralBodyParts: 
+  Animator: {fileID: 9100000, guid: a5bf26d852dc1694fa14e723dcfe3396, type: 2}
+  LaunchIntoAir: 1
+  IsFacingAttacker: 0
