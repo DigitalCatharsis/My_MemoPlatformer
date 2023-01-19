@@ -81,6 +81,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\BaseScripts\CharacterState.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\MoveForward.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\CharacterControl\CharacterControl.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\CheckAttack.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\Singleton.cs" />
     <Compile Include="Assets\My_MemoPlatformer\RB_Camera\CameraContoller.cs" />
     <Compile Include="Assets\My_MemoPlatformer\PooledObjects\PoolObject.cs" />

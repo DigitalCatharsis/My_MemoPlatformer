@@ -115,6 +115,7 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            animator.SetBool(TransitionParameter.Attack.ToString(), false);
             ClearAttack();
         }
         private void ClearAttack()
