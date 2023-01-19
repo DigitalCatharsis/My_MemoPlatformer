@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d2138cfc2da18499f42578916d88ca, type: 3}
   m_Name: SO_Player_Uppercut
   m_EditorClassIdentifier: 
-  startAttackTime: 0.2
-  endAttackTime: 0.8
+  startAttackTime: 0.3
+  endAttackTime: 0.6
   colliderNames:
   - mixamorig:RightHand
   LaunchIntoAir: 1
@@ -21,3 +21,4 @@ MonoBehaviour:
   mustFaceAttacker: 0
   lethalRange: 0
   maxHits: 1
+  debug: 1

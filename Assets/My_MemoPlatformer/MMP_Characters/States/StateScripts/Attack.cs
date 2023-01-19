@@ -16,6 +16,7 @@ namespace My_MemoPlatformer
         public bool mustFaceAttacker;
         public float lethalRange;
         public int maxHits;
+        public bool debug;
 
         private List<AttackInfo> finishedAttacks = new List<AttackInfo> ();
 
@@ -57,6 +58,11 @@ namespace My_MemoPlatformer
 
                     if (!info.isRegistered && info.attackAbility == this)
                     {
+                        if (debug)
+                        {
+                            Debug.Log(this.name + " registered: " + stateInfo.normalizedTime);
+                        }
+
                         info.Register(this);
                     }
 
@@ -77,6 +83,12 @@ namespace My_MemoPlatformer
                     {
                         info.isFinished = true;
                         info.GetComponent<PoolObject>().TurnOff();
+
+                        if (debug)
+                        {
+                            Debug.Log(this.name + " deregistered: " + stateInfo.normalizedTime);
+                        }
+
                     }
 
                 }
