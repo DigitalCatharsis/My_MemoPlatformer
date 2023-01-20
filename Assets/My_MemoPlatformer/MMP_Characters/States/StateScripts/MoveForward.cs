@@ -8,10 +8,10 @@ namespace My_MemoPlatformer
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/MoveForward")]
     public class MoveForward : StateData
     {
-        [SerializeField] private bool constant; //move no matter what
-        [SerializeField] private AnimationCurve speedGraph;
-        [SerializeField] private float speed;
-        [SerializeField] private float blockDistance;
+        public bool constant; //move no matter what
+        public AnimationCurve speedGraph;
+        public float speed;
+        public float blockDistance;
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
@@ -65,7 +65,7 @@ namespace My_MemoPlatformer
             if (control.moveRight)
             {
 
-                control.transform.rotation = Quaternion.Euler(0f, 0, 0f);
+                control.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                 if (!CheckFront(control))
                 {
                     control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));

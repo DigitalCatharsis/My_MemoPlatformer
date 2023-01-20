@@ -65,6 +65,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Idle.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Landing.cs" />
     <Compile Include="Assets\My_MemoPlatformer\PooledObjects\AttackInfo\AttackInfo.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\GravityPull.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\GroundDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\PoolManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\PooledObjects\PoolObjectLoader.cs" />
