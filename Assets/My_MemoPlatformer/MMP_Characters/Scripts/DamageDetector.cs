@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 namespace My_MemoPlatformer
 {
@@ -59,6 +60,15 @@ namespace My_MemoPlatformer
                         TakeDamage(info);
                     }
                 }
+                else
+                {
+                    float dist = Vector3.SqrMagnitude( this.gameObject.transform.position - info.attacker.transform.position); //distance between target and attacker
+                    Debug.Log(this.gameObject.name + "dist: "+ dist.ToString() );
+                    if (dist  <= info.lethalRange) 
+                    {
+                        TakeDamage(info);
+                    }
+                }
             }
         }
 
@@ -73,7 +83,6 @@ namespace My_MemoPlatformer
                         if (name == collider.gameObject.name)  //Смотрим, что коллайдер атакующий
                         {
                             _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
-                            TakeDamage(info);
                             return true;
                         }
                     }
@@ -84,10 +93,15 @@ namespace My_MemoPlatformer
 
         private void TakeDamage(AttackInfo info)
         {
-            CameraManager.Instance.ShakeCamera(0.35f);
+            if (info.mustCollide)
+            {
+                CameraManager.Instance.ShakeCamera(0.2f);
+            }
+            CameraManager.Instance.ShakeCamera(0.2f);
 
             Debug.Log(info.attacker.gameObject.name + " hits " + this.gameObject.name);
             Debug.Log(this.gameObject.name + " hit " + _damagePart.ToString());
+
 
             //control.skinnedMeshAnimator.runtimeAnimatorController = info.attackAbility.GetDeathAnimator();
             control.skinnedMeshAnimator.runtimeAnimatorController = DeathAnimationManager.Instance.GetAnimator(_damagePart, info);

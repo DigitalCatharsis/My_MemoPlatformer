@@ -61,6 +61,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\MaterialChaner\MaterialChanger.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts\ManualInput.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\VirtualInputManager.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\ShakeCamera.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\DeathAnimationData.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Idle.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Landing.cs" />
