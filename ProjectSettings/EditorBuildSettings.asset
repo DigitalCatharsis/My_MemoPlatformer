@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/My_MemoPlatformer/MMP_Scenes/L_CharacterSelect.unity
+    guid: 9748b6e9880114b46a2e24ff4ec7c432
+  - enabled: 1
+    path: Assets/My_MemoPlatformer/MMP_Scenes/L_LevelStart.unity
+    guid: da984efe9e288584fade828a9ada5554
   m_configObjects: {}

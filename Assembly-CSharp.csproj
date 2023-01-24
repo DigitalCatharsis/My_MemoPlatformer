@@ -58,21 +58,26 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.2.2f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterSelect.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\MaterialChaner\MaterialChanger.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\MouseControl.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts\ManualInput.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\VirtualInputManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\ShakeCamera.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\DeathAnimationData.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Idle.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterSelectLight.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\PlayGame.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Landing.cs" />
     <Compile Include="Assets\My_MemoPlatformer\PooledObjects\AttackInfo\AttackInfo.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Camera\CameraContoller.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\GravityPull.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\GroundDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\PoolManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\PooledObjects\PoolObjectLoader.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterHoverLight.cs" />
     <Compile Include="Assets\My_MemoPlatformer\InputDevices\KeyboardInput.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\Resources\DeathAnimationLoader.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\RB_Camera\CameraState.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Jump.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\CameraManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\DeathAnimationManager.cs" />
@@ -85,10 +90,11 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\CharacterControl\CharacterControl.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\CheckAttack.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\Singleton.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\RB_Camera\CameraContoller.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Camera\CameraState.cs" />
     <Compile Include="Assets\My_MemoPlatformer\PooledObjects\PoolObject.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts\TriggerDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\ForceTransition.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

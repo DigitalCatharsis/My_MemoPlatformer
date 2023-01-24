@@ -14,10 +14,16 @@ namespace My_MemoPlatformer
         Attack,
     }
 
+    public enum MMP_Scenes
+    {
+        L_CharacterSelect,
+        L_LevelStart,
+    }
+
 
     public class CharacterControl : MonoBehaviour
     {
-
+        public PlayableCharacterType playableCharacterType;
         [SerializeField] public Animator skinnedMeshAnimator;
         public bool moveRight;
         public bool moveLeft;
@@ -52,18 +58,28 @@ namespace My_MemoPlatformer
         {
             bool switchBack = false;
 
-            if (!IsFacingForward()) 
+            if (!IsFacingForward())
             {
                 switchBack = true;
             }
 
             FaceForward(true);
-            SetRagdollParts();
             SetColliderSpheres();
 
             if (switchBack)
             {
                 FaceForward(false);
+            }
+
+            RegisterCharacter();
+
+        }
+
+        private void RegisterCharacter()
+        {
+            if (!CharacterManager.Instance.characters.Contains(this))
+            {
+                CharacterManager.Instance.characters.Add(this);
             }
         }
 
@@ -88,7 +104,7 @@ namespace My_MemoPlatformer
 
             Collider[] colliders = this.gameObject.GetComponentsInChildren<Collider>(); //Get all the colliders in the hierarchy
 
-            foreach(Collider c in colliders)
+            foreach (Collider c in colliders)
             {
                 if (c.gameObject != this.gameObject)  //if the collider that we found is not the same as in the charactercontrol (//not a boxcolllider itself)
                 {
@@ -99,8 +115,8 @@ namespace My_MemoPlatformer
                     if (c.GetComponent<TriggerDetector>() == null)
                     {
                         c.gameObject.AddComponent<TriggerDetector>();
-                    }                    
-                } 
+                    }
+                }
             }
         }
 
@@ -127,18 +143,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void FixedUpdate()
-        {
-            if (Rigid_Body.velocity.y < 0f)
-            {
-                Rigid_Body.velocity += (-Vector3.up * gravityMultipliyer);
-            }
 
-            if (Rigid_Body.velocity.y > 0f && !jump)
-            {
-                Rigid_Body.velocity += (-Vector3.up * pullMultipliyer);
-            }
-        }
 
         private void SetColliderSpheres()
         {
@@ -172,6 +177,18 @@ namespace My_MemoPlatformer
             float verSec = (bottomFront.transform.position - topFront.transform.position).magnitude / 10f; //Получаем одну секцию длинны, деленной на 10
             CreateMiddleSpheres(bottomFront, this.transform.up, verSec, 9, frontSpheres);
         }
+        private void FixedUpdate()
+        {
+            if (Rigid_Body.velocity.y < 0f)
+            {
+                Rigid_Body.velocity += (-Vector3.up * gravityMultipliyer);
+            }
+
+            if (Rigid_Body.velocity.y > 0f && !jump)
+            {
+                Rigid_Body.velocity += (-Vector3.up * pullMultipliyer);
+            }
+        }
 
         public void CreateMiddleSpheres(GameObject start, Vector3 dir, float sec, int interation, List<GameObject> spheresList)
         {
@@ -185,9 +202,9 @@ namespace My_MemoPlatformer
                 spheresList.Add(newObj);  //добавляем в список
             }
         }
-        private GameObject CreateEdgeSphere (Vector3 pos)
+        private GameObject CreateEdgeSphere(Vector3 pos)
         {
-            GameObject obj = Instantiate(colliderEdgePrefab,pos,Quaternion.identity);
+            GameObject obj = Instantiate(colliderEdgePrefab, pos, Quaternion.identity);
             return obj;
         }
 
@@ -196,12 +213,16 @@ namespace My_MemoPlatformer
             transform.Translate(Vector3.forward * speed * speedGraph * Time.deltaTime);
         }
 
-        public void FaceForward (bool forward)
+        public void FaceForward(bool forward)
         {
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(MMP_Scenes.L_CharacterSelect.ToString()))
+            {
+                return;
+            }
             if (forward)
             {
-                transform.rotation = Quaternion.Euler(0f,0f,0f);
-                
+                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
             }
             else
             {
