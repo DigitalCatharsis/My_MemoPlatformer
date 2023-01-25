@@ -1183,6 +1183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee80179171b79c54e86b124755c65156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playableCharacterType: 1
   skinnedMeshAnimator: {fileID: 2091534045450154104}
   moveRight: 0
   moveLeft: 0

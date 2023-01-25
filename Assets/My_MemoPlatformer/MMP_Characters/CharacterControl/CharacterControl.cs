@@ -242,5 +242,17 @@ namespace My_MemoPlatformer
             }
         }
 
+        public Collider GetBodyPart (string name)
+        {
+            foreach (Collider c in ragdollParts)
+            {
+                if (c.name.Contains(name))
+                {
+                    return c;
+                }
+            }
+            return null;
+        }
+
     }
 }

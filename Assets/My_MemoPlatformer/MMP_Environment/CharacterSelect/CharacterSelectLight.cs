@@ -7,7 +7,7 @@ namespace My_MemoPlatformer
 {
     public class CharacterSelectLight : MonoBehaviour
     {
-        public Light light;
+        public new Light light;
         private void Start()
         {
             light = GetComponent<Light>();

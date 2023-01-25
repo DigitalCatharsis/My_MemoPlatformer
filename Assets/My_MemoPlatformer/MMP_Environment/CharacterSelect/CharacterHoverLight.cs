@@ -11,7 +11,7 @@ namespace My_MemoPlatformer
 
         private CharacterControl _hoverSelectedCharacter;
         private MouseControl _mouseHoverSelect;
-        private Vector3 _targetPos = new Vector3();
+        //private Vector3 _targetPos = new Vector3();
         private Light _light;
 
         private void Start()

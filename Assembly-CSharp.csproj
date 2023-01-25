@@ -61,7 +61,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterSelect.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\MaterialChaner\MaterialChanger.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\MouseControl.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts\ManualInput.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts_and_Prefabs\PlayerSpawn.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\VirtualInputManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\ShakeCamera.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\DeathAnimationData.cs" />
@@ -77,22 +77,23 @@
     <Compile Include="Assets\My_MemoPlatformer\PooledObjects\PoolObjectLoader.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterHoverLight.cs" />
     <Compile Include="Assets\My_MemoPlatformer\InputDevices\KeyboardInput.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts_and_Prefabs\ManualInput.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\Resources\DeathAnimationLoader.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Jump.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\CameraManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\DeathAnimationManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\AttackManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\BaseScripts\StateData.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts\DamageDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Attack.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\BaseScripts\CharacterState.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\MoveForward.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\CharacterControl\CharacterControl.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\CheckAttack.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\Singleton.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts_and_Prefabs\DamageDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Camera\CameraState.cs" />
     <Compile Include="Assets\My_MemoPlatformer\PooledObjects\PoolObject.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts\TriggerDetector.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts_and_Prefabs\TriggerDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\ForceTransition.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterManager.cs" />
   </ItemGroup>
