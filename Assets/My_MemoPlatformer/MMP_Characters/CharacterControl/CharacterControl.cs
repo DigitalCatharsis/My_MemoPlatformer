@@ -12,6 +12,7 @@ namespace My_MemoPlatformer
         ForceTransition,
         Grounded,
         Attack,
+        ClickAnimation,
     }
 
     public enum MMP_Scenes

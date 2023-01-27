@@ -62,6 +62,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\MaterialChaner\MaterialChanger.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\MouseControl.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts_and_Prefabs\PlayerSpawn.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\ResetLocalPosition.cs" />
     <Compile Include="Assets\My_MemoPlatformer\Managers\VirtualInputManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\ShakeCamera.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\DeathAnimationData.cs" />

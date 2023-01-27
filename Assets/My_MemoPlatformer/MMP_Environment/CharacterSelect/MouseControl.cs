@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Rendering.Universal;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 namespace My_MemoPlatformer
 {
@@ -29,7 +30,7 @@ namespace My_MemoPlatformer
             if (Physics.Raycast(ray, out hit))
             {
                 CharacterControl control = hit.collider.gameObject.GetComponent<CharacterControl>();
-                if (control != null )
+                if (control != null)
                 {
                     selectedCharacterType = control.playableCharacterType;
                 }
@@ -45,12 +46,27 @@ namespace My_MemoPlatformer
                 {
                     characterSelect.selectedCharacterType = this.selectedCharacterType;
                     _characterSelectLight.transform.position = _characterHoverLight.transform.position;
+                    CharacterControl control = CharacterManager.Instance.GetCharacter(selectedCharacterType);
+                    _characterSelectLight.transform.parent = control.skinnedMeshAnimator.transform;
                     _characterSelectLight.light.enabled = true;
                 }
                 else
                 {
                     characterSelect.selectedCharacterType = PlayableCharacterType.NONE;
                     _characterSelectLight.light.enabled = false;
+                }
+
+                foreach (CharacterControl c in CharacterManager.Instance.characters)
+                {
+                    if (c.playableCharacterType == selectedCharacterType)
+                    {
+
+                        c.skinnedMeshAnimator.SetBool(TransitionParameter.ClickAnimation.ToString(), true);
+                    }
+                    else
+                    {
+                        c.skinnedMeshAnimator.SetBool(TransitionParameter.ClickAnimation.ToString(), false);
+                    }
                 }
             }
         }

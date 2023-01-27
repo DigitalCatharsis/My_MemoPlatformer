@@ -38,7 +38,8 @@ namespace My_MemoPlatformer
             if (_hoverSelectedCharacter == null)
             {
                 _hoverSelectedCharacter = CharacterManager.Instance.GetCharacter(_mouseHoverSelect.selectedCharacterType);
-                this.transform.position = _hoverSelectedCharacter.transform.position + _hoverSelectedCharacter.transform.TransformDirection(Offset);
+                this.transform.position = _hoverSelectedCharacter.skinnedMeshAnimator.transform.position + _hoverSelectedCharacter.transform.TransformDirection(Offset);
+                this.transform.parent = _hoverSelectedCharacter.skinnedMeshAnimator.transform; //adding to the hierarchy of the character to make this move with char.
             }
         }
     }
