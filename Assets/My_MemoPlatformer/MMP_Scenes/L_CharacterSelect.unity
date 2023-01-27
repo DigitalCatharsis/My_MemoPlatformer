@@ -11070,10 +11070,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2430949021683835267, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
-      propertyPath: playableCharacterType
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3372119544377188088, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_Name
       value: YBot - Yellow
@@ -11122,10 +11118,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7199473640970729132, guid: 50f426c0cc43c0c43b72737d9fd8b1f2, type: 3}
-      propertyPath: material
-      value: 
-      objectReference: {fileID: 2100000, guid: a5a9423d9d457d941809bb8134d12dda, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

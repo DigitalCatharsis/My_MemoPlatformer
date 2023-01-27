@@ -77,6 +77,7 @@
     <Compile Include="Assets\My_MemoPlatformer\PooledObjects\PoolObjectLoader.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterHoverLight.cs" />
     <Compile Include="Assets\My_MemoPlatformer\InputDevices\KeyboardInput.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\TurnOnRootMotion.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts_and_Prefabs\ManualInput.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\Resources\DeathAnimationLoader.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Jump.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Camera\CameraState.cs" />
     <Compile Include="Assets\My_MemoPlatformer\PooledObjects\PoolObject.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts_and_Prefabs\TriggerDetector.cs" />
+    <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\ForceTransition.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterManager.cs" />
   </ItemGroup>
