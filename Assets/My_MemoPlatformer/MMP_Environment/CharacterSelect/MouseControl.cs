@@ -15,12 +15,16 @@ namespace My_MemoPlatformer
         public CharacterSelect characterSelect;
         private CharacterSelectLight _characterSelectLight;
         private CharacterHoverLight _characterHoverLight;
+        private GameObject _whiteSelection;
 
         private void Awake()
         {
             characterSelect.selectedCharacterType = PlayableCharacterType.NONE;
             _characterSelectLight = GameObject.FindObjectOfType<CharacterSelectLight>();
             _characterHoverLight = GameObject.FindObjectOfType<CharacterHoverLight>();
+
+            _whiteSelection = GameObject.Find("WhteSelection");
+            _whiteSelection.SetActive(false);            
         }
 
         private void Update()
@@ -49,11 +53,20 @@ namespace My_MemoPlatformer
                     CharacterControl control = CharacterManager.Instance.GetCharacter(selectedCharacterType);
                     _characterSelectLight.transform.parent = control.skinnedMeshAnimator.transform;
                     _characterSelectLight.light.enabled = true;
+
+
+
+                    //Временно
+                    _whiteSelection.SetActive(true);                    
+                    _whiteSelection.transform.parent = control.skinnedMeshAnimator.transform;
+                    _whiteSelection.transform.localPosition = new Vector3(-0.07f, 0.04f, 0.21f);
                 }
                 else
                 {
                     characterSelect.selectedCharacterType = PlayableCharacterType.NONE;
                     _characterSelectLight.light.enabled = false;
+
+                    _whiteSelection.SetActive(false);
                 }
 
                 foreach (CharacterControl c in CharacterManager.Instance.characters)
