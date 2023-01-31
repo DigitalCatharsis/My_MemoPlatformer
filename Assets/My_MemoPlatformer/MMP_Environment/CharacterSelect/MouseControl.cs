@@ -16,6 +16,7 @@ namespace My_MemoPlatformer
         private CharacterSelectLight _characterSelectLight;
         private CharacterHoverLight _characterHoverLight;
         private GameObject _whiteSelection;
+        Animator _characterSelectCamAnimator;
 
         private void Awake()
         {
@@ -24,7 +25,9 @@ namespace My_MemoPlatformer
             _characterHoverLight = GameObject.FindObjectOfType<CharacterHoverLight>();
 
             _whiteSelection = GameObject.Find("WhteSelection");
-            _whiteSelection.SetActive(false);            
+            _whiteSelection.SetActive(false);
+
+            _characterSelectCamAnimator = GameObject.Find("CharacterSelectCameraControler").GetComponent<Animator>();
         }
 
         private void Update()
@@ -81,6 +84,8 @@ namespace My_MemoPlatformer
                         c.skinnedMeshAnimator.SetBool(TransitionParameter.ClickAnimation.ToString(), false);
                     }
                 }
+
+                _characterSelectCamAnimator.SetBool(selectedCharacterType.ToString(), true);
             }
         }
     }

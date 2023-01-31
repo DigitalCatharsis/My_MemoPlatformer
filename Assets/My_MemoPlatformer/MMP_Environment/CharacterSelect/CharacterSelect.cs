@@ -7,9 +7,9 @@ namespace My_MemoPlatformer
     public enum PlayableCharacterType
     {
         NONE,
-        Yellow,
-        Red,
-        Green,
+        YELLOW,
+        RED,
+        GREEN,
     }
 
     [CreateAssetMenu(fileName = "chracterSelect", menuName = "My_MemoPlatformer/CharacterSelect/CharacterSelect")]
