@@ -17,17 +17,17 @@ namespace My_MemoPlatformer
         {
             switch (_characterSelect.selectedCharacterType)
             {
-                case PlayableCharacterType.Yellow:
+                case PlayableCharacterType.YELLOW:
                     {
                         _objName = "YBot - Yellow";
                     }
                     break;
-                case PlayableCharacterType.Red:
+                case PlayableCharacterType.RED:
                     {
                         _objName = "YBot - Red Variant";
                     }
                     break;
-                case PlayableCharacterType.Green:
+                case PlayableCharacterType.GREEN:
                     {
                         _objName = "YBot - Green Variant";
                     }
