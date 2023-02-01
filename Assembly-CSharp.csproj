@@ -860,10 +860,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="SimpleFolderIcon.csproj">
-      <Project>{40448599-A49C-5E90-B744-6AE105D4154C}</Project>
-      <Name>SimpleFolderIcon</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
