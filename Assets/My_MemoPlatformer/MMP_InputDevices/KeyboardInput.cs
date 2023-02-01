@@ -6,7 +6,7 @@ namespace My_MemoPlatformer
 {
     public class KeyboardInput : MonoBehaviour
     {
-        #region Input system
+        #region Input system (old)
         //    private NIS_PlayerControls _controls;
 
         //    private float _direction;
@@ -82,40 +82,58 @@ namespace My_MemoPlatformer
 
         void Update()
         {
-            if (Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             {
-                VirtualInputManager.Instance.MoveRight = true;
+                VirtualInputManager.Instance.moveUp = true;
             }
             else
             {
-                VirtualInputManager.Instance.MoveRight = false;
+                VirtualInputManager.Instance.moveUp = false;
             }
 
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
             {
-                VirtualInputManager.Instance.MoveLeft = true;
+                VirtualInputManager.Instance.moveDown = true;
             }
             else
             {
-                VirtualInputManager.Instance.MoveLeft = false;
+                VirtualInputManager.Instance.moveDown = false;
+            }
+
+            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            {
+                VirtualInputManager.Instance.moveRight = true;
+            }
+            else
+            {
+                VirtualInputManager.Instance.moveRight = false;
+            }
+
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            {
+                VirtualInputManager.Instance.moveLeft = true;
+            }
+            else
+            {
+                VirtualInputManager.Instance.moveLeft = false;
             }
 
             if (Input.GetKey(KeyCode.Space))
             {
-                VirtualInputManager.Instance.Jump = true;
+                VirtualInputManager.Instance.jump = true;
             }
             else
             {
-                VirtualInputManager.Instance.Jump = false;
+                VirtualInputManager.Instance.jump = false;
             }
 
             if (Input.GetKeyDown(KeyCode.C))
             {
-                VirtualInputManager.Instance.Attack = true;
+                VirtualInputManager.Instance.attack = true;
             }
             else
             {
-                VirtualInputManager.Instance.Attack = false;
+                VirtualInputManager.Instance.attack = false;
             }
         }
 
