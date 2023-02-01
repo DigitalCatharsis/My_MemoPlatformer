@@ -16,7 +16,25 @@ namespace My_MemoPlatformer
 
         private void Update()
         {
-            if (VirtualInputManager.Instance.MoveRight)
+            if (VirtualInputManager.Instance.moveUp)
+            {
+                characterControl.moveUp = true;
+            }
+            else
+            {
+                characterControl.moveUp = false;
+            }
+
+            if (VirtualInputManager.Instance.moveDown)
+            {
+                characterControl.moveDown = true;
+            }
+            else
+            {
+                characterControl.moveDown = false;
+            }
+
+            if (VirtualInputManager.Instance.moveRight)
             {
                 characterControl.moveRight = true;
             }
@@ -25,7 +43,7 @@ namespace My_MemoPlatformer
                 characterControl.moveRight = false;
             }
 
-            if (VirtualInputManager.Instance.MoveLeft)
+            if (VirtualInputManager.Instance.moveLeft)
             {
                 characterControl.moveLeft = true;
             }
@@ -34,7 +52,7 @@ namespace My_MemoPlatformer
                 characterControl.moveLeft = false;
             }
 
-            if (VirtualInputManager.Instance.Jump)
+            if (VirtualInputManager.Instance.jump)
             {
                 characterControl.jump = true;
             }
@@ -43,7 +61,7 @@ namespace My_MemoPlatformer
                 characterControl.jump = false;
             }
 
-            if (VirtualInputManager.Instance.Attack)
+            if (VirtualInputManager.Instance.attack)
             {
                 characterControl.attack = true;
             }

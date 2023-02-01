@@ -13,6 +13,7 @@ namespace My_MemoPlatformer
         Grounded,
         Attack,
         ClickAnimation,
+        TransitionIndex,
     }
 
     public enum MMP_Scenes
@@ -26,10 +27,13 @@ namespace My_MemoPlatformer
     {
         public PlayableCharacterType playableCharacterType;
         [SerializeField] public Animator skinnedMeshAnimator;
+        public bool moveUp;
+        public bool moveDown;
         public bool moveRight;
         public bool moveLeft;
         public bool jump;
         public bool attack;
+        public LedgeChecker ledgeChecker;
 
         [SerializeField] private GameObject colliderEdgePrefab;
         public List<GameObject> bottomSpheres = new List<GameObject>();
@@ -37,8 +41,8 @@ namespace My_MemoPlatformer
         public List<Collider> ragdollParts = new List<Collider>();
 
 
-        [SerializeField] public float gravityMultipliyer;
-        [SerializeField] public float pullMultipliyer;
+        public float gravityMultipliyer;
+        public float pullMultipliyer;
 
         private List<TriggerDetector> _triggerDetectors = new List<TriggerDetector>();
 
@@ -71,6 +75,8 @@ namespace My_MemoPlatformer
             {
                 FaceForward(false);
             }
+
+            ledgeChecker = GetComponentInChildren<LedgeChecker>();
 
             RegisterCharacter();
 
@@ -121,13 +127,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        //private IEnumerator Start()
-        //{
-        //    yield return new WaitForSeconds(5f);
-        //    Rigid_Body.AddForce(200f * Vector3.up);
-        //    yield return new WaitForSeconds(0.5f);
-        //    TurnOnRagdoll();
-        //}
+
 
         private void TurnOnRagdoll()
         {
@@ -211,7 +211,7 @@ namespace My_MemoPlatformer
 
         public void MoveForward(float speed, float speedGraph)
         {
-            transform.Translate(Vector3.forward * speed * speedGraph * Time.deltaTime);
+            transform.Translate(speed * speedGraph * Time.deltaTime * Vector3.forward);
         }
 
         public void FaceForward(bool forward)

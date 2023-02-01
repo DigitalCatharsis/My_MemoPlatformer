@@ -5,7 +5,7 @@ namespace My_MemoPlatformer
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/GravityPull")]
     public class GravityPull : StateData
     {
-        [SerializeField] private AnimationCurve gravity;
+        public AnimationCurve gravity;
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
