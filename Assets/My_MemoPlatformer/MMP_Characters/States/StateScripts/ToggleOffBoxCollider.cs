@@ -37,6 +37,7 @@ namespace My_MemoPlatformer
 
         private void ToggleBoxCol(CharacterControl control)
         {
+            control.Rigid_Body.velocity = Vector3.zero;
             control.GetComponent<BoxCollider>().enabled= on;
         }
     }

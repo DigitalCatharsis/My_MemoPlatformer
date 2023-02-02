@@ -6,5 +6,6 @@ namespace My_MemoPlatformer
     public class Ledge : MonoBehaviour
     {
         public Vector3 offset;
+        public Vector3 endPosition;
     }
 }

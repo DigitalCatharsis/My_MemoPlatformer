@@ -43,18 +43,18 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            
+            animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), 0);
         }
 
         private bool MakeTransition(CharacterControl control)
         {
-            foreach(TransitionConditionType c in transitionConditions)
+            foreach (TransitionConditionType c in transitionConditions)
             {
                 switch (c)
                 {
                     case TransitionConditionType.UP:
                         {
-                           if (!control.moveUp)
+                            if (!control.moveUp)
                             {
                                 return false;
                             }
@@ -108,7 +108,7 @@ namespace My_MemoPlatformer
                             }
                         }
                         break;
-                }                
+                }
             }
 
             return true;

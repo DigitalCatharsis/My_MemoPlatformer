@@ -22,6 +22,16 @@ namespace My_MemoPlatformer
             return null;
         }
 
-        
+        public CharacterControl GetCharacter(Animator animator)
+        {
+            foreach (CharacterControl control in characters)
+            {
+                if (control.skinnedMeshAnimator == animator)
+                {
+                    return control;
+                }
+            }
+            return null;
+        }
     }
 }

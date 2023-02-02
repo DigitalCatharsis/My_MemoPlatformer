@@ -91,6 +91,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\Resources\DeathAnimationLoader.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\DeathAnimationManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\OffsetOnLedge.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\TeleportOnLedge.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Jump.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\BaseScripts\StateData.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Attack.cs" />
