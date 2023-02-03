@@ -7,5 +7,14 @@ namespace My_MemoPlatformer
     {
         public Vector3 offset;
         public Vector3 endPosition;
+
+        public static bool IsLedge(GameObject obj)
+        {
+            if (obj.GetComponent<Ledge>() == null)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

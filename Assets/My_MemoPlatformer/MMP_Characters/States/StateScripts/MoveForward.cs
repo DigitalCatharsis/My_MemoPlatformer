@@ -87,7 +87,7 @@ namespace My_MemoPlatformer
 
 
 
-        bool CheckFront(CharacterControl control)
+        bool CheckFront(CharacterControl control)  //Проверка на коллизии
         {
             foreach (GameObject o in control.frontSpheres)
             {
@@ -97,7 +97,7 @@ namespace My_MemoPlatformer
                 {
                     if (!control.ragdollParts.Contains(hit.collider))  //Проверка, что задетый коллайдер не часть колайдеров radoll
                     {
-                        if (!IsBodyPart(hit.collider))  // Проверка, что мы не задеваем...коллайдер меша. В инспекторе - это прямоугольный коллайдер
+                        if (!IsBodyPart(hit.collider) && !Ledge.IsLedge(hit.collider.gameObject))  // Проверка, что мы ничего не задеваем, включая Ledge (платформы, за котоыре можно зацепиться)
                         {
                             return true;
                         }

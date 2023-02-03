@@ -28,6 +28,7 @@ namespace My_MemoPlatformer
             {
                 animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), Index);
             }
+
         }
 
 
@@ -38,6 +39,10 @@ namespace My_MemoPlatformer
             if (MakeTransition(control))
             {
                 animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), Index);
+            }
+            else
+            {
+                animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), 0);
             }
         }
 
