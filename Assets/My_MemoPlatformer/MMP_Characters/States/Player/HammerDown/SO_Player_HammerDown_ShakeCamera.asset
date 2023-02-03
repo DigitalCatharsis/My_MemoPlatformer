@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9529fa24d765c64bbdd4bdf25d51b94, type: 3}
-  m_Name: SO_Player_CrouchIdle_TransitionIndexer
+  m_Script: {fileID: 11500000, guid: e809daa3eb1b61341a5c1a50d9939282, type: 3}
+  m_Name: SO_Player_HammerDown_ShakeCamera
   m_EditorClassIdentifier: 
-  Index: 1
-  transitionConditions: 01000000
+  _shakeTiming: 0.3
