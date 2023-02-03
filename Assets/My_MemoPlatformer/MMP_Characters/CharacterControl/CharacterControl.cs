@@ -40,11 +40,11 @@ namespace My_MemoPlatformer
         public List<GameObject> frontSpheres = new List<GameObject>();
         public List<Collider> ragdollParts = new List<Collider>();
 
-
         public float gravityMultipliyer;
         public float pullMultipliyer;
 
         private List<TriggerDetector> _triggerDetectors = new List<TriggerDetector>();
+        private Dictionary<string, GameObject> _childObjects= new Dictionary<string, GameObject>();
 
         private Rigidbody _rigid;
         public Rigidbody Rigid_Body
@@ -243,7 +243,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        public Collider GetBodyPart (string name)
+        public Collider GetBodyPart(string name)
         {
             foreach (Collider c in ragdollParts)
             {
@@ -253,6 +253,30 @@ namespace My_MemoPlatformer
                 }
             }
             return null;
+        }
+
+        public GameObject GetChildObj(string name) 
+        {
+
+            if (_childObjects.ContainsKey(name)) //check if Dictionary already has the object i am looking for
+            {
+                return _childObjects[name];
+            }
+
+            Transform[] ar = this.gameObject.GetComponentsInChildren<Transform>();
+
+            foreach (Transform t in ar)
+            {
+                if (t.gameObject.name.Equals(name))
+                {
+                    _childObjects.Add(name,t.gameObject);
+                    return t.gameObject;
+                }
+
+            }
+
+            return null;
+
         }
 
     }

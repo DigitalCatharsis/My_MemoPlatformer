@@ -120,6 +120,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGrabbongLedge: 0
   grabbedLedge: {fileID: 0}
+--- !u!1 &2026038873
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2026038874}
+  m_Layer: 0
+  m_Name: WeaponPosition -ThorHammer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2026038874
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026038873}
+  m_LocalRotation: {x: 0.6647914, y: 0.3410767, z: 0.3518993, w: -0.5638138}
+  m_LocalPosition: {x: 0.109, y: 0.03, z: 0.193}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6186158364294804001}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: -81.764, y: 144.458, z: 156.693}
 --- !u!1 &196238662119682868
 GameObject:
   m_ObjectHideFlags: 0
@@ -3165,6 +3196,7 @@ Transform:
   - {fileID: 6696295823467808129}
   - {fileID: 3666066671875828453}
   - {fileID: 4131520218632526103}
+  - {fileID: 2026038874}
   m_Father: {fileID: 8070261839508928577}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

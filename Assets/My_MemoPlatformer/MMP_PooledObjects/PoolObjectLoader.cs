@@ -9,6 +9,7 @@ using UnityEngine;
     public enum PoolObjectType
     {
         ATTACKINFO,
+        HAMMER,
     }
 
     public class PoolObjectLoader : MonoBehaviour
@@ -23,6 +24,11 @@ using UnityEngine;
                     {
                         obj = Instantiate(Resources.Load("AttackInfo", typeof (GameObject)) as GameObject);
                         break; 
+                    }
+                case PoolObjectType.HAMMER:
+                    {
+                        obj = Instantiate(Resources.Load("ThorHammer", typeof(GameObject)) as GameObject);
+                        break;
                     }
             }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace My_MemoPlatformer
 {
@@ -11,7 +12,7 @@ namespace My_MemoPlatformer
         [SerializeField] float scheduledOffTime;
         private Coroutine offRoutine;
 
-        private void OnOnEnable()  //failsafe
+        private void OnEnable()                //Есть бага, когда объект не апдейтится, объект пула перестает деактивироваться. Это FailSafe
         {
             if (offRoutine != null)
             {
@@ -22,11 +23,14 @@ namespace My_MemoPlatformer
             {
                 offRoutine = StartCoroutine(_ScheduledOff());
             }
-
         }
 
         public void TurnOff()
         {
+            this.transform.parent = null;
+            this.transform.position = Vector3.zero;
+            this.transform.rotation = Quaternion.identity;
+
             PoolManager.Instance.AddObject(this);
         }
 

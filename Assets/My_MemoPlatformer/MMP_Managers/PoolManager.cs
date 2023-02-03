@@ -14,7 +14,7 @@ namespace My_MemoPlatformer
             //get every enum in PoolObjedtType
             PoolObjectType[] arr = System.Enum.GetValues(typeof(PoolObjectType)) as PoolObjectType[];
             
-            foreach (var p in arr)
+            foreach (PoolObjectType p in arr)
             {
                 if (!poolDictionary.ContainsKey(p))
                 {
