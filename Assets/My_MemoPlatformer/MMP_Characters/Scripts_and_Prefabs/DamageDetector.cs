@@ -53,6 +53,15 @@ namespace My_MemoPlatformer
                     continue;
                 }
 
+                if (info.mustFaceAttacker)
+                {
+                    Vector3 vec = this.transform.position - info.attacker.transform.position;  //Вектор от жертвы до нападающего
+                    if (vec.z * info.attacker.transform.forward.z < 0f) //Мы сравниваем 2 вектора, если они смотрят в разные стороны, со один из них отрицательный, следовательно, перменожение решает смотрят ли они друг на друга
+                    {
+                        continue;
+                    }
+                }
+
                 if (info.mustCollide)
                 {
                     if (IsCollided(info))

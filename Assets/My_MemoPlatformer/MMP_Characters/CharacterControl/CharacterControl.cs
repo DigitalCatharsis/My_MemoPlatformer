@@ -155,28 +155,30 @@ namespace My_MemoPlatformer
             float front = box.bounds.center.z + box.bounds.extents.z; // в центре спереди. ;
             float back = box.bounds.center.z - box.bounds.extents.z; // в центре сзади. ;;
 
-            GameObject bottomFront = CreateEdgeSphere(new Vector3(0f, bottom, front));
-            GameObject bottomBack = CreateEdgeSphere(new Vector3(0f, bottom, back));
+            GameObject bottomFrontHor = CreateEdgeSphere(new Vector3(0f, bottom, front));
+            GameObject bottomFrontVer = CreateEdgeSphere(new Vector3(0f, bottom + 0.05f, front));
+            GameObject bottomBack = CreateEdgeSphere(new Vector3(0f, bottom, back));            
             GameObject topFront = CreateEdgeSphere(new Vector3(0f, top, front));
-            //GameObject topBack = CreateEdgeSphere(new Vector3(0f, top, front));
 
-            bottomFront.transform.parent = this.transform; //Делаем его дочерним
+
+            bottomFrontHor.transform.parent = this.transform; 
+            bottomFrontVer.transform.parent = this.transform; 
             bottomBack.transform.parent = this.transform;
             topFront.transform.parent = this.transform;
 
-            bottomSpheres.Add(bottomFront);
+            bottomSpheres.Add(bottomFrontHor);
             bottomSpheres.Add(bottomBack);
 
-            frontSpheres.Add(bottomFront);
+            frontSpheres.Add(bottomFrontVer);
             frontSpheres.Add(topFront);
             //frontSpheres.Add(topBack);
 
-            float horSec = (bottomFront.transform.position - bottomBack.transform.position).magnitude / 5f; //Получаем одну секцию длинны, деленной на пять            
-            CreateMiddleSpheres(bottomFront, -this.transform.forward, horSec, 4, bottomSpheres);
+            float horSec = (bottomFrontHor.transform.position - bottomBack.transform.position).magnitude / 5f; //Получаем одну секцию длинны, деленной на пять            
+            CreateMiddleSpheres(bottomFrontHor, -this.transform.forward, horSec, 4, bottomSpheres);
 
 
-            float verSec = (bottomFront.transform.position - topFront.transform.position).magnitude / 10f; //Получаем одну секцию длинны, деленной на 10
-            CreateMiddleSpheres(bottomFront, this.transform.up, verSec, 9, frontSpheres);
+            float verSec = (bottomFrontVer.transform.position - topFront.transform.position).magnitude / 10f; //Получаем одну секцию длинны, деленной на 10
+            CreateMiddleSpheres(bottomFrontVer, this.transform.up, verSec, 9, frontSpheres);
         }
         private void FixedUpdate()
         {
