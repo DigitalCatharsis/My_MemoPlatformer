@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -9,9 +10,11 @@ namespace My_MemoPlatformer
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/SpawnObject")]
     public class SpawnObject : StateData
     {
+        [SerializeField] private PoolObjectType objectType;
         [Range(0f, 1f)]
         public float spawnTiming;
         public string parentObjectName = string.Empty;
+        public bool stickToParent;
 
         private bool isSpawned;
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -44,10 +47,9 @@ namespace My_MemoPlatformer
 
         private void SpawnObj(CharacterControl control)
         {
-            GameObject obj = PoolManager.Instance.GetObject(PoolObjectType.HAMMER);
-            obj.SetActive(true);
+            GameObject obj = PoolManager.Instance.GetObject(objectType);
 
-            if (!string.IsNullOrEmpty(parentObjectName)) 
+            if (!string.IsNullOrEmpty(parentObjectName))
             {
                 GameObject p = control.GetChildObj(parentObjectName);
                 obj.transform.parent = p.transform;
@@ -55,6 +57,14 @@ namespace My_MemoPlatformer
                 obj.transform.localRotation = Quaternion.identity;
 
             }
+
+            if (!stickToParent)
+            {
+                obj.transform.parent = null;
+            }
+
+            obj.SetActive(true);
+
         }
 
     }

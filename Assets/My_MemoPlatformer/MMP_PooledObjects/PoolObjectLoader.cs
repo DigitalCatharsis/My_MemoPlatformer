@@ -9,7 +9,9 @@ using UnityEngine;
     public enum PoolObjectType
     {
         ATTACKINFO,
-        HAMMER,
+        HAMMER_OBJ,
+        HAMMER_VFX,
+        Test_Hammer,
     }
 
     public class PoolObjectLoader : MonoBehaviour
@@ -25,9 +27,19 @@ using UnityEngine;
                         obj = Instantiate(Resources.Load("AttackInfo", typeof (GameObject)) as GameObject);
                         break; 
                     }
-                case PoolObjectType.HAMMER:
+                case PoolObjectType.HAMMER_OBJ:
                     {
                         obj = Instantiate(Resources.Load("ThorHammer", typeof(GameObject)) as GameObject);
+                        break;
+                    }         
+                case PoolObjectType.HAMMER_VFX:
+                    {
+                        obj = Instantiate(Resources.Load("VFX_HammerDown", typeof(GameObject)) as GameObject);
+                        break;
+                    }           
+                case PoolObjectType.Test_Hammer:
+                    {
+                        obj = Instantiate(Resources.Load("HitParticleEffect(TestVerison)", typeof(GameObject)) as GameObject);
                         break;
                     }
             }
