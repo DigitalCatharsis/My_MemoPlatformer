@@ -20,7 +20,7 @@ namespace My_MemoPlatformer
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
 
-            if (control.attack)
+            if (control.animationProgress.attackTriggered)
             {
                 animator.SetBool(TransitionParameter.Attack.ToString(), true);
             }
