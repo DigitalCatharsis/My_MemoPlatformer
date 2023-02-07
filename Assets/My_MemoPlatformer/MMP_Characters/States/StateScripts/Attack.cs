@@ -97,12 +97,12 @@ namespace My_MemoPlatformer
 
         public void CheckCombo (CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (stateInfo.normalizedTime >= startAttackTime + ((endAttackTime - startAttackTime) /3))
+            if (stateInfo.normalizedTime >= startAttackTime + ((endAttackTime - startAttackTime) /3))   //to define when we press. wich procent of the animation i want to set combos start time
             {
                 if (stateInfo.normalizedTime < endAttackTime + (endAttackTime - startAttackTime) / 2)
                 {
                     CharacterControl control = characterState.GetCharacterControl(animator);
-                    if (control.attack)
+                    if (control.animationProgress.attackTriggered)
                     {
                         Debug.Log("uppercut triggered");
                         animator.SetBool(TransitionParameter.Attack.ToString(),true);

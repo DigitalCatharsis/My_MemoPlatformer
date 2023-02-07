@@ -9,24 +9,26 @@ namespace My_MemoPlatformer
     public class ShakeCamera : StateData
     {
         [Range(0f, 0.99f)][SerializeField] private float _shakeTiming;
-        private bool _isShaken  = false;
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             if (_shakeTiming == 0f) 
             {
+                CharacterControl control = characterState.GetCharacterControl(animator);
                 CameraManager.Instance.ShakeCamera(0.2f);
-                _isShaken= true;
+                control.animationProgress.cameraShaken = true;
             }
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (!_isShaken)
+            CharacterControl control = characterState.GetCharacterControl(animator);
+
+            if (!control.animationProgress.cameraShaken)
             {
                 if (stateInfo.normalizedTime >= _shakeTiming)
                 {
-                    _isShaken = true;
+                    control.animationProgress.cameraShaken = true;
                     CameraManager.Instance.ShakeCamera(0.2f);
                 }
             }
@@ -34,7 +36,8 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            _isShaken = false;
+            CharacterControl control = characterState.GetCharacterControl(animator);
+            control.animationProgress.cameraShaken = false;
         }
     }
 }

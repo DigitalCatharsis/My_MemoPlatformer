@@ -1341,6 +1341,7 @@ GameObject:
   - component: {fileID: 4542326154330732370}
   - component: {fileID: 8003498278013731179}
   - component: {fileID: 936084455}
+  - component: {fileID: 1747402107}
   m_Layer: 0
   m_Name: YBot - Yellow
   m_TagString: Untagged
@@ -1364,7 +1365,7 @@ Transform:
   - {fileID: 1260156244}
   - {fileID: 673519052}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2430949021683835266
 BoxCollider:
@@ -1408,6 +1409,7 @@ MonoBehaviour:
   jump: 0
   attack: 0
   ledgeChecker: {fileID: 0}
+  animationProgress: {fileID: 0}
   colliderEdgePrefab: {fileID: 6977181466952526126, guid: 14252d4c16f30bc44b4e47de024c6ff3, type: 3}
   bottomSpheres: []
   frontSpheres: []
@@ -1451,6 +1453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ce156c695f6fa4dadd5a2b226dc977, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageTaken: 0
 --- !u!114 &8003498278013731179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1494,6 +1497,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 114
   m_CollisionDetection: 1
+--- !u!114 &1747402107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3372119544377188088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7dc2d5d4cbdf1f4f890b95530896b58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isJumped: 0
+  cameraShaken: 0
+  poolObjectList: 
+  attackTriggered: 0
+  maxPressTime: 0.1
 --- !u!1 &3421970840792435037
 GameObject:
   m_ObjectHideFlags: 0

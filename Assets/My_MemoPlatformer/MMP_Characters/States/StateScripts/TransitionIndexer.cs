@@ -91,7 +91,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.ATTACK:
                         {
-                            if (!control.attack)
+                            if (!control.animationProgress.attackTriggered)
                             {
                                 return false;
                             }

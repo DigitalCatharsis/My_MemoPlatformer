@@ -127,7 +127,8 @@ namespace My_MemoPlatformer
                 VirtualInputManager.Instance.jump = false;
             }
 
-            if (Input.GetKeyDown(KeyCode.C))
+            //    if (Input.GetKeyDown(KeyCode.C))
+            if (Input.GetKey(KeyCode.C))
             {
                 VirtualInputManager.Instance.attack = true;
             }
