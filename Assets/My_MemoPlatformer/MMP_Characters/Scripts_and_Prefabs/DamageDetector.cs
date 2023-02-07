@@ -128,7 +128,9 @@ namespace My_MemoPlatformer
             info.currentHits++;
 
             control.GetComponent<BoxCollider>().enabled = false;
+            control.ledgeChecker.GetComponent<BoxCollider>().enabled = false;
             control.Rigid_Body.useGravity = false;
+
 
             damageTaken++; 
         }
