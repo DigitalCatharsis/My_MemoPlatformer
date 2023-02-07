@@ -11,7 +11,7 @@ namespace My_MemoPlatformer
         public float startAttackTime; //Is % of the animation duration
         public float endAttackTime; //Is % of the animation duration
         public List<string> colliderNames = new List<string>();  //name of the bodypards that gonna carry the attack
-        public bool LaunchIntoAir;
+        public DeathType deathType;
         public bool mustCollide;
         public bool mustFaceAttacker;
         public float lethalRange;

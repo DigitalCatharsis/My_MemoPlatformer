@@ -9,15 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09d2138cfc2da18499f42578916d88ca, type: 3}
-  m_Name: SO_Player_HammerDown_Attack
+  m_Script: {fileID: 11500000, guid: a0a31e85d36702348afc1f483d518a94, type: 3}
+  m_Name: SO_Death_SoccerTackle_Collision
   m_EditorClassIdentifier: 
-  startAttackTime: 0.3
-  endAttackTime: 0.4
-  colliderNames: []
-  deathType: 2
-  mustCollide: 0
-  mustFaceAttacker: 1
-  lethalRange: 5
-  maxHits: 100
-  debug: 0
+  GeneralBodyParts: 0100000003000000
+  Animator: {fileID: 9100000, guid: c3eaf3d2381d60949a36874a622fa4b8, type: 2}
+  deathType: 0
+  IsFacingAttacker: 1

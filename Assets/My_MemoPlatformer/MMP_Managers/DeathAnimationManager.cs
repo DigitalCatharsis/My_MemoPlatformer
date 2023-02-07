@@ -8,63 +8,55 @@ namespace My_MemoPlatformer
     public class DeathAnimationManager : Singleton<DeathAnimationManager>
     {
 
-        DeathAnimationLoader deathAnimationLoader;
-        List<RuntimeAnimatorController> Candidates = new List<RuntimeAnimatorController>();
+        private DeathAnimationLoader _deathAnimationLoader;
+        private List<RuntimeAnimatorController> _Candidates = new List<RuntimeAnimatorController>();
 
 
         void SetupDeathAnimationLoader()
         {
-            if (deathAnimationLoader == null)
+            if (_deathAnimationLoader == null)
             {
                 GameObject obj = Instantiate(Resources.Load("DeathAnimationLoader", typeof(GameObject)) as GameObject);
                 DeathAnimationLoader loader = obj.GetComponent<DeathAnimationLoader>();
-                deathAnimationLoader = loader;
+                _deathAnimationLoader = loader;
             }
         }
 
-        public RuntimeAnimatorController GetAnimator (GeneralBodyPart generalBodyPart, AttackInfo info)
+        public RuntimeAnimatorController GetAnimator(GeneralBodyPart generalBodyPart, AttackInfo info)
         {
             SetupDeathAnimationLoader();
 
-            Candidates.Clear();
+            _Candidates.Clear();
 
-            foreach (DeathAnimationData data in deathAnimationLoader.DeathAnimationDataList)
+            foreach (DeathAnimationData data in _deathAnimationLoader.DeathAnimationDataList)
             {
-                if (info.LaunchIntoAir)
+                if (info.deathType == data.deathType)
                 {
-                    if (data.LaunchIntoAir)
+
+                    if (info.deathType != DeathType.NONE)
                     {
-                        Candidates.Add(data.Animator);
+                        _Candidates.Add(data.Animator);
                     }
-                }
-                else if (!info.mustCollide)
-                {
-                    foreach (GeneralBodyPart part in data.GeneralBodyParts)
+
+
+                    if (!info.mustCollide)
                     {
-                        if (part == GeneralBodyPart.Lower || part == GeneralBodyPart.Leg)
-                        {
-                            Candidates.Add(data.Animator);
-                            break;
-                        }
+                        _Candidates.Add(data.Animator);
                     }
-                }
-                else
-                {
-                    foreach (GeneralBodyPart part in data.GeneralBodyParts)
+                    else
                     {
-                        if (part == generalBodyPart)
+                        foreach (GeneralBodyPart part in data.GeneralBodyParts)
                         {
-                            Candidates.Add(data.Animator);
-                            break;
+                            if (part == generalBodyPart)
+                            {
+                                _Candidates.Add(data.Animator);
+                                break;
+                            }
                         }
                     }
                 }                
             }
-
-            return Candidates[Random.Range(0,Candidates.Count)];
+            return _Candidates[Random.Range(0, _Candidates.Count)];
         }
-
-
-
     }
 }
