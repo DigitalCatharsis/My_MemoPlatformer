@@ -9,10 +9,13 @@ namespace My_MemoPlatformer
     public class DamageDetector : MonoBehaviour  //Compare collision info versus attack input that is being registered
     {
         CharacterControl control;
-        GeneralBodyPart _damagePart; 
+        GeneralBodyPart _damagePart;
+
+        public int damageTaken; //templory
 
         private void Awake()
         {
+            damageTaken = 0;
             control = GetComponent<CharacterControl>();
         }
 
@@ -72,7 +75,7 @@ namespace My_MemoPlatformer
                 else
                 {
                     float dist = Vector3.SqrMagnitude( this.gameObject.transform.position - info.attacker.transform.position); //distance between target and attacker
-                    Debug.Log(this.gameObject.name + "dist: "+ dist.ToString() );
+                    //Debug.Log(this.gameObject.name + "dist: "+ dist.ToString() );
                     if (dist  <= info.lethalRange) 
                     {
                         TakeDamage(info);
@@ -102,6 +105,11 @@ namespace My_MemoPlatformer
 
         private void TakeDamage(AttackInfo info)
         {
+            if (damageTaken > 0)  //templory fix for hitting dead enemy
+            {
+                return;
+            }
+
             if (info.mustCollide)
             {
                 CameraManager.Instance.ShakeCamera(0.2f);
@@ -111,13 +119,13 @@ namespace My_MemoPlatformer
             Debug.Log(info.attacker.gameObject.name + " hits " + this.gameObject.name);
             Debug.Log(this.gameObject.name + " hit " + _damagePart.ToString());
 
-
-            //control.skinnedMeshAnimator.runtimeAnimatorController = info.attackAbility.GetDeathAnimator();
             control.skinnedMeshAnimator.runtimeAnimatorController = DeathAnimationManager.Instance.GetAnimator(_damagePart, info);
             info.currentHits++;
 
             control.GetComponent<BoxCollider>().enabled = false;
             control.Rigid_Body.useGravity = false;
+
+            damageTaken++; 
         }
 
     }

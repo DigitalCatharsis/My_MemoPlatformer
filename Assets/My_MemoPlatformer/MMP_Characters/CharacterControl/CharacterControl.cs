@@ -34,6 +34,7 @@ namespace My_MemoPlatformer
         public bool jump;
         public bool attack;
         public LedgeChecker ledgeChecker;
+        public AnimationProgress animationProgress;
 
         [SerializeField] private GameObject colliderEdgePrefab;
         public List<GameObject> bottomSpheres = new List<GameObject>();
@@ -77,6 +78,8 @@ namespace My_MemoPlatformer
             }
 
             ledgeChecker = GetComponentInChildren<LedgeChecker>();
+
+            animationProgress = GetComponent<AnimationProgress>();
 
             RegisterCharacter();
 

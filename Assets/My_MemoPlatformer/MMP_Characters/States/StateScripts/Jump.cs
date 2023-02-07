@@ -11,16 +11,16 @@ namespace My_MemoPlatformer
         [Range(0f, 1f)]
         [SerializeField] private float jumpTiming;
         [SerializeField] private float jumpForce;
-        //[SerializeField] private AnimationCurve gravity; 
         [SerializeField] private AnimationCurve pull;
-        private bool isJumped;
+
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             if (jumpTiming ==0f)
             {
+                CharacterControl control = characterState.GetCharacterControl(animator);
                 characterState.GetCharacterControl(animator).Rigid_Body.AddForce(Vector3.up * jumpForce);
-                isJumped = true;
+                control.animationProgress.isJumped = true;
             }
             animator.SetBool(TransitionParameter.Grounded.ToString(), false);
         }
@@ -28,24 +28,21 @@ namespace My_MemoPlatformer
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
-
-           // control.gravityMultipliyer = gravity.Evaluate(stateInfo.normalizedTime);
             control.pullMultipliyer = pull.Evaluate(stateInfo.normalizedTime);   //ÒÓÒ ÃĞÅÁÀÍÀß ÂÛÑÎÒÀ ÏĞÛÆÊÀ ÂÇÀÂÈÑÈÌÎÑÒÈ ÎÒ ÍÀÆÀÒÈß!
 
-            if (!isJumped && stateInfo.normalizedTime >= jumpTiming)
+            if (!control.animationProgress.isJumped && stateInfo.normalizedTime >= jumpTiming)
             {
                 characterState.GetCharacterControl(animator).Rigid_Body.AddForce(Vector3.up * jumpForce);
-                isJumped = true;
+                control.animationProgress.isJumped = true;
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
-
-            control.pullMultipliyer = pull.Evaluate(stateInfo.normalizedTime);   //ÒÓÒ ÃĞÅÁÀÍÀß ÂÛÑÎÒÀ ÏĞÛÆÊÀ ÂÇÀÂÈÑÈÌÎÑÒÈ ÎÒ ÍÀÆÀÒÈß!
+            //control.pullMultipliyer = pull.Evaluate(stateInfo.normalizedTime);   //ÒÓÒ ÃĞÅÁÀÍÀß äëèííà ÏĞÛÆÊÀ ÂÇÀÂÈÑÈÌÎÑÒÈ ÎÒ ÍÀÆÀÒÈß!
             control.pullMultipliyer = 0f;
-            isJumped=false;
+            control.animationProgress.isJumped = false;
         }
     }
 

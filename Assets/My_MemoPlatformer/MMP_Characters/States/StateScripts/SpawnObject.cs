@@ -16,37 +16,45 @@ namespace My_MemoPlatformer
         public string parentObjectName = string.Empty;
         public bool stickToParent;
 
-        private bool isSpawned;
+        
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             if (spawnTiming== 0f)
             {
                 CharacterControl control = characterState.GetCharacterControl(animator);
                 SpawnObj(control);
-                isSpawned = true;
             }
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (!isSpawned)
+            CharacterControl control = characterState.GetCharacterControl(animator);
+
+            if (!control.animationProgress.PoolObjectList.Contains(objectType))
             {
                 if (stateInfo.normalizedTime >= spawnTiming)
-                {
-                    CharacterControl control = characterState.GetCharacterControl(animator);
+                {                    
                     SpawnObj(control);
-                    isSpawned = true;
                 }
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            isSpawned = false;
+            CharacterControl control = characterState.GetCharacterControl(animator);
+            if (control.animationProgress.PoolObjectList.Contains(objectType))
+            {
+                control.animationProgress.PoolObjectList.Remove(objectType);
+            }
         }
 
         private void SpawnObj(CharacterControl control)
         {
+            if (control.animationProgress.PoolObjectList.Contains(objectType))
+            {
+                return;
+            }
+
             GameObject obj = PoolManager.Instance.GetObject(objectType);
 
             if (!string.IsNullOrEmpty(parentObjectName))
@@ -64,6 +72,8 @@ namespace My_MemoPlatformer
             }
 
             obj.SetActive(true);
+
+            control.animationProgress.PoolObjectList.Add(objectType);
 
         }
 
