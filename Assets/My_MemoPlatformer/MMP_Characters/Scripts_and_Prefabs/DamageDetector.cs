@@ -92,10 +92,15 @@ namespace My_MemoPlatformer
                 {
                     foreach (string name in info.colliderNames)  //Имена атакующих коллайдеров
                     {
-                        if (name == collider.gameObject.name)  //Смотрим, что коллайдер атакующий
+                        if (name.Equals(collider.gameObject.name))  //Смотрим, что коллайдер атакующий
                         {
-                            _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
-                            return true;
+                            if (collider.transform.root.gameObject == info.attacker.gameObject) //фикс, если несколько игроков бьют врагов одновременно
+                            {
+                                _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
+                                return true;
+                            }
+                            
+
                         }
                     }
                 }
@@ -107,7 +112,7 @@ namespace My_MemoPlatformer
         {
             if (damageTaken > 0)  //templory fix for hitting dead enemy
             {
-                return;
+                //return;
             }
 
             if (info.mustCollide)

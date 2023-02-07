@@ -1511,7 +1511,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isJumped: 0
   cameraShaken: 0
-  PoolObjectList: 
+  poolObjectList: 
+  attackTriggered: 0
+  maxPressTime: 0.1
 --- !u!1 &3421970840792435037
 GameObject:
   m_ObjectHideFlags: 0
