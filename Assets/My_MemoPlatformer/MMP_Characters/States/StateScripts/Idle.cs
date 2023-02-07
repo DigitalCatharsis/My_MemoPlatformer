@@ -12,6 +12,7 @@ namespace My_MemoPlatformer
         {
             animator.SetBool(TransitionParameter.Jump.ToString(), false);
             animator.SetBool(TransitionParameter.Attack.ToString(), false);
+            animator.SetBool(TransitionParameter.Attack.ToString(), false);
         }
 
 
@@ -30,11 +31,15 @@ namespace My_MemoPlatformer
                 animator.SetBool(TransitionParameter.Jump.ToString(), true);
             }
 
-            if (control.moveRight)
+            if (control.moveLeft && control.moveRight)
+            {
+                //nothing to fix bug with double press
+            }
+            else if (control.moveRight)
             {
                 animator.SetBool(TransitionParameter.Move.ToString(), true);
             }
-            if (control.moveLeft)
+            else if (control.moveLeft)
             {
                 animator.SetBool(TransitionParameter.Move.ToString(), true);
             }
