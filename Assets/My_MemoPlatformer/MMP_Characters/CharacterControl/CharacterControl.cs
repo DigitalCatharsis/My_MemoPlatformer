@@ -14,6 +14,7 @@ namespace My_MemoPlatformer
         Attack,
         ClickAnimation,
         TransitionIndex,
+        Turbo,
     }
 
     public enum MMP_Scenes
@@ -31,6 +32,7 @@ namespace My_MemoPlatformer
         public bool moveDown;
         public bool moveRight;
         public bool moveLeft;
+        public bool turbo;
         public bool jump;
         public bool attack;
         public LedgeChecker ledgeChecker;
