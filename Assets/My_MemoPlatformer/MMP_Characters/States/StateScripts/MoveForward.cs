@@ -8,6 +8,7 @@ namespace My_MemoPlatformer
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/MoveForward")]
     public class MoveForward : StateData
     {
+        public bool lockDirection;
         public bool constant; //move no matter what
         public AnimationCurve speedGraph;
         public float speed;
@@ -64,8 +65,6 @@ namespace My_MemoPlatformer
 
             if (control.moveRight)
             {
-
-                control.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                 if (!CheckFront(control))
                 {
                     control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
@@ -75,17 +74,29 @@ namespace My_MemoPlatformer
             if (control.moveLeft)
             {
                 {
-
-                    control.transform.rotation = Quaternion.Euler(0f, 180, 0f);
                     if (!CheckFront(control))
                     {
                         control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                     }
                 }
             }
+            CheckTurn(control);
         }
 
-
+        private void CheckTurn(CharacterControl control)
+        {
+            if (!lockDirection)
+                {
+                if (control.moveRight)
+                {
+                    control.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                }           
+                if (control.moveLeft)
+                {
+                    control.transform.rotation = Quaternion.Euler(0f, 180, 0f);
+                }
+            }
+        }
 
         bool CheckFront(CharacterControl control)  //Проверка на коллизии
         {

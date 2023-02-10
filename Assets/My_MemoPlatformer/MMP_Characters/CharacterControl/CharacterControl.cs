@@ -15,6 +15,7 @@ namespace My_MemoPlatformer
         ClickAnimation,
         TransitionIndex,
         Turbo,
+        Turn,
     }
 
     public enum MMP_Scenes

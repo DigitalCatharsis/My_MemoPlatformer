@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/CheckAttack")]
-    public class CheckAttack : StateData
+    [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/ChecMovement")]
+    public class ChecMovement : StateData
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
@@ -17,15 +17,18 @@ namespace My_MemoPlatformer
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
 
-            if (control.animationProgress.attackTriggered)
+            if (control.moveLeft || control.moveRight)
             {
-                animator.SetBool(TransitionParameter.Attack.ToString(), true);
+                animator.SetBool(TransitionParameter.Move.ToString(), true);
+            }
+            else
+            {
+                animator.SetBool(TransitionParameter.Move.ToString(), false);
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            //animator.SetBool(TransitionParameter.Attack.ToString(), false);
         }
     }
 

@@ -62,6 +62,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterSelect.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_PooledObjects\PoolObjectLoader.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\SpawnObject.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\CheckMovement.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\MaterialChaner\MaterialChanger.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\MouseControl.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts_and_Prefabs\PlayerSpawn.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\BaseScripts\CharacterState.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\MoveForward.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\CharacterControl\CharacterControl.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\CheckTurboAndMovement.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\CheckAttack.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\TransitionIndexer.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts_and_Prefabs\DamageDetector.cs" />
@@ -110,6 +112,8 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\ForceTransition.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_CameraGame\CameraContoller.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterManager.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Turn180.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\CheckRunningTurn.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
