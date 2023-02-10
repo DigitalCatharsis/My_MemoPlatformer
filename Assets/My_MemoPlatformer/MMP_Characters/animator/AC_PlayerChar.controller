@@ -275,7 +275,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f893ecf6189846c4aada6d244806222e, type: 2}
   - {fileID: 11400000, guid: 82cfea98851c9da45aa612fb376e76eb, type: 2}
   - {fileID: 11400000, guid: c4dc48306b821084682efeaf15d7b2bb, type: 2}
-  - {fileID: 11400000, guid: 7defb8a75fc400a469092fb8f12f47a2, type: 2}
+  - {fileID: 11400000, guid: 47e26e7df83d0e5408c55a85213b3e4d, type: 2}
   - {fileID: 11400000, guid: c12ed0cc89ec7e848be4b097c2daaaad, type: 2}
 --- !u!1102 &-6731088163875340424
 AnimatorState:
@@ -1099,9 +1099,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.057552874
+  m_TransitionDuration: 0.12925673
   m_TransitionOffset: 0
-  m_ExitTime: 0.91749936
+  m_ExitTime: 0.87433314
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -1213,7 +1213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ListAbilityData:
-  - {fileID: 11400000, guid: 7defb8a75fc400a469092fb8f12f47a2, type: 2}
+  - {fileID: 11400000, guid: 47e26e7df83d0e5408c55a85213b3e4d, type: 2}
   - {fileID: 11400000, guid: c12ed0cc89ec7e848be4b097c2daaaad, type: 2}
   - {fileID: 11400000, guid: 1e41e4c93de64a14e928e5d4a26e5f02, type: 2}
   - {fileID: 11400000, guid: f5aaebf3793cca141b8e09a3e31f1ebf, type: 2}

@@ -8,6 +8,7 @@ namespace My_MemoPlatformer
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/MoveForward")]
     public class MoveForward : StateData
     {
+        public bool allowEarlyTurn; //Prevent turning when running from idle
         public bool lockDirection;
         public bool constant; //move no matter what
         public AnimationCurve speedGraph;
@@ -16,6 +17,19 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            if (allowEarlyTurn)
+            {
+                CharacterControl control = characterState.GetCharacterControl(animator);
+
+                if (control.moveLeft)
+                {
+                    control.FaceForward(false);
+                }
+                if (control.moveRight)
+                {
+                    control.FaceForward(true);
+                }
+            }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -86,11 +100,11 @@ namespace My_MemoPlatformer
         private void CheckTurn(CharacterControl control)
         {
             if (!lockDirection)
-                {
+            {
                 if (control.moveRight)
                 {
                     control.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-                }           
+                }
                 if (control.moveLeft)
                 {
                     control.transform.rotation = Quaternion.Euler(0f, 180, 0f);
@@ -120,7 +134,7 @@ namespace My_MemoPlatformer
 
         }
 
-        private bool IsBodyPart (Collider col)
+        private bool IsBodyPart(Collider col)
         {
             CharacterControl control = col.transform.root.GetComponent<CharacterControl>();
 
