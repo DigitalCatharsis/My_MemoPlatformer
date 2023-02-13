@@ -83,6 +83,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\CameraManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\GravityPull.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\GroundDetector.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\DisAllowEarlyTurn.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_InputDevices\KeyboardInput.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\ToggleOffBoxCollider.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterHoverLight.cs" />

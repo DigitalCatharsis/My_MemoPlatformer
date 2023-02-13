@@ -14,6 +14,7 @@ namespace My_MemoPlatformer
         public List<PoolObjectType> poolObjectList = new List<PoolObjectType>();
         public bool attackTriggered;
         public float maxPressTime;
+        public bool disAllowEarlyTurn;
 
         private CharacterControl _control;
         private float _pressTime;

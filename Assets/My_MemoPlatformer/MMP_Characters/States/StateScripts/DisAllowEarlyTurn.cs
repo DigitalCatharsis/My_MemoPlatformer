@@ -5,32 +5,25 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/Turn180")]
-    public class Turn180 : StateData
+    [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/DisAllowEarlyTurn")]
+    public class DisAllowEarlyTurn : StateData
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
 
-            if (control.IsFacingForward())
-            {
-                control.FaceForward(false);
-            }
-            else
-            {
-                control.FaceForward(true);
-            }
-
+            control.animationProgress.disAllowEarlyTurn= true;
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            
 
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-
+            animator.SetBool(TransitionParameter.Attack.ToString(), false);
         }
     }
 

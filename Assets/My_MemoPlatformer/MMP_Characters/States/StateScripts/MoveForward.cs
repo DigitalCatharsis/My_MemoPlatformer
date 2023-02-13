@@ -17,9 +17,10 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (allowEarlyTurn)
-            {
-                CharacterControl control = characterState.GetCharacterControl(animator);
+            CharacterControl control = characterState.GetCharacterControl(animator);
+
+            if (allowEarlyTurn && !control.animationProgress.disAllowEarlyTurn)
+            {               
 
                 if (control.moveLeft)
                 {
@@ -30,6 +31,8 @@ namespace My_MemoPlatformer
                     control.FaceForward(true);
                 }
             }
+
+            control.animationProgress.disAllowEarlyTurn = false;
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
