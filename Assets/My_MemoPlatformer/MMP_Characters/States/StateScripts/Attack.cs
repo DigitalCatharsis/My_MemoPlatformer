@@ -18,7 +18,7 @@ namespace My_MemoPlatformer
         public int maxHits;
         public bool debug;
 
-        private List<AttackInfo> finishedAttacks = new List<AttackInfo> ();
+        private List<AttackInfo> _finishedAttacks = new List<AttackInfo> ();
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
@@ -99,12 +99,12 @@ namespace My_MemoPlatformer
         {
             if (stateInfo.normalizedTime >= startAttackTime + ((endAttackTime - startAttackTime) /3))   //to define when we press. wich procent of the animation i want to set combos start time
             {
-                if (stateInfo.normalizedTime < endAttackTime + (endAttackTime - startAttackTime) / 2)
+                if (stateInfo.normalizedTime < endAttackTime + ((endAttackTime - startAttackTime) / 2))
                 {
                     CharacterControl control = characterState.GetCharacterControl(animator);
                     if (control.animationProgress.attackTriggered)
                     {
-                        Debug.Log("uppercut triggered");
+                        //Debug.Log("uppercut triggered");
                         animator.SetBool(TransitionParameter.Attack.ToString(),true);
                     }    
                 }
@@ -120,16 +120,17 @@ namespace My_MemoPlatformer
         }
         private void ClearAttack()
         {
+            _finishedAttacks.Clear();
 
             foreach (AttackInfo info in AttackManager.Instance.currentAttacks)
             {
                 if (info == null || info.attackAbility == this) 
                 {
-                    finishedAttacks.Add(info);
+                    _finishedAttacks.Add(info);
                 }
             }
 
-            foreach (AttackInfo info in finishedAttacks)
+            foreach (AttackInfo info in _finishedAttacks)
             {
                 if (AttackManager.Instance.currentAttacks.Contains(info))
                 {

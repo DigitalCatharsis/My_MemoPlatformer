@@ -34,7 +34,6 @@ namespace My_MemoPlatformer
             attackAbility = attack;
             colliderNames = attack.colliderNames;
             deathType = attack.deathType;
-            //LaunchIntoAir = attack.LaunchIntoAir;
             mustCollide = attack.mustCollide;
             mustFaceAttacker = attack.mustFaceAttacker;
             lethalRange = attack.lethalRange;

@@ -35,9 +35,6 @@ namespace My_MemoPlatformer
             control.animationProgress.disAllowEarlyTurn = false;
         }
 
-        public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
-        }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
@@ -159,6 +156,11 @@ namespace My_MemoPlatformer
             return false;
 
         }
+
+        public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
+        {
+        }
+
     }
 
 

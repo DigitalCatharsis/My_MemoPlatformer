@@ -20,6 +20,6 @@ MonoBehaviour:
   deathType: 0
   mustCollide: 1
   mustFaceAttacker: 0
-  lethalRange: 0.1
-  maxHits: 0
-  debug: 1
+  lethalRange: 0
+  maxHits: 1
+  debug: 0

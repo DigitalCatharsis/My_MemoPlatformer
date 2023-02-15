@@ -22,6 +22,7 @@ namespace My_MemoPlatformer
         private void Awake()
         {
             _control = GetComponentInParent<CharacterControl>();
+            _pressTime = 0f;
         }
 
         private void Update()
