@@ -7,6 +7,7 @@ namespace My_MemoPlatformer
 {
     public class VirtualInputManager : Singleton<VirtualInputManager>
     {
+        public bool turbo;
         public bool moveRight;
         public bool moveLeft;
         public bool moveUp;

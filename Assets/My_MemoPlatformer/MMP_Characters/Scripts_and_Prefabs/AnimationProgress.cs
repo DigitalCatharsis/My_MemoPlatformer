@@ -14,6 +14,7 @@ namespace My_MemoPlatformer
         public List<PoolObjectType> poolObjectList = new List<PoolObjectType>();
         public bool attackTriggered;
         public float maxPressTime;
+        public bool disAllowEarlyTurn;
 
         private CharacterControl _control;
         private float _pressTime;
@@ -21,6 +22,7 @@ namespace My_MemoPlatformer
         private void Awake()
         {
             _control = GetComponentInParent<CharacterControl>();
+            _pressTime = 0f;
         }
 
         private void Update()

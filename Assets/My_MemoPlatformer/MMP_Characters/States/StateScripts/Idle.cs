@@ -13,6 +13,10 @@ namespace My_MemoPlatformer
             animator.SetBool(TransitionParameter.Jump.ToString(), false);
             animator.SetBool(TransitionParameter.Attack.ToString(), false);
             animator.SetBool(TransitionParameter.Attack.ToString(), false);
+
+            CharacterControl control = characterState.GetCharacterControl(animator);
+
+            control.animationProgress.disAllowEarlyTurn= false;
         }
 
 
@@ -47,7 +51,7 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.SetBool(TransitionParameter.Attack.ToString(), false);
+            //animator.SetBool(TransitionParameter.Attack.ToString(), false);
         }
     }
 

@@ -14,6 +14,8 @@ namespace My_MemoPlatformer
         Attack,
         ClickAnimation,
         TransitionIndex,
+        Turbo,
+        Turn,
     }
 
     public enum MMP_Scenes
@@ -26,17 +28,18 @@ namespace My_MemoPlatformer
     public class CharacterControl : MonoBehaviour
     {
         public PlayableCharacterType playableCharacterType;
-        [SerializeField] public Animator skinnedMeshAnimator;
+        public Animator skinnedMeshAnimator;
         public bool moveUp;
         public bool moveDown;
         public bool moveRight;
         public bool moveLeft;
+        public bool turbo;
         public bool jump;
         public bool attack;
         public LedgeChecker ledgeChecker;
         public AnimationProgress animationProgress;
 
-        [SerializeField] private GameObject colliderEdgePrefab;
+        public GameObject colliderEdgePrefab;
         public List<GameObject> bottomSpheres = new List<GameObject>();
         public List<GameObject> frontSpheres = new List<GameObject>();
         public List<Collider> ragdollParts = new List<Collider>();
@@ -98,6 +101,7 @@ namespace My_MemoPlatformer
             if (_triggerDetectors.Count == 0)
             {
                 TriggerDetector[] arr = this.gameObject.GetComponentsInChildren<TriggerDetector>();
+                
                 foreach (TriggerDetector d in arr)
                 {
                     _triggerDetectors.Add(d);

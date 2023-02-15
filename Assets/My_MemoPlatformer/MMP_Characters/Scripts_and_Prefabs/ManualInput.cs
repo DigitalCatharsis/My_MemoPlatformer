@@ -16,6 +16,15 @@ namespace My_MemoPlatformer
 
         private void Update()
         {
+            if (VirtualInputManager.Instance.turbo)
+            {
+                characterControl.turbo = true;
+            }
+            else
+            {
+                characterControl.turbo = false;
+            }
+
             if (VirtualInputManager.Instance.moveUp)
             {
                 characterControl.moveUp = true;

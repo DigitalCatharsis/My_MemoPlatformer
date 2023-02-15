@@ -8,15 +8,15 @@ namespace My_MemoPlatformer
 
     public class DamageDetector : MonoBehaviour  //Compare collision info versus attack input that is being registered
     {
-        CharacterControl control;
-        GeneralBodyPart _damagePart;
+        private CharacterControl _control;
+        private GeneralBodyPart _damagePart;
 
         public int damageTaken; //templory
 
         private void Awake()
         {
             damageTaken = 0;
-            control = GetComponent<CharacterControl>();
+            _control = GetComponent<CharacterControl>();
         }
 
         private void Update()
@@ -51,7 +51,7 @@ namespace My_MemoPlatformer
                     continue;
                 }
 
-                if(info.attacker == control)
+                if(info.attacker == _control)
                 {
                     continue;
                 }
@@ -86,7 +86,7 @@ namespace My_MemoPlatformer
 
         private bool IsCollided(AttackInfo info)
         {
-            foreach (TriggerDetector trigger in control.GetAllTriggers())
+            foreach (TriggerDetector trigger in _control.GetAllTriggers())
             {
                 foreach (Collider collider in trigger.collidingParts) //control.collidingParts - список коллайдеров, задевающих владельца control
                 {
@@ -112,7 +112,7 @@ namespace My_MemoPlatformer
         {
             if (damageTaken > 0)  //templory fix for hitting dead enemy
             {
-                //return;
+                return;
             }
 
             if (info.mustCollide)
@@ -124,12 +124,12 @@ namespace My_MemoPlatformer
             Debug.Log(info.attacker.gameObject.name + " hits " + this.gameObject.name);
             Debug.Log(this.gameObject.name + " hit " + _damagePart.ToString());
 
-            control.skinnedMeshAnimator.runtimeAnimatorController = DeathAnimationManager.Instance.GetAnimator(_damagePart, info);
+            _control.skinnedMeshAnimator.runtimeAnimatorController = DeathAnimationManager.Instance.GetAnimator(_damagePart, info);
             info.currentHits++;
 
-            control.GetComponent<BoxCollider>().enabled = false;
-            control.ledgeChecker.GetComponent<BoxCollider>().enabled = false;
-            control.Rigid_Body.useGravity = false;
+            _control.GetComponent<BoxCollider>().enabled = false;
+            _control.ledgeChecker.GetComponent<BoxCollider>().enabled = false;
+            _control.Rigid_Body.useGravity = false;
 
 
             damageTaken++; 

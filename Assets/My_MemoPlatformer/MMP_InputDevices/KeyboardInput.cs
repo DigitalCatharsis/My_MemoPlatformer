@@ -82,6 +82,15 @@ namespace My_MemoPlatformer
 
         void Update()
         {
+            if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.LeftShift))
+            {
+                VirtualInputManager.Instance.turbo = true;
+            }
+            else
+            {
+                VirtualInputManager.Instance.turbo = false;
+            }
+
             if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             {
                 VirtualInputManager.Instance.moveUp = true;
