@@ -45,7 +45,6 @@ namespace My_MemoPlatformer
 
             if (col.gameObject == attacker.gameObject) //not a boxcolllider itself in the top of hierarchy
             {
-                Debug.Log(col.name);
                 return;
             }
 

@@ -92,13 +92,11 @@ namespace My_MemoPlatformer
                 {
                     foreach (string name in info.colliderNames)  //Имена атакующих коллайдеров
                     {
-                        Debug.Log(name);
                         if (name.Equals(collider.gameObject.name))  //Смотрим, что коллайдер атакующий
                         {
                             if (collider.transform.root.gameObject == info.attacker.gameObject) //фикс, если несколько игроков бьют врагов одновременно
                             {
                                 _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
-                                Debug.Log("collided part is " + _damagePart);
                                 return true;
                             }
                             
