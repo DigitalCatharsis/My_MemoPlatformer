@@ -112,6 +112,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\ToggleGravity.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\ForceTransition.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_CameraGame\CameraContoller.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_LayerAdder\LayerAdder.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Turn180.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\CheckRunningTurn.cs" />
