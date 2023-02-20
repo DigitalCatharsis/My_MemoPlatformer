@@ -33,5 +33,26 @@ namespace My_MemoPlatformer
             }
             return null;
         }
+
+        public CharacterControl GetPlayableCharacter()
+        {
+            foreach (CharacterControl control in characters)
+            {
+                ManualInput manualInput = control.GetComponent<ManualInput>();
+
+                if (manualInput != null)
+                {
+                    if (manualInput.enabled == true)
+                    {
+                        return control;
+                    }
+                    
+                }
+            }
+
+            return null;
+
+        }
+
     }
 }

@@ -109,6 +109,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts_and_Prefabs\TriggerDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\CheckTurbo.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\PathfindingAgent\PathFindingAgent.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\ToggleGravity.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\ForceTransition.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_CameraGame\CameraContoller.cs" />

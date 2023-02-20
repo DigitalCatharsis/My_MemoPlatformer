@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Assets\My_MemoPlatformer\MMP_LayerAdder\Editor\LayerAdderEditor.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\CharacterControl\Editor\CharacterControlEditor.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\PathfindingAgent\Editor\PathFindingAgentEditor.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\MaterialChaner\Editor\MaterialChangerEditor.cs" />
   </ItemGroup>
   <ItemGroup>
