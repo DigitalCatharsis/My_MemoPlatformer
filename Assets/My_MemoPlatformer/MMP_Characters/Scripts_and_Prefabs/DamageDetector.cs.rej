@@ -1,9 +1,0 @@
-diff a/Assets/My_MemoPlatformer/MMP_Characters/Scripts_and_Prefabs/DamageDetector.cs b/Assets/My_MemoPlatformer/MMP_Characters/Scripts_and_Prefabs/DamageDetector.cs	(rejected hunks)
-@@ -92,6 +92,7 @@
-                 {
-                     foreach (string name in info.colliderNames)  //����� ��������� �����������
-                     {
-+                        Debug.Log(name);
-                         if (name.Equals(collider.gameObject.name))  //�������, ��� ��������� ���������
-                         {
-                             if (collider.transform.root.gameObject == info.attacker.gameObject) //����, ���� ��������� ������� ���� ������ ������������
