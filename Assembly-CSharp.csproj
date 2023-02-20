@@ -65,17 +65,16 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\CheckMovement.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\MaterialChaner\MaterialChanger.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\MouseControl.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts_and_Prefabs\PlayerSpawn.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\AttackManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\VirtualInputManager.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts_and_Prefabs\AnimationProgress.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\ResetLocalPosition.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts_and_Prefabs\LedgeChecker.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\TriggerDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\ShakeCamera.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\DeathAnimationData.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_PooledObjects\AttackInfo\AttackInfo.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Idle.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterSelectLight.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\LedgeChecker.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\PlayGame.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_CameraCharacterSelect\SelectCameraState.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_CameraGame\CameraState.cs" />
@@ -85,18 +84,20 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\GroundDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\DisAllowEarlyTurn.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_InputDevices\KeyboardInput.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\AnimationProgress.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\ToggleOffBoxCollider.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterHoverLight.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\TurnOnRootMotion.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts_and_Prefabs\ManualInput.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts_and_Prefabs\Ledge.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\ManualInput.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_PooledObjects\PoolObject.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\PoolManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\Resources\DeathAnimationLoader.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\DeathAnimationManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\OffsetOnLedge.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\TeleportOnLedge.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\PlayerSpawn.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Jump.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\DamageDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\BaseScripts\StateData.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\Attack.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\BaseScripts\CharacterState.cs" />
@@ -105,8 +106,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\CheckTurboAndMovement.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\CheckAttack.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\TransitionIndexer.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts_and_Prefabs\DamageDetector.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Scripts_and_Prefabs\TriggerDetector.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\Ledge.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\StateScripts\CheckTurbo.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\My_MemoPlatformer\PathfindingAgent\PathFindingAgent.cs" />
@@ -844,10 +844,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="SimpleFolderIcon.csproj">
-      <Project>{40448599-A49C-5E90-B744-6AE105D4154C}</Project>
-      <Name>SimpleFolderIcon</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

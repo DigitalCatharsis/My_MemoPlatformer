@@ -23,7 +23,6 @@ namespace My_MemoPlatformer
             {
                 return false;
             }
-
             return true;
         }
     }

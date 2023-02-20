@@ -14,7 +14,6 @@ namespace My_MemoPlatformer
         Leg,
     }
 
-
     public class TriggerDetector : MonoBehaviour
     {
         public GeneralBodyPart generalBodyPart;
