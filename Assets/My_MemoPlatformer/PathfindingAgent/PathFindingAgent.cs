@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -37,10 +37,10 @@ namespace My_MemoPlatformer
                 StopCoroutine(_move);
             }
 
-            _move = StartCoroutine(_Move());
+            _move = StartCoroutine(Move());
         }
 
-        IEnumerator _Move()
+        IEnumerator Move()
         {
             while (true)
             {
@@ -50,7 +50,7 @@ namespace My_MemoPlatformer
                     _navMeshAgent.CompleteOffMeshLink();
 
                     yield return new WaitForEndOfFrame();
-                    endPosition =transform.position;
+                    endPosition = transform.position;
                     _navMeshAgent.isStopped = true;
                     yield break;
                 }

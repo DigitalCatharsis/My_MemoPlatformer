@@ -21,7 +21,11 @@ namespace My_MemoPlatformer
     public enum MMP_Scenes
     {
         L_CharacterSelect,
-        L_LevelStart,
+        L_Level_Start,
+        L_Level_Sample_PathFinding,
+        L_Level_Sample_Hammer,
+        L_LeveL_LedgeGrab,
+        L_Level_Sample_Demo,
     }
 
 
