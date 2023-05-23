@@ -16,6 +16,9 @@ namespace My_MemoPlatformer
 
         private Coroutine _move;
 
+        public GameObject StartSphere;
+        public GameObject EndSphere;
+
         private void Awake()
         {
             _navMeshAgent= GetComponent<NavMeshAgent>();
@@ -23,6 +26,9 @@ namespace My_MemoPlatformer
 
         public void GoToTarget()
         {
+            StartSphere.transform.parent = null;
+            EndSphere.transform.parent = null;
+
             _navMeshAgent.isStopped = false;
 
             if (targetPlayableCharacter)
@@ -47,9 +53,20 @@ namespace My_MemoPlatformer
                 if (_navMeshAgent.isOnOffMeshLink)
                 {
                     startPosition = transform.position;
+                    StartSphere.transform.position = transform.position;
                     _navMeshAgent.CompleteOffMeshLink();
 
                     yield return new WaitForEndOfFrame();
+                    endPosition = transform.position;
+                    EndSphere.transform.position = transform.position;
+                    _navMeshAgent.isStopped = true;
+                    yield break;
+                }
+
+                Vector3 dist = transform.position - _navMeshAgent.destination;
+                if (Vector3.SqrMagnitude(dist) < 0.5f)
+                {
+                    startPosition =transform.position;
                     endPosition = transform.position;
                     _navMeshAgent.isStopped = true;
                     yield break;

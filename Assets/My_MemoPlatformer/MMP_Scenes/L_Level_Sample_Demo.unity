@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 6c96c95d17e319c449c0de36cd2d2079, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: bd768ecc902d5c9469bfdb235a170e79, type: 2}
 --- !u!4 &21968649 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1293291010471077216, guid: c594df3813521c847bf412f5e9076f12, type: 3}
@@ -2836,6 +2836,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1012962189}
     m_Modifications:
+    - target: {fileID: 2587041694488829080, guid: e1a7c503bf34d2249b72642490ff0f6b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.41
+      objectReference: {fileID: 0}
     - target: {fileID: 3310306364971569917, guid: e1a7c503bf34d2249b72642490ff0f6b, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -2846,7 +2850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3310306364971569917, guid: e1a7c503bf34d2249b72642490ff0f6b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.52
+      value: 8.03
       objectReference: {fileID: 0}
     - target: {fileID: 3310306364971569917, guid: e1a7c503bf34d2249b72642490ff0f6b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2882,7 +2886,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6063555218491580538, guid: e1a7c503bf34d2249b72642490ff0f6b, type: 3}
       propertyPath: m_Name
-      value: Platform (1)
+      value: Platform_top
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6186,6 +6190,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1012962189}
     m_Modifications:
+    - target: {fileID: 2587041694488829080, guid: e1a7c503bf34d2249b72642490ff0f6b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.25
+      objectReference: {fileID: 0}
     - target: {fileID: 3310306364971569917, guid: e1a7c503bf34d2249b72642490ff0f6b, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -6196,7 +6204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3310306364971569917, guid: e1a7c503bf34d2249b72642490ff0f6b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.27
+      value: 3.86
       objectReference: {fileID: 0}
     - target: {fileID: 3310306364971569917, guid: e1a7c503bf34d2249b72642490ff0f6b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6232,7 +6240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6063555218491580538, guid: e1a7c503bf34d2249b72642490ff0f6b, type: 3}
       propertyPath: m_Name
-      value: Platform
+      value: Platform_bot
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
