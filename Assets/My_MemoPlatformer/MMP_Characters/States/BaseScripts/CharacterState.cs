@@ -47,7 +47,8 @@ namespace My_MemoPlatformer
         {
             if (_characterControl == null)
             {
-                _characterControl = animator.GetComponentInParent<CharacterControl>();  
+                _characterControl = animator.transform.root.GetComponent<CharacterControl>();  
+               // _characterControl = animator.GetComponentInParent<CharacterControl>();  
             }
             return _characterControl;
         }

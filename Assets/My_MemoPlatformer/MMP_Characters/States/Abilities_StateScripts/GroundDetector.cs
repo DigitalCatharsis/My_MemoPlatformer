@@ -42,7 +42,7 @@ namespace My_MemoPlatformer
 
         bool IsGrounded(CharacterControl control)
         {
-            if (control.Rigid_Body.velocity.y > -0.001f && control.Rigid_Body.velocity.y <= 0.0f)
+            if (control.Rigid_Body.velocity.y > -0.001f && control.Rigid_Body.velocity.y <= 0f)
             {
                 return true;
             }
@@ -56,11 +56,10 @@ namespace My_MemoPlatformer
                     RaycastHit hit;
                     if (Physics.Raycast(o.transform.position, -Vector3.up, out hit, distance))
                     {
-                        if (!control.ragdollParts.Contains(hit.collider) && !Ledge.IsLedge(hit.collider.gameObject) &&Ledge.IsLedgeChecker(hit.collider.gameObject))
+                        if (!control.ragdollParts.Contains(hit.collider) && !Ledge.IsLedge(hit.collider.gameObject) &&!Ledge.IsLedgeChecker(hit.collider.gameObject))
                         {
                             return true;
-                        }
-                        
+                        }                        
                     }
                 }
             }

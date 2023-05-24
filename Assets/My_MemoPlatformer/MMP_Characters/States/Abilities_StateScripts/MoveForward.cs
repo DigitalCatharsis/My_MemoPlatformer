@@ -81,6 +81,7 @@ namespace My_MemoPlatformer
             {
                 if (!CheckFront(control))
                 {
+                    
                     control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                 }
             }

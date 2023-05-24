@@ -246,7 +246,7 @@ Transform:
   - {fileID: 4974978994528038493}
   - {fileID: 7907207529895448243}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &9129829939218225296
 MeshFilter:
@@ -359,5 +359,6 @@ MonoBehaviour:
   target: {fileID: 0}
   startPosition: {x: 0, y: 0, z: 0}
   endPosition: {x: 0, y: 0, z: 0}
-  StartSphere: {fileID: 0}
-  EndSphere: {fileID: 0}
+  startSphere: {fileID: 504766652548213489}
+  endSphere: {fileID: 8616653730484028116}
+  startWalk: 0

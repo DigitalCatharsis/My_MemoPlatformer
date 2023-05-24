@@ -42,6 +42,7 @@ namespace My_MemoPlatformer
         public bool attack;
         public LedgeChecker ledgeChecker;
         public AnimationProgress animationProgress;
+        public AIProgress aiProgress;
 
         public GameObject colliderEdgePrefab;
         public List<GameObject> bottomSpheres = new List<GameObject>();
@@ -87,6 +88,8 @@ namespace My_MemoPlatformer
             ledgeChecker = GetComponentInChildren<LedgeChecker>();
 
             animationProgress = GetComponent<AnimationProgress>();
+
+            aiProgress = GetComponentInChildren<AIProgress>();
 
             RegisterCharacter();
 
@@ -224,7 +227,8 @@ namespace My_MemoPlatformer
 
         public void MoveForward(float speed, float speedGraph)
         {
-            transform.Translate(speed * speedGraph * Time.deltaTime * Vector3.forward);
+            //Debug.Log($"Speed:{speed}#\tSpeedGraph:{speedGraph}#\tTime.DeltaTime:{Time.deltaTime}#\tVector3.forward:{Vector3.forward}");
+            transform.Translate(Vector3.forward * speed * speedGraph * Time.deltaTime);
         }
 
         public void FaceForward(bool forward)
