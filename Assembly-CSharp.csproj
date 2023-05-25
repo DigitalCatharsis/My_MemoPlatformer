@@ -66,7 +66,6 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\MaterialChaner\MaterialChanger.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\MouseControl.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\AttackManager.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\Walk_And_Jump\WalkStateScripts\JumpPlatform.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\VirtualInputManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckTurboAndMovement.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\TriggerDetector.cs" />
@@ -80,7 +79,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\PlayGame.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_CameraCharacterSelect\SelectCameraState.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_CameraGame\CameraState.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\Walk_And_Jump\WalkStateScripts\SendPathfindingAgent.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\SendPathfindingAgent.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\CameraManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\Idle.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\SpawnObject.cs" />
@@ -88,6 +87,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\AnimationProgress.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\ToggleGravity.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterHoverLight.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\StartWalking.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\ManualInput.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\TeleportOnLedge.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_PooledObjects\PoolObject.cs" />
@@ -103,8 +103,8 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\BaseScripts\StateData.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\DisAllowEarlyTurn.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\BaseScripts\CharacterState.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\FallPlatform.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\CharacterControl\CharacterControl.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\Walk_And_Jump\WalkStateScripts\StartWalking.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\Ledge.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\OffsetOnLedge.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckAttack.cs" />
@@ -121,6 +121,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_LayerAdder\LayerAdder.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckRunningTurn.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\JumpPlatform.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

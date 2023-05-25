@@ -9,6 +9,7 @@ namespace My_MemoPlatformer
     {
         Start_Walking,
         Jump_Platform,
+        Fall_Platform,
 
     }
 

@@ -40,7 +40,11 @@ namespace My_MemoPlatformer
 
             if (moveRoutines.Count != 0)
             {
-                StopCoroutine(moveRoutines[0]);
+                if (moveRoutines[0] != null) 
+                {
+                StopCoroutine(moveRoutines[0]);                
+                }
+
                 moveRoutines.RemoveAt(0);
             }
 
