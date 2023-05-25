@@ -43,6 +43,7 @@ namespace My_MemoPlatformer
         public LedgeChecker ledgeChecker;
         public AnimationProgress animationProgress;
         public AIProgress aiProgress;
+        public DamageDetector damageDetector;
 
         public GameObject colliderEdgePrefab;
         public List<GameObject> bottomSpheres = new List<GameObject>();
@@ -86,10 +87,9 @@ namespace My_MemoPlatformer
             }
 
             ledgeChecker = GetComponentInChildren<LedgeChecker>();
-
             animationProgress = GetComponent<AnimationProgress>();
-
             aiProgress = GetComponentInChildren<AIProgress>();
+            damageDetector = GetComponentInChildren<DamageDetector>();
 
             RegisterCharacter();
 

@@ -71,6 +71,27 @@ namespace My_MemoPlatformer
                         animator.gameObject.SetActive(false);
                         animator.gameObject.SetActive(true); //»щи по новой
                     }
+
+                    //temp attack
+                    else
+                    {
+                        if (CharacterManager.Instance.GetPlayableCharacter().damageDetector.damageTaken == 0) //want to attack player if its alive (didnt date any damage)
+                        {
+                            if (control.IsFacingForward())
+                            {
+                                control.moveRight = true;
+                                control.moveLeft = false;
+                                control.attack = true;
+                            }
+                            else
+                            {
+                                control.moveRight = false;
+                                control.moveLeft = true;
+                                control.attack = true;
+                            }
+                        }
+
+                    }
                 }
             }
         }
