@@ -3,8 +3,8 @@
 # Get latest from httpsgithub.comgithubgitignoreblobmainUnity.gitignore
 
 #Custom
-Assets/Plugins/
-Assets/Plugins.meta
+#Assets/Plugins/
+#Assets/Plugins.meta
  
 #
 [Ll]ibrary

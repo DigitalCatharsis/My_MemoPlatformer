@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SO_Player_Walk_MoveForward
   m_EditorClassIdentifier: 
   allowEarlyTurn: 1
-  lockDirection: 0
+  lockDirection: 1
   constant: 0
   speedGraph:
     serializedVersion: 2

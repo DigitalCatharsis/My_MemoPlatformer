@@ -58,10 +58,11 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.2.7f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\My_MemoPlatformer\MMP_LayerAdder\Editor\LayerAdderEditor.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\CharacterControl\Editor\CharacterControlEditor.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\PathfindingAgent\Editor\PathFindingAgentEditor.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\MaterialChaner\Editor\MaterialChangerEditor.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_PathfindingAgent\Editor\PathFindingAgentEditor.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_MaterialChaner\Editor\MaterialChangerEditor.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_LayerAdder\Editor\LayerAdderEditor.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_LookAtPoint\Editor\LookAtPointEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -32,7 +32,6 @@ namespace My_MemoPlatformer
             {
                 UpdateAll(this, animator, stateInfo);
             }
-            
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

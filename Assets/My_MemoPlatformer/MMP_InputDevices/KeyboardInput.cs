@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace My_MemoPlatformer
 {
     public class KeyboardInput : MonoBehaviour
     {
-        void Update()
+       void Update()
         {
             if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.LeftShift))
             {
