@@ -227,7 +227,7 @@ namespace My_MemoPlatformer
 
         public void MoveForward(float speed, float speedGraph)
         {
-            Debug.Log($"Speed:{speed}#\tSpeedGraph:{speedGraph}#\tTime.DeltaTime:{Time.deltaTime}# \tTick: {Time.frameCount}");
+            //Debug.Log($"Speed:{speed}#\tSpeedGraph:{speedGraph}#\tTime.DeltaTime:{Time.deltaTime}# \tTick: {Time.frameCount}");
             transform.Translate(Vector3.forward * speed * speedGraph * Time.deltaTime);
         }
 

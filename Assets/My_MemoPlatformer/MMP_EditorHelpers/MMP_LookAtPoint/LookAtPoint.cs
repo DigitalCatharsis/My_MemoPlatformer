@@ -9,7 +9,7 @@ using UnityEngine.XR;
 namespace My_MemoPlatformer
 {
 
-    [ExecuteInEditMode]
+   // [ExecuteInEditMode]
 
     public class LookAtPoint : MonoBehaviour
     {

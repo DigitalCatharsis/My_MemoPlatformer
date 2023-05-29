@@ -58,18 +58,18 @@ namespace My_MemoPlatformer
             serializedObject.ApplyModifiedProperties(); //Без этой строки не выйдет изменить значения
         }
 
-        //public void OnSceneGUI()
-        //{
-        //    var tar = (target as LookAtPoint);
+        public void OnSceneGUI()
+        {
+            var tar = (target as LookAtPoint);
 
-        //    EditorGUI.BeginChangeCheck();
-        //    Vector3 pos = Handles.PositionHandle(tar.lookAtPoint, Quaternion.identity);
-        //    if (EditorGUI.EndChangeCheck())
-        //    {
-        //        Undo.RecordObject(target, "Move point");
-        //        tar.lookAtPoint = pos;
-        //        tar.Update(); //Используем Update, описанный в классе tar
-        //    }
-        //}
+            EditorGUI.BeginChangeCheck();
+            Vector3 pos = Handles.PositionHandle(tar.lookAtPoint, Quaternion.identity);
+            if (EditorGUI.EndChangeCheck())
+            {
+                Undo.RecordObject(target, "Move point");
+                tar.lookAtPoint = pos;
+                tar.Update(); //Используем Update, описанный в классе tar
+            }
+        }
     }
 }
