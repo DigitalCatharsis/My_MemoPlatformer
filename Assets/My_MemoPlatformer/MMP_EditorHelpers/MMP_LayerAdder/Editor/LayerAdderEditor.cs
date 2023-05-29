@@ -22,6 +22,8 @@ namespace My_MemoPlatformer
                     CreateLayer(r.ToString());
                 }
             }
+            EditorGUILayout.LabelField("Add layers from lookAtPoint.MMP_Layers");
+            EditorGUILayout.Space();
 
             if (GUILayout.Button("Set Default Layer Collisions"))
             {
@@ -36,9 +38,12 @@ namespace My_MemoPlatformer
                 }
 
                 Physics.IgnoreLayerCollision(dic["Default"], dic["Default"], false);
+                Physics.IgnoreLayerCollision(dic[MMP_Layers.CHARACTER.ToString()], dic["Default"], false);
 
                 Debug.Log("default collisions set");
             }
+            EditorGUILayout.LabelField("Disable all collisions, but enable default");
+            EditorGUILayout.Space();
 
             EditorGUILayout.Space();
 
@@ -57,6 +62,9 @@ namespace My_MemoPlatformer
 
                 Debug.Log("all collisions unchecked");
             }
+            EditorGUILayout.LabelField("Disable all collisions");
+            EditorGUILayout.Space();
+
 
             if (GUILayout.Button("Check All Layer Collisions"))
             {
@@ -72,9 +80,11 @@ namespace My_MemoPlatformer
 
                 Debug.Log("all collisions checked");
             }
+            EditorGUILayout.LabelField("Enable all collisions");
+            EditorGUILayout.Space();
         }
 
-        Dictionary<string, int> GetAllLayers()
+        public static Dictionary<string, int> GetAllLayers()
         {
             SerializedObject tagManager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
             SerializedProperty layers = tagManager.FindProperty("layers");

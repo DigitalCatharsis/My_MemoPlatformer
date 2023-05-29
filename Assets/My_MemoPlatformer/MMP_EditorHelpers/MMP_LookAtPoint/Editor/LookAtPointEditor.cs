@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;  //Для срани ниже
+using log4net.Util;
+using UnityEngine.UIElements;
 
 namespace My_MemoPlatformer
 {
@@ -32,6 +34,9 @@ namespace My_MemoPlatformer
             tar.Update(); //Используем Update, описанный в классе tar
 
             serializedObject.Update(); //Тыкнуть поле, чтобы оно считало
+
+
+
             EditorGUILayout.PropertyField(lookAtPoint); //Отобразить обрабатываемое поле
             EditorGUILayout.PropertyField(objectToLook); //Отобразить обрабатываемое поле
             EditorGUILayout.PropertyField(rotateToPoint); //Отобразить обрабатываемое поле
@@ -56,6 +61,15 @@ namespace My_MemoPlatformer
             EditorGUILayout.LabelField($"Vector range to point: {(lookAtPoint.vector3Value - (target as LookAtPoint).transform.position)}");
             EditorGUILayout.LabelField("This is working even if script is disabled!"); //Создай TIP
             serializedObject.ApplyModifiedProperties(); //Без этой строки не выйдет изменить значения
+
+            if (GUILayout.Button("Rotate to point once (3D)"))
+            {
+                RotateToPointOnce3D();
+            }
+            if (GUILayout.Button("Rotate to point once (2D)"))
+            {
+                RotateToPointOnce2D();
+            }
         }
 
         public void OnSceneGUI()
@@ -70,6 +84,17 @@ namespace My_MemoPlatformer
                 tar.lookAtPoint = pos;
                 tar.Update(); //Используем Update, описанный в классе tar
             }
+        }
+
+        private void RotateToPointOnce3D()
+        {
+            var tar = (target as LookAtPoint);
+            tar.transform.root.LookAt(lookAtPoint.vector3Value);
+            Debug.Log($"{tar.transform.root.name} has been rotated to {lookAtPoint.vector3Value}");
+        }        
+        private void RotateToPointOnce2D()
+        {
+            Debug.Log("<color=red>RotateToPointOnce2D is Not implemented yet</color>");
         }
     }
 }

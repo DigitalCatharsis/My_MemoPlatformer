@@ -19,10 +19,6 @@ namespace My_MemoPlatformer
         public Color traceColor;
         public float traceExistDuration = 0.1f;
 
-        private void Awake()
-        {
-        }
-
         public void Update()
         {
             if (traceColor == null) 
@@ -40,7 +36,6 @@ namespace My_MemoPlatformer
             {
                 transform.LookAt(lookAtPoint);
             }
-            //Debug.DrawLine(test.position, lookAtPoint, Color.red, 0.1f);
             Debug.DrawLine(transform.position, lookAtPoint, traceColor, traceExistDuration);
         }
     }

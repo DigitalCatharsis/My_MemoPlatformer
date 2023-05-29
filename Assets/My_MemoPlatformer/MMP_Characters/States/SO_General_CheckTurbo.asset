@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ae134fd93074324a9e4122d636bc09b, type: 3}
   m_Name: SO_General_CheckTurbo
   m_EditorClassIdentifier: 
+  mustRequireMovement: 0
