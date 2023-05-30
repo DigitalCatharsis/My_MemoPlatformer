@@ -31,8 +31,7 @@ namespace My_MemoPlatformer
 
     public class CharacterControl : MonoBehaviour
     {
-        public PlayableCharacterType playableCharacterType;
-        public Animator skinnedMeshAnimator;
+        [Header("Input")]
         public bool moveUp;
         public bool moveDown;
         public bool moveRight;
@@ -40,6 +39,8 @@ namespace My_MemoPlatformer
         public bool turbo;
         public bool jump;
         public bool attack;
+
+        [Header ("SubComponents")]
         public LedgeChecker ledgeChecker;
         public AnimationProgress animationProgress;
         public AIProgress aiProgress;
@@ -48,13 +49,18 @@ namespace My_MemoPlatformer
         public GameObject colliderEdgePrefab;
         public List<GameObject> bottomSpheres = new List<GameObject>();
         public List<GameObject> frontSpheres = new List<GameObject>();
-        public List<Collider> ragdollParts = new List<Collider>();
 
+        [Header("Gravity")]
         public float gravityMultipliyer;
         public float pullMultipliyer;
 
+        [Header("Setup")]
+        public PlayableCharacterType playableCharacterType;
+        public Animator skinnedMeshAnimator;
+        public List<Collider> ragdollParts = new List<Collider>();
+
         private List<TriggerDetector> _triggerDetectors = new List<TriggerDetector>();
-        private Dictionary<string, GameObject> _childObjects= new Dictionary<string, GameObject>();
+        private Dictionary<string, GameObject> _childObjects = new Dictionary<string, GameObject>();
 
         private Rigidbody _rigid;
         public Rigidbody Rigid_Body
@@ -129,13 +135,16 @@ namespace My_MemoPlatformer
             {
                 if (c.gameObject != this.gameObject)  //if the collider that we found is not the same as in the charactercontrol (//not a boxcolllider itself)
                 {
-                    //thats means its a ragdoll
-                    c.isTrigger = true;
-                    ragdollParts.Add(c);
-
-                    if (c.GetComponent<TriggerDetector>() == null)
+                    if (c.gameObject.GetComponent<LedgeChecker>() == null)
                     {
-                        c.gameObject.AddComponent<TriggerDetector>();
+                        //thats means its a ragdoll
+                        c.isTrigger = true;
+                        ragdollParts.Add(c);
+
+                        if (c.GetComponent<TriggerDetector>() == null)
+                        {
+                            c.gameObject.AddComponent<TriggerDetector>();
+                        }
                     }
                 }
             }
@@ -289,12 +298,8 @@ namespace My_MemoPlatformer
                     _childObjects.Add(name,t.gameObject);
                     return t.gameObject;
                 }
-
             }
-
             return null;
-
         }
-
     }
 }

@@ -10,7 +10,7 @@ namespace My_MemoPlatformer
         
 
         [SerializeField][Range(0.01f, 1f)]
-        private float Checktime; //Сначала нужно подняться в воздух, а потом проверять isgrounded. Чето типа fail-safe
+        private float _checktime; //Сначала нужно подняться в воздух, а потом проверять isgrounded. Чето типа fail-safe
         [SerializeField] private float distance;
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
@@ -21,7 +21,7 @@ namespace My_MemoPlatformer
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
 
-            if (stateInfo.normalizedTime >= Checktime)
+            if (stateInfo.normalizedTime >= _checktime)
             {
                 if (IsGrounded(control))
                 {
