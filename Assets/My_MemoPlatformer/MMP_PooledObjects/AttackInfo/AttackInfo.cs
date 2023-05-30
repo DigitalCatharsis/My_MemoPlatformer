@@ -9,7 +9,8 @@ namespace My_MemoPlatformer
     {
         public CharacterControl attacker = null;
         public Attack attackAbility;
-        public List<string> colliderNames = new List<string>(); //name of the bodypards that gonna carry the attack
+        //public List<string> colliderNames = new List<string>(); //name of the bodypards that gonna carry the attack
+        public List<AttackPartType> attackParts = new List<AttackPartType>(); //name of the bodypards that gonna carry the attack
         public DeathType deathType;
         public bool mustCollide;
         public bool mustFaceAttacker;
@@ -32,7 +33,8 @@ namespace My_MemoPlatformer
             isRegistered = true;
 
             attackAbility = attack;
-            colliderNames = attack.colliderNames;
+            //colliderNames = attack.colliderNames;
+            attackParts = attack.attackParts;
             deathType = attack.deathType;
             mustCollide = attack.mustCollide;
             mustFaceAttacker = attack.mustFaceAttacker;

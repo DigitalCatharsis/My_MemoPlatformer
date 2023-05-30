@@ -7425,7 +7425,7 @@ Transform:
   - {fileID: 7592365791148635976}
   - {fileID: 1185063826724050007}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &941113788067798222
 BoxCollider:
@@ -7460,8 +7460,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee80179171b79c54e86b124755c65156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playableCharacterType: 1
-  skinnedMeshAnimator: {fileID: 2987942029620383389}
   moveUp: 0
   moveDown: 0
   moveRight: 0
@@ -7476,6 +7474,10 @@ MonoBehaviour:
   colliderEdgePrefab: {fileID: 6977181466952526126, guid: 14252d4c16f30bc44b4e47de024c6ff3, type: 3}
   bottomSpheres: []
   frontSpheres: []
+  gravityMultipliyer: 0
+  pullMultipliyer: 0
+  playableCharacterType: 1
+  skinnedMeshAnimator: {fileID: 2987942029620383389}
   ragdollParts:
   - {fileID: 8945057649498576542}
   - {fileID: 7688359754162369770}
@@ -7490,8 +7492,8 @@ MonoBehaviour:
   - {fileID: 351844250015558249}
   - {fileID: 8708704315193747453}
   - {fileID: 12145429822830214}
-  gravityMultipliyer: 0
-  pullMultipliyer: 0
+  rightHandAttack: {fileID: 7982042444130743061}
+  leftHandAttack: {fileID: 2424528732688916467}
 --- !u!114 &2812370432128812777
 MonoBehaviour:
   m_ObjectHideFlags: 0

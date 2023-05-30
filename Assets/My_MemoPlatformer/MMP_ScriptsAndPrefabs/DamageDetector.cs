@@ -90,17 +90,20 @@ namespace My_MemoPlatformer
             {
                 foreach (Collider collider in trigger.collidingParts) //control.collidingParts - список коллайдеров, задевающих владельца control
                 {
-                    foreach (string name in info.colliderNames)  //Имена атакующих коллайдеров
+                    foreach (AttackPartType part in info.attackParts)  //Имена атакующих коллайдеров
                     {
-                        if (name.Equals(collider.gameObject.name))  //Смотрим, что коллайдер атакующий
+                        if (part==AttackPartType.LEFT_HAND)
                         {
-                            if (collider.transform.root.gameObject == info.attacker.gameObject) //фикс, если несколько игроков бьют врагов одновременно
+                            if (collider.gameObject == info.attacker.leftHandAttack)
                             {
-                                _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
-                                return true;
+                                    _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
+                                    return true;
                             }
-                            
-
+                            else if (part == AttackPartType.RIGHT_HAND)
+                            {
+                                    _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
+                                    return true;
+                            }
                         }
                     }
                 }

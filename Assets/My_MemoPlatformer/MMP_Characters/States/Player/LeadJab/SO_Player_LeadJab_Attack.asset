@@ -14,11 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startAttackTime: 0.15
   endAttackTime: 0.52
-  colliderNames:
-  - LeftHand
-  - mixamorig:LeftHand
-  - Bip001 L Hand
-  - Hand_L
+  attackParts: 00000000
   deathType: 0
   mustCollide: 1
   mustFaceAttacker: 0

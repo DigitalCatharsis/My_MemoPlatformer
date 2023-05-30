@@ -4,13 +4,21 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
+
+    public enum AttackPartType
+    {
+        LEFT_HAND,
+        RIGHT_HAND,
+    }
+
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/Attack")]
     public class Attack : StateData
     {
 
         public float startAttackTime; //Is % of the animation duration
         public float endAttackTime; //Is % of the animation duration
-        public List<string> colliderNames = new List<string>();  //name of the bodypards that gonna carry the attack
+        //public List<string> colliderNames = new List<string>();  //name of the bodypards that gonna carry the attack
+        public List<AttackPartType> attackParts = new List<AttackPartType>();
         public DeathType deathType;
         public bool mustCollide;
         public bool mustFaceAttacker;
