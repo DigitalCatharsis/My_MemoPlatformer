@@ -10,14 +10,11 @@ namespace My_MemoPlatformer
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/SpawnObject")]
     public class SpawnObject : StateData
     {
-        [SerializeField] private PoolObjectType objectType;
+        public PoolObjectType objectType;
         [Range(0f, 1f)]
         public float spawnTiming;
         public string parentObjectName = string.Empty;
         public bool stickToParent;
-
-
-
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
@@ -58,6 +55,8 @@ namespace My_MemoPlatformer
             }
 
             GameObject obj = PoolManager.Instance.GetObject(objectType);
+
+            Debug.Log("spawning " + objectType.ToString() + " | looking for: " + parentObjectName);
 
             if (!string.IsNullOrEmpty(parentObjectName))
             {

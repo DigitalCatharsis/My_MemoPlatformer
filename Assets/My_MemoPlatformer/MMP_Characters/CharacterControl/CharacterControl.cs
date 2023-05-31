@@ -45,8 +45,7 @@ namespace My_MemoPlatformer
         public AnimationProgress animationProgress;
         public AIProgress aiProgress;
         public DamageDetector damageDetector;
-
-        public GameObject colliderEdgePrefab;
+        //public GameObject colliderEdgePrefab;
         public List<GameObject> bottomSpheres = new List<GameObject>();
         public List<GameObject> frontSpheres = new List<GameObject>();
 
@@ -232,7 +231,7 @@ namespace My_MemoPlatformer
         }
         private GameObject CreateEdgeSphere(Vector3 pos)
         {
-            GameObject obj = Instantiate(colliderEdgePrefab, pos, Quaternion.identity);
+            GameObject obj = Instantiate(Resources.Load("ColliderEdge", typeof(GameObject)), pos, Quaternion.identity) as GameObject;
             return obj;
         }
 
