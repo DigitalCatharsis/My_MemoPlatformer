@@ -35,7 +35,7 @@ namespace My_MemoPlatformer
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
-            Vector3 dist = control.aiProgress.pathfindfingAgent.startSphere.transform.position - control.transform.position;
+            Vector3 dist = control.aiProgress.pathfindfingAgent.startSphere.transform.position - control.transform.position; //distance between checkpoint and character
 
             //Debug.DrawLine(control.transform.position, control.aiProgress.pathfindfingAgent.startSphere.transform.position, UnityEngine.Color.magenta,0.1f);
             if (control.aiProgress.pathfindfingAgent.startSphere.transform.position.y < control.aiProgress.pathfindfingAgent.endSphere.transform.position.y) //Если это подъем
@@ -73,28 +73,26 @@ namespace My_MemoPlatformer
                     }
 
                     //temp attack
-                    else
-                    {
-                        if (CharacterManager.Instance.GetPlayableCharacter().damageDetector.damageTaken == 0) //want to attack player if its alive (didnt date any damage)
-                        {
-                            if (control.IsFacingForward())
-                            {
-                                control.moveRight = true;
-                                control.moveLeft = false;
-                                control.attack = true;
-                            }
-                            else
-                            {
-                                control.moveRight = false;
-                                control.moveLeft = true;
-                                control.attack = true;
-                            }
-                        }
-
-                    }
+                    //else
+                    //{
+                        //if (CharacterManager.Instance.GetPlayableCharacter().damageDetector.damageTaken == 0) //want to attack player if its alive (didnt date any damage)
+                        //{
+                        //    if (control.IsFacingForward())
+                        //    {
+                        //        control.moveRight = true;
+                        //        control.moveLeft = false;
+                        //        control.attack = true;
+                        //    }
+                        //    else
+                        //    {
+                        //        control.moveRight = false;
+                        //        control.moveLeft = true;
+                        //        control.attack = true;
+                        //    }
+                        //}
+                    //}
                 }
             }
         }
-
     }
 }

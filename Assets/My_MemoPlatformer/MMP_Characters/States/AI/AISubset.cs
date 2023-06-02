@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    public class AIProgress : MonoBehaviour
+    public class AISubset : MonoBehaviour
     {
-        public PathFindingAgent pathfindfingAgent;
+        public AI_TYPE aiType;
     }
 }

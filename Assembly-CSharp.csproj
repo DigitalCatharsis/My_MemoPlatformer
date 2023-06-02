@@ -66,6 +66,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_PooledObjects\PoolObjectLoader.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\MouseControl.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\AttackManager.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\Run\StartRunning.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\VirtualInputManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckTurboAndMovement.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\TriggerDetector.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_CameraGame\CameraState.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\SendPathfindingAgent.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\CameraManager.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\AIController.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\Idle.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\SpawnObject.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_InputDevices\KeyboardInput.cs" />
@@ -115,8 +117,10 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\TransitionIndexer.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_PathfindingAgent\PathFindingAgent.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\AISubset.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\Jump.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\ShakeCamera.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\AITransitions\AITransitionCondition.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\ToggleOffBoxCollider.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\GroundDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\Landing.cs" />
