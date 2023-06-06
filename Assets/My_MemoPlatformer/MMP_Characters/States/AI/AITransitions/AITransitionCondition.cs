@@ -14,7 +14,7 @@ namespace My_MemoPlatformer
         public enum AiTransitionType
         {
             RUN_TO_WALK,
-
+            WALK_TO_RUN
         }
 
         public AiTransitionType aiTransition;
@@ -48,8 +48,17 @@ namespace My_MemoPlatformer
                     return true;
                 }
             }
+            else if (aiTransition == AiTransitionType.WALK_TO_RUN)
+            {
+                Vector3 dist = control.aiProgress.pathfindfingAgent.startSphere.transform.position - control.transform.position; //distance between checkpoint and character
+
+                if (Vector3.SqrMagnitude(dist) > 2f)
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
-
     }
 }

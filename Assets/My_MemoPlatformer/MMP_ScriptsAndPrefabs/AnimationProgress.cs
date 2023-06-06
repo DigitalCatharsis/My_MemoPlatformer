@@ -15,6 +15,7 @@ namespace My_MemoPlatformer
         public bool attackTriggered;
         public float maxPressTime;
         public bool disAllowEarlyTurn;
+        public float airMomentum;
 
         private CharacterControl _control;
         private float _pressTime;

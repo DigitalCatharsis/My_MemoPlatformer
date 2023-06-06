@@ -15,6 +15,10 @@ namespace My_MemoPlatformer
         public float speed;
         public float blockDistance;
 
+        [Header("Momentum")]
+        public bool useMomentum;
+        public float maxMomentum;
+
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
@@ -33,6 +37,7 @@ namespace My_MemoPlatformer
             }
 
             control.animationProgress.disAllowEarlyTurn = false;
+            control.animationProgress.airMomentum = 0f;
         }
 
 
@@ -45,14 +50,57 @@ namespace My_MemoPlatformer
                 animator.SetBool(TransitionParameter.Jump.ToString(), true);
             }
 
-            if (constant)
+            if (useMomentum)
             {
-                ConstantMove(control, animator, stateInfo);
+                UpdateMomentum(control, stateInfo);
             }
             else
             {
-                ControlledMove(control, animator, stateInfo);
+                if (constant)
+                {
+                    ConstantMove(control, animator, stateInfo);
+                }
+                else
+                {
+                    ControlledMove(control, animator, stateInfo);
+                }
             }
+        }
+
+        private void UpdateMomentum(CharacterControl control, AnimatorStateInfo stateInfo)
+        {
+            if (control.moveRight)
+            {
+                control.animationProgress.airMomentum += speedGraph.Evaluate(stateInfo.normalizedTime) * Time.deltaTime;
+            }
+
+            if (control.moveLeft)
+            {
+                control.animationProgress.airMomentum -= speedGraph.Evaluate(stateInfo.normalizedTime) * Time.deltaTime;
+            }
+
+            if(Mathf.Abs(control.animationProgress.airMomentum) >= maxMomentum)
+            {
+                if (control.animationProgress.airMomentum > 0f)
+                {
+                    control.animationProgress.airMomentum = maxMomentum;
+                }
+                else if(control.animationProgress.airMomentum < 0f)
+                {
+                    control.animationProgress.airMomentum = -maxMomentum;
+                }
+            }
+
+            if (control.animationProgress.airMomentum > 0f)
+            {
+                control.FaceForward(true);
+            }
+            else if (control.animationProgress.airMomentum < 0f)
+            {
+                control.FaceForward(false);
+            }
+
+            control.MoveForward(speed, Mathf.Abs(control.animationProgress.airMomentum));
         }
 
         private void ConstantMove(CharacterControl control, Animator animator, AnimatorStateInfo stateInfo)
@@ -160,6 +208,8 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            CharacterControl control = characterState.GetCharacterControl(animator);
+            control.animationProgress.airMomentum = 0f;
         }
 
     }

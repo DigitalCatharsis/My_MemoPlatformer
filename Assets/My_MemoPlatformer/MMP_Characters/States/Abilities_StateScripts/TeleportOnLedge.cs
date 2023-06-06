@@ -22,6 +22,7 @@ namespace My_MemoPlatformer
             CharacterControl control = CharacterManager.Instance.GetCharacter(animator);
 
             Vector3 endPosition = control.ledgeChecker.grabbedLedge.transform.position + control.ledgeChecker.grabbedLedge.endPosition;
+
             control.transform.position = endPosition;
             control.skinnedMeshAnimator.transform.position = endPosition;
             control.skinnedMeshAnimator.transform.parent = control.transform;

@@ -99,11 +99,11 @@ namespace My_MemoPlatformer
                                     _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
                                     return true;
                             }
-                            else if (part == AttackPartType.RIGHT_HAND)
-                            {
-                                    _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
-                                    return true;
-                            }
+                        }
+                        else if (part == AttackPartType.RIGHT_HAND)
+                        {
+                            _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
+                            return true;
                         }
                     }
                 }

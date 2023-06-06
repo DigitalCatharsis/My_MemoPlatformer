@@ -9,15 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09d2138cfc2da18499f42578916d88ca, type: 3}
-  m_Name: SO_CrossPunch
+  m_Script: {fileID: 11500000, guid: 7bf1a52970b4abe47be8e4a42bb8262f, type: 3}
+  m_Name: SO_AITransition_WalkToRun
   m_EditorClassIdentifier: 
-  startAttackTime: 0.5
-  endAttackTime: 0.75
-  attackParts: 01000000
-  deathType: 2
-  mustCollide: 1
-  mustFaceAttacker: 0
-  lethalRange: 0
-  maxHits: 1
-  debug: 1
+  aiTransition: 1
+  nextAI: 1
