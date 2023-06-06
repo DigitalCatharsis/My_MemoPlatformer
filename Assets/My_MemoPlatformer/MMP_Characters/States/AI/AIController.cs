@@ -50,7 +50,10 @@ namespace My_MemoPlatformer
                 }
             }
 
-            next.gameObject.SetActive(true);
+            if (next != null)
+            {
+                next.gameObject.SetActive(true);
+            }
         }
 
     }

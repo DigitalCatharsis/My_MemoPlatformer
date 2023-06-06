@@ -21,6 +21,9 @@ namespace My_MemoPlatformer
         public List<Collider> collidingParts = new List<Collider>();
         private CharacterControl _owner;
 
+        public Vector3 lastPosition;
+        public Quaternion lastRotation;
+
         private void Awake()
         {
             _owner = this.GetComponentInParent<CharacterControl>();

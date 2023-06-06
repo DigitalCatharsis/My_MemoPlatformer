@@ -10,6 +10,7 @@ namespace My_MemoPlatformer
         CHARACTER,
         BOT,
         GROUND,
+        DeadBody,
     }
 
     public class LayerAdder : MonoBehaviour

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
 namespace My_MemoPlatformer
@@ -142,6 +143,14 @@ namespace My_MemoPlatformer
                         //thats means its a ragdoll
                         c.isTrigger = true;
                         ragdollParts.Add(c);
+                        c.attachedRigidbody.interpolation = RigidbodyInterpolation.Interpolate;  //убрать дрожжание
+                        c.attachedRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic; //расчет физики, предотвращение прохождения сквозь объекты
+
+                        CharacterJoint joint = c.GetComponent<CharacterJoint>();
+                        if (joint != null)
+                        {
+                            joint.enableProjection = true; //https://docs.unity3d.com/Manual/RagdollStability.html
+                        }
 
                         if (c.GetComponent<TriggerDetector>() == null)
                         {
@@ -151,25 +160,41 @@ namespace My_MemoPlatformer
                 }
             }
         }
-
-
-
-        private void TurnOnRagdoll()
+        public void TurnOnRagdoll()
         {
+            //change components layers from character to DeadBody to prevent unnessesary collisions.
+            Transform[] arr = GetComponentsInChildren<Transform>();
+            foreach (Transform t in arr)
+            {
+                t.gameObject.layer = LayerMask.NameToLayer(MMP_Layers.DeadBody.ToString());
+            }
+
+            //save bodypart positions to prevent teleporting
+            foreach (Collider c in ragdollParts)
+            {
+                TriggerDetector det = c.GetComponent<TriggerDetector>();
+                det.lastPosition = c.gameObject.transform.localPosition;
+                det.lastRotation = c.gameObject.transform.localRotation;
+            }
+
+            //turn off animator, avatar, smth else
             Rigid_Body.useGravity = false;
             Rigid_Body.velocity = Vector3.zero;
             this.gameObject.GetComponent<BoxCollider>().enabled = false;
             skinnedMeshAnimator.enabled = false;
             skinnedMeshAnimator.avatar = null;
 
+            //turn on ragdoll
             foreach (Collider c in ragdollParts)
             {
                 c.isTrigger = false;
                 c.attachedRigidbody.velocity = Vector3.zero;
+
+                TriggerDetector det = c.GetComponent<TriggerDetector>();
+                c.transform.localPosition = det.lastPosition;
+                c.transform.localRotation = det.lastRotation;
             }
         }
-
-
 
         private void SetColliderSpheres()
         {

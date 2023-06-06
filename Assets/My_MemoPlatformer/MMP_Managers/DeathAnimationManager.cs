@@ -32,14 +32,11 @@ namespace My_MemoPlatformer
             {
                 if (info.deathType == data.deathType)
                 {
-
                     if (info.deathType != DeathType.NONE)
                     {
                         _Candidates.Add(data.Animator);
                     }
-
-
-                    if (!info.mustCollide)
+                    else if (!info.mustCollide)
                     {
                         _Candidates.Add(data.Animator);
                     }

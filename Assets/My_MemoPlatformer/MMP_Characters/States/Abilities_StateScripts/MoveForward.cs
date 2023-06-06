@@ -100,7 +100,11 @@ namespace My_MemoPlatformer
                 control.FaceForward(false);
             }
 
-            control.MoveForward(speed, Mathf.Abs(control.animationProgress.airMomentum));
+            if (!CheckFront(control))
+            {
+                control.MoveForward(speed, Mathf.Abs(control.animationProgress.airMomentum));
+            }
+            
         }
 
         private void ConstantMove(CharacterControl control, Animator animator, AnimatorStateInfo stateInfo)

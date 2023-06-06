@@ -13,6 +13,7 @@ namespace My_MemoPlatformer
         public bool cameraShaken = false;
         public List<PoolObjectType> poolObjectList = new List<PoolObjectType>();
         public bool attackTriggered;
+        public bool ragdollTriggered;
         public float maxPressTime;
         public bool disAllowEarlyTurn;
         public float airMomentum;
