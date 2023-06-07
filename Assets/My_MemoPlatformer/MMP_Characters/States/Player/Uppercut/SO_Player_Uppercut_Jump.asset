@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b095a8e4be93540459b40b21115b915c, type: 3}
   m_Name: SO_Player_Uppercut_Jump
   m_EditorClassIdentifier: 
-  jumpTiming: 0.03
-  jumpForce: 250
+  jumpTiming: 0.2
+  jumpForce: 280
   pull:
     serializedVersion: 2
     m_Curve:

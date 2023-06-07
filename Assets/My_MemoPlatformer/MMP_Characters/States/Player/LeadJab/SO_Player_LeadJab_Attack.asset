@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d2138cfc2da18499f42578916d88ca, type: 3}
   m_Name: SO_Player_LeadJab_Attack
   m_EditorClassIdentifier: 
-  startAttackTime: 0.15
+  startAttackTime: 0.18
   endAttackTime: 0.52
   attackParts: 00000000
   deathType: 0
