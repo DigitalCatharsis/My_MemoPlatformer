@@ -49,6 +49,7 @@ namespace My_MemoPlatformer
         public List<GameObject> bottomSpheres = new List<GameObject>();
         public List<GameObject> frontSpheres = new List<GameObject>();
         public AIController aiController;
+        public BoxCollider boxCollider;
 
         [Header("Gravity")]
         public float gravityMultipliyer;
@@ -99,6 +100,7 @@ namespace My_MemoPlatformer
             aiProgress = GetComponentInChildren<AIProgress>();
             damageDetector = GetComponentInChildren<DamageDetector>();
             aiController = GetComponentInChildren<AIController>();
+            boxCollider = GetComponentInChildren<BoxCollider>();
 
             RegisterCharacter();
 
@@ -230,6 +232,33 @@ namespace My_MemoPlatformer
             float verSec = (bottomFrontVer.transform.position - topFront.transform.position).magnitude / 10f; //Получаем одну секцию длинны, деленной на 10
             CreateMiddleSpheres(bottomFrontVer, this.transform.up, verSec, 9, frontSpheres);
         }
+
+        public void UpdateBoxColliderSize()
+        {
+            if (!animationProgress.isUpdatingBoxCollider)
+            {
+                return;
+            }
+
+            if (Vector3.SqrMagnitude(boxCollider.size - animationProgress.targetSize) > 0.01f)
+            {
+                boxCollider.size = Vector3.Lerp(boxCollider.size, animationProgress.targetSize, Time.deltaTime * animationProgress.sizeSpeed);
+            }
+        }
+
+        public void UpdateBoxColliderCenter()
+        {
+            if (!animationProgress.isUpdatingBoxCollider)
+            {
+                return;
+            }
+
+            if (Vector3.SqrMagnitude(boxCollider.center - animationProgress.targetCenter) > 0.01f)
+            {
+                boxCollider.center = Vector3.Lerp(boxCollider.center, animationProgress.targetCenter, Time.deltaTime * animationProgress.centerSpeed);
+            }
+        }
+
         private void FixedUpdate()
         {
             if (Rigid_Body.velocity.y < 0f)
@@ -241,6 +270,9 @@ namespace My_MemoPlatformer
             {
                 Rigid_Body.velocity += (-Vector3.up * pullMultipliyer);
             }
+
+            UpdateBoxColliderSize();
+            UpdateBoxColliderCenter();
         }
 
         public void CreateMiddleSpheres(GameObject start, Vector3 dir, float sec, int interation, List<GameObject> spheresList)
@@ -254,6 +286,8 @@ namespace My_MemoPlatformer
                 newObj.transform.parent = this.transform; //Делаем его дочерним
                 spheresList.Add(newObj);  //добавляем в список
             }
+
+
         }
         private GameObject CreateEdgeSphere(Vector3 pos)
         {

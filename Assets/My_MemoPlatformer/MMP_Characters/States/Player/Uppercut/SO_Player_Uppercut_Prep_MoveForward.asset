@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaff6f6f2abc0794896d70a63da7cbcf, type: 3}
   m_Name: SO_Player_Uppercut_Prep_MoveForward
   m_EditorClassIdentifier: 
+  allowEarlyTurn: 0
+  lockDirection: 0
   constant: 1
   speedGraph:
     serializedVersion: 2
@@ -48,3 +50,5 @@ MonoBehaviour:
     m_RotationOrder: 4
   speed: 1.1
   blockDistance: 0.1
+  useMomentum: 0
+  maxMomentum: 0

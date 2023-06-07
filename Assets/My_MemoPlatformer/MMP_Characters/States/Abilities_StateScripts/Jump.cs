@@ -42,7 +42,7 @@ namespace My_MemoPlatformer
             CharacterControl control = characterState.GetCharacterControl(animator);
             //control.pullMultipliyer = pull.Evaluate(stateInfo.normalizedTime);   //ÒÓÒ ÃĞÅÁÀÍÀß äëèííà ÏĞÛÆÊÀ ÂÇÀÂÈÑÈÌÎÑÒÈ ÎÒ ÍÀÆÀÒÈß!
             control.pullMultipliyer = 0f;
-            control.animationProgress.isJumped = false;
+            //control.animationProgress.isJumped = false;
         }
     }
 

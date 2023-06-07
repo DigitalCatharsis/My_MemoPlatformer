@@ -105,9 +105,9 @@ namespace My_MemoPlatformer
 
         public void CheckCombo (CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (stateInfo.normalizedTime >= startAttackTime + ((endAttackTime - startAttackTime) /3))   //to define when we press. wich procent of the animation i want to set combos start time
+            if (stateInfo.normalizedTime >= startAttackTime + ((endAttackTime - startAttackTime) /3f))   //to define when we press. wich procent of the animation i want to set combos start time
             {
-                if (stateInfo.normalizedTime < endAttackTime + ((endAttackTime - startAttackTime) / 2))
+                if (stateInfo.normalizedTime < endAttackTime + ((endAttackTime - startAttackTime) / 2f))
                 {
                     CharacterControl control = characterState.GetCharacterControl(animator);
                     if (control.animationProgress.attackTriggered)

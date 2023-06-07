@@ -93,6 +93,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\ManualInput.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\TeleportOnLedge.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_MaterialChaner\MaterialChanger.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\UpdateBoxCollider.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_PooledObjects\PoolObject.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\PoolManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\Resources\DeathAnimationLoader.cs" />

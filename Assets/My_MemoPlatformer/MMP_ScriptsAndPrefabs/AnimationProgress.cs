@@ -18,6 +18,13 @@ namespace My_MemoPlatformer
         public bool disAllowEarlyTurn;
         public float airMomentum;
 
+        [Header("UpdateBoxCollider")]
+        public bool isUpdatingBoxCollider;
+        public float sizeSpeed;
+        public float centerSpeed;
+        public Vector3 targetSize;
+        public Vector3 targetCenter;
+
         private CharacterControl _control;
         private float _pressTime;
 
