@@ -19,7 +19,7 @@ namespace My_MemoPlatformer
             if (jumpTiming ==0f)
             {
                 CharacterControl control = characterState.GetCharacterControl(animator);
-                characterState.GetCharacterControl(animator).Rigid_Body.AddForce(Vector3.up * jumpForce);
+                control.Rigid_Body.AddForce(Vector3.up * jumpForce);
                 control.animationProgress.isJumped = true;
             }
             animator.SetBool(TransitionParameter.Grounded.ToString(), false);
@@ -32,7 +32,7 @@ namespace My_MemoPlatformer
 
             if (!control.animationProgress.isJumped && stateInfo.normalizedTime >= jumpTiming)
             {
-                characterState.GetCharacterControl(animator).Rigid_Body.AddForce(Vector3.up * jumpForce);
+                control.Rigid_Body.AddForce(Vector3.up * jumpForce);
                 control.animationProgress.isJumped = true;
             }
         }

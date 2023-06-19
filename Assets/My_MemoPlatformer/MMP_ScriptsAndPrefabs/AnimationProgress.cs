@@ -20,6 +20,7 @@ namespace My_MemoPlatformer
 
         [Header("UpdateBoxCollider")]
         public bool isUpdatingBoxCollider;
+        public bool isUpdatingSpheres;
         public float sizeSpeed;
         public float centerSpeed;
         public Vector3 targetSize;

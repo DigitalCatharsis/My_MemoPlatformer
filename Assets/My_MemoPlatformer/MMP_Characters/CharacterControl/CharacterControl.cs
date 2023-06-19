@@ -41,7 +41,7 @@ namespace My_MemoPlatformer
         public bool jump;
         public bool attack;
 
-        [Header ("SubComponents")]
+        [Header("SubComponents")]
         public LedgeChecker ledgeChecker;
         public AnimationProgress animationProgress;
         public AIProgress aiProgress;
@@ -80,21 +80,6 @@ namespace My_MemoPlatformer
 
         private void Awake()
         {
-            bool switchBack = false;
-
-            if (!IsFacingForward())
-            {
-                switchBack = true;
-            }
-
-            FaceForward(true);
-            SetColliderSpheres();
-
-            if (switchBack)
-            {
-                FaceForward(false);
-            }
-
             ledgeChecker = GetComponentInChildren<LedgeChecker>();
             animationProgress = GetComponent<AnimationProgress>();
             aiProgress = GetComponentInChildren<AIProgress>();
@@ -102,8 +87,9 @@ namespace My_MemoPlatformer
             aiController = GetComponentInChildren<AIController>();
             boxCollider = GetComponentInChildren<BoxCollider>();
 
-            RegisterCharacter();
+            SetColliderSpheres();
 
+            RegisterCharacter();
         }
 
         private void RegisterCharacter()
@@ -119,7 +105,7 @@ namespace My_MemoPlatformer
             if (_triggerDetectors.Count == 0)
             {
                 TriggerDetector[] arr = this.gameObject.GetComponentsInChildren<TriggerDetector>();
-                
+
                 foreach (TriggerDetector d in arr)
                 {
                     _triggerDetectors.Add(d);
@@ -128,7 +114,6 @@ namespace My_MemoPlatformer
 
             return _triggerDetectors;
         }
-
 
         public void SetRagdollParts()
         {
@@ -162,6 +147,7 @@ namespace My_MemoPlatformer
                 }
             }
         }
+
         public void TurnOnRagdoll()
         {
             //change components layers from character to DeadBody to prevent unnessesary collisions.
@@ -199,38 +185,62 @@ namespace My_MemoPlatformer
         }
 
         private void SetColliderSpheres()
+        {            
+            for (int i = 0; i < 5; i++)
+            {
+                GameObject obj = Instantiate(Resources.Load("ColliderEdge", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
+                bottomSpheres.Add(obj);
+                obj.transform.parent = this.transform;
+            }
+
+            Reposition_BottomSpheres();
+
+            for (int i = 0; i < 10; i++)
+            {
+                GameObject obj = Instantiate(Resources.Load("ColliderEdge", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
+                frontSpheres.Add(obj);
+                obj.transform.parent = this.transform;
+            }
+
+            Reposition_FrontSpheres();
+        }
+
+        public void Reposition_FrontSpheres()
         {
-            BoxCollider box = GetComponent<BoxCollider>();
+            float bottom = boxCollider.bounds.center.y - boxCollider.bounds.extents.y; // в центре внизу. 
+            float top = boxCollider.bounds.center.y + boxCollider.bounds.extents.y; // в центре вверху. ;
+            float front = boxCollider.bounds.center.z + boxCollider.bounds.extents.z; // в центре спереди. ;
+            //float back = boxCollider.bounds.center.z - boxCollider.bounds.extents.z; // в центре сзади. ;;
 
-            float bottom = box.bounds.center.y - box.bounds.extents.y; // в центре внизу. 
-            float top = box.bounds.center.y + box.bounds.extents.y; // в центре вверху. ;
-            float front = box.bounds.center.z + box.bounds.extents.z; // в центре спереди. ;
-            float back = box.bounds.center.z - box.bounds.extents.z; // в центре сзади. ;;
+            frontSpheres[0].transform.localPosition = new Vector3(0f, bottom + 0.05f, front) - this.transform.position;
+            frontSpheres[1].transform.localPosition = new Vector3(0f, top, front) - this.transform.position;
 
-            GameObject bottomFrontHor = CreateEdgeSphere(new Vector3(0f, bottom, front));
-            GameObject bottomFrontVer = CreateEdgeSphere(new Vector3(0f, bottom + 0.05f, front));
-            GameObject bottomBack = CreateEdgeSphere(new Vector3(0f, bottom, back));            
-            GameObject topFront = CreateEdgeSphere(new Vector3(0f, top, front));
+            float interval = (top - bottom + 0.05f) / 9;
 
+            for (int i = 2; i < frontSpheres.Count; i++)
+            {
+                frontSpheres[i].transform.localPosition = new Vector3(0f, bottom + (interval * (i - 1)), front)
+                     - this.transform.position;
+            }
+        }
 
-            bottomFrontHor.transform.parent = this.transform; 
-            bottomFrontVer.transform.parent = this.transform; 
-            bottomBack.transform.parent = this.transform;
-            topFront.transform.parent = this.transform;
+        public void Reposition_BottomSpheres()
+        {
+            float bottom = boxCollider.bounds.center.y - boxCollider.bounds.extents.y; // в центре внизу. 
+            //float top = boxCollider.bounds.center.y + boxCollider.bounds.extents.y; // в центре вверху. ;
+            float front = boxCollider.bounds.center.z + boxCollider.bounds.extents.z; // в центре спереди. ;
+            float back = boxCollider.bounds.center.z - boxCollider.bounds.extents.z; // в центре сзади. ;;
 
-            bottomSpheres.Add(bottomFrontHor);
-            bottomSpheres.Add(bottomBack);
+            bottomSpheres[0].transform.localPosition = new Vector3(0f, bottom, back) - this.transform.position;
+            bottomSpheres[1].transform.localPosition = new Vector3(0f, bottom, front) - this.transform.position;
 
-            frontSpheres.Add(bottomFrontVer);
-            frontSpheres.Add(topFront);
-            //frontSpheres.Add(topBack);
+            float interval = (front - back) / 4;
 
-            float horSec = (bottomFrontHor.transform.position - bottomBack.transform.position).magnitude / 5f; //Получаем одну секцию длинны, деленной на пять            
-            CreateMiddleSpheres(bottomFrontHor, -this.transform.forward, horSec, 4, bottomSpheres);
-
-
-            float verSec = (bottomFrontVer.transform.position - topFront.transform.position).magnitude / 10f; //Получаем одну секцию длинны, деленной на 10
-            CreateMiddleSpheres(bottomFrontVer, this.transform.up, verSec, 9, frontSpheres);
+            for (int i = 2; i < bottomSpheres.Count; i++)
+            {
+                bottomSpheres[i].transform.localPosition = new Vector3(0f, bottom, back + (interval * (i - 1)))
+                     - this.transform.position;
+            }
         }
 
         public void UpdateBoxColliderSize()
@@ -243,6 +253,8 @@ namespace My_MemoPlatformer
             if (Vector3.SqrMagnitude(boxCollider.size - animationProgress.targetSize) > 0.01f)
             {
                 boxCollider.size = Vector3.Lerp(boxCollider.size, animationProgress.targetSize, Time.deltaTime * animationProgress.sizeSpeed);
+
+                animationProgress.isUpdatingSpheres = true;
             }
         }
 
@@ -271,28 +283,14 @@ namespace My_MemoPlatformer
                 Rigid_Body.velocity += (-Vector3.up * pullMultipliyer);
             }
 
+            animationProgress.isUpdatingSpheres = false;
             UpdateBoxColliderSize();
             UpdateBoxColliderCenter();
-        }
-
-        public void CreateMiddleSpheres(GameObject start, Vector3 dir, float sec, int interation, List<GameObject> spheresList)
-        {
-
-            for (int i = 0; i < interation; i++)
+            if (animationProgress.isUpdatingSpheres)
             {
-                Vector3 pos = start.transform.position + (dir * sec * (i + 1));  //Получаем секцию
-
-                GameObject newObj = CreateEdgeSphere(pos); //Спавним в каждой секции сферу
-                newObj.transform.parent = this.transform; //Делаем его дочерним
-                spheresList.Add(newObj);  //добавляем в список
+                Reposition_FrontSpheres();
+                Reposition_BottomSpheres();
             }
-
-
-        }
-        private GameObject CreateEdgeSphere(Vector3 pos)
-        {
-            GameObject obj = Instantiate(Resources.Load("ColliderEdge", typeof(GameObject)), pos, Quaternion.identity) as GameObject;
-            return obj;
         }
 
         public void MoveForward(float speed, float speedGraph)
@@ -342,7 +340,7 @@ namespace My_MemoPlatformer
             return null;
         }
 
-        public GameObject GetChildObj(string name) 
+        public GameObject GetChildObj(string name)
         {
 
             if (_childObjects.ContainsKey(name)) //check if Dictionary already has the object i am looking for
@@ -356,7 +354,7 @@ namespace My_MemoPlatformer
             {
                 if (t.gameObject.name.Equals(name))
                 {
-                    _childObjects.Add(name,t.gameObject);
+                    _childObjects.Add(name, t.gameObject);
                     return t.gameObject;
                 }
             }

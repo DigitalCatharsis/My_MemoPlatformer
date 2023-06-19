@@ -12,6 +12,9 @@ namespace My_MemoPlatformer
         public bool onStart;
         public bool onEnd;
 
+        [Space(10)]
+        public bool repositionSpheres;
+
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             if (onStart)
@@ -39,6 +42,13 @@ namespace My_MemoPlatformer
         {
             control.Rigid_Body.velocity = Vector3.zero;
             control.GetComponent<BoxCollider>().enabled= on;
+
+            if (repositionSpheres)
+            {
+                control.Reposition_FrontSpheres();
+                control.Reposition_BottomSpheres();
+
+            }
         }
     }
 }

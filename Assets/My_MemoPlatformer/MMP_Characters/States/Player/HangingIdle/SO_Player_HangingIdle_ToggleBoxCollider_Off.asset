@@ -15,3 +15,4 @@ MonoBehaviour:
   on: 0
   onStart: 1
   onEnd: 0
+  repositionSpheres: 0
