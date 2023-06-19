@@ -54,6 +54,7 @@ namespace My_MemoPlatformer
         [Header("Gravity")]
         public float gravityMultipliyer;
         public float pullMultipliyer;
+        public ContactPoint[] contactPoints;
 
         [Header("Setup")]
         public PlayableCharacterType playableCharacterType;
@@ -90,6 +91,11 @@ namespace My_MemoPlatformer
             SetColliderSpheres();
 
             RegisterCharacter();
+        }
+
+        private void OnCollisionStay(Collision collision)
+        {
+            contactPoints = collision.contacts;
         }
 
         private void RegisterCharacter()
@@ -207,10 +213,10 @@ namespace My_MemoPlatformer
 
         public void Reposition_FrontSpheres()
         {
-            float bottom = boxCollider.bounds.center.y - boxCollider.bounds.extents.y; // в центре внизу. 
-            float top = boxCollider.bounds.center.y + boxCollider.bounds.extents.y; // в центре вверху. ;
-            float front = boxCollider.bounds.center.z + boxCollider.bounds.extents.z; // в центре спереди. ;
-            //float back = boxCollider.bounds.center.z - boxCollider.bounds.extents.z; // в центре сзади. ;;
+            float bottom = boxCollider.bounds.center.y - boxCollider.bounds.size.y /2; // в центре внизу. 
+            float top = boxCollider.bounds.center.y + boxCollider.bounds.size.y /2; // в центре вверху. ;
+            float front = boxCollider.bounds.center.z + boxCollider.bounds.size.z /2; // в центре спереди. ;
+            //float back = boxCollider.bounds.center.z - boxCollider.bounds.size.z; // в центре сзади. ;;
 
             frontSpheres[0].transform.localPosition = new Vector3(0f, bottom + 0.05f, front) - this.transform.position;
             frontSpheres[1].transform.localPosition = new Vector3(0f, top, front) - this.transform.position;
@@ -226,10 +232,10 @@ namespace My_MemoPlatformer
 
         public void Reposition_BottomSpheres()
         {
-            float bottom = boxCollider.bounds.center.y - boxCollider.bounds.extents.y; // в центре внизу. 
-            //float top = boxCollider.bounds.center.y + boxCollider.bounds.extents.y; // в центре вверху. ;
-            float front = boxCollider.bounds.center.z + boxCollider.bounds.extents.z; // в центре спереди. ;
-            float back = boxCollider.bounds.center.z - boxCollider.bounds.extents.z; // в центре сзади. ;;
+            float bottom = boxCollider.bounds.center.y - boxCollider.bounds.size.y /2; // в центре внизу. 
+            //float top = boxCollider.bounds.center.y + boxCollider.bounds.size.y; // в центре вверху. ;
+            float front = boxCollider.bounds.center.z + boxCollider.bounds.size.z /2; // в центре спереди. ;
+            float back = boxCollider.bounds.center.z - boxCollider.bounds.size.z /2; // в центре сзади. ;;
 
             bottomSpheres[0].transform.localPosition = new Vector3(0f, bottom, back) - this.transform.position;
             bottomSpheres[1].transform.localPosition = new Vector3(0f, bottom, front) - this.transform.position;
@@ -245,7 +251,7 @@ namespace My_MemoPlatformer
 
         public void UpdateBoxColliderSize()
         {
-            if (!animationProgress.isUpdatingBoxCollider)
+            if (!animationProgress.updatingBoxCollider)
             {
                 return;
             }
@@ -254,13 +260,13 @@ namespace My_MemoPlatformer
             {
                 boxCollider.size = Vector3.Lerp(boxCollider.size, animationProgress.targetSize, Time.deltaTime * animationProgress.sizeSpeed);
 
-                animationProgress.isUpdatingSpheres = true;
+                animationProgress.updatingSpheres = true;
             }
         }
 
         public void UpdateBoxColliderCenter()
         {
-            if (!animationProgress.isUpdatingBoxCollider)
+            if (!animationProgress.updatingBoxCollider)
             {
                 return;
             }
@@ -268,6 +274,8 @@ namespace My_MemoPlatformer
             if (Vector3.SqrMagnitude(boxCollider.center - animationProgress.targetCenter) > 0.01f)
             {
                 boxCollider.center = Vector3.Lerp(boxCollider.center, animationProgress.targetCenter, Time.deltaTime * animationProgress.centerSpeed);
+
+                animationProgress.updatingSpheres = true;
             }
         }
 
@@ -283,10 +291,10 @@ namespace My_MemoPlatformer
                 Rigid_Body.velocity += (-Vector3.up * pullMultipliyer);
             }
 
-            animationProgress.isUpdatingSpheres = false;
+            animationProgress.updatingSpheres = false;
             UpdateBoxColliderSize();
             UpdateBoxColliderCenter();
-            if (animationProgress.isUpdatingSpheres)
+            if (animationProgress.updatingSpheres)
             {
                 Reposition_FrontSpheres();
                 Reposition_BottomSpheres();

@@ -9,8 +9,8 @@ namespace My_MemoPlatformer
 
     public class AnimationProgress : MonoBehaviour
     {
-        public bool isJumped;
-        public bool cameraShaken = false;
+        public bool jumped;
+        public bool cameraShaken;
         public List<PoolObjectType> poolObjectList = new List<PoolObjectType>();
         public bool attackTriggered;
         public bool ragdollTriggered;
@@ -19,12 +19,13 @@ namespace My_MemoPlatformer
         public float airMomentum;
 
         [Header("UpdateBoxCollider")]
-        public bool isUpdatingBoxCollider;
-        public bool isUpdatingSpheres;
-        public float sizeSpeed;
-        public float centerSpeed;
+        public bool updatingBoxCollider;
+        public bool updatingSpheres;
         public Vector3 targetSize;
+        public float sizeSpeed;
         public Vector3 targetCenter;
+        public float centerSpeed;
+        
 
         private CharacterControl _control;
         private float _pressTime;
@@ -58,7 +59,6 @@ namespace My_MemoPlatformer
             {
                 attackTriggered = true;
             }
-
         }
     }
 }

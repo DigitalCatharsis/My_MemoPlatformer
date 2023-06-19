@@ -32,14 +32,14 @@ namespace My_MemoPlatformer
 
             if (control.jump)
             {
-                if (!control.animationProgress.isJumped)
+                if (!control.animationProgress.jumped)
                 {
                     animator.SetBool(TransitionParameter.Jump.ToString(), true);
                 }
             }
             else
             {
-                control.animationProgress.isJumped = false;
+                control.animationProgress.jumped = false;
             }
 
             if (control.moveLeft && control.moveRight)

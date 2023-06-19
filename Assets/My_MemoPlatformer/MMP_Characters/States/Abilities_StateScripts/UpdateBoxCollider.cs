@@ -8,21 +8,25 @@ namespace My_MemoPlatformer
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/UpdateBoxCollider")]
     public class UpdateBoxCollider : StateData
     {
-
-        public Vector3 targetSize;
         public Vector3 targetCenter;
-
-        public float sizeUpdateSpeed;
         public float centerUpdateSpeed;
+        [Space(10)]
+        public Vector3 targetSize;
+        public float sizeUpdateSpeed;
+        [Space(10)]
+        public bool keepUpdating;
+
+
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
-            control.animationProgress.isUpdatingBoxCollider = true;
+            control.animationProgress.updatingBoxCollider = true;
 
-            control.animationProgress.targetCenter = targetCenter;
             control.animationProgress.targetSize = targetSize;
             control.animationProgress.sizeSpeed = sizeUpdateSpeed;
+
+            control.animationProgress.targetCenter = targetCenter;
             control.animationProgress.centerSpeed = centerUpdateSpeed;
 
         }
@@ -33,7 +37,7 @@ namespace My_MemoPlatformer
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
-            control.animationProgress.isUpdatingBoxCollider = false;
+            control.animationProgress.updatingBoxCollider = false;
         }
     }
 }

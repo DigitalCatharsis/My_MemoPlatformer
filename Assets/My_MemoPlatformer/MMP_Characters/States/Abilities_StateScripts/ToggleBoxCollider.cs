@@ -47,7 +47,6 @@ namespace My_MemoPlatformer
             {
                 control.Reposition_FrontSpheres();
                 control.Reposition_BottomSpheres();
-
             }
         }
     }

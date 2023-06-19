@@ -44,7 +44,19 @@ namespace My_MemoPlatformer
         {
             if (control.Rigid_Body.velocity.y > -0.001f && control.Rigid_Body.velocity.y <= 0f)
             {
-                return true;
+                if (control.contactPoints != null) 
+                {
+                    foreach (ContactPoint c in control.contactPoints)
+                    {
+                        float colliderBottom = (control.transform.position.y + control.boxCollider.center.y) - (control.boxCollider.size.y / 2f);
+                        float yDiffirence = Mathf.Abs(c.point.y - colliderBottom);
+
+                        if (yDiffirence < 0.01f)
+                        {
+                            return true;
+                        }
+                    }
+                }
             }
 
             if(control.Rigid_Body.velocity.y < 0f)
@@ -69,5 +81,4 @@ namespace My_MemoPlatformer
             return false;
         }
     }
-
 }
