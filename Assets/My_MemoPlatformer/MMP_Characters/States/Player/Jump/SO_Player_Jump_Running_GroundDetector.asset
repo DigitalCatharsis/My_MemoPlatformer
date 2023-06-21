@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SO_Player_Jump_Running_GroundDetector
   m_EditorClassIdentifier: 
   _checktime: 0
-  distance: 0
+  distance: 0.05

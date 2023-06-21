@@ -403,7 +403,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.17013675
+  m_TransitionDuration: 0.1835773
   m_TransitionOffset: 0
   m_ExitTime: 0.4139079
   m_HasExitTime: 1
@@ -611,7 +611,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Running_Jump
+  m_Name: Jump_Running
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1939,7 +1939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ListAbilityData:
-  - {fileID: 11400000, guid: e85a5f6f9551dc441b1b754f4ea81e40, type: 2}
+  - {fileID: 11400000, guid: de522ba46629158428e5c6cdd9ed8d1b, type: 2}
   - {fileID: 11400000, guid: 48306d92b46918d4b8996a8bf0e53b47, type: 2}
 --- !u!1102 &4441053273889874492
 AnimatorState:
@@ -2305,8 +2305,8 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.13117206
-  m_TransitionOffset: 0.0037068594
+  m_TransitionDuration: 0.2200545
+  m_TransitionOffset: 0
   m_ExitTime: 0.9669232
   m_HasExitTime: 1
   m_HasFixedDuration: 1
@@ -2461,9 +2461,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.14881682
+  m_TransitionDuration: 0.10527766
   m_TransitionOffset: 0
-  m_ExitTime: 0.9617513
+  m_ExitTime: 0.97919816
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
