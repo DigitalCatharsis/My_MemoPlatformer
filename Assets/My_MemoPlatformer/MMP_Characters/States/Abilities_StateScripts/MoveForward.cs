@@ -16,8 +16,8 @@ namespace My_MemoPlatformer
         public float blockDistance;
 
         [Header("Momentum")]
-        public float startingMomentum;
         public bool useMomentum;
+        public float startingMomentum;
         public float maxMomentum;
         public bool clearMomentumOnExit;
 
@@ -83,6 +83,13 @@ namespace My_MemoPlatformer
 
         private void UpdateMomentum(CharacterControl control, AnimatorStateInfo stateInfo)
         {
+            if (control.animationProgress.FrameUpdated)
+            {
+                return;
+            }
+
+            control.animationProgress.FrameUpdated = true;
+
             if (control.moveRight)
             {
                 control.animationProgress.airMomentum += speedGraph.Evaluate(stateInfo.normalizedTime)* speed * Time.deltaTime;

@@ -16,7 +16,10 @@ namespace My_MemoPlatformer
         public bool ragdollTriggered;
         public float maxPressTime;
         public bool disAllowEarlyTurn;
+
+        [Header("AirControl")]
         public float airMomentum;
+        public bool FrameUpdated;
 
         [Header("UpdateBoxCollider")]
         public bool updatingBoxCollider;
@@ -60,5 +63,11 @@ namespace My_MemoPlatformer
                 attackTriggered = true;
             }
         }
+
+        private void LateUpdate()
+        {
+            FrameUpdated = false;
+        }
+
     }
 }
