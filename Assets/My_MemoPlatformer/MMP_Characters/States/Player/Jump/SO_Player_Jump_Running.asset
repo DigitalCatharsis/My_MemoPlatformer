@@ -9,39 +9,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaff6f6f2abc0794896d70a63da7cbcf, type: 3}
-  m_Name: SO_Player_Jump_Normal_MoveForward
+  m_Script: {fileID: 11500000, guid: b095a8e4be93540459b40b21115b915c, type: 3}
+  m_Name: SO_Player_Jump_Running
   m_EditorClassIdentifier: 
-  allowEarlyTurn: 0
-  lockDirection: 0
-  constant: 0
-  speedGraph:
+  jumpTiming: 0
+  jumpForce: 600
+  pull:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      value: 0
+      inSlope: 0.3
+      outSlope: 0.3
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      value: 0.3
+      inSlope: 0.3
+      outSlope: 0.3
       tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  speed: 1.65
-  blockDistance: 0.1
-  startingMomentum: 0
-  useMomentum: 1
-  maxMomentum: 2.6
-  clearMomentumOnExit: 1

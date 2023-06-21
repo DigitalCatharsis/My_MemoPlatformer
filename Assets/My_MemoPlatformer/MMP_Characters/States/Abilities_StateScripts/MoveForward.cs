@@ -16,8 +16,10 @@ namespace My_MemoPlatformer
         public float blockDistance;
 
         [Header("Momentum")]
+        public float startingMomentum;
         public bool useMomentum;
         public float maxMomentum;
+        public bool clearMomentumOnExit;
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
@@ -37,7 +39,19 @@ namespace My_MemoPlatformer
             }
 
             control.animationProgress.disAllowEarlyTurn = false;
-            control.animationProgress.airMomentum = 0f;
+            //control.animationProgress.airMomentum = 0f;
+
+            if (startingMomentum > 0.001f)
+            {
+                if (control.IsFacingForward())
+                {
+                    control.animationProgress.airMomentum = startingMomentum;
+                }
+                else
+                {
+                    control.animationProgress.airMomentum = -startingMomentum;
+                }
+            }
         }
 
 
@@ -71,12 +85,12 @@ namespace My_MemoPlatformer
         {
             if (control.moveRight)
             {
-                control.animationProgress.airMomentum += speedGraph.Evaluate(stateInfo.normalizedTime) * Time.deltaTime;
+                control.animationProgress.airMomentum += speedGraph.Evaluate(stateInfo.normalizedTime)* speed * Time.deltaTime;
             }
 
             if (control.moveLeft)
             {
-                control.animationProgress.airMomentum -= speedGraph.Evaluate(stateInfo.normalizedTime) * Time.deltaTime;
+                control.animationProgress.airMomentum -= speedGraph.Evaluate(stateInfo.normalizedTime)* speed * Time.deltaTime;
             }
 
             if(Mathf.Abs(control.animationProgress.airMomentum) >= maxMomentum)
@@ -213,10 +227,10 @@ namespace My_MemoPlatformer
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
-            control.animationProgress.airMomentum = 0f;
+            if (clearMomentumOnExit)
+            {
+                control.animationProgress.airMomentum = 0f;
+            }            
         }
-
-    }
-
-
+    } 
 }
