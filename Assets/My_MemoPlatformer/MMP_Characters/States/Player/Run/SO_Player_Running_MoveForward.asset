@@ -50,3 +50,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   speed: 10
   blockDistance: 0.1
+  useMomentum: 0
+  startingMomentum: 0
+  maxMomentum: 0
+  clearMomentumOnExit: 0

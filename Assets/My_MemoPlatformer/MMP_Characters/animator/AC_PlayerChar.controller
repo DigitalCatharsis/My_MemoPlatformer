@@ -71,9 +71,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ListAbilityData:
-  - {fileID: 11400000, guid: e85a5f6f9551dc441b1b754f4ea81e40, type: 2}
+  - {fileID: 11400000, guid: b722c59b64d452943ab79032f648d23c, type: 2}
   - {fileID: 11400000, guid: 23968493541976f419bea0d3f1a40f0f, type: 2}
   - {fileID: 11400000, guid: 6ea82ee52ab7c7046957034d362fc7b4, type: 2}
+  - {fileID: 11400000, guid: 23968493541976f419bea0d3f1a40f0f, type: 2}
 --- !u!1101 &-8187840935787046069
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -748,6 +749,7 @@ MonoBehaviour:
   ListAbilityData:
   - {fileID: 11400000, guid: 31871942c935e1a42b6285ec04094f12, type: 2}
   - {fileID: 11400000, guid: 58b43d49be9474a4bbd20b15c7d25d5d, type: 2}
+  - {fileID: 11400000, guid: 85fdf9287fae1f845ac095a6273536fc, type: 2}
 --- !u!1102 &-1968700179192103663
 AnimatorState:
   serializedVersion: 6
@@ -1939,8 +1941,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ListAbilityData:
-  - {fileID: 11400000, guid: de522ba46629158428e5c6cdd9ed8d1b, type: 2}
+  - {fileID: 11400000, guid: b722c59b64d452943ab79032f648d23c, type: 2}
   - {fileID: 11400000, guid: 48306d92b46918d4b8996a8bf0e53b47, type: 2}
+  - {fileID: 11400000, guid: 609e4d6c413583f43a369a8b92ac14a0, type: 2}
 --- !u!1102 &4441053273889874492
 AnimatorState:
   serializedVersion: 6
@@ -2305,7 +2308,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.2200545
+  m_TransitionDuration: 0.3014694
   m_TransitionOffset: 0
   m_ExitTime: 0.9669232
   m_HasExitTime: 1

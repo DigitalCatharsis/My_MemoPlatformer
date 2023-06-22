@@ -37,7 +37,11 @@ namespace My_MemoPlatformer
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
-            control.animationProgress.updatingBoxCollider = false;
+
+            if (!keepUpdating) 
+            {
+                control.animationProgress.updatingBoxCollider = false;
+            }            
         }
     }
 }
