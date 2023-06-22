@@ -206,6 +206,10 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 112
       objectReference: {fileID: 0}
+    - target: {fileID: 936084455, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1747402107, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: maxPressTime
       value: 0.1

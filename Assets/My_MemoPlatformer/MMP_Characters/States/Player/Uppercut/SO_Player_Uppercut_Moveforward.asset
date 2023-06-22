@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaff6f6f2abc0794896d70a63da7cbcf, type: 3}
   m_Name: SO_Player_Uppercut_Moveforward
   m_EditorClassIdentifier: 
+  allowEarlyTurn: 0
+  lockDirection: 0
   constant: 1
   speedGraph:
     serializedVersion: 2
@@ -19,32 +21,36 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: -0.65088624
-      outSlope: -0.65088624
+      inSlope: -0.58074456
+      outSlope: -0.58074456
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.37813735
-      value: 0.7538756
-      inSlope: -1.8855515
-      outSlope: -1.8855515
+      time: 0.37092665
+      value: 0.78458637
+      inSlope: -2.3471744
+      outSlope: -2.3471744
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.051485226
+      inWeight: 0.06754405
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.5
       value: 0
-      inSlope: -2.0071242
-      outSlope: -2.0071242
+      inSlope: -1.6409807
+      outSlope: -1.6409807
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.061592117
+      inWeight: 0.09755325
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   speed: 0.5
   blockDistance: 0.1
+  useMomentum: 0
+  startingMomentum: 0
+  maxMomentum: 0
+  clearMomentumOnExit: 0

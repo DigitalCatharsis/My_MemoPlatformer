@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaff6f6f2abc0794896d70a63da7cbcf, type: 3}
   m_Name: SO_Player_Smash_Prem_Moveforward
   m_EditorClassIdentifier: 
+  allowEarlyTurn: 0
+  lockDirection: 0
   constant: 1
   speedGraph:
     serializedVersion: 2
@@ -19,17 +21,17 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: -0.20231798
-      outSlope: -0.20231798
+      inSlope: -0.20371242
+      outSlope: -0.20371242
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.54439807
-      value: 0.8898585
-      inSlope: -0.52900887
-      outSlope: -0.52900887
+      time: 0.5557287
+      value: 0.88679117
+      inSlope: -0.5371658
+      outSlope: -0.5371658
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -37,8 +39,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 0.5
-      inSlope: -0.8556998
-      outSlope: -0.8556998
+      inSlope: -0.87061924
+      outSlope: -0.87061924
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -46,5 +48,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  speed: 2
+  speed: 6
   blockDistance: 0.1
+  useMomentum: 0
+  startingMomentum: 0
+  maxMomentum: 0
+  clearMomentumOnExit: 0

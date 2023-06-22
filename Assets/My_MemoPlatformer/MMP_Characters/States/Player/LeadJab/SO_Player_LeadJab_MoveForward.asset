@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaff6f6f2abc0794896d70a63da7cbcf, type: 3}
   m_Name: SO_Player_LeadJab_MoveForward
   m_EditorClassIdentifier: 
+  allowEarlyTurn: 0
+  lockDirection: 0
   constant: 1
   speedGraph:
     serializedVersion: 2
@@ -19,32 +21,36 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: -0.083333254
-      outSlope: -0.083333254
+      inSlope: -0.15438218
+      outSlope: -0.15438218
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.12
-      value: 0.99
-      inSlope: -0.4180712
-      outSlope: -0.4180712
+      time: 0.11954002
+      value: 0.98154515
+      inSlope: -0.3502004
+      outSlope: -0.3502004
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.08757872
-      outWeight: 0.072674185
+      inWeight: 0.33333334
+      outWeight: 0.08398101
     - serializedVersion: 3
       time: 0.25
-      value: 0.002532959
-      inSlope: -7.5959005
-      outSlope: -7.5959005
-      tangentMode: 34
+      value: 0
+      inSlope: -3.1687253
+      outSlope: -3.1687253
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0
+      outWeight: 0.15009171
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   speed: 4
   blockDistance: 0.1
+  useMomentum: 0
+  startingMomentum: 0
+  maxMomentum: 0
+  clearMomentumOnExit: 0

@@ -57,7 +57,6 @@ namespace My_MemoPlatformer
                     return true;
                 }
             }
-
             return false;
         }
     }

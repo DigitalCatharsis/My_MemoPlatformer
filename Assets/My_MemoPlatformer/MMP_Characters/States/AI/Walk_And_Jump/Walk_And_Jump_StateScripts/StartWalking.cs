@@ -41,7 +41,7 @@ namespace My_MemoPlatformer
             if (control.aiProgress.pathfindfingAgent.startSphere.transform.position.y < control.aiProgress.pathfindfingAgent.endSphere.transform.position.y) //Если это подъем
             {
                 //Jumping
-                if (Vector3.SqrMagnitude(dist) < 0.01f) //how close are we to the checkpoint    //Разве длинна вектора - это не корень квадрата длинны?
+                if (Vector3.SqrMagnitude(dist) < 0.01f) //how close are we to the checkpoint    //Здесь часто бывает баг (когда иди бегает вокруг Start Point) из-за разных смещений платформы или ИИ относительно друг друга. Увелич да < 0.1f для дебага
                 {
                     //Debug.DrawLine(control.aiProgress.pathfindfingAgent.startSphere.transform.position, control.transform.position, UnityEngine.Color.green, 2.5f);
                     control.moveLeft = false;
@@ -58,7 +58,7 @@ namespace My_MemoPlatformer
             }
 
             //straight
-            if (control.aiProgress.pathfindfingAgent.startSphere.transform.position.y == control.aiProgress.pathfindfingAgent.endSphere.transform.position.y)
+            if (control.aiProgress.pathfindfingAgent.startSphere.transform.position.y == control.aiProgress.pathfindfingAgent.endSphere.transform.position.y)   //Цель перед нами
             {
                 if (Vector3.SqrMagnitude(dist) < 0.5f) //чтобы не топтался в персонажа
                 {
