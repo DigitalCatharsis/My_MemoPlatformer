@@ -331,6 +331,12 @@ namespace My_MemoPlatformer
             {
                 return;
             }
+
+            if (!skinnedMeshAnimator.enabled)   //to prevent rotating after death
+            {
+                return;
+            }
+
             if (forward)
             {
                 transform.rotation = Quaternion.Euler(0f, 0f, 0f);
