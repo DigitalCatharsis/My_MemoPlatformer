@@ -24,7 +24,7 @@ namespace My_MemoPlatformer
             {
                 if (!control.animationProgress.ragdollTriggered)
                 {
-                    control.TurnOnRagdoll();
+                    //control.TurnOnRagdoll();
                     control.animationProgress.ragdollTriggered = true;
                 }
 
@@ -33,8 +33,8 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
-            control.animationProgress.ragdollTriggered = false;
+            //CharacterControl control = characterState.GetCharacterControl(animator);
+            //control.animationProgress.ragdollTriggered = false;
         }
     }
 }

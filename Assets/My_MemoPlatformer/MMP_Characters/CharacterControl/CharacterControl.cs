@@ -284,6 +284,7 @@ namespace My_MemoPlatformer
 
         private void FixedUpdate()
         {
+            //fall
             if (Rigid_Body.velocity.y < 0f)
             {
                 Rigid_Body.velocity += (-Vector3.up * gravityMultipliyer);
@@ -294,6 +295,7 @@ namespace My_MemoPlatformer
                 Rigid_Body.velocity += (-Vector3.up * pullMultipliyer);
             }
 
+            //Spheres
             animationProgress.updatingSpheres = false;
             UpdateBoxColliderSize();
             UpdateBoxColliderCenter();
@@ -301,6 +303,13 @@ namespace My_MemoPlatformer
             {
                 Reposition_FrontSpheres();
                 Reposition_BottomSpheres();
+            }
+
+            //ragdoll
+            if (animationProgress.ragdollTriggered)
+            {
+                TurnOnRagdoll();
+                animationProgress.ragdollTriggered = false;
             }
         }
 

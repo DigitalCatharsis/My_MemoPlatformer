@@ -133,7 +133,7 @@ namespace My_MemoPlatformer
             _control.GetComponent<BoxCollider>().enabled = false;
             _control.ledgeChecker.GetComponent<BoxCollider>().enabled = false;
             _control.Rigid_Body.useGravity = false;
-
+            _control.navMeshObstacle.carving = false; //we dont need carving when enemy is dead
 
             damageTaken++; 
         }
