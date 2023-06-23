@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
@@ -50,6 +51,7 @@ namespace My_MemoPlatformer
         public List<GameObject> frontSpheres = new List<GameObject>();
         public AIController aiController;
         public BoxCollider boxCollider;
+        public NavMeshObstacle navMeshObstacle;
 
         [Header("Gravity")]
         public float gravityMultipliyer;
@@ -86,7 +88,8 @@ namespace My_MemoPlatformer
             aiProgress = GetComponentInChildren<AIProgress>();
             damageDetector = GetComponentInChildren<DamageDetector>();
             aiController = GetComponentInChildren<AIController>();
-            boxCollider = GetComponentInChildren<BoxCollider>();
+            boxCollider = GetComponent<BoxCollider>();
+            navMeshObstacle = GetComponentInChildren<NavMeshObstacle>();
 
             SetColliderSpheres();
 

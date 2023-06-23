@@ -26,8 +26,10 @@ namespace My_MemoPlatformer
                 control.aiProgress.pathfindfingAgent = pfAgent.GetComponent<PathFindingAgent>();
             }
 
+            control.aiProgress.pathfindfingAgent.owner = control;
             control.aiProgress.pathfindfingAgent.GetComponent<NavMeshAgent>().enabled = false;
             control.aiProgress.pathfindfingAgent.transform.position = control.transform.position;
+            control.navMeshObstacle.carving = false; //to prevent bug when carving forbids agent to move
             control.aiProgress.pathfindfingAgent.GoToTarget();
         }
 

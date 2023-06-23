@@ -42,24 +42,24 @@ namespace My_MemoPlatformer
 
         bool IsGrounded(CharacterControl control)
         {
-            if (control.Rigid_Body.velocity.y > -0.001f && control.Rigid_Body.velocity.y <= 0f)
+            if (control.contactPoints != null)
             {
-                if (control.contactPoints != null) 
+                foreach (ContactPoint c in control.contactPoints)
                 {
-                    foreach (ContactPoint c in control.contactPoints)
-                    {
-                        float colliderBottom = (control.transform.position.y + control.boxCollider.center.y) - (control.boxCollider.size.y / 2f);
-                        float yDiffirence = Mathf.Abs(c.point.y - colliderBottom);
+                    float colliderBottom = (control.transform.position.y + control.boxCollider.center.y) - (control.boxCollider.size.y / 2f);
+                    float yDiffirence = Mathf.Abs(c.point.y - colliderBottom);
 
-                        if (yDiffirence < 0.01f)
+                    if (yDiffirence < 0.01f)
+                    {
+                        if (Mathf.Abs(control.Rigid_Body.velocity.y) < 0.01f)
                         {
                             return true;
-                        }
+                        }                        
                     }
                 }
             }
 
-            if(control.Rigid_Body.velocity.y < 0f)
+            if (control.Rigid_Body.velocity.y < 0f)
             {
                 foreach (GameObject o in control.bottomSpheres)
                 {

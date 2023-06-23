@@ -24,11 +24,15 @@ namespace My_MemoPlatformer
             else
             {
                 control.FaceForward(false);
-                control.moveLeft = true;
+                control.moveLeft = true; 
                 control.moveRight = false;
             }
 
-            control.turbo = true;
+            Vector3 dist = control.aiProgress.pathfindfingAgent.startSphere.transform.position - control.transform.position;
+            if (Vector3.SqrMagnitude(dist) > 2f)
+            {
+                control.turbo = true;
+            }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

@@ -17,6 +17,8 @@ namespace My_MemoPlatformer
         public GameObject endSphere;
         public bool startWalk;
 
+        public CharacterControl owner = null;
+
         private void Awake()
         {
             _navMeshAgent= GetComponent<NavMeshAgent>();
@@ -56,7 +58,9 @@ namespace My_MemoPlatformer
             while (true)
             {
                 if (_navMeshAgent.isOnOffMeshLink)
-                {
+                {                    
+                    owner.navMeshObstacle.carving = true;
+
                     startSphere.transform.position = _navMeshAgent.currentOffMeshLinkData.startPos;
                     endSphere.transform.position = _navMeshAgent.currentOffMeshLinkData.endPos;
 
@@ -67,9 +71,14 @@ namespace My_MemoPlatformer
                     yield break;
                 }
 
-                Vector3 dist = transform.position - _navMeshAgent.destination;
-                if (Vector3.SqrMagnitude(dist) < 0.5f)
+                Vector3 dist = transform.position - _navMeshAgent.destination;  //между навигатором и его точкой назначения, а не control
+                if (Vector3.SqrMagnitude(dist) < 0.5f)  
                 {
+                    if (Vector3.SqrMagnitude(owner.transform.position - _navMeshAgent.destination) > 1f)  //control и точкой назначения
+                    {
+                        owner.navMeshObstacle.carving = true; //исправлял баг, где carving мешал движению навигатора. Возвращаю carving Обратно
+                    }
+                    
                     startSphere.transform.position = _navMeshAgent.destination;
                     endSphere.transform.position = _navMeshAgent.destination;
 
