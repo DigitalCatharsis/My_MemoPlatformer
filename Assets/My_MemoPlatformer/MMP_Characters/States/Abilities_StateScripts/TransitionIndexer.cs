@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public enum TransitionConditionType
@@ -11,6 +12,7 @@ public enum TransitionConditionType
     ATTACK,
     JUMP,
     GRABBING_LEDGE,
+    LEFT_OR_RIGHT,
 }
 
 namespace My_MemoPlatformer
@@ -28,7 +30,6 @@ namespace My_MemoPlatformer
             {
                 animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), Index);
             }
-
         }
 
 
@@ -113,12 +114,17 @@ namespace My_MemoPlatformer
                             }
                         }
                         break;
+                    case TransitionConditionType.LEFT_OR_RIGHT:
+                        {
+                            if (!control.moveLeft && !control.moveRight)
+                            {
+                                return false;
+                            }
+                        }
+                        break;
                 }
             }
-
             return true;
         }
-
     }
-
 }

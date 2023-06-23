@@ -11,18 +11,23 @@ namespace My_MemoPlatformer
         [Range(0f, 1f)]
         [SerializeField] private float jumpTiming;
         [SerializeField] private float jumpForce;
+        [Header("Extra Gravity")]
         [SerializeField] private AnimationCurve pull;
+        [SerializeField] private bool canselPull;
+
 
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (jumpTiming ==0f)
+            CharacterControl control = characterState.GetCharacterControl(animator);
+            control.animationProgress.jumped = false;
+            if (jumpTiming == 0f)
             {
-                CharacterControl control = characterState.GetCharacterControl(animator);
                 control.Rigid_Body.AddForce(Vector3.up * jumpForce);
                 control.animationProgress.jumped = true;
             }
-            animator.SetBool(TransitionParameter.Grounded.ToString(), false);
+
+            control.animationProgress.cancelPull = canselPull;
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

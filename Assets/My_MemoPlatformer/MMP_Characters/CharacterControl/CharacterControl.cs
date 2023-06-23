@@ -286,14 +286,17 @@ namespace My_MemoPlatformer
         private void FixedUpdate()
         {
             //fall
-            if (Rigid_Body.velocity.y < 0f)
+            if (!animationProgress.cancelPull)
             {
-                Rigid_Body.velocity += (-Vector3.up * gravityMultipliyer);
-            }
+                if (Rigid_Body.velocity.y < 0f)
+                {
+                    Rigid_Body.velocity += (-Vector3.up * gravityMultipliyer);
+                }
 
-            if (Rigid_Body.velocity.y > 0f && !jump)
-            {
-                Rigid_Body.velocity += (-Vector3.up * pullMultipliyer);
+                if (Rigid_Body.velocity.y > 0f && !jump)
+                {
+                    Rigid_Body.velocity += (-Vector3.up * pullMultipliyer);
+                }
             }
 
             //Spheres

@@ -10,6 +10,7 @@ namespace My_MemoPlatformer
     {
         public bool allowEarlyTurn; //Prevent turning when running from idle
         public bool lockDirection;
+        public bool lockDirectionNextState;
         public bool constant; //move no matter what
         public AnimationCurve speedGraph;
         public float speed;
@@ -27,19 +28,24 @@ namespace My_MemoPlatformer
 
             if (allowEarlyTurn && !control.animationProgress.disAllowEarlyTurn)
             {               
-
-                if (control.moveLeft)
+                if (!control.animationProgress.lockDirectionNextState) 
                 {
-                    control.FaceForward(false);
+                    if (control.moveLeft)
+                    {
+                        control.FaceForward(false);
+                    }
+                    if (control.moveRight)
+                    {
+                        control.FaceForward(true);
+                    }
                 }
-                if (control.moveRight)
+                else
                 {
-                    control.FaceForward(true);
+                    control.animationProgress.lockDirectionNextState = false;
                 }
             }
 
             control.animationProgress.disAllowEarlyTurn = false;
-            //control.animationProgress.airMomentum = 0f;
 
             if (startingMomentum > 0.001f)
             {
@@ -58,6 +64,15 @@ namespace My_MemoPlatformer
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
+
+            control.animationProgress.lockDirectionNextState = lockDirectionNextState;
+
+            if (control.animationProgress.frameUpdated)    //fix for double updating. Met this when implement running kick
+            {
+                return;
+            }
+
+            control.animationProgress.frameUpdated = true;
 
             if (control.jump)
             {
@@ -83,12 +98,6 @@ namespace My_MemoPlatformer
 
         private void UpdateMomentum(CharacterControl control, AnimatorStateInfo stateInfo)
         {
-            if (control.animationProgress.FrameUpdated)
-            {
-                return;
-            }
-
-            control.animationProgress.FrameUpdated = true;
 
             if (control.moveRight)
             {
