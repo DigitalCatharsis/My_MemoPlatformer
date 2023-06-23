@@ -185,11 +185,12 @@ namespace My_MemoPlatformer
             foreach (Collider c in ragdollParts)
             {
                 c.isTrigger = false;
-                c.attachedRigidbody.velocity = Vector3.zero;
 
                 TriggerDetector det = c.GetComponent<TriggerDetector>();
                 c.transform.localPosition = det.lastPosition;
                 c.transform.localRotation = det.lastRotation;
+
+                c.attachedRigidbody.velocity = Vector3.zero;
             }
         }
 

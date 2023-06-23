@@ -7,10 +7,12 @@ namespace My_MemoPlatformer
     public class Settings : MonoBehaviour
     {
         public FrameSettings frameSettings;
+        public PhysicsSettings physicsSettings;
         [SerializeField] private bool debug;
 
         private void Awake()
         {
+            //Frames
             if (debug)
             {
                 Debug.Log("timeScale: " + frameSettings.TimeScale);
@@ -22,6 +24,14 @@ namespace My_MemoPlatformer
                 Debug.Log("TargetFrameRate" + frameSettings.TargetFPS);
             }
             Application.targetFrameRate = frameSettings.TargetFPS;
+
+            //Physics
+            if (debug)
+            {
+                Debug.Log("Default Solver Velocity Iterations" + physicsSettings.DefaultSolverVelocityIterations);
+            }
+            Physics.defaultSolverVelocityIterations = physicsSettings.DefaultSolverVelocityIterations;
+
         }
     }
 }
