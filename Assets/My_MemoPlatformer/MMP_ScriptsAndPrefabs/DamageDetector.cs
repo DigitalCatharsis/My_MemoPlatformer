@@ -94,7 +94,7 @@ namespace My_MemoPlatformer
                     {
                         if (part==AttackPartType.LEFT_HAND)
                         {
-                            if (collider.gameObject == info.attacker.leftHandAttack)
+                            if (collider.gameObject == info.attacker.leftHand_Attack)
                             {
                                     _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
                                     return true;
@@ -102,8 +102,27 @@ namespace My_MemoPlatformer
                         }
                         else if (part == AttackPartType.RIGHT_HAND)
                         {
-                            _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
-                            return true;
+                            if (collider.gameObject == info.attacker.rightHand_Attack)
+                            {
+                                _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
+                                return true;
+                            }
+                        }                        
+                        else if (part == AttackPartType.LEFT_FOOT)
+                        {
+                            if (collider.gameObject == info.attacker.leftFoot_Attack)
+                            {
+                                _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
+                                return true;
+                            }
+                        }                        
+                        else if (part == AttackPartType.RIGHT_FOOT)
+                        {
+                            if (collider.gameObject == info.attacker.rightFoot_Attack)
+                            {
+                                _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
+                                return true;
+                            }
                         }
                     }
                 }

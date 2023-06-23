@@ -476,6 +476,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d9edb555885762942897b7b591a0a6e6, type: 2}
   - {fileID: 11400000, guid: c7300d6f81267054fbd5ac637a185f47, type: 2}
   - {fileID: 11400000, guid: ea750484aaa6127489b6f20fa6e9a2eb, type: 2}
+  - {fileID: 11400000, guid: 4ff73a1873c684f4c84aacd387add705, type: 2}
 --- !u!1101 &-4313479422415923681
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

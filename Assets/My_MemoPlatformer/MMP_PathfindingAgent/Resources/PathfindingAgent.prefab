@@ -262,7 +262,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8801515615342999332}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -336,3 +336,4 @@ MonoBehaviour:
   startSphere: {fileID: 504766652548213489}
   endSphere: {fileID: 8616653730484028116}
   startWalk: 0
+  owner: {fileID: 0}

@@ -62,8 +62,10 @@ namespace My_MemoPlatformer
         public PlayableCharacterType playableCharacterType;
         public Animator skinnedMeshAnimator;
         public List<Collider> ragdollParts = new List<Collider>();
-        public GameObject rightHandAttack;
-        public GameObject leftHandAttack;
+        public GameObject rightHand_Attack;
+        public GameObject leftHand_Attack;
+        public GameObject leftFoot_Attack;
+        public GameObject rightFoot_Attack;
 
         private List<TriggerDetector> _triggerDetectors = new List<TriggerDetector>();
         private Dictionary<string, GameObject> _childObjects = new Dictionary<string, GameObject>();
