@@ -9,18 +9,6 @@ EditorBuildSettings:
     path: Assets/My_MemoPlatformer/MMP_Scenes/L_CharacterSelect.unity
     guid: 9748b6e9880114b46a2e24ff4ec7c432
   - enabled: 1
-    path: Assets/My_MemoPlatformer/MMP_Scenes/L_Level_Start.unity
-    guid: da984efe9e288584fade828a9ada5554
-  - enabled: 1
-    path: Assets/My_MemoPlatformer/MMP_Scenes/L_Level_Sample_Demo.unity
-    guid: 2ac2c1b6d6b3e274c8cb4119d9d28a82
-  - enabled: 1
-    path: Assets/My_MemoPlatformer/MMP_Scenes/L_Level_Sample_Hammer.unity
-    guid: 87b4ecaa30310394d996e30154046062
-  - enabled: 1
-    path: Assets/My_MemoPlatformer/MMP_Scenes/L_LeveL_LedgeGrab.unity
-    guid: 8e49783e40e5dd8478181a8c52d9301b
-  - enabled: 1
-    path: Assets/My_MemoPlatformer/MMP_Scenes/L_Level_Sample_PathFinding.unity
-    guid: 2db2f234a4e482e4f887b239f2536495
+    path: Assets/My_MemoPlatformer/MMP_Scenes/L_Level_Day.unity
+    guid: 03b27758fc522f340b9ed5e28548d0a3
   m_configObjects: {}

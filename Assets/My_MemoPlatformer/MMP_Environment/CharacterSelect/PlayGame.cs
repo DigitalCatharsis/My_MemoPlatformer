@@ -15,7 +15,7 @@ namespace My_MemoPlatformer
             {
                 if (characterSelect.selectedCharacterType != PlayableCharacterType.NONE)
                 {
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(MMP_Scenes.L_Level_Sample_Demo.ToString());
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(MMP_Scenes.L_Level_Day.ToString());
                 }
                 else
                 {
