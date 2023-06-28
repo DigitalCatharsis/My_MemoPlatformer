@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 
 namespace My_MemoPlatformer
 {
@@ -71,6 +72,13 @@ namespace My_MemoPlatformer
             else
             {
                 VirtualInputManager.Instance.attack = false;
+            }            
+            
+            //Temp Restart
+            if (Input.GetKey(KeyCode.R))
+            {
+                Scene scene = SceneManager.GetActiveScene();
+                SceneManager.LoadScene(scene.name);
             }
         }
 

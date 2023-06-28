@@ -1,7 +1,4 @@
-using My_MemoPlatformer;
-using System.Collections;
 using System.Collections.Generic;
-using System.Drawing.Text;
 using UnityEngine;
 
 namespace My_MemoPlatformer
