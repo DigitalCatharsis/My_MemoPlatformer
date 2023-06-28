@@ -32,6 +32,10 @@ namespace My_MemoPlatformer
             }
             Physics.defaultSolverVelocityIterations = physicsSettings.DefaultSolverVelocityIterations;
 
+            //Default Keys
+            Debug.Log("Default keys binding settings");
+            VirtualInputManager.Instance.SetDefaultKeys();
+
         }
     }
 }

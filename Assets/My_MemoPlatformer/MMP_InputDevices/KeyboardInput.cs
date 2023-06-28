@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 
 namespace My_MemoPlatformer
@@ -10,7 +7,7 @@ namespace My_MemoPlatformer
     {
        void Update()
         {
-            if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(VirtualInputManager.Instance.DicKeys[InputKeyType.KEY_TURBO]))
             {
                 VirtualInputManager.Instance.turbo = true;
             }
@@ -19,7 +16,7 @@ namespace My_MemoPlatformer
                 VirtualInputManager.Instance.turbo = false;
             }
 
-            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+            if (Input.GetKey(VirtualInputManager.Instance.DicKeys[InputKeyType.KEY_MOVE_UP]))
             {
                 VirtualInputManager.Instance.moveUp = true;
             }
@@ -28,7 +25,7 @@ namespace My_MemoPlatformer
                 VirtualInputManager.Instance.moveUp = false;
             }
 
-            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+            if (Input.GetKey(VirtualInputManager.Instance.DicKeys[InputKeyType.KEY_MOVE_DOWN]))
             {
                 VirtualInputManager.Instance.moveDown = true;
             }
@@ -37,7 +34,7 @@ namespace My_MemoPlatformer
                 VirtualInputManager.Instance.moveDown = false;
             }
 
-            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            if (Input.GetKey(VirtualInputManager.Instance.DicKeys[InputKeyType.KEY_MOVE_RIGHT]))
             {
                 VirtualInputManager.Instance.moveRight = true;
             }
@@ -46,7 +43,7 @@ namespace My_MemoPlatformer
                 VirtualInputManager.Instance.moveRight = false;
             }
 
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            if (Input.GetKey(VirtualInputManager.Instance.DicKeys[InputKeyType.KEY_MOVE_LEFT]))
             {
                 VirtualInputManager.Instance.moveLeft = true;
             }
@@ -55,7 +52,7 @@ namespace My_MemoPlatformer
                 VirtualInputManager.Instance.moveLeft = false;
             }
 
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(VirtualInputManager.Instance.DicKeys[InputKeyType.KEY_JUMP]))
             {
                 VirtualInputManager.Instance.jump = true;
             }
@@ -65,7 +62,7 @@ namespace My_MemoPlatformer
             }
 
             //    if (Input.GetKeyDown(KeyCode.C))
-            if (Input.GetKey(KeyCode.C))
+            if (Input.GetKey(VirtualInputManager.Instance.DicKeys[InputKeyType.KEY_ATTACK]))
             {
                 VirtualInputManager.Instance.attack = true;
             }
@@ -75,7 +72,7 @@ namespace My_MemoPlatformer
             }            
             
             //Temp Restart
-            if (Input.GetKey(KeyCode.R))
+            if (Input.GetKey(VirtualInputManager.Instance.DicKeys[InputKeyType.KEY_RESTART]))
             {
                 Scene scene = SceneManager.GetActiveScene();
                 SceneManager.LoadScene(scene.name);
