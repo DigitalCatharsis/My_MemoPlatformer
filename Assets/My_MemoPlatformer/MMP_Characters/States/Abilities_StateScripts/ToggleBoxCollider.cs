@@ -17,8 +17,8 @@ namespace My_MemoPlatformer
         {
             if (onStart)
             {
-                CharacterControl control = characterState.GetCharacterControl(animator);
-                ToggleBoxCol(control);
+                
+                ToggleBoxCol(characterState.characterControl);
             }
         }
 
@@ -31,8 +31,8 @@ namespace My_MemoPlatformer
         {
             if (onEnd)
             {
-                CharacterControl control = characterState.GetCharacterControl(animator);
-                ToggleBoxCol(control);
+                
+                ToggleBoxCol(characterState.characterControl);
             }
         }
 

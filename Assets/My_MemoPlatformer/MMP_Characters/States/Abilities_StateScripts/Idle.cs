@@ -14,43 +14,43 @@ namespace My_MemoPlatformer
             animator.SetBool(TransitionParameter.Attack.ToString(), false);
             animator.SetBool(TransitionParameter.Attack.ToString(), false);
 
-            CharacterControl control = characterState.GetCharacterControl(animator);
+            
 
-            control.animationProgress.disAllowEarlyTurn= false;
+            characterState.characterControl.animationProgress.disAllowEarlyTurn= false;
         }
 
 
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
+            
 
-            if (control.animationProgress.attackTriggered)
+            if (characterState.characterControl.animationProgress.attackTriggered)
             {
                 animator.SetBool(TransitionParameter.Attack.ToString(), true);
             }
 
-            if (control.jump)
+            if (characterState.characterControl.jump)
             {
-                if (!control.animationProgress.jumped)
+                if (!characterState.characterControl.animationProgress.jumped)
                 {
                     animator.SetBool(TransitionParameter.Jump.ToString(), true);
                 }
             }
             else
             {
-                control.animationProgress.jumped = false;
+                characterState.characterControl.animationProgress.jumped = false;
             }
 
-            if (control.moveLeft && control.moveRight)
+            if (characterState.characterControl.moveLeft && characterState.characterControl.moveRight)
             {
                 //nothing to fix bug with double press
             }
-            else if (control.moveRight)
+            else if (characterState.characterControl.moveRight)
             {
                 animator.SetBool(TransitionParameter.Move.ToString(), true);
             }
-            else if (control.moveLeft)
+            else if (characterState.characterControl.moveLeft)
             {
                 animator.SetBool(TransitionParameter.Move.ToString(), true);
             }

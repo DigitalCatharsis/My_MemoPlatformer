@@ -16,19 +16,19 @@ namespace My_MemoPlatformer
         }
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
+            
 
-            if (control.IsFacingForward())
+            if (characterState.characterControl.IsFacingForward())
             {
-                if (control.moveLeft)
+                if (characterState.characterControl.moveLeft)
                 {
                     animator.SetBool(TransitionParameter.Turn.ToString(), true);
                 }
             }
 
-            if (!control.IsFacingForward())
+            if (!characterState.characterControl.IsFacingForward())
             {
-                if (control.moveRight)
+                if (characterState.characterControl.moveRight)
                 {
                     animator.SetBool(TransitionParameter.Turn.ToString(), true);
                 }

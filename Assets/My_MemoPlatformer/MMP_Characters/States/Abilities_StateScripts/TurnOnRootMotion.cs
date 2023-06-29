@@ -10,8 +10,8 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
-            control.skinnedMeshAnimator.applyRootMotion= true;
+            
+            characterState.characterControl.skinnedMeshAnimator.applyRootMotion= true;
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -21,8 +21,8 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
-            control.skinnedMeshAnimator.applyRootMotion= false;
+            
+            characterState.characterControl.skinnedMeshAnimator.applyRootMotion= false;
         }
     }
 }

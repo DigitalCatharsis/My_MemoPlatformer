@@ -10,9 +10,7 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
-
-            control.animationProgress.disAllowEarlyTurn= true;
+            characterState.characterControl.animationProgress.disAllowEarlyTurn= true;
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

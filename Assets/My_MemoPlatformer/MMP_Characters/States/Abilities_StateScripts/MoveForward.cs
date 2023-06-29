@@ -24,38 +24,38 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
+            
 
-            if (allowEarlyTurn && !control.animationProgress.disAllowEarlyTurn)
+            if (allowEarlyTurn && !characterState.characterControl.animationProgress.disAllowEarlyTurn)
             {               
-                if (!control.animationProgress.lockDirectionNextState) 
+                if (!characterState.characterControl.animationProgress.lockDirectionNextState) 
                 {
-                    if (control.moveLeft)
+                    if (characterState.characterControl.moveLeft)
                     {
-                        control.FaceForward(false);
+                        characterState.characterControl.FaceForward(false);
                     }
-                    if (control.moveRight)
+                    if (characterState.characterControl.moveRight)
                     {
-                        control.FaceForward(true);
+                        characterState.characterControl.FaceForward(true);
                     }
                 }
                 else
                 {
-                    control.animationProgress.lockDirectionNextState = false;
+                    characterState.characterControl.animationProgress.lockDirectionNextState = false;
                 }
             }
 
-            control.animationProgress.disAllowEarlyTurn = false;
+            characterState.characterControl.animationProgress.disAllowEarlyTurn = false;
 
             if (startingMomentum > 0.001f)
             {
-                if (control.IsFacingForward())
+                if (characterState.characterControl.IsFacingForward())
                 {
-                    control.animationProgress.airMomentum = startingMomentum;
+                    characterState.characterControl.animationProgress.airMomentum = startingMomentum;
                 }
                 else
                 {
-                    control.animationProgress.airMomentum = -startingMomentum;
+                    characterState.characterControl.animationProgress.airMomentum = -startingMomentum;
                 }
             }
         }
@@ -63,35 +63,35 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
+            
 
-            control.animationProgress.lockDirectionNextState = lockDirectionNextState;
+            characterState.characterControl.animationProgress.lockDirectionNextState = lockDirectionNextState;
 
-            if (control.animationProgress.frameUpdated)    //fix for double updating. Met this when implement running kick
+            if (characterState.characterControl.animationProgress.frameUpdated)    //fix for double updating. Met this when implement running kick
             {
                 return;
             }
 
-            control.animationProgress.frameUpdated = true;
+            characterState.characterControl.animationProgress.frameUpdated = true;
 
-            if (control.jump)
+            if (characterState.characterControl.jump)
             {
                 animator.SetBool(TransitionParameter.Jump.ToString(), true);
             }
 
             if (useMomentum)
             {
-                UpdateMomentum(control, stateInfo);
+                UpdateMomentum(characterState.characterControl, stateInfo);
             }
             else
             {
                 if (constant)
                 {
-                    ConstantMove(control, animator, stateInfo);
+                    ConstantMove(characterState.characterControl, animator, stateInfo);
                 }
                 else
                 {
-                    ControlledMove(control, animator, stateInfo);
+                    ControlledMove(characterState.characterControl, animator, stateInfo);
                 }
             }
         }
@@ -242,10 +242,10 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
+            
             if (clearMomentumOnExit)
             {
-                control.animationProgress.airMomentum = 0f;
+                characterState.characterControl.animationProgress.airMomentum = 0f;
             }            
         }
     } 

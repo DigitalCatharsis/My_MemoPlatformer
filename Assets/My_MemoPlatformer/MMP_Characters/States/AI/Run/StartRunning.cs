@@ -11,27 +11,25 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
-
-            Vector3 dir = control.aiProgress.pathfindfingAgent.startSphere.transform.position - control.transform.position;
+            Vector3 dir = characterState.characterControl.aiProgress.pathfindfingAgent.startSphere.transform.position - characterState.characterControl.transform.position;
 
             if (dir.z > 0f)
             {
-                control.FaceForward(true);
-                control.moveLeft = false;
-                control.moveRight = true;
+                characterState.characterControl.FaceForward(true);
+                characterState.characterControl.moveLeft = false;
+                characterState.characterControl.moveRight = true;
             }
             else
             {
-                control.FaceForward(false);
-                control.moveLeft = true; 
-                control.moveRight = false;
+                characterState.characterControl.FaceForward(false);
+                characterState.characterControl.moveLeft = true; 
+                characterState.characterControl.moveRight = false;
             }
 
-            Vector3 dist = control.aiProgress.pathfindfingAgent.startSphere.transform.position - control.transform.position;
+            Vector3 dist = characterState.characterControl.aiProgress.pathfindfingAgent.startSphere.transform.position - characterState.characterControl.transform.position;
             if (Vector3.SqrMagnitude(dist) > 2f)
             {
-                control.turbo = true;
+                characterState.characterControl.turbo = true;
             }
         }
 
@@ -41,14 +39,13 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
-            Vector3 dist = control.aiProgress.pathfindfingAgent.startSphere.transform.position - control.transform.position;
+            Vector3 dist = characterState.characterControl.aiProgress.pathfindfingAgent.startSphere.transform.position - characterState.characterControl.transform.position;
 
             if (Vector3.SqrMagnitude(dist) < 2f) //чтобы не топтался в персонажа
             {
-                control.moveLeft = false;
-                control.moveRight = false;
-                control.turbo = false;
+                characterState.characterControl.moveLeft = false;
+                characterState.characterControl.moveRight = false;
+                characterState.characterControl.turbo = false;
             }
         }
     }

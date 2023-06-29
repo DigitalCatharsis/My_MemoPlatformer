@@ -91,7 +91,7 @@ namespace My_MemoPlatformer
 
             int count = System.Enum.GetValues(typeof(InputKeyType)).Length;
 
-            for (int i = 0; i < count; ++i)
+            for (int i = 0; i < count; ++i) 
             {
                 playerInput.SavedKeys.keyCodesList.Add(DicKeys[(InputKeyType)i]);
             }
@@ -117,10 +117,10 @@ namespace My_MemoPlatformer
 
         private void Update()
         {
-            if (!useCustomKeys)
-            {
-                return;
-            }
+            //if (!useCustomKeys)
+            //{
+            //    return;
+            //}
 
             if (useCustomKeys)
             {

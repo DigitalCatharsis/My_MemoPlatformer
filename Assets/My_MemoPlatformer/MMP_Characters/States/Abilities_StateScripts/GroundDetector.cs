@@ -19,11 +19,11 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
+            
 
             if (stateInfo.normalizedTime >= _checktime)
             {
-                if (IsGrounded(control))
+                if (IsGrounded(characterState.characterControl))
                 {
                     animator.SetBool(TransitionParameter.Grounded.ToString(), true);
                 }

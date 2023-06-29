@@ -25,8 +25,8 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
-            if (MakeTransition(control))
+            
+            if (MakeTransition(characterState.characterControl))
             {
                 animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), Index);
             }
@@ -36,8 +36,8 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
-            if (MakeTransition(control))
+            
+            if (MakeTransition(characterState.characterControl))
             {
                 animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), Index);
             }

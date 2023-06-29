@@ -11,6 +11,8 @@ namespace My_MemoPlatformer
         private CharacterControl _control;
         private GeneralBodyPart _damagePart;
 
+        [SerializeField] private bool _debug;
+
         public int damageTaken; //templory
 
         private void Awake()
@@ -143,8 +145,12 @@ namespace My_MemoPlatformer
             }
             CameraManager.Instance.ShakeCamera(0.2f);
 
-            Debug.Log(info.attacker.gameObject.name + " hits " + this.gameObject.name);
-            Debug.Log(this.gameObject.name + " hit " + _damagePart.ToString());
+            if (_debug)
+            {
+                Debug.Log(info.attacker.gameObject.name + " hits " + this.gameObject.name);
+                Debug.Log(this.gameObject.name + " hit " + _damagePart.ToString());
+            }
+
 
             _control.skinnedMeshAnimator.runtimeAnimatorController = DeathAnimationManager.Instance.GetAnimator(_damagePart, info);
             info.currentHits++;

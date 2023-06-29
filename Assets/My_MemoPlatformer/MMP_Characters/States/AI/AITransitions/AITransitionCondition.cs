@@ -26,10 +26,10 @@ namespace My_MemoPlatformer
         }
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
-            if (TransitionToNextAI(control))
+            
+            if (TransitionToNextAI(characterState.characterControl))
             {
-                control.aiController.TriggerAI(nextAI);
+                characterState.characterControl.aiController.TriggerAI(nextAI);
             }
         }
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

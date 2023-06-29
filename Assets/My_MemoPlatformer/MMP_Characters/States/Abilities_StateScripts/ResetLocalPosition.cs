@@ -14,9 +14,9 @@ namespace My_MemoPlatformer
         {
             if (onStart)
             {
-                CharacterControl control = characterState.GetCharacterControl(animator);
-                control.skinnedMeshAnimator.transform.localPosition = Vector3.zero;
-                control.skinnedMeshAnimator.transform.localRotation = Quaternion.identity;
+                
+                characterState.characterControl.skinnedMeshAnimator.transform.localPosition = Vector3.zero;
+                characterState.characterControl.skinnedMeshAnimator.transform.localRotation = Quaternion.identity;
             }
 
         }
@@ -30,10 +30,10 @@ namespace My_MemoPlatformer
         {
             if (onEnd) 
             {
-                CharacterControl control = characterState.GetCharacterControl(animator);
-                control.skinnedMeshAnimator.transform.localPosition = Vector3.zero;
-                control.skinnedMeshAnimator.transform.localRotation = Quaternion.identity;
-            }
+                
+                characterState.characterControl.skinnedMeshAnimator.transform.localPosition = Vector3.zero;
+                characterState.characterControl.skinnedMeshAnimator.transform.localRotation = Quaternion.identity;
+            }   
 
         }
 

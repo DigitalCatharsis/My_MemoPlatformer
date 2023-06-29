@@ -13,8 +13,8 @@ namespace My_MemoPlatformer
         {
             if (onStart)
             {
-                CharacterControl control = characterState.GetCharacterControl(animator);
-                ToggleGrav(control);
+                
+                ToggleGrav(characterState.characterControl);
             }
         }
 
@@ -27,9 +27,9 @@ namespace My_MemoPlatformer
         {
             if (onEnd)
             {
-                CharacterControl control = characterState.GetCharacterControl(animator);
-                ToggleGrav(control);
-            }
+                
+                ToggleGrav(characterState.characterControl);
+            }   
         }
 
         private void ToggleGrav(CharacterControl control)

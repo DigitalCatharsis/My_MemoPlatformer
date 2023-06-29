@@ -9,12 +9,12 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
-            GameObject anim = control.skinnedMeshAnimator.gameObject;
-            anim.transform.parent = control.ledgeChecker.grabbedLedge.transform;
-            anim.transform.localPosition = control.ledgeChecker.grabbedLedge.offset;
+            
+            GameObject anim = characterState.characterControl.skinnedMeshAnimator.gameObject;
+            anim.transform.parent = characterState.characterControl.ledgeChecker.grabbedLedge.transform;
+            anim.transform.localPosition = characterState.characterControl.ledgeChecker.grabbedLedge.offset;
 
-            control.Rigid_Body.velocity= Vector3.zero;
+            characterState.characterControl.Rigid_Body.velocity= Vector3.zero;
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

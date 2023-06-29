@@ -91,8 +91,17 @@ namespace My_MemoPlatformer
             navMeshObstacle = GetComponentInChildren<NavMeshObstacle>();
 
             SetColliderSpheres();
-
             RegisterCharacter();
+        }
+
+        public void CacheCharacterControl (Animator animator)  //Передает стейтам аниматора CharacterControl референс
+        {
+            CharacterState[] arr = animator.GetBehaviours<CharacterState>();
+
+            foreach (CharacterState c in arr)
+            {
+                c.characterControl = this;
+            }
         }
 
         private void OnCollisionStay(Collision collision)

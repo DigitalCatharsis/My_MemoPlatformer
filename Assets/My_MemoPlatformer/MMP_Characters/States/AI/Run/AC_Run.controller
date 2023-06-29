@@ -11,7 +11,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 8837779622261971693}
-    m_Position: {x: 294.37976, y: 148.6225, z: 0}
+    m_Position: {x: 350, y: 140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7896682713242047215}
     m_Position: {x: 350, y: 230, z: 0}
@@ -37,6 +37,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 3b07827ff7ba0324bb622445e1214f11, type: 2}
 --- !u!114 &-3091895062685405112
@@ -51,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 14a63663b75cafb4a8cd451a89e4547d, type: 2}
   - {fileID: 11400000, guid: 9301d73fe379bea43a9ad107b8ecc47a, type: 2}
@@ -93,7 +95,7 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer

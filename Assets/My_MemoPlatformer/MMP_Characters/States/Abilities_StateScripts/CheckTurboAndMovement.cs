@@ -15,9 +15,9 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
+            
 
-            if ((control.moveLeft || control.moveRight) & control.turbo)
+            if ((characterState.characterControl.moveLeft || characterState.characterControl.moveRight) & characterState.characterControl.turbo)
             {
                 animator.SetBool(TransitionParameter.Move.ToString(), true);
                 animator.SetBool(TransitionParameter.Turbo.ToString(), true);

@@ -14,18 +14,16 @@ namespace My_MemoPlatformer
             
         }
 
-
-
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
+            //
 
             if (stateInfo.normalizedTime >= triggerTiming)
             {
-                if (!control.animationProgress.ragdollTriggered)
+                if (!characterState.characterControl.animationProgress.ragdollTriggered)
                 {
                     //control.TurnOnRagdoll();
-                    control.animationProgress.ragdollTriggered = true;
+                    characterState.characterControl.animationProgress.ragdollTriggered = true;
                 }
 
             }
@@ -33,7 +31,7 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            //CharacterControl control = characterState.GetCharacterControl(animator);
+            //
             //control.animationProgress.ragdollTriggered = false;
         }
     }

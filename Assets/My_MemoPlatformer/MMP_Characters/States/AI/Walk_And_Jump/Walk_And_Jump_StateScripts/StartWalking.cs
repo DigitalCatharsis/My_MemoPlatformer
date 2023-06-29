@@ -10,19 +10,19 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
+            
 
-            Vector3 dir = control.aiProgress.pathfindfingAgent.startSphere.transform.position - control.transform.position;
+            Vector3 dir = characterState.characterControl.aiProgress.pathfindfingAgent.startSphere.transform.position - characterState.characterControl.transform.position;
 
             if (dir.z > 0f)
             {
-                control.moveLeft = false;
-                control.moveRight = true;
+                characterState.characterControl.moveLeft = false;
+                characterState.characterControl.moveRight = true;
             }
             else
             {
-                control.moveLeft = true;
-                control.moveRight = false;
+                characterState.characterControl.moveLeft = true;
+                characterState.characterControl.moveRight = false;
             }
         }
 
@@ -34,38 +34,38 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
-            Vector3 dist = control.aiProgress.pathfindfingAgent.startSphere.transform.position - control.transform.position; //distance between checkpoint and character
+            
+            Vector3 dist = characterState.characterControl.aiProgress.pathfindfingAgent.startSphere.transform.position - characterState.characterControl.transform.position; //distance between checkpoint and character
 
             //Debug.DrawLine(control.transform.position, control.aiProgress.pathfindfingAgent.startSphere.transform.position, UnityEngine.Color.magenta,0.1f);
-            if (control.aiProgress.pathfindfingAgent.startSphere.transform.position.y < control.aiProgress.pathfindfingAgent.endSphere.transform.position.y) //Если это подъем
+            if (characterState.characterControl.aiProgress.pathfindfingAgent.startSphere.transform.position.y < characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.y) //Если это подъем
             {
                 //Jumping
                 if (Vector3.SqrMagnitude(dist) < 0.01f) //how close are we to the checkpoint    //Здесь часто бывает баг (когда иди бегает вокруг Start Point) из-за разных смещений платформы или ИИ относительно друг друга. Увелич да < 0.1f для дебага
                 {
                     //Debug.DrawLine(control.aiProgress.pathfindfingAgent.startSphere.transform.position, control.transform.position, UnityEngine.Color.green, 2.5f);
-                    control.moveLeft = false;
-                    control.moveRight = false;
+                    characterState.characterControl.moveLeft = false;
+                    characterState.characterControl.moveRight = false;
                     //Debug.Log($"<color=red>{control.moveLeft = false} </color>");
                     animator.SetBool(AI_Walk_Transitions.Jump_Platform.ToString(), true);
                 }
             }
 
             //fall
-            if (control.aiProgress.pathfindfingAgent.startSphere.transform.position.y > control.aiProgress.pathfindfingAgent.endSphere.transform.position.y)
+            if (characterState.characterControl.aiProgress.pathfindfingAgent.startSphere.transform.position.y > characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.y)
             {
                 animator.SetBool(AI_Walk_Transitions.Fall_Platform.ToString(), true);
             }
 
             //straight
-            if (control.aiProgress.pathfindfingAgent.startSphere.transform.position.y == control.aiProgress.pathfindfingAgent.endSphere.transform.position.y)   //Цель перед нами
+            if (characterState.characterControl.aiProgress.pathfindfingAgent.startSphere.transform.position.y == characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.y)   //Цель перед нами
             {
                 if (Vector3.SqrMagnitude(dist) < 0.5f) //чтобы не топтался в персонажа
                 {
-                    control.moveLeft = false;
-                    control.moveRight = false;
+                    characterState.characterControl.moveLeft = false;
+                    characterState.characterControl.moveRight = false;
 
-                    Vector3 playerDist = control.transform.position - CharacterManager.Instance.GetPlayableCharacter().transform.position;
+                    Vector3 playerDist = characterState.characterControl.transform.position - CharacterManager.Instance.GetPlayableCharacter().transform.position;
                     if (playerDist.sqrMagnitude > 1f) //if player moved somewhere else
                     {
                         animator.gameObject.SetActive(false);

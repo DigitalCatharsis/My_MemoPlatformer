@@ -10,15 +10,15 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
+            
 
-            if (control.IsFacingForward())
+            if (characterState.characterControl.IsFacingForward())
             {
-                control.FaceForward(false);
+                characterState.characterControl.FaceForward(false);
             }
             else
             {
-                control.FaceForward(true);
+                characterState.characterControl.FaceForward(true);
             }
 
         }

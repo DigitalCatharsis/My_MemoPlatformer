@@ -19,34 +19,34 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
-            control.animationProgress.jumped = false;
+            
+            characterState.characterControl.animationProgress.jumped = false;
             if (jumpTiming == 0f)
             {
-                control.Rigid_Body.AddForce(Vector3.up * jumpForce);
-                control.animationProgress.jumped = true;
+                characterState.characterControl.Rigid_Body.AddForce(Vector3.up * jumpForce);
+                characterState.characterControl.animationProgress.jumped = true;
             }
 
-            control.animationProgress.cancelPull = canselPull;
+            characterState.characterControl.animationProgress.cancelPull = canselPull;
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
-            control.pullMultipliyer = pull.Evaluate(stateInfo.normalizedTime);   //“”“ √–≈¡¿Õ¿ﬂ ¬€—Œ“¿ œ–€∆ ¿ ¬«¿¬»—»ÃŒ—“» Œ“ Õ¿∆¿“»ﬂ!
+            
+            characterState.characterControl.pullMultipliyer = pull.Evaluate(stateInfo.normalizedTime);   //“”“ √–≈¡¿Õ¿ﬂ ¬€—Œ“¿ œ–€∆ ¿ ¬«¿¬»—»ÃŒ—“» Œ“ Õ¿∆¿“»ﬂ!
 
-            if (!control.animationProgress.jumped && stateInfo.normalizedTime >= jumpTiming)
+            if (!characterState.characterControl.animationProgress.jumped && stateInfo.normalizedTime >= jumpTiming)
             {
-                control.Rigid_Body.AddForce(Vector3.up * jumpForce);
-                control.animationProgress.jumped = true;
+                characterState.characterControl.Rigid_Body.AddForce(Vector3.up * jumpForce);
+                characterState.characterControl.animationProgress.jumped = true;
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
+            
             //control.pullMultipliyer = pull.Evaluate(stateInfo.normalizedTime);   //“”“ √–≈¡¿Õ¿ﬂ ‰ÎËÌÌ‡ œ–€∆ ¿ ¬«¿¬»—»ÃŒ—“» Œ“ Õ¿∆¿“»ﬂ!
-            control.pullMultipliyer = 0f;
+            characterState.characterControl.pullMultipliyer = 0f;
         }
     }
 

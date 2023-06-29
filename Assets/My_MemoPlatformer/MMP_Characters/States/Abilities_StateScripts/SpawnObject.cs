@@ -20,30 +20,30 @@ namespace My_MemoPlatformer
         {
             if (spawnTiming== 0f)
             {
-                CharacterControl control = characterState.GetCharacterControl(animator);
-                SpawnObj(control);
+                
+                SpawnObj(characterState.characterControl);
             }
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
+            
 
-            if (!control.animationProgress.poolObjectList.Contains(objectType))
+            if (!characterState.characterControl.animationProgress.poolObjectList.Contains(objectType))
             {
                 if (stateInfo.normalizedTime >= spawnTiming)
                 {                    
-                    SpawnObj(control);
+                    SpawnObj(characterState.characterControl);
                 }
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
-            if (control.animationProgress.poolObjectList.Contains(objectType))
+            
+            if (characterState.characterControl.animationProgress.poolObjectList.Contains(objectType))
             {
-                control.animationProgress.poolObjectList.Remove(objectType);
+                characterState.characterControl.animationProgress.poolObjectList.Remove(objectType);
             }
         }
 

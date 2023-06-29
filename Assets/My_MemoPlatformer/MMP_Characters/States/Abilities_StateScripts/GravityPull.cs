@@ -14,15 +14,14 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
-            control.gravityMultipliyer = gravity.Evaluate(stateInfo.normalizedTime);
+            
+            characterState.characterControl.gravityMultipliyer = gravity.Evaluate(stateInfo.normalizedTime);
 
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
-            control.gravityMultipliyer = 0f;
+            characterState.characterControl.gravityMultipliyer = 0f;
         }
     }
 

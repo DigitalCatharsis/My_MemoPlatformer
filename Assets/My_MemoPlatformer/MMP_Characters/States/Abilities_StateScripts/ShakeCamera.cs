@@ -14,21 +14,21 @@ namespace My_MemoPlatformer
         {
             if (_shakeTiming == 0f) 
             {
-                CharacterControl control = characterState.GetCharacterControl(animator);
+                
                 CameraManager.Instance.ShakeCamera(0.2f);
-                control.animationProgress.cameraShaken = true;
+                characterState.characterControl.animationProgress.cameraShaken = true;
             }
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
+            
 
-            if (!control.animationProgress.cameraShaken)
+            if (!characterState.characterControl.animationProgress.cameraShaken)
             {
                 if (stateInfo.normalizedTime >= _shakeTiming)
                 {
-                    control.animationProgress.cameraShaken = true;
+                    characterState.characterControl.animationProgress.cameraShaken = true;
                     CameraManager.Instance.ShakeCamera(0.2f);
                 }
             }
@@ -36,8 +36,8 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
-            control.animationProgress.cameraShaken = false;
+            
+            characterState.characterControl.animationProgress.cameraShaken = false;
         }
     }
 }

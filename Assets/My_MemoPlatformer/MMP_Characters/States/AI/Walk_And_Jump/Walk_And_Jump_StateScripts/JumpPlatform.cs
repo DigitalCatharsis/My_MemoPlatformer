@@ -8,52 +8,52 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
+            
 
-            control.jump = true;
-            control.moveUp = true;
+            characterState.characterControl.jump = true;
+            characterState.characterControl.moveUp = true;
 
-            if (control.aiProgress.pathfindfingAgent.startSphere.transform.position.z < control.aiProgress.pathfindfingAgent.endSphere.transform.position.z)
+            if (characterState.characterControl.aiProgress.pathfindfingAgent.startSphere.transform.position.z < characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.z)
             {
-                control.FaceForward(true);
+                characterState.characterControl.FaceForward(true);
             }
             else
             {
-                control.FaceForward(false);
+                characterState.characterControl.FaceForward(false);
             }
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
+            
 
             //Diffirence betwen character's top sphere (coliistion emulation) and End sphere of the pathfinding agent
-            float topDist = control.aiProgress.pathfindfingAgent.endSphere.transform.position.y - control.frontSpheres[1].transform.position.y;
-            float bottomDist = control.aiProgress.pathfindfingAgent.endSphere.transform.position.y - control.frontSpheres[0].transform.position.y;
+            float topDist = characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.y - characterState.characterControl.frontSpheres[1].transform.position.y;
+            float bottomDist = characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.y - characterState.characterControl.frontSpheres[0].transform.position.y;
 
             //Debug.DrawLine(control.aiProgress.pathfindfingAgent.endSphere.transform.position, control.frontSpheres[1].transform.position, Color.magenta, 2.5f);
             //Debug.DrawLine(control.aiProgress.pathfindfingAgent.endSphere.transform.position, control.frontSpheres[0].transform.position, Color.red, 2.5f);
 
             if (topDist < 1.5f && bottomDist > 0.5f)  //bottomDist > 0.5f means it is on the same platform
             {
-                if (control.IsFacingForward())
+                if (characterState.characterControl.IsFacingForward())
                 {
-                    control.moveRight = true;
-                    control.moveLeft = false;
+                    characterState.characterControl.moveRight = true;
+                    characterState.characterControl.moveLeft = false;
                 }
                 else
                 {
-                    control.moveRight = false;
-                    control.moveLeft = true;
-                }
+                    characterState.characterControl.moveRight = false;
+                    characterState.characterControl.moveLeft = true;
+                }   
             }
 
             if (bottomDist < 0.5f)
             {
-                control.moveRight = false;
-                control.moveLeft = false;
-                control.moveUp=false;
-                control.jump=false;
+                characterState.characterControl.moveRight = false;
+                characterState.characterControl.moveLeft = false;
+                characterState.characterControl.moveUp=false;
+                characterState.characterControl.jump=false;
 
                 animator.gameObject.SetActive(false);
                 animator.gameObject.SetActive(true);

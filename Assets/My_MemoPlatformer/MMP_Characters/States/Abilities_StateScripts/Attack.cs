@@ -38,7 +38,7 @@ namespace My_MemoPlatformer
             AttackInfo info = obj.GetComponent<AttackInfo>();
 
             obj.SetActive(true); //set it active when we first get it
-            info.ResetInfo(this, characterState.GetCharacterControl(animator));
+            info.ResetInfo(this, characterState.characterControl);
 
             if (!AttackManager.Instance.currentAttacks.Contains(info)) //Making a list of current attacks
             {
@@ -111,8 +111,8 @@ namespace My_MemoPlatformer
             {
                 if (stateInfo.normalizedTime < endAttackTime + ((endAttackTime - startAttackTime) / 2f))
                 {
-                    CharacterControl control = characterState.GetCharacterControl(animator);
-                    if (control.animationProgress.attackTriggered)
+                    //
+                    if (characterState.characterControl.animationProgress.attackTriggered)
                     {
                         //Debug.Log("uppercut triggered");
                         animator.SetBool(TransitionParameter.Attack.ToString(),true);

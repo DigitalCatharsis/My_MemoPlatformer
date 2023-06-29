@@ -20,14 +20,14 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
-            control.animationProgress.updatingBoxCollider = true;
+            
+            characterState.characterControl.animationProgress.updatingBoxCollider = true;
 
-            control.animationProgress.targetSize = targetSize;
-            control.animationProgress.sizeSpeed = sizeUpdateSpeed;
+            characterState.characterControl.animationProgress.targetSize = targetSize;
+            characterState.characterControl.animationProgress.sizeSpeed = sizeUpdateSpeed;
 
-            control.animationProgress.targetCenter = targetCenter;
-            control.animationProgress.centerSpeed = centerUpdateSpeed;
+            characterState.characterControl.animationProgress.targetCenter = targetCenter;
+            characterState.characterControl.animationProgress.centerSpeed = centerUpdateSpeed;
 
         }
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -36,11 +36,11 @@ namespace My_MemoPlatformer
         }
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CharacterControl control = characterState.GetCharacterControl(animator);
+            
 
             if (!keepUpdating) 
             {
-                control.animationProgress.updatingBoxCollider = false;
+                characterState.characterControl.animationProgress.updatingBoxCollider = false;
             }            
         }
     }

@@ -7,12 +7,18 @@ namespace My_MemoPlatformer
 
     public class CharacterState : StateMachineBehaviour
     {
-        private CharacterControl _characterControl;
+        public CharacterControl characterControl;
 
         public List<StateData> ListAbilityData = new List<StateData>();
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            if (characterControl == null)  //prevent bug in animator editor, when moving a state
+            {
+                CharacterControl control = animator.transform.root.gameObject.GetComponent<CharacterControl>();
+                control.CacheCharacterControl(animator);
+            }
+
             foreach (StateData d in ListAbilityData)
             {
                 d.OnEnter(this, animator, stateInfo);
@@ -38,16 +44,5 @@ namespace My_MemoPlatformer
                 d.OnExit(this, animator, stateInfo);
             }
         }
-
-        public CharacterControl GetCharacterControl(Animator animator) //Глобальный метод для поиска аниматора у родителя. Используется в дочерних стейтах
-        {
-            if (_characterControl == null)
-            {
-                _characterControl = animator.transform.root.GetComponent<CharacterControl>();  
-               // _characterControl = animator.GetComponentInParent<CharacterControl>();  
-            }
-            return _characterControl;
-        }
-
     }
 }

@@ -70,6 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: b722c59b64d452943ab79032f648d23c, type: 2}
   - {fileID: 11400000, guid: 23968493541976f419bea0d3f1a40f0f, type: 2}
@@ -297,6 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: f893ecf6189846c4aada6d244806222e, type: 2}
   - {fileID: 11400000, guid: 82cfea98851c9da45aa612fb376e76eb, type: 2}
@@ -345,6 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 47c8756c0128ebf429a9963971830ea7, type: 2}
   - {fileID: 11400000, guid: a16638c2e4b32a741aed8952b93b04a0, type: 2}
@@ -363,6 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 784ce62cd0a2cfa4dbe0c61d08d31820, type: 2}
   - {fileID: 11400000, guid: 169be5c661cc30e48bde64a873a847eb, type: 2}
@@ -425,6 +429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 784ce62cd0a2cfa4dbe0c61d08d31820, type: 2}
   - {fileID: 11400000, guid: 169be5c661cc30e48bde64a873a847eb, type: 2}
@@ -472,6 +477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: d9edb555885762942897b7b591a0a6e6, type: 2}
   - {fileID: 11400000, guid: c7300d6f81267054fbd5ac637a185f47, type: 2}
@@ -539,6 +545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: c72cc78f36c00694bb89963cc83032a6, type: 2}
   - {fileID: 11400000, guid: f1df18af6dffee84d9ad6dc6a2a9bd04, type: 2}
@@ -692,6 +699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 898508c81d1e53f4f99c64ea08b7a4b5, type: 2}
   - {fileID: 11400000, guid: 8758a44893253aa4eb9a9d5665fe5d49, type: 2}
@@ -764,6 +772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 31871942c935e1a42b6285ec04094f12, type: 2}
   - {fileID: 11400000, guid: 58b43d49be9474a4bbd20b15c7d25d5d, type: 2}
@@ -808,6 +817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 2f619052d74700f49885047e7f54b10f, type: 2}
 --- !u!114 &-1789057227162424652
@@ -822,6 +832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 5ee236b8f57eb32428bc843b1c783f97, type: 2}
   - {fileID: 11400000, guid: bfa1250036b17f54ea0c0f5715e4ecb6, type: 2}
@@ -957,7 +968,7 @@ AnimatorStateMachine:
     m_Position: {x: 860, y: -170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3404707766950308882}
-    m_Position: {x: 980, y: 10, z: 0}
+    m_Position: {x: 990, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7240796194183866837}
     m_Position: {x: 740, y: 520, z: 0}
@@ -1020,7 +1031,7 @@ AnimatorStateMachine:
     m_Position: {x: -410, y: 450, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6789849556662752473}
-    m_Position: {x: -380, y: 320, z: 0}
+    m_Position: {x: -330, y: 270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1218163125425579568}
     m_Position: {x: -460, y: 620, z: 0}
@@ -1362,6 +1373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 02b4eba2db493de47b246c4ab90d48e6, type: 2}
   - {fileID: 11400000, guid: a3e7ea3c629d79d47a0105936aea77de, type: 2}
@@ -1456,6 +1468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 47e26e7df83d0e5408c55a85213b3e4d, type: 2}
   - {fileID: 11400000, guid: c12ed0cc89ec7e848be4b097c2daaaad, type: 2}
@@ -1717,6 +1730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: b7211ce2791d0db4e84a3b7aedca5ee0, type: 2}
   - {fileID: 11400000, guid: 249ce07e039349449a3d0467e204ec80, type: 2}
@@ -1871,6 +1885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 4d8bf62de58adbc479714fe1a0490bd2, type: 2}
   - {fileID: 11400000, guid: 3d042acad669d7d4c8608c430c46b1a0, type: 2}
@@ -1950,6 +1965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 7b42ef621c4b2e24e95f91c2ba817e31, type: 2}
   - {fileID: 11400000, guid: c5449cb73cbe69e4482349bc188564f2, type: 2}
@@ -1966,6 +1982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: a209a643407c9ed4eac8f4c09e3ee53a, type: 2}
   - {fileID: 11400000, guid: f40c699a0c45452469f7d52edb14dcce, type: 2}
@@ -2034,6 +2051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 0f7804555d40fb14799035673f519544, type: 2}
 --- !u!114 &4372203642251353705
@@ -2048,6 +2066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 64169e7d45e53384096eedd33735b21c, type: 2}
   - {fileID: 11400000, guid: e85a5f6f9551dc441b1b754f4ea81e40, type: 2}
@@ -2065,6 +2084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: b722c59b64d452943ab79032f648d23c, type: 2}
   - {fileID: 11400000, guid: 48306d92b46918d4b8996a8bf0e53b47, type: 2}
@@ -2109,6 +2129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: c7dc1cd33fc22c949b0d4626a120edd7, type: 2}
 --- !u!1101 &4631796968021574144
@@ -2223,6 +2244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 62d37c6a286c8ae4398b81f84bcd1039, type: 2}
   - {fileID: 11400000, guid: e85a5f6f9551dc441b1b754f4ea81e40, type: 2}
@@ -2240,6 +2262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 77c432c617c7a4a488a866bc5403d198, type: 2}
 --- !u!1102 &5429014344840290810
@@ -2282,6 +2305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: fd137d186d5df80459dfc187f2506039, type: 2}
   - {fileID: 11400000, guid: 2c0d450fc90329d438982b379b37b2d9, type: 2}
@@ -2326,6 +2350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: e85a5f6f9551dc441b1b754f4ea81e40, type: 2}
   - {fileID: 11400000, guid: 1613772704fbb7b46891f67b0ceeda18, type: 2}
@@ -2418,6 +2443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData: []
 --- !u!1101 &6675679183634530774
 AnimatorStateTransition:
@@ -2747,5 +2773,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030998159f8c9a47a3ff30af5acd936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: aefe223b234933d45872e230f4ad227a, type: 2}
