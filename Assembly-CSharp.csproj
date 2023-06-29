@@ -83,9 +83,9 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\SendPathfindingAgent.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\CameraManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\AIController.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_InputDevices\PlayerInput.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\Idle.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\SpawnObject.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_InputDevices\KeyboardInput.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\AnimationProgress.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\ToggleGravity.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterHoverLight.cs" />
@@ -112,6 +112,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\FallPlatform.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_LookAtPoint\LookAtPoint.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\CharacterControl\CharacterControl.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_InputDevices\SavedKeys.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\Ledge.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Settings\FrameSettings.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\OffsetOnLedge.cs" />

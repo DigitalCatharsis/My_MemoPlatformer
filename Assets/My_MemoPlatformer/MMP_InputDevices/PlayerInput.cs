@@ -3,8 +3,10 @@ using UnityEngine.SceneManagement;
 
 namespace My_MemoPlatformer
 {
-    public class KeyboardInput : MonoBehaviour
+    public class PlayerInput : MonoBehaviour
     {
+        public SavedKeys SavedKeys;
+
        void Update()
         {
             if (Input.GetKey(VirtualInputManager.Instance.DicKeys[InputKeyType.KEY_TURBO]))

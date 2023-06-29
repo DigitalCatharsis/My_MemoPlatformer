@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Xml;
+using UnityEditor.Networking.PlayerConnection;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -19,6 +21,8 @@ namespace My_MemoPlatformer
 
     public class VirtualInputManager : Singleton<VirtualInputManager>
     {
+        public PlayerInput playerInput;
+
         public bool turbo;
         public bool moveRight;
         public bool moveLeft;
@@ -52,6 +56,45 @@ namespace My_MemoPlatformer
         private void Awake()
         {
             possibleKeys = System.Enum.GetValues(typeof(KeyCode)) as KeyCode[];
+
+            GameObject piObj = Instantiate(Resources.Load("PlayerInput", typeof (GameObject))) as GameObject;
+            playerInput = piObj.GetComponent<PlayerInput>();
+        }
+
+        public void LoadKeys()
+        {
+            if (playerInput.SavedKeys.keyCodesList.Count > 0)
+            {
+                foreach(KeyCode k in playerInput.SavedKeys.keyCodesList)
+                {
+                    if (k == KeyCode.None)
+                    {
+                        SetDefaultKeys();
+                        break;
+                    }
+                }
+            }
+            else 
+            {
+                SetDefaultKeys(); 
+            }
+
+            for (int i = 0; i < playerInput.SavedKeys.keyCodesList.Count; i++)
+            {
+                DicKeys[(InputKeyType)i] = playerInput.SavedKeys.keyCodesList[i];
+            }
+        }
+
+        public void SaveKeys()
+        {
+            playerInput.SavedKeys.keyCodesList.Clear();
+
+            int count = System.Enum.GetValues(typeof(InputKeyType)).Length;
+
+            for (int i = 0; i < count; ++i)
+            {
+                playerInput.SavedKeys.keyCodesList.Add(DicKeys[(InputKeyType)i]);
+            }
         }
 
         public void SetDefaultKeys()
@@ -68,6 +111,8 @@ namespace My_MemoPlatformer
             DicKeys.Add(InputKeyType.KEY_TURBO, KeyCode.Z);
 
             DicKeys.Add(InputKeyType.KEY_RESTART, KeyCode.R);
+
+            SaveKeys();
         }
 
         private void Update()
@@ -154,6 +199,8 @@ namespace My_MemoPlatformer
             {
                 DicKeys[inputKey] = key;
             }
+
+            SaveKeys();
         }
 
         bool KeyIsChanged(InputKeyType inputKey)
