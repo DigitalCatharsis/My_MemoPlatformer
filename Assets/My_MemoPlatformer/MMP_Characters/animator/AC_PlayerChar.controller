@@ -248,9 +248,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.20064133
-  m_TransitionOffset: 0
-  m_ExitTime: 0.77608234
+  m_TransitionDuration: 0.1692816
+  m_TransitionOffset: 0.013627974
+  m_ExitTime: 0.9591543
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -1170,8 +1170,8 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CrossPunch
-  m_Speed: 2.3
+  m_Name: MMA_Lick
+  m_Speed: 1.45
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7336349381192635971}
@@ -1185,7 +1185,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 241e76c5c514bed46aef23c56bf7b568, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: 8fa4a352d109b9848b711d349252a936, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
