@@ -15,8 +15,8 @@ namespace My_MemoPlatformer
         {
             if (characterControl == null)  //prevent bug in animator editor, when moving a state
             {
-                CharacterControl control = animator.transform.root.gameObject.GetComponent<CharacterControl>();
-                control.CacheCharacterControl(animator);
+                characterControl = animator.transform.root.gameObject.GetComponent<CharacterControl>();
+                characterControl.CacheCharacterControl(animator);
             }
 
             foreach (StateData d in ListAbilityData)

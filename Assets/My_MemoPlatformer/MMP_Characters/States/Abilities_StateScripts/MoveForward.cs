@@ -79,6 +79,15 @@ namespace My_MemoPlatformer
                 animator.SetBool(TransitionParameter.Jump.ToString(), true);
             }
 
+            if (characterState.characterControl.turbo)
+            {
+                animator.SetBool(TransitionParameter.Turbo.ToString(), true);
+            }
+            else
+            {
+                animator.SetBool(TransitionParameter.Turbo.ToString(), false);
+            }
+
             if (useMomentum)
             {
                 UpdateMomentum(characterState.characterControl, stateInfo);
@@ -142,6 +151,15 @@ namespace My_MemoPlatformer
             if (!CheckFront(control))
             {
                 control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
+            }
+
+            if (!control.moveRight && !control.moveLeft)
+            {
+                animator.SetBool(TransitionParameter.Move.ToString(), false);
+            }
+            else
+            {
+                animator.SetBool(TransitionParameter.Move.ToString(), true);
             }
         }
 

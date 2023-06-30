@@ -23,7 +23,7 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            
+            characterState.characterControl.animationProgress.lockDirectionNextState = false;
 
             if (characterState.characterControl.animationProgress.attackTriggered)
             {
