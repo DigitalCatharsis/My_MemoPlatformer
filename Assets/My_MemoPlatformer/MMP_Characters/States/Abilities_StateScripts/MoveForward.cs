@@ -15,6 +15,7 @@ namespace My_MemoPlatformer
         public AnimationCurve speedGraph;
         public float speed;
         public float blockDistance;
+        public bool ignoreCharacterBox;
 
         [Header("Momentum")]
         public bool useMomentum;
@@ -213,6 +214,20 @@ namespace My_MemoPlatformer
             }
         }
 
+        private bool IgnoringCharacterBox(Collider col)
+        {
+            if (!ignoreCharacterBox)
+            {
+                return false;
+            }
+
+            if (col.gameObject.GetComponent<CharacterControl>() != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
         bool CheckFront(CharacterControl control)  //Проверка на коллизии
         {
             foreach (GameObject o in control.frontSpheres)
@@ -223,7 +238,10 @@ namespace My_MemoPlatformer
                 {
                     if (!control.ragdollParts.Contains(hit.collider))  //Проверка, что задетый коллайдер не часть колайдеров radoll
                     {
-                        if (!IsBodyPart(hit.collider) && !Ledge.IsLedge(hit.collider.gameObject) && !Ledge.IsLedgeChecker(hit.collider.gameObject))  // Проверка, что мы ничего не задеваем, включая Ledge (платформы, за котоыре можно зацепиться)
+                        if (!IsBodyPart(hit.collider) 
+                            && !Ledge.IsLedge(hit.collider.gameObject) 
+                            && !Ledge.IsLedgeChecker(hit.collider.gameObject)  // Проверка, что мы ничего не задеваем, включая Ledge (платформы, за котоыре можно зацепиться)
+                            && !IgnoringCharacterBox(hit.collider))  //чтобы насквозь проходить
                         {
                             return true;
                         }
