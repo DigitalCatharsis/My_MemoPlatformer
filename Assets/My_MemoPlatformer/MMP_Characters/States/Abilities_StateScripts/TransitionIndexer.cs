@@ -36,14 +36,12 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            
-            if (MakeTransition(characterState.characterControl))
+            if (animator.GetInteger(TransitionParameter.TransitionIndex.ToString()) == 0)
             {
-                animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), Index);
-            }
-            else
-            {
-                animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), 0);
+                if (MakeTransition(characterState.characterControl))
+                {
+                    animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), Index);
+                }
             }
         }
 
