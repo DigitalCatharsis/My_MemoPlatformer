@@ -20,4 +20,4 @@ MonoBehaviour:
   mustFaceAttacker: 0
   lethalRange: 0
   maxHits: 1
-  debug: 1
+  debug: 0
