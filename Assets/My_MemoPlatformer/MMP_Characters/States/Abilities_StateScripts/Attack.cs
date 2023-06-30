@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -27,6 +28,11 @@ namespace My_MemoPlatformer
         public float lethalRange;
         public int maxHits;
         public bool debug;
+
+        [Header("Combo")]
+        public float comboStartTime;
+        public float comboEndTime;
+
 
         private List<AttackInfo> _finishedAttacks = new List<AttackInfo> ();
 
@@ -107,9 +113,9 @@ namespace My_MemoPlatformer
 
         public void CheckCombo (CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (stateInfo.normalizedTime >= startAttackTime + ((endAttackTime - startAttackTime) /3f))   //to define when we press. wich procent of the animation i want to set combos start time
+            if (stateInfo.normalizedTime >= comboStartTime)   //to define when we press. wich procent of the animation i want to set combos start time
             {
-                if (stateInfo.normalizedTime < endAttackTime + ((endAttackTime - startAttackTime) / 2f))
+                if (stateInfo.normalizedTime < comboEndTime)
                 {
                     //
                     if (characterState.characterControl.animationProgress.attackTriggered)
