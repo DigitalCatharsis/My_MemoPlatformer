@@ -1474,7 +1474,7 @@ Transform:
   - {fileID: 1260156244}
   - {fileID: 673519052}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2430949021683835266
 BoxCollider:
@@ -1630,7 +1630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7dc2d5d4cbdf1f4f890b95530896b58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumped: 0
+  currentRunningAbilities: []
   cameraShaken: 0
   poolObjectList: 
   attackTriggered: 0
@@ -1638,8 +1638,8 @@ MonoBehaviour:
   maxPressTime: 0.1
   disAllowEarlyTurn: 0
   lockDirectionNextState: 0
+  jumped: 0
   airMomentum: 0
-  frameUpdated: 0
   cancelPull: 0
   updatingBoxCollider: 0
   updatingSpheres: 0
@@ -2532,7 +2532,7 @@ Animator:
   m_GameObject: {fileID: 4660490428024139960}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: fd074a6f4c9d6cf4983c0592e5b4f76a, type: 3}
-  m_Controller: {fileID: 9100000, guid: 58869432d74a2994180019d6ab098333, type: 2}
+  m_Controller: {fileID: 9100000, guid: 98f675c7edf570241b8ceabe58cf5a2f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

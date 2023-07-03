@@ -14,6 +14,8 @@ public enum TransitionConditionType
     GRABBING_LEDGE,
     LEFT_OR_RIGHT,
     GROUNDED,
+    MOVE_FORWARD,
+
 }
 
 namespace My_MemoPlatformer
@@ -26,7 +28,7 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            
+
             if (MakeTransition(characterState.characterControl))
             {
                 animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), Index);
@@ -126,6 +128,24 @@ namespace My_MemoPlatformer
                             if (control.skinnedMeshAnimator.GetBool(TransitionParameter.Grounded.ToString()) == false)
                             {
                                 return false;
+                            }
+                        }
+                        break;
+                    case TransitionConditionType.MOVE_FORWARD:
+                        {
+                            if (control.IsFacingForward())
+                            {
+                                if (!control.moveRight)
+                                {
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                if (!control.moveLeft)
+                                {
+                                    return false;
+                                }
                             }
                         }
                         break;

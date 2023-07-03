@@ -43,8 +43,7 @@ namespace My_MemoPlatformer
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
-            
+        {            
             //control.pullMultipliyer = pull.Evaluate(stateInfo.normalizedTime);   //ÒÓÒ ÃĞÅÁÀÍÀß äëèííà ÏĞÛÆÊÀ ÂÇÀÂÈÑÈÌÎÑÒÈ ÎÒ ÍÀÆÀÒÈß!
             characterState.characterControl.pullMultipliyer = 0f;
         }

@@ -64,16 +64,19 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            
-
             characterState.characterControl.animationProgress.lockDirectionNextState = lockDirectionNextState;
 
-            if (characterState.characterControl.animationProgress.frameUpdated)    //fix for double updating. Met this when implement running kick
+            if (characterState.characterControl.animationProgress.IsRunning(typeof(MoveForward), this)) //prevent double update
             {
                 return;
             }
 
-            characterState.characterControl.animationProgress.frameUpdated = true;
+            //if (characterState.characterControl.animationProgress.frameUpdated)    //fix for double updating. Met this when implement running kick
+            //{
+            //    return;
+            //}
+
+            //characterState.characterControl.animationProgress.frameUpdated = true;
 
             if (characterState.characterControl.jump)
             {

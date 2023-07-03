@@ -22,6 +22,10 @@ namespace My_MemoPlatformer
             foreach (StateData d in ListAbilityData)
             {
                 d.OnEnter(this, animator, stateInfo);
+                if (!characterControl.animationProgress.currentRunningAbilities.Contains(d))
+                {
+                    characterControl.animationProgress.currentRunningAbilities.Add(d);
+                }
             }
         }
         public void UpdateAll(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -42,6 +46,11 @@ namespace My_MemoPlatformer
             foreach (StateData d in ListAbilityData)
             {
                 d.OnExit(this, animator, stateInfo);
+
+                if (characterControl.animationProgress.currentRunningAbilities.Contains(d))
+                {
+                    characterControl.animationProgress.currentRunningAbilities.Remove(d);
+                }
             }
         }
     }

@@ -14,9 +14,7 @@ namespace My_MemoPlatformer
             animator.SetBool(TransitionParameter.Attack.ToString(), false);
             animator.SetBool(TransitionParameter.Attack.ToString(), false);
 
-            
-
-            characterState.characterControl.animationProgress.disAllowEarlyTurn= false;
+            characterState.characterControl.animationProgress.disAllowEarlyTurn = false;
         }
 
 
@@ -39,7 +37,10 @@ namespace My_MemoPlatformer
             }
             else
             {
-                characterState.characterControl.animationProgress.jumped = false;
+                if (!characterState.characterControl.animationProgress.IsRunning(typeof(Jump), this))   //double update fix. Guess idle is overlapping jump or moveforward
+                {
+                    characterState.characterControl.animationProgress.jumped = false;
+                }
             }
 
             if (characterState.characterControl.moveLeft && characterState.characterControl.moveRight)

@@ -6,7 +6,8 @@ namespace My_MemoPlatformer
 
     public class AnimationProgress : MonoBehaviour
     {
-        public bool jumped;
+        public List<StateData> currentRunningAbilities = new List<StateData>();
+
         public bool cameraShaken;
         public List<PoolObjectType> poolObjectList = new List<PoolObjectType>();
         public bool attackTriggered;
@@ -18,8 +19,9 @@ namespace My_MemoPlatformer
         public bool lockDirectionNextState;
 
         [Header("AirControl")]
+        public bool jumped;
         public float airMomentum;
-        public bool frameUpdated;
+        //public bool frameUpdated;
         public bool cancelPull;
 
         [Header("UpdateBoxCollider")]
@@ -29,7 +31,7 @@ namespace My_MemoPlatformer
         public float sizeSpeed;
         public Vector3 targetCenter;
         public float centerSpeed;
-        
+
 
         private CharacterControl _control;
         private float _pressTime;
@@ -44,18 +46,18 @@ namespace My_MemoPlatformer
         {
             if (_control.attack)
             {
-                _pressTime += Time.deltaTime; 
+                _pressTime += Time.deltaTime;
             }
             else
             {
                 _pressTime = 0f;
             }
 
-            if (_pressTime == 0f )
+            if (_pressTime == 0f)
             {
                 attackTriggered = false;
             }
-            else if (_pressTime> maxPressTime)
+            else if (_pressTime > maxPressTime)
             {
                 attackTriggered = false;
             }
@@ -65,10 +67,29 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void LateUpdate()
-        {
-            frameUpdated = false;
-        }
+        //private void LateUpdate()
+        //{
+        //    frameUpdated = false;
+        //}
 
+        public bool IsRunning(System.Type type, StateData self) //ability is running now?
+        {
+            for (int i = 0; i < currentRunningAbilities.Count; i++)
+            {
+                if (type == currentRunningAbilities[i].GetType())
+                {
+                    if (currentRunningAbilities[i] == self)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        //Debug.Log(type.ToString() + " is already running");
+                        return true;
+                    }                    
+                }
+            }
+            return false;
+        }
     }
 }
