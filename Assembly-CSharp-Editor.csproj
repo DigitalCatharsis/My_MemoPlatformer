@@ -63,6 +63,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_PathfindingAgent\Editor\PathFindingAgentEditor.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_MaterialChaner\Editor\MaterialChangerEditor.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_LayerAdder\Editor\LayerAdderEditor.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_InsperctorHierarchyLabel\Editor\HierarchyLabel.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_LookAtPoint\Editor\LookAtPointEditor.cs" />
   </ItemGroup>
   <ItemGroup>
