@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaff6f6f2abc0794896d70a63da7cbcf, type: 3}
+  m_Name: SO_Player_JumpingPunch_MoveForward
+  m_EditorClassIdentifier: 
+  allowEarlyTurn: 0
+  lockDirection: 1
+  lockDirectionNextState: 0
+  constant: 1
+  speedGraph:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 4.9
+      outSlope: 4.9
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.2
+      value: 0.98
+      inSlope: 0.04805225
+      outSlope: 0.04805225
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.07920799
+    - serializedVersion: 3
+      time: 0.7
+      value: 0
+      inSlope: -1.96
+      outSlope: -1.96
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  speed: 3.2
+  blockDistance: 0.1
+  ignoreCharacterBox: 0
+  useMomentum: 0
+  startingMomentum: 0
+  maxMomentum: 0
+  clearMomentumOnExit: 0
