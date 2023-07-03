@@ -13,6 +13,7 @@ public enum TransitionConditionType
     JUMP,
     GRABBING_LEDGE,
     LEFT_OR_RIGHT,
+    GROUNDED,
 }
 
 namespace My_MemoPlatformer
@@ -115,6 +116,14 @@ namespace My_MemoPlatformer
                     case TransitionConditionType.LEFT_OR_RIGHT:
                         {
                             if (!control.moveLeft && !control.moveRight)
+                            {
+                                return false;
+                            }
+                        }
+                        break;
+                    case TransitionConditionType.GROUNDED:
+                        {
+                            if (control.skinnedMeshAnimator.GetBool(TransitionParameter.Grounded.ToString()) == false)
                             {
                                 return false;
                             }
