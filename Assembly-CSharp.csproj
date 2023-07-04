@@ -120,6 +120,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_LayerAdder\LayerChanger.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckAttack.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\Attack.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_UI\PlayGame_Button.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\TransitionIndexer.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_PathfindingAgent\PathFindingAgent.cs" />
