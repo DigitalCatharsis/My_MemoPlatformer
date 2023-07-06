@@ -60,7 +60,9 @@
   <ItemGroup>
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_LayerAdder\LayerAdder.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\Singleton.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Events\ChangeScene.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\MoveForward.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Events\GameEvent.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckMovement.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterSelect.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_PooledObjects\PoolObjectLoader.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_LookAtPoint\LookAtPoint.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\CharacterControl\CharacterControl.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_InputDevices\SavedKeys.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Events\GameEventListener.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\Ledge.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Settings\FrameSettings.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\OffsetOnLedge.cs" />
@@ -120,7 +123,6 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_LayerAdder\LayerChanger.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckAttack.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\Attack.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_UI\PlayGame_Button.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\TransitionIndexer.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_PathfindingAgent\PathFindingAgent.cs" />
