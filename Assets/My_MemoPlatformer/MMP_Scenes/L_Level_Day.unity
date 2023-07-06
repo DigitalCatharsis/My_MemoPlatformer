@@ -2942,6 +2942,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: YBot - Yellow
       objectReference: {fileID: 0}
+    - target: {fileID: 3372119544377188088, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3372119544377188092, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -4253,11 +4257,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3046520408400585082, guid: adff31e199afa174c9c544399732b118, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.12
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 3046520408400585082, guid: adff31e199afa174c9c544399732b118, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.33
+      value: 0.98
       objectReference: {fileID: 0}
     - target: {fileID: 3046520408400585082, guid: adff31e199afa174c9c544399732b118, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4293,7 +4297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3252920735630016699, guid: adff31e199afa174c9c544399732b118, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4930,7 +4934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1293291010563030445, guid: c594df3813521c847bf412f5e9076f12, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.021712996
+      value: 0.02171298
       objectReference: {fileID: 0}
     - target: {fileID: 1293291010563030445, guid: c594df3813521c847bf412f5e9076f12, type: 3}
       propertyPath: m_LocalRotation.y
@@ -4938,7 +4942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1293291010563030445, guid: c594df3813521c847bf412f5e9076f12, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.021712996
+      value: 0.02171298
       objectReference: {fileID: 0}
     - target: {fileID: 1293291010564168139, guid: c594df3813521c847bf412f5e9076f12, type: 3}
       propertyPath: m_Follow
