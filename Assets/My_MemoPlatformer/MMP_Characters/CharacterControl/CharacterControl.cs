@@ -51,8 +51,8 @@ namespace My_MemoPlatformer
         public NavMeshObstacle navMeshObstacle;
 
         [Header("Gravity")]
-        public float gravityMultipliyer;
-        public float pullMultipliyer;
+        //public float gravityMultipliyer;
+        //public float pullMultipliyer;
         public ContactPoint[] contactPoints;
 
         [Header("Setup")]
@@ -67,16 +67,16 @@ namespace My_MemoPlatformer
         private List<TriggerDetector> _triggerDetectors = new List<TriggerDetector>();
         private Dictionary<string, GameObject> _childObjects = new Dictionary<string, GameObject>();
 
-        private Rigidbody _rigid;
+        private Rigidbody _rigidBody;
         public Rigidbody Rigid_Body
         {
             get
             {
-                if (_rigid == null)
+                if (_rigidBody == null)
                 {
-                    _rigid = GetComponent<Rigidbody>();
+                    _rigidBody = GetComponent<Rigidbody>();
                 }
-                return _rigid;
+                return _rigidBody;
             }
         }
 
@@ -296,14 +296,9 @@ namespace My_MemoPlatformer
             //fall
             if (!animationProgress.cancelPull)
             {
-                if (Rigid_Body.velocity.y < 0f)
-                {
-                    Rigid_Body.velocity += (-Vector3.up * gravityMultipliyer);
-                }
-
                 if (Rigid_Body.velocity.y > 0f && !jump)
                 {
-                    Rigid_Body.velocity += (-Vector3.up * pullMultipliyer);
+                    Rigid_Body.velocity -= (Vector3.up * _rigidBody.velocity.y * 0.1f);    //Высота прыжка в зависимости от длительности нажатия
                 }
             }
 

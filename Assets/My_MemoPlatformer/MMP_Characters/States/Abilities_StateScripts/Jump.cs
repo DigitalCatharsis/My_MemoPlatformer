@@ -12,7 +12,7 @@ namespace My_MemoPlatformer
         [SerializeField] private float jumpTiming;
         [SerializeField] private float jumpForce;
         [Header("Extra Gravity")]
-        [SerializeField] private AnimationCurve pull;
+        //[SerializeField] private AnimationCurve pull;
         [SerializeField] private bool canselPull;
 
 
@@ -33,7 +33,7 @@ namespace My_MemoPlatformer
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             
-            characterState.characterControl.pullMultipliyer = pull.Evaluate(stateInfo.normalizedTime);   //ÒÓÒ ÃĞÅÁÀÍÀß ÂÛÑÎÒÀ ÏĞÛÆÊÀ ÂÇÀÂÈÑÈÌÎÑÒÈ ÎÒ ÍÀÆÀÒÈß!
+            //characterState.characterControl.pullMultipliyer = pull.Evaluate(stateInfo.normalizedTime);   //ÒÓÒ ÃĞÅÁÀÍÀß ÂÛÑÎÒÀ ÏĞÛÆÊÀ ÂÇÀÂÈÑÈÌÎÑÒÈ ÎÒ ÍÀÆÀÒÈß!
 
             if (!characterState.characterControl.animationProgress.jumped && stateInfo.normalizedTime >= jumpTiming)
             {
@@ -45,7 +45,7 @@ namespace My_MemoPlatformer
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {            
             //control.pullMultipliyer = pull.Evaluate(stateInfo.normalizedTime);   //ÒÓÒ ÃĞÅÁÀÍÀß äëèííà ÏĞÛÆÊÀ ÂÇÀÂÈÑÈÌÎÑÒÈ ÎÒ ÍÀÆÀÒÈß!
-            characterState.characterControl.pullMultipliyer = 0f;
+            //characterState.characterControl.pullMultipliyer = 0f;
         }
     }
 
