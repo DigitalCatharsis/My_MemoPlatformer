@@ -1,6 +1,3 @@
-using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -31,6 +28,12 @@ namespace My_MemoPlatformer
                         _objName = "YBot - Green Variant";
                     }
                     break;
+                case PlayableCharacterType.NONE:
+                    {
+                        _characterSelect.selectedCharacterType = PlayableCharacterType.YELLOW;
+                        _objName = "YBot - Yellow";
+                    }
+                    break;
             }
 
             GameObject obj = Instantiate(Resources.Load(_objName,typeof(GameObject))) as GameObject;
@@ -45,11 +48,7 @@ namespace My_MemoPlatformer
 
                 v.LookAt = target.transform;
                 v.Follow = target.transform;
-
             }
         }
     }
-
-
-
 }

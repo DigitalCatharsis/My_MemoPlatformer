@@ -7,7 +7,7 @@ namespace My_MemoPlatformer
 {
     public class GameEventListener : MonoBehaviour
     {
-        [SerializeField] private GameEvent gameEvent;
+        public GameEvent gameEvent;
         [Space(10)]
         [SerializeField] UnityEvent response;
 
@@ -27,5 +27,4 @@ namespace My_MemoPlatformer
             response.Invoke();
         }
     }
-
 }

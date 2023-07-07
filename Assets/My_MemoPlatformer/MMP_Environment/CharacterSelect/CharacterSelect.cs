@@ -17,4 +17,5 @@ namespace My_MemoPlatformer
     {
         public PlayableCharacterType selectedCharacterType;
     }
+   
 }

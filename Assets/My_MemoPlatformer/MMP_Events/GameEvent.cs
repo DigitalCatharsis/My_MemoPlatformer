@@ -8,6 +8,7 @@ namespace My_MemoPlatformer
     public class GameEvent : MonoBehaviour
     {
         public List<GameEventListener> ListListeners = new List<GameEventListener>();
+        public GameObject eventObj;
 
         private void Awake()
         {
@@ -18,6 +19,14 @@ namespace My_MemoPlatformer
         {
             foreach (GameEventListener listener in ListListeners)
             {
+                listener.OnRaiseEvent();
+            }
+        }
+        public void Raise(GameObject eventObj)
+        {
+            foreach (GameEventListener listener in ListListeners)
+            {
+                this.eventObj = eventObj;
                 listener.OnRaiseEvent();
             }
         }
