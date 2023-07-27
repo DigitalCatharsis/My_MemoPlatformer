@@ -233,7 +233,7 @@ namespace My_MemoPlatformer
 
         bool CheckFront(CharacterControl control)  //Проверка на коллизии
         {
-            foreach (GameObject o in control.frontSpheres)
+            foreach (GameObject o in control.collisionSpheres.frontSpheres)
             {
                 Debug.DrawRay(o.transform.position, control.transform.forward * 0.3f, Color.yellow);
                 RaycastHit hit;

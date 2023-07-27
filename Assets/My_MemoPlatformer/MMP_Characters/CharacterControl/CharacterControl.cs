@@ -44,8 +44,7 @@ namespace My_MemoPlatformer
         public AnimationProgress animationProgress;
         public AIProgress aiProgress;
         public DamageDetector damageDetector;
-        public List<GameObject> bottomSpheres = new List<GameObject>();
-        public List<GameObject> frontSpheres = new List<GameObject>();
+        public CollisionSpheres collisionSpheres;
         public AIController aiController;
         public BoxCollider boxCollider;
         public NavMeshObstacle navMeshObstacle;
@@ -90,46 +89,11 @@ namespace My_MemoPlatformer
             boxCollider = GetComponent<BoxCollider>();
             navMeshObstacle = GetComponentInChildren<NavMeshObstacle>();
 
-            SetColliderSpheres();
+            collisionSpheres = GetComponentInChildren<CollisionSpheres>();
+            collisionSpheres.owner = this;
+            collisionSpheres.SetColliderSpheres();
+
             RegisterCharacter();
-        }
-
-        public void CacheCharacterControl (Animator animator)  //Передает стейтам аниматора CharacterControl референс
-        {
-            CharacterState[] arr = animator.GetBehaviours<CharacterState>();
-
-            foreach (CharacterState c in arr)
-            {
-                c.characterControl = this;
-            }
-        }
-
-        private void OnCollisionStay(Collision collision)
-        {
-            contactPoints = collision.contacts;
-        }
-
-        private void RegisterCharacter()
-        {
-            if (!CharacterManager.Instance.characters.Contains(this))
-            {
-                CharacterManager.Instance.characters.Add(this);
-            }
-        }
-
-        public List<TriggerDetector> GetAllTriggers()
-        {
-            if (_triggerDetectors.Count == 0)
-            {
-                TriggerDetector[] arr = this.gameObject.GetComponentsInChildren<TriggerDetector>();
-
-                foreach (TriggerDetector d in arr)
-                {
-                    _triggerDetectors.Add(d);
-                }
-            }
-
-            return _triggerDetectors;
         }
 
         public void SetRagdollParts()
@@ -202,63 +166,42 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void SetColliderSpheres()
-        {            
-            for (int i = 0; i < 5; i++)
-            {
-                GameObject obj = Instantiate(Resources.Load("ColliderEdge", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
-                bottomSpheres.Add(obj);
-                obj.transform.parent = this.transform;
-            }
-
-            Reposition_BottomSpheres();
-
-            for (int i = 0; i < 10; i++)
-            {
-                GameObject obj = Instantiate(Resources.Load("ColliderEdge", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
-                frontSpheres.Add(obj);
-                obj.transform.parent = this.transform;
-            }
-
-            Reposition_FrontSpheres();
-        }
-
-        public void Reposition_FrontSpheres()
+        public void CacheCharacterControl (Animator animator)  //Передает стейтам аниматора CharacterControl референс
         {
-            float bottom = boxCollider.bounds.center.y - boxCollider.bounds.size.y /2; // в центре внизу. 
-            float top = boxCollider.bounds.center.y + boxCollider.bounds.size.y /2; // в центре вверху. ;
-            float front = boxCollider.bounds.center.z + boxCollider.bounds.size.z /2; // в центре спереди. ;
-            //float back = boxCollider.bounds.center.z - boxCollider.bounds.size.z; // в центре сзади. ;;
+            CharacterState[] arr = animator.GetBehaviours<CharacterState>();
 
-            frontSpheres[0].transform.localPosition = new Vector3(0f, bottom + 0.05f, front) - this.transform.position;
-            frontSpheres[1].transform.localPosition = new Vector3(0f, top, front) - this.transform.position;
-
-            float interval = (top - bottom + 0.05f) / 9;
-
-            for (int i = 2; i < frontSpheres.Count; i++)
+            foreach (CharacterState c in arr)
             {
-                frontSpheres[i].transform.localPosition = new Vector3(0f, bottom + (interval * (i - 1)), front)
-                     - this.transform.position;
+                c.characterControl = this;
             }
         }
 
-        public void Reposition_BottomSpheres()
+        private void OnCollisionStay(Collision collision)
         {
-            float bottom = boxCollider.bounds.center.y - boxCollider.bounds.size.y /2; // в центре внизу. 
-            //float top = boxCollider.bounds.center.y + boxCollider.bounds.size.y; // в центре вверху. ;
-            float front = boxCollider.bounds.center.z + boxCollider.bounds.size.z /2; // в центре спереди. ;
-            float back = boxCollider.bounds.center.z - boxCollider.bounds.size.z /2; // в центре сзади. ;;
+            contactPoints = collision.contacts;
+        }
 
-            bottomSpheres[0].transform.localPosition = new Vector3(0f, bottom, back) - this.transform.position;
-            bottomSpheres[1].transform.localPosition = new Vector3(0f, bottom, front) - this.transform.position;
-
-            float interval = (front - back) / 4;
-
-            for (int i = 2; i < bottomSpheres.Count; i++)
+        private void RegisterCharacter()
+        {
+            if (!CharacterManager.Instance.characters.Contains(this))
             {
-                bottomSpheres[i].transform.localPosition = new Vector3(0f, bottom, back + (interval * (i - 1)))
-                     - this.transform.position;
+                CharacterManager.Instance.characters.Add(this);
             }
+        }
+
+        public List<TriggerDetector> GetAllTriggers()
+        {
+            if (_triggerDetectors.Count == 0)
+            {
+                TriggerDetector[] arr = this.gameObject.GetComponentsInChildren<TriggerDetector>();
+
+                foreach (TriggerDetector d in arr)
+                {
+                    _triggerDetectors.Add(d);
+                }
+            }
+
+            return _triggerDetectors;
         }
 
         public void UpdateBoxColliderSize()
@@ -308,8 +251,8 @@ namespace My_MemoPlatformer
             UpdateBoxColliderCenter();
             if (animationProgress.updatingSpheres)
             {
-                Reposition_FrontSpheres();
-                Reposition_BottomSpheres();
+                collisionSpheres.Reposition_FrontSpheres();
+                collisionSpheres.Reposition_BottomSpheres();
             }
 
             //ragdoll

@@ -61,7 +61,7 @@ namespace My_MemoPlatformer
 
             if (control.Rigid_Body.velocity.y < 0f)
             {
-                foreach (GameObject o in control.bottomSpheres)
+                foreach (GameObject o in control.collisionSpheres.bottomSpheres)
                 {
                     Debug.DrawRay(o.transform.position, -Vector3.up * 0.7f, Color.yellow);
 

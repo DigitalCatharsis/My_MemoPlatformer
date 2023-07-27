@@ -28,8 +28,8 @@ namespace My_MemoPlatformer
             
 
             //Diffirence betwen character's top sphere (coliistion emulation) and End sphere of the pathfinding agent
-            float topDist = characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.y - characterState.characterControl.frontSpheres[1].transform.position.y;
-            float bottomDist = characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.y - characterState.characterControl.frontSpheres[0].transform.position.y;
+            float topDist = characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.y - characterState.characterControl.collisionSpheres.frontSpheres[1].transform.position.y;
+            float bottomDist = characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.y - characterState.characterControl.collisionSpheres.frontSpheres[0].transform.position.y;
 
             //Debug.DrawLine(control.aiProgress.pathfindfingAgent.endSphere.transform.position, control.frontSpheres[1].transform.position, Color.magenta, 2.5f);
             //Debug.DrawLine(control.aiProgress.pathfindfingAgent.endSphere.transform.position, control.frontSpheres[0].transform.position, Color.red, 2.5f);

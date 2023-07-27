@@ -43,8 +43,8 @@ namespace My_MemoPlatformer
 
             if (repositionSpheres)
             {
-                control.Reposition_FrontSpheres();
-                control.Reposition_BottomSpheres();
+                control.collisionSpheres.Reposition_FrontSpheres();
+                control.collisionSpheres.Reposition_BottomSpheres();
             }
         }
     }
