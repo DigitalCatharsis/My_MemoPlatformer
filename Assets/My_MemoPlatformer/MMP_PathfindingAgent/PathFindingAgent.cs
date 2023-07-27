@@ -10,8 +10,7 @@ namespace My_MemoPlatformer
         public bool targetPlayableCharacter;
         public GameObject target;
         private NavMeshAgent _navMeshAgent;
-
-        private List<Coroutine> moveRoutines = new List<Coroutine>();
+        private Coroutine moveRoutine;
 
         public GameObject startSphere;
         public GameObject endSphere;
@@ -40,17 +39,15 @@ namespace My_MemoPlatformer
 
             _navMeshAgent.SetDestination(target.transform.position);
 
-            if (moveRoutines.Count != 0)
+            moveRoutine = StartCoroutine(Move());
+        }
+
+        private void OnEnable()
+        {
+            if (moveRoutine != null)
             {
-                if (moveRoutines[0] != null) 
-                {
-                StopCoroutine(moveRoutines[0]);                
-                }
-
-                moveRoutines.RemoveAt(0);
+                StopCoroutine(moveRoutine);
             }
-
-            moveRoutines.Add(StartCoroutine(Move()));
         }
 
         IEnumerator Move()
@@ -58,9 +55,7 @@ namespace My_MemoPlatformer
             while (true)
             {
                 if (_navMeshAgent.isOnOffMeshLink)
-                {                    
-                    owner.navMeshObstacle.carving = true;
-
+                { 
                     startSphere.transform.position = _navMeshAgent.currentOffMeshLinkData.startPos;
                     endSphere.transform.position = _navMeshAgent.currentOffMeshLinkData.endPos;
 
@@ -68,27 +63,26 @@ namespace My_MemoPlatformer
 
                     _navMeshAgent.isStopped = true;
                     startWalk = true;
-                    yield break;
+                    break;
                 }
 
                 Vector3 dist = transform.position - _navMeshAgent.destination;  //между навигатором и его точкой назначения, а не control
                 if (Vector3.SqrMagnitude(dist) < 0.5f)  
-                {
-                    if (Vector3.SqrMagnitude(owner.transform.position - _navMeshAgent.destination) > 1f)  //control и точкой назначения
-                    {
-                        owner.navMeshObstacle.carving = true; //исправлял баг, где carving мешал движению навигатора. Возвращаю carving Обратно
-                    }
-                    
+                {                    
                     startSphere.transform.position = _navMeshAgent.destination;
                     endSphere.transform.position = _navMeshAgent.destination;
 
                     _navMeshAgent.isStopped = true;
                     startWalk = true;
-                    yield break;
+                    break;
                 }
 
                 yield return new WaitForEndOfFrame();
             }
+
+            yield return new WaitForSeconds(0.5f);
+
+            owner.navMeshObstacle.carving = true;
         }
 
     }

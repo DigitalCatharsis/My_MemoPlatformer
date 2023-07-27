@@ -25,9 +25,8 @@ namespace My_MemoPlatformer
                 characterState.characterControl.moveLeft = true; 
                 characterState.characterControl.moveRight = false;
             }
-
-            Vector3 dist = characterState.characterControl.aiProgress.pathfindfingAgent.startSphere.transform.position - characterState.characterControl.transform.position;
-            if (Vector3.SqrMagnitude(dist) > 2f)
+            
+            if (characterState.characterControl.aiProgress.GetDistanceToDestination() > 2f)
             {
                 characterState.characterControl.turbo = true;
             }
@@ -39,9 +38,7 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            Vector3 dist = characterState.characterControl.aiProgress.pathfindfingAgent.startSphere.transform.position - characterState.characterControl.transform.position;
-
-            if (Vector3.SqrMagnitude(dist) < 2f) //чтобы не топтался в персонажа
+            if (characterState.characterControl.aiProgress.GetDistanceToDestination() < 2f) //чтобы не топтался в персонажа
             {
                 characterState.characterControl.moveLeft = false;
                 characterState.characterControl.moveRight = false;

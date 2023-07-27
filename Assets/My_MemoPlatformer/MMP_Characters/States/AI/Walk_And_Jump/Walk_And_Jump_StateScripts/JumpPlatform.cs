@@ -7,9 +7,7 @@ namespace My_MemoPlatformer
     public class JumpPlatform : StateData
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
-            
-
+        {         
             characterState.characterControl.jump = true;
             characterState.characterControl.moveUp = true;
 
@@ -24,9 +22,7 @@ namespace My_MemoPlatformer
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
-            
-
+        {        
             //Diffirence betwen character's top sphere (coliistion emulation) and End sphere of the pathfinding agent
             float topDist = characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.y - characterState.characterControl.collisionSpheres.frontSpheres[1].transform.position.y;
             float bottomDist = characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.y - characterState.characterControl.collisionSpheres.frontSpheres[0].transform.position.y;
