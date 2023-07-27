@@ -18,6 +18,10 @@ namespace My_MemoPlatformer
         public bool disAllowEarlyTurn;
         public bool lockDirectionNextState;
 
+        [Header("Colliding Objects")]
+        public GameObject ground;
+        public GameObject blockingObj;
+
         [Header("AirControl")]
         public bool jumped;
         public float airMomentum;

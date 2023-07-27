@@ -53,6 +53,8 @@ namespace My_MemoPlatformer
                     {
                         if (Mathf.Abs(control.Rigid_Body.velocity.y) < 0.01f)
                         {
+                            //control.animationProgress.ground = c.otherCollider.transform.root.gameObject; //что колайдерит bottom сферы
+                            control.animationProgress.ground = c.otherCollider.transform.gameObject; //что колайдерит bottom сферы
                             return true;
                         }                        
                     }
@@ -73,11 +75,14 @@ namespace My_MemoPlatformer
                             && !Ledge.IsLedgeChecker(hit.collider.gameObject)
                             && !Ledge.IsCharacter(hit.collider.gameObject))
                         {
+                            //control.animationProgress.ground = hit.collider.transform.root.gameObject; //что колайдерит bottom сферы
+                            control.animationProgress.ground = hit.collider.transform.gameObject; //что колайдерит bottom сферы
                             return true;
                         }                        
                     }
                 }
             }
+            control.animationProgress.ground = null;
             return false;
         }
     }

@@ -252,18 +252,24 @@ namespace My_MemoPlatformer
                 RaycastHit hit;
                 if (Physics.Raycast(o.transform.position, control.transform.forward * dirBlock, out hit, blockDistance))
                 {
-                    if (!control.ragdollParts.Contains(hit.collider))  //ѕроверка, что задетый коллайдер не часть колайдеров radoll
+                    if (!control.ragdollParts.Contains(hit.collider))  //ѕроверка, что задетый коллайдер не часть колайдеров ragdoll
                     {
                         if (!IsBodyPart(hit.collider) 
                             && !Ledge.IsLedge(hit.collider.gameObject) 
                             && !Ledge.IsLedgeChecker(hit.collider.gameObject)  // ѕроверка, что мы ничего не задеваем, включа€ Ledge (платформы, за котоыре можно зацепитьс€)
                             && !IgnoringCharacterBox(hit.collider))  //чтобы насквозь проходить
                         {
+                            //тогда впереди преп€тсвие
+                            //control.animationProgress.blockingObj = hit.collider.transform.root.gameObject;
+                            control.animationProgress.blockingObj = hit.collider.transform.gameObject;
                             return true;
                         }
                     }
                 }
             }
+
+            //ничего не блочит
+            control.animationProgress.blockingObj = null;
             return false;
         }
 

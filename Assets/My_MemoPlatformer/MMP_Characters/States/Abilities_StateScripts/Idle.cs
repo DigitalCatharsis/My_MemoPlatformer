@@ -15,6 +15,8 @@ namespace My_MemoPlatformer
             animator.SetBool(TransitionParameter.Attack.ToString(), false);
 
             characterState.characterControl.animationProgress.disAllowEarlyTurn = false;
+
+            characterState.characterControl.animationProgress.blockingObj = null; //когда мы стоит, нас ничего не задевает, логично. Хотя, надо подумать на счет AI. Позже...
         }
 
 
