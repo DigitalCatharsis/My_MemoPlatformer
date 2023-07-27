@@ -253,6 +253,7 @@ namespace My_MemoPlatformer
             {
                 collisionSpheres.Reposition_FrontSpheres();
                 collisionSpheres.Reposition_BottomSpheres();
+                collisionSpheres.Reposition_BackSpheres();
             }
 
             //ragdoll

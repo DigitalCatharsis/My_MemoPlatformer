@@ -45,6 +45,7 @@ namespace My_MemoPlatformer
             {
                 control.collisionSpheres.Reposition_FrontSpheres();
                 control.collisionSpheres.Reposition_BottomSpheres();
+                control.collisionSpheres.Reposition_BackSpheres();
             }
         }
     }

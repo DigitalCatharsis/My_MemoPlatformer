@@ -23,6 +23,9 @@ namespace My_MemoPlatformer
         public float maxMomentum;
         public bool clearMomentumOnExit;
 
+        private List<GameObject> spheresList;
+        private float dirBlock;
+
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             
@@ -143,7 +146,7 @@ namespace My_MemoPlatformer
                 control.FaceForward(false);
             }
 
-            if (!CheckFront(control))
+            if (!IsBlocked(control, speed))
             {
                 control.MoveForward(speed, Mathf.Abs(control.animationProgress.airMomentum));
             }
@@ -152,7 +155,7 @@ namespace My_MemoPlatformer
 
         private void ConstantMove(CharacterControl control, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (!CheckFront(control))
+            if (!IsBlocked(control, speed))
             {
                 control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
             }
@@ -183,9 +186,8 @@ namespace My_MemoPlatformer
 
             if (control.moveRight)
             {
-                if (!CheckFront(control))
-                {
-                    
+                if (!IsBlocked(control, speed))
+                {                    
                     control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                 }
             }
@@ -193,7 +195,7 @@ namespace My_MemoPlatformer
             if (control.moveLeft)
             {
                 {
-                    if (!CheckFront(control))
+                    if (!IsBlocked(control, speed))
                     {
                         control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                     }
@@ -231,13 +233,24 @@ namespace My_MemoPlatformer
             return false;
         }
 
-        bool CheckFront(CharacterControl control)  //Проверка на коллизии
+        bool IsBlocked(CharacterControl control, float speed)  //Проверка на коллизии
         {
-            foreach (GameObject o in control.collisionSpheres.frontSpheres)
+            if (speed > 0)
             {
-                Debug.DrawRay(o.transform.position, control.transform.forward * 0.3f, Color.yellow);
+                spheresList = control.collisionSpheres.frontSpheres;
+                dirBlock = 0.3f;
+            }
+            else
+            {
+                spheresList = control.collisionSpheres.backSpheres;
+                dirBlock = -0.3f;
+            }
+
+            foreach (GameObject o in spheresList)
+            {
+                Debug.DrawRay(o.transform.position, control.transform.forward * dirBlock, Color.yellow);
                 RaycastHit hit;
-                if (Physics.Raycast(o.transform.position, control.transform.forward, out hit, blockDistance))
+                if (Physics.Raycast(o.transform.position, control.transform.forward * dirBlock, out hit, blockDistance))
                 {
                     if (!control.ragdollParts.Contains(hit.collider))  //Проверка, что задетый коллайдер не часть колайдеров radoll
                     {
@@ -251,9 +264,7 @@ namespace My_MemoPlatformer
                     }
                 }
             }
-
             return false;
-
         }
 
         private bool IsBodyPart(Collider col)
