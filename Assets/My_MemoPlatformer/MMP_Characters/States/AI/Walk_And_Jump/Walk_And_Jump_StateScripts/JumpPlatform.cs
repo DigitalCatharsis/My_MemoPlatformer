@@ -51,8 +51,9 @@ namespace My_MemoPlatformer
                 characterState.characterControl.moveUp=false;
                 characterState.characterControl.jump=false;
 
-                animator.gameObject.SetActive(false);
-                animator.gameObject.SetActive(true);
+                characterState.characterControl.aiController.InitializeAI();
+                //animator.gameObject.SetActive(false);
+                //animator.gameObject.SetActive(true);
             }
         }
 

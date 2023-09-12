@@ -45,6 +45,7 @@ namespace My_MemoPlatformer
                 }
             }
 
+            //Moving
             if (characterState.characterControl.moveLeft && characterState.characterControl.moveRight)
             {
                 //nothing to fix bug with double press

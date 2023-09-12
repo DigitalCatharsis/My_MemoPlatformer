@@ -35,8 +35,9 @@ namespace My_MemoPlatformer
                     characterState.characterControl.moveRight = false;
                     characterState.characterControl.moveLeft = false;
 
-                    animator.gameObject.SetActive(false);    //repeat seatch process
-                    animator.gameObject.SetActive(true);
+                    characterState.characterControl.aiController.InitializeAI(); //Repeat Seaching process
+                    //animator.gameObject.SetActive(false);    //repeat seatch process
+                    //animator.gameObject.SetActive(true);
                 }
             }
             else
@@ -51,8 +52,7 @@ namespace My_MemoPlatformer
                     characterState.characterControl.moveRight = false;
                     characterState.characterControl.moveLeft = false;
 
-                    animator.gameObject.SetActive(false);    //repeat seatch process
-                    animator.gameObject.SetActive(true);
+                    characterState.characterControl.aiController.InitializeAI();
                 }
             }
         }

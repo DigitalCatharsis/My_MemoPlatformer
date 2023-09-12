@@ -9,7 +9,7 @@ using System.Diagnostics;
 namespace My_MemoPlatformer
 {
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AI/AiTransitionCondition")]
-    public class AiTransitionCondition : StateData
+    public class AiTransitionCondition : StateData    //This code desides the character walk or run
     {
         public enum AiTransitionType
         {

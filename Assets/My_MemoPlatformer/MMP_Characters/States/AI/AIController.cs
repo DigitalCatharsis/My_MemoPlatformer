@@ -13,24 +13,42 @@ namespace My_MemoPlatformer
     {
         public List<AISubset> aIlist = new List<AISubset>();
         public AI_TYPE initialAl;
+        private Coroutine _aIRoutine;
 
-        public void Awake()
+        public void Start()  //Not Awake (cause of we need it work after onEnable)
         {
-            AISubset[] arr = this.gameObject.GetComponentsInChildren<AISubset>();
-
-            foreach (AISubset s in arr)
-            {
-                if (!aIlist.Contains(s))
-                {
-                    aIlist.Add(s);
-                    s.gameObject.SetActive(false);
-                }
-            }
+            InitializeAI();
         }
 
-        private IEnumerator Start()
+        public void InitializeAI()
         {
-             yield return new WaitForEndOfFrame();
+            if (aIlist.Count == 0)
+            {
+                AISubset[] arr = this.gameObject.GetComponentsInChildren<AISubset>();
+
+                foreach (AISubset s in arr)
+                {
+                    if (!aIlist.Contains(s))
+                    {
+                        aIlist.Add(s);
+                        s.gameObject.SetActive(false);
+                    }
+                }
+            }
+
+            _aIRoutine = StartCoroutine(_InitAI());
+        }
+
+        private void OnEnable()
+        {
+            if (_aIRoutine != null)
+            {
+                StopCoroutine(_aIRoutine);
+            }
+        }
+        private IEnumerator _InitAI()
+        {
+            yield return new WaitForEndOfFrame();
 
             TriggerAI(initialAl);
         }
@@ -40,7 +58,7 @@ namespace My_MemoPlatformer
             AISubset next = null;
 
 
-            foreach(AISubset s in aIlist)
+            foreach (AISubset s in aIlist)
             {
                 s.gameObject.SetActive(false);
 

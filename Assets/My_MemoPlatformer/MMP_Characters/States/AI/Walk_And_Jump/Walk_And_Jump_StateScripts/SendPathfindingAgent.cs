@@ -18,8 +18,6 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-
-
             if (characterState.characterControl.aiProgress.pathfindfingAgent == null)
             {
                 GameObject pfAgent = Instantiate(Resources.Load("PathfindingAgent", typeof(GameObject)) as GameObject);

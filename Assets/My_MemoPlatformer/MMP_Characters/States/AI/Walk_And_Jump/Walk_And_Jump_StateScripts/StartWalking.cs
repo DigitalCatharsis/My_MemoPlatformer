@@ -8,21 +8,26 @@ namespace My_MemoPlatformer
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AI/StartWalking")]
     public class StartWalking : StateData
     {
+        public Vector3 targetDir = new Vector3();
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            
+            WalkStraightTowardsTarget(characterState.characterControl);
+        }
 
-            Vector3 dir = characterState.characterControl.aiProgress.pathfindfingAgent.startSphere.transform.position - characterState.characterControl.transform.position;
+        private void WalkStraightTowardsTarget(CharacterControl control)
+        {
+            targetDir = control.aiProgress.pathfindfingAgent.startSphere.transform.position
+                - control.transform.position;
 
-            if (dir.z > 0f)
+            if (targetDir.z > 0f)
             {
-                characterState.characterControl.moveLeft = false;
-                characterState.characterControl.moveRight = true;
+                control.moveLeft = false;
+                control.moveRight = true;
             }
             else
             {
-                characterState.characterControl.moveLeft = true;
-                characterState.characterControl.moveRight = false;
+                control.moveLeft = true;
+                control.moveRight = false;
             }
         }
 
@@ -53,22 +58,7 @@ namespace My_MemoPlatformer
                 animator.SetBool(AI_Walk_Transitions.Fall_Platform.ToString(), true);
             }
 
-            //straight
-            if (characterState.characterControl.aiProgress.pathfindfingAgent.startSphere.transform.position.y == characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.y)   //÷ель перед нами
-            {
-                if (characterState.characterControl.aiProgress.GetDistanceToDestination() < 0.5f) //чтобы не топталс€ в персонажа
-                {
-                    characterState.characterControl.moveLeft = false;
-                    characterState.characterControl.moveRight = false;
 
-                    Vector3 playerDist = characterState.characterControl.transform.position - CharacterManager.Instance.GetPlayableCharacter().transform.position;
-                    if (playerDist.sqrMagnitude > 1f) //if player moved somewhere else
-                    {
-                        animator.gameObject.SetActive(false);
-                        animator.gameObject.SetActive(true); //»щи по новой
-                    }
-                }
-            }
         }
     }
 }

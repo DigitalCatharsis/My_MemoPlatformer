@@ -1,5 +1,4 @@
- using System.Collections;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,7 +9,7 @@ namespace My_MemoPlatformer
         public bool targetPlayableCharacter;
         public GameObject target;
         private NavMeshAgent _navMeshAgent;
-        private Coroutine moveRoutine;
+        private Coroutine _moveRoutine;
 
         public GameObject startSphere;
         public GameObject endSphere;
@@ -39,14 +38,14 @@ namespace My_MemoPlatformer
 
             _navMeshAgent.SetDestination(target.transform.position);
 
-            moveRoutine = StartCoroutine(Move());
+            _moveRoutine = StartCoroutine(Move());
         }
 
         private void OnEnable()
         {
-            if (moveRoutine != null)
+            if (_moveRoutine != null)
             {
-                StopCoroutine(moveRoutine);
+                StopCoroutine(_moveRoutine);
             }
         }
 
