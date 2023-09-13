@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-
     public class AnimationProgress : MonoBehaviour
     {
         public List<StateData> currentRunningAbilities = new List<StateData>();
@@ -17,6 +16,7 @@ namespace My_MemoPlatformer
         [Header("GroundMovement")]
         public bool disAllowEarlyTurn;
         public bool lockDirectionNextState;
+        public bool isLanding;
 
         [Header("Colliding Objects")]
         public GameObject ground;

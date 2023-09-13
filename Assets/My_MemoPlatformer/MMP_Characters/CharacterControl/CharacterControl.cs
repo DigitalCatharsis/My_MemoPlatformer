@@ -85,13 +85,21 @@ namespace My_MemoPlatformer
             animationProgress = GetComponent<AnimationProgress>();
             aiProgress = GetComponentInChildren<AIProgress>();
             damageDetector = GetComponentInChildren<DamageDetector>();
-            aiController = GetComponentInChildren<AIController>();
             boxCollider = GetComponent<BoxCollider>();
             navMeshObstacle = GetComponentInChildren<NavMeshObstacle>();
 
             collisionSpheres = GetComponentInChildren<CollisionSpheres>();
             collisionSpheres.owner = this;
             collisionSpheres.SetColliderSpheres();
+
+            aiController = GetComponentInChildren<AIController>();
+            if (aiController == null)
+            {
+                if (navMeshObstacle != null)
+                {
+                    navMeshObstacle.carving = true;
+                }
+            }
 
             RegisterCharacter();
         }
@@ -166,7 +174,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        public void CacheCharacterControl (Animator animator)  //Передает стейтам аниматора CharacterControl референс
+        public void CacheCharacterControl(Animator animator)  //Передает стейтам аниматора CharacterControl референс
         {
             CharacterState[] arr = animator.GetBehaviours<CharacterState>();
 

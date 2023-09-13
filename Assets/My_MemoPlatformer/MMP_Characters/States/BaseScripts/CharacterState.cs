@@ -8,7 +8,7 @@ namespace My_MemoPlatformer
     public class CharacterState : StateMachineBehaviour
     {
         public CharacterControl characterControl;
-
+        [Space (10)]
         public List<StateData> ListAbilityData = new List<StateData>();
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

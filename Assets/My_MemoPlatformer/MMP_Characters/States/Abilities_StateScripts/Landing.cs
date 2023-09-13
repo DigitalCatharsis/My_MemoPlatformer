@@ -10,6 +10,7 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            characterState.characterControl.animationProgress.isLanding = true;
             animator.SetBool(TransitionParameter.Jump.ToString(), false);
             animator.SetBool(TransitionParameter.Move.ToString(), false);
         }
@@ -20,6 +21,7 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            characterState.characterControl.animationProgress.isLanding = false;
         }
 
 

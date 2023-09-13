@@ -50,7 +50,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   speed: 3.2
-  blockDistance: 0.1
+  blockDistance: 0.2
   ignoreCharacterBox: 0
   useMomentum: 0
   startingMomentum: 0

@@ -6,31 +6,39 @@ namespace My_MemoPlatformer
 {
     public enum AI_TYPE
     {
+        NONE,
         WALK_AND_JUMP,
-        RUN,
     }
     public class AIController : MonoBehaviour
     {
-        public List<AISubset> aIlist = new List<AISubset>();
         public AI_TYPE initialAl;
-        private Coroutine _aIRoutine;
 
-        public void Start()  //Not Awake (cause of we need it work after onEnable)
+        private List<AISubset> _aIlist = new List<AISubset>();
+        private Coroutine _aIRoutine;
+        private Vector3 _targetDir = new Vector3();
+        private CharacterControl _control;
+
+        private void Awake()
+        {
+            _control = this.gameObject.GetComponentInParent<CharacterControl>();
+        }
+
+        private void Start()  //Not Awake (cause of we need it work after onEnable)
         {
             InitializeAI();
         }
 
         public void InitializeAI()
         {
-            if (aIlist.Count == 0)
+            if (_aIlist.Count == 0)
             {
                 AISubset[] arr = this.gameObject.GetComponentsInChildren<AISubset>();
 
                 foreach (AISubset s in arr)
                 {
-                    if (!aIlist.Contains(s))
+                    if (!_aIlist.Contains(s))
                     {
-                        aIlist.Add(s);
+                        _aIlist.Add(s);
                         s.gameObject.SetActive(false);
                     }
                 }
@@ -58,7 +66,7 @@ namespace My_MemoPlatformer
             AISubset next = null;
 
 
-            foreach (AISubset s in aIlist)
+            foreach (AISubset s in _aIlist)
             {
                 s.gameObject.SetActive(false);
 
@@ -71,6 +79,23 @@ namespace My_MemoPlatformer
             if (next != null)
             {
                 next.gameObject.SetActive(true);
+            }
+        }
+
+        public void WalkStraightTowardsStartSphere()
+        {
+            _targetDir = _control.aiProgress.pathfindfingAgent.startSphere.transform.position
+                - _control.transform.position;
+
+            if (_targetDir.z > 0f)
+            {
+                _control.moveLeft = false;
+                _control.moveRight = true;
+            }
+            else
+            {
+                _control.moveLeft = true;
+                _control.moveRight = false;
             }
         }
 

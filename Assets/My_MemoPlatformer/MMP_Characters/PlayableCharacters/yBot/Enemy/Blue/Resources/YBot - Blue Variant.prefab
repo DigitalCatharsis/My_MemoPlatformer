@@ -59,7 +59,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ef1307ee6ae684585648aefd3d6534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aIlist: []
   initialAl: 1
 --- !u!1 &8257733769972336731
 GameObject:
@@ -126,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a849372afae4254a8a51b0063d3dcbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiType: 0
+  aiType: 1
 --- !u!1001 &7184928491295747288
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -213,7 +212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3372119544377188092, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3372119544377188092, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_LocalPosition.x
@@ -460,7 +459,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 0.75, y: 0.25, z: 0.005}
   m_MoveThreshold: 0.1
-  m_Carve: 1
+  m_Carve: 0
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5

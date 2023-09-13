@@ -51,7 +51,7 @@ namespace My_MemoPlatformer
                 characterState.characterControl.moveUp=false;
                 characterState.characterControl.jump=false;
 
-                characterState.characterControl.aiController.InitializeAI();
+                characterState.characterControl.aiController.InitializeAI(); //after the climp we reaching new platform without landing mpotion. i need it for now
                 //animator.gameObject.SetActive(false);
                 //animator.gameObject.SetActive(true);
             }

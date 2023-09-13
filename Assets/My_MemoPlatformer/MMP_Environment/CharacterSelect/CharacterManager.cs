@@ -31,6 +31,18 @@ namespace My_MemoPlatformer
             }
             return null;
         }
+           
+        public CharacterControl GetCharacter(GameObject obj)
+        {
+            foreach (CharacterControl control in characters)
+            {
+                if (control.gameObject == obj)
+                {
+                    return control;
+                }
+            }
+            return null;
+        }
 
         public CharacterControl GetPlayableCharacter()
         {

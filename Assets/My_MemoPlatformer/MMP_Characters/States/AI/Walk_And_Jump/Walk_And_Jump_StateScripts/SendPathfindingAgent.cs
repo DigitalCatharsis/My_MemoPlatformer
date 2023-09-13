@@ -10,7 +10,6 @@ namespace My_MemoPlatformer
         Start_Walking,
         Jump_Platform,
         Fall_Platform,
-        Start_Running
     }
 
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AI/SendPathfindinfAgent")]
@@ -37,14 +36,12 @@ namespace My_MemoPlatformer
             if (characterState.characterControl.aiProgress.pathfindfingAgent.startWalk)
             {
                 animator.SetBool(AI_Walk_Transitions.Start_Walking.ToString(), true);
-                animator.SetBool(AI_Walk_Transitions.Start_Running.ToString(), true);
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             animator.SetBool(AI_Walk_Transitions.Start_Walking.ToString(), false);
-            animator.SetBool(AI_Walk_Transitions.Start_Running.ToString(), false);
         }
     }
 

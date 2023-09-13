@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec5f74b1649362041a0bc8093e3c8ba4, type: 3}
-  m_Name: SO_StartRunning
+  m_Script: {fileID: 11500000, guid: 327c53ab64c2f1848b168f793a826c1a, type: 3}
+  m_Name: SO_AI_RestartAI
   m_EditorClassIdentifier: 
