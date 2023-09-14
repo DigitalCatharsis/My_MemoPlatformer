@@ -11,19 +11,19 @@ namespace My_MemoPlatformer
         public float triggerTiming;
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            
+
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            //
-
             if (stateInfo.normalizedTime >= triggerTiming)
             {
                 if (!characterState.characterControl.animationProgress.ragdollTriggered)
                 {
-                    //control.TurnOnRagdoll();
-                    characterState.characterControl.animationProgress.ragdollTriggered = true;
+                    if (characterState.characterControl.skinnedMeshAnimator.enabled)
+                    {
+                        characterState.characterControl.animationProgress.ragdollTriggered = true;
+                    }
                 }
 
             }
