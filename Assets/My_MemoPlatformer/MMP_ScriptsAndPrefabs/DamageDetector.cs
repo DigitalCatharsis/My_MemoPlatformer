@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 
 namespace My_MemoPlatformer
 {
@@ -151,8 +148,16 @@ namespace My_MemoPlatformer
                 Debug.Log(this.gameObject.name + " hit " + _damagePart.ToString());
             }
 
+            if (!info.useRagdollDeath)
+            {
+                _control.skinnedMeshAnimator.runtimeAnimatorController = DeathAnimationManager.Instance.GetAnimator(_damagePart, info);
+            }
+            else
+            {
+                _control.animationProgress.ragdollTriggered = true;
+            }
 
-            _control.skinnedMeshAnimator.runtimeAnimatorController = DeathAnimationManager.Instance.GetAnimator(_damagePart, info);
+
             info.currentHits++;
 
             _control.GetComponent<BoxCollider>().enabled = false;

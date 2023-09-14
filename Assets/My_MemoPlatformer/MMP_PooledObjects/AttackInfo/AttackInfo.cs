@@ -19,6 +19,7 @@ namespace My_MemoPlatformer
         public int currentHits;
         public bool isRegistered;
         public bool isFinished;
+        public bool useRagdollDeath;
 
         public void ResetInfo(Attack attack, CharacterControl attacker)
         {
@@ -26,6 +27,7 @@ namespace My_MemoPlatformer
             isFinished = false;
             attackAbility = attack;
             this.attacker = attacker;
+            useRagdollDeath = attack.useRagdollDeath;
         }
 
         public void Register(Attack attack)

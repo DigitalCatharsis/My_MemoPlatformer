@@ -32,6 +32,9 @@ namespace My_MemoPlatformer
         public float comboStartTime;
         public float comboEndTime;
 
+        [Header("Ragdoll Death")]
+        public bool useRagdollDeath;
+
 
         private List<AttackInfo> _finishedAttacks = new List<AttackInfo> ();
 
