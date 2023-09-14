@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
 using UnityEngine;
@@ -38,6 +37,8 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            characterState.characterControl.animationProgress.attackTriggered = false;
+
             animator.SetBool(TransitionParameter.Attack.ToString(), false);
 
             GameObject obj = PoolManager.Instance.GetObject(PoolObjectType.ATTACKINFO); //Ссылкаемя на объект в пул менеджере
@@ -115,12 +116,10 @@ namespace My_MemoPlatformer
         {
             if (stateInfo.normalizedTime >= comboStartTime)   //to define when we press. wich procent of the animation i want to set combos start time
             {
-                if (stateInfo.normalizedTime < comboEndTime)
+                if (stateInfo.normalizedTime <= comboEndTime)
                 {
-                    //
                     if (characterState.characterControl.animationProgress.attackTriggered)
                     {
-                        //Debug.Log("uppercut triggered");
                         animator.SetBool(TransitionParameter.Attack.ToString(),true);
                     }    
                 }

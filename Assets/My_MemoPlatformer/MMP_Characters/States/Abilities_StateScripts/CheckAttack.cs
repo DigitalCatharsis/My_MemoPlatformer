@@ -15,8 +15,6 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            //
-
             if (characterState.characterControl.animationProgress.attackTriggered)
             {
                 animator.SetBool(TransitionParameter.Attack.ToString(), true);

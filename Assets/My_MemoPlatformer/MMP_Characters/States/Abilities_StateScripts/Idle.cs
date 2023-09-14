@@ -28,6 +28,7 @@ namespace My_MemoPlatformer
             if (characterState.characterControl.animationProgress.attackTriggered)
             {
                 animator.SetBool(TransitionParameter.Attack.ToString(), true);
+
             }
 
             if (characterState.characterControl.jump)

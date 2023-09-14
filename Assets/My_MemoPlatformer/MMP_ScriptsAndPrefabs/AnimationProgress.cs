@@ -9,9 +9,12 @@ namespace My_MemoPlatformer
 
         public bool cameraShaken;
         public List<PoolObjectType> poolObjectList = new List<PoolObjectType>();
-        public bool attackTriggered;
         public bool ragdollTriggered;
-        public float maxPressTime;
+
+        [Header("Attack Button")]
+        public bool attackTriggered;
+        public bool attackButtonIsReset;
+
 
         [Header("GroundMovement")]
         public bool disAllowEarlyTurn;
@@ -38,43 +41,28 @@ namespace My_MemoPlatformer
 
 
         private CharacterControl _control;
-        private float _pressTime;
 
         private void Awake()
         {
             _control = GetComponentInParent<CharacterControl>();
-            _pressTime = 0f;
         }
 
         private void Update()
         {
             if (_control.attack)
-            {
-                _pressTime += Time.deltaTime;
+            { //dont trigger attack several times
+                if (attackButtonIsReset) 
+                {
+                    attackTriggered = true;
+                    attackButtonIsReset = false;
+                }
             }
             else
             {
-                _pressTime = 0f;
-            }
-
-            if (_pressTime == 0f)
-            {
+                attackButtonIsReset = true;
                 attackTriggered = false;
-            }
-            else if (_pressTime > maxPressTime)
-            {
-                attackTriggered = false;
-            }
-            else
-            {
-                attackTriggered = true;
             }
         }
-
-        //private void LateUpdate()
-        //{
-        //    frameUpdated = false;
-        //}
 
         public bool IsRunning(System.Type type, StateData self) //ability is running now?
         {

@@ -31,11 +31,11 @@ namespace My_MemoPlatformer
 
         private void CheckAttack()
         {
-            foreach(AttackInfo info in AttackManager.Instance.currentAttacks)
+            foreach (AttackInfo info in AttackManager.Instance.currentAttacks)
             {
                 if (info == null)
                 {
-                    continue;   
+                    continue;
                 }
 
                 if (!info.isRegistered)
@@ -53,7 +53,7 @@ namespace My_MemoPlatformer
                     continue;
                 }
 
-                if(info.attacker == _control)
+                if (info.attacker == _control)
                 {
                     continue;
                 }
@@ -76,9 +76,9 @@ namespace My_MemoPlatformer
                 }
                 else
                 {
-                    float dist = Vector3.SqrMagnitude( this.gameObject.transform.position - info.attacker.transform.position); //distance between target and attacker
+                    float dist = Vector3.SqrMagnitude(this.gameObject.transform.position - info.attacker.transform.position); //distance between target and attacker
                     //Debug.Log(this.gameObject.name + "dist: "+ dist.ToString() );
-                    if (dist  <= info.lethalRange) 
+                    if (dist <= info.lethalRange)
                     {
                         TakeDamage(info);
                     }
@@ -94,12 +94,12 @@ namespace My_MemoPlatformer
                 {
                     foreach (AttackPartType part in info.attackParts)  //Имена атакующих коллайдеров
                     {
-                        if (part==AttackPartType.LEFT_HAND)
+                        if (part == AttackPartType.LEFT_HAND)
                         {
                             if (collider.gameObject == info.attacker.leftHand_Attack)
                             {
-                                    _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
-                                    return true;
+                                _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
+                                return true;
                             }
                         }
                         else if (part == AttackPartType.RIGHT_HAND)
@@ -109,7 +109,7 @@ namespace My_MemoPlatformer
                                 _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
                                 return true;
                             }
-                        }                        
+                        }
                         else if (part == AttackPartType.LEFT_FOOT)
                         {
                             if (collider.gameObject == info.attacker.leftFoot_Attack)
@@ -117,7 +117,7 @@ namespace My_MemoPlatformer
                                 _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
                                 return true;
                             }
-                        }                        
+                        }
                         else if (part == AttackPartType.RIGHT_FOOT)
                         {
                             if (collider.gameObject == info.attacker.rightFoot_Attack)
@@ -158,9 +158,14 @@ namespace My_MemoPlatformer
             _control.GetComponent<BoxCollider>().enabled = false;
             _control.ledgeChecker.GetComponent<BoxCollider>().enabled = false;
             _control.Rigid_Body.useGravity = false;
-            _control.navMeshObstacle.carving = false; //we dont need carving when enemy is dead
 
-            damageTaken++; 
+            if (_control.aiController != null)
+            {
+                _control.aiController.gameObject.SetActive(false);
+                _control.navMeshObstacle.carving = false; //we dont need carving when enemy is dead
+            }
+
+            damageTaken++;
         }
 
     }
