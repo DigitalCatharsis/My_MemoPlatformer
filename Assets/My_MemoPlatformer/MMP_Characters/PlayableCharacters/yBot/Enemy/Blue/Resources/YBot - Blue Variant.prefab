@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathfindfingAgent: {fileID: 0}
+  blockingCharacter: {fileID: 0}
 --- !u!114 &7793112528300896298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +136,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 936084455, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
+      propertyPath: m_Mass
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 936084455, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_Constraints
       value: 112
       objectReference: {fileID: 0}
@@ -184,12 +189,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2430949021683835267, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: ragdollParts.Array.size
-      value: 13
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2430949021683835267, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: ragdollParts.Array.data[13]
       value: 
-      objectReference: {fileID: 7184928492286925198}
+      objectReference: {fileID: 3262711159679701061}
     - target: {fileID: 3135921507400413476, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_Interpolate
       value: 1
@@ -212,7 +217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3372119544377188092, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3372119544377188092, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_LocalPosition.x
@@ -357,11 +362,11 @@ PrefabInstance:
     - target: {fileID: 8003498278013731179, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: CurrentObjects.Array.data[0]
       value: 
-      objectReference: {fileID: 1254790456460209763}
+      objectReference: {fileID: 0}
     - target: {fileID: 8003498278013731179, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: CurrentObjects.Array.data[1]
       value: 
-      objectReference: {fileID: 8845895395925442291}
+      objectReference: {fileID: 0}
     - target: {fileID: 8003498278013731179, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: CurrentObjects.Array.data[2]
       value: 
@@ -437,9 +442,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7710581934235756834}
   m_SourcePrefab: {fileID: 100100000, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
---- !u!1 &1254790456460209763 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8276515644033745595, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
+--- !u!136 &3262711159679701061 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 5688755404330073245, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
   m_PrefabInstance: {fileID: 7184928491295747288}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &5582724929851568672 stripped
@@ -471,15 +476,5 @@ Transform:
 --- !u!1 &7184928492286925195 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1260156243, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
-  m_PrefabInstance: {fileID: 7184928491295747288}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &7184928492286925198 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 1260156246, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
-  m_PrefabInstance: {fileID: 7184928491295747288}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8845895395925442291 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1834953633333121579, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
   m_PrefabInstance: {fileID: 7184928491295747288}
   m_PrefabAsset: {fileID: 0}
