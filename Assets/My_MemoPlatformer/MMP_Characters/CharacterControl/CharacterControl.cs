@@ -172,6 +172,15 @@ namespace My_MemoPlatformer
 
                 c.attachedRigidbody.velocity = Vector3.zero;
             }
+
+            //add force
+            if (animationProgress.damagedTrigger != null)
+            {
+                animationProgress.damagedTrigger.GetComponent<Rigidbody>().
+                    AddForce(animationProgress.attacker.transform.forward * animationProgress.attack.forwardForce + 
+                    animationProgress.attacker.transform.right * animationProgress.attack.rightForce + 
+                    animationProgress.attacker.transform.up * animationProgress.attack.upForce);
+            }
         }
 
         public void CacheCharacterControl(Animator animator)  //Передает стейтам аниматора CharacterControl референс

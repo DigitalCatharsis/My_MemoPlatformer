@@ -39,6 +39,10 @@ namespace My_MemoPlatformer
         public Vector3 targetCenter;
         public float centerSpeed;
 
+        [Header("Damage Info")]
+        public Attack attack;
+        public CharacterControl attacker;
+        public TriggerDetector damagedTrigger;
 
         private CharacterControl _control;
 

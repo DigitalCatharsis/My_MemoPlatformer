@@ -96,7 +96,10 @@ namespace My_MemoPlatformer
                             if (collider.gameObject == info.attacker.leftHand_Attack)
                             {
                                 _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
-                                return true;
+                                _control.animationProgress.attack = info.attackAbility;
+                                _control.animationProgress.attacker = info.attacker;
+                                _control.animationProgress.damagedTrigger = trigger; 
+                                return true;    
                             }
                         }
                         else if (part == AttackPartType.RIGHT_HAND)
@@ -104,6 +107,9 @@ namespace My_MemoPlatformer
                             if (collider.gameObject == info.attacker.rightHand_Attack)
                             {
                                 _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
+                                _control.animationProgress.attack = info.attackAbility;
+                                _control.animationProgress.attacker = info.attacker;
+                                _control.animationProgress.damagedTrigger = trigger;
                                 return true;
                             }
                         }
@@ -112,6 +118,9 @@ namespace My_MemoPlatformer
                             if (collider.gameObject == info.attacker.leftFoot_Attack)
                             {
                                 _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
+                                _control.animationProgress.attack = info.attackAbility;
+                                _control.animationProgress.attacker = info.attacker;
+                                _control.animationProgress.damagedTrigger = trigger;
                                 return true;
                             }
                         }
@@ -120,6 +129,9 @@ namespace My_MemoPlatformer
                             if (collider.gameObject == info.attacker.rightFoot_Attack)
                             {
                                 _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
+                                _control.animationProgress.attack = info.attackAbility;
+                                _control.animationProgress.attacker = info.attacker;
+                                _control.animationProgress.damagedTrigger = trigger;
                                 return true;
                             }
                         }

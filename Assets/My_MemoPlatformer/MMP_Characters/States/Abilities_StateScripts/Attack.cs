@@ -34,6 +34,10 @@ namespace My_MemoPlatformer
 
         [Header("Ragdoll Death")]
         public bool useRagdollDeath;
+        public float forwardForce;
+        public float rightForce;
+        public float upForce;
+
 
 
         private List<AttackInfo> _finishedAttacks = new List<AttackInfo> ();
