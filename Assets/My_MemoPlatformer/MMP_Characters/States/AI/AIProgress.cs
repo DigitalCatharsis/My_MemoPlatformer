@@ -10,6 +10,7 @@ namespace My_MemoPlatformer
         public CharacterControl blockingCharacter;
 
         private CharacterControl _control;
+        public bool doFlyingKick;
 
         private void Awake()
         {
@@ -17,18 +18,36 @@ namespace My_MemoPlatformer
         }
         public float GetDistanceToStartSphere()
         {
-            return Vector3.SqrMagnitude(_control.aiProgress.pathfindfingAgent.startSphere.transform.position 
+            return Vector3.SqrMagnitude(_control.aiProgress.pathfindfingAgent.startSphere.transform.position
                 - _control.transform.position); //distance between checkpoint and character
         }
         public float AI_DistanceToEndSphere()
         {
-            return Vector3.SqrMagnitude(_control.aiProgress.pathfindfingAgent.endSphere.transform.position 
+            return Vector3.SqrMagnitude(_control.aiProgress.pathfindfingAgent.endSphere.transform.position
                 - _control.transform.position); //distance between checkpoint and character
+        }
+
+        public float AIDistanceToTarget()
+        {
+            return Vector3.SqrMagnitude(_control.aiProgress.pathfindfingAgent.target .transform.position
+                - _control.aiProgress.pathfindfingAgent.target.transform.position);
         }
         public float TargetDistanceToEndSphere()
         {
-            return Vector3.SqrMagnitude(_control.aiProgress.pathfindfingAgent.endSphere.transform.position 
+            return Vector3.SqrMagnitude(_control.aiProgress.pathfindfingAgent.endSphere.transform.position
                 - _control.aiProgress.pathfindfingAgent.target.transform.position);
+        }
+
+        public bool TargetIsDead()
+        {
+            if (CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target).damageDetector.damageTaken > 0)  //not grounded
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool TargetIsGrounded()
@@ -39,7 +58,7 @@ namespace My_MemoPlatformer
             }
             else
             {
-            return true;
+                return true;
             }
         }
 
@@ -81,9 +100,21 @@ namespace My_MemoPlatformer
             {
                 return false;
             }
-            else 
+            else
             {
                 return true;
+            }
+        }
+
+        public void SetRandomFlyingKick()
+        {
+            if (Random.Range(0f, 1f) < 0.3f) //30% chance
+            {
+                doFlyingKick = true;
+            }
+            else
+            {
+                doFlyingKick = false;
             }
         }
     }

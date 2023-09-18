@@ -10,6 +10,8 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+
+            characterState.characterControl.aiProgress.SetRandomFlyingKick();
             characterState.characterControl.aiController.WalkStraightTowardsStartSphere();
         }
 
@@ -20,7 +22,7 @@ namespace My_MemoPlatformer
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {            
+        {
             //Debug.DrawLine(control.transform.position, control.aiProgress.pathfindfingAgent.startSphere.transform.position, UnityEngine.Color.magenta,0.1f);
             if (characterState.characterControl.aiProgress.EndSphereIsHigher())
             {
@@ -43,13 +45,23 @@ namespace My_MemoPlatformer
             }
 
             //straight
-            if (characterState.characterControl.aiProgress.GetDistanceToStartSphere() > 3f)
+            if (characterState.characterControl.aiProgress.GetDistanceToStartSphere() > 1.5f)
             {
                 characterState.characterControl.turbo = true;
             }
             else
             {
-                characterState.characterControl.turbo = false;
+                if (characterState.characterControl.aiProgress.doFlyingKick && 
+                        characterState.characterControl.aiProgress.AIDistanceToTarget() <= 1.5f &&
+                            !characterState.characterControl.aiProgress.TargetIsDead())
+                {
+                    characterState.characterControl.attack = true;
+                    characterState.characterControl.aiController.InitializeAI();
+                }
+                else
+                {
+                    characterState.characterControl.turbo = false;
+                }
             }
 
             characterState.characterControl.aiController.WalkStraightTowardsStartSphere();

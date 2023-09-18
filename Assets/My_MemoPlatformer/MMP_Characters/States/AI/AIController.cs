@@ -43,7 +43,6 @@ namespace My_MemoPlatformer
                     }
                 }
             }
-
             _aIRoutine = StartCoroutine(_InitAI());
         }
 
@@ -58,13 +57,12 @@ namespace My_MemoPlatformer
         {
             yield return new WaitForEndOfFrame();
 
-            TriggerAI(initialAl);
+            TriggerAI(initialAl);  //trigger each subset
         }
 
         public void TriggerAI(AI_TYPE aiType)
         {
             AISubset next = null;
-
 
             foreach (AISubset s in _aIlist)
             {
