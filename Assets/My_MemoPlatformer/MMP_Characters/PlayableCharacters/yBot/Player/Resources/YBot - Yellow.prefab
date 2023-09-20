@@ -435,7 +435,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4565884009001823619, guid: 9613928cadb701b48b02dcfdc2e849ae, type: 3}
+  - {fileID: 2100000, guid: cc59d8a33302d8946a6cc9e6c6e9607e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1502,7 +1502,7 @@ Transform:
   - {fileID: 673519052}
   - {fileID: 1318701341189441266}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2430949021683835266
 BoxCollider:
@@ -1675,6 +1675,9 @@ MonoBehaviour:
   sizeSpeed: 0
   targetCenter: {x: 0, y: 0, z: 0}
   centerSpeed: 0
+  attack: {fileID: 0}
+  attacker: {fileID: 0}
+  damagedTrigger: {fileID: 0}
 --- !u!114 &8772349004802611497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3275,7 +3278,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -840037777384891287, guid: 9613928cadb701b48b02dcfdc2e849ae, type: 3}
+  - {fileID: 2100000, guid: 50a0a6b01bcd9734194b03e32e9b5954, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
