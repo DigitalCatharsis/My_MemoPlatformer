@@ -16,7 +16,7 @@ namespace My_MemoPlatformer
         {
             _control = this.gameObject.GetComponentInParent<CharacterControl>();
         }
-        public float GetDistanceToStartSphere()
+        public float AI_DistanceToStartSphere()
         {
             return Vector3.SqrMagnitude(_control.aiProgress.pathfindfingAgent.startSphere.transform.position
                 - _control.transform.position); //distance between checkpoint and character
@@ -30,7 +30,7 @@ namespace My_MemoPlatformer
         public float AIDistanceToTarget()
         {
             return Vector3.SqrMagnitude(_control.aiProgress.pathfindfingAgent.target .transform.position
-                - _control.aiProgress.pathfindfingAgent.target.transform.position);
+                - _control.transform.position);
         }
         public float TargetDistanceToEndSphere()
         {
@@ -41,6 +41,17 @@ namespace My_MemoPlatformer
         public bool TargetIsDead()
         {
             if (CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target).damageDetector.damageTaken > 0)  //not grounded
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool TargetIsOnTheSamePlatform()
+        {
+            if (CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target).animationProgress.ground == _control.animationProgress.ground)
             {
                 return true;
             }

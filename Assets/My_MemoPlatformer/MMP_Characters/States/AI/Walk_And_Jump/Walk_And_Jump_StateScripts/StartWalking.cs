@@ -12,7 +12,7 @@ namespace My_MemoPlatformer
         {
 
             characterState.characterControl.aiProgress.SetRandomFlyingKick();
-            characterState.characterControl.aiController.WalkStraightTowardsStartSphere();
+            characterState.characterControl.aiController.WalkStraightToStartSphere();
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -27,7 +27,7 @@ namespace My_MemoPlatformer
             if (characterState.characterControl.aiProgress.EndSphereIsHigher())
             {
                 //Jumping
-                if (characterState.characterControl.aiProgress.GetDistanceToStartSphere() < 0.015f) //how close are we to the checkpoint    //Здесь часто бывает баг (когда иди бегает вокруг Start Point) из-за разных смещений платформы или ИИ относительно друг друга. Увелич да < 0.1f для дебага
+                if (characterState.characterControl.aiProgress.AI_DistanceToStartSphere() < 0.015f) //how close are we to the checkpoint    //Здесь часто бывает баг (когда иди бегает вокруг Start Point) из-за разных смещений платформы или ИИ относительно друг друга. Увелич да < 0.1f для дебага
                 {
                     //Debug.DrawLine(control.aiProgress.pathfindfingAgent.startSphere.transform.position, control.transform.position, UnityEngine.Color.green, 2.5f);
                     characterState.characterControl.moveLeft = false;
@@ -45,26 +45,16 @@ namespace My_MemoPlatformer
             }
 
             //straight
-            if (characterState.characterControl.aiProgress.GetDistanceToStartSphere() > 1.5f)
+            if (characterState.characterControl.aiProgress.AI_DistanceToStartSphere() > 1.5f)
             {
                 characterState.characterControl.turbo = true;
             }
             else
             {
-                if (characterState.characterControl.aiProgress.doFlyingKick && 
-                        characterState.characterControl.aiProgress.AIDistanceToTarget() <= 1.5f &&
-                            !characterState.characterControl.aiProgress.TargetIsDead())
-                {
-                    characterState.characterControl.attack = true;
-                    characterState.characterControl.aiController.InitializeAI();
-                }
-                else
-                {
-                    characterState.characterControl.turbo = false;
-                }
+                characterState.characterControl.turbo = false;
             }
 
-            characterState.characterControl.aiController.WalkStraightTowardsStartSphere();
+            characterState.characterControl.aiController.WalkStraightToStartSphere();
 
             if (characterState.characterControl.aiProgress.AI_DistanceToEndSphere() < 1f)
             {

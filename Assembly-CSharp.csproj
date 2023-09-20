@@ -76,6 +76,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\ResetLocalPosition.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\DeathAnimationData.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_PooledObjects\AttackInfo\AttackInfo.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\AITriggerAttack.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterSelectLight.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\LedgeChecker.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\TurnOnRootMotion.cs" />

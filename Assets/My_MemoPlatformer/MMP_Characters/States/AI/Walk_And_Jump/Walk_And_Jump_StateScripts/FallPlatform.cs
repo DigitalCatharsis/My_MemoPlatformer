@@ -16,7 +16,7 @@ namespace My_MemoPlatformer
                 characterState.characterControl.FaceForward(false);
             }
 
-            if (characterState.characterControl.aiProgress.GetDistanceToStartSphere() > 3f)
+            if (characterState.characterControl.aiProgress.AI_DistanceToStartSphere() > 3f)
             {
                 characterState.characterControl.turbo = true;
             }

@@ -80,7 +80,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        public void WalkStraightTowardsStartSphere()
+        public void WalkStraightToStartSphere()
         {
             _targetDir = _control.aiProgress.pathfindfingAgent.startSphere.transform.position
                 - _control.transform.position;
