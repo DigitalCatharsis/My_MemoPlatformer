@@ -8,6 +8,8 @@ namespace My_MemoPlatformer
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/MoveForward")]
     public class MoveForward : StateData
     {
+        [SerializeField] private bool debug;
+
         public bool allowEarlyTurn; //Prevent turning when running from idle
         public bool lockDirection;
         public bool lockDirectionNextState;
@@ -15,7 +17,11 @@ namespace My_MemoPlatformer
         public AnimationCurve speedGraph;
         public float speed;
         public float blockDistance;
+
+        [Header("IgnoreCharacterBox")]
         public bool ignoreCharacterBox;
+        public float ignoreStartTime;
+        public float ignoreEndTime;
 
         [Header("Momentum")]
         public bool useMomentum;
@@ -27,9 +33,7 @@ namespace My_MemoPlatformer
         private float dirBlock;
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
-            
-
+        {       
             if (allowEarlyTurn && !characterState.characterControl.animationProgress.disAllowEarlyTurn)
             {               
                 if (!characterState.characterControl.animationProgress.lockDirectionNextState) 
@@ -67,6 +71,11 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            if (debug)
+            {
+                Debug.Log(stateInfo.normalizedTime);
+            }
+
             characterState.characterControl.animationProgress.lockDirectionNextState = lockDirectionNextState;
 
             if (characterState.characterControl.animationProgress.IsRunning(typeof(MoveForward), this)) //prevent double update
@@ -146,7 +155,7 @@ namespace My_MemoPlatformer
                 control.FaceForward(false);
             }
 
-            if (!IsBlocked(control, speed))
+            if (!IsBlocked(control, speed, stateInfo))
             {
                 control.MoveForward(speed, Mathf.Abs(control.animationProgress.airMomentum));
             }
@@ -155,7 +164,7 @@ namespace My_MemoPlatformer
 
         private void ConstantMove(CharacterControl control, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (!IsBlocked(control, speed))
+            if (!IsBlocked(control, speed, stateInfo))
             {
                 control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
             }
@@ -186,7 +195,7 @@ namespace My_MemoPlatformer
 
             if (control.moveRight)
             {
-                if (!IsBlocked(control, speed))
+                if (!IsBlocked(control, speed, stateInfo))
                 {                    
                     control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                 }
@@ -195,7 +204,7 @@ namespace My_MemoPlatformer
             if (control.moveLeft)
             {
                 {
-                    if (!IsBlocked(control, speed))
+                    if (!IsBlocked(control, speed, stateInfo))
                     {
                         control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                     }
@@ -219,8 +228,17 @@ namespace My_MemoPlatformer
             }
         }
 
-        private bool IgnoringCharacterBox(Collider col)
+        private bool IgnoringCharacterBox(Collider col, AnimatorStateInfo stateInfo)
         {
+            if (stateInfo.normalizedTime < ignoreStartTime)
+            {
+                return false;
+            }
+            else if (stateInfo.normalizedTime > ignoreEndTime)
+            {
+                return false;
+            }
+
             if (!ignoreCharacterBox)
             {
                 return false;
@@ -233,7 +251,7 @@ namespace My_MemoPlatformer
             return false;
         }
 
-        bool IsBlocked(CharacterControl control, float speed)  //Проверка на коллизии
+        bool IsBlocked(CharacterControl control, float speed, AnimatorStateInfo stateInfo)  //Проверка на коллизии
         {
             if (speed > 0)
             {
@@ -257,7 +275,7 @@ namespace My_MemoPlatformer
                         if (!IsBodyPart(hit.collider) 
                             && !Ledge.IsLedge(hit.collider.gameObject) 
                             && !Ledge.IsLedgeChecker(hit.collider.gameObject)  // Проверка, что мы ничего не задеваем, включая Ledge (платформы, за котоыре можно зацепиться)
-                            && !IgnoringCharacterBox(hit.collider))  //чтобы насквозь проходить
+                            && !IgnoringCharacterBox(hit.collider, stateInfo))  //чтобы насквозь проходить
                         {
                             //тогда впереди препятсвие
                             //control.animationProgress.blockingObj = hit.collider.transform.root.gameObject;

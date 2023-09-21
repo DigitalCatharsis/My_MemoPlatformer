@@ -28,7 +28,13 @@ namespace My_MemoPlatformer
             {
                 return;
             }
-            
+
+
+            if (characterState.characterControl.attack)
+            {
+                return;
+            }
+
             if (characterState.characterControl.IsFacingForward())
             {
                 if (characterState.characterControl.transform.position.z < characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.z)

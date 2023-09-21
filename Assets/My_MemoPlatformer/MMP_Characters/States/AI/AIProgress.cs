@@ -49,6 +49,19 @@ namespace My_MemoPlatformer
                 return false;
             }
         }
+
+        public bool TargetIsOnRightSide()
+        {
+            if((_control.aiProgress.pathfindfingAgent.target.transform.position - _control.transform.position).z > 0f)
+            {
+                return true;
+            }
+            else 
+            { 
+                return false; 
+            }
+        }
+
         public bool TargetIsOnTheSamePlatform()
         {
             if (CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target).animationProgress.ground == _control.animationProgress.ground)

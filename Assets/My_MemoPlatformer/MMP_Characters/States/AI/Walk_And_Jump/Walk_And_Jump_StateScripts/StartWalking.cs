@@ -23,6 +23,10 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            if (characterState.characterControl.attack) 
+            {
+                return;
+            }
             //Debug.DrawLine(control.transform.position, control.aiProgress.pathfindfingAgent.startSphere.transform.position, UnityEngine.Color.magenta,0.1f);
             if (characterState.characterControl.aiProgress.EndSphereIsHigher())
             {

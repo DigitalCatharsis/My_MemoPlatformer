@@ -25,6 +25,7 @@ namespace My_MemoPlatformer
         {
             if (characterState.characterControl.aiProgress.TargetIsDead())
             {
+                characterState.characterControl.attack = false;
                 return;
             }
             if (characterState.characterControl.turbo && characterState.characterControl.aiProgress.AIDistanceToTarget() < 2f) //2 cause distance for straight is 1.5)
@@ -34,6 +35,10 @@ namespace My_MemoPlatformer
             else if(!characterState.characterControl.turbo && characterState.characterControl.aiProgress.AIDistanceToTarget() < 1f)
             {
                 _listGroundAttacks[Random.Range(0, _listGroundAttacks.Count)](characterState.characterControl);
+            }
+            else
+            {
+                characterState.characterControl.attack = false; 
             }
         }
 
@@ -45,13 +50,17 @@ namespace My_MemoPlatformer
                 control.moveLeft = false;
                 control.attack = true;
             }
+            else
+            {
+                control.attack = false;
+            }
 
         }
         public void ForwardGroundAttack(CharacterControl control)
         {
             if (control.aiProgress.TargetIsOnTheSamePlatform())
             {
-                if (control.IsFacingForward())
+                if (control.aiProgress.TargetIsOnRightSide())
                 {
                     control.moveRight = true;
                     control.moveLeft = false;
@@ -63,6 +72,10 @@ namespace My_MemoPlatformer
                     control.moveLeft = true;
                     control.attack = true;
                 }
+            }
+            else
+            {
+                control.attack = false;
             }
         }
 

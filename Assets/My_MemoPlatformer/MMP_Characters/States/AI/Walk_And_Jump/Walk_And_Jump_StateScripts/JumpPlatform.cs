@@ -22,7 +22,13 @@ namespace My_MemoPlatformer
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {        
+        {
+
+            if (characterState.characterControl.attack)
+            {
+                return;
+            }
+
             //Diffirence betwen character's top sphere (coliistion emulation) and End sphere of the pathfinding agent
             float topDist = characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.y - characterState.characterControl.collisionSpheres.frontSpheres[1].transform.position.y;
             float bottomDist = characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.y - characterState.characterControl.collisionSpheres.frontSpheres[0].transform.position.y;
