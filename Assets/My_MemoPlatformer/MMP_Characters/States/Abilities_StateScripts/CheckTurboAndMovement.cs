@@ -19,13 +19,13 @@ namespace My_MemoPlatformer
 
             if ((characterState.characterControl.moveLeft || characterState.characterControl.moveRight) & characterState.characterControl.turbo)
             {
-                animator.SetBool(TransitionParameter.Move.ToString(), true);
-                animator.SetBool(TransitionParameter.Turbo.ToString(), true);
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], true);
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Turbo], true);
             }
             else
             {
-                animator.SetBool(TransitionParameter.Move.ToString(), false);
-                animator.SetBool(TransitionParameter.Turbo.ToString(), false);
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], false);
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Turbo], false);
             }
         }
 

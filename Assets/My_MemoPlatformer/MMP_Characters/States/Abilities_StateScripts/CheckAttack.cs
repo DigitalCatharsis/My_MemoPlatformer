@@ -17,7 +17,7 @@ namespace My_MemoPlatformer
         {
             if (characterState.characterControl.animationProgress.attackTriggered)
             {
-                animator.SetBool(TransitionParameter.Attack.ToString(), true);
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Attack], true);
             }
         }
 

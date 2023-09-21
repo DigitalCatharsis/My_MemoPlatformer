@@ -24,7 +24,7 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (!characterState.characterControl.skinnedMeshAnimator.GetBool(TransitionParameter.Grounded.ToString()))
+            if (!characterState.characterControl.skinnedMeshAnimator.GetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded]))
             {
                 return;
             }

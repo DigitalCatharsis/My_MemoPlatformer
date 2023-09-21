@@ -10,16 +10,13 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.SetBool(TransitionParameter.Jump.ToString(), false);
-            animator.SetBool(TransitionParameter.Attack.ToString(), false);
-            animator.SetBool(TransitionParameter.Attack.ToString(), false);
+            animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Jump], false);
+            animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Attack], false);
+            animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], false);
 
             characterState.characterControl.animationProgress.disAllowEarlyTurn = false;
-
             characterState.characterControl.animationProgress.blockingObj = null; //когда мы стоит, нас ничего не задевает, логично. Хотя, надо подумать на счет AI. Позже...
         }
-
-
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
@@ -27,7 +24,7 @@ namespace My_MemoPlatformer
 
             if (characterState.characterControl.animationProgress.attackTriggered)
             {
-                animator.SetBool(TransitionParameter.Attack.ToString(), true);
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Attack], true);
 
             }
 
@@ -35,7 +32,7 @@ namespace My_MemoPlatformer
             {
                 if (!characterState.characterControl.animationProgress.jumped)
                 {
-                    animator.SetBool(TransitionParameter.Jump.ToString(), true);
+                    animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Jump], true);
                 }
             }
             else
@@ -53,11 +50,11 @@ namespace My_MemoPlatformer
             }
             else if (characterState.characterControl.moveRight)
             {
-                animator.SetBool(TransitionParameter.Move.ToString(), true);
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], true);
             }
             else if (characterState.characterControl.moveLeft)
             {
-                animator.SetBool(TransitionParameter.Move.ToString(), true);
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], true);
             }
         }
 

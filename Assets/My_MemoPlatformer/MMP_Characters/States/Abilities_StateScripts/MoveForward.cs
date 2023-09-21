@@ -85,16 +85,16 @@ namespace My_MemoPlatformer
 
             if (characterState.characterControl.jump)
             {
-                animator.SetBool(TransitionParameter.Jump.ToString(), true);
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Jump], true);
             }
 
             if (characterState.characterControl.turbo)
             {
-                animator.SetBool(TransitionParameter.Turbo.ToString(), true);
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Turbo], true);
             }
             else
             {
-                animator.SetBool(TransitionParameter.Turbo.ToString(), false);
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Turbo], false);
             }
 
             if (useMomentum)
@@ -174,11 +174,11 @@ namespace My_MemoPlatformer
 
             if (!control.moveRight && !control.moveLeft)
             {
-                animator.SetBool(TransitionParameter.Move.ToString(), false);
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], false);
             }
             else
             {
-                animator.SetBool(TransitionParameter.Move.ToString(), true);
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], true);
             }
         }
 
@@ -186,13 +186,13 @@ namespace My_MemoPlatformer
         {
             if (control.moveRight && control.moveLeft)
             {
-                animator.SetBool(TransitionParameter.Move.ToString(), false);
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], false);
                 return;
             }
 
             if (!control.moveRight && !control.moveLeft)
             {
-                animator.SetBool(TransitionParameter.Move.ToString(), false);
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], false);
                 return;
             }
 

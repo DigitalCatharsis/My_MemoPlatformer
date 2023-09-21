@@ -25,27 +25,27 @@ namespace My_MemoPlatformer
                 {
                     if (characterState.characterControl.moveLeft || characterState.characterControl.moveRight)
                     {
-                        animator.SetBool(TransitionParameter.Turbo.ToString(), true);
+                        animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Turbo], true);
                     }
                     else
                     {
-                        animator.SetBool(TransitionParameter.Turbo.ToString(), false);
+                        animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Turbo], false);
                     }
                 }
                 else
                 {
-                    animator.SetBool(TransitionParameter.Turbo.ToString(), true);
+                    animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Turbo], true);
                 }
             }
             else
             {
-                animator.SetBool(TransitionParameter.Turbo.ToString(), false);
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Turbo], false);
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.SetBool(TransitionParameter.Attack.ToString(), false);
+            animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Attack], false);
         }
     }
 

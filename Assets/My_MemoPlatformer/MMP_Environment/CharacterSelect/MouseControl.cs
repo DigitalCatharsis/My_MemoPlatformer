@@ -77,11 +77,11 @@ namespace My_MemoPlatformer
                     if (c.playableCharacterType == selectedCharacterType)
                     {
 
-                        c.skinnedMeshAnimator.SetBool(TransitionParameter.ClickAnimation.ToString(), true);
+                        c.skinnedMeshAnimator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.ClickAnimation], true);
                     }
                     else
                     {
-                        c.skinnedMeshAnimator.SetBool(TransitionParameter.ClickAnimation.ToString(), false);
+                        c.skinnedMeshAnimator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.ClickAnimation], false);
                     }
                 }
 

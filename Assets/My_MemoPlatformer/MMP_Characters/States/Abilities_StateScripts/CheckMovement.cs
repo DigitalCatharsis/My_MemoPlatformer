@@ -19,11 +19,11 @@ namespace My_MemoPlatformer
 
             if (characterState.characterControl.moveLeft || characterState.characterControl.moveRight)
             {
-                animator.SetBool(TransitionParameter.Move.ToString(), true);
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], true);
             }
             else
             {
-                animator.SetBool(TransitionParameter.Move.ToString(), false);
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], false);
             }
         }
 

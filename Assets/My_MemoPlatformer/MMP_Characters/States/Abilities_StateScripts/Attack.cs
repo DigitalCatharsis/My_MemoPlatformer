@@ -44,7 +44,7 @@ namespace My_MemoPlatformer
         {
             characterState.characterControl.animationProgress.attackTriggered = false;
 
-            animator.SetBool(TransitionParameter.Attack.ToString(), false);
+            animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Attack], false);
 
             GameObject obj = PoolManager.Instance.GetObject(PoolObjectType.ATTACKINFO); //Ссылкаемя на объект в пул менеджере
             AttackInfo info = obj.GetComponent<AttackInfo>();
@@ -125,7 +125,7 @@ namespace My_MemoPlatformer
                 {
                     if (characterState.characterControl.animationProgress.attackTriggered)
                     {
-                        animator.SetBool(TransitionParameter.Attack.ToString(),true);
+                        animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Attack],true);
                     }    
                 }
             }
@@ -133,7 +133,7 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.SetBool(TransitionParameter.Attack.ToString(), false);
+            animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Attack], false);
             ClearAttack();
         }
 

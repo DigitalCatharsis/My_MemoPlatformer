@@ -31,7 +31,7 @@ namespace My_MemoPlatformer
 
             if (MakeTransition(characterState.characterControl))
             {
-                animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), Index);
+                animator.SetInteger(HashManager.Instance.dicMainParams[TransitionParameter.TransitionIndex], Index);
             }
         }
 
@@ -39,18 +39,18 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (animator.GetInteger(TransitionParameter.TransitionIndex.ToString()) == 0)
+            if (animator.GetInteger(HashManager.Instance.dicMainParams[TransitionParameter.TransitionIndex]) == 0)
             {
                 if (MakeTransition(characterState.characterControl))
                 {
-                    animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), Index);
+                    animator.SetInteger(HashManager.Instance.dicMainParams[TransitionParameter.TransitionIndex], Index);
                 }
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), 0);
+            animator.SetInteger(HashManager.Instance.dicMainParams[TransitionParameter.TransitionIndex], 0);
         }
 
         private bool MakeTransition(CharacterControl control)
@@ -125,7 +125,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.GROUNDED:
                         {
-                            if (control.skinnedMeshAnimator.GetBool(TransitionParameter.Grounded.ToString()) == false)
+                            if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded]) == false)
                             {
                                 return false;
                             }
