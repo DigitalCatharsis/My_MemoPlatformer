@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -8,6 +6,7 @@ namespace My_MemoPlatformer
     {
         public bool isGrabbongLedge;
         public Ledge grabbedLedge;
+        public Vector3 ledgeCalibration = new Vector3();  //diffirence (offset) when we change character. (Bones changing)
         private Ledge _checkLedge = null;
 
         private void OnTriggerEnter(Collider other)

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -13,6 +11,32 @@ namespace My_MemoPlatformer
             GameObject anim = characterState.characterControl.skinnedMeshAnimator.gameObject;
             anim.transform.parent = characterState.characterControl.ledgeChecker.grabbedLedge.transform;
             anim.transform.localPosition = characterState.characterControl.ledgeChecker.grabbedLedge.offset;
+
+            #region ledgeGrabCalibration  //untested
+            float x;
+            float y;
+            float z;
+
+            if (characterState.characterControl.IsFacingForward())
+            {
+                x = characterState.characterControl.ledgeChecker.ledgeCalibration.x;
+                y = characterState.characterControl.ledgeChecker.ledgeCalibration.y;
+                z = characterState.characterControl.ledgeChecker.ledgeCalibration.z;
+            }
+            else
+            {
+                x = characterState.characterControl.ledgeChecker.ledgeCalibration.x;
+                y = characterState.characterControl.ledgeChecker.ledgeCalibration.y;
+                z = -characterState.characterControl.ledgeChecker.ledgeCalibration.z;
+            }
+
+            Vector3 calibration;
+            calibration.x = x;
+            calibration.z = z;
+            calibration.y = y;
+
+            anim.transform.localPosition += calibration;
+            #endregion
 
             characterState.characterControl.Rigid_Body.velocity= Vector3.zero;
         }
