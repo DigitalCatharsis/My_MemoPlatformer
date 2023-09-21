@@ -33,10 +33,10 @@ namespace My_MemoPlatformer
         private float dirBlock;
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {       
+        {
             if (allowEarlyTurn && !characterState.characterControl.animationProgress.disAllowEarlyTurn)
-            {               
-                if (!characterState.characterControl.animationProgress.lockDirectionNextState) 
+            {
+                if (!characterState.characterControl.animationProgress.lockDirectionNextState)
                 {
                     if (characterState.characterControl.moveLeft)
                     {
@@ -83,13 +83,6 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            //if (characterState.characterControl.animationProgress.frameUpdated)    //fix for double updating. Met this when implement running kick
-            //{
-            //    return;
-            //}
-
-            //characterState.characterControl.animationProgress.frameUpdated = true;
-
             if (characterState.characterControl.jump)
             {
                 animator.SetBool(TransitionParameter.Jump.ToString(), true);
@@ -123,24 +116,34 @@ namespace My_MemoPlatformer
 
         private void UpdateMomentum(CharacterControl control, AnimatorStateInfo stateInfo)
         {
-
-            if (control.moveRight)
+            if (!control.animationProgress.RightSideIsBlocked())
             {
-                control.animationProgress.airMomentum += speedGraph.Evaluate(stateInfo.normalizedTime)* speed * Time.deltaTime;
+                if (control.moveRight)
+                {
+                    control.animationProgress.airMomentum += speedGraph.Evaluate(stateInfo.normalizedTime) * speed * Time.deltaTime;
+                }
             }
 
-            if (control.moveLeft)
+            if (!control.animationProgress.LeftSideIsBlocked())
             {
-                control.animationProgress.airMomentum -= speedGraph.Evaluate(stateInfo.normalizedTime)* speed * Time.deltaTime;
+                if (control.moveLeft)
+                {
+                    control.animationProgress.airMomentum -= speedGraph.Evaluate(stateInfo.normalizedTime) * speed * Time.deltaTime;
+                }
             }
 
-            if(Mathf.Abs(control.animationProgress.airMomentum) >= maxMomentum)
+            if (control.animationProgress.RightSideIsBlocked() || control.animationProgress.LeftSideIsBlocked())
+            {
+                control.animationProgress.airMomentum = Mathf.Lerp(control.animationProgress.airMomentum, 0f, Time.deltaTime * 1.5f);
+            }
+
+            if (Mathf.Abs(control.animationProgress.airMomentum) >= maxMomentum)
             {
                 if (control.animationProgress.airMomentum > 0f)
                 {
                     control.animationProgress.airMomentum = maxMomentum;
                 }
-                else if(control.animationProgress.airMomentum < 0f)
+                else if (control.animationProgress.airMomentum < 0f)
                 {
                     control.animationProgress.airMomentum = -maxMomentum;
                 }
@@ -159,7 +162,7 @@ namespace My_MemoPlatformer
             {
                 control.MoveForward(speed, Mathf.Abs(control.animationProgress.airMomentum));
             }
-            
+
         }
 
         private void ConstantMove(CharacterControl control, Animator animator, AnimatorStateInfo stateInfo)
@@ -196,7 +199,7 @@ namespace My_MemoPlatformer
             if (control.moveRight)
             {
                 if (!IsBlocked(control, speed, stateInfo))
-                {                    
+                {
                     control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                 }
             }
@@ -230,24 +233,26 @@ namespace My_MemoPlatformer
 
         private bool IgnoringCharacterBox(Collider col, AnimatorStateInfo stateInfo)
         {
-            if (stateInfo.normalizedTime < ignoreStartTime)
-            {
-                return false;
-            }
-            else if (stateInfo.normalizedTime > ignoreEndTime)
-            {
-                return false;
-            }
-
             if (!ignoreCharacterBox)
             {
                 return false;
             }
 
-            if (col.gameObject.GetComponent<CharacterControl>() != null)
+            if (stateInfo.normalizedTime < ignoreStartTime)
+            {
+                return false;
+            }
+
+            else if (stateInfo.normalizedTime > ignoreEndTime)
+            {
+                return false;
+            }
+
+            if (col.transform.root.gameObject.GetComponent<CharacterControl>() != null)
             {
                 return true;
             }
+
             return false;
         }
 
@@ -270,18 +275,15 @@ namespace My_MemoPlatformer
                 RaycastHit hit;
                 if (Physics.Raycast(o.transform.position, control.transform.forward * dirBlock, out hit, blockDistance))
                 {
-                    if (!control.ragdollParts.Contains(hit.collider))  //Проверка, что задетый коллайдер не часть колайдеров ragdoll
+                    if (!IsBodyPart(hit.collider, control)
+                        && !Ledge.IsLedge(hit.collider.gameObject)
+                          && !Ledge.IsLedgeChecker(hit.collider.gameObject)  // Проверка, что мы ничего не задеваем, включая Ledge (платформы, за котоыре можно зацепиться)
+                             && !IgnoringCharacterBox(hit.collider, stateInfo))  //чтобы насквозь проходить
                     {
-                        if (!IsBodyPart(hit.collider) 
-                            && !Ledge.IsLedge(hit.collider.gameObject) 
-                            && !Ledge.IsLedgeChecker(hit.collider.gameObject)  // Проверка, что мы ничего не задеваем, включая Ledge (платформы, за котоыре можно зацепиться)
-                            && !IgnoringCharacterBox(hit.collider, stateInfo))  //чтобы насквозь проходить
-                        {
-                            //тогда впереди препятсвие
-                            //control.animationProgress.blockingObj = hit.collider.transform.root.gameObject;
-                            control.animationProgress.blockingObj = hit.collider.transform.gameObject;
-                            return true;
-                        }
+                        //тогда впереди препятсвие
+                        //control.animationProgress.blockingObj = hit.collider.transform.root.gameObject;
+                        control.animationProgress.blockingObj = hit.collider.transform.gameObject;
+                        return true;
                     }
                 }
             }
@@ -291,36 +293,38 @@ namespace My_MemoPlatformer
             return false;
         }
 
-        private bool IsBodyPart(Collider col)
+        private bool IsBodyPart(Collider col, CharacterControl control)
         {
-            CharacterControl control = col.transform.root.GetComponent<CharacterControl>();
-
-            if (control == null)
-            {
-                return false;
-            }
-
-            if (control.gameObject == col.gameObject)  //thats a root of the character
-            {
-                return false;
-            }
-
-            if (control.ragdollParts.Contains(col)) //thats a part of ragdoll
+            if (col.transform.root.gameObject == control.gameObject)
             {
                 return true;
             }
+            
 
-            return false;
+            CharacterControl target = CharacterManager.Instance.GetCharacter(col.transform.root.gameObject);
 
+            if (target == null) 
+            {
+                return false;
+            }
+
+            if (target.damageDetector.damageTaken > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            
+
             if (clearMomentumOnExit)
             {
                 characterState.characterControl.animationProgress.airMomentum = 0f;
-            }            
+            }
         }
-    } 
+    }
 }

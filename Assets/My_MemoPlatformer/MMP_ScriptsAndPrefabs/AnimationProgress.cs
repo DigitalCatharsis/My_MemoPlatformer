@@ -87,5 +87,38 @@ namespace My_MemoPlatformer
             }
             return false;
         }
+
+        public bool RightSideIsBlocked()
+        {
+            if (blockingObj == null)
+            {
+                return false;
+            }
+
+            if ((blockingObj.transform.position - _control.transform.position).z > 0f)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool LeftSideIsBlocked()
+        {
+            if (blockingObj == null)
+            {
+                return false;
+            }
+
+            if ((blockingObj.transform.position - _control.transform.position).z < 0f)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
