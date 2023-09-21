@@ -21,7 +21,6 @@ namespace My_MemoPlatformer
         public float startAttackTime; //Is % of the animation duration
         public float endAttackTime; //Is % of the animation duration
         public List<AttackPartType> attackParts = new List<AttackPartType>();
-        public DeathType deathType;
         public bool mustCollide;
         public bool mustFaceAttacker;
         public float lethalRange;
@@ -33,7 +32,6 @@ namespace My_MemoPlatformer
         public float comboEndTime;
 
         [Header("Ragdoll Death")]
-        public bool useRagdollDeath;
         public float forwardForce;
         public float rightForce;
         public float upForce;

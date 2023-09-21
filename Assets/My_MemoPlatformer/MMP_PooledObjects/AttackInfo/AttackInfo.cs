@@ -27,7 +27,6 @@ namespace My_MemoPlatformer
             isFinished = false;
             attackAbility = attack;
             this.attacker = attacker;
-            useRagdollDeath = attack.useRagdollDeath;
         }
 
         public void Register(Attack attack)
@@ -37,7 +36,6 @@ namespace My_MemoPlatformer
             attackAbility = attack;
             //colliderNames = attack.colliderNames;
             attackParts = attack.attackParts;
-            deathType = attack.deathType;
             mustCollide = attack.mustCollide;
             mustFaceAttacker = attack.mustFaceAttacker;
             lethalRange = attack.lethalRange;

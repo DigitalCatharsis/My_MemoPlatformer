@@ -6,18 +6,8 @@ using UnityEngine;
 namespace My_MemoPlatformer
 {
 
-    public enum GeneralBodyPart
-    {
-        Upper,
-        Lower,
-        Arm,
-        Leg,
-    }
-
     public class TriggerDetector : MonoBehaviour
     {
-        public GeneralBodyPart generalBodyPart;
-
         public List<Collider> collidingParts = new List<Collider>();
         private CharacterControl _owner;
 

@@ -6,7 +6,6 @@ namespace My_MemoPlatformer
     public class DamageDetector : MonoBehaviour  //Compare collision info versus attack input that is being registered
     {
         private CharacterControl _control;
-        private GeneralBodyPart _damagePart;
 
         [SerializeField] private bool _debug;
 
@@ -95,7 +94,6 @@ namespace My_MemoPlatformer
                         {
                             if (collider.gameObject == info.attacker.leftHand_Attack)
                             {
-                                _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
                                 _control.animationProgress.attack = info.attackAbility;
                                 _control.animationProgress.attacker = info.attacker;
                                 _control.animationProgress.damagedTrigger = trigger; 
@@ -106,7 +104,6 @@ namespace My_MemoPlatformer
                         {
                             if (collider.gameObject == info.attacker.rightHand_Attack)
                             {
-                                _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
                                 _control.animationProgress.attack = info.attackAbility;
                                 _control.animationProgress.attacker = info.attacker;
                                 _control.animationProgress.damagedTrigger = trigger;
@@ -117,7 +114,6 @@ namespace My_MemoPlatformer
                         {
                             if (collider.gameObject == info.attacker.leftFoot_Attack)
                             {
-                                _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
                                 _control.animationProgress.attack = info.attackAbility;
                                 _control.animationProgress.attacker = info.attacker;
                                 _control.animationProgress.damagedTrigger = trigger;
@@ -128,7 +124,6 @@ namespace My_MemoPlatformer
                         {
                             if (collider.gameObject == info.attacker.rightFoot_Attack)
                             {
-                                _damagePart = trigger.generalBodyPart; //Куда нанесли урон (upper и тд, смотри enum)
                                 _control.animationProgress.attack = info.attackAbility;
                                 _control.animationProgress.attacker = info.attacker;
                                 _control.animationProgress.damagedTrigger = trigger;
@@ -157,21 +152,12 @@ namespace My_MemoPlatformer
             if (_debug)
             {
                 Debug.Log(info.attacker.gameObject.name + " hits " + this.gameObject.name);
-                Debug.Log(this.gameObject.name + " hit " + _damagePart.ToString());
             }
-
-            if (!info.useRagdollDeath)
-            {
-                _control.skinnedMeshAnimator.runtimeAnimatorController = DeathAnimationManager.Instance.GetAnimator(_damagePart, info);
-            }
-            else
-            {
-                _control.animationProgress.ragdollTriggered = true;
-            }
-
 
             info.currentHits++;
+            damageTaken++;
 
+            _control.animationProgress.ragdollTriggered = true;
             _control.GetComponent<BoxCollider>().enabled = false;
             _control.ledgeChecker.GetComponent<BoxCollider>().enabled = false;
             _control.Rigid_Body.useGravity = false;

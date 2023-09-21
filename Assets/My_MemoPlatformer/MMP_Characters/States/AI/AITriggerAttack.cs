@@ -1,15 +1,20 @@
-using UnityEngine.AI;
 using UnityEngine;
-using System;
-using System.Drawing;
+using System.Collections.Generic;
 
 namespace My_MemoPlatformer
 {
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AI/AITriggerAttack")]
     public class AITriggerAttack : StateData
     {
+        delegate void GroundAttack(CharacterControl control);
+        private List<GroundAttack> _listGroundAttacks = new List<GroundAttack>();
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            if (_listGroundAttacks.Count == 0)
+            {
+                _listGroundAttacks.Add(NormalGroundAttack);
+                _listGroundAttacks.Add(ForwardGroundAttack);
+            }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -18,17 +23,60 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (characterState.characterControl.turbo && 
-                    characterState.characterControl.aiProgress.doFlyingKick &&
-                       characterState.characterControl.aiProgress.TargetIsOnTheSamePlatform() && 
-                           characterState.characterControl.aiProgress.AIDistanceToTarget() < 2f && //2 cause distance for straight is 1.5
-                               !characterState.characterControl.aiProgress.TargetIsDead()) 
+            if (characterState.characterControl.aiProgress.TargetIsDead())
             {
-                characterState.characterControl.attack = true;
+                return;
+            }
+            if (characterState.characterControl.turbo && characterState.characterControl.aiProgress.AIDistanceToTarget() < 2f) //2 cause distance for straight is 1.5)
+            {
+                FlyingKick(characterState.characterControl);
+            }
+            else if(!characterState.characterControl.turbo && characterState.characterControl.aiProgress.AIDistanceToTarget() < 1f)
+            {
+                _listGroundAttacks[Random.Range(0, _listGroundAttacks.Count)](characterState.characterControl);
+            }
+        }
+
+        public void NormalGroundAttack(CharacterControl control)
+        {
+            if (control.aiProgress.TargetIsOnTheSamePlatform())
+            {
+                control.moveRight = false;
+                control.moveLeft = false;
+                control.attack = true;
+            }
+
+        }
+        public void ForwardGroundAttack(CharacterControl control)
+        {
+            if (control.aiProgress.TargetIsOnTheSamePlatform())
+            {
+                if (control.IsFacingForward())
+                {
+                    control.moveRight = true;
+                    control.moveLeft = false;
+                    control.attack = true;
+                }
+                else
+                {
+                    control.moveRight = false;
+                    control.moveLeft = true;
+                    control.attack = true;
+                }
+            }
+        }
+
+        public void FlyingKick(CharacterControl control)
+        {
+            if (control.aiProgress.doFlyingKick &&
+                    control.aiProgress.TargetIsOnTheSamePlatform())
+                       
+            {
+                control.attack = true;
             }
             else
             {
-                characterState.characterControl.attack = false;
+                control.attack = false;
             }
         }
     }
