@@ -7,5 +7,17 @@ namespace My_MemoPlatformer
     public class AttackManager : Singleton<AttackManager>    //Whole list if current attacks
     {
         public List<AttackInfo> currentAttacks = new List<AttackInfo>();
+
+        public void ForceDeregester(CharacterControl control)
+        {
+            foreach (var info in currentAttacks)
+            {
+                if (info.attacker == control)
+                {
+                    info.isFinished = true;
+                    info.GetComponent<PoolObject>().TurnOff();
+                }
+            }
+        }
     }
 }

@@ -157,6 +157,8 @@ namespace My_MemoPlatformer
             info.currentHits++;
             damageTaken++;
 
+            AttackManager.Instance.ForceDeregester(_control);
+
             _control.animationProgress.ragdollTriggered = true;
             _control.GetComponent<BoxCollider>().enabled = false;
             _control.ledgeChecker.GetComponent<BoxCollider>().enabled = false;
