@@ -22,12 +22,6 @@ namespace My_MemoPlatformer
         {
             characterState.characterControl.animationProgress.lockDirectionNextState = false;
 
-            if (characterState.characterControl.animationProgress.attackTriggered)
-            {
-                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Attack], true);
-
-            }
-
             if (characterState.characterControl.jump)
             {
                 if (!characterState.characterControl.animationProgress.jumped)
