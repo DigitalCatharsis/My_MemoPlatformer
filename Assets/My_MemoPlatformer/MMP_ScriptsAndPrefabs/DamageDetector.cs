@@ -1,4 +1,6 @@
+using System.Net.NetworkInformation;
 using UnityEngine;
+using UnityEngine.VFX;
 
 namespace My_MemoPlatformer
 {
@@ -90,45 +92,13 @@ namespace My_MemoPlatformer
                 {
                     foreach (AttackPartType part in info.attackParts)  //Имена атакующих коллайдеров
                     {
-                        if (part == AttackPartType.LEFT_HAND)
+                        if (info.attacker.GetAttackingPart(part) == collider.gameObject)
                         {
-                            if (collider.gameObject == info.attacker.leftHand_Attack)
-                            {
-                                _control.animationProgress.attack = info.attackAbility;
-                                _control.animationProgress.attacker = info.attacker;
-                                _control.animationProgress.damagedTrigger = trigger; 
-                                return true;    
-                            }
-                        }
-                        else if (part == AttackPartType.RIGHT_HAND)
-                        {
-                            if (collider.gameObject == info.attacker.rightHand_Attack)
-                            {
-                                _control.animationProgress.attack = info.attackAbility;
-                                _control.animationProgress.attacker = info.attacker;
-                                _control.animationProgress.damagedTrigger = trigger;
-                                return true;
-                            }
-                        }
-                        else if (part == AttackPartType.LEFT_FOOT)
-                        {
-                            if (collider.gameObject == info.attacker.leftFoot_Attack)
-                            {
-                                _control.animationProgress.attack = info.attackAbility;
-                                _control.animationProgress.attacker = info.attacker;
-                                _control.animationProgress.damagedTrigger = trigger;
-                                return true;
-                            }
-                        }
-                        else if (part == AttackPartType.RIGHT_FOOT)
-                        {
-                            if (collider.gameObject == info.attacker.rightFoot_Attack)
-                            {
-                                _control.animationProgress.attack = info.attackAbility;
-                                _control.animationProgress.attacker = info.attacker;
-                                _control.animationProgress.damagedTrigger = trigger;
-                                return true;
-                            }
+                            _control.animationProgress.attack = info.attackAbility;
+                            _control.animationProgress.attacker = info.attacker;
+                            _control.animationProgress.damagedTrigger = trigger;
+                            _control.animationProgress.attackingPart = info.attacker.GetAttackingPart(part);
+                            return true;
                         }
                     }
                 }
@@ -145,15 +115,26 @@ namespace My_MemoPlatformer
 
             if (info.mustCollide)
             {
-                CameraManager.Instance.ShakeCamera(0.2f);
+                CameraManager.Instance.ShakeCamera(0.3f);
 
                 if (info.attackAbility.useDeathParticles)
                 {
                     if (info.attackAbility.ParticleType.ToString().Contains("VFX"))
                     {
-                        GameObject vfx =  PoolManager.Instance.GetObject(info.attackAbility.ParticleType);
+                        GameObject vfx = PoolManager.Instance.GetObject(info.attackAbility.ParticleType);
 
-                        vfx.transform.position = _control.animationProgress.damagedTrigger.transform.position;
+                        vfx.transform.position = _control.animationProgress.attackingPart.transform.position;
+
+                        vfx.SetActive(true);
+
+                        if (info.attacker.IsFacingForward())
+                        {
+                            vfx.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                        }
+                        else
+                        {
+                            vfx.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+                        }
                     }
                 }
             }

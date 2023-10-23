@@ -354,5 +354,30 @@ namespace My_MemoPlatformer
             }
             return null;
         }
+
+        public GameObject GetAttackingPart(AttackPartType attackPart)
+        {
+            switch (attackPart)
+            {
+                case AttackPartType.LEFT_HAND:
+                    {
+                        return leftHand_Attack;
+                    }
+                case AttackPartType.RIGHT_HAND:
+                    {
+                        return rightHand_Attack;
+                    }
+                case AttackPartType.RIGHT_FOOT:
+                    {
+                        return rightFoot_Attack;
+                    }
+                case AttackPartType.LEFT_FOOT:
+                    {
+                        return leftFoot_Attack;
+                    }
+                default:
+                    return null;
+            }
+        }
     }
 }

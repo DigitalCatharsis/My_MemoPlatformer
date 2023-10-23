@@ -43,6 +43,7 @@ namespace My_MemoPlatformer
         public Attack attack;
         public CharacterControl attacker;
         public TriggerDetector damagedTrigger;
+        public GameObject attackingPart;
 
         private CharacterControl _control;
 

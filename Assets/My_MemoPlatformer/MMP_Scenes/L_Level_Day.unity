@@ -1504,7 +1504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &581673806
 Transform:
   m_ObjectHideFlags: 0
@@ -4924,6 +4924,10 @@ PrefabInstance:
       propertyPath: m_AnimatedTarget
       value: 
       objectReference: {fileID: 1331031633}
+    - target: {fileID: 1293291010471077231, guid: c594df3813521c847bf412f5e9076f12, type: 3}
+      propertyPath: m_DefaultBlend.m_Time
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 1293291010471077231, guid: c594df3813521c847bf412f5e9076f12, type: 3}
       propertyPath: m_ChildCameras.Array.size
       value: 2
