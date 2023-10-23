@@ -1,11 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 namespace My_MemoPlatformer
 {
-
     public class PoolObject : MonoBehaviour
     {
         public PoolObjectType poolObjectType;
@@ -42,9 +39,5 @@ namespace My_MemoPlatformer
                 TurnOff(); 
             }
         }
-
     }
-
-
-
 }

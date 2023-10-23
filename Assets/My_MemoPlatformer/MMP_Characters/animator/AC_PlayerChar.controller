@@ -742,6 +742,9 @@ MonoBehaviour:
   characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 7734ddc504fdfbb4c8e2e8c3f3a54264, type: 2}
+  - {fileID: 11400000, guid: d31863553b40392459c27e858e7951de, type: 2}
+  - {fileID: 11400000, guid: da245a35f281ae94abf35b2da8e26ce9, type: 2}
+  - {fileID: 11400000, guid: 51fc30411941f244ca83297ac3f9ac14, type: 2}
 --- !u!114 &-4541674714533460555
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1507,7 +1510,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MMA_Lick
+  m_Name: MMA_Kick
   m_Speed: 1.45
   m_CycleOffset: 0
   m_Transitions:
@@ -2661,7 +2664,7 @@ AnimatorStateMachine:
     m_Position: {x: 580, y: -190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8777901258840778715}
-    m_Position: {x: 720, y: 30, z: 0}
+    m_Position: {x: 790, y: -40, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: 7355986212213309199}
@@ -2792,7 +2795,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.112994194
+  m_TransitionDuration: 0.07205105
   m_TransitionOffset: 0
   m_ExitTime: 0.9946611
   m_HasExitTime: 0
@@ -2896,9 +2899,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.03612691
+  m_TransitionDuration: 0.1074391
   m_TransitionOffset: 0
-  m_ExitTime: 0.99002945
+  m_ExitTime: 0.992851
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -3250,9 +3253,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.06891611
+  m_TransitionDuration: 0.1853009
   m_TransitionOffset: 0
-  m_ExitTime: 0.9813563
+  m_ExitTime: 0.9959643
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -3478,7 +3481,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Shoryuken
-  m_Speed: 1
+  m_Speed: 0.725
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 7633563036749846785}

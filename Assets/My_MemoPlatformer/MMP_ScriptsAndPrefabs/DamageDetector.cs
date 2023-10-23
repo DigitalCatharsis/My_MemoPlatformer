@@ -146,8 +146,17 @@ namespace My_MemoPlatformer
             if (info.mustCollide)
             {
                 CameraManager.Instance.ShakeCamera(0.2f);
+
+                if (info.attackAbility.useDeathParticles)
+                {
+                    if (info.attackAbility.ParticleType.ToString().Contains("VFX"))
+                    {
+                        GameObject vfx =  PoolManager.Instance.GetObject(info.attackAbility.ParticleType);
+
+                        vfx.transform.position = _control.animationProgress.damagedTrigger.transform.position;
+                    }
+                }
             }
-            CameraManager.Instance.ShakeCamera(0.2f);
 
             if (_debug)
             {

@@ -10,13 +10,13 @@ namespace My_MemoPlatformer
     {
         [SerializeField] private bool debug;
 
-        public bool allowEarlyTurn; //Prevent turning when running from idle
+        [Tooltip("Prevent turning when running from idle")] public bool allowEarlyTurn; 
         public bool lockDirection;
-        public bool lockDirectionNextState;
-        public bool constant; //move no matter what
+        public bool lockDirectionNextState;        
+        [Tooltip("Move no matter what")] public bool constant;
         public AnimationCurve speedGraph;
         public float speed;
-        public float blockDistance;
+        [Tooltip("Distance to prevent moving")] public float blockDistance;
 
         [Header("IgnoreCharacterBox")]
         public bool ignoreCharacterBox;

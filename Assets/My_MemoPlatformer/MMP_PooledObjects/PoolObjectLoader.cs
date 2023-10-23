@@ -11,7 +11,7 @@ using UnityEngine;
         ATTACKINFO,
         HAMMER_OBJ,
         HAMMER_VFX,
-        Test_Hammer,
+        DAMAGE_WHITE_VFX,
     }
 
     public class PoolObjectLoader : MonoBehaviour
@@ -37,9 +37,9 @@ using UnityEngine;
                         obj = Instantiate(Resources.Load("VFX_HammerDown", typeof(GameObject)) as GameObject);
                         break;
                     }           
-                case PoolObjectType.Test_Hammer:
+                case PoolObjectType.DAMAGE_WHITE_VFX:
                     {
-                        obj = Instantiate(Resources.Load("HitParticleEffect(TestVerison)", typeof(GameObject)) as GameObject);
+                        obj = Instantiate(Resources.Load("VFX_Damage_White", typeof(GameObject)) as GameObject);
                         break;
                     }
             }

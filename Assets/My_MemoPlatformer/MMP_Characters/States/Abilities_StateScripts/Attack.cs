@@ -36,7 +36,9 @@ namespace My_MemoPlatformer
         public float rightForce;
         public float upForce;
 
-
+        [Header("Death Particles")]
+        public bool useDeathParticles;
+        public PoolObjectType ParticleType;
 
         private List<AttackInfo> _finishedAttacks = new List<AttackInfo> ();
 
