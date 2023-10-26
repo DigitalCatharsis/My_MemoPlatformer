@@ -279,6 +279,15 @@ namespace My_MemoPlatformer
                 TurnOnRagdoll();
                 animationProgress.ragdollTriggered = false;
             }
+
+            //slow down wallslide
+            if (animationProgress.maxFallVelocity.y != 0f)
+            {
+                if (_rigidBody.velocity.y <= animationProgress.maxFallVelocity.y)
+                {
+                    _rigidBody.velocity = animationProgress.maxFallVelocity;
+                }
+            }
         }
 
         public void MoveForward(float speed, float speedGraph)

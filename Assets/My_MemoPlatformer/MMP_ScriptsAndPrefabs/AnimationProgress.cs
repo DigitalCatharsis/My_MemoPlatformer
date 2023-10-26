@@ -28,7 +28,7 @@ namespace My_MemoPlatformer
         [Header("AirControl")]
         public bool jumped;
         public float airMomentum;
-        //public bool frameUpdated;
+        public Vector3 maxFallVelocity;
         public bool cancelPull;
 
         [Header("UpdateBoxCollider")]
