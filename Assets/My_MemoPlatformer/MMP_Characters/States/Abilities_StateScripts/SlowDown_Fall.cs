@@ -13,11 +13,15 @@ namespace My_MemoPlatformer
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             characterState.characterControl.animationProgress.maxFallVelocity = maxFallVelocity;
+            characterState.characterControl.animationProgress.canWallJump = false;
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-          
+            if (!characterState.characterControl.jump)
+            {
+                characterState.characterControl.animationProgress.canWallJump = true;
+            }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

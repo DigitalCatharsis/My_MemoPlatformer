@@ -17,6 +17,8 @@ public enum TransitionConditionType
     MOVE_FORWARD,
     AIR,
     BLOCKED_BY_WALL,
+    CAN_WALL_JUMP,
+    NOT_GRABBING_LEDGE,
 }
 
 namespace My_MemoPlatformer
@@ -153,6 +155,22 @@ namespace My_MemoPlatformer
                     case TransitionConditionType.AIR:
                         {
                             if (!control.skinnedMeshAnimator.GetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded]) == false)
+                            {
+                                return false;
+                            }
+                        }
+                        break;
+                    case TransitionConditionType.CAN_WALL_JUMP:
+                        {
+                            if (!control.animationProgress.canWallJump)
+                            {
+                                return false;
+                            }
+                        }
+                        break;
+                    case TransitionConditionType.NOT_GRABBING_LEDGE:
+                        {
+                            if (control.ledgeChecker.isGrabbongLedge)
                             {
                                 return false;
                             }
