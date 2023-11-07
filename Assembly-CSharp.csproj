@@ -59,9 +59,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_LayerAdder\LayerAdder.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\SlowDown_Fall.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\Singleton.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Events\ChangeScene.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\WallJump_Prep.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\MoveForward.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Events\GameEvent.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckMovement.cs" />
@@ -109,7 +109,6 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\PlayerSpawn.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\ForceTransition.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckTurbo.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\WallJump.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\DamageDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\BaseScripts\StateData.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\DisAllowEarlyTurn.cs" />
@@ -126,7 +125,6 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Settings\PhysicsSettings.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_LayerAdder\LayerChanger.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\RestartAI.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckAttack.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\Attack.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\TransitionIndexer.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
@@ -140,6 +138,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\ToggleBoxCollider.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckRunningTurn.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\WallSlide.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\JumpPlatform.cs" />
   </ItemGroup>
   <ItemGroup>

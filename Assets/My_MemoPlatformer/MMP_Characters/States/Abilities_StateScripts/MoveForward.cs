@@ -83,6 +83,11 @@ namespace My_MemoPlatformer
                 return;
             }
 
+            if (characterState.characterControl.animationProgress.IsRunning(typeof(WallSlide), this)) //prevent bugs when calculating several states at the short duration
+            {
+                return;
+            }
+
             if (characterState.characterControl.jump)
             {
                 animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Jump], true);

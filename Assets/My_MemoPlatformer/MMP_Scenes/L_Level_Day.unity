@@ -984,7 +984,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7557080083853022557, guid: 6ac14f86bdd8fa74c9d512c678433e03, type: 3}
       propertyPath: m_Name
-      value: Platform 3 (1)
+      value: Platform 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6810,7 +6810,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7557080083853022557, guid: 6ac14f86bdd8fa74c9d512c678433e03, type: 3}
       propertyPath: m_Name
-      value: Platform
+      value: Platform 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
