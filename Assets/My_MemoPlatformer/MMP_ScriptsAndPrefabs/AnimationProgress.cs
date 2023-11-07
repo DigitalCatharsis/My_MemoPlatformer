@@ -31,6 +31,7 @@ namespace My_MemoPlatformer
         public Vector3 maxFallVelocity;
         public bool cancelPull;
         public bool canWallJump;
+        public bool checkWallBlock;
 
         [Header("UpdateBoxCollider")]
         public bool updatingBoxCollider;

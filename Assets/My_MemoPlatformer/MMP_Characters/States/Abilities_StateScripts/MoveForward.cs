@@ -16,7 +16,7 @@ namespace My_MemoPlatformer
         [Tooltip("Move no matter what")] public bool constant;
         public AnimationCurve speedGraph;
         public float speed;
-        [Tooltip("Distance to prevent moving")] public float blockDistance;
+        [Tooltip("Distance to prevent moving, \n MAKE SURE ITS LESS THAN ColliderEdge RADIUS!")] public float blockDistance;
 
         [Header("IgnoreCharacterBox")]
         public bool ignoreCharacterBox;

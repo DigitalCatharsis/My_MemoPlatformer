@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SO_Player_Jump_LedgeGrab_Indexer_1
   m_EditorClassIdentifier: 
   Index: 1
-  transitionConditions: 0500000006000000
+  transitionConditions: 0000000006000000

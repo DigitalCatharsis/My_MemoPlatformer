@@ -42,7 +42,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   speed: 4.5
-  blockDistance: 0.1
+  blockDistance: 0.125
   ignoreCharacterBox: 0
   ignoreStartTime: 0
   ignoreEndTime: 0

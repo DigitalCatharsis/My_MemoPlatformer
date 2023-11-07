@@ -12,7 +12,6 @@ namespace My_MemoPlatformer
             characterState.characterControl.moveRight = false;
             characterState.characterControl.animationProgress.airMomentum = 0.0f;
 
-
             characterState.characterControl.Rigid_Body.velocity = Vector3.zero;
 
             if (characterState.characterControl.IsFacingForward())   //make the character turn 

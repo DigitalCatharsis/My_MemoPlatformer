@@ -17,8 +17,10 @@ public enum TransitionConditionType
     MOVE_FORWARD,
     AIR,
     BLOCKED_BY_WALL,
-    CAN_WALL_JUMP,
+    CAN_WALLJUMP,
     NOT_GRABBING_LEDGE,
+    NOT_BLOCKED_BY_WALL,
+    MOVING_TO_BLOCKING_OBG,
 }
 
 namespace My_MemoPlatformer
@@ -42,6 +44,8 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            characterState.characterControl.animationProgress.checkWallBlock = StartCheckingWallBlock();
+
             if (animator.GetInteger(HashManager.Instance.dicMainParams[TransitionParameter.TransitionIndex]) == 0)
             {
                 if (MakeTransition(characterState.characterControl))
@@ -54,6 +58,19 @@ namespace My_MemoPlatformer
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             animator.SetInteger(HashManager.Instance.dicMainParams[TransitionParameter.TransitionIndex], 0);
+        }
+
+        private bool StartCheckingWallBlock()
+        {
+            foreach(TransitionConditionType t in transitionConditions)
+            {
+                if (t == TransitionConditionType.BLOCKED_BY_WALL || t == TransitionConditionType.NOT_BLOCKED_BY_WALL)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private bool MakeTransition(CharacterControl control)
@@ -160,7 +177,7 @@ namespace My_MemoPlatformer
                             }
                         }
                         break;
-                    case TransitionConditionType.CAN_WALL_JUMP:
+                    case TransitionConditionType.CAN_WALLJUMP:
                         {
                             if (!control.animationProgress.canWallJump)
                             {
@@ -176,18 +193,51 @@ namespace My_MemoPlatformer
                             }
                         }
                         break;
-                    case TransitionConditionType.BLOCKED_BY_WALL:
+                    case TransitionConditionType.MOVING_TO_BLOCKING_OBG:
                         {
                             if (control.animationProgress.blockingObj == null)
                             {
                                 return false;
                             }
-                            else  //if blockingObh != null it could be the character
+
+                            Vector3 dir = control.animationProgress.blockingObj.transform.position - control.transform.position;
+
+                            if (dir.z > 0f && !control.moveRight)
                             {
-                                if (CharacterManager.Instance.GetCharacter(control.animationProgress.blockingObj) != null)
+                                return false;
+                            }
+                            if (dir.z < 0f && !control.moveLeft)
+                            {
+                                return false;
+                            }
+                        }
+                        break;
+                    case TransitionConditionType.BLOCKED_BY_WALL:
+                        {
+                            foreach (OverlapChecker oc in control.collisionSpheres.frontOverlapCheckers) 
+                            {
+                                if (!oc.objIsOverlapping)
                                 {
                                     return false;
                                 }
+                            }
+                        }
+                        break;
+                    case TransitionConditionType.NOT_BLOCKED_BY_WALL:
+                        {
+                            bool allIsoverlapping = true;
+
+                            foreach (OverlapChecker oc in control.collisionSpheres.frontOverlapCheckers) 
+                            {
+                                if (!oc.objIsOverlapping)
+                                {
+                                    allIsoverlapping = false;
+                                }
+                            }
+
+                            if (allIsoverlapping)
+                            {
+                                return false;
                             }
                         }
                         break;

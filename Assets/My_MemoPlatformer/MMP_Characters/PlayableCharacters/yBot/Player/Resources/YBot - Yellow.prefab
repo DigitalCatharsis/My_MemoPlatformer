@@ -140,6 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGrabbongLedge: 0
   grabbedLedge: {fileID: 0}
+  ledgeCalibration: {x: 0, y: 0, z: 0}
 --- !u!1 &60663959005926749
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,7 +342,7 @@ CharacterJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!136 &5615214840259936300
@@ -379,7 +380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalBodyPart: 1
   collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -755,7 +755,7 @@ CharacterJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!136 &1840121598326954834
@@ -793,7 +793,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalBodyPart: 3
   collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -1034,7 +1033,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalBodyPart: 0
   collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -1159,7 +1157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalBodyPart: 2
   collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -1424,7 +1421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalBodyPart: 0
   collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -1502,7 +1498,7 @@ Transform:
   - {fileID: 673519052}
   - {fileID: 1318701341189441266}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2430949021683835266
 BoxCollider:
@@ -1668,7 +1664,10 @@ MonoBehaviour:
   blockingObj: {fileID: 0}
   jumped: 0
   airMomentum: 0
+  maxFallVelocity: {x: 0, y: 0, z: 0}
   cancelPull: 0
+  canWallJump: 0
+  checkWallBlock: 0
   updatingBoxCollider: 0
   updatingSpheres: 0
   targetSize: {x: 0, y: 0, z: 0}
@@ -1678,6 +1677,7 @@ MonoBehaviour:
   attack: {fileID: 0}
   attacker: {fileID: 0}
   damagedTrigger: {fileID: 0}
+  attackingPart: {fileID: 0}
 --- !u!114 &8772349004802611497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1835,7 +1835,7 @@ CharacterJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!136 &7300340283763960569
@@ -1873,7 +1873,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalBodyPart: 3
   collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2204,7 +2203,7 @@ CharacterJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!136 &1110972619262446635
@@ -2242,7 +2241,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalBodyPart: 3
   collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2422,7 +2420,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalBodyPart: 0
   collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2732,6 +2729,7 @@ MonoBehaviour:
   bottomSpheres: []
   frontSpheres: []
   backSpheres: []
+  frontOverlapCheckers: []
 --- !u!1 &6115594643896942180
 GameObject:
   m_ObjectHideFlags: 0
@@ -2860,7 +2858,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalBodyPart: 0
   collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -3063,7 +3060,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalBodyPart: 0
   collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -3509,7 +3505,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalBodyPart: 2
   collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -3816,7 +3811,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalBodyPart: 2
   collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -4052,7 +4046,7 @@ CharacterJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!136 &2526551999990073666
@@ -4090,7 +4084,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalBodyPart: 3
   collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -4232,7 +4225,7 @@ CharacterJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!136 &4529676744092964149
@@ -4270,7 +4263,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalBodyPart: 1
   collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -4704,7 +4696,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalBodyPart: 2
   collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}

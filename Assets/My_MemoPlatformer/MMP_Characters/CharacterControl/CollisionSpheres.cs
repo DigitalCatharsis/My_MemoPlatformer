@@ -12,6 +12,8 @@ namespace My_MemoPlatformer
         public List<GameObject> frontSpheres = new List<GameObject>();
         public List<GameObject> backSpheres = new List<GameObject>();
 
+        public List<OverlapChecker> frontOverlapCheckers = new List<OverlapChecker>();
+
         public void SetColliderSpheres()
         {
             //bottom
@@ -29,6 +31,7 @@ namespace My_MemoPlatformer
             {
                 GameObject obj = Instantiate(Resources.Load("ColliderEdge", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
                 frontSpheres.Add(obj);
+                frontOverlapCheckers.Add(obj.GetComponent<OverlapChecker>());
                 obj.transform.parent = this.transform.Find("Front");
             }
 

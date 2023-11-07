@@ -51,7 +51,7 @@ namespace My_MemoPlatformer
 
                     if (yDiffirence < 0.01f)
                     {
-                        if (Mathf.Abs(control.Rigid_Body.velocity.y) < 0.01f)
+                        if (Mathf.Abs(control.Rigid_Body.velocity.y) < 0.001f)
                         {
                             //control.animationProgress.ground = c.otherCollider.transform.root.gameObject; //что колайдерит bottom сферы
                             control.animationProgress.ground = c.otherCollider.transform.gameObject; //что колайдерит bottom сферы
