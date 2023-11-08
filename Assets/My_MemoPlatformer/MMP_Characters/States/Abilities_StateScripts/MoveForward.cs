@@ -34,6 +34,8 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            characterState.characterControl.animationProgress.latestMoveForward = this;
+
             if (allowEarlyTurn && !characterState.characterControl.animationProgress.disAllowEarlyTurn)
             {
                 if (!characterState.characterControl.animationProgress.lockDirectionNextState)
@@ -78,12 +80,12 @@ namespace My_MemoPlatformer
 
             characterState.characterControl.animationProgress.lockDirectionNextState = lockDirectionNextState;
 
-            if (characterState.characterControl.animationProgress.IsRunning(typeof(MoveForward), this)) //prevent double update
+            if (characterState.characterControl.animationProgress.latestMoveForward != this)
             {
                 return;
             }
 
-            if (characterState.characterControl.animationProgress.IsRunning(typeof(WallSlide), this)) //prevent bugs when calculating several states at the short duration
+            if (characterState.characterControl.animationProgress.IsRunning(typeof(WallSlide))) //prevent bugs when calculating several states at the short duration
             {
                 return;
             }

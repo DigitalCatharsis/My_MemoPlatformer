@@ -5,11 +5,12 @@ namespace My_MemoPlatformer
 {
     public class AnimationProgress : MonoBehaviour
     {
-        public List<StateData> currentRunningAbilities = new List<StateData>();
+        public Dictionary<StateData, int> currentRunningAbilities = new Dictionary<StateData, int>();
 
         public bool cameraShaken;
         public List<PoolObjectType> poolObjectList = new List<PoolObjectType>();
         public bool ragdollTriggered;
+        public MoveForward latestMoveForward;
 
         [Header("Attack Button")]
         public bool attackTriggered;
@@ -71,24 +72,16 @@ namespace My_MemoPlatformer
             }
         }
 
-        public bool IsRunning(System.Type type, StateData self) //ability is running now?
+        public bool IsRunning(System.Type type) //ability is running now?
         {
-            for (int i = 0; i < currentRunningAbilities.Count; i++)
+           foreach(KeyValuePair<StateData,int> data in currentRunningAbilities)
             {
-                if (type == currentRunningAbilities[i].GetType())
+                if(data.Key.GetType() == type)
                 {
-                    if (currentRunningAbilities[i] == self)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        //Debug.Log(type.ToString() + " is already running");
-                        return true;
-                    }                    
+                    return true;
                 }
             }
-            return false;
+           return false;
         }
 
         public bool RightSideIsBlocked()

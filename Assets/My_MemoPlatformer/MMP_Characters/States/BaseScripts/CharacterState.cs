@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace My_MemoPlatformer
 {
@@ -22,9 +23,13 @@ namespace My_MemoPlatformer
             foreach (StateData d in ListAbilityData)
             {
                 d.OnEnter(this, animator, stateInfo);
-                if (!characterControl.animationProgress.currentRunningAbilities.Contains(d))
+                if (characterControl.animationProgress.currentRunningAbilities.ContainsKey(d))
                 {
-                    characterControl.animationProgress.currentRunningAbilities.Add(d);
+                    characterControl.animationProgress.currentRunningAbilities[d] += 1;
+                }
+                else
+                {
+                    characterControl.animationProgress.currentRunningAbilities.Add(d,1);
                 }
             }
         }
@@ -47,9 +52,14 @@ namespace My_MemoPlatformer
             {
                 d.OnExit(this, animator, stateInfo);
 
-                if (characterControl.animationProgress.currentRunningAbilities.Contains(d))
+                if (characterControl.animationProgress.currentRunningAbilities.ContainsKey(d))
                 {
-                    characterControl.animationProgress.currentRunningAbilities.Remove(d);
+                    characterControl.animationProgress.currentRunningAbilities[d] -= 1;
+
+                    if (characterControl.animationProgress.currentRunningAbilities[d] <= 0)
+                    {
+                        characterControl.animationProgress.currentRunningAbilities.Remove(d);
+                    }
                 }
             }
         }
