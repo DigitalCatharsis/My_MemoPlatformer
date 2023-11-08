@@ -30,7 +30,7 @@ namespace My_MemoPlatformer
 
         public void TriggerCamera(CameraTrigger trigger)
         {
-            Animator.SetTrigger(trigger.ToString());
+            Animator.SetTrigger(HashManager.Instance.dicCameraTriggers[trigger]);
         }
 
     }

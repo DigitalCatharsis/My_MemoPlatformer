@@ -35,13 +35,13 @@ namespace My_MemoPlatformer
 
             if (characterState.characterControl.aiProgress.pathfindfingAgent.startWalk)
             {
-                animator.SetBool(AI_Walk_Transitions.Start_Walking.ToString(), true);
+                animator.SetBool(HashManager.Instance.dicAITransitions[AI_Walk_Transitions.Start_Walking], true);
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.SetBool(AI_Walk_Transitions.Start_Walking.ToString(), false);
+            animator.SetBool(HashManager.Instance.dicAITransitions[AI_Walk_Transitions.Start_Walking], false);
         }
     }
 
