@@ -16,8 +16,7 @@ namespace My_MemoPlatformer
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             if (onStart)
-            {
-                
+            {                
                 ToggleBoxCol(characterState.characterControl);
             }
         }

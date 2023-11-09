@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -25,7 +23,7 @@ namespace My_MemoPlatformer
 
             characterState.characterControl.aiProgress.pathfindfingAgent.owner = characterState.characterControl;
             characterState.characterControl.aiProgress.pathfindfingAgent.GetComponent<NavMeshAgent>().enabled = false;
-            characterState.characterControl.aiProgress.pathfindfingAgent.transform.position = characterState.characterControl.transform.position;
+            characterState.characterControl.aiProgress.pathfindfingAgent.transform.position = characterState.characterControl.transform.position + (Vector3.up * 0.5f);
             characterState.characterControl.navMeshObstacle.carving = false; //to prevent bug when carving forbids agent to move
             characterState.characterControl.aiProgress.pathfindfingAgent.GoToTarget();
         }

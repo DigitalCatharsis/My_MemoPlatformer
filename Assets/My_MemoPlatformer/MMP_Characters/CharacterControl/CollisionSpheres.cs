@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,9 +48,9 @@ namespace My_MemoPlatformer
         }
         public void Reposition_BackSpheres()
         {
-            float bottom = owner.boxCollider.bounds.center.y - owner.boxCollider.bounds.size.y / 2; // в центре внизу. 
-            float top = owner.boxCollider.bounds.center.y + owner.boxCollider.bounds.size.y / 2; // в центре вверху.
-            float back = owner.boxCollider.bounds.center.z - owner.boxCollider.bounds.size.z / 2; // в центре спереди.
+            float bottom = owner.boxCollider.bounds.center.y - (owner.boxCollider.bounds.size.y / 2f); // в центре внизу. 
+            float top = owner.boxCollider.bounds.center.y + (owner.boxCollider.bounds.size.y / 2f); // в центре вверху.
+            float back = owner.boxCollider.bounds.center.z - (owner.boxCollider.bounds.size.z / 2f); // в центре спереди.
 
             backSpheres[0].transform.localPosition = new Vector3(0f, bottom + 0.05f, back) - this.transform.position;
             backSpheres[1].transform.localPosition = new Vector3(0f, top, back) - this.transform.position;
@@ -67,9 +66,9 @@ namespace My_MemoPlatformer
 
         public void Reposition_FrontSpheres()
         {
-            float bottom = owner.boxCollider.bounds.center.y - owner.boxCollider.bounds.size.y / 2; // в центре внизу. 
-            float top = owner.boxCollider.bounds.center.y + owner.boxCollider.bounds.size.y / 2; // в центре вверху. ;
-            float front = owner.boxCollider.bounds.center.z + owner.boxCollider.bounds.size.z / 2; // в центре спереди. ;
+            float bottom = owner.boxCollider.bounds.center.y - (owner.boxCollider.bounds.size.y / 2f); // в центре внизу. 
+            float top = owner.boxCollider.bounds.center.y + (owner.boxCollider.bounds.size.y / 2f); // в центре вверху. ;
+            float front = owner.boxCollider.bounds.center.z + (owner.boxCollider.bounds.size.z / 2f); // в центре спереди. ;
             //float back = boxCollider.bounds.center.z - boxCollider.bounds.size.z; // в центре сзади. ;;
 
             frontSpheres[0].transform.localPosition = new Vector3(0f, bottom + 0.05f, front) - this.transform.position;
@@ -86,10 +85,10 @@ namespace My_MemoPlatformer
 
         public void Reposition_BottomSpheres()
         {
-            float bottom = owner.boxCollider.bounds.center.y - owner.boxCollider.bounds.size.y / 2; // в центре внизу. 
+            float bottom = owner.boxCollider.bounds.center.y - (owner.boxCollider.bounds.size.y / 2f); // в центре внизу. 
             //float top = boxCollider.bounds.center.y + boxCollider.bounds.size.y; // в центре вверху. ;
-            float front = owner.boxCollider.bounds.center.z + owner.boxCollider.bounds.size.z / 2; // в центре спереди. ;
-            float back = owner.boxCollider.bounds.center.z - owner.boxCollider.bounds.size.z / 2; // в центре сзади. ;;
+            float front = owner.boxCollider.bounds.center.z + (owner.boxCollider.bounds.size.z / 2f); // в центре спереди. ;
+            float back = owner.boxCollider.bounds.center.z - (owner.boxCollider.bounds.size.z / 2f); // в центре сзади. ;;
 
             bottomSpheres[0].transform.localPosition = new Vector3(0f, bottom, back) - this.transform.position;
             bottomSpheres[1].transform.localPosition = new Vector3(0f, bottom, front) - this.transform.position;
