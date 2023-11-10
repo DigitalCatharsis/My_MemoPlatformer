@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eaff6f6f2abc0794896d70a63da7cbcf, type: 3}
-  m_Name: SO_Player_ForwardRoll_MoveForward
+  m_Name: SO_Player_ForwardRoll_End_MoveForward
   m_EditorClassIdentifier: 
   debug: 0
   allowEarlyTurn: 0
@@ -22,40 +22,31 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.5
-      inSlope: 2.594975
-      outSlope: 2.594975
+      value: 1
+      inSlope: -0.047042146
+      outSlope: -0.047042146
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.18073957
-      value: 0.96901464
-      inSlope: -0.20085756
-      outSlope: -0.20085756
+      time: 0.74031067
+      value: 0.9651742
+      inSlope: -0.21461779
+      outSlope: -0.21461779
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.06490651
-    - serializedVersion: 3
-      time: 0.88
-      value: 0.8
-      inSlope: -0.3928479
-      outSlope: -0.3928479
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.44154224
+      inWeight: 0.05571219
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 0.5
-      inSlope: -2.5
-      outSlope: -2.5
+      value: 0.4
+      inSlope: -2.1763475
+      outSlope: -2.1763475
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

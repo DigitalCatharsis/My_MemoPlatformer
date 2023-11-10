@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ba82b944131404a4383b3d7bc992377d
+guid: 42ec2975e71306c408219b5f8ea2f63f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: ForwardRoll
+      name: ForwardRoll_Start
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 20
-      lastFrame: 110
+      lastFrame: 69
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
