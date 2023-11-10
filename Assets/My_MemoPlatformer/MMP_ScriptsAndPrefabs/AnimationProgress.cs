@@ -20,7 +20,6 @@ namespace My_MemoPlatformer
         [Header("GroundMovement")]
         public bool disAllowEarlyTurn;
         public bool lockDirectionNextState;
-        public bool isLanding;
 
         [Header("Colliding Objects")]
         public GameObject ground;
