@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e0ba571eff373647b5ee80e9e370e01, type: 3}
-  m_Name: SO_Player_CrouchIdle_ToggleBoxCollider
+  m_Script: {fileID: 11500000, guid: 80ed62a8fe4bde449b481791cd975f35, type: 3}
+  m_Name: SO_Player_LedgeClimb_UpdateBoxCollider
   m_EditorClassIdentifier: 
-  on: 1
-  onStart: 1
-  onEnd: 0
-  repositionSpheres: 1
+  targetCenter: {x: 0, y: 1.2, z: 0}
+  centerUpdateSpeed: 10
+  targetSize: {x: 1, y: 0.9, z: 0.4}
+  sizeUpdateSpeed: 10
+  keepUpdating: 0
