@@ -8,6 +8,7 @@ namespace My_MemoPlatformer
         public bool on;
         public bool onStart;
         public bool onEnd;
+        [Tooltip("Toggle Gravity at this % of animation")] public float customTiming;
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
@@ -20,14 +21,19 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-
+            if (customTiming != 0f)
+            {
+                if (customTiming <= stateInfo.normalizedTime)
+                {
+                    ToggleGrav(characterState.characterControl);
+                }
+            }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             if (onEnd)
-            {
-                
+            {                
                 ToggleGrav(characterState.characterControl);
             }   
         }
