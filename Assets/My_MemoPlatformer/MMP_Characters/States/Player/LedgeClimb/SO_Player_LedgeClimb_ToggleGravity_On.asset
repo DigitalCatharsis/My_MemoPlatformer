@@ -15,4 +15,4 @@ MonoBehaviour:
   on: 1
   onStart: 0
   onEnd: 0
-  customTiming: 0.9
+  customTiming: 1

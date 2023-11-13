@@ -34,7 +34,6 @@ namespace My_MemoPlatformer
         public bool checkWallBlock;
 
         [Header("UpdateBoxCollider")]
-        public bool updatingBoxCollider;
         public bool updatingSpheres;
         public Vector3 targetSize;
         public float sizeSpeed;

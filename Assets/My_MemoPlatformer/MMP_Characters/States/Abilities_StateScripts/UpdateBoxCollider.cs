@@ -13,16 +13,11 @@ namespace My_MemoPlatformer
         [Space(10)]
         public Vector3 targetSize;
         public float sizeUpdateSpeed;
-        [Space(10)]
-        public bool keepUpdating;
 
 
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
-            
-            characterState.characterControl.animationProgress.updatingBoxCollider = true;
-
+        {      
             characterState.characterControl.animationProgress.targetSize = targetSize;
             characterState.characterControl.animationProgress.sizeSpeed = sizeUpdateSpeed;
 
@@ -35,13 +30,7 @@ namespace My_MemoPlatformer
 
         }
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
-            
-
-            if (!keepUpdating) 
-            {
-                characterState.characterControl.animationProgress.updatingBoxCollider = false;
-            }            
+        {       
         }
     }
 }

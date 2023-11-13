@@ -223,7 +223,7 @@ namespace My_MemoPlatformer
 
         public void UpdateBoxColliderSize()
         {
-            if (!animationProgress.updatingBoxCollider)
+            if (!animationProgress.IsRunning(typeof(UpdateBoxCollider)))
             {
                 return;
             }
@@ -238,12 +238,12 @@ namespace My_MemoPlatformer
 
         public void UpdateBoxColliderCenter()
         {
-            if (!animationProgress.updatingBoxCollider)
+            if (!animationProgress.IsRunning(typeof(UpdateBoxCollider)))
             {
                 return;
             }
 
-            if (Vector3.SqrMagnitude(boxCollider.center - animationProgress.targetCenter) > 0.01f)
+            if (Vector3.SqrMagnitude(boxCollider.center - animationProgress.targetCenter) > 0.0001f)
             {
                 boxCollider.center = Vector3.Lerp(boxCollider.center, animationProgress.targetCenter, Time.deltaTime * animationProgress.centerSpeed);
 
