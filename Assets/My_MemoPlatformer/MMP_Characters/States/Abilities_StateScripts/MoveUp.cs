@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -17,12 +18,33 @@ namespace My_MemoPlatformer
         {
             if (!characterState.characterControl.Rigid_Body.useGravity)
             {
-                characterState.characterControl.transform.Translate(Vector3.up * speed * speedGraph.Evaluate(stateInfo.normalizedTime) * Time.deltaTime);
+                if (!UpIsBlocked(characterState.characterControl))
+                {
+                    characterState.characterControl.transform.Translate(Vector3.up * speed * speedGraph.Evaluate(stateInfo.normalizedTime) * Time.deltaTime);
+                }
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+        }
+
+        private bool UpIsBlocked(CharacterControl control)
+        {
+            foreach (GameObject o in control.collisionSpheres.upSpheres)
+            {
+                Debug.DrawRay(o.transform.position, control.transform.up * 0.3f, Color.yellow);
+
+                RaycastHit hit;
+                if (Physics.Raycast(o.transform.position, control.transform.up, out hit, 0.125f))
+                {
+                    if (hit.collider.transform.root.gameObject != control.gameObject && !Ledge.IsLedge(hit.collider.gameObject))   //not a character or a ledge
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

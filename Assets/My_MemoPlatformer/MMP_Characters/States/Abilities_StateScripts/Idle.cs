@@ -26,7 +26,10 @@ namespace My_MemoPlatformer
             {
                 if (!characterState.characterControl.animationProgress.jumped)
                 {
-                    animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Jump], true);
+                    if (characterState.characterControl.animationProgress.ground != null)
+                    {
+                        animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Jump], true);
+                    }
                 }
             }
             else

@@ -10,6 +10,7 @@ namespace My_MemoPlatformer
         public List<GameObject> bottomSpheres = new List<GameObject>();
         public List<GameObject> frontSpheres = new List<GameObject>();
         public List<GameObject> backSpheres = new List<GameObject>();
+        public List<GameObject> upSpheres = new List<GameObject>();
 
         public List<OverlapChecker> frontOverlapCheckers = new List<OverlapChecker>();
 
@@ -24,6 +25,16 @@ namespace My_MemoPlatformer
             }
 
             Reposition_BottomSpheres();
+
+            //top
+            for (int i = 0; i < 5; i++)
+            {
+                GameObject obj = Instantiate(Resources.Load("ColliderEdge", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
+                upSpheres.Add(obj);
+                obj.transform.parent = this.transform.Find("Bottom");
+            }
+
+            Reposition_UpSpheres();
 
             //front
             for (int i = 0; i < 10; i++)
@@ -98,6 +109,23 @@ namespace My_MemoPlatformer
             for (int i = 2; i < bottomSpheres.Count; i++)
             {
                 bottomSpheres[i].transform.localPosition = new Vector3(0f, bottom, back + (interval * (i - 1)))
+                     - this.transform.position;
+            }
+        }
+        public void Reposition_UpSpheres()
+        {
+            float top = owner.boxCollider.bounds.center.y + (owner.boxCollider.bounds.size.y / 2f); // в центре вверху. 
+            float front = owner.boxCollider.bounds.center.z + (owner.boxCollider.bounds.size.z / 2f); // в центре спереди. ;
+            float back = owner.boxCollider.bounds.center.z - (owner.boxCollider.bounds.size.z / 2f); // в центре сзади. ;;
+
+            upSpheres[0].transform.localPosition = new Vector3(0f, top, back) - this.transform.position;
+            upSpheres[1].transform.localPosition = new Vector3(0f, top, front) - this.transform.position;
+
+            float interval = (front - back) / 4;
+
+            for (int i = 2; i < upSpheres.Count; i++)
+            {
+                upSpheres[i].transform.localPosition = new Vector3(0f, top, back + (interval * (i - 1)))
                      - this.transform.position;
             }
         }

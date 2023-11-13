@@ -10,9 +10,9 @@ namespace My_MemoPlatformer
     {
         [SerializeField] private bool debug;
 
-        [Tooltip("Prevent turning when running from idle")] public bool allowEarlyTurn; 
+        [Tooltip("Prevent turning when running from idle")] public bool allowEarlyTurn;
         public bool lockDirection;
-        public bool lockDirectionNextState;        
+        public bool lockDirectionNextState;
         [Tooltip("Move no matter what")] public bool constant;
         public AnimationCurve speedGraph;
         public float speed;
@@ -92,7 +92,10 @@ namespace My_MemoPlatformer
 
             if (characterState.characterControl.jump)
             {
-                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Jump], true);
+                if (characterState.characterControl.animationProgress.ground != null)
+                {
+                    animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Jump], true);
+                }
             }
 
             if (characterState.characterControl.turbo)
@@ -306,11 +309,11 @@ namespace My_MemoPlatformer
             {
                 return true;
             }
-            
+
 
             CharacterControl target = CharacterManager.Instance.GetCharacter(col.transform.root.gameObject);
 
-            if (target == null) 
+            if (target == null)
             {
                 return false;
             }
