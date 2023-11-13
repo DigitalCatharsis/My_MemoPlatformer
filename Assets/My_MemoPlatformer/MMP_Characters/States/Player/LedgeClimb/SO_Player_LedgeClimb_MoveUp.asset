@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f7eadc9773ae3940b0e71a314acff79, type: 3}
-  m_Name: SO_Player_LedgeGrab_MoveUp
+  m_Name: SO_Player_LedgeClimb_MoveUp
   m_EditorClassIdentifier: 
   speedGraph:
     serializedVersion: 2

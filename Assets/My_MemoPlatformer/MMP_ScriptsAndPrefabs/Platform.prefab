@@ -223,8 +223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481dfa3c577d9ed42986e3c79de7f132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: -11.64, z: 0.72}
-  endPosition: {x: 0, y: 0, z: -0.25}
+  offset: {x: 0, y: -2.3, z: 0}
+  endPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &2152981948384565818
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,8 +448,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481dfa3c577d9ed42986e3c79de7f132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: -11.45, z: -0.9}
-  endPosition: {x: 0, y: 0, z: 0.25}
+  offset: {x: 0, y: -2.3, z: 0}
+  endPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &4135263068187955823
 GameObject:
   m_ObjectHideFlags: 0
