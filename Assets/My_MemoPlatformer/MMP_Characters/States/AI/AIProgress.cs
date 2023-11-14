@@ -29,7 +29,7 @@ namespace My_MemoPlatformer
 
         public float AIDistanceToTarget()
         {
-            return Vector3.SqrMagnitude(_control.aiProgress.pathfindfingAgent.target .transform.position
+            return Vector3.SqrMagnitude(_control.aiProgress.pathfindfingAgent.target.transform.position
                 - _control.transform.position);
         }
         public float TargetDistanceToEndSphere()
@@ -52,14 +52,33 @@ namespace My_MemoPlatformer
 
         public bool TargetIsOnRightSide()
         {
-            if((_control.aiProgress.pathfindfingAgent.target.transform.position - _control.transform.position).z > 0f)
+            if ((_control.aiProgress.pathfindfingAgent.target.transform.position - _control.transform.position).z > 0f)
             {
                 return true;
             }
-            else 
-            { 
-                return false; 
+            else
+            {
+                return false;
             }
+        }
+        public bool IsFacingTarget()
+        {
+            if ((_control.aiProgress.pathfindfingAgent.target.transform.position - _control.transform.position).z > 0f)
+            {
+                if (_control.IsFacingForward())
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                if (!_control.IsFacingForward())
+                {
+                    return true;
+                }
+            }
+            
+            return false;
         }
 
         public bool TargetIsOnTheSamePlatform()
@@ -140,6 +159,13 @@ namespace My_MemoPlatformer
             {
                 doFlyingKick = false;
             }
+        }
+
+        public float GetStartSphereHeight()
+        {
+            Vector3 vec = _control.transform.position - pathfindfingAgent.startSphere.transform.position;
+
+            return Mathf.Abs(vec.y);
         }
     }
 }

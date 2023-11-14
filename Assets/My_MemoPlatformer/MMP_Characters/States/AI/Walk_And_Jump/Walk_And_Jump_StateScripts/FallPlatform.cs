@@ -7,19 +7,7 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {   
-            if (characterState.characterControl.transform.position.z < characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.z)
-            {
-                characterState.characterControl.FaceForward(true);
-            }
-            else if (characterState.characterControl.transform.position.z > characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.z)
-            {
-                characterState.characterControl.FaceForward(false);
-            }
 
-            if (characterState.characterControl.aiProgress.AI_DistanceToStartSphere() > 3f)
-            {
-                characterState.characterControl.turbo = true;
-            }
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -35,21 +23,20 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (characterState.characterControl.IsFacingForward())
+            if (characterState.characterControl.transform.position.z < characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.z)
             {
-                if (characterState.characterControl.transform.position.z < characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.z)
-                {
-                    characterState.characterControl.moveRight = true;
-                    characterState.characterControl.moveLeft = false;
-                }
+                characterState.characterControl.moveRight = true;
+                characterState.characterControl.moveLeft = false;
             }
-            else
+            else if (characterState.characterControl.transform.position.z > characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.z)
             {
-                if (characterState.characterControl.transform.position.z > characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.z)
-                {
-                    characterState.characterControl.moveLeft = true;
-                    characterState.characterControl.moveRight = false;
-                }
+                characterState.characterControl.moveRight = false;
+                characterState.characterControl.moveLeft = true;
+            }
+
+            if (characterState.characterControl.aiProgress.AI_DistanceToStartSphere() > 3f)
+            {
+                characterState.characterControl.turbo = true;
             }
         }
 

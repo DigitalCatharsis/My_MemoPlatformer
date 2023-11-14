@@ -32,13 +32,13 @@ namespace My_MemoPlatformer
             {
                 FlyingKick(characterState.characterControl);
             }
-            else if(!characterState.characterControl.turbo && characterState.characterControl.aiProgress.AIDistanceToTarget() < 1f)
+            else if (!characterState.characterControl.turbo && characterState.characterControl.aiProgress.AIDistanceToTarget() < 1f)
             {
                 _listGroundAttacks[Random.Range(0, _listGroundAttacks.Count)](characterState.characterControl);
             }
             else
             {
-                characterState.characterControl.attack = false; 
+                characterState.characterControl.attack = false;
             }
         }
 
@@ -48,13 +48,17 @@ namespace My_MemoPlatformer
             {
                 control.moveRight = false;
                 control.moveLeft = false;
-                control.attack = true;
-            }
-            else
-            {
-                control.attack = false;
-            }
 
+                if (control.aiProgress.IsFacingTarget() && !control.animationProgress.IsRunning(typeof(MoveForward)))
+                {
+                    control.attack = true;
+                }
+                else
+                {
+                    control.attack = false;
+                }
+
+            }
         }
         public void ForwardGroundAttack(CharacterControl control)
         {
@@ -64,13 +68,21 @@ namespace My_MemoPlatformer
                 {
                     control.moveRight = true;
                     control.moveLeft = false;
-                    control.attack = true;
+
+                    if (control.aiProgress.IsFacingTarget() && control.animationProgress.IsRunning(typeof(MoveForward)))
+                    {
+                        control.attack = true;
+                    }
                 }
                 else
                 {
                     control.moveRight = false;
                     control.moveLeft = true;
-                    control.attack = true;
+
+                    if (control.aiProgress.IsFacingTarget() && control.animationProgress.IsRunning(typeof(MoveForward)))
+                    {
+                        control.attack = true;
+                    }
                 }
             }
             else
@@ -83,7 +95,7 @@ namespace My_MemoPlatformer
         {
             if (control.aiProgress.doFlyingKick &&
                     control.aiProgress.TargetIsOnTheSamePlatform())
-                       
+
             {
                 control.attack = true;
             }

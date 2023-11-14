@@ -41,9 +41,9 @@ namespace My_MemoPlatformer
                 {
                     if (characterState.characterControl.animationProgress.ground != null)
                     {
-                        if (!characterState.characterControl.animationProgress.IsRunning(typeof(Jump)) 
+                        if (!characterState.characterControl.animationProgress.IsRunning(typeof(Jump))
                             && !characterState.characterControl.animationProgress.IsRunning(typeof(JumpPrep)))
-                            {
+                        {
                             characterState.characterControl.turbo = false;
                             characterState.characterControl.jump = false;
                             characterState.characterControl.moveUp = false;
@@ -53,6 +53,23 @@ namespace My_MemoPlatformer
                             characterState.characterControl.aiController.InitializeAI();
                         }
                     }
+                }
+            }
+
+            //startsphere Height
+            if (characterState.characterControl.animationProgress.ground != null
+                && !characterState.characterControl.animationProgress.IsRunning(typeof(Jump))
+                && !characterState.characterControl.animationProgress.IsRunning(typeof(WallJump_Prep)))
+            {
+                if (characterState.characterControl.aiProgress.GetStartSphereHeight() > 0.1f)
+                {
+                    characterState.characterControl.turbo = false;
+                    characterState.characterControl.jump = false;
+                    characterState.characterControl.moveUp = false;
+                    characterState.characterControl.moveLeft = false;
+                    characterState.characterControl.moveRight = false;
+                    characterState.characterControl.moveDown = false;
+                    characterState.characterControl.aiController.InitializeAI();
                 }
             }
         }
