@@ -80,9 +80,24 @@ namespace My_MemoPlatformer
             }
         }
 
-        public void WalkStraightToStartSphere()
+        public void WalkStraightToTheStartSphere()
         {
-            _targetDir = _control.aiProgress.pathfindfingAgent.startSphere.transform.position
+            _targetDir = _control.aiProgress.pathfindfingAgent.startSphere.transform.position - _control.transform.position;
+
+            if (_targetDir.z > 0f)
+            {
+                _control.moveLeft = false;
+                _control.moveRight = true;
+            }
+            else
+            {
+                _control.moveLeft = true;
+                _control.moveRight = false;
+            }
+        }
+        public void WalkStraightToTheEndSphere()
+        {
+            _targetDir = _control.aiProgress.pathfindfingAgent.endSphere.transform.position
                 - _control.transform.position;
 
             if (_targetDir.z > 0f)

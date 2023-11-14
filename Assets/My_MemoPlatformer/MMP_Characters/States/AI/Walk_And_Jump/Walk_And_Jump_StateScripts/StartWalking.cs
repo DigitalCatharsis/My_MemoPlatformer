@@ -12,7 +12,7 @@ namespace My_MemoPlatformer
         {
 
             characterState.characterControl.aiProgress.SetRandomFlyingKick();
-            characterState.characterControl.aiController.WalkStraightToStartSphere();
+            characterState.characterControl.aiController.WalkStraightToTheStartSphere();
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -31,7 +31,7 @@ namespace My_MemoPlatformer
             if (characterState.characterControl.aiProgress.EndSphereIsHigher())
             {
                 //Jumping
-                if (characterState.characterControl.aiProgress.AI_DistanceToStartSphere() < 0.015f) //how close are we to the checkpoint    //Здесь часто бывает баг (когда иди бегает вокруг Start Point) из-за разных смещений платформы или ИИ относительно друг друга. Увелич да < 0.1f для дебага
+                if (characterState.characterControl.aiProgress.AI_DistanceToStartSphere() < 0.08f) //how close are we to the checkpoint    //Здесь часто бывает баг (когда иди бегает вокруг Start Point) из-за разных смещений платформы или ИИ относительно друг друга. Увелич да < 0.1f для дебага
                 {
                     //Debug.DrawLine(control.aiProgress.pathfindfingAgent.startSphere.transform.position, control.transform.position, UnityEngine.Color.green, 2.5f);
                     characterState.characterControl.moveLeft = false;
@@ -44,6 +44,8 @@ namespace My_MemoPlatformer
             //fall
             if (characterState.characterControl.aiProgress.EndSphereIsLower())
             {
+                characterState.characterControl.aiController.WalkStraightToTheEndSphere();
+
                 animator.SetBool(HashManager.Instance.dicAITransitions[AI_Walk_Transitions.Fall_Platform], true);
                 return;
             }
@@ -58,7 +60,7 @@ namespace My_MemoPlatformer
                 characterState.characterControl.turbo = false;
             }
 
-            characterState.characterControl.aiController.WalkStraightToStartSphere();
+            characterState.characterControl.aiController.WalkStraightToTheStartSphere();
 
             if (characterState.characterControl.aiProgress.AI_DistanceToEndSphere() < 1f)
             {
