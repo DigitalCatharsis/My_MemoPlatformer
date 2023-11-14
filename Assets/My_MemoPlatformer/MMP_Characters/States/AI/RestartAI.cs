@@ -14,7 +14,7 @@ namespace My_MemoPlatformer
             //walking
             if (characterState.characterControl.aiProgress.AI_DistanceToEndSphere() < 1.0f)
             {
-                if (characterState.characterControl.aiProgress.TargetDistanceToEndSphere() > 5f)
+                if (characterState.characterControl.aiProgress.TargetDistanceToEndSphere() > 0.5f)
                 {
                     if (characterState.characterControl.aiProgress.TargetIsGrounded())
                     {
