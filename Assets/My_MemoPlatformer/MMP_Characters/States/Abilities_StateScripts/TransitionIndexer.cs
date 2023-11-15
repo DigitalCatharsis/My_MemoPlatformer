@@ -195,20 +195,18 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.MOVING_TO_BLOCKING_OBG:
                         {
-                            if (control.animationProgress.blockingObj == null)
+                            foreach (KeyValuePair<GameObject, GameObject> data in control.animationProgress.blockingObjects)
                             {
-                                return false;
-                            }
+                                Vector3 dir = data.Value.transform.position - control.transform.position;
 
-                            Vector3 dir = control.animationProgress.blockingObj.transform.position - control.transform.position;
-
-                            if (dir.z > 0f && !control.moveRight)
-                            {
-                                return false;
-                            }
-                            if (dir.z < 0f && !control.moveLeft)
-                            {
-                                return false;
+                                if (dir.z > 0f && !control.moveRight)
+                                {
+                                    return false;
+                                }
+                                if (dir.z < 0f && !control.moveLeft)
+                                {
+                                    return false;
+                                }
                             }
                         }
                         break;

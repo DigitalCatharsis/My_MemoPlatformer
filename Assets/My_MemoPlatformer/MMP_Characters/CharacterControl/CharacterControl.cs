@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
 
 namespace My_MemoPlatformer
 {
@@ -50,8 +47,6 @@ namespace My_MemoPlatformer
         public NavMeshObstacle navMeshObstacle;
 
         [Header("Gravity")]
-        //public float gravityMultipliyer;
-        //public float pullMultipliyer;
         public ContactPoint[] contactPoints;
 
         [Header("Setup")]

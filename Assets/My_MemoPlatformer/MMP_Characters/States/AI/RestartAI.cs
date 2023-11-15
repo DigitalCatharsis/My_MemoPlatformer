@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -33,8 +34,28 @@ namespace My_MemoPlatformer
             }
 
             //path is blocked
-            characterState.characterControl.aiProgress.blockingCharacter = CharacterManager.Instance.GetCharacter(characterState.characterControl.animationProgress.blockingObj);
-
+            if (characterState.characterControl.animationProgress.blockingObjects.Count == 0)
+            {
+                characterState.characterControl.aiProgress.blockingCharacter = null;
+            }
+            else
+            {
+                foreach (KeyValuePair<GameObject, GameObject> data in characterState.characterControl.animationProgress.blockingObjects)
+                {
+                    CharacterControl blockingCharacter = CharacterManager.Instance.GetCharacter(data.Value);
+                     
+                    if (blockingCharacter != null)
+                    {
+                        characterState.characterControl.aiProgress.blockingCharacter = blockingCharacter;
+                        break;
+                    }
+                    else
+                    {
+                        characterState.characterControl.aiProgress.blockingCharacter = null;
+                    }
+                }
+            }
+            
             if (characterState.characterControl.aiProgress.blockingCharacter != null)
             {
                 if (characterState.characterControl.animationProgress.ground != null)

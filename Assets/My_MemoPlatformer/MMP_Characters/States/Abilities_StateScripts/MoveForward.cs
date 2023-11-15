@@ -29,12 +29,9 @@ namespace My_MemoPlatformer
         public float maxMomentum;
         public bool clearMomentumOnExit;
 
-        private List<GameObject> spheresList;
-        private float dirBlock;
-
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            characterState.characterControl.animationProgress.latestMoveForward = this;
+            characterState.characterControl.animationProgress.latestMoveForwardScript = this;
 
             if (allowEarlyTurn && !characterState.characterControl.animationProgress.disAllowEarlyTurn)
             {
@@ -68,6 +65,9 @@ namespace My_MemoPlatformer
                     characterState.characterControl.animationProgress.airMomentum = -startingMomentum;
                 }
             }
+
+            characterState.characterControl.animationProgress.disAllowEarlyTurn = false;
+            characterState.characterControl.animationProgress.lockDirectionNextState = false;
         }
 
 
@@ -80,7 +80,7 @@ namespace My_MemoPlatformer
 
             characterState.characterControl.animationProgress.lockDirectionNextState = lockDirectionNextState;
 
-            if (characterState.characterControl.animationProgress.latestMoveForward != this)
+            if (characterState.characterControl.animationProgress.latestMoveForwardScript != this)
             {
                 return;
             }
@@ -89,6 +89,8 @@ namespace My_MemoPlatformer
             {
                 return;
             }
+
+            UpdateCharacterIgnoreTime(characterState.characterControl, stateInfo);
 
             if (characterState.characterControl.jump)
             {
@@ -168,7 +170,7 @@ namespace My_MemoPlatformer
                 control.FaceForward(false);
             }
 
-            if (!IsBlocked(control, speed, stateInfo))
+            if (!IsBlocked(control))
             {
                 control.MoveForward(speed, Mathf.Abs(control.animationProgress.airMomentum));
             }
@@ -177,7 +179,7 @@ namespace My_MemoPlatformer
 
         private void ConstantMove(CharacterControl control, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (!IsBlocked(control, speed, stateInfo))
+            if (!IsBlocked(control))
             {
                 control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
             }
@@ -208,7 +210,7 @@ namespace My_MemoPlatformer
 
             if (control.moveRight)
             {
-                if (!IsBlocked(control, speed, stateInfo))
+                if (!IsBlocked(control))
                 {
                     control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                 }
@@ -217,7 +219,7 @@ namespace My_MemoPlatformer
             if (control.moveLeft)
             {
                 {
-                    if (!IsBlocked(control, speed, stateInfo))
+                    if (!IsBlocked(control))
                     {
                         control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                     }
@@ -241,90 +243,21 @@ namespace My_MemoPlatformer
             }
         }
 
-        private bool IgnoringCharacterBox(Collider col, AnimatorStateInfo stateInfo)
+        private void UpdateCharacterIgnoreTime(CharacterControl control, AnimatorStateInfo stateInfo)
         {
             if (!ignoreCharacterBox)
             {
-                return false;
+                control.animationProgress.isIgnoreCharacterTime = false;
             }
 
-            if (stateInfo.normalizedTime < ignoreStartTime)
+            if (stateInfo.normalizedTime > ignoreStartTime 
+                && stateInfo.normalizedTime < ignoreEndTime)
             {
-                return false;
-            }
-
-            else if (stateInfo.normalizedTime > ignoreEndTime)
-            {
-                return false;
-            }
-
-            if (col.transform.root.gameObject.GetComponent<CharacterControl>() != null)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        bool IsBlocked(CharacterControl control, float speed, AnimatorStateInfo stateInfo)  //Проверка на коллизии
-        {
-            if (speed > 0)
-            {
-                spheresList = control.collisionSpheres.frontSpheres;
-                dirBlock = 0.3f;
+                control.animationProgress.isIgnoreCharacterTime = true;
             }
             else
             {
-                spheresList = control.collisionSpheres.backSpheres;
-                dirBlock = -0.3f;
-            }
-
-            foreach (GameObject o in spheresList)
-            {
-                Debug.DrawRay(o.transform.position, control.transform.forward * dirBlock, Color.yellow);
-                RaycastHit hit;
-                if (Physics.Raycast(o.transform.position, control.transform.forward * dirBlock, out hit, blockDistance))
-                {
-                    if (!IsBodyPart(hit.collider, control)
-                        && !Ledge.IsLedge(hit.collider.gameObject)
-                          && !Ledge.IsLedgeChecker(hit.collider.gameObject)  // Проверка, что мы ничего не задеваем, включая Ledge (платформы, за котоыре можно зацепиться)
-                             && !IgnoringCharacterBox(hit.collider, stateInfo))  //чтобы насквозь проходить
-                    {
-                        //тогда впереди препятсвие
-                        //control.animationProgress.blockingObj = hit.collider.transform.root.gameObject;
-                        control.animationProgress.blockingObj = hit.collider.transform.gameObject;
-                        return true;
-                    }
-                }
-            }
-
-            //ничего не блочит
-            control.animationProgress.blockingObj = null;
-            return false;
-        }
-
-        private bool IsBodyPart(Collider col, CharacterControl control)
-        {
-            if (col.transform.root.gameObject == control.gameObject)
-            {
-                return true;
-            }
-
-
-            CharacterControl target = CharacterManager.Instance.GetCharacter(col.transform.root.gameObject);
-
-            if (target == null)
-            {
-                return false;
-            }
-
-            if (target.damageDetector.damageTaken > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
+                control.animationProgress.isIgnoreCharacterTime = false;
             }
         }
 
@@ -334,6 +267,18 @@ namespace My_MemoPlatformer
             if (clearMomentumOnExit)
             {
                 characterState.characterControl.animationProgress.airMomentum = 0f;
+            }
+        }
+
+        private bool IsBlocked(CharacterControl control)
+        {
+            if (control.animationProgress.blockingObjects.Count != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
