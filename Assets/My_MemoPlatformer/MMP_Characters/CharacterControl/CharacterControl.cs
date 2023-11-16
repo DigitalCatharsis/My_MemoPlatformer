@@ -58,7 +58,6 @@ namespace My_MemoPlatformer
         public GameObject leftFoot_Attack;
         public GameObject rightFoot_Attack;
 
-        private List<TriggerDetector> _triggerDetectors = new List<TriggerDetector>();
         private Dictionary<string, GameObject> _childObjects = new Dictionary<string, GameObject>();
 
         private Rigidbody _rigidBody;
@@ -199,21 +198,6 @@ namespace My_MemoPlatformer
             {
                 CharacterManager.Instance.characters.Add(this);
             }
-        }
-
-        public List<TriggerDetector> GetAllTriggers()
-        {
-            if (_triggerDetectors.Count == 0)
-            {
-                TriggerDetector[] arr = this.gameObject.GetComponentsInChildren<TriggerDetector>();
-
-                foreach (TriggerDetector d in arr)
-                {
-                    _triggerDetectors.Add(d);
-                }
-            }
-
-            return _triggerDetectors;
         }
 
         public void UpdateBoxColliderSize()

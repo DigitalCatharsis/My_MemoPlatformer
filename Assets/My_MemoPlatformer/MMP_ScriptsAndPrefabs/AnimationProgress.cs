@@ -27,6 +27,7 @@ namespace My_MemoPlatformer
 
         [Header("Colliding Objects")]
         public GameObject ground;
+        public Dictionary<TriggerDetector, List<Collider>> collidingBodyParts = new Dictionary<TriggerDetector, List<Collider>>(); //key trigger detectors, value - colliding bodyparts which are in contract with trigger detectors
         public Dictionary<GameObject, GameObject> blockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
 
         [Header("AirControl")]

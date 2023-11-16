@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.VFX;
@@ -23,7 +24,10 @@ namespace My_MemoPlatformer
         {
             if (AttackManager.Instance.currentAttacks.Count > 0)
             {
-                CheckAttack();
+                if (_control.animationProgress.collidingBodyParts.Count != 0)
+                {
+                    CheckAttack();
+                }
             }
         }
 
@@ -86,9 +90,9 @@ namespace My_MemoPlatformer
 
         private bool IsCollided(AttackInfo info)
         {
-            foreach (TriggerDetector trigger in _control.GetAllTriggers())
+            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in _control.animationProgress.collidingBodyParts)
             {
-                foreach (Collider collider in trigger.collidingParts) //control.collidingParts - список коллайдеров, задевающих владельца control
+                foreach (Collider collider in data.Value)
                 {
                     foreach (AttackPartType part in info.attackParts)  //Имена атакующих коллайдеров
                     {
@@ -96,7 +100,7 @@ namespace My_MemoPlatformer
                         {
                             _control.animationProgress.attack = info.attackAbility;
                             _control.animationProgress.attacker = info.attacker;
-                            _control.animationProgress.damagedTrigger = trigger;
+                            _control.animationProgress.damagedTrigger = data.Key;
                             _control.animationProgress.attackingPart = info.attacker.GetAttackingPart(part);
                             return true;
                         }
