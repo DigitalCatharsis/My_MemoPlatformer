@@ -21,6 +21,10 @@ public enum TransitionConditionType
     NOT_GRABBING_LEDGE,
     NOT_BLOCKED_BY_WALL,
     MOVING_TO_BLOCKING_OBG,
+    DOUBLETAP_UP,
+    DOUBLETAP_DOWN,
+    DOUBLETAP_LEFT,
+    DOUBLETAP_RIGHT,
 }
 
 namespace My_MemoPlatformer
@@ -239,6 +243,14 @@ namespace My_MemoPlatformer
                             }
                         }
                         break;
+                    case TransitionConditionType.DOUBLETAP_UP:
+                        {
+                            if (!control.manualInput._doubleTaps.Contains(InputKeyType.KEY_MOVE_UP))
+                            {
+                                return false;
+                            }
+                            break;
+                        }
                 }
             }
             return true;

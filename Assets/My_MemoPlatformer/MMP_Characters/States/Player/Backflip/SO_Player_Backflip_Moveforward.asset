@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaff6f6f2abc0794896d70a63da7cbcf, type: 3}
+  m_Name: SO_Player_Backflip_Moveforward
+  m_EditorClassIdentifier: 
+  debug: 0
+  allowEarlyTurn: 0
+  lockDirection: 1
+  lockDirectionNextState: 1
+  constant: 1
+  speedGraph:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.0027943964
+      outSlope: 0.0027943964
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.2010465
+      value: 0.0005618036
+      inSlope: -0.022700934
+      outSlope: -0.022700934
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.3606787
+    - serializedVersion: 3
+      time: 0.2917009
+      value: 0.9967532
+      inSlope: 1.187113
+      outSlope: 1.187113
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.49022323
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6433347
+      value: 0.97868425
+      inSlope: -0.00623357
+      outSlope: -0.00623357
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.35935083
+    - serializedVersion: 3
+      time: 0.80120444
+      value: -0.0015568435
+      inSlope: 0.0012073335
+      outSlope: 0.0012073335
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.34906924
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0.00783138
+      outSlope: 0.00783138
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  speed: -2.15
+  blockDistance: 0.1
+  ignoreCharacterBox: 0
+  ignoreStartTime: 0
+  ignoreEndTime: 0
+  useMomentum: 0
+  startingMomentum: 0
+  maxMomentum: 0
+  clearMomentumOnExit: 0

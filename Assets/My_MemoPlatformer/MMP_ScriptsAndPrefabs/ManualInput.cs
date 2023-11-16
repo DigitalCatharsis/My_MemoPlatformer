@@ -9,7 +9,7 @@ namespace My_MemoPlatformer
     {
         private CharacterControl characterControl;
 
-        [SerializeField] private List<InputKeyType> _doubleTaps = new List<InputKeyType>();
+        public List<InputKeyType> _doubleTaps = new List<InputKeyType>();
         [SerializeField] private List<InputKeyType> _upKeys = new List<InputKeyType>();  //какие отпустил
         [SerializeField] private Dictionary<InputKeyType, float> _doubleTapTimings = new Dictionary<InputKeyType, float>();
 

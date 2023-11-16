@@ -15,6 +15,7 @@ namespace My_MemoPlatformer
         TransitionIndex,
         Turbo,
         Turn,
+        LockTransition,
     }
 
     public enum MMP_Scenes
@@ -37,6 +38,7 @@ namespace My_MemoPlatformer
         public bool attack;
 
         [Header("SubComponents")]
+        public ManualInput manualInput;
         public LedgeChecker ledgeChecker;
         public AnimationProgress animationProgress;
         public AIProgress aiProgress;
@@ -75,6 +77,7 @@ namespace My_MemoPlatformer
 
         private void Awake()
         {
+            manualInput = GetComponent<ManualInput>();  
             ledgeChecker = GetComponentInChildren<LedgeChecker>();
             animationProgress = GetComponent<AnimationProgress>();
             aiProgress = GetComponentInChildren<AIProgress>();

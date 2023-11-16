@@ -51,6 +51,9 @@ namespace My_MemoPlatformer
         public TriggerDetector damagedTrigger;
         public GameObject attackingPart;
 
+        [Header("Transition")]
+        public bool lockTransition;
+
         private CharacterControl _control;
 
         private void Awake()
@@ -206,6 +209,22 @@ namespace My_MemoPlatformer
             {
                 attackButtonIsReset = true;
                 attackTriggered = false;
+            }
+
+            if (IsRunning(typeof(LockTransition)))
+            {
+                if (_control.animationProgress.lockTransition)
+                {
+                    _control.skinnedMeshAnimator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.LockTransition], true);
+                }
+                else
+                {
+                    _control.skinnedMeshAnimator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.LockTransition], false);
+                }
+            }
+            else
+            {
+                _control.skinnedMeshAnimator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.LockTransition], false);
             }
         }
 
