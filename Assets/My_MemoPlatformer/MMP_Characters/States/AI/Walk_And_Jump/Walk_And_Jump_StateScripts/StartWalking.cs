@@ -68,6 +68,11 @@ namespace My_MemoPlatformer
                 characterState.characterControl.moveLeft = false;
                 characterState.characterControl.moveRight = false;
             }
+
+            if (characterState.characterControl.aiProgress.TargetIsOnTheSamePlatform())
+            {
+                characterState.characterControl.aiProgress.RepositionDestination();
+            }
         }
     }
 }

@@ -81,6 +81,13 @@ namespace My_MemoPlatformer
             return false;
         }
 
+        public void RepositionDestination()
+        {
+            pathfindfingAgent.startSphere.transform.position = pathfindfingAgent.target.transform.position;
+            pathfindfingAgent.endSphere.transform.position = pathfindfingAgent.target.transform.position;
+
+        }
+
         public bool TargetIsOnTheSamePlatform()
         {
             if (CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target).animationProgress.ground == _control.animationProgress.ground)
