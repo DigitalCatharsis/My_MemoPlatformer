@@ -25,7 +25,7 @@ namespace My_MemoPlatformer
                     characterState.characterControl.animationProgress.HoldingWeapon = weapon;
 
                     weapon.transform.parent = characterState.characterControl.rightHand_Attack.transform;
-                    weapon.transform.localPosition =weapon.customPosition;
+                    weapon.transform.localPosition = weapon.customPosition;
                     weapon.transform.localRotation = Quaternion.Euler(weapon.customRotation);
 
                     weapon.control = characterState.characterControl;

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eaff6f6f2abc0794896d70a63da7cbcf, type: 3}
-  m_Name: SO_Player_AxeWalk_MoveForward
+  m_Name: SO_Player_AxeRun_MoveForward
   m_EditorClassIdentifier: 
   debug: 0
   allowEarlyTurn: 1
@@ -22,27 +22,27 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 20.467417
-      outSlope: 20.467417
+      value: 0.5
+      inSlope: 11.526256
+      outSlope: 11.526256
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.04778393
-      value: 0.9780136
-      inSlope: 0.064535744
-      outSlope: 0.064535744
+      time: 0.042939797
+      value: 0.9949351
+      inSlope: 0.032100935
+      outSlope: 0.032100935
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.07781818
+      outWeight: 0.050152976
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0.023089742
-      outSlope: 0.023089742
+      inSlope: 0.0052921483
+      outSlope: 0.0052921483
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -50,7 +50,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  speed: 1
+  speed: 2.1
   blockDistance: 0.125
   ignoreCharacterBox: 0
   ignoreStartTime: 0

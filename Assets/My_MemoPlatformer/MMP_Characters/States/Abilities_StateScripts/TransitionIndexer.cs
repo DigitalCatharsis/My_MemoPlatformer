@@ -28,6 +28,8 @@ public enum TransitionConditionType
     TOUCHING_WEAPON,
     HOLDING_AXE,
     NOT_MOVING,
+    RUN,
+    NOT_RUN,
 }
 
 namespace My_MemoPlatformer
@@ -252,16 +254,16 @@ namespace My_MemoPlatformer
                             {
                                 return false;
                             }
-                            break;
                         }
+                        break;
                     case TransitionConditionType.DOUBLETAP_DOWN:
                         {
                             if (!control.manualInput._doubleTaps.Contains(InputKeyType.KEY_MOVE_DOWN))
                             {
                                 return false;
                             }
-                            break;
                         }
+                        break;
                     case TransitionConditionType.TOUCHING_WEAPON:
                         {
                             if (control.animationProgress.collidingWeapons.Count == 0)
@@ -271,8 +273,8 @@ namespace My_MemoPlatformer
                                     return false;
                                 }
                             }
-                            break;
                         }
+                        break;
                     case TransitionConditionType.HOLDING_AXE:
                         {
                             if (control.animationProgress.HoldingWeapon == null)
@@ -284,16 +286,47 @@ namespace My_MemoPlatformer
                             {
                                 return false;
                             }
-                            break;
                         }
+                        break;
                     case TransitionConditionType.NOT_MOVING:
                         {
                             if (control.moveLeft || control.moveRight)
                             {
                                 return false;
                             }
-                            break;
                         }
+                        break;
+                    case TransitionConditionType.RUN:
+                        {
+                            if (!control.moveLeft && !control.moveRight)
+                            {
+                                return false;
+                            }
+                            if (control.moveLeft && control.moveRight)
+                            {
+                                return false;
+                            }
+                            if (!control.turbo)
+                            {
+                                return false;
+                            }
+                        }
+
+                        break;
+                    case TransitionConditionType.NOT_RUN:
+                        {
+                            if (control.turbo)
+                            {
+                                if (control.moveLeft || control.moveRight)
+                                {
+                                    if (!(control.moveLeft && control.moveRight))
+                                    {
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
+                        break;
                 }
             }
             return true;

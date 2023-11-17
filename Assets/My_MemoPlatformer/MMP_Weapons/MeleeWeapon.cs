@@ -8,7 +8,7 @@ namespace My_MemoPlatformer
         public Vector3 customPosition = new Vector3();
         public Vector3 customRotation = new Vector3();
         public BoxCollider pickUpCollider;
-        public BoxCollider AttackCollider;
+        public BoxCollider attackCollider;
         public TriggerDetector triggerDetector;
 
         private void Update()
@@ -16,12 +16,12 @@ namespace My_MemoPlatformer
             if (control != null)
             {
                 pickUpCollider.enabled = false;
-                AttackCollider.enabled = true;
+                attackCollider.enabled = true;
             }
             else
             {
                 pickUpCollider.enabled = true;
-                AttackCollider.enabled = false;
+                attackCollider.enabled = false;
             }
         }
 
