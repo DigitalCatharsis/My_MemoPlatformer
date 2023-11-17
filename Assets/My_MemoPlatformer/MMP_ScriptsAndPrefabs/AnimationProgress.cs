@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Net;
 using UnityEditor;
 using UnityEngine;
 
@@ -28,6 +29,7 @@ namespace My_MemoPlatformer
         [Header("Colliding Objects")]
         public GameObject ground;
         public Dictionary<TriggerDetector, List<Collider>> collidingBodyParts = new Dictionary<TriggerDetector, List<Collider>>(); //key trigger detectors, value - colliding bodyparts which are in contract with trigger detectors
+        public Dictionary<TriggerDetector, List<Collider>> collidingWeapons = new Dictionary<TriggerDetector, List<Collider>>(); //key trigger detectors, value - colliding bodyparts which are in contract with trigger detectors
         public Dictionary<GameObject, GameObject> blockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
 
         [Header("AirControl")]
@@ -53,6 +55,9 @@ namespace My_MemoPlatformer
 
         [Header("Transition")]
         public bool lockTransition;
+
+        [Header("Weapon")]
+        public MeleeWeapon HoldingWeapon;
 
         private CharacterControl _control;
 
@@ -115,7 +120,8 @@ namespace My_MemoPlatformer
                     if (!IsBodyPart(hit.collider)
                         && !IsIgnoringCharacter(hit.collider)
                         && !Ledge.IsLedge(hit.collider.gameObject)
-                          && !Ledge.IsLedgeChecker(hit.collider.gameObject))  // Проверка, что мы ничего не задеваем, включая Ledge (платформы, за котоыре можно зацепиться)
+                        && !Ledge.IsLedgeChecker(hit.collider.gameObject)  // Проверка, что мы ничего не задеваем, включая Ledge (платформы, за котоыре можно зацепиться)
+                        && !MeleeWeapon.IsWeapon(hit.collider.gameObject))
                     {
                         if (blockingObjects.ContainsKey(o)) //Если сфера есть в списке
                         {
@@ -262,6 +268,17 @@ namespace My_MemoPlatformer
                 }
             }
             return false;
+        }
+
+        public MeleeWeapon GetTouchingWeapon()
+        {
+            foreach(KeyValuePair<TriggerDetector,List<Collider>> data in collidingWeapons)
+            {
+                var w = data.Value[0].gameObject.GetComponent<MeleeWeapon>();
+                return w;
+            }
+
+            return null;
         }
     }
 }

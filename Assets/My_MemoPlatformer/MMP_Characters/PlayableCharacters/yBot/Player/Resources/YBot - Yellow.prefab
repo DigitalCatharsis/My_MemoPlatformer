@@ -380,7 +380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1129136888719444179
@@ -793,7 +792,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1961251371231414958
@@ -1033,7 +1031,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &2398050349095610606
@@ -1157,7 +1154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!136 &5688755404330073245
@@ -1421,7 +1417,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &2872434137521528111
@@ -1498,7 +1493,7 @@ Transform:
   - {fileID: 673519052}
   - {fileID: 1318701341189441266}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2430949021683835266
 BoxCollider:
@@ -1540,6 +1535,7 @@ MonoBehaviour:
   turbo: 0
   jump: 0
   attack: 0
+  manualInput: {fileID: 0}
   ledgeChecker: {fileID: 0}
   animationProgress: {fileID: 0}
   aiProgress: {fileID: 0}
@@ -1566,8 +1562,8 @@ MonoBehaviour:
   - {fileID: 2396262389435876478}
   - {fileID: 5688755404330073245}
   - {fileID: 787785776741374890}
-  rightHand_Attack: {fileID: 6390529184369956183}
-  leftHand_Attack: {fileID: 2373364315605623442}
+  rightHand_Attack: {fileID: 9160105403987278352}
+  leftHand_Attack: {fileID: 7264828609573986013}
   leftFoot_Attack: {fileID: 4152838678372553637}
   rightFoot_Attack: {fileID: 3396455527245553538}
 --- !u!114 &8003498278013731179
@@ -1598,6 +1594,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffaa8e7aa94c91a4b922478195404587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _doubleTaps: 
+  _upKeys: 
 --- !u!114 &4542326154330732370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1637,7 +1635,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 114
   m_CollisionDetection: 1
 --- !u!114 &1747402107
 MonoBehaviour:
@@ -1654,13 +1652,13 @@ MonoBehaviour:
   cameraShaken: 0
   poolObjectList: 
   ragdollTriggered: 0
-  latestMoveForward: {fileID: 0}
+  latestMoveForwardScript: {fileID: 0}
   attackTriggered: 0
   attackButtonIsReset: 0
   disAllowEarlyTurn: 0
   lockDirectionNextState: 0
+  isIgnoreCharacterTime: 0
   ground: {fileID: 0}
-  blockingObj: {fileID: 0}
   jumped: 0
   airMomentum: 0
   maxFallVelocity: {x: 0, y: 0, z: 0}
@@ -1676,6 +1674,8 @@ MonoBehaviour:
   attacker: {fileID: 0}
   damagedTrigger: {fileID: 0}
   attackingPart: {fileID: 0}
+  lockTransition: 0
+  HoldingWeapon: {fileID: 0}
 --- !u!114 &8772349004802611497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1871,7 +1871,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &3556205057496371964
@@ -2239,7 +2238,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &4359712379254403761
@@ -2418,7 +2416,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &4711798783780023744
@@ -2889,7 +2886,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6229027787294321216
@@ -3091,7 +3087,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6525732377822747112
@@ -3536,7 +3531,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &7318678368571476172
@@ -3842,7 +3836,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &7879012930953290345
@@ -4115,7 +4108,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &8141024835662750435
@@ -4294,7 +4286,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &8161170872856295509
@@ -4727,6 +4718,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collidingParts: []
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}

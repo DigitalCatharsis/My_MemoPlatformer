@@ -22,9 +22,15 @@ namespace My_MemoPlatformer
 
         private void OnTriggerEnter(Collider col) //callback function whenever somth touches or enters or otuches raggdoll body parts
         {
+            CheckCollidingBodyparts(col);
+            CheckCollidingWeapons(col);
+        }
+
+        private void CheckCollidingBodyparts(Collider col)
+        {
             if (_control.ragdollParts.Contains(col))  //touching own collider
             {
-                return;                
+                return;
             }
 
             CharacterControl attacker = col.transform.root.GetComponent<CharacterControl>();
@@ -51,18 +57,57 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void OnTriggerExit(Collider attackingBodyPartCollider)
+        void CheckCollidingWeapons(Collider col)
+        {
+            if (col.transform.root.gameObject.GetComponent<MeleeWeapon>() == null)
+            {
+                return;
+            }
+
+            if (!_control.animationProgress.collidingWeapons.ContainsKey(this))
+            {
+                _control.animationProgress.collidingWeapons.Add(this, new List<Collider>());
+            }
+
+            if (!_control.animationProgress.collidingWeapons[this].Contains(col))
+            {
+                _control.animationProgress.collidingWeapons[this].Add(col);
+            }
+        }
+
+        private void OnTriggerExit(Collider col)
+        {
+            CheckExitingBodypart(col);
+            CheckExitingWeapons(col);
+        }
+
+        private void CheckExitingBodypart(Collider col)
         {
             if (_control.animationProgress.collidingBodyParts.ContainsKey(this))
             {
-                if (_control.animationProgress.collidingBodyParts[this].Contains(attackingBodyPartCollider))
+                if (_control.animationProgress.collidingBodyParts[this].Contains(col))
                 {
-                    _control.animationProgress.collidingBodyParts[this].Remove(attackingBodyPartCollider);
+                    _control.animationProgress.collidingBodyParts[this].Remove(col);
                 }
 
-                if (_control.animationProgress.collidingBodyParts.Count == 0)
+                if (_control.animationProgress.collidingBodyParts[this].Count == 0)
                 {
                     _control.animationProgress.collidingBodyParts.Remove(this);
+                }
+            }
+        }
+        private void CheckExitingWeapons(Collider col)
+        {
+            if (_control.animationProgress.collidingWeapons.ContainsKey(this))
+            {
+                if (_control.animationProgress.collidingWeapons[this].Contains(col))
+                {
+                    _control.animationProgress.collidingWeapons[this].Remove(col);
+                }
+
+                if (_control.animationProgress.collidingWeapons[this].Count == 0)
+                {
+                    _control.animationProgress.collidingWeapons.Remove(this);
                 }
             }
         }

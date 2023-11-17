@@ -25,6 +25,9 @@ public enum TransitionConditionType
     DOUBLETAP_DOWN,
     DOUBLETAP_LEFT,
     DOUBLETAP_RIGHT,
+    TOUCHING_WEAPON,
+    HOLDING_AXE,
+    NOT_MOVING,
 }
 
 namespace My_MemoPlatformer
@@ -66,7 +69,7 @@ namespace My_MemoPlatformer
 
         private bool StartCheckingWallBlock()
         {
-            foreach(TransitionConditionType t in transitionConditions)
+            foreach (TransitionConditionType t in transitionConditions)
             {
                 if (t == TransitionConditionType.BLOCKED_BY_WALL || t == TransitionConditionType.NOT_BLOCKED_BY_WALL)
                 {
@@ -203,11 +206,11 @@ namespace My_MemoPlatformer
                             {
                                 Vector3 dir = data.Value.transform.position - control.transform.position;
 
-                                if (dir.z > 0f && !control.moveRight)
+                                if (dir.z > 0f && control.moveRight)
                                 {
                                     return false;
                                 }
-                                if (dir.z < 0f && !control.moveLeft)
+                                if (dir.z < 0f && control.moveLeft)
                                 {
                                     return false;
                                 }
@@ -216,7 +219,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.BLOCKED_BY_WALL:
                         {
-                            foreach (OverlapChecker oc in control.collisionSpheres.frontOverlapCheckers) 
+                            foreach (OverlapChecker oc in control.collisionSpheres.frontOverlapCheckers)
                             {
                                 if (!oc.objIsOverlapping)
                                 {
@@ -229,7 +232,7 @@ namespace My_MemoPlatformer
                         {
                             bool allIsoverlapping = true;
 
-                            foreach (OverlapChecker oc in control.collisionSpheres.frontOverlapCheckers) 
+                            foreach (OverlapChecker oc in control.collisionSpheres.frontOverlapCheckers)
                             {
                                 if (!oc.objIsOverlapping)
                                 {
@@ -246,6 +249,46 @@ namespace My_MemoPlatformer
                     case TransitionConditionType.DOUBLETAP_UP:
                         {
                             if (!control.manualInput._doubleTaps.Contains(InputKeyType.KEY_MOVE_UP))
+                            {
+                                return false;
+                            }
+                            break;
+                        }
+                    case TransitionConditionType.DOUBLETAP_DOWN:
+                        {
+                            if (!control.manualInput._doubleTaps.Contains(InputKeyType.KEY_MOVE_DOWN))
+                            {
+                                return false;
+                            }
+                            break;
+                        }
+                    case TransitionConditionType.TOUCHING_WEAPON:
+                        {
+                            if (control.animationProgress.collidingWeapons.Count == 0)
+                            {
+                                if (control.animationProgress.HoldingWeapon == null)
+                                {
+                                    return false;
+                                }
+                            }
+                            break;
+                        }
+                    case TransitionConditionType.HOLDING_AXE:
+                        {
+                            if (control.animationProgress.HoldingWeapon == null)
+                            {
+                                return false;
+                            }
+
+                            if (!control.animationProgress.HoldingWeapon.name.Contains("Blade_Knife"))
+                            {
+                                return false;
+                            }
+                            break;
+                        }
+                    case TransitionConditionType.NOT_MOVING:
+                        {
+                            if (control.moveLeft || control.moveRight)
                             {
                                 return false;
                             }

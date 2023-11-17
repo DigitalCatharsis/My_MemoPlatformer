@@ -97,6 +97,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\ToggleGravity.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterHoverLight.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\StartWalking.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\WeaponPutDown.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\ManualInput.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_MaterialChaner\MaterialChanger.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\UpdateBoxCollider.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\FallPlatform.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_LookAtPoint\LookAtPoint.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\CharacterControl\CharacterControl.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Weapons\MeleeWeapon.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_InputDevices\SavedKeys.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Events\GameEventListener.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\Ledge.cs" />
@@ -141,6 +143,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\ToggleBoxCollider.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckRunningTurn.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\WeaponPickup.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\WallSlide.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\JumpPlatform.cs" />
   </ItemGroup>
