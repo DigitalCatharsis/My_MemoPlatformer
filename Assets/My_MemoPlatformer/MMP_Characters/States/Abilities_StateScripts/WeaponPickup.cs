@@ -29,6 +29,7 @@ namespace My_MemoPlatformer
                     weapon.transform.localRotation = Quaternion.Euler(weapon.customRotation);
 
                     weapon.control = characterState.characterControl;
+                    weapon.triggerDetector.control = characterState.characterControl;
 
                 }
             }

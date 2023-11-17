@@ -7,6 +7,23 @@ namespace My_MemoPlatformer
         public CharacterControl control;
         public Vector3 customPosition = new Vector3();
         public Vector3 customRotation = new Vector3();
+        public BoxCollider pickUpCollider;
+        public BoxCollider AttackCollider;
+        public TriggerDetector triggerDetector;
+
+        private void Update()
+        {
+            if (control != null)
+            {
+                pickUpCollider.enabled = false;
+                AttackCollider.enabled = true;
+            }
+            else
+            {
+                pickUpCollider.enabled = true;
+                AttackCollider.enabled = false;
+            }
+        }
 
         public static bool IsWeapon(GameObject obj)
         {
@@ -41,6 +58,8 @@ namespace My_MemoPlatformer
 
                 control.animationProgress.HoldingWeapon = null;
                 control = null;
+
+                weapon.triggerDetector.control = null;
             }
         }
     }

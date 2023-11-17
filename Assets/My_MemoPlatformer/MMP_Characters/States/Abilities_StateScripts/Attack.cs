@@ -12,6 +12,8 @@ namespace My_MemoPlatformer
         
         LEFT_FOOT,
         RIGHT_FOOT,
+
+        MELEE_WEAPON,
     }
 
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/Attack")]

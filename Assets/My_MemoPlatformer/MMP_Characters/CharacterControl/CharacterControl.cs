@@ -367,6 +367,10 @@ namespace My_MemoPlatformer
                     {
                         return leftFoot_Attack;
                     }
+                case AttackPartType.MELEE_WEAPON:
+                    {
+                        return animationProgress.HoldingWeapon.triggerDetector.gameObject;
+                    }
                 default:
                     return null;
             }
