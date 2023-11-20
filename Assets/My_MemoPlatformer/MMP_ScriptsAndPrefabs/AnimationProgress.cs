@@ -121,7 +121,8 @@ namespace My_MemoPlatformer
                         && !IsIgnoringCharacter(hit.collider)
                         && !Ledge.IsLedge(hit.collider.gameObject)
                         && !Ledge.IsLedgeChecker(hit.collider.gameObject)  // Проверка, что мы ничего не задеваем, включая Ledge (платформы, за котоыре можно зацепиться)
-                        && !MeleeWeapon.IsWeapon(hit.collider.gameObject))
+                        && !MeleeWeapon.IsWeapon(hit.collider.gameObject)
+                        && !TrapSpikes.IsTrap(hit.collider.gameObject))
                     {
                         if (blockingObjects.ContainsKey(o)) //Если сфера есть в списке
                         {

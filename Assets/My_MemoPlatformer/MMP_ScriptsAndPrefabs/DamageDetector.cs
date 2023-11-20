@@ -167,5 +167,9 @@ namespace My_MemoPlatformer
             damageTaken++;
         }
 
+        public void TriggerSpikeDeath(RuntimeAnimatorController animator)
+        {
+            _control.skinnedMeshAnimator.runtimeAnimatorController = animator;
+        }
     }
 }
