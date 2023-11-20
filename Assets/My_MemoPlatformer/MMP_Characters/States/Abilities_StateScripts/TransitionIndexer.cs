@@ -150,6 +150,10 @@ namespace My_MemoPlatformer
                             {
                                 return false;
                             }
+                            if (control.moveLeft && control.moveRight)
+                            {
+                                return false;
+                            }
                         }
                         break;
                     case TransitionConditionType.GROUNDED:
@@ -292,7 +296,10 @@ namespace My_MemoPlatformer
                         {
                             if (control.moveLeft || control.moveRight)
                             {
-                                return false;
+                                if (!(control.moveLeft && control.moveRight))
+                                {
+                                    return false;
+                                }
                             }
                         }
                         break;
