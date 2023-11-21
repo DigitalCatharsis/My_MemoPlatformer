@@ -12,11 +12,10 @@ namespace My_MemoPlatformer
 
         [SerializeField] private bool _debug;
 
-        public int damageTaken; //templory
+        [SerializeField] private float hp;
 
         private void Awake()
         {
-            damageTaken = 0;
             _control = GetComponent<CharacterControl>();
         }
 
@@ -110,9 +109,21 @@ namespace My_MemoPlatformer
             return false;
         }
 
+        public bool IsDead()
+        {
+            if (hp <= 0f)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private void TakeDamage(AttackInfo info)
         {
-            if (damageTaken > 0)  //templory fix for hitting dead enemy
+            if (IsDead())  //templory fix for hitting dead enemy
             {
                 return;
             }
@@ -149,27 +160,37 @@ namespace My_MemoPlatformer
             }
 
             info.currentHits++;
-            damageTaken++;
+            hp -= info.attackAbility.damage;
 
             AttackManager.Instance.ForceDeregester(_control);
 
-            _control.animationProgress.ragdollTriggered = true;
-            _control.GetComponent<BoxCollider>().enabled = false;
-            _control.ledgeChecker.GetComponent<BoxCollider>().enabled = false;
-            _control.Rigid_Body.useGravity = false;
-
-            if (_control.aiController != null)
+            if (IsDead())
             {
-                _control.aiController.gameObject.SetActive(false);
-                _control.navMeshObstacle.carving = false; //we dont need carving when enemy is dead
-            }
+                _control.animationProgress.ragdollTriggered = true;
+                _control.GetComponent<BoxCollider>().enabled = false;
+                _control.ledgeChecker.GetComponent<BoxCollider>().enabled = false;
+                _control.Rigid_Body.useGravity = false;
 
-            damageTaken++;
+                if (_control.aiController != null)
+                {
+                    _control.aiController.gameObject.SetActive(false);
+                    _control.navMeshObstacle.carving = false; //we dont need carving when enemy is dead
+                }
+            }
+            else
+            {
+                //damage reaction
+            }
         }
 
         public void TriggerSpikeDeath(RuntimeAnimatorController animator)
         {
             _control.skinnedMeshAnimator.runtimeAnimatorController = animator;
+        }
+
+        public void TakeTotalDamage()
+        {
+            hp = 0f;
         }
     }
 }

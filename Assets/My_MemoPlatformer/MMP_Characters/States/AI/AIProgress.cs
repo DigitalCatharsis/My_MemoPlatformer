@@ -40,7 +40,7 @@ namespace My_MemoPlatformer
 
         public bool TargetIsDead()
         {
-            if (CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target).damageDetector.damageTaken > 0)  //not grounded
+            if (CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target).damageDetector.IsDead())  //not grounded
             {
                 return true;
             }

@@ -28,6 +28,7 @@ namespace My_MemoPlatformer
         public float lethalRange;
         public int maxHits;
         public bool debug;
+        public float damage;
 
         [Header("Combo")]
         public float comboStartTime;

@@ -37,14 +37,14 @@ namespace My_MemoPlatformer
             {
                 foreach (var control in listOfCharacter)
                 {
-                    if (control.damageDetector.damageTaken == 0)
+                    if (!control.damageDetector.IsDead())
                     {
                         if (_spikeTriggerRoutine == null && _spikesReloaded)
                         {
                             if (!listOfSpikeVictims.Contains(control))
                             {
                                 listOfSpikeVictims.Add(control);
-                                control.damageDetector.damageTaken++;
+                                control.damageDetector.TakeTotalDamage();
                             }
                         }
                     }

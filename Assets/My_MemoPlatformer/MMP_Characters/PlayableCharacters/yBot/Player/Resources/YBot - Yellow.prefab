@@ -380,6 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 0}
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1129136888719444179
@@ -792,6 +793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 0}
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1961251371231414958
@@ -1031,6 +1033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 0}
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &2398050349095610606
@@ -1154,6 +1157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 0}
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!136 &5688755404330073245
@@ -1417,6 +1421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 0}
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &2872434137521528111
@@ -1609,7 +1614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debug: 0
-  damageTaken: 0
+  hp: 3
 --- !u!54 &936084455
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1871,6 +1876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 0}
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &3556205057496371964
@@ -2238,6 +2244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 0}
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &4359712379254403761
@@ -2416,6 +2423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 0}
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &4711798783780023744
@@ -2886,6 +2894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 0}
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6229027787294321216
@@ -3087,6 +3096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 0}
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6525732377822747112
@@ -3517,7 +3527,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.105
+  m_Radius: 0.13
   m_Center: {x: -0.12, y: 0, z: 0}
 --- !u!114 &4289703549495303787
 MonoBehaviour:
@@ -3531,6 +3541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 0}
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &7318678368571476172
@@ -3836,6 +3847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 0}
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &7879012930953290345
@@ -4108,6 +4120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 0}
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &8141024835662750435
@@ -4286,6 +4299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 0}
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &8161170872856295509
@@ -4704,7 +4718,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.105
+  m_Radius: 0.13
   m_Center: {x: 0.12, y: 0, z: 0}
 --- !u!114 &3000342705100398716
 MonoBehaviour:
@@ -4718,5 +4732,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8264e7673f696d4ab98a94478b78518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 0}
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}

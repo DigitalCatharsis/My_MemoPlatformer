@@ -20,6 +20,7 @@ MonoBehaviour:
   lethalRange: 0
   maxHits: 1
   debug: 0
+  damage: 1
   comboStartTime: 0.2
   comboEndTime: 0.8
   forwardForce: 1500
