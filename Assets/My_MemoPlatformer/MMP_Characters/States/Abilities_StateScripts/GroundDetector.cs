@@ -7,10 +7,6 @@ namespace My_MemoPlatformer
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/GroundDetector")]
     public class GroundDetector : StateData
     {
-        
-
-        [SerializeField][Range(0.01f, 1f)]
-        private float _checktime; //Сначала нужно подняться в воздух, а потом проверять isgrounded. Чето типа fail-safe
         [SerializeField] private float distance;
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
@@ -19,20 +15,14 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            
-
-            if (stateInfo.normalizedTime >= _checktime)
+            if (IsGrounded(characterState.characterControl))
             {
-                if (IsGrounded(characterState.characterControl))
-                {
-                    animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded], true);
-                }
-                else
-                {
-                    animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded], false);
-                }
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded], true);
             }
-
+            else
+            {
+                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded], false);
+            }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -56,7 +46,7 @@ namespace My_MemoPlatformer
                             //control.animationProgress.ground = c.otherCollider.transform.root.gameObject; //что колайдерит bottom сферы
                             control.animationProgress.ground = c.otherCollider.transform.gameObject; //что колайдерит bottom сферы
                             return true;
-                        }                        
+                        }
                     }
                 }
             }
@@ -70,15 +60,15 @@ namespace My_MemoPlatformer
                     RaycastHit hit;
                     if (Physics.Raycast(o.transform.position, -Vector3.up, out hit, distance))
                     {
-                        if (!control.ragdollParts.Contains(hit.collider) 
-                            && !Ledge.IsLedge(hit.collider.gameObject) 
+                        if (!control.ragdollParts.Contains(hit.collider)
+                            && !Ledge.IsLedge(hit.collider.gameObject)
                             && !Ledge.IsLedgeChecker(hit.collider.gameObject)
                             && !Ledge.IsCharacter(hit.collider.gameObject))
                         {
                             //control.animationProgress.ground = hit.collider.transform.root.gameObject; //что колайдерит bottom сферы
                             control.animationProgress.ground = hit.collider.transform.gameObject; //что колайдерит bottom сферы
                             return true;
-                        }                        
+                        }
                     }
                 }
             }
