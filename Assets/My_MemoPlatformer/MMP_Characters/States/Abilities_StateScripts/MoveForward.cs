@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using UnityEditor;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -29,6 +31,9 @@ namespace My_MemoPlatformer
         public float maxMomentum;
         public bool clearMomentumOnExit;
 
+        [Header("MoveOnHit")]
+        [Tooltip("Move to direction away from Attacker")] public bool moveOnHit;
+
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             characterState.characterControl.animationProgress.latestMoveForwardScript = this;
@@ -46,13 +51,7 @@ namespace My_MemoPlatformer
                         characterState.characterControl.FaceForward(true);
                     }
                 }
-                else
-                {
-                    characterState.characterControl.animationProgress.lockDirectionNextState = false;
-                }
             }
-
-            characterState.characterControl.animationProgress.disAllowEarlyTurn = false;
 
             if (startingMomentum > 0.001f)
             {
@@ -68,6 +67,12 @@ namespace My_MemoPlatformer
 
             characterState.characterControl.animationProgress.disAllowEarlyTurn = false;
             characterState.characterControl.animationProgress.lockDirectionNextState = false;
+
+            //if (moveOnHit)
+            //{
+                UpdateMoveOnHit(characterState.characterControl);
+
+            //}
         }
 
 
@@ -126,6 +131,44 @@ namespace My_MemoPlatformer
             }
         }
 
+        public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
+        {
+
+            if (clearMomentumOnExit)
+            {
+                characterState.characterControl.animationProgress.airMomentum = 0f;
+            }
+        }
+
+        private void UpdateMoveOnHit(CharacterControl control)
+        {
+            if (!moveOnHit)
+            {
+                return;
+            }
+
+            if (control.animationProgress.attacker != null)
+            {
+                Vector3 dir = control.transform.position - control.animationProgress.attacker.transform.position;
+
+                if (dir.z > 0f)
+                {
+                    if (speed < 0f)
+                    {
+                        speed *= -1f;
+                    }
+                }
+                else if (dir.z < 0f)
+                {
+                    if (speed > 0f)
+                    {
+                        speed *= -1f;
+                    }
+                }
+            }
+        }
+
+
         private void UpdateMomentum(CharacterControl control, AnimatorStateInfo stateInfo)
         {
             if (!control.animationProgress.RightSideIsBlocked())
@@ -181,6 +224,10 @@ namespace My_MemoPlatformer
         {
             if (!IsBlocked(control))
             {
+                if (control.name == "YBot - Blue Variant")
+                {
+                    Debug.Log(speed + "\n" + speedGraph.Evaluate(stateInfo.normalizedTime));
+                }
                 control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
             }
 
@@ -250,7 +297,7 @@ namespace My_MemoPlatformer
                 control.animationProgress.isIgnoreCharacterTime = false;
             }
 
-            if (stateInfo.normalizedTime > ignoreStartTime 
+            if (stateInfo.normalizedTime > ignoreStartTime
                 && stateInfo.normalizedTime < ignoreEndTime)
             {
                 control.animationProgress.isIgnoreCharacterTime = true;
@@ -261,14 +308,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
 
-            if (clearMomentumOnExit)
-            {
-                characterState.characterControl.animationProgress.airMomentum = 0f;
-            }
-        }
 
         private bool IsBlocked(CharacterControl control)
         {

@@ -1615,6 +1615,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _debug: 0
   hp: 3
+  _hitReactionList:
+  - {fileID: 9100000, guid: e06831303a0df0f4eabcb778560a1ea8, type: 2}
+  - {fileID: 9100000, guid: 59bd317eca619a2499e6be92d3e5c518, type: 2}
 --- !u!54 &936084455
 Rigidbody:
   m_ObjectHideFlags: 0

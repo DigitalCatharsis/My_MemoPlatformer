@@ -14,6 +14,8 @@ namespace My_MemoPlatformer
 
         [SerializeField] private float hp;
 
+        [SerializeField] private List<RuntimeAnimatorController> _hitReactionList = new List<RuntimeAnimatorController>();
+
         private void Awake()
         {
             _control = GetComponent<CharacterControl>();
@@ -179,7 +181,10 @@ namespace My_MemoPlatformer
             }
             else
             {
-                //damage reaction
+                var rand = Random.RandomRange(0, _hitReactionList.Count);
+
+                _control.skinnedMeshAnimator.runtimeAnimatorController = null; //need this to restart the animation if get several hits in a short period of time
+                _control.skinnedMeshAnimator.runtimeAnimatorController = _hitReactionList[rand];
             }
         }
 
