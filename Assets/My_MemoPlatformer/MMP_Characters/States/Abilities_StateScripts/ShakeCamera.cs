@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -9,27 +6,25 @@ namespace My_MemoPlatformer
     public class ShakeCamera : StateData
     {
         [Range(0f, 0.99f)][SerializeField] private float _shakeTiming;
+        public float shakeLength;
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             if (_shakeTiming == 0f) 
-            {
-                
-                CameraManager.Instance.ShakeCamera(0.2f);
+            {                
+                CameraManager.Instance.ShakeCamera(shakeLength);
                 characterState.characterControl.animationProgress.cameraShaken = true;
             }
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
-            
-
+        {           
             if (!characterState.characterControl.animationProgress.cameraShaken)
             {
                 if (stateInfo.normalizedTime >= _shakeTiming)
                 {
                     characterState.characterControl.animationProgress.cameraShaken = true;
-                    CameraManager.Instance.ShakeCamera(0.2f);
+                    CameraManager.Instance.ShakeCamera(shakeLength);
                 }
             }
         }
