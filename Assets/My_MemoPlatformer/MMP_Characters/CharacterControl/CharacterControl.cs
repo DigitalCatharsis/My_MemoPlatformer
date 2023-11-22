@@ -77,7 +77,7 @@ namespace My_MemoPlatformer
 
         private void Awake()
         {
-            manualInput = GetComponent<ManualInput>();  
+            manualInput = GetComponent<ManualInput>();
             ledgeChecker = GetComponentInChildren<LedgeChecker>();
             animationProgress = GetComponent<AnimationProgress>();
             aiProgress = GetComponentInChildren<AIProgress>();
@@ -170,13 +170,22 @@ namespace My_MemoPlatformer
                 c.attachedRigidbody.velocity = Vector3.zero;
             }
 
-            //add force
+            AddForceToDamagedPart();
+        }
+
+        public void AddForceToDamagedPart()
+        {
             if (animationProgress.damagedTrigger != null)
             {
+                foreach (Collider c in ragdollParts)
+                {
+                    c.attachedRigidbody.velocity = Vector3.zero;
+                }
+
                 animationProgress.damagedTrigger.GetComponent<Rigidbody>().
-                    AddForce(animationProgress.attacker.transform.forward * animationProgress.attack.forwardForce + 
-                    animationProgress.attacker.transform.right * animationProgress.attack.rightForce + 
-                    animationProgress.attacker.transform.up * animationProgress.attack.upForce);
+                     AddForce(animationProgress.attacker.transform.forward * animationProgress.attack.forwardForce +
+                          animationProgress.attacker.transform.right * animationProgress.attack.rightForce +
+                             animationProgress.attacker.transform.up * animationProgress.attack.upForce);
             }
         }
 

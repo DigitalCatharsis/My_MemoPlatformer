@@ -25,68 +25,76 @@ namespace My_MemoPlatformer
         {
             if (AttackManager.Instance.currentAttacks.Count > 0)
             {
-                if (_control.animationProgress.collidingBodyParts.Count != 0)
+                CheckAttack();
+            }
+        }
+
+        private bool AttackIsValid(AttackInfo info)
+        {
+            if (info == null)
+            {
+                return false; ;
+            }
+
+            if (!info.isRegistered)
+            {
+                return false;
+            }
+
+            if (info.isFinished)
+            {
+                return false;
+            }
+
+            if (info.currentHits >= info.maxHits)
+            {
+                return false;
+            }
+
+            if (info.attacker == _control)
+            {
+                return false;
+            }
+
+            if (info.mustFaceAttacker)
+            {
+                Vector3 vec = this.transform.position - info.attacker.transform.position;  //Вектор от жертвы до нападающего
+                if (vec.z * info.attacker.transform.forward.z < 0f) //Мы сравниваем 2 вектора, если они смотрят в разные стороны, со один из них отрицательный, следовательно, перменожение решает смотрят ли они друг на друга
                 {
-                    CheckAttack();
+                    return false;
                 }
             }
+
+            if (info.registeredTargets.Contains(this._control))  //prevent several times damage from one attack
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private void CheckAttack()
         {
             foreach (AttackInfo info in AttackManager.Instance.currentAttacks)
             {
-                if (info == null)
+                if (AttackIsValid(info))
                 {
-                    continue;
-                }
-
-                if (!info.isRegistered)
-                {
-                    continue;
-                }
-
-                if (info.isFinished)
-                {
-                    continue;
-                }
-
-                if (info.currentHits >= info.maxHits)
-                {
-                    continue;
-                }
-
-                if (info.attacker == _control)
-                {
-                    continue;
-                }
-
-                if (info.mustFaceAttacker)
-                {
-                    Vector3 vec = this.transform.position - info.attacker.transform.position;  //Вектор от жертвы до нападающего
-                    if (vec.z * info.attacker.transform.forward.z < 0f) //Мы сравниваем 2 вектора, если они смотрят в разные стороны, со один из них отрицательный, следовательно, перменожение решает смотрят ли они друг на друга
+                    if (info.mustCollide)
                     {
-                        continue;
+                        if (_control.animationProgress.collidingBodyParts.Count != 0)
+                        {
+                            if (IsCollided(info))
+                            {
+                                TakeDamage(info);
+                            }
+                        }
                     }
-                }
-
-                if (info.registeredTargets.Contains(this._control))  //prevent several times damage from one attack
-                {
-                    continue;
-                }
-
-                if (info.mustCollide)
-                {
-                    if (IsCollided(info))
+                    else
                     {
-                        TakeDamage(info);
-                    }
-                }
-                else
-                {
-                    if (IsInLethalRange(info))
-                    {
-                        TakeDamage(info);
+                        if (IsInLethalRange(info))
+                        {
+                            TakeDamage(info);
+                        }
                     }
                 }
             }
@@ -117,16 +125,19 @@ namespace My_MemoPlatformer
 
         private bool IsInLethalRange(AttackInfo info)
         {
-            float dist = Vector3.SqrMagnitude(this.gameObject.transform.position - info.attacker.transform.position); //distance between target and attacker
-                                                                                                                      //Debug.Log(this.gameObject.name + "dist: "+ dist.ToString() );
-            if (dist <= info.lethalRange)
+            foreach (var c in _control.ragdollParts)
             {
-                _control.animationProgress.attack = info.attackAbility;
-                _control.animationProgress.attacker = info.attacker;
+                float dist = Vector3.SqrMagnitude(c.transform.position - info.attacker.transform.position); //distance between target and attacker
+                                                                                                                          //Debug.Log(this.gameObject.name + "dist: "+ dist.ToString() );
+                if (dist <= info.lethalRange)
+                {
+                    _control.animationProgress.attack = info.attackAbility;
+                    _control.animationProgress.attacker = info.attacker;
 
-                int index = Random.Range(0, _control.ragdollParts.Count);
-                _control.animationProgress.damagedTrigger = _control.ragdollParts[index].GetComponent<TriggerDetector>();
-                return true;
+                    int index = Random.Range(0, _control.ragdollParts.Count);
+                    _control.animationProgress.damagedTrigger = _control.ragdollParts[index].GetComponent<TriggerDetector>();
+                    return true;
+                }
             }
             return false;
         }
@@ -147,6 +158,11 @@ namespace My_MemoPlatformer
         {
             if (IsDead())  //templory fix for hitting dead enemy
             {
+                if (!info.registeredTargets.Contains(this._control))
+                {
+                    info.registeredTargets.Add(this._control);
+                    _control.AddForceToDamagedPart();
+                }
                 return;
             }
 
@@ -207,7 +223,7 @@ namespace My_MemoPlatformer
                 _control.skinnedMeshAnimator.runtimeAnimatorController = _hitReactionList[rand];
             }
 
-            //register damaged target
+
             if (!info.registeredTargets.Contains(this._control))
             {
                 info.registeredTargets.Add(this._control);
