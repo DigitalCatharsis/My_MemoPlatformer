@@ -8,9 +8,9 @@ namespace My_MemoPlatformer
 
     public class DamageDetector : MonoBehaviour  //Compare collision info versus attack input that is being registered
     {
-        private CharacterControl _control;
 
         [SerializeField] private bool _debug;
+        private CharacterControl _control;
 
         [SerializeField] private float hp;
 
@@ -79,9 +79,7 @@ namespace My_MemoPlatformer
                 }
                 else
                 {
-                    float dist = Vector3.SqrMagnitude(this.gameObject.transform.position - info.attacker.transform.position); //distance between target and attacker
-                    //Debug.Log(this.gameObject.name + "dist: "+ dist.ToString() );
-                    if (dist <= info.lethalRange)
+                    if (IsInLethalRange(info))
                     {
                         TakeDamage(info);
                     }
@@ -101,12 +99,29 @@ namespace My_MemoPlatformer
                         {
                             _control.animationProgress.attack = info.attackAbility;
                             _control.animationProgress.attacker = info.attacker;
+
                             _control.animationProgress.damagedTrigger = data.Key;
                             _control.animationProgress.attackingPart = info.attacker.GetAttackingPart(part);
                             return true;
                         }
                     }
                 }
+            }
+            return false;
+        }
+
+        private bool IsInLethalRange(AttackInfo info)
+        {
+            float dist = Vector3.SqrMagnitude(this.gameObject.transform.position - info.attacker.transform.position); //distance between target and attacker
+                                                                                                                      //Debug.Log(this.gameObject.name + "dist: "+ dist.ToString() );
+            if (dist <= info.lethalRange)
+            {
+                _control.animationProgress.attack = info.attackAbility;
+                _control.animationProgress.attacker = info.attacker;
+
+                int index = Random.Range(0, _control.ragdollParts.Count);
+                _control.animationProgress.damagedTrigger = _control.ragdollParts[index].GetComponent<TriggerDetector>();
+                return true;
             }
             return false;
         }

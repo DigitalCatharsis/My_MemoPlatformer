@@ -20,6 +20,8 @@ namespace My_MemoPlatformer
     public class Attack : StateData
     {
 
+        public bool debug;
+
         public float startAttackTime; //Is % of the animation duration
         public float endAttackTime; //Is % of the animation duration
         public List<AttackPartType> attackParts = new List<AttackPartType>();
@@ -27,7 +29,6 @@ namespace My_MemoPlatformer
         public bool mustFaceAttacker;
         public float lethalRange;
         public int maxHits;
-        public bool debug;
         public float damage;
 
         [Header("Combo")]

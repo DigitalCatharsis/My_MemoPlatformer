@@ -224,10 +224,6 @@ namespace My_MemoPlatformer
         {
             if (!IsBlocked(control))
             {
-                if (control.name == "YBot - Blue Variant")
-                {
-                    Debug.Log(speed + "\n" + speedGraph.Evaluate(stateInfo.normalizedTime));
-                }
                 control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
             }
 

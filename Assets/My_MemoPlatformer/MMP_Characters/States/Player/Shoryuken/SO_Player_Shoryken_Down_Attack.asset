@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09d2138cfc2da18499f42578916d88ca, type: 3}
-  m_Name: SO_Player_Shoryken_Attack
+  m_Name: SO_Player_Shoryken_Down_Attack
   m_EditorClassIdentifier: 
-  startAttackTime: 0.55
-  endAttackTime: 0.8
-  attackParts: 00000000
-  mustCollide: 1
-  mustFaceAttacker: 0
-  lethalRange: 0
-  maxHits: 1
   debug: 0
-  damage: 1
-  comboStartTime: 0.1
-  comboEndTime: 0.9
-  forwardForce: 2000
+  startAttackTime: 0.3
+  endAttackTime: 0.35
+  attackParts: 
+  mustCollide: 0
+  mustFaceAttacker: 0
+  lethalRange: 0.5
+  maxHits: 3
+  damage: 3
+  comboStartTime: 0
+  comboEndTime: 0
+  forwardForce: 700
   rightForce: 0
-  upForce: 6800
-  useDeathParticles: 1
+  upForce: 6000
+  useDeathParticles: 0
   ParticleType: 3
