@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using UnityEngine;
-using UnityEngine.VFX;
 
 namespace My_MemoPlatformer
 {
@@ -217,7 +215,7 @@ namespace My_MemoPlatformer
             }
             else
             {
-                var rand = Random.RandomRange(0, _hitReactionList.Count);
+                var rand = Random.Range(0, _hitReactionList.Count);
 
                 _control.skinnedMeshAnimator.runtimeAnimatorController = null; //need this to restart the animation if get several hits in a short period of time
                 _control.skinnedMeshAnimator.runtimeAnimatorController = _hitReactionList[rand];

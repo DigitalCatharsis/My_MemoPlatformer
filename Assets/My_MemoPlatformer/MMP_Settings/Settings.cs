@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -8,37 +6,35 @@ namespace My_MemoPlatformer
     {
         public FrameSettings frameSettings;
         public PhysicsSettings physicsSettings;
-        [SerializeField] private bool debug;
+
+        private float PastTimeScale = 0f;
 
         private void Awake()
         {
             //Frames
-            if (debug)
-            {
-                Debug.Log("timeScale: " + frameSettings.TimeScale);
-            }
-            Time.timeScale = frameSettings.TimeScale;
-
-            if (debug)
-            {
-                Debug.Log("TargetFrameRate" + frameSettings.TargetFPS);
-            }
+            Debug.Log("targetFrameRate: " + frameSettings.TargetFPS);
             Application.targetFrameRate = frameSettings.TargetFPS;
 
             //Physics
-            if (debug)
-            {
-                Debug.Log("Default Solver Velocity Iterations" + physicsSettings.DefaultSolverVelocityIterations);
-            }
-            Physics.defaultSolverVelocityIterations = physicsSettings.DefaultSolverVelocityIterations;
+            Debug.Log("Default Solver Iterations: " + physicsSettings.defaultSolverIterations);
+            Physics.defaultSolverIterations = physicsSettings.defaultSolverIterations;
 
-            //Load Keys
-            if (debug)
-            {
-                Debug.Log("Loading keys binding");
-            }
+            Debug.Log("Default Solver Velocity Iterations: " + physicsSettings.defaultSolverIterations);
+            Physics.defaultSolverVelocityIterations = physicsSettings.defaultSolverIterations;
 
+            //Default Keys
+            Debug.Log("loading key bindings");
             VirtualInputManager.Instance.LoadKeys();
+            //VirtualInputManager.Instance.SetDefaultKeys();
+        }
+
+        private void LateUpdate()
+        {
+            if (PastTimeScale != frameSettings.TimeScale)
+            {
+                PastTimeScale = frameSettings.TimeScale;
+                Time.timeScale = frameSettings.TimeScale;
+            }
         }
     }
 }

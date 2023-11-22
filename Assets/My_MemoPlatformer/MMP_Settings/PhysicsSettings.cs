@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -9,7 +7,8 @@ namespace My_MemoPlatformer
 
     public class PhysicsSettings : ScriptableObject
     {
-        public int DefaultSolverVelocityIterations;
+        public int defaultSolverIterations;
+        public int defaultSolverVelocityIterations;
 
     }
 }
