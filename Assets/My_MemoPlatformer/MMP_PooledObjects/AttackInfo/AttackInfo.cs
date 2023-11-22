@@ -20,6 +20,7 @@ namespace My_MemoPlatformer
         public bool isRegistered;
         public bool isFinished;
         public bool useRagdollDeath;
+        public List<CharacterControl> registeredTargets = new List<CharacterControl>();  //using to prevent dublicate registering attacks
 
         public void ResetInfo(Attack attack, CharacterControl attacker)
         {
@@ -27,6 +28,7 @@ namespace My_MemoPlatformer
             isFinished = false;
             attackAbility = attack;
             this.attacker = attacker;
+            registeredTargets.Clear();
         }
 
         public void Register(Attack attack)

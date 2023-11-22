@@ -70,6 +70,11 @@ namespace My_MemoPlatformer
                     }
                 }
 
+                if (info.registeredTargets.Contains(this._control))  //prevent several times damage from one attack
+                {
+                    continue;
+                }
+
                 if (info.mustCollide)
                 {
                     if (IsCollided(info))
@@ -200,6 +205,12 @@ namespace My_MemoPlatformer
 
                 _control.skinnedMeshAnimator.runtimeAnimatorController = null; //need this to restart the animation if get several hits in a short period of time
                 _control.skinnedMeshAnimator.runtimeAnimatorController = _hitReactionList[rand];
+            }
+
+            //register damaged target
+            if (!info.registeredTargets.Contains(this._control))
+            {
+                info.registeredTargets.Add(this._control);
             }
         }
 
