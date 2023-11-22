@@ -8,6 +8,20 @@ namespace My_MemoPlatformer
     public class GroundDetector : StateData
     {
         [SerializeField] private float distance;
+
+        private GameObject testingSphere;
+
+        public GameObject TestingSphere
+        {
+            get
+            {
+                if (testingSphere == null)
+                {
+                    testingSphere = GameObject.Find("TestingSphere");
+                }
+                return testingSphere;
+            }
+        }
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
 
@@ -34,10 +48,10 @@ namespace My_MemoPlatformer
         {
             if (control.contactPoints != null)
             {
-                foreach (ContactPoint c in control.contactPoints)
+                foreach (var c in control.contactPoints)
                 {
-                    float colliderBottom = (control.transform.position.y + control.boxCollider.center.y) - (control.boxCollider.size.y / 2f);
-                    float yDiffirence = Mathf.Abs(c.point.y - colliderBottom);
+                    var colliderBottom = (control.transform.position.y + control.boxCollider.center.y) - (control.boxCollider.size.y / 2f);
+                    var yDiffirence = Mathf.Abs(c.point.y - colliderBottom);
 
                     if (yDiffirence < 0.01f)
                     {
@@ -45,6 +59,12 @@ namespace My_MemoPlatformer
                         {
                             //control.animationProgress.ground = c.otherCollider.transform.root.gameObject; //что колайдерит bottom сферы
                             control.animationProgress.ground = c.otherCollider.transform.gameObject; //что колайдерит bottom сферы
+                            control.animationProgress.landingPosition = new Vector3(0f, c.point.y, c.point.z);
+
+                            if (control.manualInput.enabled)
+                            {
+                                TestingSphere.transform.position = control.animationProgress.landingPosition;
+                            }
                             return true;
                         }
                     }
@@ -67,6 +87,12 @@ namespace My_MemoPlatformer
                         {
                             //control.animationProgress.ground = hit.collider.transform.root.gameObject; //что колайдерит bottom сферы
                             control.animationProgress.ground = hit.collider.transform.gameObject; //что колайдерит bottom сферы
+                            control.animationProgress.landingPosition = new Vector3(0f, hit.point.y, hit.point.z);
+
+                            if (control.manualInput.enabled)
+                            {
+                                TestingSphere.transform.position = control.animationProgress.landingPosition;
+                            }
                             return true;
                         }
                     }

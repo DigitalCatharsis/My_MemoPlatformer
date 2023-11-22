@@ -14,7 +14,7 @@ namespace My_MemoPlatformer
         public Vector3 targetSize;
         public float sizeUpdateSpeed;
 
-
+        private const string landingState = "Jump_Normal_Landing";
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {      
@@ -24,13 +24,22 @@ namespace My_MemoPlatformer
             characterState.characterControl.animationProgress.targetCenter = targetCenter;
             characterState.characterControl.animationProgress.centerSpeed = centerUpdateSpeed;
 
+            if (stateInfo.IsName(landingState)) 
+            {
+                characterState.characterControl.animationProgress.isLanding = true;
+            }
+
         }
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
 
         }
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {       
+        {
+            if (stateInfo.IsName(landingState))
+            {
+                characterState.characterControl.animationProgress.isLanding = false;
+            }
         }
     }
 }

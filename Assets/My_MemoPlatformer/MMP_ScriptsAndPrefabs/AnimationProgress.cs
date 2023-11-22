@@ -46,6 +46,8 @@ namespace My_MemoPlatformer
         public float sizeSpeed;
         public Vector3 targetCenter;
         public float centerSpeed;
+        public Vector3 landingPosition;
+        public bool isLanding;
 
         [Header("Damage Info")]
         public Attack attack;

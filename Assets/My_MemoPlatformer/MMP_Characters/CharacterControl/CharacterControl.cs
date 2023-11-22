@@ -170,16 +170,19 @@ namespace My_MemoPlatformer
                 c.attachedRigidbody.velocity = Vector3.zero;
             }
 
-            AddForceToDamagedPart();
+            AddForceToDamagedPart(false);
         }
 
-        public void AddForceToDamagedPart()
+        public void AddForceToDamagedPart(bool zeroZelocity)
         {
             if (animationProgress.damagedTrigger != null)
             {
-                foreach (Collider c in ragdollParts)
+                if (zeroZelocity)
                 {
-                    c.attachedRigidbody.velocity = Vector3.zero;
+                    foreach (Collider c in ragdollParts)
+                    {
+                        c.attachedRigidbody.velocity = Vector3.zero;
+                    }
                 }
 
                 animationProgress.damagedTrigger.GetComponent<Rigidbody>().
@@ -263,6 +266,11 @@ namespace My_MemoPlatformer
                 collisionSpheres.Reposition_BottomSpheres();
                 collisionSpheres.Reposition_BackSpheres();
                 collisionSpheres.Reposition_UpSpheres();
+            }
+
+            if (animationProgress.isLanding)  //prevent bug when idle after catching corner of platform
+            {
+                Rigid_Body.MovePosition(new Vector3(0f, animationProgress.landingPosition.y, this.transform.position.z));
             }
 
             //ragdoll

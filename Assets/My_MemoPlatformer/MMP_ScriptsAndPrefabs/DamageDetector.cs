@@ -159,7 +159,7 @@ namespace My_MemoPlatformer
                 if (!info.registeredTargets.Contains(this._control))
                 {
                     info.registeredTargets.Add(this._control);
-                    _control.AddForceToDamagedPart();
+                    _control.AddForceToDamagedPart(true);
                 }
                 return;
             }
@@ -233,8 +233,9 @@ namespace My_MemoPlatformer
             _control.skinnedMeshAnimator.runtimeAnimatorController = animator;
         }
 
-        public void TakeTotalDamage()
+        public void DeathBySpikes()
         {
+            _control.animationProgress.damagedTrigger = null;
             hp = 0f;
         }
     }
