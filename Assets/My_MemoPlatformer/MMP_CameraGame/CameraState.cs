@@ -13,7 +13,18 @@ namespace My_MemoPlatformer
 
             foreach (CameraTrigger t in arr)
             {
-                CameraManager.Instance.Cam_Controller.Animator.ResetTrigger(t.ToString());
+                CameraManager.Instance.Cam_Controller.Animator.ResetTrigger(HashManager.Instance.dicCameraTriggers[t]);
+            }
+        }
+
+        public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
+            if (stateInfo.normalizedTime > 0.7f)
+            {
+                if (stateInfo.IsName("Shake"))
+                {
+                    animator.SetTrigger(HashManager.Instance.dicCameraTriggers[CameraTrigger.Default]);
+                }
             }
         }
     }
