@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetCenter: {x: 0, y: 0.915, z: 0}
   centerUpdateSpeed: 20
-  targetSize: {x: 1, y: 2, z: 0.4}
+  targetSize: {x: 1, y: 1.85, z: 0.4}
   sizeUpdateSpeed: 20

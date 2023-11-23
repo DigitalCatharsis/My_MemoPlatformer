@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -14,7 +12,8 @@ namespace My_MemoPlatformer
         public Vector3 targetSize;
         public float sizeUpdateSpeed;
 
-        private const string landingState = "Jump_Normal_Landing";
+        private const string _landingState = "Jump_Normal_Landing";
+        private const string _climbingState = "LedgeClimb";
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {      
@@ -24,7 +23,7 @@ namespace My_MemoPlatformer
             characterState.characterControl.animationProgress.targetCenter = targetCenter;
             characterState.characterControl.animationProgress.centerSpeed = centerUpdateSpeed;
 
-            if (stateInfo.IsName(landingState)) 
+            if (stateInfo.IsName(_landingState)) 
             {
                 characterState.characterControl.animationProgress.isLanding = true;
             }
@@ -32,11 +31,29 @@ namespace My_MemoPlatformer
         }
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-
+            //preventing pull back from platform when climbing cause of collider
+            if (stateInfo.IsName(_climbingState))
+            {
+                if (stateInfo.normalizedTime > 0.7f)
+                {
+                    if (animator.GetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded]) == true)
+                    {
+                        characterState.characterControl.animationProgress.isLanding = true;
+                    }
+                    else
+                    {
+                        characterState.characterControl.animationProgress.isLanding = false;
+                    }
+                }
+                else
+                {
+                    characterState.characterControl.animationProgress.isLanding = false;
+                }
+            }
         }
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (stateInfo.IsName(landingState))
+            if (stateInfo.IsName(_landingState) || stateInfo.IsName(_climbingState))
             {
                 characterState.characterControl.animationProgress.isLanding = false;
             }

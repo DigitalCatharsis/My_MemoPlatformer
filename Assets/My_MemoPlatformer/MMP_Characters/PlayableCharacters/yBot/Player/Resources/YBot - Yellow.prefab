@@ -1644,7 +1644,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 114
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!114 &1747402107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1678,6 +1678,8 @@ MonoBehaviour:
   sizeSpeed: 0
   targetCenter: {x: 0, y: 0, z: 0}
   centerSpeed: 0
+  landingPosition: {x: 0, y: 0, z: 0}
+  isLanding: 0
   attack: {fileID: 0}
   attacker: {fileID: 0}
   damagedTrigger: {fileID: 0}

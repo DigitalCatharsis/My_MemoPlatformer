@@ -222,7 +222,7 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (Vector3.SqrMagnitude(boxCollider.size - animationProgress.targetSize) > 0.01f)
+            if (Vector3.SqrMagnitude(boxCollider.size - animationProgress.targetSize) > 0.00001f)
             {
                 boxCollider.size = Vector3.Lerp(boxCollider.size, animationProgress.targetSize, Time.deltaTime * animationProgress.sizeSpeed);
 
@@ -252,7 +252,7 @@ namespace My_MemoPlatformer
             {
                 if (Rigid_Body.velocity.y > 0f && !jump)
                 {
-                    Rigid_Body.velocity -= (Vector3.up * _rigidBody.velocity.y * 0.1f);    //Высота прыжка в зависимости от длительности нажатия
+                    Rigid_Body.velocity -= (Vector3.up * Rigid_Body.velocity.y * 0.1f);    //Высота прыжка в зависимости от длительности нажатия
                 }
             }
 
@@ -266,11 +266,12 @@ namespace My_MemoPlatformer
                 collisionSpheres.Reposition_BottomSpheres();
                 collisionSpheres.Reposition_BackSpheres();
                 collisionSpheres.Reposition_UpSpheres();
-            }
 
-            if (animationProgress.isLanding)  //prevent bug when idle after catching corner of platform
-            {
-                Rigid_Body.MovePosition(new Vector3(0f, animationProgress.landingPosition.y, this.transform.position.z));
+                if (animationProgress.isLanding)  //prevent bug when idle after catching corner of platform
+                {
+                    Debug.Log("repositioning y");
+                    Rigid_Body.MovePosition(new Vector3(0f, animationProgress.landingPosition.y, this.transform.position.z));
+                }
             }
 
             //ragdoll
@@ -283,9 +284,9 @@ namespace My_MemoPlatformer
             //slow down wallslide
             if (animationProgress.maxFallVelocity.y != 0f)
             {
-                if (_rigidBody.velocity.y <= animationProgress.maxFallVelocity.y)
+                if (Rigid_Body.velocity.y <= animationProgress.maxFallVelocity.y)
                 {
-                    _rigidBody.velocity = animationProgress.maxFallVelocity;
+                    Rigid_Body.velocity = animationProgress.maxFallVelocity;
                 }
             }
         }

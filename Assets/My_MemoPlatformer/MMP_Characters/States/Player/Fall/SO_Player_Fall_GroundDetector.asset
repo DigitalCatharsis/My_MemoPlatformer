@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57112dfa714501f45b4438a59e17df5a, type: 3}
   m_Name: SO_Player_Fall_GroundDetector
   m_EditorClassIdentifier: 
-  _checktime: 0
   distance: 0.3

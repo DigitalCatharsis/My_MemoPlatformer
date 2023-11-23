@@ -68,6 +68,39 @@ namespace My_MemoPlatformer
             _control = GetComponentInParent<CharacterControl>();
         }
 
+        private void Update()
+        {
+            if (_control.attack)
+            { //dont trigger attack several times
+                if (attackButtonIsReset)
+                {
+                    attackTriggered = true;
+                    attackButtonIsReset = false;
+                }
+            }
+            else
+            {
+                attackButtonIsReset = true;
+                attackTriggered = false;
+            }
+
+            if (IsRunning(typeof(LockTransition)))
+            {
+                if (_control.animationProgress.lockTransition)
+                {
+                    _control.skinnedMeshAnimator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.LockTransition], true);
+                }
+                else
+                {
+                    _control.skinnedMeshAnimator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.LockTransition], false);
+                }
+            }
+            else
+            {
+                _control.skinnedMeshAnimator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.LockTransition], false);
+            }
+        }
+
         private void FixedUpdate()
         {
             if (IsRunning(typeof(MoveForward)))
@@ -90,7 +123,7 @@ namespace My_MemoPlatformer
                 _spheresList = _control.collisionSpheres.frontSpheres;
                 _dirBlock = 0.3f;
 
-                foreach (GameObject sphere in _control.collisionSpheres.backSpheres)
+                foreach (var sphere in _control.collisionSpheres.backSpheres)
                 {
                     if (blockingObjects.ContainsKey(sphere))
                     {
@@ -100,7 +133,6 @@ namespace My_MemoPlatformer
             }
             else
             {
-
                 _spheresList = _control.collisionSpheres.backSpheres;
                 _dirBlock = -0.3f;
 
@@ -161,7 +193,7 @@ namespace My_MemoPlatformer
             }
             else
             {
-                CharacterControl blockingCharacter = CharacterManager.Instance.GetCharacter(col.transform.root.root.gameObject);
+                var blockingCharacter = CharacterManager.Instance.GetCharacter(col.transform.root.root.gameObject);
 
                 if (blockingCharacter == null)
                 {
@@ -187,7 +219,7 @@ namespace My_MemoPlatformer
             }
 
 
-            CharacterControl target = CharacterManager.Instance.GetCharacter(col.transform.root.gameObject);
+            var target = CharacterManager.Instance.GetCharacter(col.transform.root.gameObject);
 
             if (target == null)
             {
@@ -204,38 +236,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void Update()
-        {
-            if (_control.attack)
-            { //dont trigger attack several times
-                if (attackButtonIsReset)
-                {
-                    attackTriggered = true;
-                    attackButtonIsReset = false;
-                }
-            }
-            else
-            {
-                attackButtonIsReset = true;
-                attackTriggered = false;
-            }
-
-            if (IsRunning(typeof(LockTransition)))
-            {
-                if (_control.animationProgress.lockTransition)
-                {
-                    _control.skinnedMeshAnimator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.LockTransition], true);
-                }
-                else
-                {
-                    _control.skinnedMeshAnimator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.LockTransition], false);
-                }
-            }
-            else
-            {
-                _control.skinnedMeshAnimator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.LockTransition], false);
-            }
-        }
+        
 
         public bool IsRunning(System.Type type) //ability is running now?
         {
