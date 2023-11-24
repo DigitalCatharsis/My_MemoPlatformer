@@ -13,6 +13,9 @@ namespace My_MemoPlatformer
         public List<PoolObjectType> poolObjectList = new List<PoolObjectType>();
         public bool ragdollTriggered;
         public MoveForward latestMoveForwardScript;  //latest moveforward script
+        public MoveUp latestMoveUpScript;  //latest moveforward script
+        private List<GameObject> _frontSpheresList;
+        private List<GameObject> _upSpheresList;
 
         [Header("Attack Button")]
         public bool attackTriggered;
@@ -23,14 +26,14 @@ namespace My_MemoPlatformer
         public bool disAllowEarlyTurn;
         public bool lockDirectionNextState;
         public bool isIgnoreCharacterTime; //slide beyond character (start ignoring character collider)
-        private List<GameObject> _spheresList;
         private float _dirBlock;
 
         [Header("Colliding Objects")]
         public GameObject ground;
         public Dictionary<TriggerDetector, List<Collider>> collidingBodyParts = new Dictionary<TriggerDetector, List<Collider>>(); //key trigger detectors, value - colliding bodyparts which are in contract with trigger detectors
         public Dictionary<TriggerDetector, List<Collider>> collidingWeapons = new Dictionary<TriggerDetector, List<Collider>>(); //key trigger detectors, value - colliding bodyparts which are in contract with trigger detectors
-        public Dictionary<GameObject, GameObject> blockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
+        public Dictionary<GameObject, GameObject> frontBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
+        public Dictionary<GameObject, GameObject> upBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
 
         [Header("AirControl")]
         public bool jumped;
@@ -105,82 +108,115 @@ namespace My_MemoPlatformer
         {
             if (IsRunning(typeof(MoveForward)))
             {
-                CheckForBlockingObjects();
+                CheckFrontBlocking();
             }
             else
             {
-                if (blockingObjects.Count != 0)
+                if (frontBlockingObjects.Count != 0)
                 {
-                    blockingObjects.Clear();
+                    frontBlockingObjects.Clear();
+                }
+            }
+
+            if (IsRunning(typeof(MoveUp)))
+            {
+                CheckUpBlocking();
+            }
+            else
+            {
+                if (upBlockingObjects.Count != 0)
+                {
+                    upBlockingObjects.Clear();
                 }
             }
         }
 
-        private void CheckForBlockingObjects()  //Проверка на коллизии
+        private void CheckUpBlocking()
+        {
+            if (latestMoveUpScript.speed > 0)
+            {
+                _upSpheresList = _control.collisionSpheres.upSpheres;
+            }
+
+            foreach (GameObject o in _upSpheresList)
+            {
+                CheckRaycastCollision(o, this.transform.up, 0.3f, upBlockingObjects);
+            }
+        }
+
+        private void CheckFrontBlocking()  //Проверка на коллизии
         {
             if (latestMoveForwardScript.speed > 0)
             {
-                _spheresList = _control.collisionSpheres.frontSpheres;
-                _dirBlock = 0.3f;
+                _frontSpheresList = _control.collisionSpheres.frontSpheres;
+                _dirBlock = 1;
 
                 foreach (var sphere in _control.collisionSpheres.backSpheres)
                 {
-                    if (blockingObjects.ContainsKey(sphere))
+                    if (frontBlockingObjects.ContainsKey(sphere))
                     {
-                        blockingObjects.Remove(sphere);
+                        frontBlockingObjects.Remove(sphere);
                     }
                 }
             }
             else
             {
-                _spheresList = _control.collisionSpheres.backSpheres;
-                _dirBlock = -0.3f;
+                _frontSpheresList = _control.collisionSpheres.backSpheres;
+                _dirBlock = -1;
 
                 foreach (GameObject sphere in _control.collisionSpheres.frontSpheres)
                 {
-                    if (blockingObjects.ContainsKey(sphere))
+                    if (frontBlockingObjects.ContainsKey(sphere))
                     {
-                        blockingObjects.Remove(sphere);
+                        frontBlockingObjects.Remove(sphere);
                     }
                 }
             }
 
-            foreach (GameObject o in _spheresList)
+            foreach (GameObject o in _frontSpheresList)
             {
-                Debug.DrawRay(o.transform.position, _control.transform.forward * _dirBlock, Color.yellow);
-                RaycastHit hit;
-                if (Physics.Raycast(o.transform.position, _control.transform.forward * _dirBlock, out hit, latestMoveForwardScript.blockDistance))
+                CheckRaycastCollision(o, this.transform.forward * _dirBlock, latestMoveForwardScript.blockDistance, frontBlockingObjects);
+            }
+        }
+
+        private void CheckRaycastCollision(GameObject obj, Vector3 dir, float blockDistance, Dictionary<GameObject, GameObject> blockingObjDictionary)
+        {
+            //draw DebugLine
+            Debug.DrawRay(obj.transform.position, dir * blockDistance, Color.yellow);
+
+            //check collision
+            RaycastHit hit;
+            if (Physics.Raycast(obj.transform.position, dir, out hit, blockDistance))
+            {
+                if (!IsBodyPart(hit.collider)
+                    && !IsIgnoringCharacter(hit.collider)
+                    && !Ledge.IsLedge(hit.collider.gameObject)
+                    && !Ledge.IsLedgeChecker(hit.collider.gameObject)  // Проверка, что мы ничего не задеваем, включая Ledge (платформы, за котоыре можно зацепиться)
+                    && !MeleeWeapon.IsWeapon(hit.collider.gameObject)
+                    && !TrapSpikes.IsTrap(hit.collider.gameObject))
                 {
-                    if (!IsBodyPart(hit.collider)
-                        && !IsIgnoringCharacter(hit.collider)
-                        && !Ledge.IsLedge(hit.collider.gameObject)
-                        && !Ledge.IsLedgeChecker(hit.collider.gameObject)  // Проверка, что мы ничего не задеваем, включая Ledge (платформы, за котоыре можно зацепиться)
-                        && !MeleeWeapon.IsWeapon(hit.collider.gameObject)
-                        && !TrapSpikes.IsTrap(hit.collider.gameObject))
+                    if (blockingObjDictionary.ContainsKey(obj)) //Если сфера есть в списке
                     {
-                        if (blockingObjects.ContainsKey(o)) //Если сфера есть в списке
-                        {
-                            blockingObjects[o] = hit.collider.transform.root.gameObject; //Добавляем объект, который ее колайдит
-                        }
-                        else
-                        {
-                            blockingObjects.Add(o, hit.collider.transform.root.gameObject);
-                        }
+                        blockingObjDictionary[obj] = hit.collider.transform.root.gameObject; //Добавляем объект, который ее колайдит
                     }
-                    else //not match conditions
+                    else
                     {
-                        if (blockingObjects.ContainsKey(o))
-                        {
-                            blockingObjects.Remove(o);
-                        }
+                        blockingObjDictionary.Add(obj, hit.collider.transform.root.gameObject);
                     }
                 }
-                else  //collide nothing
+                else //not match conditions
                 {
-                    if (blockingObjects.ContainsKey(o))
+                    if (blockingObjDictionary.ContainsKey(obj))
                     {
-                        blockingObjects.Remove(o);
+                        blockingObjDictionary.Remove(obj);
                     }
+                }
+            }
+            else  //collide nothing
+            {
+                if (blockingObjDictionary.ContainsKey(obj))
+                {
+                    blockingObjDictionary.Remove(obj);
                 }
             }
         }
@@ -252,7 +288,7 @@ namespace My_MemoPlatformer
 
         public bool RightSideIsBlocked()
         {
-            foreach (KeyValuePair<GameObject, GameObject> data in blockingObjects)
+            foreach (KeyValuePair<GameObject, GameObject> data in frontBlockingObjects)
             {
                 if ((data.Value.transform.position - _control.transform.position).z > 0f)
                 {
@@ -264,7 +300,7 @@ namespace My_MemoPlatformer
 
         public bool LeftSideIsBlocked()
         {
-            foreach (KeyValuePair<GameObject, GameObject> data in blockingObjects)
+            foreach (KeyValuePair<GameObject, GameObject> data in frontBlockingObjects)
             {
                 if ((data.Value.transform.position - _control.transform.position).z < 0f)
                 {

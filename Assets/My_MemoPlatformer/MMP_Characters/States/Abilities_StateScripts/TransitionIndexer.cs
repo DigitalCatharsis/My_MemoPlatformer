@@ -208,7 +208,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.MOVING_TO_BLOCKING_OBG:
                         {
-                            foreach (KeyValuePair<GameObject, GameObject> data in control.animationProgress.blockingObjects)
+                            foreach (KeyValuePair<GameObject, GameObject> data in control.animationProgress.frontBlockingObjects)
                             {
                                 Vector3 dir = data.Value.transform.position - control.transform.position;
 

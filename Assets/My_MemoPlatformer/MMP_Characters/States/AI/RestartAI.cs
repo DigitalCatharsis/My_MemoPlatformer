@@ -34,13 +34,13 @@ namespace My_MemoPlatformer
             }
 
             //path is blocked
-            if (characterState.characterControl.animationProgress.blockingObjects.Count == 0)
+            if (characterState.characterControl.animationProgress.frontBlockingObjects.Count == 0)
             {
                 characterState.characterControl.aiProgress.blockingCharacter = null;
             }
             else
             {
-                foreach (KeyValuePair<GameObject, GameObject> data in characterState.characterControl.animationProgress.blockingObjects)
+                foreach (KeyValuePair<GameObject, GameObject> data in characterState.characterControl.animationProgress.frontBlockingObjects)
                 {
                     CharacterControl blockingCharacter = CharacterManager.Instance.GetCharacter(data.Value);
                      

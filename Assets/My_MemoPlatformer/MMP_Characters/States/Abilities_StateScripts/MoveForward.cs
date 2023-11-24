@@ -308,7 +308,7 @@ namespace My_MemoPlatformer
 
         private bool IsBlocked(CharacterControl control)
         {
-            if (control.animationProgress.blockingObjects.Count != 0)
+            if (control.animationProgress.frontBlockingObjects.Count != 0)
             {
                 return true;
             }
