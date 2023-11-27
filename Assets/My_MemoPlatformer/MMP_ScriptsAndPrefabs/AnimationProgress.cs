@@ -270,9 +270,19 @@ namespace My_MemoPlatformer
             {
                 return false;
             }
-        }
+        }       
 
-        
+        public bool StateNameContains(string str) //ability is running now?
+        {
+            foreach (KeyValuePair<StateData, int> data in currentRunningAbilities)
+            {
+                if (data.Key.name.Contains(str))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         public bool IsRunning(System.Type type) //ability is running now?
         {
@@ -285,6 +295,8 @@ namespace My_MemoPlatformer
             }
             return false;
         }
+
+
 
         public bool RightSideIsBlocked()
         {

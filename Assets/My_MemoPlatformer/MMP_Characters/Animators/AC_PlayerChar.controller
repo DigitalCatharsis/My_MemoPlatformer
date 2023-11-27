@@ -3597,9 +3597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
   ListAbilityData:
-  - {fileID: 11400000, guid: 4d8bf62de58adbc479714fe1a0490bd2, type: 2}
   - {fileID: 11400000, guid: 5c00ad91735ceff428d78ad2e8d4ad22, type: 2}
-  - {fileID: 11400000, guid: 3d042acad669d7d4c8608c430c46b1a0, type: 2}
   - {fileID: 11400000, guid: 1f685a1f66d84de43bbc4c4c01bb9322, type: 2}
 --- !u!1101 &4027586811987681880
 AnimatorStateTransition:

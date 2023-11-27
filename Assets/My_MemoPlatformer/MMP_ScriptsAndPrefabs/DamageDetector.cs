@@ -204,7 +204,7 @@ namespace My_MemoPlatformer
             {
                 _control.animationProgress.ragdollTriggered = true;
                 _control.GetComponent<BoxCollider>().enabled = false;
-                _control.ledgeChecker.GetComponent<BoxCollider>().enabled = false;
+                _control.ledgeChecker.collider1.GetComponent<BoxCollider>().enabled = false;
                 _control.Rigid_Body.useGravity = false;
 
                 if (_control.aiController != null)
