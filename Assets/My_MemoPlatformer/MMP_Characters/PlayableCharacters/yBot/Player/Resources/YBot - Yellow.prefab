@@ -1521,6 +1521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee80179171b79c54e86b124755c65156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debug: 0
   moveUp: 0
   moveDown: 0
   moveRight: 0
@@ -1528,6 +1529,7 @@ MonoBehaviour:
   turbo: 0
   jump: 0
   attack: 0
+  block: 0
   manualInput: {fileID: 0}
   ledgeChecker: {fileID: 0}
   animationProgress: {fileID: 0}
@@ -3655,7 +3657,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.13
+  m_Radius: 0.135
   m_Center: {x: -0.12, y: 0, z: 0}
 --- !u!114 &4289703549495303787
 MonoBehaviour:
@@ -4846,7 +4848,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.13
+  m_Radius: 0.135
   m_Center: {x: 0.12, y: 0, z: 0}
 --- !u!114 &3000342705100398716
 MonoBehaviour:

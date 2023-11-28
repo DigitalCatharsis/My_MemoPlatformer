@@ -79,7 +79,6 @@ namespace My_MemoPlatformer
                     if (Physics.Raycast(o.transform.position, -Vector3.up, out hit, distance))
                     {
                         if (!control.ragdollParts.Contains(hit.collider)
-                            && !Ledge.IsLedge(hit.collider.gameObject)
                             && !Ledge.IsLedgeChecker(hit.collider.gameObject)
                             && !Ledge.IsCharacter(hit.collider.gameObject))
                         {
