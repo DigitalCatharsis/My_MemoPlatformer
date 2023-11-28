@@ -15,7 +15,6 @@ namespace My_MemoPlatformer
         public MoveForward latestMoveForwardScript;  //latest moveforward script
         public MoveUp latestMoveUpScript;  //latest moveforward script
         private List<GameObject> _frontSpheresList;
-        private List<GameObject> _upSpheresList;
 
         [Header("Attack Button")]
         public bool attackTriggered;
@@ -118,27 +117,39 @@ namespace My_MemoPlatformer
                 }
             }
 
+            //checking while ledge grabbing
             if (IsRunning(typeof(MoveUp)))
             {
-                CheckUpBlocking();
+                if (latestMoveUpScript.speed > 0f)
+                {
+                    CheckUpBlocking();
+                }
             }
             else
             {
-                if (upBlockingObjects.Count != 0)
+                //checking while player is jumping
+                if (_control.Rigid_Body.velocity.y > 0.001f)  
                 {
-                    upBlockingObjects.Clear();
+                    CheckUpBlocking();
+
+                    if (upBlockingObjects.Count > 0)
+                    {
+                        _control.Rigid_Body.velocity = new Vector3(_control.Rigid_Body.velocity.x, 0f, _control.Rigid_Body.velocity.z);
+                    }
+                }
+                else
+                {
+                    if (upBlockingObjects.Count != 0)
+                    {
+                        upBlockingObjects.Clear();
+                    }
                 }
             }
         }
 
         private void CheckUpBlocking()
         {
-            if (latestMoveUpScript.speed > 0)
-            {
-                _upSpheresList = _control.collisionSpheres.upSpheres;
-            }
-
-            foreach (GameObject o in _upSpheresList)
+            foreach (GameObject o in _control.collisionSpheres.upSpheres)
             {
                 CheckRaycastCollision(o, this.transform.up, 0.3f, upBlockingObjects);
             }
@@ -270,7 +281,7 @@ namespace My_MemoPlatformer
             {
                 return false;
             }
-        }       
+        }
 
         public bool StateNameContains(string str) //ability is running now?
         {
@@ -324,7 +335,7 @@ namespace My_MemoPlatformer
 
         public MeleeWeapon GetTouchingWeapon()
         {
-            foreach(KeyValuePair<TriggerDetector,List<Collider>> data in collidingWeapons)
+            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in collidingWeapons)
             {
                 var w = data.Value[0].gameObject.GetComponent<MeleeWeapon>();
                 return w;
