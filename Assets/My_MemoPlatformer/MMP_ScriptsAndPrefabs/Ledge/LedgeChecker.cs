@@ -6,19 +6,20 @@ namespace My_MemoPlatformer
 {
     public class LedgeChecker : MonoBehaviour
     {
-        public bool isGrabbongLedge;
+        public bool isGrabbingLedge;
         public Vector3 ledgeCalibration = new Vector3();  //diffirence (offset) when we change character. (Bones changing)
 
-        public LedgeCollider collider1;
-        public LedgeCollider collider2;
-
         private CharacterControl _control;
+
+        public LedgeCollider collider1; //bottom
+        public LedgeCollider collider2; //top
+
 
         public List<string> ledgeTriggerStateNames = new List<string>();
 
         private void Start()
         {
-            isGrabbongLedge = false;
+            isGrabbingLedge = false;
             _control = GetComponentInParent<CharacterControl>();
         }
         private void FixedUpdate()
@@ -27,7 +28,7 @@ namespace My_MemoPlatformer
             {
                 if (_control.Rigid_Body.useGravity)
                 {
-                    isGrabbongLedge = false;
+                    isGrabbingLedge = false;
                 }
             }
 
@@ -70,18 +71,18 @@ namespace My_MemoPlatformer
                     }
                     else
                     {
-                        isGrabbongLedge = false;
+                        isGrabbingLedge = false;
                     }
                 }
             }
             else
             {
-                isGrabbongLedge = false;
+                isGrabbingLedge = false;
             }
 
             if (collider1.collidedObjects.Count == 0)
             {
-                isGrabbongLedge = false;
+                isGrabbingLedge = false;
             }
         }
         private bool OffsetPosition(GameObject platform)
@@ -93,18 +94,18 @@ namespace My_MemoPlatformer
                 return false;
             }
 
-            if (isGrabbongLedge)
+            if (isGrabbingLedge)   //if already grabbing
             {
                 return false;
             }
 
-            isGrabbongLedge = true;
+            isGrabbingLedge = true;
             _control.Rigid_Body.useGravity = false;
             _control.Rigid_Body.velocity = Vector3.zero;
 
             float y, z;
 
-            y = platform.transform.position.y + (boxCollider.size.y / 2f);
+            y = platform.transform.position.y + (boxCollider.size.y * boxCollider.gameObject.transform.lossyScale.y / 2f);
 
             if (_control.IsFacingForward())
             {
@@ -115,7 +116,7 @@ namespace My_MemoPlatformer
                 z = platform.transform.position.z + (boxCollider.size.z * boxCollider.gameObject.transform.lossyScale.z / 2f);
             }
 
-            Vector3 plarformEdge = new Vector3(0f, y, z);
+            var plarformEdge = new Vector3(0f, y, z);
 
             var testingSphere = GameObject.Find("TestingSphere");
             testingSphere.transform.position = plarformEdge;

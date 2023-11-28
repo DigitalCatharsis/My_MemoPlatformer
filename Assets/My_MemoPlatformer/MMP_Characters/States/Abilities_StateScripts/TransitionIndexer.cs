@@ -140,7 +140,15 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.GRABBING_LEDGE:
                         {
-                            if (!control.ledgeChecker.isGrabbongLedge)
+                            if (!control.ledgeChecker.isGrabbingLedge)
+                            {
+                                return false;
+                            }
+                        }
+                        break;
+                    case TransitionConditionType.NOT_GRABBING_LEDGE:
+                        {
+                            if (control.ledgeChecker.isGrabbingLedge)
                             {
                                 return false;
                             }
@@ -195,14 +203,6 @@ namespace My_MemoPlatformer
                     case TransitionConditionType.CAN_WALLJUMP:
                         {
                             if (!control.animationProgress.canWallJump)
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.NOT_GRABBING_LEDGE:
-                        {
-                            if (control.ledgeChecker.isGrabbongLedge)
                             {
                                 return false;
                             }

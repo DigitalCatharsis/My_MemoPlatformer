@@ -282,7 +282,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        public bool StateNameContains(string str) //ability is running now?
+        public bool StateNameContains(string str) 
         {
             foreach (KeyValuePair<StateData, int> data in currentRunningAbilities)
             {
