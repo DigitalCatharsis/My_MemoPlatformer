@@ -30,6 +30,8 @@ public enum TransitionConditionType
     NOT_MOVING,
     RUN,
     NOT_RUN,
+    BLOCKING,
+    NOT_BLOCKING,
 }
 
 namespace My_MemoPlatformer
@@ -331,6 +333,22 @@ namespace My_MemoPlatformer
                                         return false;
                                     }
                                 }
+                            }
+                        }
+                        break;
+                    case TransitionConditionType.BLOCKING:
+                        {
+                            if (!control.block)
+                            {
+                                return false;
+                            }
+                        }
+                        break;
+                    case TransitionConditionType.NOT_BLOCKING:
+                        {
+                            if (control.block)
+                            {
+                                return false;
                             }
                         }
                         break;

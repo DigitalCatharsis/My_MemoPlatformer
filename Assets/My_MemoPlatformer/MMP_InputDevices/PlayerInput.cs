@@ -5,6 +5,11 @@ namespace My_MemoPlatformer
 {
     public class PlayerInput : MonoBehaviour
     {
+        //1. Looking for key pressing in PlayerInput
+        //2. The pressed keys saved up to the VirtualInputManager, and bind up
+        //3. ManualInput Relay that keys to the CharacterControl
+        //4. CharacterControl contains actual fields about character moving etc.
+
         public SavedKeys SavedKeys;
 
        void Update()
@@ -61,6 +66,15 @@ namespace My_MemoPlatformer
             else
             {
                 VirtualInputManager.Instance.jump = false;
+            }
+
+            if (Input.GetKey(VirtualInputManager.Instance.DicKeys[InputKeyType.KEY_BLOCK]))
+            {
+                VirtualInputManager.Instance.block = true;
+            }
+            else
+            {
+                VirtualInputManager.Instance.block = false;
             }
 
             //    if (Input.GetKeyDown(KeyCode.C))

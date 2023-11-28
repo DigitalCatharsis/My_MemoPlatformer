@@ -164,6 +164,26 @@ namespace My_MemoPlatformer
                 return;
             }
 
+            if (_control.animationProgress.IsRunning(typeof(Block)))
+            {
+                var dir = info.attacker.transform.position - _control.transform.position;
+
+                if (dir.z > 0f)
+                {
+                    if (_control.IsFacingForward())
+                    {
+                        return;
+                    }
+                }
+                else if (dir.z < 0f)
+                {
+                    if (!_control.IsFacingForward())
+                    {
+                        return;
+                    }
+                }
+            }
+
             if (info.mustCollide)
             {
                 CameraManager.Instance.ShakeCamera(0.3f);

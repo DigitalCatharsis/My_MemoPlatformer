@@ -111,6 +111,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\DeathAnimationManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\AIProgress.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\Turn180.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\Block.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\PlayerSpawn.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\ForceTransition.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckTurbo.cs" />

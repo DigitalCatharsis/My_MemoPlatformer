@@ -4,6 +4,10 @@ using UnityEngine.AI;
 
 namespace My_MemoPlatformer
 {
+    //1. Looking for key pressing in PlayerInput
+    //2. The pressed keys saved up to the VirtualInputManager, and bind up
+    //3. ManualInput Relay that keys to the CharacterControl
+    //4. CharacterControl contains actual fields about character moving etc.
     public enum TransitionParameter
     {
         Move,
@@ -29,6 +33,9 @@ namespace My_MemoPlatformer
     public class CharacterControl : MonoBehaviour
     {
         [Header("Input")]
+        [SerializeField] bool _debug;
+
+        [Header("Input")]
         public bool moveUp;
         public bool moveDown;
         public bool moveRight;
@@ -36,6 +43,7 @@ namespace My_MemoPlatformer
         public bool turbo;
         public bool jump;
         public bool attack;
+        public bool block;
 
         [Header("SubComponents")]
         public ManualInput manualInput;
@@ -269,7 +277,10 @@ namespace My_MemoPlatformer
 
                 if (animationProgress.isLanding)  //prevent bug when idle after catching corner of platform
                 {
-                    Debug.Log("repositioning y");
+                    if (_debug)
+                    {
+                        Debug.Log("repositioning y");
+                    }
                     Rigid_Body.MovePosition(new Vector3(0f, animationProgress.landingPosition.y, this.transform.position.z));
                 }
             }

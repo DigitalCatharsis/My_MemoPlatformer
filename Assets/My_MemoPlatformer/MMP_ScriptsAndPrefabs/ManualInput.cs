@@ -5,6 +5,10 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
+    //1. Looking for key pressing in PlayerInput
+    //2. The pressed keys saved up to the VirtualInputManager, and bind up
+    //3. ManualInput Relay that keys to the CharacterControl
+    //4. CharacterControl contains actual fields about character moving etc.
     public class ManualInput : MonoBehaviour
     {
         private CharacterControl characterControl;
@@ -86,6 +90,17 @@ namespace My_MemoPlatformer
             {
                 characterControl.jump = false;
                 RemoveDoubleTap(InputKeyType.KEY_JUMP);
+            }
+
+            if (VirtualInputManager.Instance.block)
+            {
+                characterControl.block = true;
+                ProcessDoubleTap(InputKeyType.KEY_BLOCK);
+            }
+            else
+            {
+                characterControl.block = false;
+                RemoveDoubleTap(InputKeyType.KEY_BLOCK);
             }
 
             if (VirtualInputManager.Instance.attack)

@@ -14,8 +14,16 @@ namespace My_MemoPlatformer
         KEY_ATTACK,
         KEY_TURBO,
         KEY_JUMP,
+
+        KEY_BLOCK,
+
         KEY_RESTART,
     }
+
+    //1. Looking for key pressing in PlayerInput
+    //2. The pressed keys saved up to the VirtualInputManager, and bind up
+    //3. ManualInput Relay that keys to the CharacterControl
+    //4. CharacterControl contains actual fields about character moving etc.
 
     public class VirtualInputManager : Singleton<VirtualInputManager>
     {
@@ -28,6 +36,7 @@ namespace My_MemoPlatformer
         public bool moveDown;
         public bool jump;
         public bool attack;
+        public bool block;
 
         public bool debug;
 
@@ -42,6 +51,7 @@ namespace My_MemoPlatformer
         public bool bind_Jump;
         public bool bind_Turbo;
         public bool bind_Restart;
+        public bool bind_Block;
 
 
 
@@ -99,16 +109,18 @@ namespace My_MemoPlatformer
         {
             DicKeys.Clear();
 
-            DicKeys.Add(InputKeyType.KEY_MOVE_UP, KeyCode.UpArrow);
-            DicKeys.Add(InputKeyType.KEY_MOVE_DOWN, KeyCode.DownArrow);
-            DicKeys.Add(InputKeyType.KEY_MOVE_LEFT, KeyCode.LeftArrow);
-            DicKeys.Add(InputKeyType.KEY_MOVE_RIGHT, KeyCode.RightArrow);
+            DicKeys.Add(InputKeyType.KEY_MOVE_UP,        KeyCode.UpArrow);
+            DicKeys.Add(InputKeyType.KEY_MOVE_DOWN,      KeyCode.DownArrow);
+            DicKeys.Add(InputKeyType.KEY_MOVE_LEFT,      KeyCode.LeftArrow);
+            DicKeys.Add(InputKeyType.KEY_MOVE_RIGHT,     KeyCode.RightArrow);
 
-            DicKeys.Add(InputKeyType.KEY_ATTACK, KeyCode.C);
-            DicKeys.Add(InputKeyType.KEY_JUMP, KeyCode.X);
-            DicKeys.Add(InputKeyType.KEY_TURBO, KeyCode.Z);
+            DicKeys.Add(InputKeyType.KEY_ATTACK,         KeyCode.C);
+            DicKeys.Add(InputKeyType.KEY_JUMP,           KeyCode.X);
+            DicKeys.Add(InputKeyType.KEY_TURBO,          KeyCode.Z);
 
-            DicKeys.Add(InputKeyType.KEY_RESTART, KeyCode.R);
+            DicKeys.Add(InputKeyType.KEY_BLOCK,          KeyCode.F);
+
+            DicKeys.Add(InputKeyType.KEY_RESTART,        KeyCode.R);
 
             SaveKeys();
         }
@@ -169,6 +181,13 @@ namespace My_MemoPlatformer
                     if (KeyIsChanged(InputKeyType.KEY_TURBO))
                     {
                         bind_Turbo = false;
+                    }
+                }
+                if (bind_Block)
+                {
+                    if (KeyIsChanged(InputKeyType.KEY_BLOCK))
+                    {
+                        bind_Block = false;
                     }
                 }
 
