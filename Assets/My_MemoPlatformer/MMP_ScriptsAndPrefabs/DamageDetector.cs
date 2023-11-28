@@ -219,6 +219,8 @@ namespace My_MemoPlatformer
             hp -= info.attackAbility.damage;
 
             AttackManager.Instance.ForceDeregester(_control);
+            _control.animationProgress.currentRunningAbilities.Clear();
+            
 
             if (IsDead())
             {

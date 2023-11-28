@@ -4,6 +4,8 @@ namespace My_MemoPlatformer
 {
     public class Settings : MonoBehaviour
     {
+        [SerializeField] private bool debug;
+
         public FrameSettings frameSettings;
         public PhysicsSettings physicsSettings;
 
@@ -12,18 +14,30 @@ namespace My_MemoPlatformer
         private void Awake()
         {
             //Frames
-            Debug.Log("targetFrameRate: " + frameSettings.TargetFPS);
+            if (debug)
+            {
+                Debug.Log("targetFrameRate: " + frameSettings.TargetFPS);
+            }
             Application.targetFrameRate = frameSettings.TargetFPS;
 
             //Physics
-            Debug.Log("Default Solver Iterations: " + physicsSettings.defaultSolverIterations);
+            if (debug)
+            {
+                Debug.Log("Default Solver Iterations: " + physicsSettings.defaultSolverIterations);
+            }
             Physics.defaultSolverIterations = physicsSettings.defaultSolverIterations;
 
-            Debug.Log("Default Solver Velocity Iterations: " + physicsSettings.defaultSolverIterations);
+            if (debug)
+            {
+                Debug.Log("Default Solver Velocity Iterations: " + physicsSettings.defaultSolverIterations);
+            }
             Physics.defaultSolverVelocityIterations = physicsSettings.defaultSolverIterations;
 
             //Default Keys
-            Debug.Log("loading key bindings");
+            if (debug)
+            {
+                Debug.Log("loading key bindings");
+            }
             VirtualInputManager.Instance.LoadKeys();
             //VirtualInputManager.Instance.SetDefaultKeys();
         }
