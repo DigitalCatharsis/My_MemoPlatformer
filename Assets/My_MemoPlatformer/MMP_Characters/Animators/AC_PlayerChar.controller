@@ -1166,6 +1166,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d31863553b40392459c27e858e7951de, type: 2}
   - {fileID: 11400000, guid: da245a35f281ae94abf35b2da8e26ce9, type: 2}
   - {fileID: 11400000, guid: 51fc30411941f244ca83297ac3f9ac14, type: 2}
+  - {fileID: 11400000, guid: cdaf3740cc5ff50479a1b54a27eded63, type: 2}
+  - {fileID: 11400000, guid: 25680e4218cc887468ae3ff4387dd467, type: 2}
 --- !u!114 &-4541674714533460555
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4437,16 +4439,19 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Grounded
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: LockTransition
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5489882414272739648}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.1074391
+  m_TransitionDuration: 0.16941184
   m_TransitionOffset: 0
-  m_ExitTime: 0.992851
-  m_HasExitTime: 1
+  m_ExitTime: 0.9431816
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -4711,6 +4716,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Attack
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: LockTransition
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6570860496411235770}
   m_Solo: 0
@@ -4720,7 +4728,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.01608038
   m_TransitionOffset: 0
   m_ExitTime: 0.99855125
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -4922,34 +4930,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1101 &7633563036749846785
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: Grounded
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: Attack
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -7240796194183866837}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0.2010392
-  m_TransitionOffset: 0
-  m_ExitTime: 0.9959643
-  m_HasExitTime: 1
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!1101 &7686989176987801655
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -5360,7 +5340,6 @@ AnimatorState:
   m_Speed: 0.725
   m_CycleOffset: 0
   m_Transitions:
-  - {fileID: 7633563036749846785}
   - {fileID: 6222391132312602525}
   - {fileID: 6892312997344114892}
   m_StateMachineBehaviours:
