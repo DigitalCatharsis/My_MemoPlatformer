@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b570f699005d93a4e8d6805d7f531e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrabbongLedge: 0
+  isGrabbingLedge: 0
   ledgeCalibration: {x: 0, y: -2.3, z: -0.1}
   collider1: {fileID: 3335105432292074732}
   collider2: {fileID: 4451637664484933198}
@@ -1664,6 +1664,8 @@ MonoBehaviour:
   cancelPull: 0
   canWallJump: 0
   checkWallBlock: 0
+  airStompTargets: []
+  airStompAttack: {fileID: 11400000, guid: 270577db070e447499e094b119ff8aa1, type: 2}
   updatingSpheres: 0
   targetSize: {x: 0, y: 0, z: 0}
   sizeSpeed: 0

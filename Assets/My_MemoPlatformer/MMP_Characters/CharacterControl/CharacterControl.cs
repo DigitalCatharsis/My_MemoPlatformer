@@ -183,7 +183,7 @@ namespace My_MemoPlatformer
 
         public void AddForceToDamagedPart(bool zeroZelocity)
         {
-            if (animationProgress.damagedTrigger != null)
+            if (damageDetector.damagedTrigger != null)
             {
                 if (zeroZelocity)
                 {
@@ -193,10 +193,10 @@ namespace My_MemoPlatformer
                     }
                 }
 
-                animationProgress.damagedTrigger.GetComponent<Rigidbody>().
-                     AddForce(animationProgress.attacker.transform.forward * animationProgress.attack.forwardForce +
-                          animationProgress.attacker.transform.right * animationProgress.attack.rightForce +
-                             animationProgress.attacker.transform.up * animationProgress.attack.upForce);
+                damageDetector.damagedTrigger.GetComponent<Rigidbody>().
+                     AddForce(damageDetector.attacker.transform.forward * damageDetector.attack.forwardForce +
+                          damageDetector.attacker.transform.right * damageDetector.attack.rightForce +
+                             damageDetector.attacker.transform.up * damageDetector.attack.upForce);
             }
         }
 

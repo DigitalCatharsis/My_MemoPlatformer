@@ -147,9 +147,9 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (control.animationProgress.attacker != null)
+            if (control.damageDetector.attacker != null)
             {
-                Vector3 dir = control.transform.position - control.animationProgress.attacker.transform.position;
+                Vector3 dir = control.transform.position - control.damageDetector.attacker.transform.position;
 
                 if (dir.z > 0f)
                 {

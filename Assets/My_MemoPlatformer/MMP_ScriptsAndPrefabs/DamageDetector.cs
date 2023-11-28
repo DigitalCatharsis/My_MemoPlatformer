@@ -14,6 +14,12 @@ namespace My_MemoPlatformer
 
         [SerializeField] private List<RuntimeAnimatorController> _hitReactionList = new List<RuntimeAnimatorController>();
 
+        [Header("Damage Info")]
+        public Attack attack;
+        public CharacterControl attacker;
+        public TriggerDetector damagedTrigger;
+        public GameObject attackingPart;
+
         private void Awake()
         {
             _control = GetComponent<CharacterControl>();
@@ -108,11 +114,11 @@ namespace My_MemoPlatformer
                     {
                         if (info.attacker.GetAttackingPart(part) == collider.gameObject)
                         {
-                            _control.animationProgress.attack = info.attackAbility;
-                            _control.animationProgress.attacker = info.attacker;
+                            _control.damageDetector.attack = info.attackAbility;
+                            _control.damageDetector.attacker = info.attacker;
 
-                            _control.animationProgress.damagedTrigger = data.Key;
-                            _control.animationProgress.attackingPart = info.attacker.GetAttackingPart(part);
+                            _control.damageDetector.damagedTrigger = data.Key;
+                            _control.damageDetector.attackingPart = info.attacker.GetAttackingPart(part);
                             return true;
                         }
                     }
@@ -129,11 +135,11 @@ namespace My_MemoPlatformer
                                                                                                                           //Debug.Log(this.gameObject.name + "dist: "+ dist.ToString() );
                 if (dist <= info.lethalRange)
                 {
-                    _control.animationProgress.attack = info.attackAbility;
-                    _control.animationProgress.attacker = info.attacker;
+                    _control.damageDetector.attack = info.attackAbility;
+                    _control.damageDetector.attacker = info.attacker;
 
                     int index = Random.Range(0, _control.ragdollParts.Count);
-                    _control.animationProgress.damagedTrigger = _control.ragdollParts[index].GetComponent<TriggerDetector>();
+                    _control.damageDetector.damagedTrigger = _control.ragdollParts[index].GetComponent<TriggerDetector>();
                     return true;
                 }
             }
@@ -152,7 +158,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void TakeDamage(AttackInfo info)
+        public void TakeDamage(AttackInfo info)
         {
             if (IsDead())  //templory fix for hitting dead enemy
             {
@@ -194,7 +200,7 @@ namespace My_MemoPlatformer
                     {
                         GameObject vfx = PoolManager.Instance.GetObject(info.attackAbility.ParticleType);
 
-                        vfx.transform.position = _control.animationProgress.attackingPart.transform.position;
+                        vfx.transform.position = _control.damageDetector.attackingPart.transform.position;
 
                         vfx.SetActive(true);
 
@@ -257,7 +263,7 @@ namespace My_MemoPlatformer
 
         public void DeathBySpikes()
         {
-            _control.animationProgress.damagedTrigger = null;
+            _control.damageDetector.damagedTrigger = null;
             hp = 0f;
         }
     }

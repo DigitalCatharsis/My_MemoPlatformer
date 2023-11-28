@@ -31,8 +31,11 @@ namespace My_MemoPlatformer
         public GameObject ground;
         public Dictionary<TriggerDetector, List<Collider>> collidingBodyParts = new Dictionary<TriggerDetector, List<Collider>>(); //key trigger detectors, value - colliding bodyparts which are in contract with trigger detectors
         public Dictionary<TriggerDetector, List<Collider>> collidingWeapons = new Dictionary<TriggerDetector, List<Collider>>(); //key trigger detectors, value - colliding bodyparts which are in contract with trigger detectors
+
         public Dictionary<GameObject, GameObject> frontBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
         public Dictionary<GameObject, GameObject> upBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
+        public Dictionary<GameObject, GameObject> downBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
+
 
         [Header("AirControl")]
         public bool jumped;
@@ -41,6 +44,8 @@ namespace My_MemoPlatformer
         public bool cancelPull;
         public bool canWallJump;
         public bool checkWallBlock;
+        public List<CharacterControl> airStompTargets;
+        public Attack airStompAttack;
 
         [Header("UpdateBoxCollider")]
         public bool updatingSpheres;
@@ -50,12 +55,6 @@ namespace My_MemoPlatformer
         public float centerSpeed;
         public Vector3 landingPosition;
         public bool isLanding;
-
-        [Header("Damage Info")]
-        public Attack attack;
-        public CharacterControl attacker;
-        public TriggerDetector damagedTrigger;
-        public GameObject attackingPart;
 
         [Header("Transition")]
         public bool lockTransition;
@@ -128,7 +127,7 @@ namespace My_MemoPlatformer
             else
             {
                 //checking while player is jumping
-                if (_control.Rigid_Body.velocity.y > 0.001f)  
+                if (_control.Rigid_Body.velocity.y > 0.001f)
                 {
                     CheckUpBlocking();
 
@@ -144,6 +143,69 @@ namespace My_MemoPlatformer
                         upBlockingObjects.Clear();
                     }
                 }
+            }
+
+            CheckAirStomp();
+        }
+
+        private void CheckAirStomp()
+        {
+            if (_control.Rigid_Body.velocity.y >= 0f)
+            {
+                airStompTargets.Clear();
+                downBlockingObjects.Clear();
+                return;
+            }
+
+            if (airStompTargets.Count > 0)
+            {
+                _control.Rigid_Body.velocity = Vector3.zero;
+                _control.Rigid_Body.AddForce(Vector3.up * 350f);
+
+                foreach (CharacterControl c in airStompTargets)
+                {
+                    var info = new AttackInfo();
+                    info.attacker = _control;
+                    info.attackAbility = airStompAttack;
+
+                    int index = Random.Range(0, c.ragdollParts.Count);
+                    c.damageDetector.damagedTrigger = c.ragdollParts[index].GetComponent<TriggerDetector>();
+                    c.damageDetector.attack = airStompAttack;
+                    c.damageDetector.attacker = _control;
+
+                    c.damageDetector.TakeDamage(info);
+                }
+
+                airStompTargets.Clear();
+                return;
+            }
+
+            CheckDownBlocking();
+
+            if (downBlockingObjects.Count > 0)
+            {
+                foreach (KeyValuePair<GameObject, GameObject> data in downBlockingObjects)
+                {
+                    CharacterControl c = CharacterManager.Instance.GetCharacter(data.Value.transform.root.gameObject);
+                    if (c != null)
+                    {
+                        if (c != _control)  //not self
+                        {
+                            if (!airStompTargets.Contains(c))
+                            {
+                                airStompTargets.Add(c);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void CheckDownBlocking()
+        {
+            foreach (GameObject o in _control.collisionSpheres.bottomSpheres)
+            {
+                CheckRaycastCollision(o, Vector3.down, 0.1f, downBlockingObjects);
             }
         }
 
@@ -282,7 +344,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        public bool StateNameContains(string str) 
+        public bool StateNameContains(string str)
         {
             foreach (KeyValuePair<StateData, int> data in currentRunningAbilities)
             {
