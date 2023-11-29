@@ -189,11 +189,14 @@ namespace My_MemoPlatformer
                     CharacterControl c = CharacterManager.Instance.GetCharacter(data.Value.transform.root.gameObject);
                     if (c != null)
                     {
-                        if (c != _control)  //not self
+                        if (c.boxCollider.center.y + c.transform.position.y < _control.transform.position.y)
                         {
-                            if (!airStompTargets.Contains(c))
+                            if (c != _control)  //not self
                             {
-                                airStompTargets.Add(c);
+                                if (!airStompTargets.Contains(c))
+                                {
+                                    airStompTargets.Add(c);
+                                }
                             }
                         }
                     }

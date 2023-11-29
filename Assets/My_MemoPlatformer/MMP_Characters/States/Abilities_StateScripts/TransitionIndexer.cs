@@ -32,6 +32,7 @@ public enum TransitionConditionType
     NOT_RUN,
     BLOCKING,
     NOT_BLOCKING,
+    ATTACK_ISBLOCKED,
 }
 
 namespace My_MemoPlatformer
@@ -347,6 +348,14 @@ namespace My_MemoPlatformer
                     case TransitionConditionType.NOT_BLOCKING:
                         {
                             if (control.block)
+                            {
+                                return false;
+                            }
+                        }
+                        break;
+                    case TransitionConditionType.ATTACK_ISBLOCKED:
+                        {
+                            if (control.damageDetector.blockedAttack == null)
                             {
                                 return false;
                             }

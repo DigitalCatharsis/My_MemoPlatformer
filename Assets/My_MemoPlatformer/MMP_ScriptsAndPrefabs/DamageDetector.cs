@@ -161,7 +161,7 @@ namespace My_MemoPlatformer
 
         private bool AttackIsBlocked(AttackInfo info)
         {
-            if (info == blockedAttack)
+            if (info == blockedAttack && blockedAttack != null)
             {
                 return attack;
             }
