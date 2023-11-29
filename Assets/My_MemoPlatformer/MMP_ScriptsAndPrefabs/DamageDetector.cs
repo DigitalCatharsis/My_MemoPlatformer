@@ -19,6 +19,7 @@ namespace My_MemoPlatformer
         public CharacterControl attacker;
         public TriggerDetector damagedTrigger;
         public GameObject attackingPart;
+        public AttackInfo blockedAttack;
 
         private void Awake()
         {
@@ -158,6 +159,36 @@ namespace My_MemoPlatformer
             }
         }
 
+        private bool AttackIsBlocked(AttackInfo info)
+        {
+            if (info == blockedAttack)
+            {
+                return attack;
+            }
+
+            if (_control.animationProgress.IsRunning(typeof(Block)))
+            {
+                var dir = info.attacker.transform.position - _control.transform.position;
+
+                if (dir.z > 0f)
+                {
+                    if (_control.IsFacingForward())
+                    {
+                        return true;
+                    }
+                }
+                else if (dir.z < 0f)
+                {
+                    if (!_control.IsFacingForward())
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         public void TakeDamage(AttackInfo info)
         {
             if (IsDead())  //templory fix for hitting dead enemy
@@ -170,24 +201,10 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (_control.animationProgress.IsRunning(typeof(Block)))
+            if (AttackIsBlocked(info))
             {
-                var dir = info.attacker.transform.position - _control.transform.position;
-
-                if (dir.z > 0f)
-                {
-                    if (_control.IsFacingForward())
-                    {
-                        return;
-                    }
-                }
-                else if (dir.z < 0f)
-                {
-                    if (!_control.IsFacingForward())
-                    {
-                        return;
-                    }
-                }
+                blockedAttack = info;
+                return;
             }
 
             if (info.mustCollide)

@@ -112,6 +112,14 @@ namespace My_MemoPlatformer
                         info.isFinished = true;
                         info.GetComponent<PoolObject>().TurnOff();
 
+                        foreach (CharacterControl c in CharacterManager.Instance.characters)
+                        {
+                            if (c.damageDetector.blockedAttack == info)
+                            {
+                                c.damageDetector.blockedAttack = null;
+                            }
+                        }
+
                         if (debug)
                         {
                             Debug.Log(this.name + " deregistered: " + stateInfo.normalizedTime);
