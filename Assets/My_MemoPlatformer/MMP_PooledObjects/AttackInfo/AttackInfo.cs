@@ -36,7 +36,17 @@ namespace My_MemoPlatformer
             isRegistered = true;
 
             attackAbility = attack;
-            //colliderNames = attack.colliderNames;
+            attackParts = attack.attackParts;
+            mustCollide = attack.mustCollide;
+            mustFaceAttacker = attack.mustFaceAttacker;
+            lethalRange = attack.lethalRange;
+            maxHits = attack.maxHits;
+            currentHits = 0;
+        }
+        public void CopyInfo(Attack attack, CharacterControl attacker)
+        {
+            this.attacker = attacker;
+            attackAbility = attack;
             attackParts = attack.attackParts;
             mustCollide = attack.mustCollide;
             mustFaceAttacker = attack.mustFaceAttacker;

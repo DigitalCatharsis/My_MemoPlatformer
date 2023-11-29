@@ -25,6 +25,6 @@ MonoBehaviour:
   comboEndTime: 0
   forwardForce: 1000
   rightForce: 0
-  upForce: -1000
-  useDeathParticles: 0
+  upForce: 2000
+  useDeathParticles: 1
   ParticleType: 3

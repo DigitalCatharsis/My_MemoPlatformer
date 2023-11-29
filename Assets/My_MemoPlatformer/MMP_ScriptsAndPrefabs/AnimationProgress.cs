@@ -165,13 +165,13 @@ namespace My_MemoPlatformer
                 foreach (CharacterControl c in airStompTargets)
                 {
                     var info = new AttackInfo();
-                    info.attacker = _control;
-                    info.attackAbility = airStompAttack;
+                    info.CopyInfo(airStompAttack, _control);
 
                     int index = Random.Range(0, c.ragdollParts.Count);
                     c.damageDetector.damagedTrigger = c.ragdollParts[index].GetComponent<TriggerDetector>();
                     c.damageDetector.attack = airStompAttack;
                     c.damageDetector.attacker = _control;
+                    c.damageDetector.attackingPart = _control.rightFoot_Attack;
 
                     c.damageDetector.TakeDamage(info);
                 }

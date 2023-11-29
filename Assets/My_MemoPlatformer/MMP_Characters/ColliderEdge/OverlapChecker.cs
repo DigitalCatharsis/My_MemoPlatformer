@@ -31,7 +31,7 @@ namespace My_MemoPlatformer
         {
             arrColliders = Physics.OverlapSphere(this.transform.position, 0.13f); //less than colliderEdge radius
 
-            foreach (Collider collider in arrColliders)
+            foreach (var collider in arrColliders)
             {
                 if (CharacterManager.Instance.GetCharacter(collider.transform.root.gameObject) == null)  //non character
                 {
