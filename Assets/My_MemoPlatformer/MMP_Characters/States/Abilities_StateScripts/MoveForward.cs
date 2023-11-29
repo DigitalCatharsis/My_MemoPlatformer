@@ -68,11 +68,7 @@ namespace My_MemoPlatformer
             characterState.characterControl.animationProgress.disAllowEarlyTurn = false;
             characterState.characterControl.animationProgress.lockDirectionNextState = false;
 
-            //if (moveOnHit)
-            //{
-                UpdateMoveOnHit(characterState.characterControl);
 
-            //}
         }
 
 
@@ -140,35 +136,6 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void UpdateMoveOnHit(CharacterControl control)
-        {
-            if (!moveOnHit)
-            {
-                return;
-            }
-
-            if (control.damageDetector.attacker != null)
-            {
-                Vector3 dir = control.transform.position - control.damageDetector.attacker.transform.position;
-
-                if (dir.z > 0f)
-                {
-                    if (speed < 0f)
-                    {
-                        speed *= -1f;
-                    }
-                }
-                else if (dir.z < 0f)
-                {
-                    if (speed > 0f)
-                    {
-                        speed *= -1f;
-                    }
-                }
-            }
-        }
-
-
         private void UpdateMomentum(CharacterControl control, AnimatorStateInfo stateInfo)
         {
             if (!control.animationProgress.RightSideIsBlocked())
@@ -224,7 +191,21 @@ namespace My_MemoPlatformer
         {
             if (!IsBlocked(control))
             {
-                control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
+                if (moveOnHit)
+                {
+                    if (!control.animationProgress.IsFacingAtacker())
+                    {
+                        control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));  //make sure speed is >0 in SO
+                    }
+                    else
+                    {
+                        control.MoveForward(-speed, speedGraph.Evaluate(stateInfo.normalizedTime)); //make sure speed is >0 in SO
+                    }
+                }
+                else
+                {
+                    control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
+                }               
             }
 
             if (!control.moveRight && !control.moveLeft)

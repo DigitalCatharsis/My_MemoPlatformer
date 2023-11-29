@@ -217,9 +217,65 @@ namespace My_MemoPlatformer
             }
         }
 
+        public bool IsFacingAtacker()
+        {
+            var vec = _control.damageDetector.attacker.transform.position - _control.transform.position;
+
+            if (vec.z < 0f)
+            {
+                if (_control.IsFacingForward())
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else if (vec.z > 0f)
+            {
+                if (_control.IsFacingForward())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool ForwardIsReversed()
+        {
+            if (latestMoveForwardScript.moveOnHit)
+            {
+                if (IsFacingAtacker())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            if (latestMoveForwardScript.speed > 0f)
+            {
+                return false;
+            }
+            else if (latestMoveForwardScript.speed < 0f)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         private void CheckFrontBlocking()  //Проверка на коллизии
         {
-            if (latestMoveForwardScript.speed > 0)
+            if (!ForwardIsReversed())
             {
                 _frontSpheresList = _control.collisionSpheres.frontSpheres;
                 _dirBlock = 1;
