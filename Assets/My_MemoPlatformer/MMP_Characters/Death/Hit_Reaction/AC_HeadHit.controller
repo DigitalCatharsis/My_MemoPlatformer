@@ -100,6 +100,7 @@ MonoBehaviour:
   characterControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 9b208f2a1eed9424c8e53628c3751d8a, type: 2}
+  - {fileID: 11400000, guid: 2f619052d74700f49885047e7f54b10f, type: 2}
 --- !u!1102 &4658614339400876309
 AnimatorState:
   serializedVersion: 6

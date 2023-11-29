@@ -131,6 +131,25 @@ namespace My_MemoPlatformer
                 {
                     CheckUpBlocking();
 
+                    foreach (KeyValuePair<GameObject, GameObject> data in upBlockingObjects)
+                    {
+                        var c = CharacterManager.Instance.GetCharacter(data.Value.transform.root.gameObject);
+
+                        if (c == null)
+                        {
+                            NullifyUpVelocity();
+                            break;
+                        }
+                        else
+                        {
+                            if (_control.transform.position.y + _control.boxCollider.center.y < c.transform.position.y)
+                            {
+                                NullifyUpVelocity();
+                                break;
+                            }
+                        }
+                    }
+
                     if (upBlockingObjects.Count > 0)
                     {
                         _control.Rigid_Body.velocity = new Vector3(_control.Rigid_Body.velocity.x, 0f, _control.Rigid_Body.velocity.z);
@@ -146,6 +165,11 @@ namespace My_MemoPlatformer
             }
 
             CheckAirStomp();
+        }
+
+        private void NullifyUpVelocity()
+        {
+
         }
 
         private void CheckAirStomp()
