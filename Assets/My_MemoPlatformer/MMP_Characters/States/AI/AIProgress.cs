@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -40,7 +38,7 @@ namespace My_MemoPlatformer
 
         public bool TargetIsDead()
         {
-            if (CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target).damageDetector.IsDead())  //not grounded
+            if (CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target).damageDetector.IsDead())
             {
                 return true;
             }
@@ -170,7 +168,7 @@ namespace My_MemoPlatformer
 
         public float GetStartSphereHeight()
         {
-            Vector3 vec = _control.transform.position - pathfindfingAgent.startSphere.transform.position;
+            var vec = _control.transform.position - pathfindfingAgent.startSphere.transform.position;
 
             return Mathf.Abs(vec.y);
         }

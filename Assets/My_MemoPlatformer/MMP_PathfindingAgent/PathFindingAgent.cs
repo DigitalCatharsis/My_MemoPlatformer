@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,10 +11,10 @@ namespace My_MemoPlatformer
         public GameObject target;
         private NavMeshAgent _navMeshAgent;
         private Coroutine _moveRoutine;
-
         public GameObject startSphere;
         public GameObject endSphere;
         public bool startWalk;
+        public List<Vector3> meshLinks = new List<Vector3>();
 
         public CharacterControl owner = null;
 
@@ -24,6 +25,8 @@ namespace My_MemoPlatformer
 
         public void GoToTarget()
         {
+            meshLinks.Clear();
+
             _navMeshAgent.enabled = true;
             startSphere.transform.parent = null;
             endSphere.transform.parent = null;
@@ -55,21 +58,35 @@ namespace My_MemoPlatformer
             {
                 if (_navMeshAgent.isOnOffMeshLink)
                 { 
-                    startSphere.transform.position = _navMeshAgent.currentOffMeshLinkData.startPos;
-                    endSphere.transform.position = _navMeshAgent.currentOffMeshLinkData.endPos;
+                    if (meshLinks.Count == 0)
+                    {
+                        meshLinks.Add(_navMeshAgent.currentOffMeshLinkData.startPos);
+                        meshLinks.Add(_navMeshAgent.currentOffMeshLinkData.endPos);
+                    }
 
-                    _navMeshAgent.CompleteOffMeshLink();
+                    //startSphere.transform.position = _navMeshAgent.currentOffMeshLinkData.startPos;
+                    //endSphere.transform.position = _navMeshAgent.currentOffMeshLinkData.endPos;
 
-                    _navMeshAgent.isStopped = true;
-                    startWalk = true;
-                    break;
+                    //_navMeshAgent.CompleteOffMeshLink();
+
+                    //_navMeshAgent.isStopped = true;
+                    //startWalk = true;
+                    //break;
                 }
 
-                Vector3 dist = transform.position - _navMeshAgent.destination;  //между навигатором и его точкой назначения, а не control
+                var dist = transform.position - _navMeshAgent.destination;  //между навигатором и его точкой назначения, а не control
                 if (Vector3.SqrMagnitude(dist) < 0.5f)  
-                {                    
-                    startSphere.transform.position = _navMeshAgent.destination;
-                    endSphere.transform.position = _navMeshAgent.destination;
+                {
+                    if (meshLinks.Count > 0)
+                    {
+                        startSphere.transform.position = meshLinks[0];
+                        endSphere.transform.position = meshLinks[1];
+                    }
+                    else
+                    {
+                        startSphere.transform.position = _navMeshAgent.destination;
+                        endSphere.transform.position = _navMeshAgent.destination;
+                    }
 
                     _navMeshAgent.isStopped = true;
                     startWalk = true;

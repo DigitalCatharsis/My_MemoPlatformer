@@ -56,7 +56,7 @@ namespace My_MemoPlatformer
                         if (Mathf.Abs(control.Rigid_Body.velocity.y) < 0.001f)
                         {
                             //control.animationProgress.ground = c.otherCollider.transform.root.gameObject; //что колайдерит bottom сферы
-                            control.animationProgress.ground = c.otherCollider.transform.root.gameObject; //что колайдерит bottom сферы
+                            control.animationProgress.ground = c.otherCollider.transform.gameObject; //что колайдерит bottom сферы
                             control.animationProgress.landingPosition = new Vector3(0f, c.point.y, c.point.z);
 
                             if (control.manualInput.enabled)

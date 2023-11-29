@@ -17,7 +17,7 @@ namespace My_MemoPlatformer
         {
             if (characterState.characterControl.aiProgress.pathfindfingAgent == null)
             {
-                GameObject pfAgent = Instantiate(Resources.Load("PathfindingAgent", typeof(GameObject)) as GameObject);
+                var pfAgent = Instantiate(Resources.Load("PathfindingAgent", typeof(GameObject)) as GameObject);
                 characterState.characterControl.aiProgress.pathfindfingAgent = pfAgent.GetComponent<PathFindingAgent>();
             }
 

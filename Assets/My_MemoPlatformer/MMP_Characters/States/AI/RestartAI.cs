@@ -12,6 +12,11 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            if (!AIIsOnGround(characterState.characterControl))
+            {
+                return;
+            }
+
             //walking
             if (characterState.characterControl.aiProgress.AI_DistanceToEndSphere() < 1.0f)
             {
@@ -98,6 +103,24 @@ namespace My_MemoPlatformer
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
 
+        }
+
+        private bool AIIsOnGround(CharacterControl control)
+        {
+            if (control.animationProgress.IsRunning(typeof(MoveUp)))
+            {
+                return false;
+            }
+
+            if (control.Rigid_Body.useGravity)
+            {
+                if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded]))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
