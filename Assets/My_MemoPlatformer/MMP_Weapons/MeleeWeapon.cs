@@ -11,6 +11,19 @@ namespace My_MemoPlatformer
         public BoxCollider attackCollider;
         public TriggerDetector triggerDetector;
 
+        [Header("WeaponThrow")]
+        public Vector3 throwOffset;
+        public bool isThrown;
+        public bool flyForward;
+        public float flightSpeed;
+        public float rotationSpeed;
+        public CharacterControl thrower;
+
+        private void Start()
+        {
+            isThrown = false;
+        }
+
         private void Update()
         {
             if (control != null)
@@ -22,6 +35,23 @@ namespace My_MemoPlatformer
             {
                 pickUpCollider.enabled = true;
                 attackCollider.enabled = false;
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (isThrown)
+            {
+                if (flyForward)
+                {
+                    this.transform.position += (Vector3.forward * flightSpeed * Time.deltaTime);
+                }
+                else
+                {
+                    this.transform.position -= (Vector3.forward * flightSpeed * Time.deltaTime);
+                }
+
+                this.transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
             }
         }
 
@@ -60,6 +90,37 @@ namespace My_MemoPlatformer
                 control = null;
 
                 weapon.triggerDetector.control = null;
+            }
+        }
+
+        public void ThrowWeapon()
+        {
+            var weapon = control.animationProgress.HoldingWeapon;
+
+            if (weapon != null)
+            {
+                weapon.transform.parent = null;
+
+                if (control.IsFacingForward())
+                {
+                    weapon.transform.rotation = Quaternion.Euler(90f, 0, 0f);
+                }
+                else
+                {
+                    weapon.transform.rotation = Quaternion.Euler(-90f, 0, 0f);
+                }
+
+                flyForward = control.IsFacingForward();
+
+                weapon.transform.position = control.transform.position + Vector3.up * throwOffset.y;
+                weapon.transform.position +=  control.transform.forward * throwOffset.z;
+
+                thrower = control;
+                control.animationProgress.HoldingWeapon = null;
+                control = null;
+                weapon.triggerDetector.control = null;
+
+                isThrown = true;
             }
         }
     }

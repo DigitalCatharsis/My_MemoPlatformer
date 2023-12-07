@@ -28,6 +28,11 @@ namespace My_MemoPlatformer
 
         private void CheckCollidingBodyparts(Collider col)
         {
+            if (control == null)
+            {
+                return;
+            }
+
             if (control.ragdollParts.Contains(col))  //touching own collider
             {
                 return;
@@ -59,9 +64,20 @@ namespace My_MemoPlatformer
 
         void CheckCollidingWeapons(Collider col)
         {
-            if (col.transform.root.gameObject.GetComponent<MeleeWeapon>() == null)
+            var w = col.transform.root.gameObject.GetComponent<MeleeWeapon>();
+
+            if (w == null)
             {
                 return;
+            }
+
+            if (w.isThrown)
+            {
+                if (w.thrower != control)
+                {
+                    w.isThrown = false;
+                    return;
+                }
             }
 
             if (!control.animationProgress.collidingWeapons.ContainsKey(this))
