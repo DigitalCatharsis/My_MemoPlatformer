@@ -55,6 +55,7 @@ namespace My_MemoPlatformer
         public AIController aiController;
         public BoxCollider boxCollider;
         public NavMeshObstacle navMeshObstacle;
+        public InstaKill instakill;
 
         [Header("Gravity")]
         public ContactPoint[] contactPoints;
@@ -92,6 +93,7 @@ namespace My_MemoPlatformer
             damageDetector = GetComponentInChildren<DamageDetector>();
             boxCollider = GetComponent<BoxCollider>();
             navMeshObstacle = GetComponentInChildren<NavMeshObstacle>();
+            instakill = GetComponentInChildren<InstaKill>();
 
             collisionSpheres = GetComponentInChildren<CollisionSpheres>();
             collisionSpheres.owner = this;

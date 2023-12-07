@@ -429,14 +429,26 @@ namespace My_MemoPlatformer
 
         public bool StateNameContains(string str)
         {
-            foreach (KeyValuePair<StateData, int> data in currentRunningAbilities)
+            AnimatorClipInfo[] arr = _control.skinnedMeshAnimator.GetCurrentAnimatorClipInfo(0); //have only one layer which is zero
+
+            foreach (var clipinfo in arr)
             {
-                if (data.Key.name.Contains(str))
+                if (clipinfo.clip.name.Contains(str))
                 {
                     return true;
                 }
             }
+
             return false;
+
+            //foreach (KeyValuePair<StateData, int> data in currentRunningAbilities)
+            //{
+            //    if (data.Key.name.Contains(str))
+            //    {
+            //        return true;
+            //    }
+            //}
+            //return false;
         }
 
         public bool IsRunning(System.Type type) //ability is running now?

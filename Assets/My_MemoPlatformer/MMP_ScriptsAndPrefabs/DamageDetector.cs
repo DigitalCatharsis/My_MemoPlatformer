@@ -21,6 +21,10 @@ namespace My_MemoPlatformer
         public GameObject attackingPart;
         public AttackInfo blockedAttack;
 
+        [Header("InstaKill")]
+        public RuntimeAnimatorController Assassination_Assassin;
+        public RuntimeAnimatorController Assassination_Victim;
+
         private void Awake()
         {
             _control = GetComponent<CharacterControl>();
@@ -281,6 +285,36 @@ namespace My_MemoPlatformer
         public void DeathBySpikes()
         {
             _control.damageDetector.damagedTrigger = null;
+            hp = 0f;
+        }
+        public void DeathByInstakill(CharacterControl attacker)
+        {
+            _control.animationProgress.currentRunningAbilities.Clear();
+            attacker.animationProgress.currentRunningAbilities.Clear();
+
+            _control.Rigid_Body.useGravity = false;
+            _control.boxCollider.enabled = false;
+            _control.skinnedMeshAnimator.runtimeAnimatorController = Assassination_Victim;
+
+
+            attacker.Rigid_Body.useGravity = false;
+            attacker.boxCollider.enabled = false;
+            attacker.skinnedMeshAnimator.runtimeAnimatorController = Assassination_Assassin;
+
+            var dir = _control.transform.position - attacker.transform.position;
+            
+            if (dir.z < 0f) 
+            {
+                attacker.FaceForward(false);
+            }
+            else if (dir.z > 0f)
+            {
+                attacker.FaceForward(true);
+            }
+
+            _control.transform.LookAt(_control.transform.position + (attacker.transform.forward * 5f), Vector3.up);
+            _control.transform.position = attacker.transform.position + (attacker.transform.forward * 0.45f);
+
             hp = 0f;
         }
     }
