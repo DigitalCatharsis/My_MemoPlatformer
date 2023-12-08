@@ -16,7 +16,7 @@ namespace My_MemoPlatformer
 
             if (GUILayout.Button("Setup RagdollParts (BodyParts)"))
             {
-                control.SetRagdollParts();
+                control.SetBodyParts();
             }
         }
     }

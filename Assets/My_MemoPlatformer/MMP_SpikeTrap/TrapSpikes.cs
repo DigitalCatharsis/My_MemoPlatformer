@@ -88,7 +88,7 @@ namespace My_MemoPlatformer
 
             foreach (var control in listOfSpikeVictims)
             {
-                control.TurnOnRagdoll();
+                control.procDict[CharacterProc.RAGDOLL_ON]();
             }
 
             yield return new WaitForSeconds(1);

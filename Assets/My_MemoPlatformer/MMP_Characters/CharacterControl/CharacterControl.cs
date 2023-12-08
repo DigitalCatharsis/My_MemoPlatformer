@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -68,7 +69,7 @@ namespace My_MemoPlatformer
         [Header("Setup")]
         public PlayableCharacterType playableCharacterType;
         public Animator skinnedMeshAnimator;
-        public List<Collider> ragdollParts = new List<Collider>();
+        public List<Collider> bodyParts = new List<Collider>();
         public GameObject rightHand_Attack;
         public GameObject leftHand_Attack;
         public GameObject leftFoot_Attack;
@@ -114,9 +115,9 @@ namespace My_MemoPlatformer
             RegisterCharacter();
         }
 
-        public void SetRagdollParts()
+        public void SetBodyParts()
         {
-            ragdollParts.Clear();
+            bodyParts.Clear();
 
             Collider[] colliders = this.gameObject.GetComponentsInChildren<Collider>(); //Get all the colliders in the hierarchy
 
@@ -124,12 +125,12 @@ namespace My_MemoPlatformer
             {
                 if (c.gameObject != this.gameObject)  //if the collider that we found is not the same as in the charactercontrol (//not a boxcolllider itself)
                 {
-                    if (c.gameObject.GetComponent<LedgeChecker>() == null)
+                    if (c.gameObject.GetComponent<LedgeChecker>() == null && c.gameObject.GetComponent<LedgeCollider>() == null)
                     {
                         //thats means its a ragdoll
                         c.isTrigger = true;
-                        ragdollParts.Add(c);
-                        c.attachedRigidbody.interpolation = RigidbodyInterpolation.Interpolate;  //убрать дрожжание
+                        bodyParts.Add(c);
+                        c.attachedRigidbody.interpolation = RigidbodyInterpolation.None;  //убрать дрожжание //Окей, если каждая часть будет интерполированной, то начинается вакханалия
                         c.attachedRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic; //расчет физики, предотвращение прохождения сквозь объекты
 
                         CharacterJoint joint = c.GetComponent<CharacterJoint>();
@@ -146,53 +147,13 @@ namespace My_MemoPlatformer
                 }
             }
         }
-
-        public void TurnOnRagdoll()
-        {
-            //change components layers from character to DeadBody to prevent unnessesary collisions.
-            Transform[] arr = GetComponentsInChildren<Transform>();
-            foreach (Transform t in arr)
-            {
-                t.gameObject.layer = LayerMask.NameToLayer(MMP_Layers.DeadBody.ToString());
-            }
-
-            //save bodypart positions to prevent teleporting
-            foreach (Collider c in ragdollParts)
-            {
-                TriggerDetector det = c.GetComponent<TriggerDetector>();
-                det.lastPosition = c.gameObject.transform.localPosition;
-                det.lastRotation = c.gameObject.transform.localRotation;
-            }
-
-            //turn off animator, avatar, smth else
-            Rigid_Body.useGravity = false;
-            Rigid_Body.velocity = Vector3.zero;
-            this.gameObject.GetComponent<BoxCollider>().enabled = false;
-            skinnedMeshAnimator.enabled = false;
-            skinnedMeshAnimator.avatar = null;
-
-            //turn on ragdoll
-            foreach (Collider c in ragdollParts)
-            {
-                c.isTrigger = false;
-
-                TriggerDetector det = c.GetComponent<TriggerDetector>();
-                c.transform.localPosition = det.lastPosition;
-                c.transform.localRotation = det.lastRotation;
-
-                c.attachedRigidbody.velocity = Vector3.zero;
-            }
-
-            AddForceToDamagedPart(false);
-        }
-
         public void AddForceToDamagedPart(bool zeroZelocity)
         {
             if (damageDetector.damagedTrigger != null)
             {
                 if (zeroZelocity)
                 {
-                    foreach (Collider c in ragdollParts)
+                    foreach (Collider c in bodyParts)
                     {
                         c.attachedRigidbody.velocity = Vector3.zero;
                     }
@@ -312,13 +273,6 @@ namespace My_MemoPlatformer
                 }
             }
 
-            //ragdoll
-            if (animationProgress.ragdollTriggered)
-            {
-                TurnOnRagdoll();
-                animationProgress.ragdollTriggered = false;
-            }
-
             //slow down wallslide
             if (animationProgress.maxFallVelocity.y != 0f)
             {
@@ -372,7 +326,7 @@ namespace My_MemoPlatformer
 
         public Collider GetBodyPart(string name)
         {
-            foreach (Collider c in ragdollParts)
+            foreach (Collider c in bodyParts)
             {
                 if (c.name.Contains(name))
                 {

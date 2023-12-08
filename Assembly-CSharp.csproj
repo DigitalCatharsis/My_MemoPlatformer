@@ -151,6 +151,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\ToggleBoxCollider.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckRunningTurn.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_SubComponents\Ragdoll.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\WeaponPickup.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\WallSlide.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\JumpPlatform.cs" />

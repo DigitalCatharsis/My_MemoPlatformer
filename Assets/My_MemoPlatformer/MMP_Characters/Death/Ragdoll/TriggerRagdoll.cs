@@ -11,28 +11,18 @@ namespace My_MemoPlatformer
         public float triggerTiming;
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             if (stateInfo.normalizedTime >= triggerTiming)
             {
-                if (!characterState.characterControl.animationProgress.ragdollTriggered)
-                {
-                    if (characterState.characterControl.skinnedMeshAnimator.enabled)
-                    {
-                        characterState.characterControl.animationProgress.ragdollTriggered = true;
-                    }
-                }
-
+                characterState.characterControl.procDict[CharacterProc.RAGDOLL_ON]();
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            //
-            //control.animationProgress.ragdollTriggered = false;
         }
     }
 }
