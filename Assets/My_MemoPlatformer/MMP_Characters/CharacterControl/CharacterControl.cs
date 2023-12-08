@@ -46,8 +46,6 @@ namespace My_MemoPlatformer
         public bool block;
 
         [Header("SubComponents")]
-        //public ManualInput manualInput;
-        public LedgeChecker ledgeChecker;
         public AnimationProgress animationProgress;
         public AIProgress aiProgress;
         public DamageDetector damageDetector;
@@ -58,8 +56,11 @@ namespace My_MemoPlatformer
         public InstaKill instakill;
         public Dictionary<SubComponents, SubComponent> SubComponentsDict = new Dictionary<SubComponents, SubComponent>();
 
-        public Dictionary<BoolData, GetBool> getBoolDic = new Dictionary<BoolData, GetBool>();
+        public Dictionary<BoolData, GetBool> boolDic = new Dictionary<BoolData, GetBool>();
+        public Dictionary<CharacterProc, CharacterProcDel> procDict = new Dictionary<CharacterProc, CharacterProcDel>();
+
         public delegate bool GetBool();
+        public delegate void CharacterProcDel();
 
         [Header("Gravity")]
         public ContactPoint[] contactPoints;
@@ -90,7 +91,6 @@ namespace My_MemoPlatformer
 
         private void Awake()
         {
-            ledgeChecker = GetComponentInChildren<LedgeChecker>();
             animationProgress = GetComponent<AnimationProgress>();
             aiProgress = GetComponentInChildren<AIProgress>();
             damageDetector = GetComponentInChildren<DamageDetector>();
@@ -258,16 +258,30 @@ namespace My_MemoPlatformer
             }
         }
 
+        private void UpdateSubComponent(SubComponents type)
+        {
+            if (SubComponentsDict.ContainsKey(type))
+            {
+                SubComponentsDict[type].OnUpdate();
+            }
+        }        
+        private void FixedUpdateSubComponent(SubComponents type)
+        {
+            if (SubComponentsDict.ContainsKey(type))
+            {
+                SubComponentsDict[type].OnFixedUpdate();
+            }
+        }
+
         private void Update()
         {
-            if (SubComponentsDict.ContainsKey(SubComponents.MANUALINPUT))
-            {
-                SubComponentsDict[SubComponents.MANUALINPUT].OnUpdate();
-            }
+            UpdateSubComponent(SubComponents.MANUALINPUT);
         }
 
         private void FixedUpdate()
         {
+            FixedUpdateSubComponent(SubComponents.LEDGECHECKER);
+
             //fall
             if (!animationProgress.cancelPull)
             {

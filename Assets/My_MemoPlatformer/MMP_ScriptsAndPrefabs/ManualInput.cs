@@ -18,8 +18,8 @@ namespace My_MemoPlatformer
         {
             control.SubComponentsDict.Add(SubComponents.MANUALINPUT, this);
 
-            control.getBoolDic.Add(BoolData.DOUBLETAP_UP, IsDoubleTap_Up);
-            control.getBoolDic.Add(BoolData.DOUBLETAP_DOWN, IsDoubleTap_Down);
+            control.boolDic.Add(BoolData.DOUBLETAP_UP, IsDoubleTap_Up);
+            control.boolDic.Add(BoolData.DOUBLETAP_DOWN, IsDoubleTap_Down);
         }
 
         //private void Awake()
@@ -201,6 +201,11 @@ namespace My_MemoPlatformer
             {
                 _upKeys.Add(keyType);
             }
+        }
+
+        public override void OnFixedUpdate()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

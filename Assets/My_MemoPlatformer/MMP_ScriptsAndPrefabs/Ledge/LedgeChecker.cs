@@ -1,32 +1,37 @@
 using System.Collections.Generic;
-using System.Diagnostics;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    public class LedgeChecker : MonoBehaviour
+    public class LedgeChecker : SubComponent
     {
         public bool isGrabbingLedge;
         public Vector3 ledgeCalibration = new Vector3();  //diffirence (offset) when we change character. (Bones changing)
 
-        private CharacterControl _control;
-
         public LedgeCollider collider1; //bottom
         public LedgeCollider collider2; //top
-
 
         public List<string> ledgeTriggerStateNames = new List<string>();
 
         private void Start()
         {
             isGrabbingLedge = false;
-            _control = GetComponentInParent<CharacterControl>();
+
+            control.SubComponentsDict.Add(SubComponents.LEDGECHECKER, this);
+            control.procDict.Add(CharacterProc.LEDGE_COLLIDERS_OFF, LedgeCollidersOff);
+            control.boolDic.Add(BoolData.GRABBING_LEDGE, IsGrabbingLedge);
         }
-        private void FixedUpdate()
+
+        public override void OnUpdate()
         {
-            if (_control.skinnedMeshAnimator.GetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded]))
+            //Барбара меня накажет, простите :c
+        }
+        public override void OnFixedUpdate()
+        {
+            if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded]))
             {
-                if (_control.Rigid_Body.useGravity)
+                if (control.Rigid_Body.useGravity)
                 {
                     isGrabbingLedge = false;
                 }
@@ -40,14 +45,14 @@ namespace My_MemoPlatformer
 
         private bool IsLedgeGrabCondition()
         {
-            if (!_control.moveUp)
+            if (!control.moveUp)
             {
                 return false;
             }
 
             foreach(string s in ledgeTriggerStateNames)
             {
-                if (_control.animationProgress.StateNameContains(s))
+                if (control.animationProgress.StateNameContains(s))
                 {
                     return true;
                 }
@@ -58,7 +63,7 @@ namespace My_MemoPlatformer
 
         private void ProcessLedgeGrab()
         {
-            if (!_control.skinnedMeshAnimator.GetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded]))
+            if (!control.skinnedMeshAnimator.GetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded]))
             {
                 foreach (var obj in collider1.collidedObjects)
                 {
@@ -100,14 +105,14 @@ namespace My_MemoPlatformer
             }
 
             isGrabbingLedge = true;
-            _control.Rigid_Body.useGravity = false;
-            _control.Rigid_Body.velocity = Vector3.zero;
+            control.Rigid_Body.useGravity = false;
+            control.Rigid_Body.velocity = Vector3.zero;
 
             float y, z;
 
             y = platform.transform.position.y + (boxCollider.size.y * boxCollider.gameObject.transform.lossyScale.y / 2f);
 
-            if (_control.IsFacingForward())
+            if (control.IsFacingForward())
             {
                 z = platform.transform.position.z - (boxCollider.size.z * boxCollider.gameObject.transform.lossyScale.z / 2f);
             }
@@ -121,16 +126,27 @@ namespace My_MemoPlatformer
             var testingSphere = GameObject.Find("TestingSphere");
             testingSphere.transform.position = plarformEdge;
 
-            if (_control.IsFacingForward())
+            if (control.IsFacingForward())
             {
-                _control.Rigid_Body.MovePosition(plarformEdge + ledgeCalibration);
+                control.Rigid_Body.MovePosition(plarformEdge + ledgeCalibration);
             }
             else
             {
-                _control.Rigid_Body.MovePosition(plarformEdge + new Vector3(0f, ledgeCalibration.y, -ledgeCalibration.z));
+                control.Rigid_Body.MovePosition(plarformEdge + new Vector3(0f, ledgeCalibration.y, -ledgeCalibration.z));
             }
 
             return true;
+        }
+
+        public void LedgeCollidersOff()
+        {
+            collider1.GetComponent<BoxCollider>().enabled = false;
+            collider2.GetComponent<BoxCollider>().enabled = false;
+        }
+
+        public bool IsGrabbingLedge()
+        {
+            return isGrabbingLedge;
         }
     }
 }

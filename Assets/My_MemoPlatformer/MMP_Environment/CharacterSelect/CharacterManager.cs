@@ -48,14 +48,9 @@ namespace My_MemoPlatformer
         {
             foreach (var control in characters)
             {
-                var manualInput = control.GetComponentInChildren<ManualInput>();
-
-                if (manualInput != null)
+                if (control.SubComponentsDict.ContainsKey(SubComponents.MANUALINPUT))
                 {
-                    if (manualInput.enabled == true)
-                    {
-                        return control;
-                    }                    
+                    return control;
                 }
             }
 

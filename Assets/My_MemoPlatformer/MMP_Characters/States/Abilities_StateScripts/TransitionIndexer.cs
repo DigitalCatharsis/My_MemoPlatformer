@@ -141,7 +141,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.GRABBING_LEDGE:
                         {
-                            if (!control.ledgeChecker.isGrabbingLedge)
+                            if (!control.boolDic[BoolData.GRABBING_LEDGE]())
                             {
                                 return false;
                             }
@@ -149,7 +149,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.NOT_GRABBING_LEDGE:
                         {
-                            if (control.ledgeChecker.isGrabbingLedge)
+                            if (control.boolDic[BoolData.GRABBING_LEDGE]())
                             {
                                 return false;
                             }
@@ -262,7 +262,7 @@ namespace My_MemoPlatformer
                                 return false;
                             }
 
-                            if (!control.getBoolDic[BoolData.DOUBLETAP_UP]())
+                            if (!control.boolDic[BoolData.DOUBLETAP_UP]())
                             {
                                 return false;
                             }
@@ -275,7 +275,7 @@ namespace My_MemoPlatformer
                                 return false;
                             }
 
-                            if (!control.getBoolDic[BoolData.DOUBLETAP_DOWN]())
+                            if (!control.boolDic[BoolData.DOUBLETAP_DOWN]())
                             {
                                 return false;
                             }

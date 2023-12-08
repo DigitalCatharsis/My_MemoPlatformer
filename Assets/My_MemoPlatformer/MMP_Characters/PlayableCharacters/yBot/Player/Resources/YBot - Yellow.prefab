@@ -88,14 +88,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1260156243}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 2.309, z: 0.231}
   m_LocalScale: {x: 2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5048502664790285771}
   - {fileID: 1530509413396575398}
-  m_Father: {fileID: 3372119544377188092}
+  m_Father: {fileID: 2838286670764771645}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1260156248
@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b570f699005d93a4e8d6805d7f531e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 0}
   isGrabbingLedge: 0
   ledgeCalibration: {x: 0, y: -2.3, z: -0.1}
   collider1: {fileID: 3335105432292074732}
@@ -1528,7 +1529,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6717720730588901626}
-  - {fileID: 1260156244}
   - {fileID: 673519052}
   - {fileID: 1318701341189441266}
   - {fileID: 5415747056367200280}
@@ -1578,7 +1578,6 @@ MonoBehaviour:
   jump: 0
   attack: 0
   block: 0
-  ledgeChecker: {fileID: 0}
   animationProgress: {fileID: 0}
   aiProgress: {fileID: 0}
   damageDetector: {fileID: 0}
@@ -3869,6 +3868,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1260156244}
   - {fileID: 2212010676037463706}
   m_Father: {fileID: 3372119544377188092}
   m_RootOrder: -1
