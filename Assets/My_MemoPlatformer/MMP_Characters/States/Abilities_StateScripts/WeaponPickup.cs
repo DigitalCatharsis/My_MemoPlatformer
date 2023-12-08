@@ -12,17 +12,16 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-
+            characterState.characterControl.animationProgress.HoldingWeapon = characterState.characterControl.animationProgress.GetTouchingWeapon();
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             if (stateInfo.normalizedTime > pickupTiming)
             {
-                if (characterState.characterControl.animationProgress.HoldingWeapon == null)
+                if (characterState.characterControl.animationProgress.HoldingWeapon.control == null)
                 {
-                    var weapon = characterState.characterControl.animationProgress.GetTouchingWeapon();
-                    characterState.characterControl.animationProgress.HoldingWeapon = weapon;
+                    var weapon = characterState.characterControl.animationProgress.HoldingWeapon;
 
                     weapon.transform.parent = characterState.characterControl.rightHand_Attack.transform;
                     weapon.transform.localPosition = weapon.customPosition;

@@ -86,6 +86,20 @@ namespace My_MemoPlatformer
 
                     control.damageDetector.TakeDamage(info);
 
+                    if (w.flyForward)
+                    {
+                        w.transform.rotation = Quaternion.Euler(-90f, 0f, -180f);
+                    }
+                    else
+                    {
+                        w.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+                    }
+
+                    w.transform.parent = this.transform;
+
+                    var offset = this.transform.position - w.weaponTip.transform.position;
+                    w.transform.position += offset;
+
                     w.isThrown = false;
                     return;
                 }

@@ -19,6 +19,7 @@ namespace My_MemoPlatformer
         public float flightSpeed;
         public float rotationSpeed;
         public CharacterControl thrower;
+        public GameObject weaponTip;
 
         private void Start()
         {
