@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace My_MemoPlatformer
 {
@@ -7,29 +6,35 @@ namespace My_MemoPlatformer
     {
         private void Start()
         {
+            control.SubComponentsDict.Add(SubComponents.RAGDOLL, this);
             control.procDict.Add(CharacterProc.RAGDOLL_ON, TurnOnRagdoll);
         }
 
         public override void OnFixedUpdate()
         {
-            throw new System.NotImplementedException();
+            if (control.animationProgress.ragdollTriggered)
+            {
+                ProcRagdoll();
+            }
         }
 
         public override void OnUpdate()
         {
             throw new System.NotImplementedException();
         }
-
-
-
         public void TurnOnRagdoll()
         {
-            if (control.animationProgress.ragdollTriggered)
+            control.animationProgress.ragdollTriggered = true;
+        }
+
+        private void ProcRagdoll()
+        {
+            control.animationProgress.ragdollTriggered = false;
+            
+            if (control.skinnedMeshAnimator.avatar == null)
             {
                 return;
             }
-
-            control.animationProgress.ragdollTriggered = true;
 
             //change components layers from character to DeadBody to prevent unnessesary collisions.
             Transform[] arr = control.gameObject.GetComponentsInChildren<Transform>();

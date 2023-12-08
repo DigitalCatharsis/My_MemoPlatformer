@@ -7,6 +7,7 @@ namespace My_MemoPlatformer
         NONE,
         MANUALINPUT,
         LEDGECHECKER,
+        RAGDOLL,
     }
 
     public enum BoolData

@@ -242,6 +242,7 @@ namespace My_MemoPlatformer
         private void FixedUpdate()
         {
             FixedUpdateSubComponent(SubComponents.LEDGECHECKER);
+            FixedUpdateSubComponent(SubComponents.RAGDOLL);
 
             //fall
             if (!animationProgress.cancelPull)
