@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -84,6 +85,8 @@ namespace My_MemoPlatformer
                     weapon.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
                 }
 
+                RemoveWeaponFromDictionary(control);
+
                 weapon.transform.position = control.transform.position + Vector3.up * 0.015f;
 
                 control.animationProgress.HoldingWeapon = null;
@@ -113,7 +116,7 @@ namespace My_MemoPlatformer
                 flyForward = control.IsFacingForward();
 
                 weapon.transform.position = control.transform.position + Vector3.up * throwOffset.y;
-                weapon.transform.position +=  control.transform.forward * throwOffset.z;
+                weapon.transform.position += control.transform.forward * throwOffset.z;
 
                 thrower = control;
                 control.animationProgress.HoldingWeapon = null;
@@ -121,6 +124,43 @@ namespace My_MemoPlatformer
                 weapon.triggerDetector.control = null;
 
                 isThrown = true;
+
+                RemoveWeaponFromDictionary(thrower);
+            }
+        }
+
+        public void RemoveWeaponFromDictionary(CharacterControl c)
+        {
+            foreach (var col in c.ragdollParts)
+            {
+                var t = col.GetComponent<TriggerDetector>();
+
+                if (t != null)
+                {
+                    ProcRemove(c.animationProgress.collidingWeapons, t);
+                    ProcRemove(c.animationProgress.collidingBodyParts, t);
+                }
+            }
+        }
+
+        private void ProcRemove(Dictionary<TriggerDetector, List<Collider>> d, TriggerDetector t)
+        {
+            if (d.ContainsKey(t))
+            {
+                if (d[t].Contains(pickUpCollider))
+                {
+                    d[t].Remove(pickUpCollider);
+                }
+
+                if (d[t].Contains(attackCollider))
+                {
+                    d[t].Remove(attackCollider);
+                }
+
+                if (d[t].Count == 0)
+                {
+                    d.Remove(t);
+                }
             }
         }
     }

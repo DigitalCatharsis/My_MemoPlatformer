@@ -31,6 +31,7 @@ namespace My_MemoPlatformer
                     weapon.control = characterState.characterControl;
                     weapon.triggerDetector.control = characterState.characterControl;
 
+                    weapon.RemoveWeaponFromDictionary(characterState.characterControl);
                 }
             }
         }
