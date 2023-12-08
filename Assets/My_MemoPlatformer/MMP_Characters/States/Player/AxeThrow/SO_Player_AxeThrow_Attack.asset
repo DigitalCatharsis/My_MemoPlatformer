@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09d2138cfc2da18499f42578916d88ca, type: 3}
+  m_Name: SO_Player_AxeThrow_Attack
+  m_EditorClassIdentifier: 
+  debug: 0
+  startAttackTime: 0
+  endAttackTime: 0
+  attackParts: 
+  mustCollide: 0
+  mustFaceAttacker: 0
+  lethalRange: 0
+  maxHits: 0
+  damage: 3
+  comboStartTime: 0
+  comboEndTime: 0
+  forwardForce: 3000
+  rightForce: 0
+  upForce: 3000
+  useDeathParticles: 0
+  ParticleType: 3

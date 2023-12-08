@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 
@@ -73,8 +74,18 @@ namespace My_MemoPlatformer
 
             if (w.isThrown)
             {
-                if (w.thrower != control)
+                if (w.thrower != control) //not colliding himself
                 {
+                    var info = new AttackInfo();
+                    info.CopyInfo(control.damageDetector.AxeThrow, control);
+
+                    control.damageDetector.damagedTrigger = this;
+                    control.damageDetector.attack = control.damageDetector.AxeThrow;
+                    control.damageDetector.attacker = w.thrower;
+                    control.damageDetector.attackingPart = control.rightHand_Attack;
+
+                    control.damageDetector.TakeDamage(info);
+
                     w.isThrown = false;
                     return;
                 }

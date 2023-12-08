@@ -25,6 +25,10 @@ namespace My_MemoPlatformer
         public RuntimeAnimatorController Assassination_Assassin;
         public RuntimeAnimatorController Assassination_Victim;
 
+        [Header("Attack")]
+        public Attack AxeThrow;
+        public Attack airStompAttack;
+
         private void Awake()
         {
             _control = GetComponent<CharacterControl>();

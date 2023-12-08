@@ -45,7 +45,6 @@ namespace My_MemoPlatformer
         public bool canWallJump;
         public bool checkWallBlock;
         public List<CharacterControl> airStompTargets;
-        public Attack airStompAttack;
 
         [Header("UpdateBoxCollider")]
         public bool updatingSpheres;
@@ -189,11 +188,11 @@ namespace My_MemoPlatformer
                 foreach (CharacterControl c in airStompTargets)
                 {
                     var info = new AttackInfo();
-                    info.CopyInfo(airStompAttack, _control);
+                    info.CopyInfo(c.damageDetector.airStompAttack, _control);
 
                     int index = Random.Range(0, c.ragdollParts.Count);
                     c.damageDetector.damagedTrigger = c.ragdollParts[index].GetComponent<TriggerDetector>();
-                    c.damageDetector.attack = airStompAttack;
+                    c.damageDetector.attack = c.damageDetector.airStompAttack;
                     c.damageDetector.attacker = _control;
                     c.damageDetector.attackingPart = _control.rightFoot_Attack;
 

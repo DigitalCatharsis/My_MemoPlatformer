@@ -1617,6 +1617,8 @@ MonoBehaviour:
   blockedAttack: {fileID: 0}
   Assassination_Assassin: {fileID: 9100000, guid: 1ff8244958f934742a2835e1c827d59c, type: 2}
   Assassination_Victim: {fileID: 9100000, guid: ae6282d82d780684b889b8ad9c9da487, type: 2}
+  AxeThrow: {fileID: 11400000, guid: a887d67403fa15e4f9758370f2bce396, type: 2}
+  airStompAttack: {fileID: 11400000, guid: 270577db070e447499e094b119ff8aa1, type: 2}
 --- !u!54 &936084455
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1674,7 +1676,6 @@ MonoBehaviour:
   canWallJump: 0
   checkWallBlock: 0
   airStompTargets: []
-  airStompAttack: {fileID: 11400000, guid: 270577db070e447499e094b119ff8aa1, type: 2}
   updatingSpheres: 0
   targetSize: {x: 0, y: 0, z: 0}
   sizeSpeed: 0
