@@ -193,6 +193,53 @@ Transform:
   m_Father: {fileID: 1969032057692000916}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &744158901061891061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2212010676037463706}
+  - component: {fileID: 5396730058849828673}
+  m_Layer: 9
+  m_Name: ManualInput
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2212010676037463706
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744158901061891061}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2838286670764771645}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5396730058849828673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744158901061891061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffaa8e7aa94c91a4b922478195404587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  control: {fileID: 0}
+  _doubleTaps: 
+  _upKeys: 
 --- !u!1 &876816306485884224
 GameObject:
   m_ObjectHideFlags: 0
@@ -1456,7 +1503,6 @@ GameObject:
   - component: {fileID: 2430949021683835266}
   - component: {fileID: 2430949021683835267}
   - component: {fileID: 8003498278013731179}
-  - component: {fileID: 2430949021683835261}
   - component: {fileID: 4542326154330732370}
   - component: {fileID: 936084455}
   - component: {fileID: 1747402107}
@@ -1486,6 +1532,7 @@ Transform:
   - {fileID: 673519052}
   - {fileID: 1318701341189441266}
   - {fileID: 5415747056367200280}
+  - {fileID: 2838286670764771645}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1531,7 +1578,6 @@ MonoBehaviour:
   jump: 0
   attack: 0
   block: 0
-  manualInput: {fileID: 0}
   ledgeChecker: {fileID: 0}
   animationProgress: {fileID: 0}
   aiProgress: {fileID: 0}
@@ -1579,20 +1625,6 @@ MonoBehaviour:
   CurrentObjects: []
   CurrentMaterials: []
   NewMaterials: []
---- !u!114 &2430949021683835261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3372119544377188088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffaa8e7aa94c91a4b922478195404587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _doubleTaps: 
-  _upKeys: 
 --- !u!114 &4542326154330732370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3807,6 +3839,38 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2021523847237344339}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7601673426626872993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2838286670764771645}
+  m_Layer: 9
+  m_Name: SubComponents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2838286670764771645
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7601673426626872993}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2212010676037463706}
+  m_Father: {fileID: 3372119544377188092}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7745837032654152969

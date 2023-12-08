@@ -10,7 +10,7 @@ namespace My_MemoPlatformer
 
         public CharacterControl GetCharacter(PlayableCharacterType playableCharacterType)
         {
-            foreach (CharacterControl control in characters) 
+            foreach (var control in characters) 
             {
                 if (control.playableCharacterType == playableCharacterType)
                 {
@@ -22,7 +22,7 @@ namespace My_MemoPlatformer
 
         public CharacterControl GetCharacter(Animator animator)
         {
-            foreach (CharacterControl control in characters)
+            foreach (var control in characters)
             {
                 if (control.skinnedMeshAnimator == animator)
                 {
@@ -34,7 +34,7 @@ namespace My_MemoPlatformer
            
         public CharacterControl GetCharacter(GameObject obj)
         {
-            foreach (CharacterControl control in characters)
+            foreach (var control in characters)
             {
                 if (control.gameObject == obj)
                 {
@@ -46,23 +46,20 @@ namespace My_MemoPlatformer
 
         public CharacterControl GetPlayableCharacter()
         {
-            foreach (CharacterControl control in characters)
+            foreach (var control in characters)
             {
-                ManualInput manualInput = control.GetComponent<ManualInput>();
+                var manualInput = control.GetComponentInChildren<ManualInput>();
 
                 if (manualInput != null)
                 {
                     if (manualInput.enabled == true)
                     {
                         return control;
-                    }
-                    
+                    }                    
                 }
             }
 
             return null;
-
         }
-
     }
 }

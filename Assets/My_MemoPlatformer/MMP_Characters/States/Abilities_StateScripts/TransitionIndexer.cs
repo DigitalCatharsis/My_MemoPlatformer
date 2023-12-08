@@ -257,7 +257,12 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.DOUBLETAP_UP:
                         {
-                            if (!control.manualInput._doubleTaps.Contains(InputKeyType.KEY_MOVE_UP))
+                            if (!control.SubComponentsDict.ContainsKey(SubComponents.MANUALINPUT))
+                            {
+                                return false;
+                            }
+
+                            if (!control.getBoolDic[BoolData.DOUBLETAP_UP]())
                             {
                                 return false;
                             }
@@ -265,7 +270,12 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.DOUBLETAP_DOWN:
                         {
-                            if (!control.manualInput._doubleTaps.Contains(InputKeyType.KEY_MOVE_DOWN))
+                            if (!control.SubComponentsDict.ContainsKey(SubComponents.MANUALINPUT))
+                            {
+                                return false;
+                            }
+
+                            if (!control.getBoolDic[BoolData.DOUBLETAP_DOWN]())
                             {
                                 return false;
                             }

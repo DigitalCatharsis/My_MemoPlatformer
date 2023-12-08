@@ -46,7 +46,7 @@ namespace My_MemoPlatformer
         public bool block;
 
         [Header("SubComponents")]
-        public ManualInput manualInput;
+        //public ManualInput manualInput;
         public LedgeChecker ledgeChecker;
         public AnimationProgress animationProgress;
         public AIProgress aiProgress;
@@ -56,6 +56,10 @@ namespace My_MemoPlatformer
         public BoxCollider boxCollider;
         public NavMeshObstacle navMeshObstacle;
         public InstaKill instakill;
+        public Dictionary<SubComponents, SubComponent> SubComponentsDict = new Dictionary<SubComponents, SubComponent>();
+
+        public Dictionary<BoolData, GetBool> getBoolDic = new Dictionary<BoolData, GetBool>();
+        public delegate bool GetBool();
 
         [Header("Gravity")]
         public ContactPoint[] contactPoints;
@@ -86,7 +90,6 @@ namespace My_MemoPlatformer
 
         private void Awake()
         {
-            manualInput = GetComponent<ManualInput>();
             ledgeChecker = GetComponentInChildren<LedgeChecker>();
             animationProgress = GetComponent<AnimationProgress>();
             aiProgress = GetComponentInChildren<AIProgress>();
@@ -252,6 +255,14 @@ namespace My_MemoPlatformer
                 boxCollider.center = Vector3.Lerp(boxCollider.center, animationProgress.targetCenter, Time.deltaTime * animationProgress.centerSpeed);
 
                 animationProgress.updatingSpheres = true;
+            }
+        }
+
+        private void Update()
+        {
+            if (SubComponentsDict.ContainsKey(SubComponents.MANUALINPUT))
+            {
+                SubComponentsDict[SubComponents.MANUALINPUT].OnUpdate();
             }
         }
 

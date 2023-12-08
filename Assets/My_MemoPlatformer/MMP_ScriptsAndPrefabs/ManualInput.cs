@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 
 namespace My_MemoPlatformer
 {
@@ -9,119 +7,125 @@ namespace My_MemoPlatformer
     //2. The pressed keys saved up to the VirtualInputManager, and bind up
     //3. ManualInput Relay that keys to the CharacterControl
     //4. CharacterControl contains actual fields about character moving etc.
-    public class ManualInput : MonoBehaviour
-    {
-        private CharacterControl characterControl;
 
+    public class ManualInput : SubComponent
+    {
         public List<InputKeyType> _doubleTaps = new List<InputKeyType>();
         [SerializeField] private List<InputKeyType> _upKeys = new List<InputKeyType>();  //какие отпустил
         [SerializeField] private Dictionary<InputKeyType, float> _doubleTapTimings = new Dictionary<InputKeyType, float>();
 
-
-        private void Awake()
+        private void Start()
         {
-            characterControl = this.gameObject.GetComponent<CharacterControl>();
+            control.SubComponentsDict.Add(SubComponents.MANUALINPUT, this);
+
+            control.getBoolDic.Add(BoolData.DOUBLETAP_UP, IsDoubleTap_Up);
+            control.getBoolDic.Add(BoolData.DOUBLETAP_DOWN, IsDoubleTap_Down);
         }
 
-        private void Update()
+        //private void Awake()
+        //{
+        //    control = this.gameObject.GetComponent<CharacterControl>();
+        //}
+
+        public override void OnUpdate()
         {
             if (VirtualInputManager.Instance.turbo)
             {
-                characterControl.turbo = true;
+                control.turbo = true;
                 ProcessDoubleTap(InputKeyType.KEY_TURBO);
 
             }
             else
             {
-                characterControl.turbo = false;
+                control.turbo = false;
                 RemoveDoubleTap(InputKeyType.KEY_TURBO);
             }
 
             if (VirtualInputManager.Instance.moveUp)
             {
-                characterControl.moveUp = true;
+                control.moveUp = true;
                 ProcessDoubleTap(InputKeyType.KEY_MOVE_UP);
             }
             else
             {
-                characterControl.moveUp = false;
+                control.moveUp = false;
                 RemoveDoubleTap(InputKeyType.KEY_MOVE_UP);
             }
 
             if (VirtualInputManager.Instance.moveDown)
             {
-                characterControl.moveDown = true;
+                control.moveDown = true;
                 ProcessDoubleTap(InputKeyType.KEY_MOVE_DOWN);
             }
             else
             {
-                characterControl.moveDown = false;
+                control.moveDown = false;
                 RemoveDoubleTap(InputKeyType.KEY_MOVE_DOWN);
             }
 
             if (VirtualInputManager.Instance.moveRight)
             {
-                characterControl.moveRight = true;
+                control.moveRight = true;
                 ProcessDoubleTap(InputKeyType.KEY_MOVE_RIGHT);
             }
             else
             {
-                characterControl.moveRight = false;
+                control.moveRight = false;
                 RemoveDoubleTap(InputKeyType.KEY_MOVE_RIGHT);
             }
 
             if (VirtualInputManager.Instance.moveLeft)
             {
-                characterControl.moveLeft = true;
+                control.moveLeft = true;
                 ProcessDoubleTap(InputKeyType.KEY_MOVE_LEFT);
             }
             else
             {
-                characterControl.moveLeft = false;
+                control.moveLeft = false;
                 RemoveDoubleTap(InputKeyType.KEY_MOVE_LEFT);
             }
 
             if (VirtualInputManager.Instance.jump)
             {
-                characterControl.jump = true;
+                control.jump = true;
                 ProcessDoubleTap(InputKeyType.KEY_JUMP);
             }
             else
             {
-                characterControl.jump = false;
+                control.jump = false;
                 RemoveDoubleTap(InputKeyType.KEY_JUMP);
             }
 
             if (VirtualInputManager.Instance.block)
             {
-                characterControl.block = true;
+                control.block = true;
                 ProcessDoubleTap(InputKeyType.KEY_BLOCK);
             }
             else
             {
-                characterControl.block = false;
+                control.block = false;
                 RemoveDoubleTap(InputKeyType.KEY_BLOCK);
             }
 
             if (VirtualInputManager.Instance.attack)
             {
-                characterControl.attack = true;
+                control.attack = true;
                 ProcessDoubleTap(InputKeyType.KEY_ATTACK);
             }
             else
             {
-                characterControl.attack = false;
+                control.attack = false;
                 RemoveDoubleTap(InputKeyType.KEY_ATTACK);
             }
 
             //double tap running
             if (_doubleTaps.Contains(InputKeyType.KEY_MOVE_RIGHT) || _doubleTaps.Contains(InputKeyType.KEY_MOVE_LEFT))
             {
-                characterControl.turbo = true;
+                control.turbo = true;
             }
 
             //double tap running turn
-            if (characterControl.moveRight && characterControl.moveLeft)
+            if (control.moveRight && control.moveLeft)
             {
                 if (_doubleTaps.Contains(InputKeyType.KEY_MOVE_RIGHT) || _doubleTaps.Contains(InputKeyType.KEY_MOVE_LEFT))
                 {
@@ -134,6 +138,29 @@ namespace My_MemoPlatformer
                         _doubleTaps.Add(InputKeyType.KEY_MOVE_LEFT);
                     }
                 }
+            }
+        }
+
+        public bool IsDoubleTap_Up()
+        {
+            if (_doubleTaps.Contains(InputKeyType.KEY_MOVE_UP))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool IsDoubleTap_Down()
+        {
+            if (_doubleTaps.Contains(InputKeyType.KEY_MOVE_DOWN))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

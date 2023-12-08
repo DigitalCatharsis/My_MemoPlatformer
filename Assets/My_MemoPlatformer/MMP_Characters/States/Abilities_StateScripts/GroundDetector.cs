@@ -59,7 +59,7 @@ namespace My_MemoPlatformer
                             control.animationProgress.ground = c.otherCollider.transform.gameObject; //что колайдерит bottom сферы
                             control.animationProgress.landingPosition = new Vector3(0f, c.point.y, c.point.z);
 
-                            if (control.manualInput.enabled)
+                            if (control.SubComponentsDict.ContainsKey(SubComponents.MANUALINPUT))
                             {
                                 TestingSphere.transform.position = control.animationProgress.landingPosition;
                             }
@@ -86,7 +86,7 @@ namespace My_MemoPlatformer
                             control.animationProgress.ground = hit.collider.transform.root.gameObject; //что колайдерит bottom сферы
                             control.animationProgress.landingPosition = new Vector3(0f, hit.point.y, hit.point.z);
 
-                            if (control.manualInput.enabled)
+                            if (control.SubComponentsDict.ContainsKey(SubComponents.MANUALINPUT))
                             {
                                 TestingSphere.transform.position = control.animationProgress.landingPosition;
                             }
