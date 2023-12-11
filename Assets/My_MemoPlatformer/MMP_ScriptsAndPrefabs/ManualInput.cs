@@ -16,7 +16,7 @@ namespace My_MemoPlatformer
 
         private void Start()
         {
-            control.SubComponentsDict.Add(SubComponents.MANUALINPUT, this);
+            control.SubComponentsDic.Add(SubComponents.MANUALINPUT, this);
 
             control.boolDic.Add(BoolData.DOUBLETAP_UP, IsDoubleTap_Up);
             control.boolDic.Add(BoolData.DOUBLETAP_DOWN, IsDoubleTap_Down);

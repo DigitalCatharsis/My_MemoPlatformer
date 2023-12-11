@@ -138,7 +138,7 @@ namespace My_MemoPlatformer
 
         private void UpdateMomentum(CharacterControl control, AnimatorStateInfo stateInfo)
         {
-            if (!control.animationProgress.RightSideIsBlocked())
+            if (!control.boolDic[BoolData.RIGHTSIDE_IS_BLOCKED]())
             {
                 if (control.moveRight)
                 {
@@ -146,7 +146,7 @@ namespace My_MemoPlatformer
                 }
             }
 
-            if (!control.animationProgress.LeftSideIsBlocked())
+            if (!control.boolDic[BoolData.LEFTSIDE_IS_BLOCKED]())
             {
                 if (control.moveLeft)
                 {
@@ -154,7 +154,7 @@ namespace My_MemoPlatformer
                 }
             }
 
-            if (control.animationProgress.RightSideIsBlocked() || control.animationProgress.LeftSideIsBlocked())
+            if (control.boolDic[BoolData.RIGHTSIDE_IS_BLOCKED]() || control.boolDic[BoolData.LEFTSIDE_IS_BLOCKED]())
             {
                 control.animationProgress.airMomentum = Mathf.Lerp(control.animationProgress.airMomentum, 0f, Time.deltaTime * 1.5f);
             }
@@ -289,7 +289,7 @@ namespace My_MemoPlatformer
 
         private bool IsBlocked(CharacterControl control)
         {
-            if (control.animationProgress.frontBlockingObjects.Count != 0)
+            if (!control.boolDic[BoolData.FRONTBLOCKINGOBJ_DICTIONARY_IS_EMPTY]())
             {
                 return true;
             }

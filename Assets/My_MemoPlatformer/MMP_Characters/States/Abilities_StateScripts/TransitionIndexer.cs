@@ -211,9 +211,11 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.MOVING_TO_BLOCKING_OBG:
                         {
-                            foreach (KeyValuePair<GameObject, GameObject> data in control.animationProgress.frontBlockingObjects)
+                            var objs = control.listDic[ListData.FRONTBLOCKING_OBJECTS]();
+
+                            foreach (var o in objs) 
                             {
-                                Vector3 dir = data.Value.transform.position - control.transform.position;
+                                var dir = o.transform.position - control.transform.position;
 
                                 if (dir.z > 0f && control.moveRight)
                                 {
@@ -228,7 +230,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.BLOCKED_BY_WALL:
                         {
-                            foreach (OverlapChecker oc in control.collisionSpheres.frontOverlapCheckers)
+                            foreach (var oc in control.collisionSpheres.frontOverlapCheckers)
                             {
                                 if (!oc.objIsOverlapping)
                                 {
@@ -241,7 +243,7 @@ namespace My_MemoPlatformer
                         {
                             bool allIsoverlapping = true;
 
-                            foreach (OverlapChecker oc in control.collisionSpheres.frontOverlapCheckers)
+                            foreach (var oc in control.collisionSpheres.frontOverlapCheckers)
                             {
                                 if (!oc.objIsOverlapping)
                                 {
@@ -257,7 +259,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.DOUBLETAP_UP:
                         {
-                            if (!control.SubComponentsDict.ContainsKey(SubComponents.MANUALINPUT))
+                            if (!control.SubComponentsDic.ContainsKey(SubComponents.MANUALINPUT))
                             {
                                 return false;
                             }
@@ -270,7 +272,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.DOUBLETAP_DOWN:
                         {
-                            if (!control.SubComponentsDict.ContainsKey(SubComponents.MANUALINPUT))
+                            if (!control.SubComponentsDic.ContainsKey(SubComponents.MANUALINPUT))
                             {
                                 return false;
                             }

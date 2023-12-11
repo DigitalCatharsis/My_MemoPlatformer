@@ -15,7 +15,7 @@ namespace My_MemoPlatformer
             animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], false);
 
             characterState.characterControl.animationProgress.disAllowEarlyTurn = false;
-            characterState.characterControl.animationProgress.frontBlockingObjects.Clear(); //когда мы стоит, нас ничего не задевает, логично. Хотя, надо подумать на счет AI. Позже...
+            characterState.characterControl.procDict[CharacterProc.CLEAR_FRONTBLOCKING_OBJ_DICTIONARY]();
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

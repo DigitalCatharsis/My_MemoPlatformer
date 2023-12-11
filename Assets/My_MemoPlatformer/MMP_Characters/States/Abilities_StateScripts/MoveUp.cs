@@ -19,7 +19,7 @@ namespace My_MemoPlatformer
         {
             if (!characterState.characterControl.Rigid_Body.useGravity)
             {
-                if (characterState.characterControl.animationProgress.upBlockingObjects.Count == 0)
+                if (characterState.characterControl.boolDic[BoolData.UPBLOCKINGOBJ_DICTIONARY_IS_EMPTY]())
                 {
                     characterState.characterControl.transform.Translate(Vector3.up * speed * speedGraph.Evaluate(stateInfo.normalizedTime) * Time.deltaTime);
                 }

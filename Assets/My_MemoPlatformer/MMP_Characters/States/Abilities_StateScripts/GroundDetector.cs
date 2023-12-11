@@ -60,7 +60,7 @@ namespace My_MemoPlatformer
                             control.animationProgress.ground = c.otherCollider.transform.gameObject; //что колайдерит bottom сферы
                             control.animationProgress.landingPosition = new Vector3(0f, c.point.y, c.point.z);
 
-                            if (control.SubComponentsDict.ContainsKey(SubComponents.MANUALINPUT))
+                            if (control.SubComponentsDic.ContainsKey(SubComponents.MANUALINPUT))
                             {
                                 TestingSphere.transform.position = control.animationProgress.landingPosition;
                             }

@@ -18,7 +18,7 @@ namespace My_MemoPlatformer
         {
             isGrabbingLedge = false;
 
-            control.SubComponentsDict.Add(SubComponents.LEDGECHECKER, this);
+            control.SubComponentsDic.Add(SubComponents.LEDGECHECKER, this);
             control.procDict.Add(CharacterProc.LEDGE_COLLIDERS_OFF, LedgeCollidersOff);
             control.boolDic.Add(BoolData.GRABBING_LEDGE, IsGrabbingLedge);
         }

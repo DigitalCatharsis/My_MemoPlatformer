@@ -39,15 +39,17 @@ namespace My_MemoPlatformer
             }
 
             //path is blocked
-            if (characterState.characterControl.animationProgress.frontBlockingObjects.Count == 0)
+            if (characterState.characterControl.boolDic[BoolData.FRONTBLOCKINGOBJ_DICTIONARY_IS_EMPTY]())
             {
                 characterState.characterControl.aiProgress.blockingCharacter = null;
             }
             else
             {
-                foreach (KeyValuePair<GameObject, GameObject> data in characterState.characterControl.animationProgress.frontBlockingObjects)
+                var objs = characterState.characterControl.listDic[ListData.FRONTBLOCKING_CHARACTERS]();
+
+                foreach (var o in objs)
                 {
-                    CharacterControl blockingCharacter = CharacterManager.Instance.GetCharacter(data.Value);
+                    CharacterControl blockingCharacter = CharacterManager.Instance.GetCharacter(o);
                      
                     if (blockingCharacter != null)
                     {

@@ -55,12 +55,15 @@ namespace My_MemoPlatformer
         public BoxCollider boxCollider;
         public NavMeshObstacle navMeshObstacle;
         public InstaKill instakill;
-        public Dictionary<SubComponents, SubComponent> SubComponentsDict = new Dictionary<SubComponents, SubComponent>();
+
+        public Dictionary<SubComponents, SubComponent> SubComponentsDic = new Dictionary<SubComponents, SubComponent>();
         public Dictionary<BoolData, GetBool> boolDic = new Dictionary<BoolData, GetBool>();
         public Dictionary<CharacterProc, CharacterProcDel> procDict = new Dictionary<CharacterProc, CharacterProcDel>();
+        public Dictionary<ListData, GetList> listDic = new Dictionary<ListData, GetList>();
 
         public delegate bool GetBool();
         public delegate void CharacterProcDel();
+        public delegate List<GameObject> GetList();
 
         [Header("Gravity")]
         public ContactPoint[] contactPoints;
@@ -220,16 +223,16 @@ namespace My_MemoPlatformer
 
         private void UpdateSubComponent(SubComponents type)
         {
-            if (SubComponentsDict.ContainsKey(type))
+            if (SubComponentsDic.ContainsKey(type))
             {
-                SubComponentsDict[type].OnUpdate();
+                SubComponentsDic[type].OnUpdate();
             }
         }        
         private void FixedUpdateSubComponent(SubComponents type)
         {
-            if (SubComponentsDict.ContainsKey(type))
+            if (SubComponentsDic.ContainsKey(type))
             {
-                SubComponentsDict[type].OnFixedUpdate();
+                SubComponentsDic[type].OnFixedUpdate();
             }
         }
 
@@ -242,6 +245,7 @@ namespace My_MemoPlatformer
         {
             FixedUpdateSubComponent(SubComponents.LEDGECHECKER);
             FixedUpdateSubComponent(SubComponents.RAGDOLL);
+            FixedUpdateSubComponent(SubComponents.BLOCKINGOBJECTS);
 
             //fall
             if (!animationProgress.cancelPull)
