@@ -4,6 +4,7 @@ namespace My_MemoPlatformer
 {
     public class Ragdoll : SubComponent
     {
+        public bool ragdollTriggered = false;
         private void Start()
         {
             control.SubComponentsDict.Add(SubComponents.RAGDOLL, this);
@@ -12,7 +13,7 @@ namespace My_MemoPlatformer
 
         public override void OnFixedUpdate()
         {
-            if (control.animationProgress.ragdollTriggered)
+            if (ragdollTriggered)
             {
                 ProcRagdoll();
             }
@@ -24,12 +25,12 @@ namespace My_MemoPlatformer
         }
         public void TurnOnRagdoll()
         {
-            control.animationProgress.ragdollTriggered = true;
+            ragdollTriggered = true;
         }
 
         private void ProcRagdoll()
         {
-            control.animationProgress.ragdollTriggered = false;
+            ragdollTriggered = false;
             
             if (control.skinnedMeshAnimator.avatar == null)
             {
@@ -47,8 +48,8 @@ namespace My_MemoPlatformer
             foreach (Collider c in control.bodyParts)
             {
                 TriggerDetector det = c.GetComponent<TriggerDetector>();
-                det.lastPosition = c.gameObject.transform.localPosition;
-                det.lastRotation = c.gameObject.transform.localRotation;
+                det.lastPosition = c.gameObject.transform.position;
+                det.lastRotation = c.gameObject.transform.rotation;
             }
 
             //turn off animator, avatar
@@ -74,8 +75,8 @@ namespace My_MemoPlatformer
                 c.isTrigger = false;
 
                 TriggerDetector det = c.GetComponent<TriggerDetector>();
-                c.transform.localPosition = det.lastPosition;
-                c.transform.localRotation = det.lastRotation;
+                c.attachedRigidbody.MovePosition(det.lastPosition);  //https://docs.unity3d.com/ScriptReference/Rigidbody.MovePosition.html
+                c.attachedRigidbody.MoveRotation(det.lastRotation);  //https://docs.unity3d.com/ScriptReference/Rigidbody.MoveRotation.html
 
                 c.attachedRigidbody.velocity = Vector3.zero;
             }

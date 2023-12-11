@@ -1,3 +1,4 @@
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -73,23 +74,16 @@ namespace My_MemoPlatformer
             {
                 foreach (GameObject o in control.collisionSpheres.bottomSpheres)
                 {
-                    Debug.DrawRay(o.transform.position, -Vector3.up * distance, Color.yellow);
+                    var blockingObj = CollisionDetection.GetCollidingObject(control, o, -Vector3.up, distance, ref control.animationProgress.collidingPoint);
 
-                    RaycastHit hit;
-                    if (Physics.Raycast(o.transform.position, -Vector3.up, out hit, distance))
+                    if (blockingObj != null)
                     {
-                        if (!control.bodyParts.Contains(hit.collider)
-                            && !Ledge.IsLedgeChecker(hit.collider.gameObject)
-                            && !Ledge.IsCharacter(hit.collider.gameObject))
-                        {
-                            //control.animationProgress.ground = hit.collider.transform.root.gameObject; //что колайдерит bottom сферы
-                            control.animationProgress.ground = hit.collider.transform.root.gameObject; //что колайдерит bottom сферы
-                            control.animationProgress.landingPosition = new Vector3(0f, hit.point.y, hit.point.z);
+                        var c = CharacterManager.Instance.GetCharacter(blockingObj.transform.root.gameObject);
 
-                            if (control.SubComponentsDict.ContainsKey(SubComponents.MANUALINPUT))
-                            {
-                                TestingSphere.transform.position = control.animationProgress.landingPosition;
-                            }
+                        if (c == null)
+                        {
+                            control.animationProgress.ground = blockingObj.transform.root.gameObject; //что колайдерит bottom сферы
+                            control.animationProgress.landingPosition = new Vector3(0f, control.animationProgress.collidingPoint.y, control.animationProgress.collidingPoint.z);
                             return true;
                         }
                     }

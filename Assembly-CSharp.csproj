@@ -133,6 +133,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\Ledge\LedgeCollider.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_InputDevices\SavedKeys.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Events\GameEventListener.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\CollisionDetection.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Settings\FrameSettings.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Settings\PhysicsSettings.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_LayerAdder\LayerChanger.cs" />

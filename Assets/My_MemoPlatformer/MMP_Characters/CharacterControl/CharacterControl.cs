@@ -56,7 +56,6 @@ namespace My_MemoPlatformer
         public NavMeshObstacle navMeshObstacle;
         public InstaKill instakill;
         public Dictionary<SubComponents, SubComponent> SubComponentsDict = new Dictionary<SubComponents, SubComponent>();
-
         public Dictionary<BoolData, GetBool> boolDic = new Dictionary<BoolData, GetBool>();
         public Dictionary<CharacterProc, CharacterProcDel> procDict = new Dictionary<CharacterProc, CharacterProcDel>();
 

@@ -9,7 +9,6 @@ namespace My_MemoPlatformer
         LEDGECHECKER,
         RAGDOLL,
     }
-
     public enum BoolData
     {
         NONE,

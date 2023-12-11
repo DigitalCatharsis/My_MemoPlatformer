@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Net;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace My_MemoPlatformer
 {
@@ -11,7 +12,6 @@ namespace My_MemoPlatformer
 
         public bool cameraShaken;
         public List<PoolObjectType> poolObjectList = new List<PoolObjectType>();
-        public bool ragdollTriggered;
         public MoveForward latestMoveForwardScript;  //latest moveforward script
         public MoveUp latestMoveUpScript;  //latest moveforward script
         private List<GameObject> _frontSpheresList;
@@ -36,6 +36,7 @@ namespace My_MemoPlatformer
         public Dictionary<GameObject, GameObject> upBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
         public Dictionary<GameObject, GameObject> downBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
 
+        public Vector3 collidingPoint = new Vector3();
 
         [Header("AirControl")]
         public bool jumped;
@@ -168,7 +169,10 @@ namespace My_MemoPlatformer
 
         private void NullifyUpVelocity()
         {
-
+            _control.Rigid_Body.velocity = new Vector3(
+                _control.Rigid_Body.velocity.x,
+                0f,
+                _control.Rigid_Body.velocity.z);
         }
 
         private void CheckAirStomp()
@@ -227,19 +231,23 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void CheckDownBlocking()
+        private void AddBlockingObjToDictionary(Dictionary<GameObject, GameObject> dic, GameObject key, GameObject value)
         {
-            foreach (GameObject o in _control.collisionSpheres.bottomSpheres)
+            if (dic.ContainsKey(key))
             {
-                CheckRaycastCollision(o, Vector3.down, 0.1f, downBlockingObjects);
+                dic[key] = value;
+            }
+            else
+            {
+                dic.Add(key, value);
             }
         }
 
-        private void CheckUpBlocking()
+        private void RemoveBlockingObjFromDictionary(Dictionary<GameObject, GameObject> dic, GameObject key)
         {
-            foreach (GameObject o in _control.collisionSpheres.upSpheres)
+            if (dic.ContainsKey(key))
             {
-                CheckRaycastCollision(o, this.transform.up, 0.3f, upBlockingObjects);
+                dic.Remove(key);
             }
         }
 
@@ -298,13 +306,46 @@ namespace My_MemoPlatformer
 
             return false;
         }
+        private void CheckUpBlocking()
+        {
+            foreach (var o in _control.collisionSpheres.upSpheres)
+            {
+                var blockingObj = CollisionDetection.GetCollidingObject(_control, o, this.transform.up, 0.3f, ref _control.animationProgress.collidingPoint);
+
+                if (blockingObj != null)
+                {
+                    AddBlockingObjToDictionary(upBlockingObjects, o, blockingObj);
+                }
+                else
+                {
+                    RemoveBlockingObjFromDictionary(upBlockingObjects, o);
+                }
+            }
+        }
+
+        private void CheckDownBlocking()
+        {
+            foreach (var o in _control.collisionSpheres.bottomSpheres)
+            {
+                var blockingObj = CollisionDetection.GetCollidingObject(_control, o, Vector3.down, 0.1f, ref _control.animationProgress.collidingPoint);
+
+                if (blockingObj != null)
+                {
+                    AddBlockingObjToDictionary(downBlockingObjects, o, blockingObj);
+                }
+                else
+                {
+                    RemoveBlockingObjFromDictionary(downBlockingObjects, o);
+                }
+            }
+        }
 
         private void CheckFrontBlocking()  //Проверка на коллизии
         {
             if (!ForwardIsReversed())
             {
                 _frontSpheresList = _control.collisionSpheres.frontSpheres;
-                _dirBlock = 1;
+                _dirBlock = 1f;
 
                 foreach (var sphere in _control.collisionSpheres.backSpheres)
                 {
@@ -328,101 +369,18 @@ namespace My_MemoPlatformer
                 }
             }
 
-            foreach (GameObject o in _frontSpheresList)
+            foreach (var o in _frontSpheresList)
             {
-                CheckRaycastCollision(o, this.transform.forward * _dirBlock, latestMoveForwardScript.blockDistance, frontBlockingObjects);
-            }
-        }
+                var blockingObj = CollisionDetection.GetCollidingObject(_control, o, this.transform.forward * _dirBlock, latestMoveForwardScript.blockDistance, ref _control.animationProgress.collidingPoint);
 
-        private void CheckRaycastCollision(GameObject obj, Vector3 dir, float blockDistance, Dictionary<GameObject, GameObject> blockingObjDictionary)
-        {
-            //draw DebugLine
-            Debug.DrawRay(obj.transform.position, dir * blockDistance, Color.yellow);
-
-            //check collision
-            RaycastHit hit;
-            if (Physics.Raycast(obj.transform.position, dir, out hit, blockDistance))
-            {
-                if (!IsBodyPart(hit.collider)
-                    && !IsIgnoringCharacter(hit.collider)
-                    && !Ledge.IsLedgeChecker(hit.collider.gameObject)  // Проверка, что мы ничего не задеваем, включая Ledge (платформы, за котоыре можно зацепиться)
-                    && !MeleeWeapon.IsWeapon(hit.collider.gameObject)
-                    && !TrapSpikes.IsTrap(hit.collider.gameObject))
+                if (blockingObj != null)
                 {
-                    if (blockingObjDictionary.ContainsKey(obj)) //Если сфера есть в списке
-                    {
-                        blockingObjDictionary[obj] = hit.collider.transform.root.gameObject; //Добавляем объект, который ее колайдит
-                    }
-                    else
-                    {
-                        blockingObjDictionary.Add(obj, hit.collider.transform.root.gameObject);
-                    }
-                }
-                else //not match conditions
-                {
-                    if (blockingObjDictionary.ContainsKey(obj))
-                    {
-                        blockingObjDictionary.Remove(obj);
-                    }
-                }
-            }
-            else  //collide nothing
-            {
-                if (blockingObjDictionary.ContainsKey(obj))
-                {
-                    blockingObjDictionary.Remove(obj);
-                }
-            }
-        }
-
-        private bool IsIgnoringCharacter(Collider col)
-        {
-            if (!isIgnoreCharacterTime)
-            {
-                return false;
-            }
-            else
-            {
-                var blockingCharacter = CharacterManager.Instance.GetCharacter(col.transform.root.root.gameObject);
-
-                if (blockingCharacter == null)
-                {
-                    return false;
-                }
-
-                if (blockingCharacter == _control)
-                {
-                    return false;
+                    AddBlockingObjToDictionary(frontBlockingObjects, o, blockingObj);
                 }
                 else
                 {
-                    return true;
+                    RemoveBlockingObjFromDictionary(frontBlockingObjects, o);
                 }
-            }
-        }
-
-        private bool IsBodyPart(Collider col)
-        {
-            if (col.transform.root.gameObject == _control.gameObject)
-            {
-                return true;
-            }
-
-
-            var target = CharacterManager.Instance.GetCharacter(col.transform.root.gameObject);
-
-            if (target == null)
-            {
-                return false;
-            }
-
-            if (target.damageDetector.IsDead())
-            {
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
 
@@ -439,15 +397,6 @@ namespace My_MemoPlatformer
             }
 
             return false;
-
-            //foreach (KeyValuePair<StateData, int> data in currentRunningAbilities)
-            //{
-            //    if (data.Key.name.Contains(str))
-            //    {
-            //        return true;
-            //    }
-            //}
-            //return false;
         }
 
         public bool IsRunning(System.Type type) //ability is running now?

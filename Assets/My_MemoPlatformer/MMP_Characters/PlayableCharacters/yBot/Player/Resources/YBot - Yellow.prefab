@@ -207,6 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   control: {fileID: 0}
+  ragdollTriggered: 0
 --- !u!1 &708256176615141862
 GameObject:
   m_ObjectHideFlags: 0
@@ -1736,7 +1737,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraShaken: 0
   poolObjectList: 
-  ragdollTriggered: 0
   latestMoveForwardScript: {fileID: 0}
   latestMoveUpScript: {fileID: 0}
   attackTriggered: 0
