@@ -76,6 +76,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\SwitchAnimator.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\VirtualInputManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\JumpPrep.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_DataSets\DataProcessor.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckTurboAndMovement.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_SubComponents\LedgeChecker.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\HashManager.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_PathfindingAgent\PathFindingAgent.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\LockTransition.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_DataSets\Dataset.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\AISubset.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\Jump.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\ShakeCamera.cs" />
@@ -156,6 +158,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckRunningTurn.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\WeaponPickup.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\WallSlide.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_DataSets\Datasets\AirControl_Dataset.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\JumpPlatform.cs" />
   </ItemGroup>
   <ItemGroup>

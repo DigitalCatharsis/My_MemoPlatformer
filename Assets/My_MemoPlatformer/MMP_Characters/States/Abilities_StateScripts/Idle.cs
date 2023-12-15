@@ -1,3 +1,4 @@
+using My_MemoPlatformer.Datasets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +25,8 @@ namespace My_MemoPlatformer
 
             if (characterState.characterControl.jump)
             {
-                if (!characterState.characterControl.animationProgress.jumped)
+                var jumped = characterState.characterControl.Air_Control.GetBool((int)AirControlBool.JUMPED);
+                if (!jumped)
                 {
                     if (characterState.characterControl.animationProgress.ground != null)
                     {
@@ -34,9 +36,10 @@ namespace My_MemoPlatformer
             }
             else
             {
+                var jumped = characterState.characterControl.Air_Control.GetBool((int)AirControlBool.JUMPED);
                 if (!characterState.characterControl.animationProgress.IsRunning(typeof(Jump)))   //double update fix. Guess idle is overlapping jump or moveforward
                 {
-                    characterState.characterControl.animationProgress.jumped = false;
+                    characterState.characterControl.Air_Control.SetBool((int)AirControlBool.JUMPED, false);
                 }
             }
 

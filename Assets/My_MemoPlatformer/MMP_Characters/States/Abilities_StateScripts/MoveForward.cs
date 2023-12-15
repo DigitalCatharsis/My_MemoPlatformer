@@ -1,3 +1,4 @@
+using My_MemoPlatformer.Datasets;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -57,11 +58,11 @@ namespace My_MemoPlatformer
             {
                 if (characterState.characterControl.IsFacingForward())
                 {
-                    characterState.characterControl.animationProgress.airMomentum = startingMomentum;
+                    characterState.characterControl.Air_Control.SetFloat((int)AirControlFloat.AIR_MOMENTUM, startingMomentum);
                 }
                 else
                 {
-                    characterState.characterControl.animationProgress.airMomentum = -startingMomentum;
+                    characterState.characterControl.Air_Control.SetFloat((int)AirControlFloat.AIR_MOMENTUM, -startingMomentum);
                 }
             }
 
@@ -132,17 +133,21 @@ namespace My_MemoPlatformer
 
             if (clearMomentumOnExit)
             {
-                characterState.characterControl.animationProgress.airMomentum = 0f;
+                characterState.characterControl.Air_Control.SetFloat((int)AirControlFloat.AIR_MOMENTUM, 0f);
             }
         }
 
         private void UpdateMomentum(CharacterControl control, AnimatorStateInfo stateInfo)
         {
+            //current momentum
+            var currentMomentum = control.Air_Control.GetFloat((int)AirControlFloat.AIR_MOMENTUM);
+            var currentSpeed = speedGraph.Evaluate(stateInfo.normalizedTime) * speed * Time.deltaTime;
+
             if (!control.boolDic[BoolData.RIGHTSIDE_IS_BLOCKED]())
             {
                 if (control.moveRight)
                 {
-                    control.animationProgress.airMomentum += speedGraph.Evaluate(stateInfo.normalizedTime) * speed * Time.deltaTime;
+                    control.Air_Control.SetFloat((int)AirControlFloat.AIR_MOMENTUM, currentMomentum + currentSpeed);
                 }
             }
 
@@ -150,39 +155,41 @@ namespace My_MemoPlatformer
             {
                 if (control.moveLeft)
                 {
-                    control.animationProgress.airMomentum -= speedGraph.Evaluate(stateInfo.normalizedTime) * speed * Time.deltaTime;
+                    control.Air_Control.SetFloat((int)AirControlFloat.AIR_MOMENTUM, currentMomentum - currentSpeed);
                 }
             }
 
             if (control.boolDic[BoolData.RIGHTSIDE_IS_BLOCKED]() || control.boolDic[BoolData.LEFTSIDE_IS_BLOCKED]())
             {
-                control.animationProgress.airMomentum = Mathf.Lerp(control.animationProgress.airMomentum, 0f, Time.deltaTime * 1.5f);
+                var lerp = Mathf.Lerp(currentMomentum, 0f, Time.deltaTime * 1.5f);
+
+                control.Air_Control.SetFloat((int)AirControlFloat.AIR_MOMENTUM, lerp);
             }
 
-            if (Mathf.Abs(control.animationProgress.airMomentum) >= maxMomentum)
+            if (Mathf.Abs(currentMomentum) >= maxMomentum)
             {
-                if (control.animationProgress.airMomentum > 0f)
+                if (currentMomentum > 0f)
                 {
-                    control.animationProgress.airMomentum = maxMomentum;
+                    control.Air_Control.SetFloat((int)AirControlFloat.AIR_MOMENTUM, maxMomentum);
                 }
-                else if (control.animationProgress.airMomentum < 0f)
+                else if (currentMomentum < 0f)
                 {
-                    control.animationProgress.airMomentum = -maxMomentum;
+                    control.Air_Control.SetFloat((int)AirControlFloat.AIR_MOMENTUM, -maxMomentum);
                 }
             }
 
-            if (control.animationProgress.airMomentum > 0f)
+            if (currentMomentum > 0f)
             {
                 control.FaceForward(true);
             }
-            else if (control.animationProgress.airMomentum < 0f)
+            else if (currentMomentum < 0f)
             {
                 control.FaceForward(false);
             }
 
             if (!IsBlocked(control))
             {
-                control.MoveForward(speed, Mathf.Abs(control.animationProgress.airMomentum));
+                control.MoveForward(speed, Mathf.Abs(currentMomentum));
             }
 
         }

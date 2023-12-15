@@ -1,3 +1,4 @@
+using My_MemoPlatformer.Datasets;
 using System.Collections.Generic;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
@@ -56,6 +57,16 @@ namespace My_MemoPlatformer
         public NavMeshObstacle navMeshObstacle;
         public InstaKill instakill;
 
+        public DataProcessor dataProcessor;
+
+        public Dataset Air_Control
+        {
+            get
+            {
+                return dataProcessor.GetDataset(typeof(AirControl_Dataset));
+            }
+        }
+
         public Dictionary<SubComponents, SubComponent> SubComponentsDic = new Dictionary<SubComponents, SubComponent>();
         public Dictionary<BoolData, GetBool> boolDic = new Dictionary<BoolData, GetBool>();
         public Dictionary<CharacterProc, CharacterProcDel> procDict = new Dictionary<CharacterProc, CharacterProcDel>();
@@ -104,6 +115,10 @@ namespace My_MemoPlatformer
             collisionSpheres = GetComponentInChildren<CollisionSpheres>();
             collisionSpheres.owner = this;
             collisionSpheres.SetColliderSpheres();
+
+            dataProcessor = this.gameObject.GetComponentInChildren<DataProcessor>();
+            System.Type[] arr = { typeof(AirControl_Dataset) };
+            dataProcessor.InitializeSets(arr);
 
             aiController = GetComponentInChildren<AIController>();
             if (aiController == null)
@@ -247,8 +262,10 @@ namespace My_MemoPlatformer
             FixedUpdateSubComponent(SubComponents.RAGDOLL);
             FixedUpdateSubComponent(SubComponents.BLOCKINGOBJECTS);
 
+            var cancelPull = Air_Control.GetBool((int)AirControlBool.CANCEL_PULL);
+
             //fall
-            if (!animationProgress.cancelPull)
+            if (!cancelPull)
             {
                 if (Rigid_Body.velocity.y > 0f && !jump)
                 {
@@ -277,12 +294,14 @@ namespace My_MemoPlatformer
                 }
             }
 
+            var maxFallVelocity = Air_Control.GetVecto3((int)AirControlVector3.MAX_FALL_VELOCITY);
+
             //slow down wallslide
-            if (animationProgress.maxFallVelocity.y != 0f)
+            if (maxFallVelocity.y != 0f)
             {
-                if (Rigid_Body.velocity.y <= animationProgress.maxFallVelocity.y)
+                if (Rigid_Body.velocity.y <= maxFallVelocity.y)
                 {
-                    Rigid_Body.velocity = animationProgress.maxFallVelocity;
+                    Rigid_Body.velocity = maxFallVelocity;
                 }
             }
         }

@@ -1,3 +1,4 @@
+using My_MemoPlatformer.Datasets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -56,7 +57,7 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            characterState.characterControl.animationProgress.checkWallBlock = StartCheckingWallBlock();
+            characterState.characterControl.Air_Control.SetBool((int)AirControlBool.CHECK_WALL_BLOCK, StartCheckingWallBlock());
 
             if (animator.GetInteger(HashManager.Instance.dicMainParams[TransitionParameter.TransitionIndex]) == 0)
             {
@@ -203,7 +204,9 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.CAN_WALLJUMP:
                         {
-                            if (!control.animationProgress.canWallJump)
+                            var canWallJump = control.Air_Control.GetBool((int)AirControlBool.CAN_WALL_JUMP);
+
+                            if (!canWallJump)
                             {
                                 return false;
                             }

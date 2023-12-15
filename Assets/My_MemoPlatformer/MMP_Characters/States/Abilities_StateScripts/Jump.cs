@@ -1,3 +1,4 @@
+using My_MemoPlatformer.Datasets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,33 +20,31 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            
-            characterState.characterControl.animationProgress.jumped = false;
+            characterState.characterControl.Air_Control.SetBool((int)AirControlBool.JUMPED, false);
             if (jumpTiming == 0f)
             {
                 characterState.characterControl.Rigid_Body.AddForce(Vector3.up * jumpForce);
-                characterState.characterControl.animationProgress.jumped = true;
+                characterState.characterControl.Air_Control.SetBool((int)AirControlBool.JUMPED, true);
             }
 
-            characterState.characterControl.animationProgress.cancelPull = canselPull;
+            characterState.characterControl.Air_Control.SetBool((int)AirControlBool.CANCEL_PULL, canselPull);
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
-            
+        {            
             //characterState.characterControl.pullMultipliyer = pull.Evaluate(stateInfo.normalizedTime);   //“”“ √–≈¡¿Õ¿ﬂ ¬€—Œ“¿ œ–€∆ ¿ ¬«¿¬»—»ÃŒ—“» Œ“ Õ¿∆¿“»ﬂ!
+            var jumped = characterState.characterControl.Air_Control.GetBool((int)AirControlBool.JUMPED);
 
-            if (!characterState.characterControl.animationProgress.jumped && stateInfo.normalizedTime >= jumpTiming)
+            if (!jumped && stateInfo.normalizedTime >= jumpTiming)
             {
                 characterState.characterControl.Rigid_Body.AddForce(Vector3.up * jumpForce);
-                characterState.characterControl.animationProgress.jumped = true;
+                characterState.characterControl.Air_Control.SetBool((int)AirControlBool.JUMPED, true);
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {            
-            //control.pullMultipliyer = pull.Evaluate(stateInfo.normalizedTime);   //“”“ √–≈¡¿Õ¿ﬂ ‰ÎËÌÌ‡ œ–€∆ ¿ ¬«¿¬»—»ÃŒ—“» Œ“ Õ¿∆¿“»ﬂ!
-            //characterState.characterControl.pullMultipliyer = 0f;
+        {
+
         }
     }
 
