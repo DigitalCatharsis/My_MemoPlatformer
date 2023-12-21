@@ -37,11 +37,19 @@ namespace My_MemoPlatformer
 
     public abstract class SubComponent : MonoBehaviour
     {
-        public CharacterControl control;
+        protected SubComponentProcessor subComponentProcessor;
+
+        public CharacterControl control
+        {
+            get
+            {
+                return subComponentProcessor.control;
+            }
+        }
 
         private void Awake()
         {
-            control = this.gameObject.GetComponentInParent<CharacterControl>();
+            subComponentProcessor = this.gameObject.GetComponentInParent<SubComponentProcessor>();
         }
 
         public abstract void OnUpdate();

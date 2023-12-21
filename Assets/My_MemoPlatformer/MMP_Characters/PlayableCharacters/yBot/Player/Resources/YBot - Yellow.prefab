@@ -118,7 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b570f699005d93a4e8d6805d7f531e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  control: {fileID: 0}
   isGrabbingLedge: 0
   ledgeCalibration: {x: 0, y: -2.3, z: -0.1}
   collider1: {fileID: 3335105432292074732}
@@ -206,7 +205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 478003207d1c5774f9c7dcc4bbe94864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  control: {fileID: 0}
   ragdollTriggered: 0
 --- !u!1 &708256176615141862
 GameObject:
@@ -284,7 +282,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffaa8e7aa94c91a4b922478195404587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  control: {fileID: 0}
   _doubleTaps: 
   _upKeys: 
 --- !u!1 &876816306485884224
@@ -1625,6 +1622,7 @@ MonoBehaviour:
   jump: 0
   attack: 0
   block: 0
+  subComponentProcessor: {fileID: 0}
   animationProgress: {fileID: 0}
   aiProgress: {fileID: 0}
   damageDetector: {fileID: 0}
@@ -1748,12 +1746,6 @@ MonoBehaviour:
   isIgnoreCharacterTime: 0
   ground: {fileID: 0}
   collidingPoint: {x: 0, y: 0, z: 0}
-  jumped: 0
-  airMomentum: 0
-  maxFallVelocity: {x: 0, y: 0, z: 0}
-  cancelPull: 0
-  canWallJump: 0
-  checkWallBlock: 0
   updatingSpheres: 0
   targetSize: {x: 0, y: 0, z: 0}
   sizeSpeed: 0
@@ -2682,7 +2674,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34a11615e00c33f4a9fe37e8e222824d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  control: {fileID: 0}
   airStompTargets: []
 --- !u!1 &5135971744954625573
 GameObject:
@@ -3942,6 +3933,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2838286670764771645}
+  - component: {fileID: 7446479350593793540}
   m_Layer: 9
   m_Name: SubComponents
   m_TagString: Untagged
@@ -3968,6 +3960,19 @@ Transform:
   m_Father: {fileID: 3372119544377188092}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7446479350593793540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7601673426626872993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 398827a419a02cc46b79a4688f0f853a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  control: {fileID: 0}
 --- !u!1 &7745837032654152969
 GameObject:
   m_ObjectHideFlags: 0

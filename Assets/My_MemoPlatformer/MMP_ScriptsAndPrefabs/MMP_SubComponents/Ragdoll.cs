@@ -7,7 +7,7 @@ namespace My_MemoPlatformer
         public bool ragdollTriggered = false;
         private void Start()
         {
-            control.SubComponentsDic.Add(SubComponents.RAGDOLL, this);
+            subComponentProcessor.componentsDictionary.Add(SubComponents.RAGDOLL, this);
             control.procDict.Add(CharacterProc.RAGDOLL_ON, TurnOnRagdoll);
         }
 

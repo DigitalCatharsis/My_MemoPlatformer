@@ -48,6 +48,7 @@ namespace My_MemoPlatformer
         public bool block;
 
         [Header("SubComponents")]
+        public SubComponentProcessor subComponentProcessor;
         public AnimationProgress animationProgress;
         public AIProgress aiProgress;
         public DamageDetector damageDetector;
@@ -67,7 +68,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        public Dictionary<SubComponents, SubComponent> SubComponentsDic = new Dictionary<SubComponents, SubComponent>();
+        
         public Dictionary<BoolData, GetBool> boolDic = new Dictionary<BoolData, GetBool>();
         public Dictionary<CharacterProc, CharacterProcDel> procDict = new Dictionary<CharacterProc, CharacterProcDel>();
         public Dictionary<ListData, GetList> listDic = new Dictionary<ListData, GetList>();
@@ -105,6 +106,7 @@ namespace My_MemoPlatformer
 
         private void Awake()
         {
+            subComponentProcessor = GetComponentInChildren<SubComponentProcessor>();
             animationProgress = GetComponent<AnimationProgress>();
             aiProgress = GetComponentInChildren<AIProgress>();
             damageDetector = GetComponentInChildren<DamageDetector>();
@@ -235,32 +237,14 @@ namespace My_MemoPlatformer
                 animationProgress.updatingSpheres = true;
             }
         }
-
-        private void UpdateSubComponent(SubComponents type)
-        {
-            if (SubComponentsDic.ContainsKey(type))
-            {
-                SubComponentsDic[type].OnUpdate();
-            }
-        }        
-        private void FixedUpdateSubComponent(SubComponents type)
-        {
-            if (SubComponentsDic.ContainsKey(type))
-            {
-                SubComponentsDic[type].OnFixedUpdate();
-            }
-        }
-
         private void Update()
         {
-            UpdateSubComponent(SubComponents.MANUALINPUT);
+            subComponentProcessor.UpdateSubComponents();
         }
 
         private void FixedUpdate()
         {
-            FixedUpdateSubComponent(SubComponents.LEDGECHECKER);
-            FixedUpdateSubComponent(SubComponents.RAGDOLL);
-            FixedUpdateSubComponent(SubComponents.BLOCKINGOBJECTS);
+            subComponentProcessor.FixedUpdateSubComponents();
 
             var cancelPull = Air_Control.GetBool((int)AirControlBool.CANCEL_PULL);
 

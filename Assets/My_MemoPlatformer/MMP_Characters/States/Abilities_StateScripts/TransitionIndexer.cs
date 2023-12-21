@@ -262,7 +262,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.DOUBLETAP_UP:
                         {
-                            if (!control.SubComponentsDic.ContainsKey(SubComponents.MANUALINPUT))
+                            if (!control.subComponentProcessor.componentsDictionary.ContainsKey(SubComponents.MANUALINPUT))
                             {
                                 return false;
                             }
@@ -275,7 +275,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.DOUBLETAP_DOWN:
                         {
-                            if (!control.SubComponentsDic.ContainsKey(SubComponents.MANUALINPUT))
+                            if (!control.subComponentProcessor.componentsDictionary.ContainsKey(SubComponents.MANUALINPUT))
                             {
                                 return false;
                             }

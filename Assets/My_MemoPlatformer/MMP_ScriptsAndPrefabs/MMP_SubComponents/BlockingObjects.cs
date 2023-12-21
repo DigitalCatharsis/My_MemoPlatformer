@@ -21,7 +21,7 @@ namespace My_MemoPlatformer
 
         private void Start()
         {
-            control.SubComponentsDic.Add(SubComponents.BLOCKINGOBJECTS, this);
+            subComponentProcessor.componentsDictionary.Add(SubComponents.BLOCKINGOBJECTS, this);
             control.procDict.Add(CharacterProc.CLEAR_FRONTBLOCKING_OBJ_DICTIONARY, ClearFrontBlockingObjDictionary);
 
             control.boolDic.Add(BoolData.UPBLOCKINGOBJ_DICTIONARY_IS_EMPTY, UpBlockingObjDictionaryIsEmpty);
