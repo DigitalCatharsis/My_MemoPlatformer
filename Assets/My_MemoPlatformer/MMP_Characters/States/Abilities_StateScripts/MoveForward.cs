@@ -296,7 +296,7 @@ namespace My_MemoPlatformer
 
         private bool IsBlocked(CharacterControl control)
         {
-            if (!control.boolDic[BoolData.FRONTBLOCKINGOBJ_DICTIONARY_IS_EMPTY]())
+            if (control.blockingObjData.frontBlockingDictionaryCount != 0)
             {
                 return true;
             }

@@ -9,6 +9,8 @@ namespace My_MemoPlatformer
         public Dictionary<SubComponents, SubComponent> componentsDictionary = new Dictionary<SubComponents, SubComponent>();
         public CharacterControl control;
 
+        public BlockingObjData blockingObjData;
+
         private void Awake()
         {
             control = GetComponentInParent<CharacterControl>();

@@ -5,15 +5,16 @@ namespace My_MemoPlatformer
 {
     public class BlockingObjects : SubComponent
     {
+        public BlockingObjData blockingObjData;
+
         //Map each collided object to the collision detector
-        public Dictionary<GameObject, GameObject> frontBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
-        public Dictionary<GameObject, GameObject> upBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
-        public Dictionary<GameObject, GameObject> downBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
+        private Dictionary<GameObject, GameObject> frontBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
+        private Dictionary<GameObject, GameObject> upBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
+        private Dictionary<GameObject, GameObject> downBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
 
         //The entire list
         private List<GameObject> _frontBlockingObjList = new List<GameObject>();
-
-        public List<CharacterControl> airStompTargets = new List<CharacterControl>();        
+        private List<CharacterControl> airStompTargets = new List<CharacterControl>();
         private List<GameObject> _frontBlockingCharacters = new List<GameObject>();
         private List<GameObject> _frontSpheresList;
 
@@ -21,11 +22,16 @@ namespace My_MemoPlatformer
 
         private void Start()
         {
+            blockingObjData = new BlockingObjData
+            {
+                frontBlockingDictionaryCount = 0,
+                upBlockingDictionaryCount = 0,
+            };
+
+            subComponentProcessor.blockingObjData = blockingObjData;
+
             subComponentProcessor.componentsDictionary.Add(SubComponents.BLOCKINGOBJECTS, this);
             control.procDict.Add(CharacterProc.CLEAR_FRONTBLOCKING_OBJ_DICTIONARY, ClearFrontBlockingObjDictionary);
-
-            control.boolDic.Add(BoolData.UPBLOCKINGOBJ_DICTIONARY_IS_EMPTY, UpBlockingObjDictionaryIsEmpty);
-            control.boolDic.Add(BoolData.FRONTBLOCKINGOBJ_DICTIONARY_IS_EMPTY, FrontBlockingObjDictionaryIsEmpty);
             control.boolDic.Add(BoolData.RIGHTSIDE_IS_BLOCKED, RightSideIsBlocked);
             control.boolDic.Add(BoolData.LEFTSIDE_IS_BLOCKED, LeftSideIsBlocked);
 
@@ -96,6 +102,9 @@ namespace My_MemoPlatformer
             }
 
             CheckAirStomp();
+
+            blockingObjData.frontBlockingDictionaryCount = frontBlockingObjects.Count;
+            blockingObjData.upBlockingDictionaryCount = upBlockingObjects.Count;
         }
 
         public override void OnUpdate()
@@ -314,7 +323,7 @@ namespace My_MemoPlatformer
         {
             _frontBlockingCharacters.Clear();
 
-            foreach (KeyValuePair<GameObject,GameObject> data in frontBlockingObjects)
+            foreach (KeyValuePair<GameObject, GameObject> data in frontBlockingObjects)
             {
                 var c = CharacterManager.Instance.GetCharacter(data.Value.transform.root.gameObject);
 
@@ -334,7 +343,7 @@ namespace My_MemoPlatformer
         {
             _frontBlockingObjList.Clear();
 
-            foreach(KeyValuePair<GameObject,GameObject> data in frontBlockingObjects)
+            foreach (KeyValuePair<GameObject, GameObject> data in frontBlockingObjects)
             {
                 if (!_frontBlockingObjList.Contains(data.Value))
                 {

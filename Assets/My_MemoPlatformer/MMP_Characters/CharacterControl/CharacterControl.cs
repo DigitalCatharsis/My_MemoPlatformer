@@ -60,6 +60,8 @@ namespace My_MemoPlatformer
 
         public DataProcessor dataProcessor;
 
+        public BlockingObjData blockingObjData => subComponentProcessor.blockingObjData;
+
         public Dataset Air_Control
         {
             get

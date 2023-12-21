@@ -39,7 +39,7 @@ namespace My_MemoPlatformer
             }
 
             //path is blocked
-            if (characterState.characterControl.boolDic[BoolData.FRONTBLOCKINGOBJ_DICTIONARY_IS_EMPTY]())
+            if (characterState.BlockingObjData.frontBlockingDictionaryCount == 0)
             {
                 characterState.characterControl.aiProgress.blockingCharacter = null;
             }

@@ -12,6 +12,8 @@ namespace My_MemoPlatformer
         [Space (10)]
         public List<StateData> ListAbilityData = new List<StateData>();
 
+        public BlockingObjData BlockingObjData => characterControl.subComponentProcessor.blockingObjData;
+
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             if (characterControl == null)  //prevent bug in animator editor, when moving a state
