@@ -16,13 +16,6 @@ namespace My_MemoPlatformer
         DOUBLETAP_DOWN,
         DOUBLETAP_UP,
         GRABBING_LEDGE,
-        RIGHTSIDE_IS_BLOCKED,
-        LEFTSIDE_IS_BLOCKED,
-    }
-    public enum ListData
-    {
-        FRONTBLOCKING_CHARACTERS,
-        FRONTBLOCKING_OBJECTS,
     }
 
     public enum CharacterProc
@@ -30,7 +23,6 @@ namespace My_MemoPlatformer
         NONE,
         LEDGE_COLLIDERS_OFF,
         RAGDOLL_ON,
-        CLEAR_FRONTBLOCKING_OBJ_DICTIONARY,
     }
 
     public abstract class SubComponent : MonoBehaviour

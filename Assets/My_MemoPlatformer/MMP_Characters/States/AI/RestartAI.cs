@@ -45,7 +45,7 @@ namespace My_MemoPlatformer
             }
             else
             {
-                var objs = characterState.characterControl.listDic[ListData.FRONTBLOCKING_CHARACTERS]();
+                var objs = characterState.characterControl.BlockingObjData.GetFrontBlockingCharactersList();
 
                 foreach (var o in objs)
                 {

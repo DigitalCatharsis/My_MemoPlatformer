@@ -8,13 +8,13 @@ namespace My_MemoPlatformer
         public BlockingObjData blockingObjData;
 
         //Map each collided object to the collision detector
-        private Dictionary<GameObject, GameObject> frontBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
-        private Dictionary<GameObject, GameObject> upBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
-        private Dictionary<GameObject, GameObject> downBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
+        private Dictionary<GameObject, GameObject> _frontBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
+        private Dictionary<GameObject, GameObject> _upBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
+        private Dictionary<GameObject, GameObject> _downBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
 
         //The entire list
         private List<GameObject> _frontBlockingObjList = new List<GameObject>();
-        private List<CharacterControl> airStompTargets = new List<CharacterControl>();
+        private List<CharacterControl> _airStompTargets = new List<CharacterControl>();
         private List<GameObject> _frontBlockingCharacters = new List<GameObject>();
         private List<GameObject> _frontSpheresList;
 
@@ -26,17 +26,15 @@ namespace My_MemoPlatformer
             {
                 frontBlockingDictionaryCount = 0,
                 upBlockingDictionaryCount = 0,
+                ClearFrontBlockingObjDic = ClearFrontBlockingObjDictionary,
+                LeftSideBlocked = LeftSideIsBlocked,
+                RightSideBLocked = RightSideIsBlocked,
+                GetFrontBlockingCharactersList = GetFrontBlockingCharacterList,
+                GetFrontBlockingObjList = GetFrontBlockingObjList,
             };
 
             subComponentProcessor.blockingObjData = blockingObjData;
-
             subComponentProcessor.componentsDictionary.Add(SubComponents.BLOCKINGOBJECTS, this);
-            control.procDict.Add(CharacterProc.CLEAR_FRONTBLOCKING_OBJ_DICTIONARY, ClearFrontBlockingObjDictionary);
-            control.boolDic.Add(BoolData.RIGHTSIDE_IS_BLOCKED, RightSideIsBlocked);
-            control.boolDic.Add(BoolData.LEFTSIDE_IS_BLOCKED, LeftSideIsBlocked);
-
-            control.listDic.Add(ListData.FRONTBLOCKING_CHARACTERS, GetFrontBlockingCharacters);
-            control.listDic.Add(ListData.FRONTBLOCKING_OBJECTS, GetFrontBlockingObjList);
         }
 
         public override void OnFixedUpdate()
@@ -47,9 +45,9 @@ namespace My_MemoPlatformer
             }
             else
             {
-                if (frontBlockingObjects.Count != 0)
+                if (_frontBlockingObjects.Count != 0)
                 {
-                    frontBlockingObjects.Clear();
+                    _frontBlockingObjects.Clear();
                 }
             }
 
@@ -68,7 +66,7 @@ namespace My_MemoPlatformer
                 {
                     CheckUpBlocking();
 
-                    foreach (KeyValuePair<GameObject, GameObject> data in upBlockingObjects)
+                    foreach (KeyValuePair<GameObject, GameObject> data in _upBlockingObjects)
                     {
                         var c = CharacterManager.Instance.GetCharacter(data.Value.transform.root.gameObject);
 
@@ -87,24 +85,24 @@ namespace My_MemoPlatformer
                         }
                     }
 
-                    if (upBlockingObjects.Count > 0)
+                    if (_upBlockingObjects.Count > 0)
                     {
                         control.Rigid_Body.velocity = new Vector3(control.Rigid_Body.velocity.x, 0f, control.Rigid_Body.velocity.z);
                     }
                 }
                 else
                 {
-                    if (upBlockingObjects.Count != 0)
+                    if (_upBlockingObjects.Count != 0)
                     {
-                        upBlockingObjects.Clear();
+                        _upBlockingObjects.Clear();
                     }
                 }
             }
 
             CheckAirStomp();
 
-            blockingObjData.frontBlockingDictionaryCount = frontBlockingObjects.Count;
-            blockingObjData.upBlockingDictionaryCount = upBlockingObjects.Count;
+            blockingObjData.frontBlockingDictionaryCount = _frontBlockingObjects.Count;
+            blockingObjData.upBlockingDictionaryCount = _upBlockingObjects.Count;
         }
 
         public override void OnUpdate()
@@ -116,17 +114,17 @@ namespace My_MemoPlatformer
         {
             if (control.Rigid_Body.velocity.y >= 0f)
             {
-                airStompTargets.Clear();
-                downBlockingObjects.Clear();
+                _airStompTargets.Clear();
+                _downBlockingObjects.Clear();
                 return;
             }
 
-            if (airStompTargets.Count > 0)
+            if (_airStompTargets.Count > 0)
             {
                 control.Rigid_Body.velocity = Vector3.zero;
                 control.Rigid_Body.AddForce(Vector3.up * 350f);
 
-                foreach (var c in airStompTargets)
+                foreach (var c in _airStompTargets)
                 {
                     var info = new AttackInfo();
                     info.CopyInfo(c.damageDetector.airStompAttack, control);
@@ -140,15 +138,15 @@ namespace My_MemoPlatformer
                     c.damageDetector.TakeDamage(info);
                 }
 
-                airStompTargets.Clear();
+                _airStompTargets.Clear();
                 return;
             }
 
             CheckDownBlocking();
 
-            if (downBlockingObjects.Count > 0)
+            if (_downBlockingObjects.Count > 0)
             {
-                foreach (KeyValuePair<GameObject, GameObject> data in downBlockingObjects)
+                foreach (KeyValuePair<GameObject, GameObject> data in _downBlockingObjects)
                 {
                     var c = CharacterManager.Instance.GetCharacter(data.Value.transform.root.gameObject);
                     if (c != null)
@@ -157,9 +155,9 @@ namespace My_MemoPlatformer
                         {
                             if (c != control)  //not self
                             {
-                                if (!airStompTargets.Contains(c))
+                                if (!_airStompTargets.Contains(c))
                                 {
-                                    airStompTargets.Add(c);
+                                    _airStompTargets.Add(c);
                                 }
                             }
                         }
@@ -177,9 +175,9 @@ namespace My_MemoPlatformer
 
                 foreach (var sphere in control.collisionSpheres.backSpheres)
                 {
-                    if (frontBlockingObjects.ContainsKey(sphere))
+                    if (_frontBlockingObjects.ContainsKey(sphere))
                     {
-                        frontBlockingObjects.Remove(sphere);
+                        _frontBlockingObjects.Remove(sphere);
                     }
                 }
             }
@@ -190,9 +188,9 @@ namespace My_MemoPlatformer
 
                 foreach (GameObject sphere in control.collisionSpheres.frontSpheres)
                 {
-                    if (frontBlockingObjects.ContainsKey(sphere))
+                    if (_frontBlockingObjects.ContainsKey(sphere))
                     {
-                        frontBlockingObjects.Remove(sphere);
+                        _frontBlockingObjects.Remove(sphere);
                     }
                 }
             }
@@ -203,11 +201,11 @@ namespace My_MemoPlatformer
 
                 if (blockingObj != null)
                 {
-                    AddBlockingObjToDictionary(frontBlockingObjects, o, blockingObj);
+                    AddBlockingObjToDictionary(_frontBlockingObjects, o, blockingObj);
                 }
                 else
                 {
-                    RemoveBlockingObjFromDictionary(frontBlockingObjects, o);
+                    RemoveBlockingObjFromDictionary(_frontBlockingObjects, o);
                 }
             }
         }
@@ -221,11 +219,11 @@ namespace My_MemoPlatformer
 
                 if (blockingObj != null)
                 {
-                    AddBlockingObjToDictionary(upBlockingObjects, o, blockingObj);
+                    AddBlockingObjToDictionary(_upBlockingObjects, o, blockingObj);
                 }
                 else
                 {
-                    RemoveBlockingObjFromDictionary(upBlockingObjects, o);
+                    RemoveBlockingObjFromDictionary(_upBlockingObjects, o);
                 }
             }
         }
@@ -238,11 +236,11 @@ namespace My_MemoPlatformer
 
                 if (blockingObj != null)
                 {
-                    AddBlockingObjToDictionary(downBlockingObjects, o, blockingObj);
+                    AddBlockingObjToDictionary(_downBlockingObjects, o, blockingObj);
                 }
                 else
                 {
-                    RemoveBlockingObjFromDictionary(downBlockingObjects, o);
+                    RemoveBlockingObjFromDictionary(_downBlockingObjects, o);
                 }
             }
         }
@@ -269,7 +267,7 @@ namespace My_MemoPlatformer
 
         private bool RightSideIsBlocked()
         {
-            foreach (KeyValuePair<GameObject, GameObject> data in frontBlockingObjects)
+            foreach (KeyValuePair<GameObject, GameObject> data in _frontBlockingObjects)
             {
                 if ((data.Value.transform.position - control.transform.position).z > 0f)
                 {
@@ -281,7 +279,7 @@ namespace My_MemoPlatformer
 
         private bool LeftSideIsBlocked()
         {
-            foreach (KeyValuePair<GameObject, GameObject> data in frontBlockingObjects)
+            foreach (KeyValuePair<GameObject, GameObject> data in _frontBlockingObjects)
             {
                 if ((data.Value.transform.position - control.transform.position).z < 0f)
                 {
@@ -293,12 +291,12 @@ namespace My_MemoPlatformer
 
         private void ClearFrontBlockingObjDictionary()
         {
-            frontBlockingObjects.Clear();
+            _frontBlockingObjects.Clear();
         }
 
         private bool UpBlockingObjDictionaryIsEmpty()
         {
-            if (upBlockingObjects.Count == 0)
+            if (_upBlockingObjects.Count == 0)
             {
                 return true;
             }
@@ -309,7 +307,7 @@ namespace My_MemoPlatformer
         }
         private bool FrontBlockingObjDictionaryIsEmpty()
         {
-            if (frontBlockingObjects.Count == 0)
+            if (_frontBlockingObjects.Count == 0)
             {
                 return true;
             }
@@ -319,11 +317,11 @@ namespace My_MemoPlatformer
             }
         }
 
-        private List<GameObject> GetFrontBlockingCharacters()
+        private List<GameObject> GetFrontBlockingCharacterList()
         {
             _frontBlockingCharacters.Clear();
 
-            foreach (KeyValuePair<GameObject, GameObject> data in frontBlockingObjects)
+            foreach (KeyValuePair<GameObject, GameObject> data in _frontBlockingObjects)
             {
                 var c = CharacterManager.Instance.GetCharacter(data.Value.transform.root.gameObject);
 
@@ -343,7 +341,7 @@ namespace My_MemoPlatformer
         {
             _frontBlockingObjList.Clear();
 
-            foreach (KeyValuePair<GameObject, GameObject> data in frontBlockingObjects)
+            foreach (KeyValuePair<GameObject, GameObject> data in _frontBlockingObjects)
             {
                 if (!_frontBlockingObjList.Contains(data.Value))
                 {

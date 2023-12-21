@@ -16,7 +16,7 @@ namespace My_MemoPlatformer
             animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], false);
 
             characterState.characterControl.animationProgress.disAllowEarlyTurn = false;
-            characterState.characterControl.procDict[CharacterProc.CLEAR_FRONTBLOCKING_OBJ_DICTIONARY]();
+            characterState.BlockingObjData.ClearFrontBlockingObjDic();
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

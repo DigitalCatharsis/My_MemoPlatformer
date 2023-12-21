@@ -60,7 +60,7 @@ namespace My_MemoPlatformer
 
         public DataProcessor dataProcessor;
 
-        public BlockingObjData blockingObjData => subComponentProcessor.blockingObjData;
+        public BlockingObjData BlockingObjData => subComponentProcessor.blockingObjData;
 
         public Dataset Air_Control
         {
@@ -73,11 +73,9 @@ namespace My_MemoPlatformer
         
         public Dictionary<BoolData, GetBool> boolDic = new Dictionary<BoolData, GetBool>();
         public Dictionary<CharacterProc, CharacterProcDel> procDict = new Dictionary<CharacterProc, CharacterProcDel>();
-        public Dictionary<ListData, GetList> listDic = new Dictionary<ListData, GetList>();
 
         public delegate bool GetBool();
         public delegate void CharacterProcDel();
-        public delegate List<GameObject> GetList();
 
         [Header("Gravity")]
         public ContactPoint[] contactPoints;

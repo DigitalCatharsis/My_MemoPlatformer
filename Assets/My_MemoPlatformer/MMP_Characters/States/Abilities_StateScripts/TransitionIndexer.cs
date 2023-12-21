@@ -214,7 +214,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.MOVING_TO_BLOCKING_OBG:
                         {
-                            var objs = control.listDic[ListData.FRONTBLOCKING_OBJECTS]();
+                            var objs = control.BlockingObjData.GetFrontBlockingObjList();
 
                             foreach (var o in objs) 
                             {
