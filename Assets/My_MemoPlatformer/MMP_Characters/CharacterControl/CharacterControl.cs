@@ -61,6 +61,7 @@ namespace My_MemoPlatformer
         public DataProcessor dataProcessor;
 
         public BlockingObjData BlockingObjData => subComponentProcessor.blockingObjData;
+        public LedgeGrab_Data LedgeGrabData => subComponentProcessor.ledgeGrabData;
 
         public Dataset Air_Control
         {

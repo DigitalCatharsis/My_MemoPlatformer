@@ -142,7 +142,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.GRABBING_LEDGE:
                         {
-                            if (!control.boolDic[BoolData.GRABBING_LEDGE]())
+                            if (!control.LedgeGrabData.isGrabbingLedge)
                             {
                                 return false;
                             }
@@ -150,7 +150,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.NOT_GRABBING_LEDGE:
                         {
-                            if (control.boolDic[BoolData.GRABBING_LEDGE]())
+                            if (control.LedgeGrabData.isGrabbingLedge)
                             {
                                 return false;
                             }

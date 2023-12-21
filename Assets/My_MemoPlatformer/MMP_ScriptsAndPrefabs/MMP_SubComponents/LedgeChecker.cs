@@ -6,21 +6,23 @@ namespace My_MemoPlatformer
 {
     public class LedgeChecker : SubComponent
     {
-        public bool isGrabbingLedge;
-        public Vector3 ledgeCalibration = new Vector3();  //diffirence (offset) when we change character. (Bones changing)
+        public LedgeGrab_Data ledgeGrab_Data;
 
-        public LedgeCollider collider1; //bottom
-        public LedgeCollider collider2; //top
-
-        public List<string> ledgeTriggerStateNames = new List<string>();
+        [SerializeField] private Vector3 ledgeCalibration = new Vector3();  //diffirence (offset) when we change character. (Bones changing)
+        [SerializeField] private LedgeCollider collider1; //bottom
+        [SerializeField] private LedgeCollider collider2; //top
+        [SerializeField] private List<string> ledgeTriggerStateNames = new List<string>();
 
         private void Start()
         {
-            isGrabbingLedge = false;
+            ledgeGrab_Data = new LedgeGrab_Data
+            {
+                isGrabbingLedge = false,
+                LedgeCollidersOff = LedgeCollidersOff,
+            };
 
+            subComponentProcessor.ledgeGrabData = ledgeGrab_Data;
             subComponentProcessor.componentsDictionary.Add(SubComponents.LEDGECHECKER, this);
-            control.procDict.Add(CharacterProc.LEDGE_COLLIDERS_OFF, LedgeCollidersOff);
-            control.boolDic.Add(BoolData.GRABBING_LEDGE, IsGrabbingLedge);
         }
 
         public override void OnUpdate()
@@ -33,7 +35,7 @@ namespace My_MemoPlatformer
             {
                 if (control.Rigid_Body.useGravity)
                 {
-                    isGrabbingLedge = false;
+                    ledgeGrab_Data.isGrabbingLedge = false;
                 }
             }
 
@@ -76,18 +78,18 @@ namespace My_MemoPlatformer
                     }
                     else
                     {
-                        isGrabbingLedge = false;
+                        ledgeGrab_Data.isGrabbingLedge = false;
                     }
                 }
             }
             else
             {
-                isGrabbingLedge = false;
+                ledgeGrab_Data.isGrabbingLedge = false;
             }
 
             if (collider1.collidedObjects.Count == 0)
             {
-                isGrabbingLedge = false;
+                ledgeGrab_Data.isGrabbingLedge = false;
             }
         }
         private bool OffsetPosition(GameObject platform)
@@ -99,12 +101,12 @@ namespace My_MemoPlatformer
                 return false;
             }
 
-            if (isGrabbingLedge)   //if already grabbing
+            if (ledgeGrab_Data.isGrabbingLedge)   //if already grabbing
             {
                 return false;
             }
 
-            isGrabbingLedge = true;
+            ledgeGrab_Data.isGrabbingLedge = true;
             control.Rigid_Body.useGravity = false;
             control.Rigid_Body.velocity = Vector3.zero;
 
@@ -142,11 +144,6 @@ namespace My_MemoPlatformer
         {
             collider1.GetComponent<BoxCollider>().enabled = false;
             collider2.GetComponent<BoxCollider>().enabled = false;
-        }
-
-        public bool IsGrabbingLedge()
-        {
-            return isGrabbingLedge;
         }
     }
 }

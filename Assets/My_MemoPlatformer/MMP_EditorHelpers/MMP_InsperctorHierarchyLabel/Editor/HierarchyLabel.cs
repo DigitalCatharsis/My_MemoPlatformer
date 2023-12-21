@@ -25,6 +25,45 @@ namespace My_MemoPlatformer
                 EditorGUI.DrawRect(selectionRect, Color.grey);
                 EditorGUI.DropShadowLabel(selectionRect, obj.name.Replace("-", "").ToString());
             }
+
+            HighLightObj(obj, selectionRect);
+        }
+
+        static void HighLightObj(GameObject obj, Rect selectionRect)
+        {
+            if (obj != null && obj.name.StartsWith("--R", System.StringComparison.Ordinal))    //Every gameobject which starts with --- gonna be painted and have a shadow label
+            {
+                EditorGUI.DrawRect(selectionRect, Color.red);
+                EditorGUI.DropShadowLabel(selectionRect, obj.name.Replace("--R", "").ToString());
+            }
+            else if (obj != null && obj.name.StartsWith("--G", System.StringComparison.Ordinal))    //Every gameobject which starts with --- gonna be painted and have a shadow label
+            {
+                EditorGUI.DrawRect(selectionRect, Color.green);
+                EditorGUI.DropShadowLabel(selectionRect, obj.name.Replace("--G", "").ToString());
+            }
+            else if (obj != null && obj.name.StartsWith("--B", System.StringComparison.Ordinal))    //Every gameobject which starts with --- gonna be painted and have a shadow label
+            {
+                EditorGUI.DrawRect(selectionRect, Color.blue);
+                EditorGUI.DropShadowLabel(selectionRect, obj.name.Replace("--B", "").ToString());
+            }
+            else if (obj != null && obj.name.StartsWith("--Y", System.StringComparison.Ordinal))    //Every gameobject which starts with --- gonna be painted and have a shadow label
+            {
+                EditorGUI.DrawRect(selectionRect, Color.yellow);
+                EditorGUI.DropShadowLabel(selectionRect, obj.name.Replace("--Y", "").ToString());
+            }
+            else if (obj != null && obj.name.StartsWith("--M", System.StringComparison.Ordinal))    //Every gameobject which starts with --- gonna be painted and have a shadow label
+            {
+                EditorGUI.DrawRect(selectionRect, Color.magenta);
+                EditorGUI.DropShadowLabel(selectionRect, obj.name.Replace("--Y", "").ToString());
+            }
+            else if (obj != null && obj.name.StartsWith("--C", System.StringComparison.Ordinal))    //Every gameobject which starts with --- gonna be painted and have a shadow label
+            {
+                EditorGUI.DrawRect(selectionRect, Color.cyan);
+                EditorGUI.DropShadowLabel(selectionRect, obj.name.Replace("--Y", "").ToString());
+            }
+
+            
+
         }
     }
 }

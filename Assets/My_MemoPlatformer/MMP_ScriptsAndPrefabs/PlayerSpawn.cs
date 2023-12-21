@@ -15,23 +15,23 @@ namespace My_MemoPlatformer
             {
                 case PlayableCharacterType.YELLOW:
                     {
-                        _objName = "YBot - Yellow";
+                        _objName = "--Y_YBot - Yellow";
                     }
                     break;
                 case PlayableCharacterType.RED:
                     {
-                        _objName = "YBot - Red Variant";
+                        _objName = "--Y_YBot - Red Variant";
                     }
                     break;
                 case PlayableCharacterType.GREEN:
                     {
-                        _objName = "YBot - Green Variant";
+                        _objName = "--G_YBot - Green Variant";
                     }
                     break;
                 case PlayableCharacterType.NONE:
                     {
                         _characterSelect.selectedCharacterType = PlayableCharacterType.YELLOW;
-                        _objName = "YBot - Yellow";
+                        _objName = "--Y_YBot - Yellow";
                     }
                     break;
             }

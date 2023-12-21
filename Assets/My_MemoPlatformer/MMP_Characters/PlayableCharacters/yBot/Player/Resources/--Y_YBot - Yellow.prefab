@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 1260156248}
   - component: {fileID: 1260156245}
   m_Layer: 0
-  m_Name: LedgeChecker
+  m_Name: --M_LedgeChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,7 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b570f699005d93a4e8d6805d7f531e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrabbingLedge: 0
+  ledgeGrab_Data:
+    isGrabbingLedge: 0
   ledgeCalibration: {x: 0, y: -2.3, z: -0.1}
   collider1: {fileID: 3335105432292074732}
   collider2: {fileID: 4451637664484933198}
@@ -1553,7 +1554,7 @@ GameObject:
   - component: {fileID: 8772349004802611497}
   - component: {fileID: 2729992175947334301}
   m_Layer: 9
-  m_Name: YBot - Yellow
+  m_Name: --Y_YBot - Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2674,7 +2675,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34a11615e00c33f4a9fe37e8e222824d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  airStompTargets: []
+  blockingObjData:
+    frontBlockingDictionaryCount: 0
+    upBlockingDictionaryCount: 0
 --- !u!1 &5135971744954625573
 GameObject:
   m_ObjectHideFlags: 0
@@ -3973,6 +3976,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   control: {fileID: 0}
+  blockingObjData:
+    frontBlockingDictionaryCount: 0
+    upBlockingDictionaryCount: 0
+  ledgeGrabData:
+    isGrabbingLedge: 0
 --- !u!1 &7745837032654152969
 GameObject:
   m_ObjectHideFlags: 0

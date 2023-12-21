@@ -9,7 +9,10 @@ namespace My_MemoPlatformer
         public Dictionary<SubComponents, SubComponent> componentsDictionary = new Dictionary<SubComponents, SubComponent>();
         public CharacterControl control;
 
+        [Space(15)]
         public BlockingObjData blockingObjData;
+        [Space(15)]
+        public LedgeGrab_Data ledgeGrabData;
 
         private void Awake()
         {

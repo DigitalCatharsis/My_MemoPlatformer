@@ -15,13 +15,11 @@ namespace My_MemoPlatformer
         NONE,
         DOUBLETAP_DOWN,
         DOUBLETAP_UP,
-        GRABBING_LEDGE,
     }
 
     public enum CharacterProc
     {
         NONE,
-        LEDGE_COLLIDERS_OFF,
         RAGDOLL_ON,
     }
 
