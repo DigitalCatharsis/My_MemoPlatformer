@@ -34,7 +34,7 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (control.bodyParts.Contains(col))  //touching own collider
+            if (control.RagdollData.bodyParts.Contains(col))  //touching own collider
             {
                 return;
             }

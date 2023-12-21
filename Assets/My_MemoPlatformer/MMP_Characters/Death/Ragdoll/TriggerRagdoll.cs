@@ -17,7 +17,7 @@ namespace My_MemoPlatformer
         {
             if (stateInfo.normalizedTime >= triggerTiming)
             {
-                characterState.characterControl.procDict[CharacterProc.RAGDOLL_ON]();
+                characterState.RagdollData.ragdollTriggered = true;
             }
         }
 

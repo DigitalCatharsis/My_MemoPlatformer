@@ -88,7 +88,7 @@ namespace My_MemoPlatformer
 
             foreach (var control in listOfSpikeVictims)
             {
-                control.procDict[CharacterProc.RAGDOLL_ON]();
+                control.RagdollData.ragdollTriggered = true;
             }
 
             yield return new WaitForSeconds(1);

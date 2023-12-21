@@ -13,6 +13,8 @@ namespace My_MemoPlatformer
         public BlockingObjData blockingObjData;
         [Space(15)]
         public LedgeGrab_Data ledgeGrabData;
+        [Space(15)]
+        public RagdollData ragdollData;
 
         private void Awake()
         {

@@ -31,7 +31,6 @@ namespace My_MemoPlatformer
         L_Level_Day
     }
 
-
     public class CharacterControl : MonoBehaviour
     {
         [Header("Input")]
@@ -62,21 +61,12 @@ namespace My_MemoPlatformer
 
         public BlockingObjData BlockingObjData => subComponentProcessor.blockingObjData;
         public LedgeGrab_Data LedgeGrabData => subComponentProcessor.ledgeGrabData;
+        public RagdollData RagdollData => subComponentProcessor.ragdollData;
 
-        public Dataset Air_Control
-        {
-            get
-            {
-                return dataProcessor.GetDataset(typeof(AirControl_Dataset));
-            }
-        }
-
+        public Dataset Air_Control => dataProcessor.GetDataset(typeof(AirControl_Dataset));
         
         public Dictionary<BoolData, GetBool> boolDic = new Dictionary<BoolData, GetBool>();
-        public Dictionary<CharacterProc, CharacterProcDel> procDict = new Dictionary<CharacterProc, CharacterProcDel>();
-
         public delegate bool GetBool();
-        public delegate void CharacterProcDel();
 
         [Header("Gravity")]
         public ContactPoint[] contactPoints;
@@ -84,7 +74,6 @@ namespace My_MemoPlatformer
         [Header("Setup")]
         public PlayableCharacterType playableCharacterType;
         public Animator skinnedMeshAnimator;
-        public List<Collider> bodyParts = new List<Collider>();
         public GameObject rightHand_Attack;
         public GameObject leftHand_Attack;
         public GameObject leftFoot_Attack;
@@ -133,47 +122,14 @@ namespace My_MemoPlatformer
             }
 
             RegisterCharacter();
-        }
-
-        public void SetBodyParts()
-        {
-            bodyParts.Clear();
-
-            Collider[] colliders = this.gameObject.GetComponentsInChildren<Collider>(); //Get all the colliders in the hierarchy
-
-            foreach (Collider c in colliders)
-            {
-                if (c.gameObject != this.gameObject)  //if the collider that we found is not the same as in the charactercontrol (//not a boxcolllider itself)
-                {
-                    if (c.gameObject.GetComponent<LedgeChecker>() == null && c.gameObject.GetComponent<LedgeCollider>() == null)
-                    {
-                        //thats means its a ragdoll
-                        c.isTrigger = true;
-                        bodyParts.Add(c);
-                        c.attachedRigidbody.interpolation = RigidbodyInterpolation.None;  //убрать дрожжание //Окей, если каждая часть будет интерполированной, то начинается вакханалия
-                        c.attachedRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic; //расчет физики, предотвращение прохождения сквозь объекты
-
-                        CharacterJoint joint = c.GetComponent<CharacterJoint>();
-                        if (joint != null)
-                        {
-                            joint.enableProjection = true; //https://docs.unity3d.com/Manual/RagdollStability.html
-                        }
-
-                        if (c.GetComponent<TriggerDetector>() == null)
-                        {
-                            c.gameObject.AddComponent<TriggerDetector>();
-                        }
-                    }
-                }
-            }
-        }
+        }        
         public void AddForceToDamagedPart(bool zeroZelocity)
         {
             if (damageDetector.damagedTrigger != null)
             {
                 if (zeroZelocity)
                 {
-                    foreach (Collider c in bodyParts)
+                    foreach (Collider c in RagdollData.bodyParts)
                     {
                         c.attachedRigidbody.velocity = Vector3.zero;
                     }
@@ -334,7 +290,7 @@ namespace My_MemoPlatformer
 
         public Collider GetBodyPart(string name)
         {
-            foreach (Collider c in bodyParts)
+            foreach (Collider c in RagdollData.bodyParts)
             {
                 if (c.name.Contains(name))
                 {

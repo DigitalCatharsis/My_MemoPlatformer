@@ -36,14 +36,14 @@ namespace My_MemoPlatformer
                     break;
             }
 
-            GameObject obj = Instantiate(Resources.Load(_objName,typeof(GameObject))) as GameObject;
+            var obj = Instantiate(Resources.Load(_objName,typeof(GameObject))) as GameObject;
             obj.transform.position = this.transform.position;
             GetComponent<MeshRenderer>().enabled = false;
 
             Cinemachine.CinemachineVirtualCamera[] arr = GameObject.FindObjectsOfType<Cinemachine.CinemachineVirtualCamera>();
             foreach (Cinemachine.CinemachineVirtualCamera v in arr)
             {
-                CharacterControl control =  CharacterManager.Instance.GetCharacter(_characterSelect.selectedCharacterType);
+                var control =  CharacterManager.Instance.GetCharacter(_characterSelect.selectedCharacterType);
                 Collider target = control.GetBodyPart("mixamorig:Spine1");
 
                 v.LookAt = target.transform;

@@ -1,19 +1,29 @@
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
     public class Ragdoll : SubComponent
     {
-        public bool ragdollTriggered = false;
+        public RagdollData ragdollData;
+
         private void Start()
         {
+            ragdollData = new RagdollData
+            {
+                ragdollTriggered = false,
+                bodyParts = new List<Collider>(),
+            };
+
+            SetupBodyParts();
+            subComponentProcessor.ragdollData = ragdollData;
             subComponentProcessor.componentsDictionary.Add(SubComponents.RAGDOLL, this);
-            control.procDict.Add(CharacterProc.RAGDOLL_ON, TurnOnRagdoll);
         }
 
         public override void OnFixedUpdate()
         {
-            if (ragdollTriggered)
+            if (ragdollData.ragdollTriggered)
             {
                 ProcRagdoll();
             }
@@ -23,14 +33,43 @@ namespace My_MemoPlatformer
         {
             throw new System.NotImplementedException();
         }
-        public void TurnOnRagdoll()
+
+        public void SetupBodyParts()
         {
-            ragdollTriggered = true;
+            ragdollData.bodyParts.Clear();
+
+            var colliders = control.gameObject.GetComponentsInChildren<Collider>(); //Get all the colliders in the hierarchy
+
+            foreach (Collider c in colliders)
+            {
+                if (c.gameObject != control.gameObject)  //if the collider that we found is not the same as in the charactercontrol (//not a boxcolllider itself)
+                {
+                    if (c.gameObject.GetComponent<LedgeChecker>() == null && c.gameObject.GetComponent<LedgeCollider>() == null)
+                    {
+                        //thats means its a ragdoll
+                        c.isTrigger = true;
+                        ragdollData.bodyParts.Add(c);
+                        c.attachedRigidbody.interpolation = RigidbodyInterpolation.None;  //убрать дрожжание //Окей, если каждая часть будет интерполированной, то начинается вакханалия
+                        c.attachedRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic; //расчет физики, предотвращение прохождения сквозь объекты
+
+                        CharacterJoint joint = c.GetComponent<CharacterJoint>();
+                        if (joint != null)
+                        {
+                            joint.enableProjection = true; //https://docs.unity3d.com/Manual/RagdollStability.html
+                        }
+
+                        if (c.GetComponent<TriggerDetector>() == null)
+                        {
+                            c.gameObject.AddComponent<TriggerDetector>();
+                        }
+                    }
+                }
+            }
         }
 
         private void ProcRagdoll()
         {
-            ragdollTriggered = false;
+            ragdollData.ragdollTriggered = false;
             
             if (control.skinnedMeshAnimator.avatar == null)
             {
@@ -45,7 +84,7 @@ namespace My_MemoPlatformer
             }
 
             //save bodypart positions to prevent teleporting
-            foreach (Collider c in control.bodyParts)
+            foreach (Collider c in ragdollData.bodyParts)
             {
                 TriggerDetector det = c.GetComponent<TriggerDetector>();
                 det.lastPosition = c.gameObject.transform.position;
@@ -70,7 +109,7 @@ namespace My_MemoPlatformer
             }
 
             //turn on ragdoll
-            foreach (Collider c in control.bodyParts)
+            foreach (Collider c in ragdollData.bodyParts)
             {
                 c.isTrigger = false;
 

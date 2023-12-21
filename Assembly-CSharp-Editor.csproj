@@ -59,7 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_LayerAdder\Editor\LayerChangerEditor.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\CharacterControl\Editor\CharacterControlEditor.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_PathfindingAgent\Editor\PathFindingAgentEditor.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_MaterialChaner\Editor\MaterialChangerEditor.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_LayerAdder\Editor\LayerAdderEditor.cs" />

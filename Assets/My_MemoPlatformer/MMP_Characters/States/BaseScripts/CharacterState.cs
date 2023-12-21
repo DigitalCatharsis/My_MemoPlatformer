@@ -11,8 +11,8 @@ namespace My_MemoPlatformer
         public CharacterControl characterControl;
         [Space (10)]
         public List<StateData> ListAbilityData = new List<StateData>();
-
         public BlockingObjData BlockingObjData => characterControl.subComponentProcessor.blockingObjData;
+        public RagdollData RagdollData => characterControl.subComponentProcessor.ragdollData;
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {

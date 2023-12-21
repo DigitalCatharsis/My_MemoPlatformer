@@ -129,8 +129,8 @@ namespace My_MemoPlatformer
                     var info = new AttackInfo();
                     info.CopyInfo(c.damageDetector.airStompAttack, control);
 
-                    int index = Random.Range(0, c.bodyParts.Count);
-                    c.damageDetector.damagedTrigger = c.bodyParts[index].GetComponent<TriggerDetector>();
+                    int index = Random.Range(0, c.RagdollData.bodyParts.Count);
+                    c.damageDetector.damagedTrigger = c.RagdollData.bodyParts[index].GetComponent<TriggerDetector>();
                     c.damageDetector.attack = c.damageDetector.airStompAttack;
                     c.damageDetector.attacker = control;
                     c.damageDetector.attackingPart = control.rightFoot_Attack;

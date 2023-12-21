@@ -151,6 +151,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\AISubset.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\Jump.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\ShakeCamera.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_DataSets\RagdollData.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_SubComponents\Ragdoll.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\GroundDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\Landing.cs" />

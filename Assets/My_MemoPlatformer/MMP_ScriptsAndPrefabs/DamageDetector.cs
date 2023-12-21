@@ -138,7 +138,7 @@ namespace My_MemoPlatformer
 
         private bool IsInLethalRange(AttackInfo info)
         {
-            foreach (var c in _control.bodyParts)
+            foreach (var c in _control.RagdollData.bodyParts)
             {
                 float dist = Vector3.SqrMagnitude(c.transform.position - info.attacker.transform.position); //distance between target and attacker
                                                                                                                           //Debug.Log(this.gameObject.name + "dist: "+ dist.ToString() );
@@ -147,8 +147,8 @@ namespace My_MemoPlatformer
                     _control.damageDetector.attack = info.attackAbility;
                     _control.damageDetector.attacker = info.attacker;
 
-                    int index = Random.Range(0, _control.bodyParts.Count);
-                    _control.damageDetector.damagedTrigger = _control.bodyParts[index].GetComponent<TriggerDetector>();
+                    int index = Random.Range(0, _control.RagdollData.bodyParts.Count);
+                    _control.damageDetector.damagedTrigger = _control.RagdollData.bodyParts[index].GetComponent<TriggerDetector>();
                     return true;
                 }
             }
@@ -255,7 +255,7 @@ namespace My_MemoPlatformer
 
             if (IsDead())
             {
-                _control.procDict[CharacterProc.RAGDOLL_ON]();
+                _control.RagdollData.ragdollTriggered = true;
             }
             else
             {
