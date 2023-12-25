@@ -285,6 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffaa8e7aa94c91a4b922478195404587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manualInputData: {fileID: 0}
   _doubleTaps: 
   _upKeys: 
 --- !u!1 &876816306485884224
@@ -3308,6 +3309,50 @@ Transform:
   m_Father: {fileID: 2979884157917687692}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7020094712125406493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 559100818167184587}
+  - component: {fileID: 6827526552430038439}
+  m_Layer: 9
+  m_Name: BoxColliderUpdater
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &559100818167184587
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7020094712125406493}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2838286670764771645}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6827526552430038439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7020094712125406493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5064a9a467d2e9b4d9b5d92fed279ae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7180817089236728352
 GameObject:
   m_ObjectHideFlags: 0
@@ -3770,6 +3815,7 @@ Transform:
   - {fileID: 2212010676037463706}
   - {fileID: 6629428920720007203}
   - {fileID: 4751183889889371912}
+  - {fileID: 559100818167184587}
   m_Father: {fileID: 3372119544377188092}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3794,6 +3840,7 @@ MonoBehaviour:
   ragdollData:
     ragdollTriggered: 0
     bodyParts: []
+  manualInput_Data: {fileID: 0}
 --- !u!1 &7745837032654152969
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,15 +17,15 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {      
-            characterState.characterControl.animationProgress.targetSize = targetSize;
-            characterState.characterControl.animationProgress.sizeSpeed = sizeUpdateSpeed;
-
-            characterState.characterControl.animationProgress.targetCenter = targetCenter;
-            characterState.characterControl.animationProgress.centerSpeed = centerUpdateSpeed;
+            characterState.BoxCollider_Data.targetSize = targetSize;
+            characterState.BoxCollider_Data.size_Update_Speed = sizeUpdateSpeed;
+                          
+            characterState.BoxCollider_Data.targetCenter = targetCenter;
+            characterState.BoxCollider_Data.center_Update_Speed = centerUpdateSpeed;
 
             if (stateInfo.IsName(_landingState)) 
             {
-                characterState.characterControl.animationProgress.isLanding = true;
+                characterState.BoxCollider_Data.isLanding = true;
             }
 
         }
@@ -38,16 +38,16 @@ namespace My_MemoPlatformer
                 {
                     if (animator.GetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded]) == true)
                     {
-                        characterState.characterControl.animationProgress.isLanding = true;
+                        characterState.BoxCollider_Data.isLanding = true;
                     }
                     else
                     {
-                        characterState.characterControl.animationProgress.isLanding = false;
+                        characterState.BoxCollider_Data.isLanding = false;
                     }
                 }
                 else
                 {
-                    characterState.characterControl.animationProgress.isLanding = false;
+                    characterState.BoxCollider_Data.isLanding = false;
                 }
             }
         }
@@ -55,7 +55,7 @@ namespace My_MemoPlatformer
         {
             if (stateInfo.IsName(_landingState) || stateInfo.IsName(_climbingState))
             {
-                characterState.characterControl.animationProgress.isLanding = false;
+                characterState.BoxCollider_Data.isLanding = false;
             }
         }
     }

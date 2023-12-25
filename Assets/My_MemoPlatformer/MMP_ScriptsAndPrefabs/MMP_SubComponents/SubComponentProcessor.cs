@@ -17,6 +17,8 @@ namespace My_MemoPlatformer
         public Ragdoll_Data ragdollData;
         [Space(15)]
         public ManualInput_Data manualInput_Data;
+        [Space(15)]
+        public BoxCollider_Data boxCollider_Data;
 
         private void Awake()
         {

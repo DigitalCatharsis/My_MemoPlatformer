@@ -64,6 +64,7 @@ namespace My_MemoPlatformer
         public Ragdoll_Data RagdollData => subComponentProcessor.ragdollData;
         public Dataset Air_Control => dataProcessor.GetDataset(typeof(AirControl_Dataset));
         public ManualInput_Data ManualInpu_Data => subComponentProcessor.manualInput_Data;
+        public BoxCollider_Data BoxCollider_Data => subComponentProcessor.boxCollider_Data;
 
         [Header("Gravity")]
         public ContactPoint[] contactPoints;
@@ -169,11 +170,11 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (Vector3.SqrMagnitude(boxCollider.size - animationProgress.targetSize) > 0.00001f)
+            if (Vector3.SqrMagnitude(boxCollider.size - BoxCollider_Data.targetSize) > 0.00001f)
             {
-                boxCollider.size = Vector3.Lerp(boxCollider.size, animationProgress.targetSize, Time.deltaTime * animationProgress.sizeSpeed);
+                boxCollider.size = Vector3.Lerp(boxCollider.size, BoxCollider_Data.targetSize, Time.deltaTime * BoxCollider_Data.size_Update_Speed);
 
-                animationProgress.updatingSpheres = true;
+                BoxCollider_Data.updatingSpheres = true;
             }
         }
 
@@ -184,11 +185,11 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (Vector3.SqrMagnitude(boxCollider.center - animationProgress.targetCenter) > 0.0001f)
+            if (Vector3.SqrMagnitude(boxCollider.center - BoxCollider_Data.targetCenter) > 0.0001f)
             {
-                boxCollider.center = Vector3.Lerp(boxCollider.center, animationProgress.targetCenter, Time.deltaTime * animationProgress.centerSpeed);
+                boxCollider.center = Vector3.Lerp(boxCollider.center, BoxCollider_Data.targetCenter, Time.deltaTime * BoxCollider_Data.center_Update_Speed);
 
-                animationProgress.updatingSpheres = true;
+                BoxCollider_Data.updatingSpheres = true;
             }
         }
         private void Update()
@@ -212,23 +213,23 @@ namespace My_MemoPlatformer
             }
 
             //Spheres
-            animationProgress.updatingSpheres = false;
+            BoxCollider_Data.updatingSpheres = false;
             UpdateBoxColliderSize();
             UpdateBoxColliderCenter();
-            if (animationProgress.updatingSpheres)
+            if (BoxCollider_Data.updatingSpheres)
             {
                 collisionSpheres.Reposition_FrontSpheres();
                 collisionSpheres.Reposition_BottomSpheres();
                 collisionSpheres.Reposition_BackSpheres();
                 collisionSpheres.Reposition_UpSpheres();
 
-                if (animationProgress.isLanding)  //prevent bug when idle after catching corner of platform
+                if (BoxCollider_Data.isLanding)  //prevent bug when idle after catching corner of platform
                 {
                     if (_debug)
                     {
                         Debug.Log("repositioning y");
                     }
-                    Rigid_Body.MovePosition(new Vector3(0f, animationProgress.landingPosition.y, this.transform.position.z));
+                    Rigid_Body.MovePosition(new Vector3(0f, BoxCollider_Data.landingPosition.y, this.transform.position.z));
                 }
             }
 
