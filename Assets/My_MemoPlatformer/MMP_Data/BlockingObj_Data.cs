@@ -4,7 +4,7 @@ using UnityEngine;
 namespace My_MemoPlatformer
 {
     [System.Serializable]
-    public class BlockingObjData
+    public class BlockingObj_Data
     {
         public int frontBlockingDictionaryCount;
         public int upBlockingDictionaryCount;

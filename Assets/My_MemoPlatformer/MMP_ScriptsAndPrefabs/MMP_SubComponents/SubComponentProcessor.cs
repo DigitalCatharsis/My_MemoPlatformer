@@ -10,11 +10,13 @@ namespace My_MemoPlatformer
         public CharacterControl control;
 
         [Space(15)]
-        public BlockingObjData blockingObjData;
+        public BlockingObj_Data blockingObjData;
         [Space(15)]
         public LedgeGrab_Data ledgeGrabData;
         [Space(15)]
-        public RagdollData ragdollData;
+        public Ragdoll_Data ragdollData;
+        [Space(15)]
+        public ManualInput_Data manualInput_Data;
 
         private void Awake()
         {

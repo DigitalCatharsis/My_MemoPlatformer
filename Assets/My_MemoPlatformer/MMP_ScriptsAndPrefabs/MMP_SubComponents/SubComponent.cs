@@ -10,12 +10,6 @@ namespace My_MemoPlatformer
         RAGDOLL,
         BLOCKINGOBJECTS,
     }
-    public enum BoolData
-    {
-        NONE,
-        DOUBLETAP_DOWN,
-        DOUBLETAP_UP,
-    }
 
     public abstract class SubComponent : MonoBehaviour
     {

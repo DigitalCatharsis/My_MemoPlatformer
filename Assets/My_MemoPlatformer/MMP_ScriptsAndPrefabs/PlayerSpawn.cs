@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -9,7 +10,7 @@ namespace My_MemoPlatformer
 
         private string _objName;
 
-        private void Start()
+        IEnumerator Start()
         {
             switch (_characterSelect.selectedCharacterType)
             {
@@ -40,11 +41,13 @@ namespace My_MemoPlatformer
             obj.transform.position = this.transform.position;
             GetComponent<MeshRenderer>().enabled = false;
 
+            yield return new WaitForEndOfFrame(); //get some time for cinemachine to catch target, cause of control.RagdollData.GetBodypart is not initialized yet
+
             Cinemachine.CinemachineVirtualCamera[] arr = GameObject.FindObjectsOfType<Cinemachine.CinemachineVirtualCamera>();
             foreach (Cinemachine.CinemachineVirtualCamera v in arr)
             {
                 var control =  CharacterManager.Instance.GetCharacter(_characterSelect.selectedCharacterType);
-                Collider target = control.GetBodyPart("mixamorig:Spine1");
+                Collider target = control.RagdollData.GetBodypart("mixamorig:Spine1");
 
                 v.LookAt = target.transform;
                 v.Follow = target.transform;

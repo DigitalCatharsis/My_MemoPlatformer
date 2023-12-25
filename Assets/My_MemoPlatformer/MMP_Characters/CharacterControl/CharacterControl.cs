@@ -59,14 +59,11 @@ namespace My_MemoPlatformer
 
         public DataProcessor dataProcessor;
 
-        public BlockingObjData BlockingObjData => subComponentProcessor.blockingObjData;
+        public BlockingObj_Data BlockingObjData => subComponentProcessor.blockingObjData;
         public LedgeGrab_Data LedgeGrabData => subComponentProcessor.ledgeGrabData;
-        public RagdollData RagdollData => subComponentProcessor.ragdollData;
-
+        public Ragdoll_Data RagdollData => subComponentProcessor.ragdollData;
         public Dataset Air_Control => dataProcessor.GetDataset(typeof(AirControl_Dataset));
-        
-        public Dictionary<BoolData, GetBool> boolDic = new Dictionary<BoolData, GetBool>();
-        public delegate bool GetBool();
+        public ManualInput_Data ManualInpu_Data => subComponentProcessor.manualInput_Data;
 
         [Header("Gravity")]
         public ContactPoint[] contactPoints;
@@ -286,18 +283,6 @@ namespace My_MemoPlatformer
             {
                 return false;
             }
-        }
-
-        public Collider GetBodyPart(string name)
-        {
-            foreach (Collider c in RagdollData.bodyParts)
-            {
-                if (c.name.Contains(name))
-                {
-                    return c;
-                }
-            }
-            return null;
         }
 
         public GameObject GetChildObj(string name)

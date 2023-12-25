@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -10,16 +11,22 @@ namespace My_MemoPlatformer
 
     public class ManualInput : SubComponent
     {
-        public List<InputKeyType> _doubleTaps = new List<InputKeyType>();
+        public ManualInput_Data manualInputData;
+
+        [SerializeField] private List<InputKeyType> _doubleTaps = new List<InputKeyType>();
         [SerializeField] private List<InputKeyType> _upKeys = new List<InputKeyType>();  //какие отпустил
         [SerializeField] private Dictionary<InputKeyType, float> _doubleTapTimings = new Dictionary<InputKeyType, float>();
 
         private void Start()
         {
-            subComponentProcessor.componentsDictionary.Add(SubComponents.MANUALINPUT, this);
+            manualInputData = new ManualInput_Data
+            {
+                DoubleTapDown = IsDoubleTap_Down,
+                DoubleTapUp = IsDoubleTap_Up,
+            };
 
-            control.boolDic.Add(BoolData.DOUBLETAP_UP, IsDoubleTap_Up);
-            control.boolDic.Add(BoolData.DOUBLETAP_DOWN, IsDoubleTap_Down);
+            subComponentProcessor.manualInput_Data = manualInputData;
+            subComponentProcessor.componentsDictionary.Add(SubComponents.MANUALINPUT, this);
         }
 
         //private void Awake()
@@ -141,7 +148,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        public bool IsDoubleTap_Up()
+        private bool IsDoubleTap_Up()
         {
             if (_doubleTaps.Contains(InputKeyType.KEY_MOVE_UP))
             {
@@ -152,7 +159,7 @@ namespace My_MemoPlatformer
                 return false;
             }
         }
-        public bool IsDoubleTap_Down()
+        private bool IsDoubleTap_Down()
         {
             if (_doubleTaps.Contains(InputKeyType.KEY_MOVE_DOWN))
             {

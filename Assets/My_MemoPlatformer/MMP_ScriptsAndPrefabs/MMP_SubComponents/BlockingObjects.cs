@@ -5,7 +5,7 @@ namespace My_MemoPlatformer
 {
     public class BlockingObjects : SubComponent
     {
-        public BlockingObjData blockingObjData;
+        public BlockingObj_Data blockingObjData;
 
         //Map each collided object to the collision detector
         private Dictionary<GameObject, GameObject> _frontBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
@@ -22,7 +22,7 @@ namespace My_MemoPlatformer
 
         private void Start()
         {
-            blockingObjData = new BlockingObjData
+            blockingObjData = new BlockingObj_Data
             {
                 frontBlockingDictionaryCount = 0,
                 upBlockingDictionaryCount = 0,

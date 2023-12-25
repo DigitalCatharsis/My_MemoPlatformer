@@ -267,7 +267,7 @@ namespace My_MemoPlatformer
                                 return false;
                             }
 
-                            if (!control.boolDic[BoolData.DOUBLETAP_UP]())
+                            if (!control.ManualInpu_Data.DoubleTapUp())
                             {
                                 return false;
                             }
@@ -280,7 +280,7 @@ namespace My_MemoPlatformer
                                 return false;
                             }
 
-                            if (!control.boolDic[BoolData.DOUBLETAP_DOWN]())
+                            if (!control.ManualInpu_Data.DoubleTapDown())
                             {
                                 return false;
                             }

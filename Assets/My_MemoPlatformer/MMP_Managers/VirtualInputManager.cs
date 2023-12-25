@@ -10,11 +10,9 @@ namespace My_MemoPlatformer
         KEY_MOVE_DOWN,
         KEY_MOVE_LEFT,
         KEY_MOVE_RIGHT,
-
         KEY_ATTACK,
         KEY_TURBO,
         KEY_JUMP,
-
         KEY_BLOCK,
 
         KEY_RESTART,
@@ -53,9 +51,6 @@ namespace My_MemoPlatformer
         public bool bind_Restart;
         public bool bind_Block;
 
-
-
-
         [Space(10)]
         public Dictionary<InputKeyType, KeyCode> DicKeys = new Dictionary<InputKeyType, KeyCode>();
         public KeyCode[] possibleKeys;
@@ -65,7 +60,7 @@ namespace My_MemoPlatformer
         {
             possibleKeys = System.Enum.GetValues(typeof(KeyCode)) as KeyCode[];
 
-            GameObject piObj = Instantiate(Resources.Load("PlayerInput", typeof (GameObject))) as GameObject;
+            var piObj = Instantiate(Resources.Load("PlayerInput", typeof (GameObject))) as GameObject;
             playerInput = piObj.GetComponent<PlayerInput>();
         }
 
@@ -97,7 +92,7 @@ namespace My_MemoPlatformer
         {
             playerInput.SavedKeys.keyCodesList.Clear();
 
-            int count = System.Enum.GetValues(typeof(InputKeyType)).Length;
+            var count = System.Enum.GetValues(typeof(InputKeyType)).Length;
 
             for (int i = 0; i < count; ++i) 
             {

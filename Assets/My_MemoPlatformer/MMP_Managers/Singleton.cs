@@ -13,7 +13,7 @@ namespace My_MemoPlatformer
                 //_instance = (T)FindObjectOfType(typeof(T));
                 if (_instance == null)
                 {
-                    GameObject obj = new GameObject();
+                    var obj = new GameObject();
                     _instance = obj.AddComponent<T>();
                     obj.name = typeof(T).ToString();
                 }

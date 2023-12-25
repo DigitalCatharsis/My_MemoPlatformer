@@ -11,7 +11,14 @@ namespace My_MemoPlatformer.Datasets
 
         public bool GetBool(int index)
         {
-            return boolDictionary[index];
+            if (boolDictionary.ContainsKey(index))
+            {
+                return boolDictionary[index];
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void SetBool(int index, bool value)
@@ -25,7 +32,14 @@ namespace My_MemoPlatformer.Datasets
         }
         public float GetFloat(int index)
         {
-            return floatDictionary[index];
+            if (floatDictionary.ContainsKey(index))
+            {
+                return floatDictionary[index];
+            }
+            else
+            {
+                return 0f;
+            }
         }
         public void SetVector3(int index, Vector3 value)
         {
@@ -33,7 +47,14 @@ namespace My_MemoPlatformer.Datasets
         }
         public Vector3 GetVecto3(int index)
         {
-            return vector3Dictionary[index];
+            if (vector3Dictionary.ContainsKey(index))
+            {
+                return vector3Dictionary[index];
+            }
+            else
+            {
+                return Vector3.zero;
+            }
         }
     }
 }

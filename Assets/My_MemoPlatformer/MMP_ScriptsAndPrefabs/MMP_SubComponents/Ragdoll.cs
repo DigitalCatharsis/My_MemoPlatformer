@@ -6,14 +6,15 @@ namespace My_MemoPlatformer
 {
     public class Ragdoll : SubComponent
     {
-        public RagdollData ragdollData;
+        public Ragdoll_Data ragdollData;
 
         private void Start()
         {
-            ragdollData = new RagdollData
+            ragdollData = new Ragdoll_Data
             {
                 ragdollTriggered = false,
                 bodyParts = new List<Collider>(),
+                GetBodypart = GetBodyPart,
             };
 
             SetupBodyParts();
@@ -121,6 +122,18 @@ namespace My_MemoPlatformer
             }
 
             control.AddForceToDamagedPart(false);
+        }
+
+        private Collider GetBodyPart(string name)
+        {
+            foreach (Collider c in ragdollData.bodyParts)
+            {
+                if (c.name.Contains(name))
+                {
+                    return c;
+                }
+            }
+            return null;
         }
     }
 }
