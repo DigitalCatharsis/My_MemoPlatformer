@@ -370,7 +370,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.ATTACK_ISBLOCKED:
                         {
-                            if (control.damageDetector.blockedAttack == null)
+                            if (control.damageDetector.damageDetector_Data.blockedAttack == null)
                             {
                                 return false;
                             }

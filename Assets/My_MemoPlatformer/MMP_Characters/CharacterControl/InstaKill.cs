@@ -55,12 +55,12 @@ namespace My_MemoPlatformer
                         continue;
                     }
 
-                    if (c.damageDetector.IsDead())
+                    if (c.damageDetector_Data.IsDead())
                     {
                         continue;
                     }
 
-                    if (_control.damageDetector.IsDead())
+                    if (_control.damageDetector_Data.IsDead())
                     {
                         continue;
                     }

@@ -114,9 +114,9 @@ namespace My_MemoPlatformer
 
                         foreach (CharacterControl c in CharacterManager.Instance.characters)
                         {
-                            if (c.damageDetector.blockedAttack == info)
+                            if (c.damageDetector_Data.blockedAttack == info)
                             {
-                                c.damageDetector.blockedAttack = null;
+                                c.damageDetector_Data.blockedAttack = null;
                             }
                         }
 

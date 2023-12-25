@@ -130,10 +130,10 @@ namespace My_MemoPlatformer
                     info.CopyInfo(c.damageDetector.airStompAttack, control);
 
                     int index = Random.Range(0, c.RagdollData.bodyParts.Count);
-                    c.damageDetector.damagedTrigger = c.RagdollData.bodyParts[index].GetComponent<TriggerDetector>();
-                    c.damageDetector.attack = c.damageDetector.airStompAttack;
+                    c.damageDetector_Data.damagedTrigger = c.RagdollData.bodyParts[index].GetComponent<TriggerDetector>();
+                    c.damageDetector_Data.attack = c.damageDetector.airStompAttack;
                     c.damageDetector_Data.attacker = control;
-                    c.damageDetector.attackingPart = control.rightFoot_Attack;
+                    c.damageDetector_Data.attackingPart = control.rightFoot_Attack;
 
                     c.damageDetector.TakeDamage(info);
                 }

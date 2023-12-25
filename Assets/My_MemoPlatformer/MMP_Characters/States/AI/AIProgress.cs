@@ -38,7 +38,7 @@ namespace My_MemoPlatformer
 
         public bool TargetIsDead()
         {
-            if (CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target).damageDetector.IsDead())
+            if (CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target).damageDetector_Data.IsDead())
             {
                 return true;
             }

@@ -6,18 +6,13 @@ namespace My_MemoPlatformer
 
     public class DamageDetector : SubComponent  //Compare collision info versus attack input that is being registered
     {
-        public DamageDetector_Data damageDetector_Data;   
+        public DamageDetector_Data damageDetector_Data;
         [SerializeField] private bool _debug;
 
         [SerializeField] private float hp;
 
         [SerializeField] private List<RuntimeAnimatorController> _hitReactionList = new List<RuntimeAnimatorController>();
 
-        [Header("Damage Info")]
-        public Attack attack;
-        public TriggerDetector damagedTrigger;
-        public GameObject attackingPart;
-        public AttackInfo blockedAttack;
 
         [Header("InstaKill")]
         public RuntimeAnimatorController Assassination_Assassin;
@@ -31,7 +26,12 @@ namespace My_MemoPlatformer
         {
             damageDetector_Data = new DamageDetector_Data
             {
-
+                attacker = null,
+                attack = null,
+                damagedTrigger = null,
+                attackingPart = null,
+                blockedAttack = null,
+                IsDead = IsDead,
             };
 
             subComponentProcessor.damageDetector_Data = damageDetector_Data;
@@ -131,11 +131,11 @@ namespace My_MemoPlatformer
                     {
                         if (info.attacker.GetAttackingPart(part) == collider.gameObject)
                         {
-                            control.damageDetector.attack = info.attackAbility;
-                            control.damageDetector_Data.attacker = info.attacker;
+                            damageDetector_Data.attack = info.attackAbility;
+                            damageDetector_Data.attacker = info.attacker;
 
-                            control.damageDetector.damagedTrigger = data.Key;
-                            control.damageDetector.attackingPart = info.attacker.GetAttackingPart(part);
+                            damageDetector_Data.damagedTrigger = data.Key;
+                            damageDetector_Data.attackingPart = info.attacker.GetAttackingPart(part);
                             return true;
                         }
                     }
@@ -149,37 +149,25 @@ namespace My_MemoPlatformer
             foreach (var c in control.RagdollData.bodyParts)
             {
                 float dist = Vector3.SqrMagnitude(c.transform.position - info.attacker.transform.position); //distance between target and attacker
-                                                                                                                          //Debug.Log(this.gameObject.name + "dist: "+ dist.ToString() );
+                                                                                                            //Debug.Log(this.gameObject.name + "dist: "+ dist.ToString() );
                 if (dist <= info.lethalRange)
                 {
-                    control.damageDetector.attack = info.attackAbility;
+                    damageDetector_Data.attack = info.attackAbility;
                     control.damageDetector_Data.attacker = info.attacker;
 
                     int index = Random.Range(0, control.RagdollData.bodyParts.Count);
-                    control.damageDetector.damagedTrigger = control.RagdollData.bodyParts[index].GetComponent<TriggerDetector>();
+                    damageDetector_Data.damagedTrigger = control.RagdollData.bodyParts[index].GetComponent<TriggerDetector>();
                     return true;
                 }
             }
             return false;
         }
 
-        public bool IsDead()
-        {
-            if (hp <= 0f)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
         private bool AttackIsBlocked(AttackInfo info)
         {
-            if (info == blockedAttack && blockedAttack != null)
+            if (info == damageDetector_Data.blockedAttack && damageDetector_Data.blockedAttack != null)
             {
-                return attack;
+                return damageDetector_Data.attack;
             }
 
             if (control.animationProgress.IsRunning(typeof(Block)))
@@ -219,7 +207,7 @@ namespace My_MemoPlatformer
 
             if (AttackIsBlocked(info))
             {
-                blockedAttack = info;
+                damageDetector_Data.blockedAttack = info;
                 return;
             }
 
@@ -233,7 +221,7 @@ namespace My_MemoPlatformer
                     {
                         GameObject vfx = PoolManager.Instance.GetObject(info.attackAbility.ParticleType);
 
-                        vfx.transform.position = control.damageDetector.attackingPart.transform.position;
+                        vfx.transform.position = damageDetector_Data.attackingPart.transform.position;
 
                         vfx.SetActive(true);
 
@@ -259,7 +247,7 @@ namespace My_MemoPlatformer
 
             AttackManager.Instance.ForceDeregester(control);
             control.animationProgress.currentRunningAbilities.Clear();
-            
+
 
             if (IsDead())
             {
@@ -271,7 +259,7 @@ namespace My_MemoPlatformer
 
                 control.skinnedMeshAnimator.runtimeAnimatorController = null; //need this to restart the animation if get several hits in a short period of time
                 control.skinnedMeshAnimator.runtimeAnimatorController = _hitReactionList[rand];
-            }   
+            }
 
 
             if (!info.registeredTargets.Contains(this.control))
@@ -287,9 +275,10 @@ namespace My_MemoPlatformer
 
         public void DeathBySpikes()
         {
-            control.damageDetector.damagedTrigger = null;
+            damageDetector_Data.damagedTrigger = null;
             hp = 0f;
         }
+
         public void DeathByInstakill(CharacterControl attacker)
         {
             control.animationProgress.currentRunningAbilities.Clear();
@@ -305,8 +294,8 @@ namespace My_MemoPlatformer
             attacker.skinnedMeshAnimator.runtimeAnimatorController = Assassination_Assassin;
 
             var dir = control.transform.position - attacker.transform.position;
-            
-            if (dir.z < 0f) 
+
+            if (dir.z < 0f)
             {
                 attacker.FaceForward(false);
             }
@@ -319,6 +308,18 @@ namespace My_MemoPlatformer
             control.transform.position = attacker.transform.position + (attacker.transform.forward * 0.45f);
 
             hp = 0f;
+        }
+
+        private bool IsDead()
+        {
+            if (hp <= 0f)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

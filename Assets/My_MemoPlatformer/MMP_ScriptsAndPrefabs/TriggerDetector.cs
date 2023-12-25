@@ -79,10 +79,10 @@ namespace My_MemoPlatformer
                     var info = new AttackInfo();
                     info.CopyInfo(control.damageDetector.AxeThrow, control);
 
-                    control.damageDetector.damagedTrigger = this;
-                    control.damageDetector.attack = control.damageDetector.AxeThrow;
+                    control.damageDetector_Data.damagedTrigger = this;
+                    control.damageDetector_Data.attack = control.damageDetector.AxeThrow;
                     control.damageDetector_Data.attacker = w.thrower;
-                    control.damageDetector.attackingPart = w.thrower.rightHand_Attack;
+                    control.damageDetector_Data.attackingPart = w.thrower.rightHand_Attack;
 
                     control.damageDetector.TakeDamage(info);
 

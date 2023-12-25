@@ -6,6 +6,14 @@ namespace My_MemoPlatformer
     public class DamageDetector_Data
     {
         public CharacterControl attacker;
+        public Attack attack;
+        public TriggerDetector damagedTrigger;
+        public GameObject attackingPart;
+        public AttackInfo blockedAttack;
+
+        public delegate bool ReturnBool();
+
+        public ReturnBool IsDead;
     }
 }
 

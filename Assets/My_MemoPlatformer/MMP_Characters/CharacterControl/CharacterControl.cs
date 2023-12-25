@@ -140,7 +140,7 @@ namespace My_MemoPlatformer
 
         public void AddForceToDamagedPart(bool zeroZelocity)
         {
-            if (damageDetector.damagedTrigger != null)
+            if (damageDetector_Data.damagedTrigger != null)
             {
                 if (zeroZelocity)
                 {
@@ -150,10 +150,10 @@ namespace My_MemoPlatformer
                     }
                 }
 
-                damageDetector.damagedTrigger.GetComponent<Rigidbody>().
-                     AddForce(damageDetector_Data.attacker.transform.forward * damageDetector.attack.forwardForce +
-                          damageDetector_Data.attacker.transform.right * damageDetector.attack.rightForce +
-                             damageDetector_Data.attacker.transform.up * damageDetector.attack.upForce);
+                damageDetector_Data.damagedTrigger.GetComponent<Rigidbody>().
+                     AddForce(damageDetector_Data.attacker.transform.forward * damageDetector_Data.attack.forwardForce +
+                          damageDetector_Data.attacker.transform.right * damageDetector_Data.attack.rightForce +
+                             damageDetector_Data.attacker.transform.up * damageDetector_Data.attack.upForce);
             }
         }
 
@@ -166,9 +166,6 @@ namespace My_MemoPlatformer
                 c.characterControl = this;
             }
         }
-
-
-
         private void RegisterCharacter()
         {
             if (!CharacterManager.Instance.characters.Contains(this))
