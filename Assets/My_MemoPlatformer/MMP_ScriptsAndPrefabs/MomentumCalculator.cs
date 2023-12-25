@@ -1,6 +1,3 @@
-using My_MemoPlatformer;
-using My_MemoPlatformer.Datasets;
-using UnityEditor;
 using UnityEngine;
 
 namespace My_MemoPlatformer

@@ -1,4 +1,3 @@
-using My_MemoPlatformer.Datasets;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -15,7 +14,7 @@ namespace My_MemoPlatformer
         }
         private void FixedUpdate()
         {
-            if (_control.Air_Control.GetBool((int)AirControlBool.CHECK_WALL_BLOCK))
+            if (_control.PlayerJump_Data.checkWallBlock)
             {
                 if (_control.collisionSpheres.frontOverlapCheckers.Contains(this))
                 {

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -7,5 +6,7 @@ namespace My_MemoPlatformer
     public class PlayerJump_Data
     {
         public bool jumped;
+        public bool canWallJump;
+        public bool checkWallBlock;
     }
 }

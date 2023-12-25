@@ -85,7 +85,6 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\TriggerDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_SubComponents\BlockingObjects.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\Ledge\Ledge.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_Data\Datasets\AirControl_Dataset.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\ResetLocalPosition.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\DeathAnimationData.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_PooledObjects\AttackInfo\AttackInfo.cs" />
@@ -134,7 +133,6 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\BaseScripts\StateData.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\DisAllowEarlyTurn.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\Ragdoll\TriggerRagdoll.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_Data\Datasets\DataProcessor.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\BaseScripts\CharacterState.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckAttackPress.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\FallPlatform.cs" />
@@ -149,7 +147,6 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Events\GameEventListener.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\CollisionDetection.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Settings\FrameSettings.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_Data\Datasets\Dataset.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_SubComponents\SubComponent.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Settings\PhysicsSettings.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_LayerAdder\LayerChanger.cs" />

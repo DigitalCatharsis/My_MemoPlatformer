@@ -1,8 +1,3 @@
-using My_MemoPlatformer.Datasets;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using UnityEditor;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -46,18 +41,18 @@ namespace My_MemoPlatformer
                 {
                     if (characterState.characterControl.moveLeft)
                     {
-                        characterState.characterControl.playerRotation_Data.FaceForward(false);
+                        characterState.characterControl.PlayerRotation_Data.FaceForward(false);
                     }
                     if (characterState.characterControl.moveRight)
                     {
-                        characterState.characterControl.playerRotation_Data.FaceForward(true);
+                        characterState.characterControl.PlayerRotation_Data.FaceForward(true);
                     }
                 }
             }
 
             if (startingMomentum > 0.001f)
             {
-                if (characterState.characterControl.playerRotation_Data.IsFacingForward())
+                if (characterState.characterControl.PlayerRotation_Data.IsFacingForward())
                 {
                     characterState.MomentumCalculator_Data.momentum = startingMomentum;
                 }
@@ -145,11 +140,11 @@ namespace My_MemoPlatformer
 
             if (control.MomentumCalculator_Data.momentum > 0f)
             {
-                control.playerRotation_Data.FaceForward(true);
+                control.PlayerRotation_Data.FaceForward(true);
             }
             else if (control.MomentumCalculator_Data.momentum < 0f)
             {
-                control.playerRotation_Data.FaceForward(false);
+                control.PlayerRotation_Data.FaceForward(false);
             }
 
             if (!IsBlocked(control))

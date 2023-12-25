@@ -1,4 +1,3 @@
-using My_MemoPlatformer.Datasets;
 using UnityEngine;
 
 
@@ -15,7 +14,7 @@ namespace My_MemoPlatformer
             characterState.characterControl.moveRight = false;
 
             characterState.MomentumCalculator_Data.momentum = 0;
-            characterState.characterControl.Air_Control.SetBool((int)AirControlBool.CAN_WALL_JUMP, false);
+            characterState.PlayerJump_Data.canWallJump = false;
 
             characterState.VerticalVelocity_Data.maxWallSlideVelocity = maxFallVelocity;
         }
@@ -24,7 +23,7 @@ namespace My_MemoPlatformer
         {
             if (!characterState.characterControl.jump)
             {
-                characterState.characterControl.Air_Control.SetBool((int)AirControlBool.CAN_WALL_JUMP, true);
+                characterState.PlayerJump_Data.canWallJump = true;
             }
         }
 

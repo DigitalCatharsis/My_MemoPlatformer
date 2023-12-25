@@ -12,9 +12,11 @@ namespace My_MemoPlatformer
             PlayerJump_Data = new PlayerJump_Data
             {
                 jumped = false,
+                canWallJump = false,
+                checkWallBlock = false,
             };
 
-            subComponentProcessor.PlayerJump_Data = PlayerJump_Data;
+            subComponentProcessor.playerJump_Data = PlayerJump_Data;
         }
         public override void OnFixedUpdate()
         {

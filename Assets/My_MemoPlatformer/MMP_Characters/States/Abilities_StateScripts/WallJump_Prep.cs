@@ -1,4 +1,3 @@
-using My_MemoPlatformer.Datasets;
 using UnityEngine;
 
 
@@ -15,13 +14,13 @@ namespace My_MemoPlatformer
 
             characterState.characterControl.Rigid_Body.velocity = Vector3.zero;
 
-            if (characterState.characterControl.playerRotation_Data.IsFacingForward())   //make the character turn 
+            if (characterState.characterControl.PlayerRotation_Data.IsFacingForward())   //make the character turn 
             {
-                characterState.characterControl.playerRotation_Data.FaceForward(false);
+                characterState.characterControl.PlayerRotation_Data.FaceForward(false);
             }
             else
             {
-                characterState.characterControl.playerRotation_Data.FaceForward(true);
+                characterState.characterControl.PlayerRotation_Data.FaceForward(true);
             }
         }
 

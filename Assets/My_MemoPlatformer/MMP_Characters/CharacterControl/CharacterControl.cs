@@ -1,6 +1,4 @@
-using My_MemoPlatformer.Datasets;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -57,8 +55,6 @@ namespace My_MemoPlatformer
         public NavMeshObstacle navMeshObstacle;
         public InstaKill instakill;
 
-        public DataProcessor dataProcessor;
-
         public BlockingObj_Data BlockingObj_Data => subComponentProcessor.blockingObjData;
         public LedgeGrab_Data LedgeGrab_Data => subComponentProcessor.ledgeGrabData;
         public Ragdoll_Data Ragdoll_Data => subComponentProcessor.ragdollData;
@@ -66,10 +62,8 @@ namespace My_MemoPlatformer
         public BoxCollider_Data BoxCollider_Data => subComponentProcessor.boxCollider_Data;
         public DamageDetector_Data DamageDetector_Data => subComponentProcessor.damageDetector_Data;
         public MomentumCalculator_Data MomentumCalculator_Data => subComponentProcessor.momentumCalculator_Data;
-        public PlayerRotation_Data playerRotation_Data => subComponentProcessor.playerRotation_Data;
-
-
-        public Dataset Air_Control => dataProcessor.GetDataset(typeof(AirControl_Dataset));
+        public PlayerRotation_Data PlayerRotation_Data => subComponentProcessor.playerRotation_Data;
+        public PlayerJump_Data PlayerJump_Data => subComponentProcessor.playerJump_Data;
 
         [Header("Gravity")]
         public ContactPoint[] contactPoints;
@@ -110,10 +104,6 @@ namespace My_MemoPlatformer
             collisionSpheres = GetComponentInChildren<CollisionSpheres>();
             collisionSpheres.owner = this;
             collisionSpheres.SetColliderSpheres();
-
-            dataProcessor = this.gameObject.GetComponentInChildren<DataProcessor>();
-            System.Type[] arr = { typeof(AirControl_Dataset) };
-            dataProcessor.InitializeSets(arr);
 
             aiController = GetComponentInChildren<AIController>();
             if (aiController == null)
