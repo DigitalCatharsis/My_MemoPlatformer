@@ -4,11 +4,10 @@ using UnityEngine;
 namespace My_MemoPlatformer
 {
 
-    public class DamageDetector : MonoBehaviour  //Compare collision info versus attack input that is being registered
+    public class DamageDetector : SubComponent  //Compare collision info versus attack input that is being registered
     {
-
+        public DamageDetector_Data damageDetector_Data;   
         [SerializeField] private bool _debug;
-        private CharacterControl _control;
 
         [SerializeField] private float hp;
 
@@ -16,7 +15,6 @@ namespace My_MemoPlatformer
 
         [Header("Damage Info")]
         public Attack attack;
-        public CharacterControl attacker;
         public TriggerDetector damagedTrigger;
         public GameObject attackingPart;
         public AttackInfo blockedAttack;
@@ -29,17 +27,27 @@ namespace My_MemoPlatformer
         public Attack AxeThrow;
         public Attack airStompAttack;
 
-        private void Awake()
+        private void Start()
         {
-            _control = GetComponent<CharacterControl>();
+            damageDetector_Data = new DamageDetector_Data
+            {
+
+            };
+
+            subComponentProcessor.damageDetector_Data = damageDetector_Data;
+            subComponentProcessor.componentsDictionary.Add(SubComponentType.DAMAGE_DETECTOR_DATA, this);
         }
 
-        private void Update()
+        public override void OnUpdate()
         {
             if (AttackManager.Instance.currentAttacks.Count > 0)
             {
                 CheckAttack();
             }
+        }
+
+        public override void OnFixedUpdate()
+        {
         }
 
         private bool AttackIsValid(AttackInfo info)
@@ -64,7 +72,7 @@ namespace My_MemoPlatformer
                 return false;
             }
 
-            if (info.attacker == _control)
+            if (info.attacker == control)
             {
                 return false;
             }
@@ -78,7 +86,7 @@ namespace My_MemoPlatformer
                 }
             }
 
-            if (info.registeredTargets.Contains(this._control))  //prevent several times damage from one attack
+            if (info.registeredTargets.Contains(this.control))  //prevent several times damage from one attack
             {
                 return false;
             }
@@ -94,7 +102,7 @@ namespace My_MemoPlatformer
                 {
                     if (info.mustCollide)
                     {
-                        if (_control.animationProgress.collidingBodyParts.Count != 0)
+                        if (control.animationProgress.collidingBodyParts.Count != 0)
                         {
                             if (IsCollided(info))
                             {
@@ -115,7 +123,7 @@ namespace My_MemoPlatformer
 
         private bool IsCollided(AttackInfo info)
         {
-            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in _control.animationProgress.collidingBodyParts)
+            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in control.animationProgress.collidingBodyParts)
             {
                 foreach (Collider collider in data.Value)
                 {
@@ -123,11 +131,11 @@ namespace My_MemoPlatformer
                     {
                         if (info.attacker.GetAttackingPart(part) == collider.gameObject)
                         {
-                            _control.damageDetector.attack = info.attackAbility;
-                            _control.damageDetector.attacker = info.attacker;
+                            control.damageDetector.attack = info.attackAbility;
+                            control.damageDetector_Data.attacker = info.attacker;
 
-                            _control.damageDetector.damagedTrigger = data.Key;
-                            _control.damageDetector.attackingPart = info.attacker.GetAttackingPart(part);
+                            control.damageDetector.damagedTrigger = data.Key;
+                            control.damageDetector.attackingPart = info.attacker.GetAttackingPart(part);
                             return true;
                         }
                     }
@@ -138,17 +146,17 @@ namespace My_MemoPlatformer
 
         private bool IsInLethalRange(AttackInfo info)
         {
-            foreach (var c in _control.RagdollData.bodyParts)
+            foreach (var c in control.RagdollData.bodyParts)
             {
                 float dist = Vector3.SqrMagnitude(c.transform.position - info.attacker.transform.position); //distance between target and attacker
                                                                                                                           //Debug.Log(this.gameObject.name + "dist: "+ dist.ToString() );
                 if (dist <= info.lethalRange)
                 {
-                    _control.damageDetector.attack = info.attackAbility;
-                    _control.damageDetector.attacker = info.attacker;
+                    control.damageDetector.attack = info.attackAbility;
+                    control.damageDetector_Data.attacker = info.attacker;
 
-                    int index = Random.Range(0, _control.RagdollData.bodyParts.Count);
-                    _control.damageDetector.damagedTrigger = _control.RagdollData.bodyParts[index].GetComponent<TriggerDetector>();
+                    int index = Random.Range(0, control.RagdollData.bodyParts.Count);
+                    control.damageDetector.damagedTrigger = control.RagdollData.bodyParts[index].GetComponent<TriggerDetector>();
                     return true;
                 }
             }
@@ -174,20 +182,20 @@ namespace My_MemoPlatformer
                 return attack;
             }
 
-            if (_control.animationProgress.IsRunning(typeof(Block)))
+            if (control.animationProgress.IsRunning(typeof(Block)))
             {
-                var dir = info.attacker.transform.position - _control.transform.position;
+                var dir = info.attacker.transform.position - control.transform.position;
 
                 if (dir.z > 0f)
                 {
-                    if (_control.IsFacingForward())
+                    if (control.IsFacingForward())
                     {
                         return true;
                     }
                 }
                 else if (dir.z < 0f)
                 {
-                    if (!_control.IsFacingForward())
+                    if (!control.IsFacingForward())
                     {
                         return true;
                     }
@@ -201,10 +209,10 @@ namespace My_MemoPlatformer
         {
             if (IsDead())  //templory fix for hitting dead enemy
             {
-                if (!info.registeredTargets.Contains(this._control))
+                if (!info.registeredTargets.Contains(this.control))
                 {
-                    info.registeredTargets.Add(this._control);
-                    _control.AddForceToDamagedPart(true);
+                    info.registeredTargets.Add(this.control);
+                    control.AddForceToDamagedPart(true);
                 }
                 return;
             }
@@ -225,7 +233,7 @@ namespace My_MemoPlatformer
                     {
                         GameObject vfx = PoolManager.Instance.GetObject(info.attackAbility.ParticleType);
 
-                        vfx.transform.position = _control.damageDetector.attackingPart.transform.position;
+                        vfx.transform.position = control.damageDetector.attackingPart.transform.position;
 
                         vfx.SetActive(true);
 
@@ -249,54 +257,54 @@ namespace My_MemoPlatformer
             info.currentHits++;
             hp -= info.attackAbility.damage;
 
-            AttackManager.Instance.ForceDeregester(_control);
-            _control.animationProgress.currentRunningAbilities.Clear();
+            AttackManager.Instance.ForceDeregester(control);
+            control.animationProgress.currentRunningAbilities.Clear();
             
 
             if (IsDead())
             {
-                _control.RagdollData.ragdollTriggered = true;
+                control.RagdollData.ragdollTriggered = true;
             }
             else
             {
                 var rand = Random.Range(0, _hitReactionList.Count);
 
-                _control.skinnedMeshAnimator.runtimeAnimatorController = null; //need this to restart the animation if get several hits in a short period of time
-                _control.skinnedMeshAnimator.runtimeAnimatorController = _hitReactionList[rand];
-            }
+                control.skinnedMeshAnimator.runtimeAnimatorController = null; //need this to restart the animation if get several hits in a short period of time
+                control.skinnedMeshAnimator.runtimeAnimatorController = _hitReactionList[rand];
+            }   
 
 
-            if (!info.registeredTargets.Contains(this._control))
+            if (!info.registeredTargets.Contains(this.control))
             {
-                info.registeredTargets.Add(this._control);
+                info.registeredTargets.Add(this.control);
             }
         }
 
         public void TriggerSpikeDeath(RuntimeAnimatorController animator)
         {
-            _control.skinnedMeshAnimator.runtimeAnimatorController = animator;
+            control.skinnedMeshAnimator.runtimeAnimatorController = animator;
         }
 
         public void DeathBySpikes()
         {
-            _control.damageDetector.damagedTrigger = null;
+            control.damageDetector.damagedTrigger = null;
             hp = 0f;
         }
         public void DeathByInstakill(CharacterControl attacker)
         {
-            _control.animationProgress.currentRunningAbilities.Clear();
+            control.animationProgress.currentRunningAbilities.Clear();
             attacker.animationProgress.currentRunningAbilities.Clear();
 
-            _control.Rigid_Body.useGravity = false;
-            _control.boxCollider.enabled = false;
-            _control.skinnedMeshAnimator.runtimeAnimatorController = Assassination_Victim;
+            control.Rigid_Body.useGravity = false;
+            control.boxCollider.enabled = false;
+            control.skinnedMeshAnimator.runtimeAnimatorController = Assassination_Victim;
 
 
             attacker.Rigid_Body.useGravity = false;
             attacker.boxCollider.enabled = false;
             attacker.skinnedMeshAnimator.runtimeAnimatorController = Assassination_Assassin;
 
-            var dir = _control.transform.position - attacker.transform.position;
+            var dir = control.transform.position - attacker.transform.position;
             
             if (dir.z < 0f) 
             {
@@ -307,8 +315,8 @@ namespace My_MemoPlatformer
                 attacker.FaceForward(true);
             }
 
-            _control.transform.LookAt(_control.transform.position + (attacker.transform.forward * 5f), Vector3.up);
-            _control.transform.position = attacker.transform.position + (attacker.transform.forward * 0.45f);
+            control.transform.LookAt(control.transform.position + (attacker.transform.forward * 5f), Vector3.up);
+            control.transform.position = attacker.transform.position + (attacker.transform.forward * 0.45f);
 
             hp = 0f;
         }

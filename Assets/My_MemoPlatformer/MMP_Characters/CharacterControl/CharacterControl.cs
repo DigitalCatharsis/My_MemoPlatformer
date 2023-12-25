@@ -65,6 +65,7 @@ namespace My_MemoPlatformer
         public Dataset Air_Control => dataProcessor.GetDataset(typeof(AirControl_Dataset));
         public ManualInput_Data ManualInpu_Data => subComponentProcessor.manualInput_Data;
         public BoxCollider_Data BoxCollider_Data => subComponentProcessor.boxCollider_Data;
+        public DamageDetector_Data damageDetector_Data => subComponentProcessor.damageDetector_Data;
 
         [Header("Gravity")]
         public ContactPoint[] contactPoints;
@@ -150,9 +151,9 @@ namespace My_MemoPlatformer
                 }
 
                 damageDetector.damagedTrigger.GetComponent<Rigidbody>().
-                     AddForce(damageDetector.attacker.transform.forward * damageDetector.attack.forwardForce +
-                          damageDetector.attacker.transform.right * damageDetector.attack.rightForce +
-                             damageDetector.attacker.transform.up * damageDetector.attack.upForce);
+                     AddForce(damageDetector_Data.attacker.transform.forward * damageDetector.attack.forwardForce +
+                          damageDetector_Data.attacker.transform.right * damageDetector.attack.rightForce +
+                             damageDetector_Data.attacker.transform.up * damageDetector.attack.upForce);
             }
         }
 

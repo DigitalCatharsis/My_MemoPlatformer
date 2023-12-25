@@ -1515,7 +1515,6 @@ GameObject:
   - component: {fileID: 2430949021683835266}
   - component: {fileID: 2430949021683835267}
   - component: {fileID: 8003498278013731179}
-  - component: {fileID: 4542326154330732370}
   - component: {fileID: 936084455}
   - component: {fileID: 1747402107}
   - component: {fileID: 8772349004802611497}
@@ -1622,32 +1621,6 @@ MonoBehaviour:
   CurrentObjects: []
   CurrentMaterials: []
   NewMaterials: []
---- !u!114 &4542326154330732370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3372119544377188088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80ce156c695f6fa4dadd5a2b226dc977, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _debug: 0
-  hp: 3
-  _hitReactionList:
-  - {fileID: 9100000, guid: e06831303a0df0f4eabcb778560a1ea8, type: 2}
-  - {fileID: 9100000, guid: 59bd317eca619a2499e6be92d3e5c518, type: 2}
-  attack: {fileID: 0}
-  attacker: {fileID: 0}
-  damagedTrigger: {fileID: 0}
-  attackingPart: {fileID: 0}
-  blockedAttack: {fileID: 0}
-  Assassination_Assassin: {fileID: 9100000, guid: 1ff8244958f934742a2835e1c827d59c, type: 2}
-  Assassination_Victim: {fileID: 9100000, guid: ae6282d82d780684b889b8ad9c9da487, type: 2}
-  AxeThrow: {fileID: 11400000, guid: a887d67403fa15e4f9758370f2bce396, type: 2}
-  airStompAttack: {fileID: 11400000, guid: 270577db070e447499e094b119ff8aa1, type: 2}
 --- !u!54 &936084455
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3346,6 +3319,64 @@ Transform:
   m_Father: {fileID: 2979884157917687692}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6953080380928779147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2047273890012996326}
+  - component: {fileID: 8443160812094211633}
+  m_Layer: 9
+  m_Name: DamageDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2047273890012996326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6953080380928779147}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2838286670764771645}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8443160812094211633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6953080380928779147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ce156c695f6fa4dadd5a2b226dc977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debug: 0
+  hp: 3
+  _hitReactionList:
+  - {fileID: 9100000, guid: e06831303a0df0f4eabcb778560a1ea8, type: 2}
+  - {fileID: 9100000, guid: 59bd317eca619a2499e6be92d3e5c518, type: 2}
+  attack: {fileID: 0}
+  attacker: {fileID: 0}
+  damagedTrigger: {fileID: 0}
+  attackingPart: {fileID: 0}
+  blockedAttack: {fileID: 0}
+  Assassination_Assassin: {fileID: 9100000, guid: 1ff8244958f934742a2835e1c827d59c, type: 2}
+  Assassination_Victim: {fileID: 9100000, guid: ae6282d82d780684b889b8ad9c9da487, type: 2}
+  AxeThrow: {fileID: 11400000, guid: a887d67403fa15e4f9758370f2bce396, type: 2}
+  airStompAttack: {fileID: 11400000, guid: 270577db070e447499e094b119ff8aa1, type: 2}
 --- !u!1 &7020094712125406493
 GameObject:
   m_ObjectHideFlags: 0
@@ -3855,6 +3886,7 @@ Transform:
   - {fileID: 4751183889889371912}
   - {fileID: 559100818167184587}
   - {fileID: 3143708995062494809}
+  - {fileID: 2047273890012996326}
   m_Father: {fileID: 3372119544377188092}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3888,6 +3920,9 @@ MonoBehaviour:
     targetCenter: {x: 0, y: 0, z: 0}
     targetSize: {x: 0, y: 0, z: 0}
     landingPosition: {x: 0, y: 0, z: 0}
+  verticalVelocity_Data:
+    noJumpCancel: 0
+    maxWallSlideVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &7745837032654152969
 GameObject:
   m_ObjectHideFlags: 0

@@ -1105,6 +1105,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: --Y_YBot - Yellow
       objectReference: {fileID: 0}
+    - target: {fileID: 3372119544377188088, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3372119544377188092, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -4933,7 +4937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3252920735630016699, guid: adff31e199afa174c9c544399732b118, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8737855401915161938, guid: adff31e199afa174c9c544399732b118, type: 3}
       propertyPath: m_CastShadows

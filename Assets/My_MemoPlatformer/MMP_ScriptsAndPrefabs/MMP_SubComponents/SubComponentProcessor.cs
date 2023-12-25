@@ -21,6 +21,8 @@ namespace My_MemoPlatformer
         public BoxCollider_Data boxCollider_Data;
         [Space(15)]
         public VerticalVelocity_Data verticalVelocity_Data;
+        [Space(15)]
+        public DamageDetector_Data damageDetector_Data;
 
         private void Awake()
         {
@@ -37,6 +39,7 @@ namespace My_MemoPlatformer
         public void UpdateSubComponents()
         {
             UpdateSubComponent(SubComponentType.MANUALINPUT);
+            UpdateSubComponent(SubComponentType.DAMAGE_DETECTOR_DATA);
         }
 
         private void UpdateSubComponent(SubComponentType type)

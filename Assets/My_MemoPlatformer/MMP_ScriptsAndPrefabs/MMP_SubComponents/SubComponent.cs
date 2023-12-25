@@ -11,6 +11,7 @@ namespace My_MemoPlatformer
         BLOCKINGOBJECTS,
         BOX_COLLIDER_UPDATER,
         VERTICALVELOCITY_DATA,
+        DAMAGE_DETECTOR_DATA,
     }
 
     public abstract class SubComponent : MonoBehaviour

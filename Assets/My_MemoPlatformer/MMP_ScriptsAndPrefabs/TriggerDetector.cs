@@ -81,7 +81,7 @@ namespace My_MemoPlatformer
 
                     control.damageDetector.damagedTrigger = this;
                     control.damageDetector.attack = control.damageDetector.AxeThrow;
-                    control.damageDetector.attacker = w.thrower;
+                    control.damageDetector_Data.attacker = w.thrower;
                     control.damageDetector.attackingPart = w.thrower.rightHand_Attack;
 
                     control.damageDetector.TakeDamage(info);
