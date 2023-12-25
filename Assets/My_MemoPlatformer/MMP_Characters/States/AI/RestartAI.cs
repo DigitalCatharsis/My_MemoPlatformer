@@ -45,7 +45,7 @@ namespace My_MemoPlatformer
             }
             else
             {
-                var objs = characterState.characterControl.BlockingObjData.GetFrontBlockingCharactersList();
+                var objs = characterState.characterControl.BlockingObj_Data.GetFrontBlockingCharactersList();
 
                 foreach (var o in objs)
                 {

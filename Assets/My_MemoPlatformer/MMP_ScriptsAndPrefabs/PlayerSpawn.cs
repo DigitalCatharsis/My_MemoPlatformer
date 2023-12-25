@@ -47,7 +47,7 @@ namespace My_MemoPlatformer
             foreach (Cinemachine.CinemachineVirtualCamera v in arr)
             {
                 var control =  CharacterManager.Instance.GetCharacter(_characterSelect.selectedCharacterType);
-                Collider target = control.RagdollData.GetBodypart("mixamorig:Spine1");
+                Collider target = control.Ragdoll_Data.GetBodypart("mixamorig:Spine1");
 
                 v.LookAt = target.transform;
                 v.Follow = target.transform;

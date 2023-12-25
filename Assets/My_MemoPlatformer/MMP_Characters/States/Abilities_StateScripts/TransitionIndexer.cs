@@ -142,7 +142,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.GRABBING_LEDGE:
                         {
-                            if (!control.LedgeGrabData.isGrabbingLedge)
+                            if (!control.LedgeGrab_Data.isGrabbingLedge)
                             {
                                 return false;
                             }
@@ -150,7 +150,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.NOT_GRABBING_LEDGE:
                         {
-                            if (control.LedgeGrabData.isGrabbingLedge)
+                            if (control.LedgeGrab_Data.isGrabbingLedge)
                             {
                                 return false;
                             }
@@ -214,7 +214,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.MOVING_TO_BLOCKING_OBG:
                         {
-                            var objs = control.BlockingObjData.GetFrontBlockingObjList();
+                            var objs = control.BlockingObj_Data.GetFrontBlockingObjList();
 
                             foreach (var o in objs) 
                             {

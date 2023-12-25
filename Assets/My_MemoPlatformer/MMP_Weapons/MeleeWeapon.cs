@@ -132,7 +132,7 @@ namespace My_MemoPlatformer
 
         public void RemoveWeaponFromDictionary(CharacterControl c)
         {
-            foreach (var col in c.RagdollData.bodyParts)
+            foreach (var col in c.Ragdoll_Data.bodyParts)
             {
                 var t = col.GetComponent<TriggerDetector>();
 

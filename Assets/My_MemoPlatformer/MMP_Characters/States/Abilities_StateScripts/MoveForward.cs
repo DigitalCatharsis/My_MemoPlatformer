@@ -143,7 +143,7 @@ namespace My_MemoPlatformer
             var currentMomentum = control.Air_Control.GetFloat((int)AirControlFloat.AIR_MOMENTUM);
             var currentSpeed = speedGraph.Evaluate(stateInfo.normalizedTime) * speed * Time.deltaTime;
 
-            if (!control.BlockingObjData.RightSideBLocked())
+            if (!control.BlockingObj_Data.RightSideBLocked())
             {
                 if (control.moveRight)
                 {
@@ -151,7 +151,7 @@ namespace My_MemoPlatformer
                 }
             }
 
-            if (!control.BlockingObjData.LeftSideBlocked())
+            if (!control.BlockingObj_Data.LeftSideBlocked())
             {
                 if (control.moveLeft)
                 {
@@ -159,7 +159,7 @@ namespace My_MemoPlatformer
                 }
             }
 
-            if (control.BlockingObjData.RightSideBLocked() || control.BlockingObjData.LeftSideBlocked())
+            if (control.BlockingObj_Data.RightSideBLocked() || control.BlockingObj_Data.LeftSideBlocked())
             {
                 var lerp = Mathf.Lerp(currentMomentum, 0f, Time.deltaTime * 1.5f);
 
@@ -296,7 +296,7 @@ namespace My_MemoPlatformer
 
         private bool IsBlocked(CharacterControl control)
         {
-            if (control.BlockingObjData.frontBlockingDictionaryCount != 0)
+            if (control.BlockingObj_Data.frontBlockingDictionaryCount != 0)
             {
                 return true;
             }

@@ -34,7 +34,7 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (control.RagdollData.bodyParts.Contains(col))  //touching own collider
+            if (control.Ragdoll_Data.bodyParts.Contains(col))  //touching own collider
             {
                 return;
             }
@@ -79,10 +79,7 @@ namespace My_MemoPlatformer
                     var info = new AttackInfo();
                     info.CopyInfo(control.damageDetector.AxeThrow, control);
 
-                    control.damageDetector_Data.damagedTrigger = this;
-                    control.damageDetector_Data.attack = control.damageDetector.AxeThrow;
-                    control.damageDetector_Data.attacker = w.thrower;
-                    control.damageDetector_Data.attackingPart = w.thrower.rightHand_Attack;
+                    control.damageDetector_Data.SetData(w.thrower, control.damageDetector.AxeThrow, this, null);
 
                     control.damageDetector.TakeDamage(info);
 

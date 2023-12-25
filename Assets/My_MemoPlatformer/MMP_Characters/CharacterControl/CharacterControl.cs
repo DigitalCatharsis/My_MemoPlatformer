@@ -59,9 +59,9 @@ namespace My_MemoPlatformer
 
         public DataProcessor dataProcessor;
 
-        public BlockingObj_Data BlockingObjData => subComponentProcessor.blockingObjData;
-        public LedgeGrab_Data LedgeGrabData => subComponentProcessor.ledgeGrabData;
-        public Ragdoll_Data RagdollData => subComponentProcessor.ragdollData;
+        public BlockingObj_Data BlockingObj_Data => subComponentProcessor.blockingObjData;
+        public LedgeGrab_Data LedgeGrab_Data => subComponentProcessor.ledgeGrabData;
+        public Ragdoll_Data Ragdoll_Data => subComponentProcessor.ragdollData;
         public Dataset Air_Control => dataProcessor.GetDataset(typeof(AirControl_Dataset));
         public ManualInput_Data ManualInpu_Data => subComponentProcessor.manualInput_Data;
         public BoxCollider_Data BoxCollider_Data => subComponentProcessor.boxCollider_Data;
@@ -144,7 +144,7 @@ namespace My_MemoPlatformer
             {
                 if (zeroZelocity)
                 {
-                    foreach (Collider c in RagdollData.bodyParts)
+                    foreach (Collider c in Ragdoll_Data.bodyParts)
                     {
                         c.attachedRigidbody.velocity = Vector3.zero;
                     }

@@ -136,6 +136,8 @@ namespace My_MemoPlatformer
 
                             damageDetector_Data.damagedTrigger = data.Key;
                             damageDetector_Data.attackingPart = info.attacker.GetAttackingPart(part);
+
+                            damageDetector_Data.SetData(info.attacker,info.attackAbility,data.Key,info.attacker.GetAttackingPart(part));
                             return true;
                         }
                     }
@@ -146,17 +148,16 @@ namespace My_MemoPlatformer
 
         private bool IsInLethalRange(AttackInfo info)
         {
-            foreach (var c in control.RagdollData.bodyParts)
+            foreach (var c in control.Ragdoll_Data.bodyParts)
             {
                 float dist = Vector3.SqrMagnitude(c.transform.position - info.attacker.transform.position); //distance between target and attacker
                                                                                                             //Debug.Log(this.gameObject.name + "dist: "+ dist.ToString() );
                 if (dist <= info.lethalRange)
                 {
-                    damageDetector_Data.attack = info.attackAbility;
-                    control.damageDetector_Data.attacker = info.attacker;
+                    int index = Random.Range(0, control.Ragdoll_Data.bodyParts.Count);
+                    var triggerDetector = control.Ragdoll_Data.bodyParts[index].GetComponent<TriggerDetector>();
 
-                    int index = Random.Range(0, control.RagdollData.bodyParts.Count);
-                    damageDetector_Data.damagedTrigger = control.RagdollData.bodyParts[index].GetComponent<TriggerDetector>();
+                    damageDetector_Data.SetData(info.attacker, info.attackAbility, triggerDetector, null);
                     return true;
                 }
             }
@@ -251,7 +252,7 @@ namespace My_MemoPlatformer
 
             if (IsDead())
             {
-                control.RagdollData.ragdollTriggered = true;
+                control.Ragdoll_Data.ragdollTriggered = true;
             }
             else
             {
