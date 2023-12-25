@@ -319,6 +319,50 @@ Transform:
   m_Father: {fileID: 5384060028677536349}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1104078879428963464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3143708995062494809}
+  - component: {fileID: 4279002999893990411}
+  m_Layer: 9
+  m_Name: VerticalVelocity
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3143708995062494809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104078879428963464}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2838286670764771645}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4279002999893990411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104078879428963464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fee4fb8d5e8653449859c1d1257253d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1124313125906359194
 GameObject:
   m_ObjectHideFlags: 0
@@ -1654,13 +1698,6 @@ MonoBehaviour:
   isIgnoreCharacterTime: 0
   ground: {fileID: 0}
   collidingPoint: {x: 0, y: 0, z: 0}
-  updatingSpheres: 0
-  targetSize: {x: 0, y: 0, z: 0}
-  sizeSpeed: 0
-  targetCenter: {x: 0, y: 0, z: 0}
-  centerSpeed: 0
-  landingPosition: {x: 0, y: 0, z: 0}
-  isLanding: 0
   lockTransition: 0
   HoldingWeapon: {fileID: 0}
 --- !u!114 &8772349004802611497
@@ -3353,6 +3390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5064a9a467d2e9b4d9b5d92fed279ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debug: 0
 --- !u!1 &7180817089236728352
 GameObject:
   m_ObjectHideFlags: 0
@@ -3816,6 +3854,7 @@ Transform:
   - {fileID: 6629428920720007203}
   - {fileID: 4751183889889371912}
   - {fileID: 559100818167184587}
+  - {fileID: 3143708995062494809}
   m_Father: {fileID: 3372119544377188092}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3841,6 +3880,14 @@ MonoBehaviour:
     ragdollTriggered: 0
     bodyParts: []
   manualInput_Data: {fileID: 0}
+  boxCollider_Data:
+    updatingSpheres: 0
+    isLanding: 0
+    size_Update_Speed: 0
+    center_Update_Speed: 0
+    targetCenter: {x: 0, y: 0, z: 0}
+    targetSize: {x: 0, y: 0, z: 0}
+    landingPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &7745837032654152969
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ namespace My_MemoPlatformer
         RAGDOLL,
         BLOCKINGOBJECTS,
         BOX_COLLIDER_UPDATER,
+        VERTICALVELOCITY_DATA,
     }
 
     public abstract class SubComponent : MonoBehaviour

@@ -19,6 +19,8 @@ namespace My_MemoPlatformer
         public ManualInput_Data manualInput_Data;
         [Space(15)]
         public BoxCollider_Data boxCollider_Data;
+        [Space(15)]
+        public VerticalVelocity_Data verticalVelocity_Data;
 
         private void Awake()
         {
@@ -30,6 +32,7 @@ namespace My_MemoPlatformer
             FixedUpdateSubComponent(SubComponentType.RAGDOLL);
             FixedUpdateSubComponent(SubComponentType.BLOCKINGOBJECTS);
             FixedUpdateSubComponent(SubComponentType.BOX_COLLIDER_UPDATER);
+            FixedUpdateSubComponent(SubComponentType.VERTICALVELOCITY_DATA);
         }
         public void UpdateSubComponents()
         {

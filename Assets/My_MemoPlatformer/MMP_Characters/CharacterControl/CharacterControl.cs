@@ -130,28 +130,6 @@ namespace My_MemoPlatformer
         private void FixedUpdate()
         {
             subComponentProcessor.FixedUpdateSubComponents();
-
-            var cancelPull = Air_Control.GetBool((int)AirControlBool.CANCEL_PULL);
-
-            //fall
-            if (!cancelPull)
-            {
-                if (Rigid_Body.velocity.y > 0f && !jump)
-                {
-                    Rigid_Body.velocity -= (Vector3.up * Rigid_Body.velocity.y * 0.1f);    //Высота прыжка в зависимости от длительности нажатия
-                }
-            }
-
-            var maxFallVelocity = Air_Control.GetVecto3((int)AirControlVector3.MAX_FALL_VELOCITY);
-
-            //slow down wallslide
-            if (maxFallVelocity.y != 0f)
-            {
-                if (Rigid_Body.velocity.y <= maxFallVelocity.y)
-                {
-                    Rigid_Body.velocity = maxFallVelocity;
-                }
-            }
         }
 
         private void OnCollisionStay(Collision collision)
