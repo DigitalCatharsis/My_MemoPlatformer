@@ -10,12 +10,11 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            characterState.characterControl.animationProgress.disAllowEarlyTurn= true;
+            characterState.PlayerRotation_Data.lockEarlyTurn= true;
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
-            
+        {          
 
         }
 

@@ -16,17 +16,13 @@ namespace My_MemoPlatformer
         public bool attackTriggered;
         public bool attackButtonIsReset;
 
-
         [Header("GroundMovement")]
-        public bool disAllowEarlyTurn;
-        public bool lockDirectionNextState;
         public bool isIgnoreCharacterTime; //slide beyond character (start ignoring character collider)
 
         [Header("Colliding Objects")]
         public GameObject ground;
         public Dictionary<TriggerDetector, List<Collider>> collidingBodyParts = new Dictionary<TriggerDetector, List<Collider>>(); //key trigger detectors, value - colliding bodyparts which are in contract with trigger detectors
         public Dictionary<TriggerDetector, List<Collider>> collidingWeapons = new Dictionary<TriggerDetector, List<Collider>>(); //key trigger detectors, value - colliding bodyparts which are in contract with trigger detectors
-
 
         public Vector3 collidingPoint = new Vector3();
 

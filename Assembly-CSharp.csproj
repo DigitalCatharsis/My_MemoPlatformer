@@ -75,6 +75,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_Data\BoxCollider_Data.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\MouseControl.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\AttackManager.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_SubComponents\PlayerRotation.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\SwitchAnimator.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\VirtualInputManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\JumpPrep.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_PathfindingAgent\PathFindingAgent.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\LockTransition.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\AISubset.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_Data\PlayerRotation_Data.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\Jump.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\ShakeCamera.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_SubComponents\Ragdoll.cs" />

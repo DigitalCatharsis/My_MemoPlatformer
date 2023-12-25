@@ -39,9 +39,10 @@ namespace My_MemoPlatformer
         {
             characterState.characterControl.animationProgress.latestMoveForwardScript = this;
 
-            if (allowEarlyTurn && !characterState.characterControl.animationProgress.disAllowEarlyTurn)
+            if (allowEarlyTurn)
             {
-                if (!characterState.characterControl.animationProgress.lockDirectionNextState)
+                // early turn can be locked by previous states
+                if (!characterState.PlayerRotation_Data.EarlyTurnIsLocked())
                 {
                     if (characterState.characterControl.moveLeft)
                     {
@@ -66,8 +67,8 @@ namespace My_MemoPlatformer
                 }
             }
 
-            characterState.characterControl.animationProgress.disAllowEarlyTurn = false;
-            characterState.characterControl.animationProgress.lockDirectionNextState = false;
+            characterState.PlayerRotation_Data.lockEarlyTurn = false;
+            characterState.PlayerRotation_Data.lockDirectionNextState = false;
 
 
         }
@@ -80,7 +81,7 @@ namespace My_MemoPlatformer
                 Debug.Log(stateInfo.normalizedTime);
             }
 
-            characterState.characterControl.animationProgress.lockDirectionNextState = lockDirectionNextState;
+            characterState.PlayerRotation_Data.lockDirectionNextState = lockDirectionNextState;
 
             if (characterState.characterControl.animationProgress.latestMoveForwardScript != this)
             {

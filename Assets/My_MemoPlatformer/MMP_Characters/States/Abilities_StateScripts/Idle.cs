@@ -15,13 +15,13 @@ namespace My_MemoPlatformer
             animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Attack], false);
             animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], false);
 
-            characterState.characterControl.animationProgress.disAllowEarlyTurn = false;
+            characterState.PlayerRotation_Data.lockEarlyTurn = false;
             characterState.BlockingObjData.ClearFrontBlockingObjDic();
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            characterState.characterControl.animationProgress.lockDirectionNextState = false;
+            characterState.PlayerRotation_Data.lockEarlyTurn = false;
 
             if (characterState.characterControl.jump)
             {

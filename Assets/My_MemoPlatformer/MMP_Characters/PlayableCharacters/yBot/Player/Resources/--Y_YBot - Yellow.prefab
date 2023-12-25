@@ -2187,6 +2187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ce3c64c369f8f44a9bfbbe749717b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  momentumCalculator_Data:
+    momentum: 0
 --- !u!1 &4152838678372553637
 GameObject:
   m_ObjectHideFlags: 0
@@ -2750,6 +2752,50 @@ Transform:
   m_Father: {fileID: 1318701341189441266}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5436518649288956060
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6749269195957879655}
+  - component: {fileID: 1846692375181530315}
+  m_Layer: 9
+  m_Name: PlayerRotation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6749269195957879655
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5436518649288956060}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2838286670764771645}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1846692375181530315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5436518649288956060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d3121aa4e082ed4c92413999d79ee6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5580213925392410522
 GameObject:
   m_ObjectHideFlags: 0
@@ -3933,6 +3979,7 @@ Transform:
   - {fileID: 3143708995062494809}
   - {fileID: 2047273890012996326}
   - {fileID: 2232804196577716856}
+  - {fileID: 6749269195957879655}
   m_Father: {fileID: 3372119544377188092}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3975,6 +4022,8 @@ MonoBehaviour:
     damagedTrigger: {fileID: 0}
     attackingPart: {fileID: 0}
     blockedAttack: {fileID: 0}
+  momentumCalculator_Data:
+    momentum: 0
 --- !u!1 &7745837032654152969
 GameObject:
   m_ObjectHideFlags: 0
