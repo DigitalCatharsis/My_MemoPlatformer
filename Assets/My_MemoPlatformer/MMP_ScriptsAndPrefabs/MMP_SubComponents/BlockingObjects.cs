@@ -34,7 +34,7 @@ namespace My_MemoPlatformer
             };
 
             subComponentProcessor.blockingObjData = blockingObjData;
-            subComponentProcessor.componentsDictionary.Add(SubComponents.BLOCKINGOBJECTS, this);
+            subComponentProcessor.componentsDictionary.Add(SubComponentType.BLOCKINGOBJECTS, this);
         }
 
         public override void OnFixedUpdate()

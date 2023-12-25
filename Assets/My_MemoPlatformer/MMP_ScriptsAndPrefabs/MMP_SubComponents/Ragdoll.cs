@@ -19,7 +19,7 @@ namespace My_MemoPlatformer
 
             SetupBodyParts();
             subComponentProcessor.ragdollData = ragdollData;
-            subComponentProcessor.componentsDictionary.Add(SubComponents.RAGDOLL, this);
+            subComponentProcessor.componentsDictionary.Add(SubComponentType.RAGDOLL, this);
         }
 
         public override void OnFixedUpdate()

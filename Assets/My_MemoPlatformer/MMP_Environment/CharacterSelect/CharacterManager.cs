@@ -48,7 +48,7 @@ namespace My_MemoPlatformer
         {
             foreach (var control in characters)
             {
-                if (control.subComponentProcessor.componentsDictionary.ContainsKey(SubComponents.MANUALINPUT))
+                if (control.subComponentProcessor.componentsDictionary.ContainsKey(SubComponentType.MANUALINPUT))
                 {
                     return control;
                 }

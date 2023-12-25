@@ -6,7 +6,7 @@ namespace My_MemoPlatformer
 {
     public class SubComponentProcessor : MonoBehaviour
     {
-        public Dictionary<SubComponents, SubComponent> componentsDictionary = new Dictionary<SubComponents, SubComponent>();
+        public Dictionary<SubComponentType, SubComponent> componentsDictionary = new Dictionary<SubComponentType, SubComponent>();
         public CharacterControl control;
 
         [Space(15)]
@@ -26,23 +26,24 @@ namespace My_MemoPlatformer
         }
         public void FixedUpdateSubComponents()
         {
-            FixedUpdateSubComponent(SubComponents.LEDGECHECKER);
-            FixedUpdateSubComponent(SubComponents.RAGDOLL);
-            FixedUpdateSubComponent(SubComponents.BLOCKINGOBJECTS);
+            FixedUpdateSubComponent(SubComponentType.LEDGECHECKER);
+            FixedUpdateSubComponent(SubComponentType.RAGDOLL);
+            FixedUpdateSubComponent(SubComponentType.BLOCKINGOBJECTS);
+            FixedUpdateSubComponent(SubComponentType.BOX_COLLIDER_UPDATER);
         }
         public void UpdateSubComponents()
         {
-            UpdateSubComponent(SubComponents.MANUALINPUT);
+            UpdateSubComponent(SubComponentType.MANUALINPUT);
         }
 
-        private void UpdateSubComponent(SubComponents type)
+        private void UpdateSubComponent(SubComponentType type)
         {
             if (componentsDictionary.ContainsKey(type))
             {
                 componentsDictionary[type].OnUpdate();
             }
         }
-        private void FixedUpdateSubComponent(SubComponents type)
+        private void FixedUpdateSubComponent(SubComponentType type)
         {
             if (componentsDictionary.ContainsKey(type))
             {

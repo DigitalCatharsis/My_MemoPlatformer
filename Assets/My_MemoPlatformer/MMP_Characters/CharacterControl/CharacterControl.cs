@@ -120,7 +120,45 @@ namespace My_MemoPlatformer
             }
 
             RegisterCharacter();
-        }        
+        }
+
+        private void Update()
+        {
+            subComponentProcessor.UpdateSubComponents();
+        }
+
+        private void FixedUpdate()
+        {
+            subComponentProcessor.FixedUpdateSubComponents();
+
+            var cancelPull = Air_Control.GetBool((int)AirControlBool.CANCEL_PULL);
+
+            //fall
+            if (!cancelPull)
+            {
+                if (Rigid_Body.velocity.y > 0f && !jump)
+                {
+                    Rigid_Body.velocity -= (Vector3.up * Rigid_Body.velocity.y * 0.1f);    //Высота прыжка в зависимости от длительности нажатия
+                }
+            }
+
+            var maxFallVelocity = Air_Control.GetVecto3((int)AirControlVector3.MAX_FALL_VELOCITY);
+
+            //slow down wallslide
+            if (maxFallVelocity.y != 0f)
+            {
+                if (Rigid_Body.velocity.y <= maxFallVelocity.y)
+                {
+                    Rigid_Body.velocity = maxFallVelocity;
+                }
+            }
+        }
+
+        private void OnCollisionStay(Collision collision)
+        {
+            contactPoints = collision.contacts;
+        }
+
         public void AddForceToDamagedPart(bool zeroZelocity)
         {
             if (damageDetector.damagedTrigger != null)
@@ -150,98 +188,13 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void OnCollisionStay(Collision collision)
-        {
-            contactPoints = collision.contacts;
-        }
+
 
         private void RegisterCharacter()
         {
             if (!CharacterManager.Instance.characters.Contains(this))
             {
                 CharacterManager.Instance.characters.Add(this);
-            }
-        }
-
-        public void UpdateBoxColliderSize()
-        {
-            if (!animationProgress.IsRunning(typeof(UpdateBoxCollider)))
-            {
-                return;
-            }
-
-            if (Vector3.SqrMagnitude(boxCollider.size - BoxCollider_Data.targetSize) > 0.00001f)
-            {
-                boxCollider.size = Vector3.Lerp(boxCollider.size, BoxCollider_Data.targetSize, Time.deltaTime * BoxCollider_Data.size_Update_Speed);
-
-                BoxCollider_Data.updatingSpheres = true;
-            }
-        }
-
-        public void UpdateBoxColliderCenter()
-        {
-            if (!animationProgress.IsRunning(typeof(UpdateBoxCollider)))
-            {
-                return;
-            }
-
-            if (Vector3.SqrMagnitude(boxCollider.center - BoxCollider_Data.targetCenter) > 0.0001f)
-            {
-                boxCollider.center = Vector3.Lerp(boxCollider.center, BoxCollider_Data.targetCenter, Time.deltaTime * BoxCollider_Data.center_Update_Speed);
-
-                BoxCollider_Data.updatingSpheres = true;
-            }
-        }
-        private void Update()
-        {
-            subComponentProcessor.UpdateSubComponents();
-        }
-
-        private void FixedUpdate()
-        {
-            subComponentProcessor.FixedUpdateSubComponents();
-
-            var cancelPull = Air_Control.GetBool((int)AirControlBool.CANCEL_PULL);
-
-            //fall
-            if (!cancelPull)
-            {
-                if (Rigid_Body.velocity.y > 0f && !jump)
-                {
-                    Rigid_Body.velocity -= (Vector3.up * Rigid_Body.velocity.y * 0.1f);    //Высота прыжка в зависимости от длительности нажатия
-                }
-            }
-
-            //Spheres
-            BoxCollider_Data.updatingSpheres = false;
-            UpdateBoxColliderSize();
-            UpdateBoxColliderCenter();
-            if (BoxCollider_Data.updatingSpheres)
-            {
-                collisionSpheres.Reposition_FrontSpheres();
-                collisionSpheres.Reposition_BottomSpheres();
-                collisionSpheres.Reposition_BackSpheres();
-                collisionSpheres.Reposition_UpSpheres();
-
-                if (BoxCollider_Data.isLanding)  //prevent bug when idle after catching corner of platform
-                {
-                    if (_debug)
-                    {
-                        Debug.Log("repositioning y");
-                    }
-                    Rigid_Body.MovePosition(new Vector3(0f, BoxCollider_Data.landingPosition.y, this.transform.position.z));
-                }
-            }
-
-            var maxFallVelocity = Air_Control.GetVecto3((int)AirControlVector3.MAX_FALL_VELOCITY);
-
-            //slow down wallslide
-            if (maxFallVelocity.y != 0f)
-            {
-                if (Rigid_Body.velocity.y <= maxFallVelocity.y)
-                {
-                    Rigid_Body.velocity = maxFallVelocity;
-                }
             }
         }
 

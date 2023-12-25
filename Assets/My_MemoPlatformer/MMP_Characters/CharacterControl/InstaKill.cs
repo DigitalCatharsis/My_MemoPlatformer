@@ -13,7 +13,7 @@ namespace My_MemoPlatformer
 
         private void FixedUpdate()
         {
-            if (_control.subComponentProcessor.componentsDictionary.ContainsKey(SubComponents.MANUALINPUT))
+            if (_control.subComponentProcessor.componentsDictionary.ContainsKey(SubComponentType.MANUALINPUT))
             {
                 return;
             }
@@ -35,7 +35,7 @@ namespace My_MemoPlatformer
                         continue;
                     }
 
-                    if (!c.subComponentProcessor.componentsDictionary.ContainsKey(SubComponents.MANUALINPUT)) //has to be a player, if not - next
+                    if (!c.subComponentProcessor.componentsDictionary.ContainsKey(SubComponentType.MANUALINPUT)) //has to be a player, if not - next
                     {
                         continue;
                     }

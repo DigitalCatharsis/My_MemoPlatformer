@@ -2,13 +2,14 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    public enum SubComponents
+    public enum SubComponentType
     {
         NONE,
         MANUALINPUT,
         LEDGECHECKER,
         RAGDOLL,
         BLOCKINGOBJECTS,
+        BOX_COLLIDER_UPDATER,
     }
 
     public abstract class SubComponent : MonoBehaviour
