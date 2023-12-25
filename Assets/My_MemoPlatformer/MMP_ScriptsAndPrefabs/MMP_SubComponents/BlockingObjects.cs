@@ -132,7 +132,7 @@ namespace My_MemoPlatformer
                     int index = Random.Range(0, c.Ragdoll_Data.bodyParts.Count);
                     var randomPart = c.Ragdoll_Data.bodyParts[index].GetComponent<TriggerDetector>();
 
-                    c.damageDetector_Data.SetData(control, c.damageDetector.airStompAttack, randomPart, control.rightFoot_Attack);
+                    c.DamageDetector_Data.SetData(control, c.damageDetector.airStompAttack, randomPart, control.rightFoot_Attack);
 
                     c.damageDetector.TakeDamage(info);
                 }

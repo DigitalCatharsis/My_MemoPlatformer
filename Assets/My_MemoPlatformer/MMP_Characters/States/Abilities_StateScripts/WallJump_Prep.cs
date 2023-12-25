@@ -11,7 +11,7 @@ namespace My_MemoPlatformer
         {
             characterState.characterControl.moveLeft = false;
             characterState.characterControl.moveRight = false;
-            characterState.characterControl.Air_Control.SetFloat((int)AirControlFloat.AIR_MOMENTUM, 0.0f);
+            characterState.MomentumCalculator_Data.momentum = 0f;
 
             characterState.characterControl.Rigid_Body.velocity = Vector3.zero;
 

@@ -27,7 +27,7 @@ namespace My_MemoPlatformer
                 characterState.characterControl.Air_Control.SetBool((int)AirControlBool.JUMPED, true);
             }
 
-            characterState.verticalVelocity_Data.noJumpCancel = canselPull;
+            characterState.VerticalVelocity_Data.noJumpCancel = canselPull;
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

@@ -62,10 +62,13 @@ namespace My_MemoPlatformer
         public BlockingObj_Data BlockingObj_Data => subComponentProcessor.blockingObjData;
         public LedgeGrab_Data LedgeGrab_Data => subComponentProcessor.ledgeGrabData;
         public Ragdoll_Data Ragdoll_Data => subComponentProcessor.ragdollData;
-        public Dataset Air_Control => dataProcessor.GetDataset(typeof(AirControl_Dataset));
         public ManualInput_Data ManualInpu_Data => subComponentProcessor.manualInput_Data;
         public BoxCollider_Data BoxCollider_Data => subComponentProcessor.boxCollider_Data;
-        public DamageDetector_Data damageDetector_Data => subComponentProcessor.damageDetector_Data;
+        public DamageDetector_Data DamageDetector_Data => subComponentProcessor.damageDetector_Data;
+        public MomentumCalculator_Data MomentumCalculator_Data => subComponentProcessor.momentumCalculator_Data;
+
+
+        public Dataset Air_Control => dataProcessor.GetDataset(typeof(AirControl_Dataset));
 
         [Header("Gravity")]
         public ContactPoint[] contactPoints;
@@ -140,7 +143,7 @@ namespace My_MemoPlatformer
 
         public void AddForceToDamagedPart(bool zeroZelocity)
         {
-            if (damageDetector_Data.damagedTrigger != null)
+            if (DamageDetector_Data.damagedTrigger != null)
             {
                 if (zeroZelocity)
                 {
@@ -150,10 +153,10 @@ namespace My_MemoPlatformer
                     }
                 }
 
-                damageDetector_Data.damagedTrigger.GetComponent<Rigidbody>().
-                     AddForce(damageDetector_Data.attacker.transform.forward * damageDetector_Data.attack.forwardForce +
-                          damageDetector_Data.attacker.transform.right * damageDetector_Data.attack.rightForce +
-                             damageDetector_Data.attacker.transform.up * damageDetector_Data.attack.upForce);
+                DamageDetector_Data.damagedTrigger.GetComponent<Rigidbody>().
+                     AddForce(DamageDetector_Data.attacker.transform.forward * DamageDetector_Data.attack.forwardForce +
+                          DamageDetector_Data.attacker.transform.right * DamageDetector_Data.attack.rightForce +
+                             DamageDetector_Data.attacker.transform.up * DamageDetector_Data.attack.upForce);
             }
         }
 

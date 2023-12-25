@@ -14,10 +14,10 @@ namespace My_MemoPlatformer
             characterState.characterControl.moveLeft = false;
             characterState.characterControl.moveRight = false;
 
-            characterState.characterControl.Air_Control.SetFloat((int)AirControlFloat.AIR_MOMENTUM, 0.0f);
+            characterState.MomentumCalculator_Data.momentum = 0;
             characterState.characterControl.Air_Control.SetBool((int)AirControlBool.CAN_WALL_JUMP, false);
 
-            characterState.verticalVelocity_Data.maxWallSlideVelocity = maxFallVelocity;
+            characterState.VerticalVelocity_Data.maxWallSlideVelocity = maxFallVelocity;
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -30,7 +30,7 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            characterState.verticalVelocity_Data.maxWallSlideVelocity = Vector3.zero;
+            characterState.VerticalVelocity_Data.maxWallSlideVelocity = Vector3.zero;
         }
     }
 

@@ -9,11 +9,6 @@ namespace My_MemoPlatformer.Datasets
         CAN_WALL_JUMP,
         CHECK_WALL_BLOCK,
     }
-    public enum AirControlFloat
-    {
-        NONE,
-        AIR_MOMENTUM,
-    }
 
     public class AirControl_Dataset : Dataset
     {
@@ -22,7 +17,6 @@ namespace My_MemoPlatformer.Datasets
             boolDictionary.Add((int)AirControlBool.JUMPED, false);
             boolDictionary.Add((int)AirControlBool.CAN_WALL_JUMP, false);
             boolDictionary.Add((int)AirControlBool.CHECK_WALL_BLOCK, false);
-            floatDictionary.Add((int)AirControlFloat.AIR_MOMENTUM, 0f);
         }
     }
 }

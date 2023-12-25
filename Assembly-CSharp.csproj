@@ -114,10 +114,12 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\ManualInput.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_MaterialChaner\MaterialChanger.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\UpdateBoxCollider.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MomentumCalculator.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_PooledObjects\PoolObject.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\PoolManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\Resources\DeathAnimationLoader.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Settings\Settings.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_Data\MomentumCalculator_Data.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\DeathAnimationManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\AIProgress.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\Turn180.cs" />

@@ -14,7 +14,8 @@ namespace My_MemoPlatformer
         public BlockingObj_Data BlockingObjData => characterControl.subComponentProcessor.blockingObjData;
         public Ragdoll_Data RagdollData => characterControl.subComponentProcessor.ragdollData;
         public BoxCollider_Data BoxCollider_Data => characterControl.subComponentProcessor.boxCollider_Data;
-        public VerticalVelocity_Data verticalVelocity_Data => characterControl.subComponentProcessor.verticalVelocity_Data;
+        public VerticalVelocity_Data VerticalVelocity_Data => characterControl.subComponentProcessor.verticalVelocity_Data;
+        public MomentumCalculator_Data MomentumCalculator_Data => characterControl.subComponentProcessor.momentumCalculator_Data;
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {

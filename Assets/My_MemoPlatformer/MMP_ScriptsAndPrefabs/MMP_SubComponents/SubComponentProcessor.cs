@@ -23,6 +23,8 @@ namespace My_MemoPlatformer
         public VerticalVelocity_Data verticalVelocity_Data;
         [Space(15)]
         public DamageDetector_Data damageDetector_Data;
+        [Space(15)]
+        public MomentumCalculator_Data momentumCalculator_Data;
 
         private void Awake()
         {

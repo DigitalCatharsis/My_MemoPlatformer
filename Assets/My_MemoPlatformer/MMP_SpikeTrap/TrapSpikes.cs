@@ -37,7 +37,7 @@ namespace My_MemoPlatformer
             {
                 foreach (var control in listOfCharacter)
                 {
-                    if (!control.damageDetector_Data.IsDead())
+                    if (!control.DamageDetector_Data.IsDead())
                     {
                         if (_spikeTriggerRoutine == null && _spikesReloaded)
                         {
