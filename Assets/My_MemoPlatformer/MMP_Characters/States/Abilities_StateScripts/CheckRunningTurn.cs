@@ -15,10 +15,8 @@ namespace My_MemoPlatformer
             
         }
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
-            
-
-            if (characterState.characterControl.IsFacingForward())
+        {        
+            if (characterState.characterControl.playerRotation_Data.IsFacingForward())
             {
                 if (characterState.characterControl.moveLeft)
                 {
@@ -26,7 +24,7 @@ namespace My_MemoPlatformer
                 }
             }
 
-            if (!characterState.characterControl.IsFacingForward())
+            if (!characterState.characterControl.playerRotation_Data.IsFacingForward())
             {
                 if (characterState.characterControl.moveRight)
                 {

@@ -66,6 +66,7 @@ namespace My_MemoPlatformer
         public BoxCollider_Data BoxCollider_Data => subComponentProcessor.boxCollider_Data;
         public DamageDetector_Data DamageDetector_Data => subComponentProcessor.damageDetector_Data;
         public MomentumCalculator_Data MomentumCalculator_Data => subComponentProcessor.momentumCalculator_Data;
+        public PlayerRotation_Data playerRotation_Data => subComponentProcessor.playerRotation_Data;
 
 
         public Dataset Air_Control => dataProcessor.GetDataset(typeof(AirControl_Dataset));
@@ -181,41 +182,6 @@ namespace My_MemoPlatformer
         {
             //Debug.Log($"Speed:{speed}#\tSpeedGraph:{speedGraph}#\tTime.DeltaTime:{Time.deltaTime}# \tTick: {Time.frameCount}");
             transform.Translate(Vector3.forward * speed * speedGraph * Time.deltaTime);
-        }
-
-        public void FaceForward(bool forward)
-        {
-            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(MMP_Scenes.L_CharacterSelect.ToString()))
-            {
-                return;
-            }
-
-            if (!skinnedMeshAnimator.enabled)   //to prevent rotating after death
-            {
-                return;
-            }
-
-            if (forward)
-            {
-                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-
-            }
-            else
-            {
-                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-            }
-        }
-
-        public bool IsFacingForward()
-        {
-            if (transform.forward.z > 0f)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
 
         public GameObject GetChildObj(string name)

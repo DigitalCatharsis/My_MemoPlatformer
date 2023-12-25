@@ -11,8 +11,11 @@ namespace My_MemoPlatformer
         public bool lockDirectionNextState;
 
         public delegate bool ReturnBool();
+        public delegate void DoSomething(bool faceforward);
 
         public ReturnBool EarlyTurnIsLocked;
+        public ReturnBool IsFacingForward;
+        public DoSomething FaceForward;
     }
 
 }

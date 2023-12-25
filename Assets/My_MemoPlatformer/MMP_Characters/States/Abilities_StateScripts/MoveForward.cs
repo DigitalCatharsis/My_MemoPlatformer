@@ -46,18 +46,18 @@ namespace My_MemoPlatformer
                 {
                     if (characterState.characterControl.moveLeft)
                     {
-                        characterState.characterControl.FaceForward(false);
+                        characterState.characterControl.playerRotation_Data.FaceForward(false);
                     }
                     if (characterState.characterControl.moveRight)
                     {
-                        characterState.characterControl.FaceForward(true);
+                        characterState.characterControl.playerRotation_Data.FaceForward(true);
                     }
                 }
             }
 
             if (startingMomentum > 0.001f)
             {
-                if (characterState.characterControl.IsFacingForward())
+                if (characterState.characterControl.playerRotation_Data.IsFacingForward())
                 {
                     characterState.MomentumCalculator_Data.momentum = startingMomentum;
                 }
@@ -145,11 +145,11 @@ namespace My_MemoPlatformer
 
             if (control.MomentumCalculator_Data.momentum > 0f)
             {
-                control.FaceForward(true);
+                control.playerRotation_Data.FaceForward(true);
             }
             else if (control.MomentumCalculator_Data.momentum < 0f)
             {
-                control.FaceForward(false);
+                control.playerRotation_Data.FaceForward(false);
             }
 
             if (!IsBlocked(control))

@@ -63,14 +63,14 @@ namespace My_MemoPlatformer
         {
             if ((_control.aiProgress.pathfindfingAgent.target.transform.position - _control.transform.position).z > 0f)
             {
-                if (_control.IsFacingForward())
+                if (_control.playerRotation_Data.IsFacingForward())
                 {
                     return true;
                 }
             }
             else
             {
-                if (!_control.IsFacingForward())
+                if (!_control.playerRotation_Data.IsFacingForward())
                 {
                     return true;
                 }

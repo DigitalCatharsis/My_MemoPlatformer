@@ -178,7 +178,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.MOVE_FORWARD:
                         {
-                            if (control.IsFacingForward())
+                            if (control.playerRotation_Data.IsFacingForward())
                             {
                                 if (!control.moveRight)
                                 {

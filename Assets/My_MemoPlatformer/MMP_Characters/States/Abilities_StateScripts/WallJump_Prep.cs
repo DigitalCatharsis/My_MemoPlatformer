@@ -15,13 +15,13 @@ namespace My_MemoPlatformer
 
             characterState.characterControl.Rigid_Body.velocity = Vector3.zero;
 
-            if (characterState.characterControl.IsFacingForward())   //make the character turn 
+            if (characterState.characterControl.playerRotation_Data.IsFacingForward())   //make the character turn 
             {
-                characterState.characterControl.FaceForward(false);
+                characterState.characterControl.playerRotation_Data.FaceForward(false);
             }
             else
             {
-                characterState.characterControl.FaceForward(true);
+                characterState.characterControl.playerRotation_Data.FaceForward(true);
             }
         }
 

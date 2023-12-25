@@ -77,7 +77,7 @@ namespace My_MemoPlatformer
             {
                 weapon.transform.parent = null;
 
-                if (control.IsFacingForward())
+                if (control.playerRotation_Data.IsFacingForward())
                 {
                     weapon.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
                 }
@@ -105,7 +105,7 @@ namespace My_MemoPlatformer
             {
                 weapon.transform.parent = null;
 
-                if (control.IsFacingForward())
+                if (control.playerRotation_Data.IsFacingForward())
                 {
                     weapon.transform.rotation = Quaternion.Euler(90f, 0, 0f);
                 }
@@ -114,7 +114,7 @@ namespace My_MemoPlatformer
                     weapon.transform.rotation = Quaternion.Euler(-90f, 0, 0f);
                 }
 
-                flyForward = control.IsFacingForward();
+                flyForward = control.playerRotation_Data.IsFacingForward();
 
                 weapon.transform.position = control.transform.position + Vector3.up * throwOffset.y;
                 weapon.transform.position += control.transform.forward * throwOffset.z;

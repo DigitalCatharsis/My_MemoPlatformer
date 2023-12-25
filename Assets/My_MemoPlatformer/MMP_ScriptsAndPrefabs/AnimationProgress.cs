@@ -84,7 +84,7 @@ namespace My_MemoPlatformer
 
             if (vec.z < 0f)
             {
-                if (_control.IsFacingForward())
+                if (_control.playerRotation_Data.IsFacingForward())
                 {
                     return false;
                 }
@@ -95,7 +95,7 @@ namespace My_MemoPlatformer
             }
             else if (vec.z > 0f)
             {
-                if (_control.IsFacingForward())
+                if (_control.playerRotation_Data.IsFacingForward())
                 {
                     return true;
                 }

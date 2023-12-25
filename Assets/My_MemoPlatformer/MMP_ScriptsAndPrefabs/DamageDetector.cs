@@ -177,14 +177,14 @@ namespace My_MemoPlatformer
 
                 if (dir.z > 0f)
                 {
-                    if (control.IsFacingForward())
+                    if (control.playerRotation_Data.IsFacingForward())
                     {
                         return true;
                     }
                 }
                 else if (dir.z < 0f)
                 {
-                    if (!control.IsFacingForward())
+                    if (!control.playerRotation_Data.IsFacingForward())
                     {
                         return true;
                     }
@@ -226,7 +226,7 @@ namespace My_MemoPlatformer
 
                         vfx.SetActive(true);
 
-                        if (info.attacker.IsFacingForward())
+                        if (info.attacker.playerRotation_Data.IsFacingForward())
                         {
                             vfx.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                         }
@@ -298,11 +298,11 @@ namespace My_MemoPlatformer
 
             if (dir.z < 0f)
             {
-                attacker.FaceForward(false);
+                attacker.playerRotation_Data.FaceForward(false);
             }
             else if (dir.z > 0f)
             {
-                attacker.FaceForward(true);
+                attacker.playerRotation_Data.FaceForward(true);
             }
 
             control.transform.LookAt(control.transform.position + (attacker.transform.forward * 5f), Vector3.up);

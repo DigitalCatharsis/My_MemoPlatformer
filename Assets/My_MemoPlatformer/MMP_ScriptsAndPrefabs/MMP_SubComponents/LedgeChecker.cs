@@ -114,7 +114,7 @@ namespace My_MemoPlatformer
 
             y = platform.transform.position.y + (boxCollider.size.y * boxCollider.gameObject.transform.lossyScale.y / 2f);
 
-            if (control.IsFacingForward())
+            if (control.playerRotation_Data.IsFacingForward())
             {
                 z = platform.transform.position.z - (boxCollider.size.z * boxCollider.gameObject.transform.lossyScale.z / 2f);
             }
@@ -128,7 +128,7 @@ namespace My_MemoPlatformer
             var testingSphere = GameObject.Find("TestingSphere");
             testingSphere.transform.position = plarformEdge;
 
-            if (control.IsFacingForward())
+            if (control.playerRotation_Data.IsFacingForward())
             {
                 control.Rigid_Body.MovePosition(plarformEdge + ledgeCalibration);
             }
