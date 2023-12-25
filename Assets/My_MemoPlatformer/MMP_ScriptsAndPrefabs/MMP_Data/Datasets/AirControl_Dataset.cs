@@ -5,7 +5,6 @@ namespace My_MemoPlatformer.Datasets
     public enum AirControlBool
     {
         NONE,
-        JUMPED,
         CAN_WALL_JUMP,
         CHECK_WALL_BLOCK,
     }
@@ -14,7 +13,6 @@ namespace My_MemoPlatformer.Datasets
     {
         private void Awake()
         {
-            boolDictionary.Add((int)AirControlBool.JUMPED, false);
             boolDictionary.Add((int)AirControlBool.CAN_WALL_JUMP, false);
             boolDictionary.Add((int)AirControlBool.CHECK_WALL_BLOCK, false);
         }

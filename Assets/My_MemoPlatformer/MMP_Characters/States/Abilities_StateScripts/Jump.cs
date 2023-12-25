@@ -12,33 +12,28 @@ namespace My_MemoPlatformer
         [Range(0f, 1f)]
         [SerializeField] private float jumpTiming;
         [SerializeField] private float jumpForce;
+
         [Header("Extra Gravity")]
-        //[SerializeField] private AnimationCurve pull;
         [SerializeField] private bool canselPull;
-
-
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            characterState.characterControl.Air_Control.SetBool((int)AirControlBool.JUMPED, false);
+            characterState.PlayerJump_Data.jumped = false;
             if (jumpTiming == 0f)
             {
                 characterState.characterControl.Rigid_Body.AddForce(Vector3.up * jumpForce);
-                characterState.characterControl.Air_Control.SetBool((int)AirControlBool.JUMPED, true);
+                characterState.PlayerJump_Data.jumped = true;
             }
 
             characterState.VerticalVelocity_Data.noJumpCancel = canselPull;
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {            
-            //characterState.characterControl.pullMultipliyer = pull.Evaluate(stateInfo.normalizedTime);   //ÒÓÒ ÃÐÅÁÀÍÀß ÂÛÑÎÒÀ ÏÐÛÆÊÀ ÂÇÀÂÈÑÈÌÎÑÒÈ ÎÒ ÍÀÆÀÒÈß!
-            var jumped = characterState.characterControl.Air_Control.GetBool((int)AirControlBool.JUMPED);
-
-            if (!jumped && stateInfo.normalizedTime >= jumpTiming)
+        {   
+            if (!characterState.PlayerJump_Data.jumped && stateInfo.normalizedTime >= jumpTiming)
             {
                 characterState.characterControl.Rigid_Body.AddForce(Vector3.up * jumpForce);
-                characterState.characterControl.Air_Control.SetBool((int)AirControlBool.JUMPED, true);
+                characterState.PlayerJump_Data.jumped = true;
             }
         }
 

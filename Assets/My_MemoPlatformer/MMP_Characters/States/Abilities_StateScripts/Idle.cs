@@ -16,17 +16,18 @@ namespace My_MemoPlatformer
             animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], false);
 
             characterState.PlayerRotation_Data.lockEarlyTurn = false;
+            characterState.PlayerRotation_Data.lockDirectionNextState = false;
             characterState.BlockingObjData.ClearFrontBlockingObjDic();
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             characterState.PlayerRotation_Data.lockEarlyTurn = false;
+            characterState.PlayerRotation_Data.lockDirectionNextState = false;
 
             if (characterState.characterControl.jump)
             {
-                var jumped = characterState.characterControl.Air_Control.GetBool((int)AirControlBool.JUMPED);
-                if (!jumped)
+                if (!characterState.PlayerJump_Data.jumped)
                 {
                     if (characterState.characterControl.animationProgress.ground != null)
                     {
@@ -36,10 +37,9 @@ namespace My_MemoPlatformer
             }
             else
             {
-                var jumped = characterState.characterControl.Air_Control.GetBool((int)AirControlBool.JUMPED);
                 if (!characterState.characterControl.animationProgress.IsRunning(typeof(Jump)))   //double update fix. Guess idle is overlapping jump or moveforward
                 {
-                    characterState.characterControl.Air_Control.SetBool((int)AirControlBool.JUMPED, false);
+                    characterState.PlayerJump_Data.jumped = false;
                 }
             }
 
