@@ -1,11 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-
-    public class AttackInfo : MonoBehaviour
+    public class AttackCondition : MonoBehaviour
     {
         public CharacterControl attacker = null;
         public Attack attackAbility;

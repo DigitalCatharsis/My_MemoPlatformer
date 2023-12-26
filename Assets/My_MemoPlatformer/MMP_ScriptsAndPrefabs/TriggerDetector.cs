@@ -76,7 +76,7 @@ namespace My_MemoPlatformer
             {
                 if (w.thrower != control) //not colliding himself
                 {
-                    var info = new AttackInfo();
+                    var info = new AttackCondition();
                     info.CopyInfo(control.DamageDetector_Data.AxeThrow, control);
 
                     control.DamageDetector_Data.SetData(w.thrower, control.DamageDetector_Data.AxeThrow, this, null);

@@ -14,7 +14,8 @@ namespace My_MemoPlatformer
         DAMAGE_DETECTOR_DATA,
         COLLISION_SPHERES,
         INSTAKILL,
-        PLAYER_GROUND
+        PLAYER_GROUND,
+        PLAYER_ATTACK,
     }
 
     public abstract class SubComponent : MonoBehaviour

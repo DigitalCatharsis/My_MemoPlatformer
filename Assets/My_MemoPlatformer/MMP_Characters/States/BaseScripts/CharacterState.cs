@@ -20,6 +20,7 @@ namespace My_MemoPlatformer
         public PlayerJump_Data PlayerJump_Data => characterControl.subComponentProcessor.playerJump_Data;
         public CollisionSpheres_Data CollisionSpheres_Data => characterControl.subComponentProcessor.collisionSpheres_Data;
         public PlayerGround_Data PlayerGround_Data => characterControl.subComponentProcessor.playerGround_Data;
+        public PlayerAttack_Data PlayerAttack_Data => characterControl.subComponentProcessor.playerAttack_Data;
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {

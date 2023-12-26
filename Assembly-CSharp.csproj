@@ -66,6 +66,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_SpikeTrap\TrapSpikes.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Events\ChangeScene.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\WallJump_Prep.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_Data\PlayerAttack_Data.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\MoveForward.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Events\GameEvent.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckMovement.cs" />
@@ -89,7 +90,6 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\Ledge\Ledge.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\ResetLocalPosition.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\DeathAnimationData.cs" />
-    <Compile Include="Assets\My_MemoPlatformer\MMP_PooledObjects\AttackInfo\AttackInfo.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\AITriggerAttack.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_Data\BlockingObj_Data.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterSelectLight.cs" />
@@ -136,12 +136,14 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\DisAllowEarlyTurn.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\Ragdoll\TriggerRagdoll.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\BaseScripts\CharacterState.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_PooledObjects\AttackCondition\AttackCondition.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckAttackPress.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\FallPlatform.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_LookAtPoint\LookAtPoint.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\CharacterControl\CharacterControl.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_Data\PlayerJump_Data.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\WeaponThrow.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_SubComponents\PlayerAttack.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Weapons\MeleeWeapon.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_Data\LedgeGrab_Data.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\Ledge\LedgeCollider.cs" />

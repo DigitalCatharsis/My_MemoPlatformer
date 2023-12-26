@@ -123,7 +123,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.ATTACK:
                         {
-                            if (!control.animationProgress.attackTriggered)
+                            if (!control.PlayerAttack_Data.attackTriggered)
                             {
                                 return false;
                             }

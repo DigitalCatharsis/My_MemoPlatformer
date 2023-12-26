@@ -9,14 +9,14 @@ namespace My_MemoPlatformer
         public Attack attack;
         public TriggerDetector damagedTrigger;
         public GameObject attackingPart;
-        public AttackInfo blockedAttack;
+        public AttackCondition blockedAttack;
         public float hp;
 
         public Attack AxeThrow;
         public Attack airStompAttack;
 
         public delegate bool ReturnBool();
-        public delegate void DoSomething(AttackInfo info);
+        public delegate void DoSomething(AttackCondition info);
 
         public ReturnBool IsDead;
         public DoSomething TakeDamage;

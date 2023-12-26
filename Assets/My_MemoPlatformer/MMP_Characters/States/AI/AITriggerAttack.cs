@@ -41,7 +41,7 @@ namespace My_MemoPlatformer
                 characterState.characterControl.attack = false;
             }
 
-            characterState.characterControl.animationProgress.attackTriggered = characterState.characterControl.attack;
+            characterState.PlayerAttack_Data.attackTriggered = characterState.characterControl.attack;
         }
 
         public void NormalGroundAttack(CharacterControl control)

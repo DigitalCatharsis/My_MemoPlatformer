@@ -126,7 +126,7 @@ namespace My_MemoPlatformer
 
                 foreach (var c in _airStompTargets)
                 {
-                    var info = new AttackInfo();
+                    var info = new AttackCondition();
                     info.CopyInfo(c.DamageDetector_Data.airStompAttack, control);
 
                     int index = Random.Range(0, c.Ragdoll_Data.bodyParts.Count);

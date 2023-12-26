@@ -6,7 +6,7 @@ namespace My_MemoPlatformer
 {
     public class AttackManager : Singleton<AttackManager>    //Whole list if current attacks
     {
-        public List<AttackInfo> currentAttacks = new List<AttackInfo>();
+        public List<AttackCondition> currentAttacks = new List<AttackCondition>();
 
         public void ForceDeregester(CharacterControl control)
         {

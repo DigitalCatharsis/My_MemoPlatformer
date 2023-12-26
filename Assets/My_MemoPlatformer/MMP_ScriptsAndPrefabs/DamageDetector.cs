@@ -47,7 +47,7 @@ namespace My_MemoPlatformer
         {
         }
 
-        private bool AttackIsValid(AttackInfo info)
+        private bool AttackIsValid(AttackCondition info)
         {
             if (info == null)
             {
@@ -93,7 +93,7 @@ namespace My_MemoPlatformer
 
         private void CheckAttack()
         {
-            foreach (AttackInfo info in AttackManager.Instance.currentAttacks)
+            foreach (AttackCondition info in AttackManager.Instance.currentAttacks)
             {
                 if (AttackIsValid(info))
                 {
@@ -118,7 +118,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        private bool IsCollided(AttackInfo info)
+        private bool IsCollided(AttackCondition info)
         {
             foreach (KeyValuePair<TriggerDetector, List<Collider>> data in control.animationProgress.collidingBodyParts)
             {
@@ -143,7 +143,7 @@ namespace My_MemoPlatformer
             return false;
         }
 
-        private bool IsInLethalRange(AttackInfo info)
+        private bool IsInLethalRange(AttackCondition info)
         {
             foreach (var c in control.Ragdoll_Data.bodyParts)
             {
@@ -161,7 +161,7 @@ namespace My_MemoPlatformer
             return false;
         }
 
-        private bool AttackIsBlocked(AttackInfo info)
+        private bool AttackIsBlocked(AttackCondition info)
         {
             if (info == damageDetector_Data.blockedAttack && damageDetector_Data.blockedAttack != null)
             {
@@ -191,7 +191,7 @@ namespace My_MemoPlatformer
             return false;
         }
 
-        private void TakeDamage(AttackInfo info)
+        private void TakeDamage(AttackCondition info)
         {
             if (IsDead())  //templory fix for hitting dead enemy
             {

@@ -64,6 +64,7 @@ namespace My_MemoPlatformer
         public CollisionSpheres_Data CollisionSpheres_Data => subComponentProcessor.collisionSpheres_Data;
         public InstaKill_Data InstaKill_Data => subComponentProcessor.instaKill_Data;
         public PlayerGround_Data PlayerGround_Data => subComponentProcessor.playerGround_Data;
+        public PlayerAttack_Data PlayerAttack_Data => subComponentProcessor.playerAttack_Data;
 
         [Header("Setup")]
         public PlayableCharacterType playableCharacterType;

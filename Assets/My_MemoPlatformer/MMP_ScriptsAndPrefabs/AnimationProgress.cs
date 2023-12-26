@@ -12,10 +12,6 @@ namespace My_MemoPlatformer
         public MoveForward latestMoveForwardScript;  //latest moveforward script
         public MoveUp latestMoveUpScript;  //latest moveforward script
 
-        [Header("Attack Button")]
-        public bool attackTriggered;
-        public bool attackButtonIsReset;
-
         [Header("GroundMovement")]
         public bool isIgnoreCharacterTime; //slide beyond character (start ignoring character collider)
 
@@ -38,20 +34,6 @@ namespace My_MemoPlatformer
 
         private void Update()
         {
-            if (_control.attack)
-            { //dont trigger attack several times
-                if (attackButtonIsReset)
-                {
-                    attackTriggered = true;
-                    attackButtonIsReset = false;
-                }
-            }
-            else
-            {
-                attackButtonIsReset = true;
-                attackTriggered = false;
-            }
-
             if (IsRunning(typeof(LockTransition)))
             {
                 if (_control.animationProgress.lockTransition)

@@ -44,16 +44,16 @@ namespace My_MemoPlatformer
         public bool useDeathParticles;
         public PoolObjectType ParticleType;
 
-        private List<AttackInfo> _finishedAttacks = new List<AttackInfo> ();
+        private List<AttackCondition> _finishedAttacks = new List<AttackCondition> ();
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            characterState.characterControl.animationProgress.attackTriggered = false;
+            characterState.characterControl.PlayerAttack_Data.attackTriggered = false;
 
             animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Attack], false);
 
-            GameObject obj = PoolManager.Instance.GetObject(PoolObjectType.ATTACKINFO); //Ссылкаемя на объект в пул менеджере
-            AttackInfo info = obj.GetComponent<AttackInfo>();
+            GameObject obj = PoolManager.Instance.GetObject(PoolObjectType.AttackCondition); //Ссылкаемя на объект в пул менеджере
+            AttackCondition info = obj.GetComponent<AttackCondition>();
 
             obj.SetActive(true); //set it active when we first get it
             info.ResetInfo(this, characterState.characterControl);
@@ -76,7 +76,7 @@ namespace My_MemoPlatformer
         {
             if (startAttackTime <= stateInfo.normalizedTime && endAttackTime > stateInfo.normalizedTime)
             {
-                foreach (AttackInfo info in AttackManager.Instance.currentAttacks)
+                foreach (AttackCondition info in AttackManager.Instance.currentAttacks)
                 {
                     if (info == null)
                     {
@@ -101,7 +101,7 @@ namespace My_MemoPlatformer
         {
             if (stateInfo.normalizedTime >= endAttackTime)
             {
-                foreach (AttackInfo info in AttackManager.Instance.currentAttacks)
+                foreach (AttackCondition info in AttackManager.Instance.currentAttacks)
                 {
                     if (info == null)
                     {
@@ -137,7 +137,7 @@ namespace My_MemoPlatformer
             {
                 if (stateInfo.normalizedTime <= comboEndTime)
                 {
-                    if (characterState.characterControl.animationProgress.attackTriggered)
+                    if (characterState.characterControl.PlayerAttack_Data.attackTriggered)
                     {
                         animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Attack],true);
                     }    
@@ -155,7 +155,7 @@ namespace My_MemoPlatformer
         {
             _finishedAttacks.Clear();
 
-            foreach (AttackInfo info in AttackManager.Instance.currentAttacks)
+            foreach (AttackCondition info in AttackManager.Instance.currentAttacks)
             {
                 if (info == null || info.attackAbility == this) 
                 {
@@ -163,7 +163,7 @@ namespace My_MemoPlatformer
                 }
             }
 
-            foreach (AttackInfo info in _finishedAttacks)
+            foreach (AttackCondition info in _finishedAttacks)
             {
                 if (AttackManager.Instance.currentAttacks.Contains(info))
                 {
