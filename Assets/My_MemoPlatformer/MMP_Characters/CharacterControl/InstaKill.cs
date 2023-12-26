@@ -14,6 +14,7 @@ namespace My_MemoPlatformer
             {
                 Animation_Assassin = Assassination_Assassin,
                 Animation_Victim = Assassination_Victim,
+                DeathByInstakill = DeathByInstakill,
             };
 
             subComponentProcessor.instaKill_Data = instaKill_Data;
@@ -79,12 +80,42 @@ namespace My_MemoPlatformer
                     }
 
                     Debug.Log("InstaKill");
-                    c.damageDetector.DeathByInstakill(control);
+                    c.InstaKill_Data.DeathByInstakill(control);
 
                     return;
                 }
             }
         }
 
+        private void DeathByInstakill(CharacterControl attacker)
+        {
+            control.animationProgress.currentRunningAbilities.Clear();
+            attacker.animationProgress.currentRunningAbilities.Clear();
+
+            control.Rigid_Body.useGravity = false;
+            control.boxCollider.enabled = false;
+            control.skinnedMeshAnimator.runtimeAnimatorController = control.InstaKill_Data.Animation_Victim;
+
+
+            attacker.Rigid_Body.useGravity = false;
+            attacker.boxCollider.enabled = false;
+            attacker.skinnedMeshAnimator.runtimeAnimatorController = control.InstaKill_Data.Animation_Assassin;
+
+            var dir = control.transform.position - attacker.transform.position;
+
+            if (dir.z < 0f)
+            {
+                attacker.PlayerRotation_Data.FaceForward(false);
+            }
+            else if (dir.z > 0f)
+            {
+                attacker.PlayerRotation_Data.FaceForward(true);
+            }
+
+            control.transform.LookAt(control.transform.position + (attacker.transform.forward * 5f), Vector3.up);
+            control.transform.position = attacker.transform.position + (attacker.transform.forward * 0.45f);
+
+            control.DamageDetector_Data.hp = 0f;
+        }
     }
 }

@@ -134,7 +134,7 @@ namespace My_MemoPlatformer
 
                     c.DamageDetector_Data.SetData(control, c.DamageDetector_Data.airStompAttack, randomPart, control.rightFoot_Attack);
 
-                    c.damageDetector.TakeDamage(info);
+                    c.DamageDetector_Data.TakeDamage(info);
                 }
 
                 _airStompTargets.Clear();

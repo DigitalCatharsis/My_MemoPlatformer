@@ -10,6 +10,9 @@ namespace My_MemoPlatformer
         public List<Collider> bodyParts;
 
         public delegate Collider GetCollider(string name);
+        public delegate void DoSomething(bool value);
+
         public GetCollider GetBodypart;
+        public DoSomething AddForceToDamagedPart;
     }
 }

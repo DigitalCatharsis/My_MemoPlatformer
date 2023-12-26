@@ -6,25 +6,26 @@ namespace My_MemoPlatformer
 {
     public class Ragdoll : SubComponent
     {
-        public Ragdoll_Data ragdollData;
+        public Ragdoll_Data ragdoll_Data;
 
         private void Start()
         {
-            ragdollData = new Ragdoll_Data
+            ragdoll_Data = new Ragdoll_Data
             {
                 ragdollTriggered = false,
                 bodyParts = new List<Collider>(),
                 GetBodypart = GetBodyPart,
+                AddForceToDamagedPart = AddForceToDamagedPart,
             };
 
             SetupBodyParts();
-            subComponentProcessor.ragdollData = ragdollData;
+            subComponentProcessor.ragdollData = ragdoll_Data;
             subComponentProcessor.subcomponentsDictionary.Add(SubComponentType.RAGDOLL, this);
         }
 
         public override void OnFixedUpdate()
         {
-            if (ragdollData.ragdollTriggered)
+            if (ragdoll_Data.ragdollTriggered)
             {
                 ProcRagdoll();
             }
@@ -37,7 +38,7 @@ namespace My_MemoPlatformer
 
         public void SetupBodyParts()
         {
-            ragdollData.bodyParts.Clear();
+            ragdoll_Data.bodyParts.Clear();
 
             var colliders = control.gameObject.GetComponentsInChildren<Collider>(); //Get all the colliders in the hierarchy
 
@@ -49,7 +50,7 @@ namespace My_MemoPlatformer
                     {
                         //thats means its a ragdoll
                         c.isTrigger = true;
-                        ragdollData.bodyParts.Add(c);
+                        ragdoll_Data.bodyParts.Add(c);
                         c.attachedRigidbody.interpolation = RigidbodyInterpolation.None;  //убрать дрожжание //Окей, если каждая часть будет интерполированной, то начинается вакханалия
                         c.attachedRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic; //расчет физики, предотвращение прохождения сквозь объекты
 
@@ -70,7 +71,7 @@ namespace My_MemoPlatformer
 
         private void ProcRagdoll()
         {
-            ragdollData.ragdollTriggered = false;
+            ragdoll_Data.ragdollTriggered = false;
             
             if (control.skinnedMeshAnimator.avatar == null)
             {
@@ -85,7 +86,7 @@ namespace My_MemoPlatformer
             }
 
             //save bodypart positions to prevent teleporting
-            foreach (Collider c in ragdollData.bodyParts)
+            foreach (Collider c in ragdoll_Data.bodyParts)
             {
                 TriggerDetector det = c.GetComponent<TriggerDetector>();
                 det.lastPosition = c.gameObject.transform.position;
@@ -110,7 +111,7 @@ namespace My_MemoPlatformer
             }
 
             //turn on ragdoll
-            foreach (Collider c in ragdollData.bodyParts)
+            foreach (Collider c in ragdoll_Data.bodyParts)
             {
                 c.isTrigger = false;
 
@@ -121,12 +122,12 @@ namespace My_MemoPlatformer
                 c.attachedRigidbody.velocity = Vector3.zero;
             }
 
-            control.AddForceToDamagedPart(false);
+            AddForceToDamagedPart(false);
         }
 
         private Collider GetBodyPart(string name)
         {
-            foreach (Collider c in ragdollData.bodyParts)
+            foreach (Collider c in ragdoll_Data.bodyParts)
             {
                 if (c.name.Contains(name))
                 {
@@ -134,6 +135,24 @@ namespace My_MemoPlatformer
                 }
             }
             return null;
+        }
+        private void AddForceToDamagedPart(bool zeroZelocity)
+        {
+            if (control.DamageDetector_Data.damagedTrigger != null)
+            {
+                if (zeroZelocity)
+                {
+                    foreach (var c in ragdoll_Data.bodyParts)
+                    {
+                        c.attachedRigidbody.velocity = Vector3.zero;
+                    }
+                }
+
+                control.DamageDetector_Data.damagedTrigger.GetComponent<Rigidbody>().
+                     AddForce(control.DamageDetector_Data.attacker.transform.forward * control.DamageDetector_Data.attack.forwardForce +
+                          control.DamageDetector_Data.attacker.transform.right * control.DamageDetector_Data.attack.rightForce +
+                             control.DamageDetector_Data.attacker.transform.up * control.DamageDetector_Data.attack.upForce);
+            }
         }
     }
 }

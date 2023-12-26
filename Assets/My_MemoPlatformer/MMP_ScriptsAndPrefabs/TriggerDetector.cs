@@ -81,7 +81,7 @@ namespace My_MemoPlatformer
 
                     control.DamageDetector_Data.SetData(w.thrower, control.DamageDetector_Data.AxeThrow, this, null);
 
-                    control.damageDetector.TakeDamage(info);
+                    control.DamageDetector_Data.TakeDamage(info);
 
                     if (w.flyForward)
                     {

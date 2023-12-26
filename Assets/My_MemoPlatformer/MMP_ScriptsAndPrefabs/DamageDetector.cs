@@ -26,8 +26,9 @@ namespace My_MemoPlatformer
                 blockedAttack = null,
                 hp = 3f,
                 airStompAttack = airStompAttack,
-                AxeThrow =  AxeThrow,
+                AxeThrow = AxeThrow,
                 IsDead = IsDead,
+                TakeDamage = TakeDamage,
             };
 
             subComponentProcessor.damageDetector_Data = damageDetector_Data;
@@ -190,14 +191,14 @@ namespace My_MemoPlatformer
             return false;
         }
 
-        public void TakeDamage(AttackInfo info)
+        private void TakeDamage(AttackInfo info)
         {
             if (IsDead())  //templory fix for hitting dead enemy
             {
                 if (!info.registeredTargets.Contains(this.control))
                 {
                     info.registeredTargets.Add(this.control);
-                    control.AddForceToDamagedPart(true);
+                    control.Ragdoll_Data.AddForceToDamagedPart(true);
                 }
                 return;
             }
@@ -263,37 +264,6 @@ namespace My_MemoPlatformer
             {
                 info.registeredTargets.Add(this.control);
             }
-        }
-
-        public void DeathByInstakill(CharacterControl attacker)
-        {
-            control.animationProgress.currentRunningAbilities.Clear();
-            attacker.animationProgress.currentRunningAbilities.Clear();
-
-            control.Rigid_Body.useGravity = false;
-            control.boxCollider.enabled = false;
-            control.skinnedMeshAnimator.runtimeAnimatorController = control.InstaKill_Data.Animation_Victim;
-
-
-            attacker.Rigid_Body.useGravity = false;
-            attacker.boxCollider.enabled = false;
-            attacker.skinnedMeshAnimator.runtimeAnimatorController = control.InstaKill_Data.Animation_Assassin;
-
-            var dir = control.transform.position - attacker.transform.position;
-
-            if (dir.z < 0f)
-            {
-                attacker.PlayerRotation_Data.FaceForward(false);
-            }
-            else if (dir.z > 0f)
-            {
-                attacker.PlayerRotation_Data.FaceForward(true);
-            }
-
-            control.transform.LookAt(control.transform.position + (attacker.transform.forward * 5f), Vector3.up);
-            control.transform.position = attacker.transform.position + (attacker.transform.forward * 0.45f);
-
-            damageDetector_Data.hp = 0f;
         }
 
         private bool IsDead()

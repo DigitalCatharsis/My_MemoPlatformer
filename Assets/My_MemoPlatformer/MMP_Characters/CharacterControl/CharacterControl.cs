@@ -48,7 +48,6 @@ namespace My_MemoPlatformer
         public SubComponentProcessor subComponentProcessor;
         public AnimationProgress animationProgress;
         public AIProgress aiProgress;
-        public DamageDetector damageDetector;
         public AIController aiController;
         public BoxCollider boxCollider;
         public NavMeshObstacle navMeshObstacle;
@@ -96,7 +95,6 @@ namespace My_MemoPlatformer
             subComponentProcessor = GetComponentInChildren<SubComponentProcessor>();
             animationProgress = GetComponent<AnimationProgress>();
             aiProgress = GetComponentInChildren<AIProgress>();
-            damageDetector = GetComponentInChildren<DamageDetector>();
             boxCollider = GetComponent<BoxCollider>();
             navMeshObstacle = GetComponentInChildren<NavMeshObstacle>();
 
@@ -125,25 +123,6 @@ namespace My_MemoPlatformer
         private void OnCollisionStay(Collision collision)
         {
             contactPoints = collision.contacts;
-        }
-
-        public void AddForceToDamagedPart(bool zeroZelocity)
-        {
-            if (DamageDetector_Data.damagedTrigger != null)
-            {
-                if (zeroZelocity)
-                {
-                    foreach (Collider c in Ragdoll_Data.bodyParts)
-                    {
-                        c.attachedRigidbody.velocity = Vector3.zero;
-                    }
-                }
-
-                DamageDetector_Data.damagedTrigger.GetComponent<Rigidbody>().
-                     AddForce(DamageDetector_Data.attacker.transform.forward * DamageDetector_Data.attack.forwardForce +
-                          DamageDetector_Data.attacker.transform.right * DamageDetector_Data.attack.rightForce +
-                             DamageDetector_Data.attacker.transform.up * DamageDetector_Data.attack.upForce);
-            }
         }
 
         public void CacheCharacterControl(Animator animator)  //Передает стейтам аниматора CharacterControl референс

@@ -16,7 +16,10 @@ namespace My_MemoPlatformer
         public Attack airStompAttack;
 
         public delegate bool ReturnBool();
+        public delegate void DoSomething(AttackInfo info);
+
         public ReturnBool IsDead;
+        public DoSomething TakeDamage;
 
         public void SetData(CharacterControl attacker, Attack attack, TriggerDetector damagedTrigger, GameObject attackingPart)
         {
