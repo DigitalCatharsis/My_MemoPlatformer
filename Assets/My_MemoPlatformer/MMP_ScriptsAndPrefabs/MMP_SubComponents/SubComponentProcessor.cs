@@ -33,6 +33,8 @@ namespace My_MemoPlatformer
         public CollisionSpheres_Data collisionSpheres_Data;
         [Space(15)]
         public InstaKill_Data instaKill_Data;
+        [Space(15)]
+        public PlayerGround_Data playerGround_Data;
 
         private void Awake()
         {

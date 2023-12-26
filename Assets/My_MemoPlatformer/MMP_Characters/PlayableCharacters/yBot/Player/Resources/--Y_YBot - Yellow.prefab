@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 478003207d1c5774f9c7dcc4bbe94864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ragdollData:
+  ragdoll_Data:
     ragdollTriggered: 0
     bodyParts: []
 --- !u!1 &708256176615141862
@@ -1588,7 +1588,6 @@ MonoBehaviour:
   subComponentProcessor: {fileID: 0}
   animationProgress: {fileID: 0}
   aiProgress: {fileID: 0}
-  damageDetector: {fileID: 0}
   aiController: {fileID: 0}
   boxCollider: {fileID: 0}
   navMeshObstacle: {fileID: 0}
@@ -3974,6 +3973,7 @@ Transform:
   - {fileID: 2232804196577716856}
   - {fileID: 6749269195957879655}
   - {fileID: 4522960269502612960}
+  - {fileID: 4633267999339462008}
   - {fileID: 1318701341189441266}
   m_Father: {fileID: 3372119544377188092}
   m_RootOrder: -1
@@ -4038,6 +4038,50 @@ MonoBehaviour:
   instaKill_Data:
     Animation_Assassin: {fileID: 0}
     Animation_Victim: {fileID: 0}
+--- !u!1 &7646921906402090757
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4633267999339462008}
+  - component: {fileID: 6572774383506496927}
+  m_Layer: 9
+  m_Name: PlayerGround
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4633267999339462008
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7646921906402090757}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2838286670764771645}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6572774383506496927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7646921906402090757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 047e75c9163be5d478677fc246e5cc1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7745837032654152969
 GameObject:
   m_ObjectHideFlags: 0

@@ -63,9 +63,7 @@ namespace My_MemoPlatformer
         public PlayerJump_Data PlayerJump_Data => subComponentProcessor.playerJump_Data;
         public CollisionSpheres_Data CollisionSpheres_Data => subComponentProcessor.collisionSpheres_Data;
         public InstaKill_Data InstaKill_Data => subComponentProcessor.instaKill_Data;
-
-        [Header("Gravity")]
-        public ContactPoint[] contactPoints;
+        public PlayerGround_Data PlayerGround_Data => subComponentProcessor.playerGround_Data;
 
         [Header("Setup")]
         public PlayableCharacterType playableCharacterType;
@@ -122,7 +120,7 @@ namespace My_MemoPlatformer
 
         private void OnCollisionStay(Collision collision)
         {
-            contactPoints = collision.contacts;
+            PlayerGround_Data.BoxColliderContacts = collision.contacts;
         }
 
         public void CacheCharacterControl(Animator animator)  //Передает стейтам аниматора CharacterControl референс

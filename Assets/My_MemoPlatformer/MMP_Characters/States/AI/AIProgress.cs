@@ -88,7 +88,8 @@ namespace My_MemoPlatformer
 
         public bool TargetIsOnTheSamePlatform()
         {
-            if (CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target).animationProgress.ground == _control.animationProgress.ground)
+            var target = CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target);
+            if (target.PlayerGround_Data.ground == _control.PlayerGround_Data.ground)
             {
                 return true;
             }
@@ -100,7 +101,8 @@ namespace My_MemoPlatformer
 
         public bool TargetIsGrounded()
         {
-            if (CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target).animationProgress.ground == null)  //not grounded
+            var target = CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target);
+            if (target.PlayerGround_Data.ground == null)  //not grounded
             {
                 return false;
             }

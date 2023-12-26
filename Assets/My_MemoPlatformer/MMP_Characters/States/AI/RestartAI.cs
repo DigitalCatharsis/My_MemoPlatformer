@@ -65,9 +65,9 @@ namespace My_MemoPlatformer
             
             if (characterState.characterControl.aiProgress.blockingCharacter != null)
             {
-                if (characterState.characterControl.animationProgress.ground != null)
+                if (characterState.characterControl.PlayerGround_Data.ground != null)
                 {
-                    if (characterState.characterControl.animationProgress.ground != null)
+                    if (characterState.characterControl.PlayerGround_Data.ground != null)
                     {
                         if (!characterState.characterControl.animationProgress.IsRunning(typeof(Jump))
                             && !characterState.characterControl.animationProgress.IsRunning(typeof(JumpPrep)))
@@ -85,7 +85,7 @@ namespace My_MemoPlatformer
             }
 
             //startsphere Height
-            if (characterState.characterControl.animationProgress.ground != null
+            if (characterState.characterControl.PlayerGround_Data.ground != null
                 && !characterState.characterControl.animationProgress.IsRunning(typeof(Jump))
                 && !characterState.characterControl.animationProgress.IsRunning(typeof(WallJump_Prep)))
             {

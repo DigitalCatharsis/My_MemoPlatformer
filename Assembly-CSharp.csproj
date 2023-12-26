@@ -61,6 +61,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_EditorHelpers\MMP_LayerAdder\LayerAdder.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\Singleton.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_SpikeTrap\Spike.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_Data\PlayerGround_Data.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_Data\DamageDetector_Data.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_SpikeTrap\TrapSpikes.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Events\ChangeScene.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_Data\PlayerRotation_Data.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\Jump.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\ShakeCamera.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_SubComponents\PlayerGround.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_SubComponents\Ragdoll.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\GroundDetector.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\Landing.cs" />

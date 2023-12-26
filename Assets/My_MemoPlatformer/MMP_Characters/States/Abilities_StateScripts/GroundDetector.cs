@@ -45,9 +45,9 @@ namespace My_MemoPlatformer
 
         bool IsGrounded(CharacterControl control)
         {
-            if (control.contactPoints != null)
+            if (control.PlayerGround_Data.BoxColliderContacts != null)
             {
-                foreach (var c in control.contactPoints)
+                foreach (var c in control.PlayerGround_Data.BoxColliderContacts)
                 {
                     var colliderBottom = (control.transform.position.y + control.boxCollider.center.y) - (control.boxCollider.size.y / 2f);
                     var yDiffirence = Mathf.Abs(c.point.y - colliderBottom);
@@ -57,7 +57,7 @@ namespace My_MemoPlatformer
                         if (Mathf.Abs(control.Rigid_Body.velocity.y) < 0.001f)
                         {
                             //control.animationProgress.ground = c.otherCollider.transform.root.gameObject; //что колайдерит bottom сферы
-                            control.animationProgress.ground = c.otherCollider.transform.gameObject; //что колайдерит bottom сферы
+                            control.PlayerGround_Data.ground = c.otherCollider.transform.gameObject; //что колайдерит bottom сферы
                             control.BoxCollider_Data.landingPosition = new Vector3(0f, c.point.y, c.point.z);
                             return true;
                         }
@@ -77,14 +77,14 @@ namespace My_MemoPlatformer
 
                         if (c == null)
                         {
-                            control.animationProgress.ground = blockingObj.transform.root.gameObject; //что колайдерит bottom сферы
+                            control.PlayerGround_Data.ground = blockingObj.transform.root.gameObject; //что колайдерит bottom сферы
                             control.BoxCollider_Data.landingPosition = new Vector3(0f, control.animationProgress.collidingPoint.y, control.animationProgress.collidingPoint.z);
                             return true;
                         }
                     }
                 }
             }
-            control.animationProgress.ground = null;
+            control.PlayerGround_Data.ground = null;
             return false;
         }
     }

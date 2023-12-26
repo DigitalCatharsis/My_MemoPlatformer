@@ -92,7 +92,7 @@ namespace My_MemoPlatformer
 
             if (characterState.characterControl.jump)
             {
-                if (characterState.characterControl.animationProgress.ground != null)
+                if (characterState.characterControl.PlayerGround_Data.ground != null)
                 {
                     animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Jump], true);
                 }
