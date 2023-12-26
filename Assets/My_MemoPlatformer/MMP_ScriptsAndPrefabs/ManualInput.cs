@@ -26,7 +26,7 @@ namespace My_MemoPlatformer
             };
 
             subComponentProcessor.manualInput_Data = manualInputData;
-            subComponentProcessor.componentsDictionary.Add(SubComponentType.MANUALINPUT, this);
+            subComponentProcessor.subcomponentsDictionary.Add(SubComponentType.MANUALINPUT, this);
         }
 
         //private void Awake()

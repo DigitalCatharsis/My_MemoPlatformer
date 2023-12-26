@@ -35,7 +35,7 @@ namespace My_MemoPlatformer
             };
 
             subComponentProcessor.damageDetector_Data = damageDetector_Data;
-            subComponentProcessor.componentsDictionary.Add(SubComponentType.DAMAGE_DETECTOR_DATA, this);
+            subComponentProcessor.subcomponentsDictionary.Add(SubComponentType.DAMAGE_DETECTOR_DATA, this);
         }
 
         public override void OnUpdate()

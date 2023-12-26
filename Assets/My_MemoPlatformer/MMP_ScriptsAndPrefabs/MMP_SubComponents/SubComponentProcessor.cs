@@ -6,7 +6,7 @@ namespace My_MemoPlatformer
 {
     public class SubComponentProcessor : MonoBehaviour
     {
-        public Dictionary<SubComponentType, SubComponent> componentsDictionary = new Dictionary<SubComponentType, SubComponent>();
+        public Dictionary<SubComponentType, SubComponent> subcomponentsDictionary = new Dictionary<SubComponentType, SubComponent>();
         public CharacterControl control;
 
         [Space(15)]
@@ -41,6 +41,7 @@ namespace My_MemoPlatformer
             FixedUpdateSubComponent(SubComponentType.BLOCKINGOBJECTS);
             FixedUpdateSubComponent(SubComponentType.BOX_COLLIDER_UPDATER);
             FixedUpdateSubComponent(SubComponentType.VERTICALVELOCITY_DATA);
+            FixedUpdateSubComponent(SubComponentType.COLLISION_SPHERES);
         }
         public void UpdateSubComponents()
         {
@@ -50,16 +51,16 @@ namespace My_MemoPlatformer
 
         private void UpdateSubComponent(SubComponentType type)
         {
-            if (componentsDictionary.ContainsKey(type))
+            if (subcomponentsDictionary.ContainsKey(type))
             {
-                componentsDictionary[type].OnUpdate();
+                subcomponentsDictionary[type].OnUpdate();
             }
         }
         private void FixedUpdateSubComponent(SubComponentType type)
         {
-            if (componentsDictionary.ContainsKey(type))
+            if (subcomponentsDictionary.ContainsKey(type))
             {
-                componentsDictionary[type].OnFixedUpdate();
+                subcomponentsDictionary[type].OnFixedUpdate();
             }
         }
     }

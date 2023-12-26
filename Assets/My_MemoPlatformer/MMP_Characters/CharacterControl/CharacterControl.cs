@@ -102,7 +102,6 @@ namespace My_MemoPlatformer
             instakill = GetComponentInChildren<InstaKill>();
 
             collisionSpheres = GetComponentInChildren<CollisionSpheres>();
-            collisionSpheres.owner = this;
             collisionSpheres.SetColliderSpheres();
 
             aiController = GetComponentInChildren<AIController>();

@@ -12,7 +12,8 @@ namespace My_MemoPlatformer
         {
             _control = this.transform.root.gameObject.GetComponent<CharacterControl>();
         }
-        private void FixedUpdate()
+
+        public void UpdateChecker()
         {
             if (_control.PlayerJump_Data.checkWallBlock)
             {

@@ -24,7 +24,7 @@ namespace My_MemoPlatformer
             };
 
             subComponentProcessor.boxCollider_Data = boxCollider_Data;
-            subComponentProcessor.componentsDictionary.Add(SubComponentType.BOX_COLLIDER_UPDATER, this);
+            subComponentProcessor.subcomponentsDictionary.Add(SubComponentType.BOX_COLLIDER_UPDATER, this);
         }
         public override void OnFixedUpdate()
         {

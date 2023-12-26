@@ -22,7 +22,7 @@ namespace My_MemoPlatformer
             };
 
             subComponentProcessor.ledgeGrabData = ledgeGrab_Data;
-            subComponentProcessor.componentsDictionary.Add(SubComponentType.LEDGECHECKER, this);
+            subComponentProcessor.subcomponentsDictionary.Add(SubComponentType.LEDGECHECKER, this);
         }
 
         public override void OnUpdate()
