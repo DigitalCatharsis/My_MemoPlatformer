@@ -52,7 +52,6 @@ namespace My_MemoPlatformer
         public AIController aiController;
         public BoxCollider boxCollider;
         public NavMeshObstacle navMeshObstacle;
-        public InstaKill instakill;
 
         public BlockingObj_Data BlockingObj_Data => subComponentProcessor.blockingObjData;
         public LedgeGrab_Data LedgeGrab_Data => subComponentProcessor.ledgeGrabData;
@@ -64,6 +63,7 @@ namespace My_MemoPlatformer
         public PlayerRotation_Data PlayerRotation_Data => subComponentProcessor.playerRotation_Data;
         public PlayerJump_Data PlayerJump_Data => subComponentProcessor.playerJump_Data;
         public CollisionSpheres_Data CollisionSpheres_Data => subComponentProcessor.collisionSpheres_Data;
+        public InstaKill_Data InstaKill_Data => subComponentProcessor.instaKill_Data;
 
         [Header("Gravity")]
         public ContactPoint[] contactPoints;
@@ -99,7 +99,6 @@ namespace My_MemoPlatformer
             damageDetector = GetComponentInChildren<DamageDetector>();
             boxCollider = GetComponent<BoxCollider>();
             navMeshObstacle = GetComponentInChildren<NavMeshObstacle>();
-            instakill = GetComponentInChildren<InstaKill>();
 
             aiController = GetComponentInChildren<AIController>();
             if (aiController == null)

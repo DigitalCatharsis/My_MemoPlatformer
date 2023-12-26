@@ -13,11 +13,6 @@ namespace My_MemoPlatformer
 
         [SerializeField] private List<RuntimeAnimatorController> _hitReactionList = new List<RuntimeAnimatorController>();
 
-
-        [Header("InstaKill")]
-        public RuntimeAnimatorController Assassination_Assassin;
-        public RuntimeAnimatorController Assassination_Victim;
-
         [Header("Attack")]
         public Attack AxeThrow;
         public Attack airStompAttack;
@@ -287,12 +282,12 @@ namespace My_MemoPlatformer
 
             control.Rigid_Body.useGravity = false;
             control.boxCollider.enabled = false;
-            control.skinnedMeshAnimator.runtimeAnimatorController = Assassination_Victim;
+            control.skinnedMeshAnimator.runtimeAnimatorController = control.InstaKill_Data.Animation_Victim;
 
 
             attacker.Rigid_Body.useGravity = false;
             attacker.boxCollider.enabled = false;
-            attacker.skinnedMeshAnimator.runtimeAnimatorController = Assassination_Assassin;
+            attacker.skinnedMeshAnimator.runtimeAnimatorController = control.InstaKill_Data.Animation_Assassin;
 
             var dir = control.transform.position - attacker.transform.position;
 

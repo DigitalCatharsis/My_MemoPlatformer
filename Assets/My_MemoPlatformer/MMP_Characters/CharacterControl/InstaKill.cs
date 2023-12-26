@@ -3,34 +3,47 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    public class InstaKill : MonoBehaviour
+    public class InstaKill : SubComponent
     {
-        private CharacterControl _control;
+        public InstaKill_Data instaKill_Data;
+        [SerializeField] private RuntimeAnimatorController Assassination_Assassin;
+        [SerializeField] private RuntimeAnimatorController Assassination_Victim;
         private void Start()
         {
-            _control = this.gameObject.GetComponentInParent<CharacterControl>();
+            instaKill_Data = new InstaKill_Data
+            {
+                Animation_Assassin = Assassination_Assassin,
+                Animation_Victim = Assassination_Victim,
+            };
+
+            subComponentProcessor.instaKill_Data = instaKill_Data;
+            subComponentProcessor.subcomponentsDictionary.Add(SubComponentType.INSTAKILL, this);
+        }
+        public override void OnUpdate()
+        {
+            throw new System.NotImplementedException();
         }
 
-        private void FixedUpdate()
+        public override void OnFixedUpdate()
         {
-            if (_control.subComponentProcessor.subcomponentsDictionary.ContainsKey(SubComponentType.MANUALINPUT))
+            if (control.subComponentProcessor.subcomponentsDictionary.ContainsKey(SubComponentType.MANUALINPUT))
             {
                 return;
             }
 
-            if (!_control.skinnedMeshAnimator.GetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded]))
+            if (!control.skinnedMeshAnimator.GetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded]))
             {
                 return;
             }
 
             //if one of bodypart is player, there gonna be instakill
-            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in _control.animationProgress.collidingBodyParts) 
+            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in control.animationProgress.collidingBodyParts)
             {
                 foreach (var col in data.Value)
                 {
-                    var c = CharacterManager.Instance.GetCharacter(col.transform.root.gameObject);  
+                    var c = CharacterManager.Instance.GetCharacter(col.transform.root.gameObject);
 
-                    if (c == _control)
+                    if (c == control)
                     {
                         continue;
                     }
@@ -45,7 +58,7 @@ namespace My_MemoPlatformer
                         continue;
                     }
 
-                    if (_control.animationProgress.IsRunning(typeof(Attack)))
+                    if (control.animationProgress.IsRunning(typeof(Attack)))
                     {
                         continue;
                     }
@@ -60,17 +73,18 @@ namespace My_MemoPlatformer
                         continue;
                     }
 
-                    if (_control.DamageDetector_Data.IsDead())
+                    if (control.DamageDetector_Data.IsDead())
                     {
                         continue;
                     }
 
                     Debug.Log("InstaKill");
-                    c.damageDetector.DeathByInstakill(_control);
+                    c.damageDetector.DeathByInstakill(control);
 
                     return;
                 }
             }
         }
+
     }
 }

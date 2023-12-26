@@ -31,6 +31,8 @@ namespace My_MemoPlatformer
         public PlayerJump_Data playerJump_Data;
         [Space(15)]
         public CollisionSpheres_Data collisionSpheres_Data;
+        [Space(15)]
+        public InstaKill_Data instaKill_Data;
 
         private void Awake()
         {
@@ -44,6 +46,7 @@ namespace My_MemoPlatformer
             FixedUpdateSubComponent(SubComponentType.BOX_COLLIDER_UPDATER);
             FixedUpdateSubComponent(SubComponentType.VERTICALVELOCITY_DATA);
             FixedUpdateSubComponent(SubComponentType.COLLISION_SPHERES);
+            FixedUpdateSubComponent(SubComponentType.INSTAKILL);
         }
         public void UpdateSubComponents()
         {

@@ -1540,7 +1540,6 @@ Transform:
   m_Children:
   - {fileID: 6717720730588901626}
   - {fileID: 673519052}
-  - {fileID: 5415747056367200280}
   - {fileID: 2838286670764771645}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1591,11 +1590,9 @@ MonoBehaviour:
   animationProgress: {fileID: 0}
   aiProgress: {fileID: 0}
   damageDetector: {fileID: 0}
-  collisionSpheres: {fileID: 0}
   aiController: {fileID: 0}
   boxCollider: {fileID: 0}
   navMeshObstacle: {fileID: 0}
-  instakill: {fileID: 0}
   playableCharacterType: 1
   skinnedMeshAnimator: {fileID: 2428127011527154921}
   rightHand_Attack: {fileID: 9160105403987278352}
@@ -2903,13 +2900,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 401ef285bfab1d34cbb51581a1cbd313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 0}
-  bottomSpheres: []
-  frontSpheres: []
-  backSpheres: []
-  upSpheres: []
-  frontOverlapCheckers: []
-  allOverlapCheckers: []
+  collisionSpheres_Data:
+    bottomSpheres: []
+    frontSpheres: []
+    backSpheres: []
+    upSpheres: []
+    frontOverlapCheckers: []
+    allOverlapCheckers: []
 --- !u!1 &6115594643896942180
 GameObject:
   m_ObjectHideFlags: 0
@@ -3460,8 +3457,6 @@ MonoBehaviour:
   _hitReactionList:
   - {fileID: 9100000, guid: e06831303a0df0f4eabcb778560a1ea8, type: 2}
   - {fileID: 9100000, guid: 59bd317eca619a2499e6be92d3e5c518, type: 2}
-  Assassination_Assassin: {fileID: 9100000, guid: 1ff8244958f934742a2835e1c827d59c, type: 2}
-  Assassination_Victim: {fileID: 9100000, guid: ae6282d82d780684b889b8ad9c9da487, type: 2}
   AxeThrow: {fileID: 11400000, guid: a887d67403fa15e4f9758370f2bce396, type: 2}
   airStompAttack: {fileID: 11400000, guid: 270577db070e447499e094b119ff8aa1, type: 2}
 --- !u!1 &7020094712125406493
@@ -3978,6 +3973,7 @@ Transform:
   - {fileID: 6749269195957879655}
   - {fileID: 4522960269502612960}
   - {fileID: 1318701341189441266}
+  - {fileID: 5415747056367200280}
   m_Father: {fileID: 3372119544377188092}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4029,6 +4025,16 @@ MonoBehaviour:
     jumped: 0
     canWallJump: 0
     checkWallBlock: 0
+  collisionSpheres_Data:
+    bottomSpheres: []
+    frontSpheres: []
+    backSpheres: []
+    upSpheres: []
+    frontOverlapCheckers: []
+    allOverlapCheckers: []
+  instaKill_Data:
+    Animation_Assassin: {fileID: 0}
+    Animation_Victim: {fileID: 0}
 --- !u!1 &7745837032654152969
 GameObject:
   m_ObjectHideFlags: 0
@@ -4794,12 +4800,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8795519861354809597}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3372119544377188092}
+  m_Father: {fileID: 2838286670764771645}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3665091282178441233
@@ -4814,6 +4820,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c295b92364b7ef4683233f1d2c55bad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instaKill_Data:
+    Animation_Assassin: {fileID: 0}
+    Animation_Victim: {fileID: 0}
+  Assassination_Assassin: {fileID: 9100000, guid: 1ff8244958f934742a2835e1c827d59c, type: 2}
+  Assassination_Victim: {fileID: 9100000, guid: ae6282d82d780684b889b8ad9c9da487, type: 2}
 --- !u!1 &8838438393441778181
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ namespace My_MemoPlatformer
         VERTICALVELOCITY_DATA,
         DAMAGE_DETECTOR_DATA,
         COLLISION_SPHERES,
+        INSTAKILL,
     }
 
     public abstract class SubComponent : MonoBehaviour
