@@ -125,9 +125,6 @@ namespace My_MemoPlatformer
 
             var plarformEdge = new Vector3(0f, y, z);
 
-            var testingSphere = GameObject.Find("TestingSphere");
-            testingSphere.transform.position = plarformEdge;
-
             if (control.PlayerRotation_Data.IsFacingForward())
             {
                 control.Rigid_Body.MovePosition(plarformEdge + ledgeCalibration);
