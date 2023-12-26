@@ -169,10 +169,10 @@ namespace My_MemoPlatformer
         {
             if (!control.animationProgress.ForwardIsReversed())
             {
-                _frontSpheresList = control.collisionSpheres.frontSpheres;
+                _frontSpheresList = control.CollisionSpheres_Data.frontSpheres;
                 _dirBlock = 1f;
 
-                foreach (var sphere in control.collisionSpheres.backSpheres)
+                foreach (var sphere in control.CollisionSpheres_Data.backSpheres)
                 {
                     if (_frontBlockingObjects.ContainsKey(sphere))
                     {
@@ -182,10 +182,10 @@ namespace My_MemoPlatformer
             }
             else
             {
-                _frontSpheresList = control.collisionSpheres.backSpheres;
+                _frontSpheresList = control.CollisionSpheres_Data.backSpheres;
                 _dirBlock = -1;
 
-                foreach (GameObject sphere in control.collisionSpheres.frontSpheres)
+                foreach (GameObject sphere in control.CollisionSpheres_Data.frontSpheres)
                 {
                     if (_frontBlockingObjects.ContainsKey(sphere))
                     {
@@ -212,7 +212,7 @@ namespace My_MemoPlatformer
 
         private void CheckUpBlocking()
         {
-            foreach (var o in control.collisionSpheres.upSpheres)
+            foreach (var o in control.CollisionSpheres_Data.upSpheres)
             {
                 var blockingObj = CollisionDetection.GetCollidingObject(control, o, this.transform.up, 0.3f, ref control.animationProgress.collidingPoint);
 
@@ -229,7 +229,7 @@ namespace My_MemoPlatformer
 
         private void CheckDownBlocking()
         {
-            foreach (var o in control.collisionSpheres.bottomSpheres)
+            foreach (var o in control.CollisionSpheres_Data.bottomSpheres)
             {
                 var blockingObj = CollisionDetection.GetCollidingObject(control, o, Vector3.down, 0.1f, ref control.animationProgress.collidingPoint);
 

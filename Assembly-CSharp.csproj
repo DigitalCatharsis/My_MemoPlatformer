@@ -69,6 +69,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Events\GameEvent.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckMovement.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterSelect.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_Data\CollisionSpheres_Data.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Events\ButtonScale.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_PooledObjects\PoolObjectLoader.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\CharacterControl\CollisionSpheres.cs" />

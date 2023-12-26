@@ -49,7 +49,6 @@ namespace My_MemoPlatformer
         public AnimationProgress animationProgress;
         public AIProgress aiProgress;
         public DamageDetector damageDetector;
-        public CollisionSpheres collisionSpheres;
         public AIController aiController;
         public BoxCollider boxCollider;
         public NavMeshObstacle navMeshObstacle;
@@ -64,6 +63,7 @@ namespace My_MemoPlatformer
         public MomentumCalculator_Data MomentumCalculator_Data => subComponentProcessor.momentumCalculator_Data;
         public PlayerRotation_Data PlayerRotation_Data => subComponentProcessor.playerRotation_Data;
         public PlayerJump_Data PlayerJump_Data => subComponentProcessor.playerJump_Data;
+        public CollisionSpheres_Data CollisionSpheres_Data => subComponentProcessor.collisionSpheres_Data;
 
         [Header("Gravity")]
         public ContactPoint[] contactPoints;
@@ -100,9 +100,6 @@ namespace My_MemoPlatformer
             boxCollider = GetComponent<BoxCollider>();
             navMeshObstacle = GetComponentInChildren<NavMeshObstacle>();
             instakill = GetComponentInChildren<InstaKill>();
-
-            collisionSpheres = GetComponentInChildren<CollisionSpheres>();
-            collisionSpheres.SetColliderSpheres();
 
             aiController = GetComponentInChildren<AIController>();
             if (aiController == null)

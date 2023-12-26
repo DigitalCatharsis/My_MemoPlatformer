@@ -15,9 +15,14 @@ namespace My_MemoPlatformer
 
         public void UpdateChecker()
         {
+            if (_control == null)
+            {
+                return;
+            }
+
             if (_control.PlayerJump_Data.checkWallBlock)
             {
-                if (_control.collisionSpheres.frontOverlapCheckers.Contains(this))
+                if (_control.CollisionSpheres_Data.frontOverlapCheckers.Contains(this))
                 {
                     objIsOverlapping = CheckObj();
                 }

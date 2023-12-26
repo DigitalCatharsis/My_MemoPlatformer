@@ -29,6 +29,8 @@ namespace My_MemoPlatformer
         public PlayerRotation_Data playerRotation_Data;
         [Space(15)]
         public PlayerJump_Data playerJump_Data;
+        [Space(15)]
+        public CollisionSpheres_Data collisionSpheres_Data;
 
         private void Awake()
         {

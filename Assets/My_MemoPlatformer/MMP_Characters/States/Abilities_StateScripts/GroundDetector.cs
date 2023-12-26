@@ -67,7 +67,7 @@ namespace My_MemoPlatformer
 
             if (control.Rigid_Body.velocity.y < 0f)
             {
-                foreach (GameObject o in control.collisionSpheres.bottomSpheres)
+                foreach (GameObject o in control.CollisionSpheres_Data.bottomSpheres)
                 {
                     var blockingObj = CollisionDetection.GetCollidingObject(control, o, -Vector3.up, distance, ref control.animationProgress.collidingPoint);
 

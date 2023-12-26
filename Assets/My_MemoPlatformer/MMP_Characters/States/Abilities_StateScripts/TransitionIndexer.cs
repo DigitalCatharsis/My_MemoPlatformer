@@ -230,7 +230,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.BLOCKED_BY_WALL:
                         {
-                            foreach (var oc in control.collisionSpheres.frontOverlapCheckers)
+                            foreach (var oc in control.CollisionSpheres_Data.frontOverlapCheckers)
                             {
                                 if (!oc.objIsOverlapping)
                                 {
@@ -243,7 +243,7 @@ namespace My_MemoPlatformer
                         {
                             bool allIsoverlapping = true;
 
-                            foreach (var oc in control.collisionSpheres.frontOverlapCheckers)
+                            foreach (var oc in control.CollisionSpheres_Data.frontOverlapCheckers)
                             {
                                 if (!oc.objIsOverlapping)
                                 {

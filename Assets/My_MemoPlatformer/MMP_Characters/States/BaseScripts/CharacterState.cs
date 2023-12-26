@@ -18,6 +18,7 @@ namespace My_MemoPlatformer
         public MomentumCalculator_Data MomentumCalculator_Data => characterControl.subComponentProcessor.momentumCalculator_Data;
         public PlayerRotation_Data PlayerRotation_Data => characterControl.subComponentProcessor.playerRotation_Data;
         public PlayerJump_Data PlayerJump_Data => characterControl.subComponentProcessor.playerJump_Data;
+        public CollisionSpheres_Data CollisionSpheres_Data => characterControl.subComponentProcessor.collisionSpheres_Data;
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
