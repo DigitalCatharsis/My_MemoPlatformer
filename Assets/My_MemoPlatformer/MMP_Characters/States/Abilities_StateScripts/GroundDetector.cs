@@ -7,20 +7,6 @@ namespace My_MemoPlatformer
     public class GroundDetector : StateData
     {
         [SerializeField] private float distance;
-
-        private GameObject testingSphere;
-
-        public GameObject TestingSphere
-        {
-            get
-            {
-                if (testingSphere == null)
-                {
-                    testingSphere = GameObject.Find("TestingSphere");
-                }
-                return testingSphere;
-            }
-        }
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
 
@@ -69,7 +55,7 @@ namespace My_MemoPlatformer
             {
                 foreach (GameObject o in control.CollisionSpheres_Data.bottomSpheres)
                 {
-                    var blockingObj = CollisionDetection.GetCollidingObject(control, o, -Vector3.up, distance, ref control.animationProgress.collidingPoint);
+                    var blockingObj = CollisionDetection.GetCollidingObject(control, o, -Vector3.up, distance, ref control.BlockingObj_Data.raycastContactPoint);
 
                     if (blockingObj != null)
                     {
@@ -78,7 +64,7 @@ namespace My_MemoPlatformer
                         if (c == null)
                         {
                             control.PlayerGround_Data.ground = blockingObj.transform.root.gameObject; //что колайдерит bottom сферы
-                            control.BoxCollider_Data.landingPosition = new Vector3(0f, control.animationProgress.collidingPoint.y, control.animationProgress.collidingPoint.z);
+                            control.BoxCollider_Data.landingPosition = new Vector3(0f, control.BlockingObj_Data.raycastContactPoint.y, control.BlockingObj_Data.raycastContactPoint.z);
                             return true;
                         }
                     }

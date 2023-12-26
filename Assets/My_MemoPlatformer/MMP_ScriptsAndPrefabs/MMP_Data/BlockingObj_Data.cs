@@ -6,6 +6,8 @@ namespace My_MemoPlatformer
     [System.Serializable]
     public class BlockingObj_Data
     {
+        public Vector3 raycastContactPoint = new Vector3();
+
         public int frontBlockingDictionaryCount;
         public int upBlockingDictionaryCount;
 

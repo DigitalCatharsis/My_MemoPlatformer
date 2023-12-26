@@ -43,12 +43,17 @@ namespace My_MemoPlatformer
             }
         }
 
+        private GameObject LoadCollisionSpheres()
+        {
+            return Instantiate(Resources.Load("CollisionSphere", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
+        }
+
         private void SetColliderSpheres()
         {
             //bottom
             for (int i = 0; i < 5; i++)
             {
-                GameObject obj = Instantiate(Resources.Load("ColliderEdge", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
+                var obj = LoadCollisionSpheres();
                 collisionSpheres_Data.bottomSpheres.Add(obj);
                 obj.transform.parent = this.transform.Find("Bottom");
             }
@@ -58,7 +63,7 @@ namespace My_MemoPlatformer
             //top
             for (int i = 0; i < 5; i++)
             {
-                GameObject obj = Instantiate(Resources.Load("ColliderEdge", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
+                var obj = LoadCollisionSpheres();
                 collisionSpheres_Data.upSpheres.Add(obj);
                 obj.transform.parent = this.transform.Find("Bottom");
             }
@@ -68,7 +73,7 @@ namespace My_MemoPlatformer
             //front
             for (int i = 0; i < 10; i++)
             {
-                GameObject obj = Instantiate(Resources.Load("ColliderEdge", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
+                var obj = LoadCollisionSpheres();
                 collisionSpheres_Data.frontSpheres.Add(obj);
                 collisionSpheres_Data.frontOverlapCheckers.Add(obj.GetComponent<OverlapChecker>());
                 obj.transform.parent = this.transform.Find("Front");
@@ -79,7 +84,7 @@ namespace My_MemoPlatformer
             //back
             for (int i = 0; i < 10; i++)
             {
-                GameObject obj = Instantiate(Resources.Load("ColliderEdge", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
+                var obj = LoadCollisionSpheres();
                 collisionSpheres_Data.backSpheres.Add(obj);
                 obj.transform.parent = this.transform.Find("Back");
             }

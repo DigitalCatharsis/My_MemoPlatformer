@@ -23,8 +23,6 @@ namespace My_MemoPlatformer
         public Dictionary<TriggerDetector, List<Collider>> collidingBodyParts = new Dictionary<TriggerDetector, List<Collider>>(); //key trigger detectors, value - colliding bodyparts which are in contract with trigger detectors
         public Dictionary<TriggerDetector, List<Collider>> collidingWeapons = new Dictionary<TriggerDetector, List<Collider>>(); //key trigger detectors, value - colliding bodyparts which are in contract with trigger detectors
 
-        public Vector3 collidingPoint = new Vector3();
-
         [Header("Transition")]
         public bool lockTransition;
 

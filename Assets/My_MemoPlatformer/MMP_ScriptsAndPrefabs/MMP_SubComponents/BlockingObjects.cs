@@ -196,7 +196,8 @@ namespace My_MemoPlatformer
 
             foreach (var o in _frontSpheresList)
             {
-                var blockingObj = CollisionDetection.GetCollidingObject(control, o, this.transform.forward * _dirBlock, control.animationProgress.latestMoveForwardScript.blockDistance, ref control.animationProgress.collidingPoint);
+                var blockingObj = CollisionDetection.GetCollidingObject
+                    (control, o, this.transform.forward * _dirBlock, control.animationProgress.latestMoveForwardScript.blockDistance, ref control.BlockingObj_Data.raycastContactPoint);
 
                 if (blockingObj != null)
                 {
@@ -214,7 +215,7 @@ namespace My_MemoPlatformer
         {
             foreach (var o in control.CollisionSpheres_Data.upSpheres)
             {
-                var blockingObj = CollisionDetection.GetCollidingObject(control, o, this.transform.up, 0.3f, ref control.animationProgress.collidingPoint);
+                var blockingObj = CollisionDetection.GetCollidingObject(control, o, this.transform.up, 0.3f, ref control.BlockingObj_Data.raycastContactPoint);
 
                 if (blockingObj != null)
                 {
@@ -231,7 +232,7 @@ namespace My_MemoPlatformer
         {
             foreach (var o in control.CollisionSpheres_Data.bottomSpheres)
             {
-                var blockingObj = CollisionDetection.GetCollidingObject(control, o, Vector3.down, 0.1f, ref control.animationProgress.collidingPoint);
+                var blockingObj = CollisionDetection.GetCollidingObject(control, o, Vector3.down, 0.1f, ref control.BlockingObj_Data.raycastContactPoint);
 
                 if (blockingObj != null)
                 {
