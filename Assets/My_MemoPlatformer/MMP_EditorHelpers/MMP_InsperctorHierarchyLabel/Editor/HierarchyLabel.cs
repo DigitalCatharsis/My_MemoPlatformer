@@ -54,7 +54,7 @@ namespace My_MemoPlatformer
             else if (obj != null && obj.name.StartsWith("--M", System.StringComparison.Ordinal))    //Every gameobject which starts with --- gonna be painted and have a shadow label
             {
                 EditorGUI.DrawRect(selectionRect, Color.magenta);
-                EditorGUI.DropShadowLabel(selectionRect, obj.name.Replace("--Y", "").ToString());
+                EditorGUI.DropShadowLabel(selectionRect, obj.name.Replace("--M", "").ToString());
             }
             else if (obj != null && obj.name.StartsWith("--C", System.StringComparison.Ordinal))    //Every gameobject which starts with --- gonna be painted and have a shadow label
             {

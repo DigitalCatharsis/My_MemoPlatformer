@@ -127,12 +127,12 @@ namespace My_MemoPlatformer
                 foreach (var c in _airStompTargets)
                 {
                     var info = new AttackInfo();
-                    info.CopyInfo(c.damageDetector.airStompAttack, control);
+                    info.CopyInfo(c.DamageDetector_Data.airStompAttack, control);
 
                     int index = Random.Range(0, c.Ragdoll_Data.bodyParts.Count);
                     var randomPart = c.Ragdoll_Data.bodyParts[index].GetComponent<TriggerDetector>();
 
-                    c.DamageDetector_Data.SetData(control, c.damageDetector.airStompAttack, randomPart, control.rightFoot_Attack);
+                    c.DamageDetector_Data.SetData(control, c.DamageDetector_Data.airStompAttack, randomPart, control.rightFoot_Attack);
 
                     c.damageDetector.TakeDamage(info);
                 }

@@ -9,13 +9,11 @@ namespace My_MemoPlatformer
         public DamageDetector_Data damageDetector_Data;
         [SerializeField] private bool _debug;
 
-        [SerializeField] private float hp;
-
+        [Header("Damage Setup")]
         [SerializeField] private List<RuntimeAnimatorController> _hitReactionList = new List<RuntimeAnimatorController>();
 
-        [Header("Attack")]
-        public Attack AxeThrow;
-        public Attack airStompAttack;
+        [SerializeField] private Attack AxeThrow;
+        [SerializeField] private Attack airStompAttack;
 
         private void Start()
         {
@@ -26,6 +24,9 @@ namespace My_MemoPlatformer
                 damagedTrigger = null,
                 attackingPart = null,
                 blockedAttack = null,
+                hp = 3f,
+                airStompAttack = airStompAttack,
+                AxeThrow =  AxeThrow,
                 IsDead = IsDead,
             };
 
@@ -239,7 +240,7 @@ namespace My_MemoPlatformer
             }
 
             info.currentHits++;
-            hp -= info.attackAbility.damage;
+            damageDetector_Data.hp -= info.attackAbility.damage;
 
             AttackManager.Instance.ForceDeregester(control);
             control.animationProgress.currentRunningAbilities.Clear();
@@ -262,17 +263,6 @@ namespace My_MemoPlatformer
             {
                 info.registeredTargets.Add(this.control);
             }
-        }
-
-        public void TriggerSpikeDeath(RuntimeAnimatorController animator)
-        {
-            control.skinnedMeshAnimator.runtimeAnimatorController = animator;
-        }
-
-        public void DeathBySpikes()
-        {
-            damageDetector_Data.damagedTrigger = null;
-            hp = 0f;
         }
 
         public void DeathByInstakill(CharacterControl attacker)
@@ -303,12 +293,12 @@ namespace My_MemoPlatformer
             control.transform.LookAt(control.transform.position + (attacker.transform.forward * 5f), Vector3.up);
             control.transform.position = attacker.transform.position + (attacker.transform.forward * 0.45f);
 
-            hp = 0f;
+            damageDetector_Data.hp = 0f;
         }
 
         private bool IsDead()
         {
-            if (hp <= 0f)
+            if (damageDetector_Data.hp <= 0f)
             {
                 return true;
             }

@@ -44,7 +44,8 @@ namespace My_MemoPlatformer
                             if (!listOfSpikeVictims.Contains(control))
                             {
                                 listOfSpikeVictims.Add(control);
-                                control.damageDetector.DeathBySpikes();
+                                control.DamageDetector_Data.hp = 0;
+                                control.DamageDetector_Data.damagedTrigger = null;
                             }
                         }
                     }
@@ -76,7 +77,7 @@ namespace My_MemoPlatformer
 
             foreach (var control in listOfSpikeVictims)
             {
-                control.damageDetector.TriggerSpikeDeath(spikeDeathAnimator);
+                control.skinnedMeshAnimator.runtimeAnimatorController = spikeDeathAnimator;
             }
 
             yield return new WaitForSeconds(1.5f);

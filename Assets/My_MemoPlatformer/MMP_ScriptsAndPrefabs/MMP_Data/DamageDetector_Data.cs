@@ -10,9 +10,12 @@ namespace My_MemoPlatformer
         public TriggerDetector damagedTrigger;
         public GameObject attackingPart;
         public AttackInfo blockedAttack;
+        public float hp;
+
+        public Attack AxeThrow;
+        public Attack airStompAttack;
 
         public delegate bool ReturnBool();
-
         public ReturnBool IsDead;
 
         public void SetData(CharacterControl attacker, Attack attack, TriggerDetector damagedTrigger, GameObject attackingPart)
