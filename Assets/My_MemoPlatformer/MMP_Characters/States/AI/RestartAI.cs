@@ -30,7 +30,7 @@ namespace My_MemoPlatformer
             }
 
             //landing
-            if (characterState.characterControl.animationProgress.IsRunning(typeof(Landing)))
+            if (characterState.PlayerAnimation_Data.IsRunning(typeof(Landing)))
             {
                 characterState.characterControl.turbo = false;
                 characterState.characterControl.jump = false;
@@ -69,8 +69,8 @@ namespace My_MemoPlatformer
                 {
                     if (characterState.characterControl.PlayerGround_Data.ground != null)
                     {
-                        if (!characterState.characterControl.animationProgress.IsRunning(typeof(Jump))
-                            && !characterState.characterControl.animationProgress.IsRunning(typeof(JumpPrep)))
+                        if (!characterState.PlayerAnimation_Data.IsRunning(typeof(Jump))
+                            && !characterState.PlayerAnimation_Data.IsRunning(typeof(JumpPrep)))
                         {
                             characterState.characterControl.turbo = false;
                             characterState.characterControl.jump = false;
@@ -86,8 +86,8 @@ namespace My_MemoPlatformer
 
             //startsphere Height
             if (characterState.characterControl.PlayerGround_Data.ground != null
-                && !characterState.characterControl.animationProgress.IsRunning(typeof(Jump))
-                && !characterState.characterControl.animationProgress.IsRunning(typeof(WallJump_Prep)))
+                && !characterState.PlayerAnimation_Data.IsRunning(typeof(Jump))
+                && !characterState.PlayerAnimation_Data.IsRunning(typeof(WallJump_Prep)))
             {
                 if (characterState.characterControl.aiProgress.GetStartSphereHeight() > 0.1f)
                 {
@@ -109,7 +109,7 @@ namespace My_MemoPlatformer
 
         private bool AIIsOnGround(CharacterControl control)
         {
-            if (control.animationProgress.IsRunning(typeof(MoveUp)))
+            if (control.PlayerAnimation_Data.IsRunning(typeof(MoveUp)))
             {
                 return false;
             }

@@ -5,8 +5,6 @@ namespace My_MemoPlatformer
 {
     public class AnimationProgress : MonoBehaviour
     {
-        public Dictionary<StateData, int> currentRunningAbilities = new Dictionary<StateData, int>();
-
         public bool cameraShaken;
         public List<PoolObjectType> poolObjectList = new List<PoolObjectType>();
         public MoveForward latestMoveForwardScript;  //latest moveforward script
@@ -30,25 +28,6 @@ namespace My_MemoPlatformer
         private void Awake()
         {
             _control = GetComponentInParent<CharacterControl>();
-        }
-
-        private void Update()
-        {
-            if (IsRunning(typeof(LockTransition)))
-            {
-                if (_control.animationProgress.lockTransition)
-                {
-                    _control.skinnedMeshAnimator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.LockTransition], true);
-                }
-                else
-                {
-                    _control.skinnedMeshAnimator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.LockTransition], false);
-                }
-            }
-            else
-            {
-                _control.skinnedMeshAnimator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.LockTransition], false);
-            }
         }
         public void NullifyUpVelocity()
         {
@@ -128,17 +107,6 @@ namespace My_MemoPlatformer
             return false;
         }
 
-        public bool IsRunning(System.Type type) //ability is running now?
-        {
-            foreach (KeyValuePair<StateData, int> data in currentRunningAbilities)
-            {
-                if (data.Key.GetType() == type)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
         public MeleeWeapon GetTouchingWeapon()
         {
             foreach (KeyValuePair<TriggerDetector, List<Collider>> data in collidingWeapons)

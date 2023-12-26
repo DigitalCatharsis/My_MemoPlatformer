@@ -37,6 +37,8 @@ namespace My_MemoPlatformer
         public PlayerGround_Data playerGround_Data;
         [Space(15)]
         public PlayerAttack_Data playerAttack_Data;
+        [Space(15)]
+        public PlayerAnimation_Data playerAnimation_Data;
 
         private void Awake()
         {
@@ -57,6 +59,7 @@ namespace My_MemoPlatformer
             UpdateSubComponent(SubComponentType.MANUALINPUT);
             UpdateSubComponent(SubComponentType.DAMAGE_DETECTOR_DATA);
             UpdateSubComponent(SubComponentType.PLAYER_ATTACK);
+            UpdateSubComponent(SubComponentType.PLAYER_ANIMATION);
         }
 
         private void UpdateSubComponent(SubComponentType type)

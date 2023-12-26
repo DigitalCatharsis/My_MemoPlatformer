@@ -27,7 +27,7 @@ namespace My_MemoPlatformer
             }
             else
             {
-                if (!characterState.characterControl.animationProgress.IsRunning(typeof(Jump)))   //double update fix. Guess idle is overlapping jump or moveforward
+                if (!characterState.PlayerAnimation_Data.IsRunning(typeof(Jump)))   //double update fix. Guess idle is overlapping jump or moveforward
                 {
                     characterState.PlayerJump_Data.jumped = false;
                 }

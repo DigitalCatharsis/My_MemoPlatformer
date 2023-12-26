@@ -122,6 +122,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\Death\Resources\DeathAnimationLoader.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Settings\Settings.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_Data\MomentumCalculator_Data.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_Data\PlayerAnimation_Data.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Managers\DeathAnimationManager.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\AI\AIProgress.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\Turn180.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\PlayerSpawn.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\ForceTransition.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\CheckTurbo.cs" />
+    <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_SubComponents\PlayerAnimation.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_SubComponents\BoxColliderUpdater.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_Characters\States\Abilities_StateScripts\MoveUp.cs" />
     <Compile Include="Assets\My_MemoPlatformer\MMP_ScriptsAndPrefabs\DamageDetector.cs" />

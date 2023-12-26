@@ -16,6 +16,7 @@ namespace My_MemoPlatformer
         INSTAKILL,
         PLAYER_GROUND,
         PLAYER_ATTACK,
+        PLAYER_ANIMATION
     }
 
     public abstract class SubComponent : MonoBehaviour

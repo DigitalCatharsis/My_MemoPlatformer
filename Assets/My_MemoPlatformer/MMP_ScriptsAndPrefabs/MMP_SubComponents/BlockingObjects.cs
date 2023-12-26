@@ -39,7 +39,7 @@ namespace My_MemoPlatformer
 
         public override void OnFixedUpdate()
         {
-            if (control.animationProgress.IsRunning(typeof(MoveForward)))
+            if (control.PlayerAnimation_Data.IsRunning(typeof(MoveForward)))
             {
                 CheckFrontBlocking();
             }
@@ -52,7 +52,7 @@ namespace My_MemoPlatformer
             }
 
             //checking while ledge grabbing
-            if (control.animationProgress.IsRunning(typeof(MoveUp)))
+            if (control.PlayerAnimation_Data.IsRunning(typeof(MoveUp)))
             {
                 if (control.animationProgress.latestMoveUpScript.speed > 0f)
                 {

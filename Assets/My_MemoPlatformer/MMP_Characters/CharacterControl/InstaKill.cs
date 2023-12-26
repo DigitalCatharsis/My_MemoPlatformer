@@ -54,12 +54,12 @@ namespace My_MemoPlatformer
                         continue;
                     }
 
-                    if (c.animationProgress.IsRunning(typeof(Attack)))
+                    if (c.PlayerAnimation_Data.IsRunning(typeof(Attack)))
                     {
                         continue;
                     }
 
-                    if (control.animationProgress.IsRunning(typeof(Attack)))
+                    if (control.PlayerAnimation_Data.IsRunning(typeof(Attack)))
                     {
                         continue;
                     }
@@ -89,8 +89,8 @@ namespace My_MemoPlatformer
 
         private void DeathByInstakill(CharacterControl attacker)
         {
-            control.animationProgress.currentRunningAbilities.Clear();
-            attacker.animationProgress.currentRunningAbilities.Clear();
+            control.PlayerAnimation_Data.currentRunningAbilities.Clear();
+            attacker.PlayerAnimation_Data.currentRunningAbilities.Clear();
 
             control.Rigid_Body.useGravity = false;
             control.boxCollider.enabled = false;

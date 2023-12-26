@@ -83,7 +83,7 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (characterState.characterControl.animationProgress.IsRunning(typeof(WallSlide))) //prevent bugs when calculating several states at the short duration
+            if (characterState.PlayerAnimation_Data.IsRunning(typeof(WallSlide))) //prevent bugs when calculating several states at the short duration
             {
                 return;
             }

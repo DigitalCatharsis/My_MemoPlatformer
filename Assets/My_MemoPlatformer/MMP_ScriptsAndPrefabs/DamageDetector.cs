@@ -168,7 +168,7 @@ namespace My_MemoPlatformer
                 return damageDetector_Data.attack;
             }
 
-            if (control.animationProgress.IsRunning(typeof(Block)))
+            if (control.PlayerAnimation_Data.IsRunning(typeof(Block)))
             {
                 var dir = info.attacker.transform.position - control.transform.position;
 
@@ -244,7 +244,7 @@ namespace My_MemoPlatformer
             damageDetector_Data.hp -= info.attackAbility.damage;
 
             AttackManager.Instance.ForceDeregester(control);
-            control.animationProgress.currentRunningAbilities.Clear();
+            control.PlayerAnimation_Data.currentRunningAbilities.Clear();
 
 
             if (IsDead())

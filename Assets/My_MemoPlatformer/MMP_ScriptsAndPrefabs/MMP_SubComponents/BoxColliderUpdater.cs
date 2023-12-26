@@ -59,7 +59,7 @@ namespace My_MemoPlatformer
 
         public void UpdateBoxColliderSize()
         {
-            if (!control.animationProgress.IsRunning(typeof(UpdateBoxCollider)))
+            if (!control.PlayerAnimation_Data.IsRunning(typeof(UpdateBoxCollider)))
             {
                 return;
             }
@@ -74,7 +74,7 @@ namespace My_MemoPlatformer
 
         public void UpdateBoxColliderCenter()
         {
-            if (!control.animationProgress.IsRunning(typeof(UpdateBoxCollider)))
+            if (!control.PlayerAnimation_Data.IsRunning(typeof(UpdateBoxCollider)))
             {
                 return;
             }

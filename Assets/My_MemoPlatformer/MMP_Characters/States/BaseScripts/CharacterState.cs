@@ -21,6 +21,7 @@ namespace My_MemoPlatformer
         public CollisionSpheres_Data CollisionSpheres_Data => characterControl.subComponentProcessor.collisionSpheres_Data;
         public PlayerGround_Data PlayerGround_Data => characterControl.subComponentProcessor.playerGround_Data;
         public PlayerAttack_Data PlayerAttack_Data => characterControl.subComponentProcessor.playerAttack_Data;
+        public PlayerAnimation_Data PlayerAnimation_Data => characterControl.subComponentProcessor.playerAnimation_Data;
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -33,13 +34,13 @@ namespace My_MemoPlatformer
             foreach (StateData d in ListAbilityData)
             {
                 d.OnEnter(this, animator, stateInfo);
-                if (characterControl.animationProgress.currentRunningAbilities.ContainsKey(d))
+                if (characterControl.PlayerAnimation_Data.currentRunningAbilities.ContainsKey(d))
                 {
-                    characterControl.animationProgress.currentRunningAbilities[d] += 1;
+                    characterControl.PlayerAnimation_Data.currentRunningAbilities[d] += 1;
                 }
                 else
                 {
-                    characterControl.animationProgress.currentRunningAbilities.Add(d,1);
+                    characterControl.PlayerAnimation_Data.currentRunningAbilities.Add(d,1);
                 }
             }
         }
@@ -62,13 +63,13 @@ namespace My_MemoPlatformer
             {
                 d.OnExit(this, animator, stateInfo);
 
-                if (characterControl.animationProgress.currentRunningAbilities.ContainsKey(d))
+                if (characterControl.PlayerAnimation_Data.currentRunningAbilities.ContainsKey(d))
                 {
-                    characterControl.animationProgress.currentRunningAbilities[d] -= 1;
+                    characterControl.PlayerAnimation_Data.currentRunningAbilities[d] -= 1;
 
-                    if (characterControl.animationProgress.currentRunningAbilities[d] <= 0)
+                    if (characterControl.PlayerAnimation_Data.currentRunningAbilities[d] <= 0)
                     {
-                        characterControl.animationProgress.currentRunningAbilities.Remove(d);
+                        characterControl.PlayerAnimation_Data.currentRunningAbilities.Remove(d);
                     }
                 }
             }
