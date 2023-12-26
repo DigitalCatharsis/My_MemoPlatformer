@@ -90,14 +90,6 @@ namespace My_MemoPlatformer
 
             UpdateCharacterIgnoreTime(characterState.characterControl, stateInfo);
 
-            if (characterState.characterControl.jump)
-            {
-                if (characterState.characterControl.PlayerGround_Data.ground != null)
-                {
-                    animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Jump], true);
-                }
-            }
-
             if (characterState.characterControl.turbo)
             {
                 animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Turbo], true);

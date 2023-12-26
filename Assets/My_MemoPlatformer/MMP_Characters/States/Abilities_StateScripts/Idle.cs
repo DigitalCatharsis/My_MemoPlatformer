@@ -8,7 +8,6 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Jump], false);
             animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Attack], false);
             animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], false);
 
@@ -24,13 +23,7 @@ namespace My_MemoPlatformer
 
             if (characterState.characterControl.jump)
             {
-                if (!characterState.PlayerJump_Data.jumped)
-                {
-                    if (characterState.characterControl.PlayerGround_Data.ground != null)
-                    {
-                        animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Jump], true);
-                    }
-                }
+                //do nothing
             }
             else
             {

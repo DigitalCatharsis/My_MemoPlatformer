@@ -445,9 +445,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: Jump
-    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: TransitionIndex
+    m_EventTreshold: 3
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7483445719845013898}
   m_Solo: 0
@@ -878,6 +878,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 197c491a17c0b8e43ad2dc456736e44a, type: 2}
   - {fileID: 11400000, guid: 6a89b738db4b1114d994ea47ac83b237, type: 2}
   - {fileID: 11400000, guid: 783421f8244597c4a9614717a88fc4d2, type: 2}
+  - {fileID: 11400000, guid: bbd505f22ece3e14092deb78388df499, type: 2}
 --- !u!1102 &-5898763538292267445
 AnimatorState:
   serializedVersion: 6
@@ -2778,9 +2779,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: Jump
-    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: TransitionIndex
+    m_EventTreshold: 4
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2790239023424084439}
   m_Solo: 0
@@ -3643,9 +3644,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: Jump
-    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: TransitionIndex
+    m_EventTreshold: 7
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7483445719845013898}
   m_Solo: 0
@@ -4040,6 +4041,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 30b10373b051ca34eb6858212c54ace0, type: 2}
   - {fileID: 11400000, guid: 9d65f7b734c30b242a8a01c0131ea504, type: 2}
   - {fileID: 11400000, guid: d5ae77febecb80c42a647740eb015a1b, type: 2}
+  - {fileID: 11400000, guid: 44c159660754ee7449e630bf43978fb0, type: 2}
 --- !u!114 &4380117591928485689
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4251,6 +4253,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7defb8a75fc400a469092fb8f12f47a2, type: 2}
   - {fileID: 11400000, guid: a99c633149a276841981296f281e95cc, type: 2}
   - {fileID: 11400000, guid: 6db03d6bce797cd468ddc00b714cda4e, type: 2}
+  - {fileID: 11400000, guid: edf5ec635699544459ea6045a312c6d0, type: 2}
 --- !u!114 &5217606143143317403
 MonoBehaviour:
   m_ObjectHideFlags: 1
