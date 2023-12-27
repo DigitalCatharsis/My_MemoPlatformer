@@ -10,6 +10,7 @@ namespace My_MemoPlatformer
         KEY_MOVE_DOWN,
         KEY_MOVE_LEFT,
         KEY_MOVE_RIGHT,
+
         KEY_ATTACK,
         KEY_TURBO,
         KEY_JUMP,
@@ -52,13 +53,13 @@ namespace My_MemoPlatformer
         public bool bind_Block;
 
         [Space(10)]
-        public Dictionary<InputKeyType, KeyCode> DicKeys = new Dictionary<InputKeyType, KeyCode>();
-        public KeyCode[] possibleKeys;
+        public Dictionary<InputKeyType, KeyCode> dicKeys = new Dictionary<InputKeyType, KeyCode>();
+        [SerializeField] private KeyCode[] _possibleKeys;
 
 
         private void Awake()
         {
-            possibleKeys = System.Enum.GetValues(typeof(KeyCode)) as KeyCode[];
+            _possibleKeys = System.Enum.GetValues(typeof(KeyCode)) as KeyCode[];
 
             var piObj = Instantiate(Resources.Load("PlayerInput", typeof (GameObject))) as GameObject;
             playerInput = piObj.GetComponent<PlayerInput>();
@@ -84,7 +85,7 @@ namespace My_MemoPlatformer
 
             for (int i = 0; i < playerInput.SavedKeys.keyCodesList.Count; i++)
             {
-                DicKeys[(InputKeyType)i] = playerInput.SavedKeys.keyCodesList[i];
+                dicKeys[(InputKeyType)i] = playerInput.SavedKeys.keyCodesList[i];
             }
         }
 
@@ -96,26 +97,26 @@ namespace My_MemoPlatformer
 
             for (int i = 0; i < count; ++i) 
             {
-                playerInput.SavedKeys.keyCodesList.Add(DicKeys[(InputKeyType)i]);
+                playerInput.SavedKeys.keyCodesList.Add(dicKeys[(InputKeyType)i]);
             }
         }
 
         public void SetDefaultKeys()
         {
-            DicKeys.Clear();
+            dicKeys.Clear();
 
-            DicKeys.Add(InputKeyType.KEY_MOVE_UP,        KeyCode.UpArrow);
-            DicKeys.Add(InputKeyType.KEY_MOVE_DOWN,      KeyCode.DownArrow);
-            DicKeys.Add(InputKeyType.KEY_MOVE_LEFT,      KeyCode.LeftArrow);
-            DicKeys.Add(InputKeyType.KEY_MOVE_RIGHT,     KeyCode.RightArrow);
+            dicKeys.Add(InputKeyType.KEY_MOVE_UP,        KeyCode.UpArrow);
+            dicKeys.Add(InputKeyType.KEY_MOVE_DOWN,      KeyCode.DownArrow);
+            dicKeys.Add(InputKeyType.KEY_MOVE_LEFT,      KeyCode.LeftArrow);
+            dicKeys.Add(InputKeyType.KEY_MOVE_RIGHT,     KeyCode.RightArrow);
 
-            DicKeys.Add(InputKeyType.KEY_ATTACK,         KeyCode.C);
-            DicKeys.Add(InputKeyType.KEY_JUMP,           KeyCode.X);
-            DicKeys.Add(InputKeyType.KEY_TURBO,          KeyCode.Z);
+            dicKeys.Add(InputKeyType.KEY_ATTACK,         KeyCode.C);
+            dicKeys.Add(InputKeyType.KEY_JUMP,           KeyCode.X);
+            dicKeys.Add(InputKeyType.KEY_TURBO,          KeyCode.Z);
 
-            DicKeys.Add(InputKeyType.KEY_BLOCK,          KeyCode.F);
+            dicKeys.Add(InputKeyType.KEY_BLOCK,          KeyCode.F);
 
-            DicKeys.Add(InputKeyType.KEY_RESTART,        KeyCode.R);
+            dicKeys.Add(InputKeyType.KEY_RESTART,        KeyCode.R);
 
             SaveKeys();
         }
@@ -203,13 +204,13 @@ namespace My_MemoPlatformer
                 Debug.Log("Key changed: " + inputKey.ToString() + " -> " + key.ToString());
             }
 
-            if (!DicKeys.ContainsKey(inputKey))
+            if (!dicKeys.ContainsKey(inputKey))
             {
-                DicKeys.Add(inputKey, key);
+                dicKeys.Add(inputKey, key);
             }
             else
             {
-                DicKeys[inputKey] = key;
+                dicKeys[inputKey] = key;
             }
 
             SaveKeys();
@@ -219,7 +220,7 @@ namespace My_MemoPlatformer
         {
             if (Input.anyKey)
             {
-                foreach (KeyCode k in possibleKeys)
+                foreach (KeyCode k in _possibleKeys)
                 {
                     if (Input.GetKeyDown(KeyCode.Mouse0))
                     {

@@ -12,7 +12,7 @@ namespace My_MemoPlatformer
         {
             playerAnimation_Data = new PlayerAnimation_Data
             {
-                currentRunningAbilities = new Dictionary<StateData, int>(),
+                currentRunningAbilities = new Dictionary<CharacterAbility, int>(),
                 IsRunning = IsRunning,
             };
 
@@ -44,7 +44,7 @@ namespace My_MemoPlatformer
         }
         private bool IsRunning(System.Type type) //ability is running now?
         {
-            foreach (KeyValuePair<StateData, int> data in playerAnimation_Data.currentRunningAbilities)
+            foreach (KeyValuePair<CharacterAbility, int> data in playerAnimation_Data.currentRunningAbilities)
             {
                 if (data.Key.GetType() == type)
                 {

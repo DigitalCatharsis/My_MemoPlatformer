@@ -1,28 +1,30 @@
-using My_MemoPlatformer;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 namespace My_MemoPlatformer
 {
-    [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/Death/TriggerRagdoll")]
-    public class TriggerRagdoll : CharacterAbility
+    [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/SwitchAnimator")]
+    public class SwitchAnimator : CharacterAbility
     {
-        public float triggerTiming;
+        public float switchTiming;
+        public RuntimeAnimatorController targetAnimator;
+
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            characterState.characterControl.Rigid_Body.useGravity = true;
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (stateInfo.normalizedTime >= triggerTiming)
+            if (stateInfo.normalizedTime >= switchTiming)
             {
-                characterState.RagdollData.ragdollTriggered = true;
+                characterState.characterControl.skinnedMeshAnimator.runtimeAnimatorController = targetAnimator;
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+
         }
     }
 }

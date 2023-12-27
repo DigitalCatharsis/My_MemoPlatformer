@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Transactions;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -17,6 +16,8 @@ namespace My_MemoPlatformer
         [SerializeField] private List<InputKeyType> _upKeys = new List<InputKeyType>();  //какие отпустил
         [SerializeField] private Dictionary<InputKeyType, float> _doubleTapTimings = new Dictionary<InputKeyType, float>();
 
+        [SerializeField] private float _doubleTapTime = 0.18f;
+
         private void Start()
         {
             manualInputData = new ManualInput_Data
@@ -29,10 +30,10 @@ namespace My_MemoPlatformer
             subComponentProcessor.subcomponentsDictionary.Add(SubComponentType.MANUALINPUT, this);
         }
 
-        //private void Awake()
-        //{
-        //    control = this.gameObject.GetComponent<CharacterControl>();
-        //}
+        public override void OnFixedUpdate()
+        {
+            throw new System.NotImplementedException();
+        }
 
         public override void OnUpdate()
         {
@@ -194,7 +195,7 @@ namespace My_MemoPlatformer
                 _upKeys.Remove(keyType);
             }
 
-            _doubleTapTimings[keyType] = Time.time + 0.15f;
+            _doubleTapTimings[keyType] = Time.time + _doubleTapTime;
         }
 
         private void RemoveDoubleTap(InputKeyType keyType)
@@ -208,11 +209,6 @@ namespace My_MemoPlatformer
             {
                 _upKeys.Add(keyType);
             }
-        }
-
-        public override void OnFixedUpdate()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
