@@ -1,11 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace My_MemoPlatformer
 {
-
     public class CharacterState : StateMachineBehaviour
     {
         public CharacterControl characterControl;
@@ -25,11 +22,11 @@ namespace My_MemoPlatformer
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (characterControl == null)  //prevent bug in animator editor, when moving a state
-            {
-                characterControl = animator.transform.root.gameObject.GetComponent<CharacterControl>();
-                characterControl.CacheCharacterControl(animator);
-            }
+            //if (characterControl == null)
+            //{
+            //    characterControl = animator.transform.root.gameObject.GetComponent<CharacterControl>();
+            //    characterControl.InitCharactersStates(animator);
+            //}
 
             foreach (CharacterAbility d in ListAbilityData)
             {

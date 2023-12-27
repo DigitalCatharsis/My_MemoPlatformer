@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -13,9 +14,33 @@ namespace My_MemoPlatformer
         private Vector3 _targetDir = new Vector3();
         private CharacterControl _control;
 
+        private Animator _animatorController;
+
+        public Animator ANIMATOR
+        {
+            get
+            {
+                return _animatorController;
+            }
+
+            private set
+            {
+
+            }
+        }
+
         private void Awake()
         {
             _control = this.gameObject.GetComponentInParent<CharacterControl>();
+
+            _animatorController = this.gameObject.GetComponentInChildren<Animator>();
+
+            var arr = _animatorController.GetBehaviours<CharacterState>();
+
+            foreach (CharacterState aiState in arr)
+            {
+                aiState.characterControl = _control;
+            }
         }
 
         private void Start()  //Not Awake (cause of we need it work after onEnable)

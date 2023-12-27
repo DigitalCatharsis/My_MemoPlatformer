@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -89,6 +90,7 @@ namespace My_MemoPlatformer
             }
 
             RegisterCharacter();
+            InitCharactersStates(skinnedMeshAnimator);
         }
 
         private void Update()
@@ -106,13 +108,13 @@ namespace My_MemoPlatformer
             PLAYER_GROUND_DATA.BoxColliderContacts = collision.contacts;
         }
 
-        public void CacheCharacterControl(Animator animator)  //Передает стейтам аниматора CharacterControl референс
+        private void InitCharactersStates(Animator animator)  //Передает стейтам аниматора CharacterControl референс
         {
             CharacterState[] arr = animator.GetBehaviours<CharacterState>();
 
             foreach (CharacterState c in arr)
             {
-                c.characterControl = this;
+                c.characterControl = this;   //For AI check awake in AiController
             }
         }
         private void RegisterCharacter()
