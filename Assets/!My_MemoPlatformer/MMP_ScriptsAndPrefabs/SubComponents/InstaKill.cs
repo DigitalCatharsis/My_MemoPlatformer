@@ -32,7 +32,7 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (!control.skinnedMeshAnimator.GetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded]))
+            if (!control.skinnedMeshAnimator.GetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Grounded]))
             {
                 return;
             }

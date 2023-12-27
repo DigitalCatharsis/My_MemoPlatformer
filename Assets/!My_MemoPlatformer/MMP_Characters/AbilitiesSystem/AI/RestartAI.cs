@@ -116,7 +116,7 @@ namespace My_MemoPlatformer
 
             if (control.Rigid_Body.useGravity)
             {
-                if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded]))
+                if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Grounded]))
                 {
                     return true;
                 }

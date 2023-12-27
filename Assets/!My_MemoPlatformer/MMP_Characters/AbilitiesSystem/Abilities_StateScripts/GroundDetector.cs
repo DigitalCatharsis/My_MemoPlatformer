@@ -16,11 +16,11 @@ namespace My_MemoPlatformer
         {
             if (IsGrounded(characterState.characterControl))
             {
-                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded], true);
+                animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Grounded], true);
             }
             else
             {
-                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded], false);
+                animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Grounded], false);
             }
         }
 

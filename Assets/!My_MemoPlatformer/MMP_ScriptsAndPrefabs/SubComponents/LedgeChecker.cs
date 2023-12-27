@@ -31,7 +31,7 @@ namespace My_MemoPlatformer
         }
         public override void OnFixedUpdate()
         {
-            if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded]))
+            if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Grounded]))
             {
                 if (control.Rigid_Body.useGravity)
                 {
@@ -65,7 +65,7 @@ namespace My_MemoPlatformer
 
         private void ProcessLedgeGrab()
         {
-            if (!control.skinnedMeshAnimator.GetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded]))
+            if (!control.skinnedMeshAnimator.GetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Grounded]))
             {
                 foreach (var obj in collider1.collidedObjects)
                 {

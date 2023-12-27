@@ -20,7 +20,7 @@ namespace My_MemoPlatformer
             {
                 if (characterState.characterControl.moveLeft)
                 {
-                    animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Turn], true);
+                    animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Turn], true);
                 }
             }
 
@@ -28,13 +28,13 @@ namespace My_MemoPlatformer
             {
                 if (characterState.characterControl.moveRight)
                 {
-                    animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Turn], true);
+                    animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Turn], true);
                 }
             }
         }
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Turn], false);
+            animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Turn], false);
         }
 
 

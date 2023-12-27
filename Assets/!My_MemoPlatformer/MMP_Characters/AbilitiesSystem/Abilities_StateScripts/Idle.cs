@@ -8,8 +8,8 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Attack], false);
-            animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], false);
+            animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Attack], false);
+            animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Move], false);
 
             characterState.PlayerRotation_Data.lockEarlyTurn = false;
             characterState.PlayerRotation_Data.lockDirectionNextState = false;
@@ -40,11 +40,11 @@ namespace My_MemoPlatformer
             }
             else if (characterState.characterControl.moveRight)
             {
-                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], true);
+                animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Move], true);
             }
             else if (characterState.characterControl.moveLeft)
             {
-                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], true);
+                animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Move], true);
             }
         }
 

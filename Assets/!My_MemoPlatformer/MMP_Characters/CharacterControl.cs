@@ -8,19 +8,6 @@ namespace My_MemoPlatformer
     //2. The pressed keys saved up to the VirtualInputManager, and bind up
     //3. ManualInput Relay that keys to the CharacterControl
     //4. CharacterControl contains actual fields about character moving etc.
-    public enum TransitionParameter
-    {
-        Move,
-        Jump,
-        ForceTransition,
-        Grounded,
-        Attack,
-        ClickAnimation,
-        TransitionIndex,
-        Turbo,
-        Turn,
-        LockTransition,
-    }
 
     public enum MMP_Scenes
     {

@@ -20,7 +20,7 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Attack], false);
+            animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Attack], false);
         }
     }
 

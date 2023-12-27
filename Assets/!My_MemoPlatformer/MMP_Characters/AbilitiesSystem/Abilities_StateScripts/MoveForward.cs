@@ -92,11 +92,11 @@ namespace My_MemoPlatformer
 
             if (characterState.characterControl.turbo)
             {
-                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Turbo], true);
+                animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Turbo], true);
             }
             else
             {
-                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Turbo], false);
+                animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Turbo], false);
             }
 
             if (useMomentum)
@@ -169,11 +169,11 @@ namespace My_MemoPlatformer
 
             if (!control.moveRight && !control.moveLeft)
             {
-                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], false);
+                animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Move], false);
             }
             else
             {
-                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], true);
+                animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Move], true);
             }
         }
 
@@ -181,13 +181,13 @@ namespace My_MemoPlatformer
         {
             if (control.moveRight && control.moveLeft)
             {
-                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], false);
+                animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Move], false);
                 return;
             }
 
             if (!control.moveRight && !control.moveLeft)
             {
-                animator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Move], false);
+                animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Move], false);
                 return;
             }
 

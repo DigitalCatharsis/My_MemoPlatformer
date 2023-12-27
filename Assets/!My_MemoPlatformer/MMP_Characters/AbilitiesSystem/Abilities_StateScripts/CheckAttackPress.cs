@@ -17,11 +17,11 @@ namespace My_MemoPlatformer
         {
             if (characterState.characterControl.attack)
             {
-                characterState.characterControl.skinnedMeshAnimator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Attack], true);
+                characterState.characterControl.skinnedMeshAnimator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Attack], true);
             }
             else
             {
-                characterState.characterControl.skinnedMeshAnimator.SetBool(HashManager.Instance.dicMainParams[TransitionParameter.Attack], false);
+                characterState.characterControl.skinnedMeshAnimator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Attack], false);
             }
         }
 

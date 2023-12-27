@@ -36,7 +36,7 @@ namespace My_MemoPlatformer
             {
                 if (stateInfo.normalizedTime > 0.7f)
                 {
-                    if (animator.GetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded]) == true)
+                    if (animator.GetBool(HashManager.Instance.ArrMainParams[(int)(int)(int)MainParameterType.Grounded]) == true)
                     {
                         characterState.BoxCollider_Data.isLanding = true;
                     }

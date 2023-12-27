@@ -46,7 +46,7 @@ namespace My_MemoPlatformer
 
             if (MakeTransition(characterState.characterControl))
             {
-                animator.SetInteger(HashManager.Instance.dicMainParams[TransitionParameter.TransitionIndex], Index);
+                animator.SetInteger(HashManager.Instance.ArrMainParams[(int)MainParameterType.TransitionIndex], Index);
             }
         }
 
@@ -56,18 +56,18 @@ namespace My_MemoPlatformer
         {
             characterState.PlayerJump_Data.checkWallBlock = StartCheckingWallBlock();
 
-            if (animator.GetInteger(HashManager.Instance.dicMainParams[TransitionParameter.TransitionIndex]) == 0)
+            if (animator.GetInteger(HashManager.Instance.ArrMainParams[(int)MainParameterType.TransitionIndex]) == 0)
             {
                 if (MakeTransition(characterState.characterControl))
                 {
-                    animator.SetInteger(HashManager.Instance.dicMainParams[TransitionParameter.TransitionIndex], Index);
+                    animator.SetInteger(HashManager.Instance.ArrMainParams[(int)MainParameterType.TransitionIndex], Index);
                 }
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.SetInteger(HashManager.Instance.dicMainParams[TransitionParameter.TransitionIndex], 0);
+            animator.SetInteger(HashManager.Instance.ArrMainParams[(int)MainParameterType.TransitionIndex], 0);
         }
 
         private bool StartCheckingWallBlock()
@@ -167,7 +167,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.GROUNDED:
                         {
-                            if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded]) == false)
+                            if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Grounded]) == false)
                             {
                                 return false;
                             }
@@ -193,7 +193,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.AIR:
                         {
-                            if (!control.skinnedMeshAnimator.GetBool(HashManager.Instance.dicMainParams[TransitionParameter.Grounded]) == false)
+                            if (!control.skinnedMeshAnimator.GetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Grounded]) == false)
                             {
                                 return false;
                             }
