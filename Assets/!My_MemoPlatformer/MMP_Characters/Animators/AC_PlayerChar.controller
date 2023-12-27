@@ -4033,8 +4033,8 @@ MonoBehaviour:
   ListAbilityData:
   - {fileID: 11400000, guid: 64169e7d45e53384096eedd33735b21c, type: 2}
   - {fileID: 11400000, guid: e85a5f6f9551dc441b1b754f4ea81e40, type: 2}
-  - {fileID: 11400000, guid: 2f619052d74700f49885047e7f54b10f, type: 2}
   - {fileID: 11400000, guid: 7defb8a75fc400a469092fb8f12f47a2, type: 2}
+  - {fileID: 11400000, guid: 2f619052d74700f49885047e7f54b10f, type: 2}
   - {fileID: 11400000, guid: d045ae9c5dc07f44ab3e7c774c892685, type: 2}
   - {fileID: 11400000, guid: 93cf45bc17cbf5b42b8d440a8c14136e, type: 2}
   - {fileID: 11400000, guid: 5b0225a3bdf0025429af9e9e92e7d4c2, type: 2}
