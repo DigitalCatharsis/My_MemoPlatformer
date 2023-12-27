@@ -17,7 +17,7 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (!characterState.characterControl.Rigid_Body.useGravity)
+            if (!characterState.characterControl.RIGID_BODY.useGravity)
             {
                 if (characterState.BlockingObjData.frontBlockingDictionaryCount == 0)
                 {

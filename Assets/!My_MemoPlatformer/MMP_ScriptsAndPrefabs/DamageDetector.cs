@@ -145,14 +145,14 @@ namespace My_MemoPlatformer
 
         private bool IsInLethalRange(AttackCondition info)
         {
-            foreach (var c in control.Ragdoll_Data.bodyParts)
+            foreach (var c in control.RAGDOLL_DATA.bodyParts)
             {
                 float dist = Vector3.SqrMagnitude(c.transform.position - info.attacker.transform.position); //distance between target and attacker
                                                                                                             //Debug.Log(this.gameObject.name + "dist: "+ dist.ToString() );
                 if (dist <= info.lethalRange)
                 {
-                    int index = Random.Range(0, control.Ragdoll_Data.bodyParts.Count);
-                    var triggerDetector = control.Ragdoll_Data.bodyParts[index].GetComponent<TriggerDetector>();
+                    int index = Random.Range(0, control.RAGDOLL_DATA.bodyParts.Count);
+                    var triggerDetector = control.RAGDOLL_DATA.bodyParts[index].GetComponent<TriggerDetector>();
 
                     damageDetector_Data.SetData(info.attacker, info.attackAbility, triggerDetector, null);
                     return true;
@@ -168,20 +168,20 @@ namespace My_MemoPlatformer
                 return damageDetector_Data.attack;
             }
 
-            if (control.PlayerAnimation_Data.IsRunning(typeof(Block)))
+            if (control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Block)))
             {
                 var dir = info.attacker.transform.position - control.transform.position;
 
                 if (dir.z > 0f)
                 {
-                    if (control.PlayerRotation_Data.IsFacingForward())
+                    if (control.PLAYER_ROTATION_DATA.IsFacingForward())
                     {
                         return true;
                     }
                 }
                 else if (dir.z < 0f)
                 {
-                    if (!control.PlayerRotation_Data.IsFacingForward())
+                    if (!control.PLAYER_ROTATION_DATA.IsFacingForward())
                     {
                         return true;
                     }
@@ -198,7 +198,7 @@ namespace My_MemoPlatformer
                 if (!info.registeredTargets.Contains(this.control))
                 {
                     info.registeredTargets.Add(this.control);
-                    control.Ragdoll_Data.AddForceToDamagedPart(true);
+                    control.RAGDOLL_DATA.AddForceToDamagedPart(true);
                 }
                 return;
             }
@@ -223,7 +223,7 @@ namespace My_MemoPlatformer
 
                         vfx.SetActive(true);
 
-                        if (info.attacker.PlayerRotation_Data.IsFacingForward())
+                        if (info.attacker.PLAYER_ROTATION_DATA.IsFacingForward())
                         {
                             vfx.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                         }
@@ -244,12 +244,12 @@ namespace My_MemoPlatformer
             damageDetector_Data.hp -= info.attackAbility.damage;
 
             AttackManager.Instance.ForceDeregester(control);
-            control.PlayerAnimation_Data.currentRunningAbilities.Clear();
+            control.PLAYER_ANIMATION_DATA.currentRunningAbilities.Clear();
 
 
             if (IsDead())
             {
-                control.Ragdoll_Data.ragdollTriggered = true;
+                control.RAGDOLL_DATA.ragdollTriggered = true;
             }
             else
             {

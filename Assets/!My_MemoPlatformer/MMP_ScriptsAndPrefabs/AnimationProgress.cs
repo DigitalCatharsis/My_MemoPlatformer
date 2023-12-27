@@ -31,18 +31,18 @@ namespace My_MemoPlatformer
         }
         public void NullifyUpVelocity()
         {
-            _control.Rigid_Body.velocity = new Vector3(
-                _control.Rigid_Body.velocity.x,
+            _control.RIGID_BODY.velocity = new Vector3(
+                _control.RIGID_BODY.velocity.x,
                 0f,
-                _control.Rigid_Body.velocity.z);
+                _control.RIGID_BODY.velocity.z);
         }
         public bool IsFacingAtacker()
         {
-            var vec = _control.DamageDetector_Data.attacker.transform.position - _control.transform.position;
+            var vec = _control.DAMAGE_DETECTOR_DATA.attacker.transform.position - _control.transform.position;
 
             if (vec.z < 0f)
             {
-                if (_control.PlayerRotation_Data.IsFacingForward())
+                if (_control.PLAYER_ROTATION_DATA.IsFacingForward())
                 {
                     return false;
                 }
@@ -53,7 +53,7 @@ namespace My_MemoPlatformer
             }
             else if (vec.z > 0f)
             {
-                if (_control.PlayerRotation_Data.IsFacingForward())
+                if (_control.PLAYER_ROTATION_DATA.IsFacingForward())
                 {
                     return true;
                 }

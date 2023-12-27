@@ -34,13 +34,13 @@ namespace My_MemoPlatformer
             foreach (CharacterAbility d in ListAbilityData)
             {
                 d.OnEnter(this, animator, stateInfo);
-                if (characterControl.PlayerAnimation_Data.currentRunningAbilities.ContainsKey(d))
+                if (characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities.ContainsKey(d))
                 {
-                    characterControl.PlayerAnimation_Data.currentRunningAbilities[d] += 1;
+                    characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities[d] += 1;
                 }
                 else
                 {
-                    characterControl.PlayerAnimation_Data.currentRunningAbilities.Add(d,1);
+                    characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities.Add(d,1);
                 }
             }
         }
@@ -63,13 +63,13 @@ namespace My_MemoPlatformer
             {
                 d.OnExit(this, animator, stateInfo);
 
-                if (characterControl.PlayerAnimation_Data.currentRunningAbilities.ContainsKey(d))
+                if (characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities.ContainsKey(d))
                 {
-                    characterControl.PlayerAnimation_Data.currentRunningAbilities[d] -= 1;
+                    characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities[d] -= 1;
 
-                    if (characterControl.PlayerAnimation_Data.currentRunningAbilities[d] <= 0)
+                    if (characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities[d] <= 0)
                     {
-                        characterControl.PlayerAnimation_Data.currentRunningAbilities.Remove(d);
+                        characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities.Remove(d);
                     }
                 }
             }

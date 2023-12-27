@@ -40,8 +40,8 @@ namespace My_MemoPlatformer
 
         private void ToggleGrav(CharacterControl control)
         {
-            control.Rigid_Body.velocity = Vector3.zero;
-            control.Rigid_Body.useGravity = on;  //ON not qual True xD
+            control.RIGID_BODY.velocity = Vector3.zero;
+            control.RIGID_BODY.useGravity = on;  //ON not qual True xD
         }
     }
 }

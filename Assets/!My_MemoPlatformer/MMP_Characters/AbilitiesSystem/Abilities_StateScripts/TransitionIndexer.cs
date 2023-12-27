@@ -123,7 +123,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.ATTACK:
                         {
-                            if (!control.PlayerAttack_Data.attackTriggered)
+                            if (!control.PLAYER_ATTACK_DATA.attackTriggered)
                             {
                                 return false;
                             }
@@ -139,7 +139,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.GRABBING_LEDGE:
                         {
-                            if (!control.LedgeGrab_Data.isGrabbingLedge)
+                            if (!control.LEDGE_GRAB_DATA.isGrabbingLedge)
                             {
                                 return false;
                             }
@@ -147,7 +147,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.NOT_GRABBING_LEDGE:
                         {
-                            if (control.LedgeGrab_Data.isGrabbingLedge)
+                            if (control.LEDGE_GRAB_DATA.isGrabbingLedge)
                             {
                                 return false;
                             }
@@ -175,7 +175,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.MOVE_FORWARD:
                         {
-                            if (control.PlayerRotation_Data.IsFacingForward())
+                            if (control.PLAYER_ROTATION_DATA.IsFacingForward())
                             {
                                 if (!control.moveRight)
                                 {
@@ -201,7 +201,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.CAN_WALLJUMP:
                         {
-                            var canWallJump = control.PlayerJump_Data.canWallJump;
+                            var canWallJump = control.PLAYER_JUMP_DATA.canWallJump;
 
                             if (!canWallJump)
                             {
@@ -211,7 +211,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.MOVING_TO_BLOCKING_OBG:
                         {
-                            var objs = control.BlockingObj_Data.GetFrontBlockingObjList();
+                            var objs = control.BLOCKING_OBJ_DATA.GetFrontBlockingObjList();
 
                             foreach (var o in objs) 
                             {
@@ -230,7 +230,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.BLOCKED_BY_WALL:
                         {
-                            foreach (var oc in control.CollisionSpheres_Data.frontOverlapCheckers)
+                            foreach (var oc in control.COLLISION_SPHERES_DATA.frontOverlapCheckers)
                             {
                                 if (!oc.objIsOverlapping)
                                 {
@@ -243,7 +243,7 @@ namespace My_MemoPlatformer
                         {
                             bool allIsoverlapping = true;
 
-                            foreach (var oc in control.CollisionSpheres_Data.frontOverlapCheckers)
+                            foreach (var oc in control.COLLISION_SPHERES_DATA.frontOverlapCheckers)
                             {
                                 if (!oc.objIsOverlapping)
                                 {
@@ -264,7 +264,7 @@ namespace My_MemoPlatformer
                                 return false;
                             }
 
-                            if (!control.ManualInpu_Data.DoubleTapUp())
+                            if (!control.MANUAL_INPUT_DATA.DoubleTapUp())
                             {
                                 return false;
                             }
@@ -277,7 +277,7 @@ namespace My_MemoPlatformer
                                 return false;
                             }
 
-                            if (!control.ManualInpu_Data.DoubleTapDown())
+                            if (!control.MANUAL_INPUT_DATA.DoubleTapDown())
                             {
                                 return false;
                             }
@@ -367,7 +367,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.ATTACK_ISBLOCKED:
                         {
-                            if (control.DamageDetector_Data.blockedAttack == null)
+                            if (control.DAMAGE_DETECTOR_DATA.blockedAttack == null)
                             {
                                 return false;
                             }

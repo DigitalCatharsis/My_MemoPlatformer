@@ -51,7 +51,7 @@ namespace My_MemoPlatformer
                 control.moveRight = false;
                 control.moveLeft = false;
 
-                if (control.aiProgress.IsFacingTarget() && !control.PlayerAnimation_Data.IsRunning(typeof(MoveForward)))
+                if (control.aiProgress.IsFacingTarget() && !control.PLAYER_ANIMATION_DATA.IsRunning(typeof(MoveForward)))
                 {
                     control.attack = true;
                 }
@@ -71,7 +71,7 @@ namespace My_MemoPlatformer
                     control.moveRight = true;
                     control.moveLeft = false;
 
-                    if (control.aiProgress.IsFacingTarget() && control.PlayerAnimation_Data.IsRunning(typeof(MoveForward)))
+                    if (control.aiProgress.IsFacingTarget() && control.PLAYER_ANIMATION_DATA.IsRunning(typeof(MoveForward)))
                     {
                         control.attack = true;
                     }
@@ -81,7 +81,7 @@ namespace My_MemoPlatformer
                     control.moveRight = false;
                     control.moveLeft = true;
 
-                    if (control.aiProgress.IsFacingTarget() && control.PlayerAnimation_Data.IsRunning(typeof(MoveForward)))
+                    if (control.aiProgress.IsFacingTarget() && control.PLAYER_ANIMATION_DATA.IsRunning(typeof(MoveForward)))
                     {
                         control.attack = true;
                     }

@@ -25,26 +25,28 @@ namespace My_MemoPlatformer
 
         [Header("SubComponents")]
         public SubComponentProcessor subComponentProcessor;
+
+        //have to dispose
         public AnimationProgress animationProgress;
         public AIProgress aiProgress;
         public AIController aiController;
         public BoxCollider boxCollider;
         public NavMeshObstacle navMeshObstacle;
 
-        public BlockingObj_Data BlockingObj_Data => subComponentProcessor.blockingObjData;
-        public LedgeGrab_Data LedgeGrab_Data => subComponentProcessor.ledgeGrabData;
-        public Ragdoll_Data Ragdoll_Data => subComponentProcessor.ragdollData;
-        public ManualInput_Data ManualInpu_Data => subComponentProcessor.manualInput_Data;
-        public BoxCollider_Data BoxCollider_Data => subComponentProcessor.boxCollider_Data;
-        public DamageDetector_Data DamageDetector_Data => subComponentProcessor.damageDetector_Data;
-        public MomentumCalculator_Data MomentumCalculator_Data => subComponentProcessor.momentumCalculator_Data;
-        public PlayerRotation_Data PlayerRotation_Data => subComponentProcessor.playerRotation_Data;
-        public PlayerJump_Data PlayerJump_Data => subComponentProcessor.playerJump_Data;
-        public CollisionSpheres_Data CollisionSpheres_Data => subComponentProcessor.collisionSpheres_Data;
-        public InstaKill_Data InstaKill_Data => subComponentProcessor.instaKill_Data;
-        public PlayerGround_Data PlayerGround_Data => subComponentProcessor.playerGround_Data;
-        public PlayerAttack_Data PlayerAttack_Data => subComponentProcessor.playerAttack_Data;
-        public PlayerAnimation_Data PlayerAnimation_Data => subComponentProcessor.playerAnimation_Data;
+        public BlockingObj_Data BLOCKING_OBJ_DATA => subComponentProcessor.blockingObjData;
+        public LedgeGrab_Data LEDGE_GRAB_DATA => subComponentProcessor.ledgeGrabData;
+        public Ragdoll_Data RAGDOLL_DATA => subComponentProcessor.ragdollData;
+        public ManualInput_Data MANUAL_INPUT_DATA => subComponentProcessor.manualInput_Data;
+        public BoxCollider_Data BOX_COLLIDER_DATA => subComponentProcessor.boxCollider_Data;
+        public DamageDetector_Data DAMAGE_DETECTOR_DATA => subComponentProcessor.damageDetector_Data;
+        public MomentumCalculator_Data MOMENTUM_CACULATOR_DATA => subComponentProcessor.momentumCalculator_Data;
+        public PlayerRotation_Data PLAYER_ROTATION_DATA => subComponentProcessor.playerRotation_Data;
+        public PlayerJump_Data PLAYER_JUMP_DATA => subComponentProcessor.playerJump_Data;
+        public CollisionSpheres_Data COLLISION_SPHERES_DATA => subComponentProcessor.collisionSpheres_Data;
+        public InstaKill_Data INSTAKILL_DATA => subComponentProcessor.instaKill_Data;
+        public PlayerGround_Data PLAYER_GROUND_DATA => subComponentProcessor.playerGround_Data;
+        public PlayerAttack_Data PLAYER_ATTACK_DATA => subComponentProcessor.playerAttack_Data;
+        public PlayerAnimation_Data PLAYER_ANIMATION_DATA => subComponentProcessor.playerAnimation_Data;
 
         [Header("Setup")]
         public PlayableCharacterType playableCharacterType;
@@ -57,7 +59,7 @@ namespace My_MemoPlatformer
         private Dictionary<string, GameObject> _childObjects = new Dictionary<string, GameObject>();
 
         private Rigidbody _rigidBody;
-        public Rigidbody Rigid_Body
+        public Rigidbody RIGID_BODY
         {
             get
             {
@@ -101,7 +103,7 @@ namespace My_MemoPlatformer
 
         private void OnCollisionStay(Collision collision)
         {
-            PlayerGround_Data.BoxColliderContacts = collision.contacts;
+            PLAYER_GROUND_DATA.BoxColliderContacts = collision.contacts;
         }
 
         public void CacheCharacterControl(Animator animator)  //Передает стейтам аниматора CharacterControl референс
@@ -135,9 +137,9 @@ namespace My_MemoPlatformer
                 return _childObjects[name];
             }
 
-            Transform[] ar = this.gameObject.GetComponentsInChildren<Transform>();
+            var ar = this.gameObject.GetComponentsInChildren<Transform>();
 
-            foreach (Transform t in ar)
+            foreach (var t in ar)
             {
                 if (t.gameObject.name.Equals(name))
                 {

@@ -33,7 +33,7 @@ namespace My_MemoPlatformer
         {
             if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Grounded]))
             {
-                if (control.Rigid_Body.useGravity)
+                if (control.RIGID_BODY.useGravity)
                 {
                     ledgeGrab_Data.isGrabbingLedge = false;
                 }
@@ -107,14 +107,14 @@ namespace My_MemoPlatformer
             }
 
             ledgeGrab_Data.isGrabbingLedge = true;
-            control.Rigid_Body.useGravity = false;
-            control.Rigid_Body.velocity = Vector3.zero;
+            control.RIGID_BODY.useGravity = false;
+            control.RIGID_BODY.velocity = Vector3.zero;
 
             float y, z;
 
             y = platform.transform.position.y + (boxCollider.size.y * boxCollider.gameObject.transform.lossyScale.y / 2f);
 
-            if (control.PlayerRotation_Data.IsFacingForward())
+            if (control.PLAYER_ROTATION_DATA.IsFacingForward())
             {
                 z = platform.transform.position.z - (boxCollider.size.z * boxCollider.gameObject.transform.lossyScale.z / 2f);
             }
@@ -125,13 +125,13 @@ namespace My_MemoPlatformer
 
             var plarformEdge = new Vector3(0f, y, z);
 
-            if (control.PlayerRotation_Data.IsFacingForward())
+            if (control.PLAYER_ROTATION_DATA.IsFacingForward())
             {
-                control.Rigid_Body.MovePosition(plarformEdge + ledgeCalibration);
+                control.RIGID_BODY.MovePosition(plarformEdge + ledgeCalibration);
             }
             else
             {
-                control.Rigid_Body.MovePosition(plarformEdge + new Vector3(0f, ledgeCalibration.y, -ledgeCalibration.z));
+                control.RIGID_BODY.MovePosition(plarformEdge + new Vector3(0f, ledgeCalibration.y, -ledgeCalibration.z));
             }
 
             return true;

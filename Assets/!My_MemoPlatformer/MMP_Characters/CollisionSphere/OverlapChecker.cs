@@ -20,9 +20,9 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (_control.PlayerJump_Data.checkWallBlock)
+            if (_control.PLAYER_JUMP_DATA.checkWallBlock)
             {
-                if (_control.CollisionSpheres_Data.frontOverlapCheckers.Contains(this))
+                if (_control.COLLISION_SPHERES_DATA.frontOverlapCheckers.Contains(this))
                 {
                     objIsOverlapping = CheckObj();
                 }

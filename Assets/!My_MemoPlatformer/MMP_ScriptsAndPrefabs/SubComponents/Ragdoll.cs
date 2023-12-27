@@ -94,14 +94,14 @@ namespace My_MemoPlatformer
             }
 
             //turn off animator, avatar
-            control.Rigid_Body.useGravity = false;
-            control.Rigid_Body.velocity = Vector3.zero;
+            control.RIGID_BODY.useGravity = false;
+            control.RIGID_BODY.velocity = Vector3.zero;
             control.gameObject.GetComponent<BoxCollider>().enabled = false;
             control.skinnedMeshAnimator.enabled = false;
             control.skinnedMeshAnimator.avatar = null;
 
             //Turn off ledge colliders
-            control.LedgeGrab_Data.LedgeCollidersOff();
+            control.LEDGE_GRAB_DATA.LedgeCollidersOff();
 
             //turn off ai
             if (control.aiController != null)
@@ -138,7 +138,7 @@ namespace My_MemoPlatformer
         }
         private void AddForceToDamagedPart(bool zeroZelocity)
         {
-            if (control.DamageDetector_Data.damagedTrigger != null)
+            if (control.DAMAGE_DETECTOR_DATA.damagedTrigger != null)
             {
                 if (zeroZelocity)
                 {
@@ -148,10 +148,10 @@ namespace My_MemoPlatformer
                     }
                 }
 
-                control.DamageDetector_Data.damagedTrigger.GetComponent<Rigidbody>().
-                     AddForce(control.DamageDetector_Data.attacker.transform.forward * control.DamageDetector_Data.attack.forwardForce +
-                          control.DamageDetector_Data.attacker.transform.right * control.DamageDetector_Data.attack.rightForce +
-                             control.DamageDetector_Data.attacker.transform.up * control.DamageDetector_Data.attack.upForce);
+                control.DAMAGE_DETECTOR_DATA.damagedTrigger.GetComponent<Rigidbody>().
+                     AddForce(control.DAMAGE_DETECTOR_DATA.attacker.transform.forward * control.DAMAGE_DETECTOR_DATA.attack.forwardForce +
+                          control.DAMAGE_DETECTOR_DATA.attacker.transform.right * control.DAMAGE_DETECTOR_DATA.attack.rightForce +
+                             control.DAMAGE_DETECTOR_DATA.attacker.transform.up * control.DAMAGE_DETECTOR_DATA.attack.upForce);
             }
         }
     }

@@ -36,10 +36,10 @@ namespace My_MemoPlatformer
 
             if (boxCollider_Data.updatingSpheres)
             {
-                control.CollisionSpheres_Data.Reposition_FrontSpheres();
-                control.CollisionSpheres_Data.Reposition_BottomSpheres();
-                control.CollisionSpheres_Data.Reposition_BackSpheres();
-                control.CollisionSpheres_Data.Reposition_UpSpheres();
+                control.COLLISION_SPHERES_DATA.Reposition_FrontSpheres();
+                control.COLLISION_SPHERES_DATA.Reposition_BottomSpheres();
+                control.COLLISION_SPHERES_DATA.Reposition_BackSpheres();
+                control.COLLISION_SPHERES_DATA.Reposition_UpSpheres();
 
                 if (boxCollider_Data.isLanding)  //prevent bug when idle after catching corner of platform
                 {
@@ -47,7 +47,7 @@ namespace My_MemoPlatformer
                     {
                         Debug.Log("repositioning y");
                     }
-                    control.Rigid_Body.MovePosition(new Vector3(0f, boxCollider_Data.landingPosition.y, this.transform.position.z));
+                    control.RIGID_BODY.MovePosition(new Vector3(0f, boxCollider_Data.landingPosition.y, this.transform.position.z));
                 }
             }
         }
@@ -59,7 +59,7 @@ namespace My_MemoPlatformer
 
         public void UpdateBoxColliderSize()
         {
-            if (!control.PlayerAnimation_Data.IsRunning(typeof(UpdateBoxCollider)))
+            if (!control.PLAYER_ANIMATION_DATA.IsRunning(typeof(UpdateBoxCollider)))
             {
                 return;
             }
@@ -74,7 +74,7 @@ namespace My_MemoPlatformer
 
         public void UpdateBoxColliderCenter()
         {
-            if (!control.PlayerAnimation_Data.IsRunning(typeof(UpdateBoxCollider)))
+            if (!control.PLAYER_ANIMATION_DATA.IsRunning(typeof(UpdateBoxCollider)))
             {
                 return;
             }

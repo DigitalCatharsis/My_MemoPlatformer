@@ -34,7 +34,7 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (control.Ragdoll_Data.bodyParts.Contains(col))  //touching own collider
+            if (control.RAGDOLL_DATA.bodyParts.Contains(col))  //touching own collider
             {
                 return;
             }
@@ -77,11 +77,11 @@ namespace My_MemoPlatformer
                 if (w.thrower != control) //not colliding himself
                 {
                     var info = new AttackCondition();
-                    info.CopyInfo(control.DamageDetector_Data.AxeThrow, control);
+                    info.CopyInfo(control.DAMAGE_DETECTOR_DATA.AxeThrow, control);
 
-                    control.DamageDetector_Data.SetData(w.thrower, control.DamageDetector_Data.AxeThrow, this, null);
+                    control.DAMAGE_DETECTOR_DATA.SetData(w.thrower, control.DAMAGE_DETECTOR_DATA.AxeThrow, this, null);
 
-                    control.DamageDetector_Data.TakeDamage(info);
+                    control.DAMAGE_DETECTOR_DATA.TakeDamage(info);
 
                     if (w.flyForward)
                     {

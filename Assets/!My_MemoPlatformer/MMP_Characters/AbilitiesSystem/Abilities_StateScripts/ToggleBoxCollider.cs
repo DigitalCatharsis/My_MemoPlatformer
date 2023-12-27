@@ -37,15 +37,15 @@ namespace My_MemoPlatformer
 
         private void ToggleBoxCol(CharacterControl control)
         {
-            control.Rigid_Body.velocity = Vector3.zero;
+            control.RIGID_BODY.velocity = Vector3.zero;
             control.GetComponent<BoxCollider>().enabled= on;
 
             if (repositionSpheres)
             {
-                control.CollisionSpheres_Data.Reposition_FrontSpheres();
-                control.CollisionSpheres_Data.Reposition_BottomSpheres();
-                control.CollisionSpheres_Data.Reposition_BackSpheres();
-                control.CollisionSpheres_Data.Reposition_UpSpheres();
+                control.COLLISION_SPHERES_DATA.Reposition_FrontSpheres();
+                control.COLLISION_SPHERES_DATA.Reposition_BottomSpheres();
+                control.COLLISION_SPHERES_DATA.Reposition_BackSpheres();
+                control.COLLISION_SPHERES_DATA.Reposition_UpSpheres();
             }
         }
     }

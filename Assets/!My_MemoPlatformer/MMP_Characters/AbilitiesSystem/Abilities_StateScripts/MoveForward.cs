@@ -41,18 +41,18 @@ namespace My_MemoPlatformer
                 {
                     if (characterState.characterControl.moveLeft)
                     {
-                        characterState.characterControl.PlayerRotation_Data.FaceForward(false);
+                        characterState.characterControl.PLAYER_ROTATION_DATA.FaceForward(false);
                     }
                     if (characterState.characterControl.moveRight)
                     {
-                        characterState.characterControl.PlayerRotation_Data.FaceForward(true);
+                        characterState.characterControl.PLAYER_ROTATION_DATA.FaceForward(true);
                     }
                 }
             }
 
             if (startingMomentum > 0.001f)
             {
-                if (characterState.characterControl.PlayerRotation_Data.IsFacingForward())
+                if (characterState.characterControl.PLAYER_ROTATION_DATA.IsFacingForward())
                 {
                     characterState.MomentumCalculator_Data.momentum = startingMomentum;
                 }
@@ -128,20 +128,20 @@ namespace My_MemoPlatformer
         private void MoveOnMomentum(CharacterControl control, AnimatorStateInfo stateInfo)
         {
             var currentSpeed = speedGraph.Evaluate(stateInfo.normalizedTime) * speed * Time.deltaTime;
-            control.MomentumCalculator_Data.CalcualteMomentum(currentSpeed, maxMomentum);
+            control.MOMENTUM_CACULATOR_DATA.CalcualteMomentum(currentSpeed, maxMomentum);
 
-            if (control.MomentumCalculator_Data.momentum > 0f)
+            if (control.MOMENTUM_CACULATOR_DATA.momentum > 0f)
             {
-                control.PlayerRotation_Data.FaceForward(true);
+                control.PLAYER_ROTATION_DATA.FaceForward(true);
             }
-            else if (control.MomentumCalculator_Data.momentum < 0f)
+            else if (control.MOMENTUM_CACULATOR_DATA.momentum < 0f)
             {
-                control.PlayerRotation_Data.FaceForward(false);
+                control.PLAYER_ROTATION_DATA.FaceForward(false);
             }
 
             if (!IsBlocked(control))
             {
-                control.MoveForward(speed, Mathf.Abs(control.MomentumCalculator_Data.momentum));
+                control.MoveForward(speed, Mathf.Abs(control.MOMENTUM_CACULATOR_DATA.momentum));
             }
 
         }
@@ -248,7 +248,7 @@ namespace My_MemoPlatformer
 
         private bool IsBlocked(CharacterControl control)
         {
-            if (control.BlockingObj_Data.frontBlockingDictionaryCount != 0)
+            if (control.BLOCKING_OBJ_DATA.frontBlockingDictionaryCount != 0)
             {
                 return true;
             }

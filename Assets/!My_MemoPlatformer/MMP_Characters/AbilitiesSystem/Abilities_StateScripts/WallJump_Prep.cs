@@ -12,15 +12,15 @@ namespace My_MemoPlatformer
             characterState.characterControl.moveRight = false;
             characterState.MomentumCalculator_Data.momentum = 0f;
 
-            characterState.characterControl.Rigid_Body.velocity = Vector3.zero;
+            characterState.characterControl.RIGID_BODY.velocity = Vector3.zero;
 
-            if (characterState.characterControl.PlayerRotation_Data.IsFacingForward())   //make the character turn 
+            if (characterState.characterControl.PLAYER_ROTATION_DATA.IsFacingForward())   //make the character turn 
             {
-                characterState.characterControl.PlayerRotation_Data.FaceForward(false);
+                characterState.characterControl.PLAYER_ROTATION_DATA.FaceForward(false);
             }
             else
             {
-                characterState.characterControl.PlayerRotation_Data.FaceForward(true);
+                characterState.characterControl.PLAYER_ROTATION_DATA.FaceForward(true);
             }
         }
 

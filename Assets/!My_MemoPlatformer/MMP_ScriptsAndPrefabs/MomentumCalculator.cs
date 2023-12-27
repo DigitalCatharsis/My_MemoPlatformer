@@ -29,7 +29,7 @@ namespace My_MemoPlatformer
 
         private void CalculateMomentum(float speed, float maxMomentum)
         {
-            if (!control.BlockingObj_Data.RightSideBLocked())
+            if (!control.BLOCKING_OBJ_DATA.RightSideBLocked())
             {
                 if (control.moveRight)
                 {
@@ -37,7 +37,7 @@ namespace My_MemoPlatformer
                 }
             }
 
-            if (!control.BlockingObj_Data.LeftSideBlocked())
+            if (!control.BLOCKING_OBJ_DATA.LeftSideBlocked())
             {
                 if (control.moveLeft)
                 {
@@ -45,7 +45,7 @@ namespace My_MemoPlatformer
                 }
             }
 
-            if (control.BlockingObj_Data.RightSideBLocked() || control.BlockingObj_Data.LeftSideBlocked())
+            if (control.BLOCKING_OBJ_DATA.RightSideBLocked() || control.BLOCKING_OBJ_DATA.LeftSideBlocked())
             {
                 var lerped = Mathf.Lerp(momentumCalculator_Data.momentum, 0f, Time.deltaTime * 1.5f);
                 momentumCalculator_Data.momentum = lerped;

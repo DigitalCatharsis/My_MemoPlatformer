@@ -77,7 +77,7 @@ namespace My_MemoPlatformer
             {
                 weapon.transform.parent = null;
 
-                if (control.PlayerRotation_Data.IsFacingForward())
+                if (control.PLAYER_ROTATION_DATA.IsFacingForward())
                 {
                     weapon.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
                 }
@@ -105,7 +105,7 @@ namespace My_MemoPlatformer
             {
                 weapon.transform.parent = null;
 
-                if (control.PlayerRotation_Data.IsFacingForward())
+                if (control.PLAYER_ROTATION_DATA.IsFacingForward())
                 {
                     weapon.transform.rotation = Quaternion.Euler(90f, 0, 0f);
                 }
@@ -114,7 +114,7 @@ namespace My_MemoPlatformer
                     weapon.transform.rotation = Quaternion.Euler(-90f, 0, 0f);
                 }
 
-                flyForward = control.PlayerRotation_Data.IsFacingForward();
+                flyForward = control.PLAYER_ROTATION_DATA.IsFacingForward();
 
                 weapon.transform.position = control.transform.position + Vector3.up * throwOffset.y;
                 weapon.transform.position += control.transform.forward * throwOffset.z;
@@ -132,7 +132,7 @@ namespace My_MemoPlatformer
 
         public void RemoveWeaponFromDictionary(CharacterControl c)
         {
-            foreach (var col in c.Ragdoll_Data.bodyParts)
+            foreach (var col in c.RAGDOLL_DATA.bodyParts)
             {
                 var t = col.GetComponent<TriggerDetector>();
 

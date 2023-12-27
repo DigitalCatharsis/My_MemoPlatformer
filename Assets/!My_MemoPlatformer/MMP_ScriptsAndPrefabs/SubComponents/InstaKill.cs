@@ -56,12 +56,12 @@ namespace My_MemoPlatformer
                         continue;
                     }
 
-                    if (c.PlayerAnimation_Data.IsRunning(typeof(Attack)))
+                    if (c.PLAYER_ANIMATION_DATA.IsRunning(typeof(Attack)))
                     {
                         continue;
                     }
 
-                    if (control.PlayerAnimation_Data.IsRunning(typeof(Attack)))
+                    if (control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Attack)))
                     {
                         continue;
                     }
@@ -71,12 +71,12 @@ namespace My_MemoPlatformer
                         continue;
                     }
 
-                    if (c.DamageDetector_Data.IsDead())
+                    if (c.DAMAGE_DETECTOR_DATA.IsDead())
                     {
                         continue;
                     }
 
-                    if (control.DamageDetector_Data.IsDead())
+                    if (control.DAMAGE_DETECTOR_DATA.IsDead())
                     {
                         continue;
                     }
@@ -86,7 +86,7 @@ namespace My_MemoPlatformer
                         Debug.Log("InstaKill");
                     }
 
-                    c.InstaKill_Data.DeathByInstakill(control);
+                    c.INSTAKILL_DATA.DeathByInstakill(control);
 
                     return;
                 }
@@ -95,33 +95,33 @@ namespace My_MemoPlatformer
 
         private void DeathByInstakill(CharacterControl attacker)
         {
-            control.PlayerAnimation_Data.currentRunningAbilities.Clear();
-            attacker.PlayerAnimation_Data.currentRunningAbilities.Clear();
+            control.PLAYER_ANIMATION_DATA.currentRunningAbilities.Clear();
+            attacker.PLAYER_ANIMATION_DATA.currentRunningAbilities.Clear();
 
-            control.Rigid_Body.useGravity = false;
+            control.RIGID_BODY.useGravity = false;
             control.boxCollider.enabled = false;
-            control.skinnedMeshAnimator.runtimeAnimatorController = control.InstaKill_Data.Animation_Victim;
+            control.skinnedMeshAnimator.runtimeAnimatorController = control.INSTAKILL_DATA.Animation_Victim;
 
 
-            attacker.Rigid_Body.useGravity = false;
+            attacker.RIGID_BODY.useGravity = false;
             attacker.boxCollider.enabled = false;
-            attacker.skinnedMeshAnimator.runtimeAnimatorController = control.InstaKill_Data.Animation_Assassin;
+            attacker.skinnedMeshAnimator.runtimeAnimatorController = control.INSTAKILL_DATA.Animation_Assassin;
 
             var dir = control.transform.position - attacker.transform.position;
 
             if (dir.z < 0f)
             {
-                attacker.PlayerRotation_Data.FaceForward(false);
+                attacker.PLAYER_ROTATION_DATA.FaceForward(false);
             }
             else if (dir.z > 0f)
             {
-                attacker.PlayerRotation_Data.FaceForward(true);
+                attacker.PLAYER_ROTATION_DATA.FaceForward(true);
             }
 
             control.transform.LookAt(control.transform.position + (attacker.transform.forward * 5f), Vector3.up);
             control.transform.position = attacker.transform.position + (attacker.transform.forward * 0.45f);
 
-            control.DamageDetector_Data.hp = 0f;
+            control.DAMAGE_DETECTOR_DATA.hp = 0f;
         }
     }
 }

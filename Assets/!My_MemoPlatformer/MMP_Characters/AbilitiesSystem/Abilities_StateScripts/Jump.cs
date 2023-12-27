@@ -18,7 +18,7 @@ namespace My_MemoPlatformer
             characterState.PlayerJump_Data.jumped = false;
             if (jumpTiming == 0f)
             {
-                characterState.characterControl.Rigid_Body.AddForce(Vector3.up * jumpForce);
+                characterState.characterControl.RIGID_BODY.AddForce(Vector3.up * jumpForce);
                 characterState.PlayerJump_Data.jumped = true;
             }
 
@@ -29,7 +29,7 @@ namespace My_MemoPlatformer
         {   
             if (!characterState.PlayerJump_Data.jumped && stateInfo.normalizedTime >= jumpTiming)
             {
-                characterState.characterControl.Rigid_Body.AddForce(Vector3.up * jumpForce);
+                characterState.characterControl.RIGID_BODY.AddForce(Vector3.up * jumpForce);
                 characterState.PlayerJump_Data.jumped = true;
             }
         }

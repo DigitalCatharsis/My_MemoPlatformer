@@ -38,7 +38,7 @@ namespace My_MemoPlatformer
 
         public bool TargetIsDead()
         {
-            if (CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target).DamageDetector_Data.IsDead())
+            if (CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target).DAMAGE_DETECTOR_DATA.IsDead())
             {
                 return true;
             }
@@ -63,14 +63,14 @@ namespace My_MemoPlatformer
         {
             if ((_control.aiProgress.pathfindfingAgent.target.transform.position - _control.transform.position).z > 0f)
             {
-                if (_control.PlayerRotation_Data.IsFacingForward())
+                if (_control.PLAYER_ROTATION_DATA.IsFacingForward())
                 {
                     return true;
                 }
             }
             else
             {
-                if (!_control.PlayerRotation_Data.IsFacingForward())
+                if (!_control.PLAYER_ROTATION_DATA.IsFacingForward())
                 {
                     return true;
                 }
@@ -89,7 +89,7 @@ namespace My_MemoPlatformer
         public bool TargetIsOnTheSamePlatform()
         {
             var target = CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target);
-            if (target.PlayerGround_Data.ground == _control.PlayerGround_Data.ground)
+            if (target.PLAYER_GROUND_DATA.ground == _control.PLAYER_GROUND_DATA.ground)
             {
                 return true;
             }
@@ -102,7 +102,7 @@ namespace My_MemoPlatformer
         public bool TargetIsGrounded()
         {
             var target = CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target);
-            if (target.PlayerGround_Data.ground == null)  //not grounded
+            if (target.PLAYER_GROUND_DATA.ground == null)  //not grounded
             {
                 return false;
             }

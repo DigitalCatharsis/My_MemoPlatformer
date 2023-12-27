@@ -45,7 +45,7 @@ namespace My_MemoPlatformer
             }
             else
             {
-                var objs = characterState.characterControl.BlockingObj_Data.GetFrontBlockingCharactersList();
+                var objs = characterState.characterControl.BLOCKING_OBJ_DATA.GetFrontBlockingCharactersList();
 
                 foreach (var o in objs)
                 {
@@ -65,9 +65,9 @@ namespace My_MemoPlatformer
             
             if (characterState.characterControl.aiProgress.blockingCharacter != null)
             {
-                if (characterState.characterControl.PlayerGround_Data.ground != null)
+                if (characterState.characterControl.PLAYER_GROUND_DATA.ground != null)
                 {
-                    if (characterState.characterControl.PlayerGround_Data.ground != null)
+                    if (characterState.characterControl.PLAYER_GROUND_DATA.ground != null)
                     {
                         if (!characterState.PlayerAnimation_Data.IsRunning(typeof(Jump))
                             && !characterState.PlayerAnimation_Data.IsRunning(typeof(JumpPrep)))
@@ -85,7 +85,7 @@ namespace My_MemoPlatformer
             }
 
             //startsphere Height
-            if (characterState.characterControl.PlayerGround_Data.ground != null
+            if (characterState.characterControl.PLAYER_GROUND_DATA.ground != null
                 && !characterState.PlayerAnimation_Data.IsRunning(typeof(Jump))
                 && !characterState.PlayerAnimation_Data.IsRunning(typeof(WallJump_Prep)))
             {
@@ -109,12 +109,12 @@ namespace My_MemoPlatformer
 
         private bool AIIsOnGround(CharacterControl control)
         {
-            if (control.PlayerAnimation_Data.IsRunning(typeof(MoveUp)))
+            if (control.PLAYER_ANIMATION_DATA.IsRunning(typeof(MoveUp)))
             {
                 return false;
             }
 
-            if (control.Rigid_Body.useGravity)
+            if (control.RIGID_BODY.useGravity)
             {
                 if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Grounded]))
                 {

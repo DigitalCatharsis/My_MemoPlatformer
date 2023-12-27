@@ -37,15 +37,15 @@ namespace My_MemoPlatformer
             {
                 foreach (var control in listOfCharacter)
                 {
-                    if (!control.DamageDetector_Data.IsDead())
+                    if (!control.DAMAGE_DETECTOR_DATA.IsDead())
                     {
                         if (_spikeTriggerRoutine == null && _spikesReloaded)
                         {
                             if (!listOfSpikeVictims.Contains(control))
                             {
                                 listOfSpikeVictims.Add(control);
-                                control.DamageDetector_Data.hp = 0;
-                                control.DamageDetector_Data.damagedTrigger = null;
+                                control.DAMAGE_DETECTOR_DATA.hp = 0;
+                                control.DAMAGE_DETECTOR_DATA.damagedTrigger = null;
                             }
                         }
                     }
@@ -89,7 +89,7 @@ namespace My_MemoPlatformer
 
             foreach (var control in listOfSpikeVictims)
             {
-                control.Ragdoll_Data.ragdollTriggered = true;
+                control.RAGDOLL_DATA.ragdollTriggered = true;
             }
 
             yield return new WaitForSeconds(1);

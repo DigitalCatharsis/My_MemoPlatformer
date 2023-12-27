@@ -11,7 +11,7 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            characterState.characterControl.Rigid_Body.useGravity = true;
+            characterState.characterControl.RIGID_BODY.useGravity = true;
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

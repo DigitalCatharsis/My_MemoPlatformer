@@ -48,7 +48,7 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            characterState.characterControl.PlayerAttack_Data.attackTriggered = false;
+            characterState.characterControl.PLAYER_ATTACK_DATA.attackTriggered = false;
 
             animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Attack], false);
 
@@ -114,9 +114,9 @@ namespace My_MemoPlatformer
 
                         foreach (CharacterControl c in CharacterManager.Instance.characters)
                         {
-                            if (c.DamageDetector_Data.blockedAttack == info)
+                            if (c.DAMAGE_DETECTOR_DATA.blockedAttack == info)
                             {
-                                c.DamageDetector_Data.blockedAttack = null;
+                                c.DAMAGE_DETECTOR_DATA.blockedAttack = null;
                             }
                         }
 
@@ -137,7 +137,7 @@ namespace My_MemoPlatformer
             {
                 if (stateInfo.normalizedTime <= comboEndTime)
                 {
-                    if (characterState.characterControl.PlayerAttack_Data.attackTriggered)
+                    if (characterState.characterControl.PLAYER_ATTACK_DATA.attackTriggered)
                     {
                         animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Attack],true);
                     }    
