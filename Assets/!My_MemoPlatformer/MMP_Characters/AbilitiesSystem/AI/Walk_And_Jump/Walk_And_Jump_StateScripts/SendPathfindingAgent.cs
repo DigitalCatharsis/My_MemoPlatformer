@@ -3,13 +3,6 @@ using UnityEngine.AI;
 
 namespace My_MemoPlatformer
 {
-    public enum AI_Walk_Transitions
-    {
-        Start_Walking,
-        Jump_Platform,
-        Fall_Platform,
-    }
-
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AI/SendPathfindinfAgent")]
     public class SendPathfindinfAgent : CharacterAbility
     {
@@ -33,13 +26,13 @@ namespace My_MemoPlatformer
 
             if (characterState.characterControl.aiProgress.pathfindfingAgent.startWalk)
             {
-                animator.SetBool(HashManager.Instance.dicAITransitions[AI_Walk_Transitions.Start_Walking], true);
+                animator.SetBool(HashManager.Instance.ArrAITransitionParams[(int)AI_Transition.Start_Walking], true);
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.SetBool(HashManager.Instance.dicAITransitions[AI_Walk_Transitions.Start_Walking], false);
+            animator.SetBool(HashManager.Instance.ArrAITransitionParams[(int)AI_Transition.Start_Walking], false);
         }
     }
 

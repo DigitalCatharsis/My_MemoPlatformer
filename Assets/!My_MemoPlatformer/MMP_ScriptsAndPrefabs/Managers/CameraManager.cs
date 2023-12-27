@@ -15,7 +15,7 @@ namespace My_MemoPlatformer
 
 
         private CameraContoller _cameraController;
-        public CameraContoller Cam_Controller
+        public CameraContoller CAM_CONTROLLER
         {
             get
             {
@@ -36,9 +36,9 @@ namespace My_MemoPlatformer
         //Controlling how long camera shake is. After some amount of second return to default camera
         IEnumerator _CamShake(float sec)
         {
-            Cam_Controller.TriggerCamera(CameraTrigger.Shake);
+            CAM_CONTROLLER.TriggerCamera(CameraTrigger.Shake);
             yield return new WaitForSeconds(sec);
-            Cam_Controller.TriggerCamera(CameraTrigger.Default);
+            CAM_CONTROLLER.TriggerCamera(CameraTrigger.Default);
         }
 
         public void ShakeCamera(float sec)

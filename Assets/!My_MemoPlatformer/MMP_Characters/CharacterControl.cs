@@ -8,14 +8,6 @@ namespace My_MemoPlatformer
     //2. The pressed keys saved up to the VirtualInputManager, and bind up
     //3. ManualInput Relay that keys to the CharacterControl
     //4. CharacterControl contains actual fields about character moving etc.
-
-    public enum MMP_Scenes
-    {
-        L_CharacterSelect,
-        L_Level_Start,
-        L_Level_Day
-    }
-
     public class CharacterControl : MonoBehaviour
     {
         [Header("Input")]

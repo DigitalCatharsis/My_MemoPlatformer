@@ -5,18 +5,11 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    public enum CameraTrigger
-    {
-        Default,
-        Shake,
-    }
-
-
     public class CameraContoller : MonoBehaviour
     {
 
         private Animator _animator;
-        public Animator Animator
+        public Animator ANIMATOR
         {
             get
             {
@@ -30,7 +23,7 @@ namespace My_MemoPlatformer
 
         public void TriggerCamera(CameraTrigger trigger)
         {
-            Animator.SetTrigger(HashManager.Instance.dicCameraTriggers[trigger]);
+            ANIMATOR.SetTrigger(HashManager.Instance.ArrCameraParams[(int)trigger]);
         }
 
     }

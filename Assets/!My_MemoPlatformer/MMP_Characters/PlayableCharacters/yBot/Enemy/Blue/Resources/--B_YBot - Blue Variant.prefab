@@ -246,7 +246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3372119544377188088, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_Name
-      value: YBot - Blue Variant
+      value: --B_YBot - Blue Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3372119544377188088, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_Layer
@@ -466,6 +466,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8252099059127498670, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8795519861354809597, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8817898887671123598, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}

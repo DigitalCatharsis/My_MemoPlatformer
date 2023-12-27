@@ -11,9 +11,10 @@ namespace My_MemoPlatformer
             CameraTrigger[] arr = System.Enum.GetValues(typeof(CameraTrigger)) as CameraTrigger[];
 
 
-            foreach (CameraTrigger t in arr)
+            for (int i = 0; i < (int)CameraTrigger.COUNT; i++)
             {
-                CameraManager.Instance.Cam_Controller.Animator.ResetTrigger(HashManager.Instance.dicCameraTriggers[t]);
+                CameraManager.Instance.CAM_CONTROLLER.ANIMATOR.
+                    ResetTrigger(HashManager.Instance.ArrCameraParams[(int)i]);
             }
         }
 
@@ -23,7 +24,7 @@ namespace My_MemoPlatformer
             {
                 if (stateInfo.IsName("Shake"))
                 {
-                    animator.SetTrigger(HashManager.Instance.dicCameraTriggers[CameraTrigger.Default]);
+                    animator.SetTrigger(HashManager.Instance.ArrCameraParams[(int)CameraTrigger.Default]);
                 }
             }
         }

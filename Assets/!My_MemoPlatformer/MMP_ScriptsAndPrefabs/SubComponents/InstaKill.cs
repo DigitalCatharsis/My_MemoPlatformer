@@ -8,6 +8,8 @@ namespace My_MemoPlatformer
         public InstaKill_Data instaKill_Data;
         [SerializeField] private RuntimeAnimatorController Assassination_Assassin;
         [SerializeField] private RuntimeAnimatorController Assassination_Victim;
+        [SerializeField] private bool _debug;
+
         private void Start()
         {
             instaKill_Data = new InstaKill_Data
@@ -79,7 +81,11 @@ namespace My_MemoPlatformer
                         continue;
                     }
 
-                    Debug.Log("InstaKill");
+                    if (_debug)
+                    {
+                        Debug.Log("InstaKill");
+                    }
+
                     c.InstaKill_Data.DeathByInstakill(control);
 
                     return;

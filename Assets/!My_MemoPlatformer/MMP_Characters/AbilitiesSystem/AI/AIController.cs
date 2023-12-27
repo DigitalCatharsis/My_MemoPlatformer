@@ -4,11 +4,6 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    public enum AI_TYPE
-    {
-        NONE,
-        WALK_AND_JUMP,
-    }
     public class AIController : MonoBehaviour
     {
         public AI_TYPE initialAl;

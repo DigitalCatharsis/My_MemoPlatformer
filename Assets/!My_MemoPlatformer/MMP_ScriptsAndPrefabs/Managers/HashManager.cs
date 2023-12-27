@@ -20,34 +20,60 @@ namespace My_MemoPlatformer
         COUNT,
     }
 
+    public enum CameraTrigger
+    {
+        Default,
+        Shake,
+
+        COUNT,
+    }
+    public enum AI_Transition
+    {
+        Start_Walking,
+        Jump_Platform,
+        Fall_Platform,
+
+        COUNT,
+    }
+
+
+    public enum MMP_Scenes
+    {
+        L_CharacterSelect,
+        L_Level_Start,
+        L_Level_Day,
+    }
+
+    public enum AI_TYPE
+    {
+        NONE,
+        WALK_AND_JUMP,
+    }
+
     public class HashManager : Singleton<HashManager> 
     {
         public int[] ArrMainParams = new int[(int)MainParameterType.COUNT];
-        public Dictionary<CameraTrigger, int> dicCameraTriggers = new Dictionary<CameraTrigger, int>();
-        public Dictionary<AI_Walk_Transitions, int> dicAITransitions = new Dictionary<AI_Walk_Transitions, int>();
+        public int[] ArrCameraParams = new int[(int)CameraTrigger.COUNT];
+        public int[] ArrAITransitionParams = new int[(int)AI_Transition.COUNT];
 
         private void Awake()
         {
             // animation transitions
             for (int i = 0; i < (int)MainParameterType.COUNT; i++)
             {
-                ArrMainParams[i] = Animator.StringToHash(((MainParameterType)i).ToString());
+                ArrMainParams[i] = Animator.StringToHash(((MainParameterType)i).ToString()); //https://docs.unity3d.com/ScriptReference/Animator.StringToHash.html
             }
 
-            //animation transitions
-            CameraTrigger[] arrCamTransitions = System.Enum.GetValues(typeof(CameraTrigger)) as CameraTrigger[];
-
-            foreach (CameraTrigger t in arrCamTransitions) 
+            // camera transitions
+            for (int i = 0; i < (int)CameraTrigger.COUNT; i++)
             {
-                dicCameraTriggers.Add(t, Animator.StringToHash(t.ToString()));  //https://docs.unity3d.com/ScriptReference/Animator.StringToHash.html
+                ArrCameraParams[i] = Animator.StringToHash(((CameraTrigger)i).ToString()); //https://docs.unity3d.com/ScriptReference/Animator.StringToHash.html
             }
 
-            //animation transitions
-            AI_Walk_Transitions[] arrAITransitions = System.Enum.GetValues(typeof(AI_Walk_Transitions)) as AI_Walk_Transitions[];
-
-            foreach (AI_Walk_Transitions t in arrAITransitions) 
+            // ai transitions
+            for (int i = 0; i < (int)AI_Transition.COUNT; i++)
             {
-                dicAITransitions.Add(t, Animator.StringToHash(t.ToString()));  //https://docs.unity3d.com/ScriptReference/Animator.StringToHash.html
+                ArrAITransitionParams[i] = Animator.StringToHash(((AI_Transition)i).ToString());
             }
         }
     }

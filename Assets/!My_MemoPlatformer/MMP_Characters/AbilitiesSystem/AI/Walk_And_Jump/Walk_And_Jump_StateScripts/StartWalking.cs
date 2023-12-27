@@ -17,8 +17,8 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.SetBool(HashManager.Instance.dicAITransitions[AI_Walk_Transitions.Jump_Platform], false);
-            animator.SetBool(HashManager.Instance.dicAITransitions[AI_Walk_Transitions.Fall_Platform], false);
+            animator.SetBool(HashManager.Instance.ArrAITransitionParams[(int)AI_Transition.Jump_Platform], false);
+            animator.SetBool(HashManager.Instance.ArrAITransitionParams[(int)AI_Transition.Fall_Platform], false);
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -37,7 +37,7 @@ namespace My_MemoPlatformer
                     characterState.characterControl.moveLeft = false;
                     characterState.characterControl.moveRight = false;
                     //Debug.Log($"<color=red>{control.moveLeft = false} </color>");
-                    animator.SetBool(HashManager.Instance.dicAITransitions[AI_Walk_Transitions.Jump_Platform], true);
+                    animator.SetBool(HashManager.Instance.ArrAITransitionParams[(int)AI_Transition.Jump_Platform], true);
                     return;
                 }
             }
@@ -46,7 +46,7 @@ namespace My_MemoPlatformer
             {
                 characterState.characterControl.aiController.WalkStraightToTheEndSphere();
 
-                animator.SetBool(HashManager.Instance.dicAITransitions[AI_Walk_Transitions.Fall_Platform], true);
+                animator.SetBool(HashManager.Instance.ArrAITransitionParams[(int)AI_Transition.Fall_Platform], true);
                 return;
             }
 
