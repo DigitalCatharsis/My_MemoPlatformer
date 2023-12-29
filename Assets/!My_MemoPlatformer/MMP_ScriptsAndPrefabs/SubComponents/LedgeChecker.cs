@@ -8,10 +8,10 @@ namespace My_MemoPlatformer
     {
         public LedgeGrab_Data ledgeGrab_Data;
 
+        [Header("Ledge Setup")]
         [SerializeField] private Vector3 ledgeCalibration = new Vector3();  //diffirence (offset) when we change character. (Bones changing)
         [SerializeField] private LedgeCollider collider1; //bottom
         [SerializeField] private LedgeCollider collider2; //top
-        [SerializeField] private List<string> ledgeTriggerStateNames = new List<string>();
 
         private void Start()
         {
@@ -21,17 +21,17 @@ namespace My_MemoPlatformer
                 LedgeCollidersOff = LedgeCollidersOff,
             };
 
-            subComponentProcessor.ledgeGrabData = ledgeGrab_Data;
-            subComponentProcessor.subcomponentsDictionary.Add(SubComponentType.LEDGECHECKER, this);
+            subComponentProcessor.ledgeGrab_Data = ledgeGrab_Data;
+            subComponentProcessor.arrSubComponents[(int)SubComponentType.LEDGE_CHECKER] = this;
         }
 
         public override void OnUpdate()
         {
-            //Барбара меня накажет, простите :c
+
         }
         public override void OnFixedUpdate()
         {
-            if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Grounded]))
+            if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
             {
                 if (control.RIGID_BODY.useGravity)
                 {
@@ -47,14 +47,15 @@ namespace My_MemoPlatformer
 
         private bool IsLedgeGrabCondition()
         {
-            if (!control.moveUp)
+            if (!control.jump)
             {
                 return false;
             }
 
-            foreach(string s in ledgeTriggerStateNames)
+            for (int i = 0; i < HashManager.Instance.arrLedgeTriggerStates.Length; i++)
             {
-                if (control.animationProgress.StateNameContains(s))
+                var info = control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
+                if (info.shortNameHash == HashManager.Instance.arrLedgeTriggerStates[i])
                 {
                     return true;
                 }
@@ -65,9 +66,10 @@ namespace My_MemoPlatformer
 
         private void ProcessLedgeGrab()
         {
-            if (!control.skinnedMeshAnimator.GetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Grounded]))
+            if (!control.skinnedMeshAnimator.GetBool(
+                HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
             {
-                foreach (var obj in collider1.collidedObjects)
+                foreach (GameObject obj in collider1.collidedObjects)
                 {
                     if (!collider2.collidedObjects.Contains(obj))
                     {
@@ -111,27 +113,27 @@ namespace My_MemoPlatformer
             control.RIGID_BODY.velocity = Vector3.zero;
 
             float y, z;
-
-            y = platform.transform.position.y + (boxCollider.size.y * boxCollider.gameObject.transform.lossyScale.y / 2f);
-
-            if (control.PLAYER_ROTATION_DATA.IsFacingForward())
+            y = platform.transform.position.y + (boxCollider.size.y / 2f);
+            if (control.ROTATION_DATA.IsFacingForward())
             {
-                z = platform.transform.position.z - (boxCollider.size.z * boxCollider.gameObject.transform.lossyScale.z / 2f);
+                z = platform.transform.position.z - (boxCollider.size.z / 2f);
             }
             else
             {
-                z = platform.transform.position.z + (boxCollider.size.z * boxCollider.gameObject.transform.lossyScale.z / 2f);
+                z = platform.transform.position.z + (boxCollider.size.z / 2f);
             }
 
-            var plarformEdge = new Vector3(0f, y, z);
+            Vector3 platformEdge = new Vector3(0f, y, z);
 
-            if (control.PLAYER_ROTATION_DATA.IsFacingForward())
+            if (control.ROTATION_DATA.IsFacingForward())
             {
-                control.RIGID_BODY.MovePosition(plarformEdge + ledgeCalibration);
+                control.RIGID_BODY.MovePosition(
+                    platformEdge + ledgeCalibration);
             }
             else
             {
-                control.RIGID_BODY.MovePosition(plarformEdge + new Vector3(0f, ledgeCalibration.y, -ledgeCalibration.z));
+                control.RIGID_BODY.MovePosition(
+                    platformEdge + new Vector3(0f, ledgeCalibration.y, -ledgeCalibration.z));
             }
 
             return true;

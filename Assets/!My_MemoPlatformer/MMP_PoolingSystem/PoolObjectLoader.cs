@@ -8,7 +8,7 @@ using UnityEngine;
 
     public enum PoolObjectType
     {
-        AttackCondition,
+        ATTACK_CONDITION,
         HAMMER_OBJ,
         HAMMER_VFX,
         DAMAGE_WHITE_VFX,
@@ -22,7 +22,7 @@ using UnityEngine;
 
             switch (objType)
             {
-                case PoolObjectType.AttackCondition:
+                case PoolObjectType.ATTACK_CONDITION:
                     {
                         obj = Instantiate(Resources.Load("AttackCondition", typeof (GameObject)) as GameObject);
                         break; 

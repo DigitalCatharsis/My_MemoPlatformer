@@ -12,13 +12,13 @@ namespace My_MemoPlatformer
         {
             
 
-            if (characterState.characterControl.PLAYER_ROTATION_DATA.IsFacingForward())
+            if (characterState.characterControl.ROTATION_DATA.IsFacingForward())
             {
-                characterState.characterControl.PLAYER_ROTATION_DATA.FaceForward(false);
+                characterState.characterControl.ROTATION_DATA.FaceForward(false);
             }
             else
             {
-                characterState.characterControl.PLAYER_ROTATION_DATA.FaceForward(true);
+                characterState.characterControl.ROTATION_DATA.FaceForward(true);
             }
 
         }

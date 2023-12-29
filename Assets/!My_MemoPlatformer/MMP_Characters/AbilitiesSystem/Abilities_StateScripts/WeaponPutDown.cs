@@ -17,9 +17,9 @@ namespace My_MemoPlatformer
         {
             if (stateInfo.normalizedTime > putDownTiming)
             {
-                if (characterState.characterControl.animationProgress.HoldingWeapon != null)
+                if (characterState.characterControl.animationProgress.holdingWeapon != null)
                 {
-                    characterState.characterControl.animationProgress.HoldingWeapon.DropWeapon();
+                    characterState.characterControl.animationProgress.holdingWeapon.DropWeapon();
                 }
             }
         }

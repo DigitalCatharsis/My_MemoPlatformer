@@ -5,18 +5,18 @@ namespace My_MemoPlatformer
 {
     public class PlayerJump : SubComponent
     {
-        PlayerJump_Data PlayerJump_Data;
+        Jump_Data jump_Data;
 
         private void Start()
         {
-            PlayerJump_Data = new PlayerJump_Data
+            jump_Data = new Jump_Data
             {
-                jumped = false,
+                dicJumped = new Dictionary<int, bool>(),
                 canWallJump = false,
                 checkWallBlock = false,
             };
 
-            subComponentProcessor.playerJump_Data = PlayerJump_Data;
+            subComponentProcessor.jump_Data = jump_Data;
         }
         public override void OnFixedUpdate()
         {

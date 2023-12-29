@@ -6,74 +6,61 @@ namespace My_MemoPlatformer
 {
     public class SubComponentProcessor : MonoBehaviour
     {
-        public Dictionary<SubComponentType, SubComponent> subcomponentsDictionary = new Dictionary<SubComponentType, SubComponent>();
+        public SubComponent[] arrSubComponents;
         public CharacterControl control;
 
-        [Space(15)]
-        public BlockingObj_Data blockingObjData;
-        [Space(15)]
-        public LedgeGrab_Data ledgeGrabData;
-        [Space(15)]
-        public Ragdoll_Data ragdollData;
-        [Space(15)]
-        public ManualInput_Data manualInput_Data;
-        [Space(15)]
-        public BoxCollider_Data boxCollider_Data;
-        [Space(15)]
-        public VerticalVelocity_Data verticalVelocity_Data;
-        [Space(15)]
-        public DamageDetector_Data damageDetector_Data;
-        [Space(15)]
-        public MomentumCalculator_Data momentumCalculator_Data;
-        [Space(15)]
-        public PlayerRotation_Data playerRotation_Data;
-        [Space(15)]
-        public PlayerJump_Data playerJump_Data;
-        [Space(15)]
-        public CollisionSpheres_Data collisionSpheres_Data;
-        [Space(15)]
-        public InstaKill_Data instaKill_Data;
-        [Space(15)]
-        public PlayerGround_Data playerGround_Data;
-        [Space(15)]
-        public PlayerAttack_Data playerAttack_Data;
-        [Space(15)]
-        public PlayerAnimation_Data playerAnimation_Data;
+        [Space(15)] public BlockingObj_Data blockingObj_Data;
+        [Space(15)] public LedgeGrab_Data ledgeGrab_Data;
+        [Space(15)] public Ragdoll_Data ragdoll_Data;
+        [Space(15)] public ManualInput_Data manualInput_Data;
+        [Space(15)] public BoxCollider_Data boxCollider_Data;
+        [Space(15)] public VerticalVelocity_Data verticalVelocity_Data;
+        [Space(15)] public Damage_Data damage_Data;
+        [Space(15)] public MomentumCalculator_Data momentumCalculator_Data;
+        [Space(15)] public Rotation_Data rotation_Data;
+        [Space(15)] public Jump_Data jump_Data;
+        [Space(15)] public CollisionSpheres_Data collisionSpheres_Data;
+        [Space(15)] public InstaKill_Data instaKill_Data;
+        [Space(15)] public Ground_Data ground_Data;
+        [Space(15)] public Attack_Data attack_Data;
+        [Space(15)] public Animation_Data animation_Data;
 
         private void Awake()
         {
+            arrSubComponents = new SubComponent[(int)SubComponentType.COUNT];
             control = GetComponentInParent<CharacterControl>();
         }
         public void FixedUpdateSubComponents()
         {
-            FixedUpdateSubComponent(SubComponentType.LEDGECHECKER);
+            FixedUpdateSubComponent(SubComponentType.LEDGE_CHECKER);
             FixedUpdateSubComponent(SubComponentType.RAGDOLL);
-            FixedUpdateSubComponent(SubComponentType.BLOCKINGOBJECTS);
+            FixedUpdateSubComponent(SubComponentType.BLOCKING_OBJECTS);
             FixedUpdateSubComponent(SubComponentType.BOX_COLLIDER_UPDATER);
-            FixedUpdateSubComponent(SubComponentType.VERTICALVELOCITY_DATA);
+            FixedUpdateSubComponent(SubComponentType.VERTICAL_VELOCITY);
             FixedUpdateSubComponent(SubComponentType.COLLISION_SPHERES);
-            FixedUpdateSubComponent(SubComponentType.INSTAKILL);
+            FixedUpdateSubComponent(SubComponentType.INSTA_KILL);
+            FixedUpdateSubComponent(SubComponentType.DAMAGE_DETECTOR);
+            FixedUpdateSubComponent(SubComponentType.PLAYER_ROTATION);
         }
         public void UpdateSubComponents()
         {
-            UpdateSubComponent(SubComponentType.MANUALINPUT);
-            UpdateSubComponent(SubComponentType.DAMAGE_DETECTOR_DATA);
+            UpdateSubComponent(SubComponentType.MANUAL_INPUT);
             UpdateSubComponent(SubComponentType.PLAYER_ATTACK);
             UpdateSubComponent(SubComponentType.PLAYER_ANIMATION);
         }
 
         private void UpdateSubComponent(SubComponentType type)
         {
-            if (subcomponentsDictionary.ContainsKey(type))
+            if (arrSubComponents[(int)type] != null)
             {
-                subcomponentsDictionary[type].OnUpdate();
+                arrSubComponents[(int)type].OnUpdate();
             }
         }
         private void FixedUpdateSubComponent(SubComponentType type)
         {
-            if (subcomponentsDictionary.ContainsKey(type))
+            if (arrSubComponents[(int)type] != null)
             {
-                subcomponentsDictionary[type].OnFixedUpdate();
+                arrSubComponents[(int)type].OnFixedUpdate();
             }
         }
     }

@@ -16,25 +16,25 @@ namespace My_MemoPlatformer
         }
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {        
-            if (characterState.characterControl.PLAYER_ROTATION_DATA.IsFacingForward())
+            if (characterState.characterControl.ROTATION_DATA.IsFacingForward())
             {
                 if (characterState.characterControl.moveLeft)
                 {
-                    animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Turn], true);
+                    animator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Turn], true);
                 }
             }
 
-            if (!characterState.characterControl.PLAYER_ROTATION_DATA.IsFacingForward())
+            if (!characterState.characterControl.ROTATION_DATA.IsFacingForward())
             {
                 if (characterState.characterControl.moveRight)
                 {
-                    animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Turn], true);
+                    animator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Turn], true);
                 }
             }
         }
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Turn], false);
+            animator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Turn], false);
         }
 
 

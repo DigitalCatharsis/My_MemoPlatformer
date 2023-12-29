@@ -17,43 +17,42 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            //walking
-            if (characterState.characterControl.aiProgress.AI_DistanceToEndSphere() < 1.0f)
+            if (characterState.AI_CONTROLLER.RestartWalk())
             {
-                if (characterState.characterControl.aiProgress.TargetDistanceToEndSphere() > 0.5f)
+                characterState.AI_CONTROLLER.InitializeAI();
+            }
+
+            if (characterState.AI_CONTROLLER.IsAttacking())
+            {
+                if (characterState.characterControl.aiProgress.AIDistanceToTarget() > 3f ||
+                    !characterState.characterControl.aiProgress.TargetIsOnTheSamePlatform())
                 {
-                    if (characterState.characterControl.aiProgress.TargetIsGrounded())
-                    {
-                        characterState.characterControl.aiController.InitializeAI();
-                    }
+                    characterState.characterControl.turbo = false;
+                    characterState.characterControl.jump = false;
+                    characterState.characterControl.moveUp = false;
+                    characterState.characterControl.moveLeft = false;
+                    characterState.characterControl.moveRight = false;
+                    characterState.characterControl.moveDown = false;
+                    characterState.characterControl.aiController.InitializeAI();
                 }
             }
 
-            //landing
-            if (characterState.PlayerAnimation_Data.IsRunning(typeof(Landing)))
-            {
-                characterState.characterControl.turbo = false;
-                characterState.characterControl.jump = false;
-                characterState.characterControl.moveUp = false;
-                characterState.characterControl.aiController.InitializeAI();
-            }
-
-            //path is blocked
-            if (characterState.BlockingObjData.frontBlockingDictionaryCount == 0)
+            // path is blocked
+            if (characterState.BlockingObj_Data.frontBlockingDictionaryCount == 0)
             {
                 characterState.characterControl.aiProgress.blockingCharacter = null;
             }
             else
             {
-                var objs = characterState.characterControl.BLOCKING_OBJ_DATA.GetFrontBlockingCharactersList();
+                List<GameObject> objs = characterState.BlockingObj_Data.GetFrontBlockingCharactersList();
 
-                foreach (var o in objs)
+                foreach (GameObject o in objs)
                 {
-                    CharacterControl blockingCharacter = CharacterManager.Instance.GetCharacter(o);
-                     
-                    if (blockingCharacter != null)
+                    CharacterControl blockingChar = CharacterManager.Instance.GetCharacter(o);
+
+                    if (blockingChar != null)
                     {
-                        characterState.characterControl.aiProgress.blockingCharacter = blockingCharacter;
+                        characterState.characterControl.aiProgress.blockingCharacter = blockingChar;
                         break;
                     }
                     else
@@ -62,32 +61,29 @@ namespace My_MemoPlatformer
                     }
                 }
             }
-            
+
             if (characterState.characterControl.aiProgress.blockingCharacter != null)
             {
-                if (characterState.characterControl.PLAYER_GROUND_DATA.ground != null)
+                if (characterState.Ground_Data.ground != null)
                 {
-                    if (characterState.characterControl.PLAYER_GROUND_DATA.ground != null)
+                    if (!characterState.Animation_Data.IsRunning(typeof(Jump)) &&
+                        !characterState.Animation_Data.IsRunning(typeof(JumpPrep)))
                     {
-                        if (!characterState.PlayerAnimation_Data.IsRunning(typeof(Jump))
-                            && !characterState.PlayerAnimation_Data.IsRunning(typeof(JumpPrep)))
-                        {
-                            characterState.characterControl.turbo = false;
-                            characterState.characterControl.jump = false;
-                            characterState.characterControl.moveUp = false;
-                            characterState.characterControl.moveLeft = false;
-                            characterState.characterControl.moveRight = false;
-                            characterState.characterControl.moveDown = false;
-                            characterState.characterControl.aiController.InitializeAI();
-                        }
+                        characterState.characterControl.turbo = false;
+                        characterState.characterControl.jump = false;
+                        characterState.characterControl.moveUp = false;
+                        characterState.characterControl.moveLeft = false;
+                        characterState.characterControl.moveRight = false;
+                        characterState.characterControl.moveDown = false;
+                        characterState.characterControl.aiController.InitializeAI();
                     }
                 }
             }
 
-            //startsphere Height
-            if (characterState.characterControl.PLAYER_GROUND_DATA.ground != null
-                && !characterState.PlayerAnimation_Data.IsRunning(typeof(Jump))
-                && !characterState.PlayerAnimation_Data.IsRunning(typeof(WallJump_Prep)))
+            //startsphere height
+            if (characterState.Ground_Data.ground != null &&
+                !characterState.Animation_Data.IsRunning(typeof(Jump)) &&
+                !characterState.Animation_Data.IsRunning(typeof(WallJump_Prep)))
             {
                 if (characterState.characterControl.aiProgress.GetStartSphereHeight() > 0.1f)
                 {
@@ -109,14 +105,14 @@ namespace My_MemoPlatformer
 
         private bool AIIsOnGround(CharacterControl control)
         {
-            if (control.PLAYER_ANIMATION_DATA.IsRunning(typeof(MoveUp)))
+            if (control.ANIMATION_DATA.IsRunning(typeof(MoveUp)))
             {
                 return false;
             }
 
             if (control.RIGID_BODY.useGravity)
             {
-                if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Grounded]))
+                if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
                 {
                     return true;
                 }

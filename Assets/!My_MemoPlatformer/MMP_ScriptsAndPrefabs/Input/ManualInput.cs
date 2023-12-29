@@ -27,7 +27,7 @@ namespace My_MemoPlatformer
             };
 
             subComponentProcessor.manualInput_Data = manualInputData;
-            subComponentProcessor.subcomponentsDictionary.Add(SubComponentType.MANUALINPUT, this);
+            subComponentProcessor.arrSubComponents[(int)SubComponentType.MANUAL_INPUT] = this;
         }
 
         public override void OnFixedUpdate()
@@ -41,7 +41,6 @@ namespace My_MemoPlatformer
             {
                 control.turbo = true;
                 ProcessDoubleTap(InputKeyType.KEY_TURBO);
-
             }
             else
             {
@@ -127,7 +126,8 @@ namespace My_MemoPlatformer
             }
 
             //double tap running
-            if (_doubleTaps.Contains(InputKeyType.KEY_MOVE_RIGHT) || _doubleTaps.Contains(InputKeyType.KEY_MOVE_LEFT))
+            if (_doubleTaps.Contains(InputKeyType.KEY_MOVE_RIGHT) ||
+                _doubleTaps.Contains(InputKeyType.KEY_MOVE_LEFT))
             {
                 control.turbo = true;
             }
@@ -135,12 +135,14 @@ namespace My_MemoPlatformer
             //double tap running turn
             if (control.moveRight && control.moveLeft)
             {
-                if (_doubleTaps.Contains(InputKeyType.KEY_MOVE_RIGHT) || _doubleTaps.Contains(InputKeyType.KEY_MOVE_LEFT))
+                if (_doubleTaps.Contains(InputKeyType.KEY_MOVE_RIGHT) ||
+                    _doubleTaps.Contains(InputKeyType.KEY_MOVE_LEFT))
                 {
                     if (!_doubleTaps.Contains(InputKeyType.KEY_MOVE_RIGHT))
                     {
                         _doubleTaps.Add(InputKeyType.KEY_MOVE_RIGHT);
                     }
+
                     if (!_doubleTaps.Contains(InputKeyType.KEY_MOVE_LEFT))
                     {
                         _doubleTaps.Add(InputKeyType.KEY_MOVE_LEFT);

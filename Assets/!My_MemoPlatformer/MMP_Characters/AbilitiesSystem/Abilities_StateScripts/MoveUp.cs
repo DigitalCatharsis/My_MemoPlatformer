@@ -19,7 +19,7 @@ namespace My_MemoPlatformer
         {
             if (!characterState.characterControl.RIGID_BODY.useGravity)
             {
-                if (characterState.BlockingObjData.frontBlockingDictionaryCount == 0)
+                if (characterState.BlockingObj_Data.frontBlockingDictionaryCount == 0)
                 {
                     characterState.characterControl.transform.Translate(Vector3.up * speed * speedGraph.Evaluate(stateInfo.normalizedTime) * Time.deltaTime);
                 }

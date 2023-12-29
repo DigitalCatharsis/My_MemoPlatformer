@@ -7,6 +7,7 @@ namespace My_MemoPlatformer
     {
         public bool cameraShaken;
         public List<PoolObjectType> poolObjectList = new List<PoolObjectType>();
+
         public MoveForward latestMoveForwardScript;  //latest moveforward script
         public MoveUp latestMoveUpScript;  //latest moveforward script
 
@@ -21,7 +22,7 @@ namespace My_MemoPlatformer
         public bool lockTransition;
 
         [Header("Weapon")]
-        public MeleeWeapon HoldingWeapon;
+        public MeleeWeapon holdingWeapon;
 
         private CharacterControl _control;
 
@@ -31,18 +32,16 @@ namespace My_MemoPlatformer
         }
         public void NullifyUpVelocity()
         {
-            _control.RIGID_BODY.velocity = new Vector3(
-                _control.RIGID_BODY.velocity.x,
-                0f,
-                _control.RIGID_BODY.velocity.z);
+            _control.RIGID_BODY.velocity = new Vector3(_control.RIGID_BODY.velocity.x,0f,_control.RIGID_BODY.velocity.z);
         }
         public bool IsFacingAtacker()
         {
-            var vec = _control.DAMAGE_DETECTOR_DATA.attacker.transform.position - _control.transform.position;
+            var vec = _control.DAMAGE_DATA.damageTaken.ATTACKER.transform.position -
+                _control.transform.position;
 
             if (vec.z < 0f)
             {
-                if (_control.PLAYER_ROTATION_DATA.IsFacingForward())
+                if (_control.ROTATION_DATA.IsFacingForward())
                 {
                     return false;
                 }
@@ -53,7 +52,7 @@ namespace My_MemoPlatformer
             }
             else if (vec.z > 0f)
             {
-                if (_control.PLAYER_ROTATION_DATA.IsFacingForward())
+                if (_control.ROTATION_DATA.IsFacingForward())
                 {
                     return true;
                 }
@@ -80,11 +79,11 @@ namespace My_MemoPlatformer
                 }
             }
 
-            if (latestMoveForwardScript.speed > 0f)
+            if (latestMoveForwardScript.Speed > 0f)
             {
                 return false;
             }
-            else if (latestMoveForwardScript.speed < 0f)
+            else if (latestMoveForwardScript.Speed < 0f)
             {
                 return true;
             }

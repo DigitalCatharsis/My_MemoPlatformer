@@ -4,17 +4,17 @@ namespace My_MemoPlatformer
 {
     public class PlayerAttack : SubComponent
     {
-        PlayerAttack_Data playerAttack_Data;
+        Attack_Data playerAttack_Data;
         private void Start()
         {
-            playerAttack_Data = new PlayerAttack_Data
+            playerAttack_Data = new Attack_Data
             {
                 attackButtonIsReset = false,
                 attackTriggered = false,
             };
 
-            subComponentProcessor.subcomponentsDictionary.Add(SubComponentType.PLAYER_ATTACK, this);
-            subComponentProcessor.playerAttack_Data = playerAttack_Data;
+            subComponentProcessor.arrSubComponents[(int)SubComponentType.PLAYER_ATTACK] = this;
+            subComponentProcessor.attack_Data = playerAttack_Data;
 
         }
         public override void OnFixedUpdate()

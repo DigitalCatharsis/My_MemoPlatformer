@@ -21,7 +21,7 @@ namespace My_MemoPlatformer
 
             //Diffirence betwen character's top sphere (coliistion emulation) and End sphere of the pathfinding agent
             //float topDist = characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.y - characterState.characterControl.collisionSpheres.frontSpheres[1].transform.position.y;
-            float platformDistance = characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.y 
+            float platformDistance = characterState.characterControl.aiProgress.pathfindingAgent.endSphere.transform.position.y 
                 - characterState.CollisionSpheres_Data.frontSpheres[0].transform.position.y;
 
             //Debug.DrawLine(control.aiProgress.pathfindfingAgent.endSphere.transform.position, control.frontSpheres[1].transform.position, Color.magenta, 2.5f);
@@ -29,7 +29,7 @@ namespace My_MemoPlatformer
 
             if (platformDistance > 0.5f)  //means it is on the same platform
             {
-                if (characterState.characterControl.aiProgress.pathfindfingAgent.startSphere.transform.position.z < characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.z)
+                if (characterState.characterControl.aiProgress.pathfindingAgent.startSphere.transform.position.z < characterState.characterControl.aiProgress.pathfindingAgent.endSphere.transform.position.z)
                 {
                     characterState.characterControl.moveRight = true;
                     characterState.characterControl.moveLeft = false;

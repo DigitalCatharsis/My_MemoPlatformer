@@ -42,10 +42,10 @@ namespace My_MemoPlatformer
 
             if (repositionSpheres)
             {
-                control.COLLISION_SPHERES_DATA.Reposition_FrontSpheres();
-                control.COLLISION_SPHERES_DATA.Reposition_BottomSpheres();
-                control.COLLISION_SPHERES_DATA.Reposition_BackSpheres();
-                control.COLLISION_SPHERES_DATA.Reposition_UpSpheres();
+                control.COLLISION_SPHERE_DATA.Reposition_FrontSpheres();
+                control.COLLISION_SPHERE_DATA.Reposition_BottomSpheres();
+                control.COLLISION_SPHERE_DATA.Reposition_BackSpheres();
+                control.COLLISION_SPHERE_DATA.Reposition_UpSpheres();
             }
         }
     }

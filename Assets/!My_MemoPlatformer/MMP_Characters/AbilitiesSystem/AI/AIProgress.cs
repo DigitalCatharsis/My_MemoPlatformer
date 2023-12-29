@@ -1,44 +1,115 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
     public class AIProgress : MonoBehaviour
     {
-        public PathFindingAgent pathfindfingAgent;
+        [Range(0f, 1f)]
+        public float flyingKickProbability;
+
+        public PathFindingAgent pathfindingAgent;
         public CharacterControl blockingCharacter;
+        public bool doFlyingKick;
+
+        delegate void GroundAttack(CharacterControl control);
+        private List<GroundAttack> _listGroundAttacks = new List<GroundAttack>();
+        private int _attackIndex;
 
         private CharacterControl _control;
-        public bool doFlyingKick;
 
         private void Awake()
         {
             _control = this.gameObject.GetComponentInParent<CharacterControl>();
-        }
-        public float AI_DistanceToStartSphere()
-        {
-            return Vector3.SqrMagnitude(_control.aiProgress.pathfindfingAgent.startSphere.transform.position
-                - _control.transform.position); //distance between checkpoint and character
-        }
-        public float AI_DistanceToEndSphere()
-        {
-            return Vector3.SqrMagnitude(_control.aiProgress.pathfindfingAgent.endSphere.transform.position
-                - _control.transform.position); //distance between checkpoint and character
+            _listGroundAttacks.Add(NormalGroundAttack);
+            _listGroundAttacks.Add(ForwardGroundAttack);
+
+            StartCoroutine(_RandomizeAttack());
         }
 
-        public float AIDistanceToTarget()
+        private void NormalGroundAttack(CharacterControl control)
         {
-            return Vector3.SqrMagnitude(_control.aiProgress.pathfindfingAgent.target.transform.position
-                - _control.transform.position);
+            control.moveRight = false;
+            control.moveLeft = false;
+
+            control.ATTACK_DATA.attackTriggered = true;
+            control.attack = false;
         }
-        public float TargetDistanceToEndSphere()
+
+        void ForwardGroundAttack(CharacterControl control)
         {
-            return Vector3.SqrMagnitude(_control.aiProgress.pathfindfingAgent.endSphere.transform.position
-                - _control.aiProgress.pathfindfingAgent.target.transform.position);
+            if (control.aiProgress.TargetIsOnRightSide())
+            {
+                control.moveRight = true;
+                control.moveLeft = false;
+
+                PrococessForwardGroundAttack(control);
+            }
+            else
+            {
+                control.moveRight = false;
+                control.moveLeft = true;
+
+                PrococessForwardGroundAttack(control);
+            }
+        }
+        public bool TargetIsOnRightSide()
+        {
+            if ((_control.aiProgress.pathfindingAgent.target.transform.position - _control.transform.position).z > 0f)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private void PrococessForwardGroundAttack(CharacterControl control)
+        {
+            if (control.aiProgress.IsFacingTarget() && control.ANIMATION_DATA.IsRunning(typeof(MoveForward)))
+            {
+                control.ATTACK_DATA.attackTriggered = true;
+                control.attack = false;
+            }
+        }
+
+        public bool IsFacingTarget()
+        {
+            if ((_control.aiProgress.pathfindingAgent.target.transform.position - _control.transform.position).z > 0f)
+            {
+                if (_control.ROTATION_DATA.IsFacingForward())
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                if (!_control.ROTATION_DATA.IsFacingForward())
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        IEnumerator _RandomizeAttack()
+        {
+            while (true)
+            {
+                _attackIndex = Random.Range(0, _listGroundAttacks.Count);
+                yield return new WaitForSeconds(2f);
+            }
+        }
+        public void DoAttack()
+        {
+            _listGroundAttacks[_attackIndex](_control);
         }
 
         public bool TargetIsDead()
         {
-            if (CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target).DAMAGE_DETECTOR_DATA.IsDead())
+            if (CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindingAgent.target).DAMAGE_DATA.IsDead())
             {
                 return true;
             }
@@ -46,50 +117,13 @@ namespace My_MemoPlatformer
             {
                 return false;
             }
-        }
-
-        public bool TargetIsOnRightSide()
-        {
-            if ((_control.aiProgress.pathfindfingAgent.target.transform.position - _control.transform.position).z > 0f)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        public bool IsFacingTarget()
-        {
-            if ((_control.aiProgress.pathfindfingAgent.target.transform.position - _control.transform.position).z > 0f)
-            {
-                if (_control.PLAYER_ROTATION_DATA.IsFacingForward())
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                if (!_control.PLAYER_ROTATION_DATA.IsFacingForward())
-                {
-                    return true;
-                }
-            }
-            
-            return false;
-        }
-
-        public void RepositionDestination()
-        {
-            pathfindfingAgent.startSphere.transform.position = pathfindfingAgent.target.transform.position;
-            pathfindfingAgent.endSphere.transform.position = pathfindfingAgent.target.transform.position;
-
         }
 
         public bool TargetIsOnTheSamePlatform()
         {
-            var target = CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target);
-            if (target.PLAYER_GROUND_DATA.ground == _control.PLAYER_GROUND_DATA.ground)
+            var target = CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindingAgent.target);
+
+            if (target.GROUND_DATA.ground == _control.GROUND_DATA.ground)
             {
                 return true;
             }
@@ -98,11 +132,16 @@ namespace My_MemoPlatformer
                 return false;
             }
         }
+        public float TargetDistanceToEndSphere()
+        {
+            return Vector3.SqrMagnitude(
+                _control.aiProgress.pathfindingAgent.endSphere.transform.position - _control.aiProgress.pathfindingAgent.target.transform.position);
+        }
 
         public bool TargetIsGrounded()
         {
-            var target = CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindfingAgent.target);
-            if (target.PLAYER_GROUND_DATA.ground == null)  //not grounded
+            var target = CharacterManager.Instance.GetCharacter(_control.aiProgress.pathfindingAgent.target);
+            if (target.GROUND_DATA.ground == null)
             {
                 return false;
             }
@@ -110,6 +149,30 @@ namespace My_MemoPlatformer
             {
                 return true;
             }
+        }
+        public void RepositionDestination()
+        {
+            pathfindingAgent.startSphere.transform.position = pathfindingAgent.target.transform.position;
+            pathfindingAgent.endSphere.transform.position = pathfindingAgent.target.transform.position;
+        }
+
+        public void SetRandomFlyingKick()
+        {
+            if (Random.Range(0f, 1f) < flyingKickProbability)
+            {
+                doFlyingKick = true;
+            }
+            else
+            {
+                doFlyingKick = false;
+            }
+        }
+
+        public float GetStartSphereHeight()
+        {
+            Vector3 vec = _control.transform.position - pathfindingAgent.startSphere.transform.position;
+
+            return Mathf.Abs(vec.y);
         }
 
         public bool EndSphereIsHigher()
@@ -118,7 +181,8 @@ namespace My_MemoPlatformer
             {
                 return false;
             }
-            if (pathfindfingAgent.endSphere.transform.position.y - pathfindfingAgent.startSphere.transform.position.y > 0f)
+
+            if (pathfindingAgent.endSphere.transform.position.y - pathfindingAgent.startSphere.transform.position.y > 0f)
             {
                 return true;
             }
@@ -134,7 +198,7 @@ namespace My_MemoPlatformer
                 return false;
             }
 
-            if (pathfindfingAgent.endSphere.transform.position.y - pathfindfingAgent.startSphere.transform.position.y > 0f)
+            if (pathfindingAgent.endSphere.transform.position.y - pathfindingAgent.startSphere.transform.position.y > 0f)
             {
                 return false;
             }
@@ -146,7 +210,7 @@ namespace My_MemoPlatformer
 
         public bool EndSphereIsStraight()
         {
-            if (Mathf.Abs(pathfindfingAgent.endSphere.transform.position.y - pathfindfingAgent.startSphere.transform.position.y) > 0.01f)
+            if (Mathf.Abs(pathfindingAgent.endSphere.transform.position.y - pathfindingAgent.startSphere.transform.position.y) > 0.01f)
             {
                 return false;
             }
@@ -156,23 +220,22 @@ namespace My_MemoPlatformer
             }
         }
 
-        public void SetRandomFlyingKick()
+        public float AIDistanceToTarget()
         {
-            if (Random.Range(0f, 1f) < 0.3f) //30% chance
-            {
-                doFlyingKick = true;
-            }
-            else
-            {
-                doFlyingKick = false;
-            }
+            return Vector3.SqrMagnitude(
+                _control.aiProgress.pathfindingAgent.target.transform.position - _control.transform.position);
         }
 
-        public float GetStartSphereHeight()
+        public float AIDistanceToStartSphere()
         {
-            var vec = _control.transform.position - pathfindfingAgent.startSphere.transform.position;
+            return Vector3.SqrMagnitude(
+                _control.aiProgress.pathfindingAgent.startSphere.transform.position - _control.transform.position);
+        }
 
-            return Mathf.Abs(vec.y);
+        public float AIDistanceToEndSphere()
+        {
+            return Vector3.SqrMagnitude(
+                _control.aiProgress.pathfindingAgent.endSphere.transform.position - _control.transform.position);
         }
     }
 }

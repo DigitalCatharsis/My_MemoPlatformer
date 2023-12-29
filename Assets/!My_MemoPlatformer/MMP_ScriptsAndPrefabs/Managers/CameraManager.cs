@@ -14,14 +14,14 @@ namespace My_MemoPlatformer
         private Coroutine _routine;
 
 
-        private CameraContoller _cameraController;
-        public CameraContoller CAM_CONTROLLER
+        private CameraController _cameraController;
+        public CameraController CAM_CONTROLLER
         {
             get
             {
                 if (_cameraController == null)
                 {
-                    _cameraController = GameObject.FindObjectOfType<CameraContoller>();
+                    _cameraController = GameObject.FindObjectOfType<CameraController>();
                 }
                 return _cameraController;
             }

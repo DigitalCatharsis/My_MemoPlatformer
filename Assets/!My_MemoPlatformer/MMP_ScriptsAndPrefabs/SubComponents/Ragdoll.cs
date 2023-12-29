@@ -1,9 +1,14 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
+    public enum RagdollPushType
+    {
+        NORMAL,
+        DEAD_BODY,
+    }
+
     public class Ragdoll : SubComponent
     {
         public Ragdoll_Data ragdoll_Data;
@@ -13,14 +18,16 @@ namespace My_MemoPlatformer
             ragdoll_Data = new Ragdoll_Data
             {
                 ragdollTriggered = false,
-                bodyParts = new List<Collider>(),
+                flyingRagdollData = new FlyingRagdollData(),
+
                 GetBodypart = GetBodyPart,
                 AddForceToDamagedPart = AddForceToDamagedPart,
+                ClearExistingVelocity = ClearExistingVelocity,
             };
 
             SetupBodyParts();
-            subComponentProcessor.ragdollData = ragdoll_Data;
-            subComponentProcessor.subcomponentsDictionary.Add(SubComponentType.RAGDOLL, this);
+            subComponentProcessor.ragdoll_Data = ragdoll_Data;
+            subComponentProcessor.arrSubComponents[(int)SubComponentType.RAGDOLL] = this;
         }
 
         public override void OnFixedUpdate()
@@ -38,11 +45,10 @@ namespace My_MemoPlatformer
 
         public void SetupBodyParts()
         {
-            ragdoll_Data.bodyParts.Clear();
-
+            var bodyParts = new List<Collider>();
             var colliders = control.gameObject.GetComponentsInChildren<Collider>(); //Get all the colliders in the hierarchy
 
-            foreach (Collider c in colliders)
+            foreach (var c in colliders)
             {
                 if (c.gameObject != control.gameObject)  //if the collider that we found is not the same as in the charactercontrol (//not a boxcolllider itself)
                 {
@@ -50,7 +56,7 @@ namespace My_MemoPlatformer
                     {
                         //thats means its a ragdoll
                         c.isTrigger = true;
-                        ragdoll_Data.bodyParts.Add(c);
+                        bodyParts.Add(c);
                         c.attachedRigidbody.interpolation = RigidbodyInterpolation.None;  //убрать дрожжание //Окей, если каждая часть будет интерполированной, то начинается вакханалия
                         c.attachedRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic; //расчет физики, предотвращение прохождения сквозь объекты
 
@@ -67,30 +73,37 @@ namespace My_MemoPlatformer
                     }
                 }
             }
+
+            ragdoll_Data.arrBodyParts = new Collider[bodyParts.Count];
+
+            for (int i = 0; i < ragdoll_Data.arrBodyParts.Length; i++)
+            {
+                ragdoll_Data.arrBodyParts[i] = bodyParts[i];
+            }
         }
 
         private void ProcRagdoll()
         {
             ragdoll_Data.ragdollTriggered = false;
-            
+
             if (control.skinnedMeshAnimator.avatar == null)
             {
                 return;
             }
 
             //change components layers from character to DeadBody to prevent unnessesary collisions.
-            Transform[] arr = control.gameObject.GetComponentsInChildren<Transform>();
-            foreach (Transform t in arr)
+            var arr = control.gameObject.GetComponentsInChildren<Transform>();
+            foreach (var t in arr)
             {
                 t.gameObject.layer = LayerMask.NameToLayer(MMP_Layers.DeadBody.ToString());
             }
 
             //save bodypart positions to prevent teleporting
-            foreach (Collider c in ragdoll_Data.bodyParts)
+            for (int i = 0; i < ragdoll_Data.arrBodyParts.Length; i++)
             {
-                TriggerDetector det = c.GetComponent<TriggerDetector>();
-                det.lastPosition = c.gameObject.transform.position;
-                det.lastRotation = c.gameObject.transform.rotation;
+                var det = ragdoll_Data.arrBodyParts[i].GetComponent<TriggerDetector>();
+                det.lastPosition = ragdoll_Data.arrBodyParts[i].gameObject.transform.position;
+                det.lastRotation = ragdoll_Data.arrBodyParts[i].gameObject.transform.rotation;
             }
 
             //turn off animator, avatar
@@ -107,51 +120,108 @@ namespace My_MemoPlatformer
             if (control.aiController != null)
             {
                 control.aiController.gameObject.SetActive(false);
-                control.navMeshObstacle.carving = false; //we dont need carving when enemy is dead
+                control.navMeshObstacle.enabled = false;
             }
 
             //turn on ragdoll
-            foreach (Collider c in ragdoll_Data.bodyParts)
+            for (int i = 0; i < ragdoll_Data.arrBodyParts.Length; i++)
             {
-                c.isTrigger = false;
-
-                TriggerDetector det = c.GetComponent<TriggerDetector>();
-                c.attachedRigidbody.MovePosition(det.lastPosition);  //https://docs.unity3d.com/ScriptReference/Rigidbody.MovePosition.html
-                c.attachedRigidbody.MoveRotation(det.lastRotation);  //https://docs.unity3d.com/ScriptReference/Rigidbody.MoveRotation.html
-
-                c.attachedRigidbody.velocity = Vector3.zero;
+                ragdoll_Data.arrBodyParts[i].isTrigger = false;
+                ragdoll_Data.arrBodyParts[i].attachedRigidbody.isKinematic = true;
             }
 
-            AddForceToDamagedPart(false);
-        }
-
-        private Collider GetBodyPart(string name)
-        {
-            foreach (Collider c in ragdoll_Data.bodyParts)
+            for (int i = 0; i < ragdoll_Data.arrBodyParts.Length; i++)
             {
-                if (c.name.Contains(name))
+                TriggerDetector det = ragdoll_Data.arrBodyParts[i].GetComponent<TriggerDetector>();
+                ragdoll_Data.arrBodyParts[i].attachedRigidbody.MovePosition(det.lastPosition);
+                ragdoll_Data.arrBodyParts[i].attachedRigidbody.MoveRotation(det.lastRotation);
+                ragdoll_Data.arrBodyParts[i].attachedRigidbody.velocity = Vector3.zero;
+            }
+
+            for (int i = 0; i < ragdoll_Data.arrBodyParts.Length; i++)
+            {
+                ragdoll_Data.arrBodyParts[i].attachedRigidbody.isKinematic = false;
+            }
+
+            ragdoll_Data.ClearExistingVelocity();
+
+            if (control.DAMAGE_DATA.damageTaken != null)
+            {
+                //take damage from ragdoll
+                var incomingVelocity = control.DAMAGE_DATA.damageTaken.INCOMING_VELOCITY;
+                var damagedPart = control.DAMAGE_DATA.damageTaken.DAMAGE_TG;
+
+                if (Vector3.SqrMagnitude(incomingVelocity) > 0.0001f)
                 {
-                    return c;
+                    if (DebugContainer.Instance.debug_Ragdoll)
+                    {
+                        Debug.Log(control.gameObject.name + ": taking damage from ragdoll");
+                    }
+                    damagedPart.rigidBody.AddForce(incomingVelocity * 0.7f);
+                }
+
+                //take damage from attack
+                else
+                {
+                    ragdoll_Data.AddForceToDamagedPart(RagdollPushType.NORMAL);
                 }
             }
+        }
+
+        Collider GetBodyPart(string name)
+        {
+            for (int i = 0; i < ragdoll_Data.arrBodyParts.Length; i++)
+            {
+                if (ragdoll_Data.arrBodyParts[i].name.Contains(name))
+                {
+                    return ragdoll_Data.arrBodyParts[i];
+                }
+            }
+
             return null;
         }
-        private void AddForceToDamagedPart(bool zeroZelocity)
+        void AddForceToDamagedPart(RagdollPushType pushType)
         {
-            if (control.DAMAGE_DETECTOR_DATA.damagedTrigger != null)
+            if (control.DAMAGE_DATA.damageTaken == null)
             {
-                if (zeroZelocity)
-                {
-                    foreach (var c in ragdoll_Data.bodyParts)
-                    {
-                        c.attachedRigidbody.velocity = Vector3.zero;
-                    }
-                }
+                return;
+            }
 
-                control.DAMAGE_DETECTOR_DATA.damagedTrigger.GetComponent<Rigidbody>().
-                     AddForce(control.DAMAGE_DETECTOR_DATA.attacker.transform.forward * control.DAMAGE_DETECTOR_DATA.attack.forwardForce +
-                          control.DAMAGE_DETECTOR_DATA.attacker.transform.right * control.DAMAGE_DETECTOR_DATA.attack.rightForce +
-                             control.DAMAGE_DETECTOR_DATA.attacker.transform.up * control.DAMAGE_DETECTOR_DATA.attack.upForce);
+            if (control.DAMAGE_DATA.damageTaken.ATTACKER == null)
+            {
+                return;
+            }
+
+            var damageData = control.DAMAGE_DATA;
+
+            var forwardDir = damageData.damageTaken.ATTACKER.transform.forward;
+            var rightDir = damageData.damageTaken.ATTACKER.transform.right;
+            var upDir = damageData.damageTaken.ATTACKER.transform.up;
+
+            var body = control.DAMAGE_DATA.damageTaken.DAMAGE_TG.GetComponent<Rigidbody>();
+            var attack = damageData.damageTaken.ATTACK;
+
+            if (pushType == RagdollPushType.NORMAL)
+            {
+                body.AddForce(
+                    forwardDir * attack.normalRagdollVelocity.forwardForce +
+                    rightDir * attack.normalRagdollVelocity.rightForce +
+                    upDir * attack.normalRagdollVelocity.upForce);
+            }
+            else if (pushType == RagdollPushType.DEAD_BODY)
+            {
+                body.AddForce(
+                    forwardDir * attack.collateralRagdollVelocity.forwardForce +
+                    rightDir * attack.collateralRagdollVelocity.rightForce +
+                    upDir * attack.collateralRagdollVelocity.upForce);
+            }
+        }
+
+        void ClearExistingVelocity()
+        {
+            for (int i = 0; i < ragdoll_Data.arrBodyParts.Length; i++)
+            {
+                ragdoll_Data.arrBodyParts[i].attachedRigidbody.velocity = Vector3.zero;
             }
         }
     }

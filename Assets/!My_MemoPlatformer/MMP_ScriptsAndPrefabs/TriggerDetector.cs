@@ -1,16 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
-
 
 namespace My_MemoPlatformer
 {
-
     public class TriggerDetector : MonoBehaviour
     {
-        //public List<Collider> collidingParts = new List<Collider>();
+        [SerializeField] private bool _debug;
         public CharacterControl control;
+        public Collider triggerCollider;
+        public Rigidbody rigidBody;
 
         public Vector3 lastPosition;
         public Quaternion lastRotation;
@@ -18,39 +16,51 @@ namespace My_MemoPlatformer
         private void Awake()
         {
             control = this.GetComponentInParent<CharacterControl>();
+            triggerCollider = this.gameObject.GetComponent<Collider>();
+            rigidBody = this.gameObject.GetComponent<Rigidbody>();
         }
 
 
-        private void OnTriggerEnter(Collider col) //callback function whenever somth touches or enters or otuches raggdoll body parts
+        private void OnTriggerEnter(Collider col) //callback function whenever somth touches or enters raggdoll body parts
         {
-            CheckCollidingBodyparts(col);
+            var attacker = CheckCollidingBodyparts(col);
+
+            if (attacker != null)
+            {
+                TakeCollateralDamage(attacker, col);
+            }
+
             CheckCollidingWeapons(col);
         }
 
-        private void CheckCollidingBodyparts(Collider col)
+        private CharacterControl CheckCollidingBodyparts(Collider col)
         {
             if (control == null)
             {
-                return;
+                return null;
             }
 
-            if (control.RAGDOLL_DATA.bodyParts.Contains(col))  //touching own collider
+            for (int i = 0; i < control.RAGDOLL_DATA.arrBodyParts.Length; i++)
             {
-                return;
+                if (control.RAGDOLL_DATA.arrBodyParts[i].Equals(col))
+                {
+                    return null;
+                }
             }
 
-            CharacterControl attacker = col.transform.root.GetComponent<CharacterControl>();
+            var attacker = CharacterManager.Instance.GetCharacter(col.transform.root.gameObject);
 
-            if (attacker == null) //not a player, just a physical object
+            if (attacker == null)
             {
-                return;
+                return null;
             }
-            //if we past two tests above, thats means its another character
 
-            if (col.gameObject == attacker.gameObject) //not a boxcolllider itself in the top of hierarchy
+            if (col.gameObject == attacker.gameObject)
             {
-                return;
+                return null;
             }
+
+            // add collider to dictionary
 
             if (!control.animationProgress.collidingBodyParts.ContainsKey(this))
             {
@@ -61,11 +71,13 @@ namespace My_MemoPlatformer
             {
                 control.animationProgress.collidingBodyParts[this].Add(col);
             }
+
+            return attacker;
         }
 
-        void CheckCollidingWeapons(Collider col)
+        private void CheckCollidingWeapons(Collider col)
         {
-            var w = col.transform.root.gameObject.GetComponent<MeleeWeapon>();
+            MeleeWeapon w = col.transform.root.gameObject.GetComponent<MeleeWeapon>();
 
             if (w == null)
             {
@@ -74,27 +86,32 @@ namespace My_MemoPlatformer
 
             if (w.isThrown)
             {
-                if (w.thrower != control) //not colliding himself
+                if (w.thrower != control)
                 {
-                    var info = new AttackCondition();
-                    info.CopyInfo(control.DAMAGE_DETECTOR_DATA.AxeThrow, control);
+                    AttackCondition info = new AttackCondition();
+                    info.CopyInfo(control.DAMAGE_DATA.AxeThrow, control);
 
-                    control.DAMAGE_DETECTOR_DATA.SetData(w.thrower, control.DAMAGE_DETECTOR_DATA.AxeThrow, this, null);
+                    control.DAMAGE_DATA.damageTaken = new DamageTaken(
+                        w.thrower,
+                        control.DAMAGE_DATA.AxeThrow,
+                        this,
+                        null,
+                        Vector3.zero);
 
-                    control.DAMAGE_DETECTOR_DATA.TakeDamage(info);
+                    control.DAMAGE_DATA.TakeDamage(info);
 
                     if (w.flyForward)
                     {
-                        w.transform.rotation = Quaternion.Euler(-90f, 0f, -180f);
+                        w.transform.rotation = Quaternion.Euler(0f, 90f, 45f);
                     }
                     else
                     {
-                        w.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+                        w.transform.rotation = Quaternion.Euler(0f, -90f, 45f);
                     }
 
                     w.transform.parent = this.transform;
 
-                    var offset = this.transform.position - w.weaponTip.transform.position;
+                    Vector3 offset = this.transform.position - w.weaponTip.transform.position;
                     w.transform.position += offset;
 
                     w.isThrown = false;
@@ -113,6 +130,7 @@ namespace My_MemoPlatformer
             }
         }
 
+
         private void OnTriggerExit(Collider col)
         {
             CheckExitingBodypart(col);
@@ -121,6 +139,11 @@ namespace My_MemoPlatformer
 
         private void CheckExitingBodypart(Collider col)
         {
+            if (control == null)
+            {
+                return;
+            }
+
             if (control.animationProgress.collidingBodyParts.ContainsKey(this))
             {
                 if (control.animationProgress.collidingBodyParts[this].Contains(col))
@@ -136,6 +159,11 @@ namespace My_MemoPlatformer
         }
         private void CheckExitingWeapons(Collider col)
         {
+            if (control == null)
+            {
+                return;
+            }
+
             if (control.animationProgress.collidingWeapons.ContainsKey(this))
             {
                 if (control.animationProgress.collidingWeapons[this].Contains(col))
@@ -146,6 +174,35 @@ namespace My_MemoPlatformer
                 if (control.animationProgress.collidingWeapons[this].Count == 0)
                 {
                     control.animationProgress.collidingWeapons.Remove(this);
+                }
+            }
+        }
+
+        private void TakeCollateralDamage(CharacterControl attacker, Collider col)
+        {
+            if (attacker.RAGDOLL_DATA.flyingRagdollData.isTriggered)
+            {
+                if (attacker.RAGDOLL_DATA.flyingRagdollData.attacker != control)
+                {
+                    var mag = Vector3.SqrMagnitude(col.attachedRigidbody.velocity);
+
+                    if (_debug)
+                    {
+                        Debug.Log("incoming ragdoll: " + attacker.gameObject.name + "\n" + "Velocity: " + mag);
+                    }
+
+                    if (mag >= 10f)
+                    {
+                        control.DAMAGE_DATA.damageTaken = new DamageTaken(
+                            attacker: null,
+                            attack: null,
+                            damage_TG: this,
+                            damager: null,
+                            incomingVelocity: col.attachedRigidbody.velocity);
+
+                        control.DAMAGE_DATA.hp = 0;
+                        control.RAGDOLL_DATA.ragdollTriggered = true;
+                    }
                 }
             }
         }

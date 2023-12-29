@@ -11,7 +11,7 @@ namespace My_MemoPlatformer
             momentumCalculator_Data = new MomentumCalculator_Data
             {
                 momentum = 0,
-                CalcualteMomentum = CalculateMomentum,
+                CalcualateMomentum = CalculateMomentum,
             };
 
             subComponentProcessor.momentumCalculator_Data = momentumCalculator_Data;

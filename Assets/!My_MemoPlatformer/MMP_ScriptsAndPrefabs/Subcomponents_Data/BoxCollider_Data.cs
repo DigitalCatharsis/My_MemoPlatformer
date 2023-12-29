@@ -5,7 +5,7 @@ namespace My_MemoPlatformer
     [System.Serializable]
     public class BoxCollider_Data
     {
-        public bool updatingSpheres;
+        public bool isUpdatingSpheres;
         public bool isLanding;
 
         public float size_Update_Speed;

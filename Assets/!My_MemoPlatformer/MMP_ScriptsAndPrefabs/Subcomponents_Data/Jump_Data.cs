@@ -1,11 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
     [System.Serializable]
-    public class PlayerJump_Data
+    public class Jump_Data
     {
-        public bool jumped;
+        public Dictionary<int, bool> dicJumped;
         public bool canWallJump;
         public bool checkWallBlock;
     }

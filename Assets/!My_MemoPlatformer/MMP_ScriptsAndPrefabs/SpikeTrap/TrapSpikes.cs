@@ -37,15 +37,15 @@ namespace My_MemoPlatformer
             {
                 foreach (var control in listOfCharacter)
                 {
-                    if (!control.DAMAGE_DETECTOR_DATA.IsDead())
+                    if (!control.DAMAGE_DATA.IsDead())
                     {
                         if (_spikeTriggerRoutine == null && _spikesReloaded)
                         {
                             if (!listOfSpikeVictims.Contains(control))
                             {
                                 listOfSpikeVictims.Add(control);
-                                control.DAMAGE_DETECTOR_DATA.hp = 0;
-                                control.DAMAGE_DETECTOR_DATA.damagedTrigger = null;
+                                control.DAMAGE_DATA.hp = 0;
+                                control.DAMAGE_DATA.damageTaken = null;
                             }
                         }
                     }
@@ -98,6 +98,18 @@ namespace My_MemoPlatformer
             _spikesReloaded = true;
         }
 
+        public static bool IsTrap(GameObject obj)
+        {
+            if (obj.transform.root.gameObject.GetComponent<TrapSpikes>() == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             var control = other.gameObject.transform.root.gameObject.GetComponent<CharacterControl>();
@@ -128,18 +140,6 @@ namespace My_MemoPlatformer
                         listOfCharacter.Remove(control);
                     }
                 }
-            }
-        }
-
-        public static bool IsTrap(GameObject obj)
-        {
-            if (obj.transform.root.gameObject.GetComponent<TrapSpikes>() == null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
             }
         }
     }

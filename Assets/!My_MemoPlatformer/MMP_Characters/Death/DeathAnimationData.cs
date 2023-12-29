@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 namespace My_MemoPlatformer
 {
-
     public enum DeathType
     {
         NONE,
@@ -13,12 +9,11 @@ namespace My_MemoPlatformer
         GROUND_SHOCK,
     }
 
-
     [CreateAssetMenu(fileName ="New ScriptableObject", menuName = "My_MemoPlatformer/Death/DeathAnimationData")]
     public class DeathAnimationData : ScriptableObject
     {
-        public RuntimeAnimatorController Animator;
+        public RuntimeAnimatorController animator;
         public DeathType deathType;
-        public bool IsFacingAttacker;
+        public bool isFacingAttacker;
     }
 }

@@ -1,44 +1,33 @@
+using My_MemoPlatformer.Roundbeargames;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
     public class PlayerRotation : SubComponent
     {
-        PlayerRotation_Data playerRotation_Data;
+        Rotation_Data rotation_Data;
         static string L_CharacterSelect = "L_CharacterSelect";
         private void Start()
         {
-            playerRotation_Data = new PlayerRotation_Data
+            rotation_Data = new Rotation_Data
             {
-                lockDirectionNextState = false,
-                lockEarlyTurn = false,
-                EarlyTurnIsLocked = EarlyTurnIsLocked,
+                lockTurn = false,
+                unlockTiming = 0f,
                 FaceForward = FaceForward,
                 IsFacingForward = IsFacingForward,
             };
 
-            subComponentProcessor.playerRotation_Data = playerRotation_Data;
+            subComponentProcessor.rotation_Data = rotation_Data;
+            subComponentProcessor.arrSubComponents[(int)SubComponentType.PLAYER_ROTATION] = this;
         }
         public override void OnFixedUpdate()
         {
-            throw new System.NotImplementedException();
+            ClearTurnLock();
         }
 
         public override void OnUpdate()
         {
             throw new System.NotImplementedException();
-        }
-
-        private bool EarlyTurnIsLocked()
-        {
-            if (playerRotation_Data.lockEarlyTurn || playerRotation_Data.lockDirectionNextState)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
         private void FaceForward(bool forward)
         {
@@ -48,6 +37,11 @@ namespace My_MemoPlatformer
             }
 
             if (!control.skinnedMeshAnimator.enabled)   //to prevent rotating after death
+            {
+                return;
+            }
+
+            if (control.ROTATION_DATA.lockTurn)
             {
                 return;
             }
@@ -71,6 +65,22 @@ namespace My_MemoPlatformer
             else
             {
                 return false;
+            }
+        }
+
+        void ClearTurnLock()
+        {
+            if (!control.ANIMATION_DATA.IsRunning(typeof(LockTurn)))
+            {
+                if (rotation_Data.lockTurn)
+                {
+                    AnimatorStateInfo info = control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
+
+                    if (info.normalizedTime >= rotation_Data.unlockTiming)
+                    {
+                        rotation_Data.lockTurn = false;
+                    }
+                }
             }
         }
     }

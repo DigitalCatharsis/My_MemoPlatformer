@@ -16,11 +16,11 @@ namespace My_MemoPlatformer
         {
             if (IsGrounded(characterState.characterControl))
             {
-                animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Grounded], true);
+                animator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded], true);
             }
             else
             {
-                animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Grounded], false);
+                animator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded], false);
             }
         }
 
@@ -31,9 +31,9 @@ namespace My_MemoPlatformer
 
         bool IsGrounded(CharacterControl control)
         {
-            if (control.PLAYER_GROUND_DATA.BoxColliderContacts != null)
+            if (control.GROUND_DATA.BoxColliderContacts != null)
             {
-                foreach (var c in control.PLAYER_GROUND_DATA.BoxColliderContacts)
+                foreach (var c in control.GROUND_DATA.BoxColliderContacts)
                 {
                     var colliderBottom = (control.transform.position.y + control.boxCollider.center.y) - (control.boxCollider.size.y / 2f);
                     var yDiffirence = Mathf.Abs(c.point.y - colliderBottom);
@@ -43,7 +43,7 @@ namespace My_MemoPlatformer
                         if (Mathf.Abs(control.RIGID_BODY.velocity.y) < 0.001f)
                         {
                             //control.animationProgress.ground = c.otherCollider.transform.root.gameObject; //что колайдерит bottom сферы
-                            control.PLAYER_GROUND_DATA.ground = c.otherCollider.transform.gameObject; //что колайдерит bottom сферы
+                            control.GROUND_DATA.ground = c.otherCollider.transform.gameObject; //что колайдерит bottom сферы
                             control.BOX_COLLIDER_DATA.landingPosition = new Vector3(0f, c.point.y, c.point.z);
                             return true;
                         }
@@ -53,7 +53,7 @@ namespace My_MemoPlatformer
 
             if (control.RIGID_BODY.velocity.y < 0f)
             {
-                foreach (GameObject o in control.COLLISION_SPHERES_DATA.bottomSpheres)
+                foreach (GameObject o in control.COLLISION_SPHERE_DATA.bottomSpheres)
                 {
                     var blockingObj = CollisionDetection.GetCollidingObject(control, o, -Vector3.up, distance, ref control.BLOCKING_OBJ_DATA.raycastContactPoint);
 
@@ -63,14 +63,14 @@ namespace My_MemoPlatformer
 
                         if (c == null)
                         {
-                            control.PLAYER_GROUND_DATA.ground = blockingObj.transform.root.gameObject; //что колайдерит bottom сферы
+                            control.GROUND_DATA.ground = blockingObj.transform.root.gameObject; //что колайдерит bottom сферы
                             control.BOX_COLLIDER_DATA.landingPosition = new Vector3(0f, control.BLOCKING_OBJ_DATA.raycastContactPoint.y, control.BLOCKING_OBJ_DATA.raycastContactPoint.z);
                             return true;
                         }
                     }
                 }
             }
-            control.PLAYER_GROUND_DATA.ground = null;
+            control.GROUND_DATA.ground = null;
             return false;
         }
     }

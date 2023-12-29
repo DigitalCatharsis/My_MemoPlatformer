@@ -74,7 +74,7 @@ namespace My_MemoPlatformer
                 return false;
             }
 
-            if (target.DAMAGE_DETECTOR_DATA.IsDead())
+            if (target.DAMAGE_DATA.IsDead())
             {
                 return true;
             }

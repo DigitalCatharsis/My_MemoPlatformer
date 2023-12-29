@@ -7,13 +7,8 @@ namespace My_MemoPlatformer
 {
     public class AIController : MonoBehaviour
     {
-        public AI_TYPE initialAl;
-
-        private List<AISubset> _aIlist = new List<AISubset>();
-        private Coroutine _aIRoutine;
         private Vector3 _targetDir = new Vector3();
         private CharacterControl _control;
-
         private Animator _animatorController;
 
         public Animator ANIMATOR
@@ -43,66 +38,14 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void Start()  //Not Awake (cause of we need it work after onEnable)
-        {
-            InitializeAI();
-        }
-
         public void InitializeAI()
         {
-            if (_aIlist.Count == 0)
-            {
-                AISubset[] arr = this.gameObject.GetComponentsInChildren<AISubset>();
-
-                foreach (AISubset s in arr)
-                {
-                    if (!_aIlist.Contains(s))
-                    {
-                        _aIlist.Add(s);
-                        s.gameObject.SetActive(false);
-                    }
-                }
-            }
-            _aIRoutine = StartCoroutine(_InitAI());
-        }
-
-        private void OnEnable()
-        {
-            if (_aIRoutine != null)
-            {
-                StopCoroutine(_aIRoutine);
-            }
-        }
-        private IEnumerator _InitAI()
-        {
-            yield return new WaitForEndOfFrame();
-
-            TriggerAI(initialAl);  //trigger each subset
-        }
-
-        public void TriggerAI(AI_TYPE aiType)
-        {
-            AISubset next = null;
-
-            foreach (AISubset s in _aIlist)
-            {
-                s.gameObject.SetActive(false);
-
-                if (s.aiType == aiType)
-                {
-                    next = s;
-                }
-            }
-
-            if (next != null)
-            {
-                next.gameObject.SetActive(true);
-            }
+            ANIMATOR.Play(HashManager.Instance.arrAIStateNames[(int)AI_State_Name.SendPathfindingAgent], 0);
         }
 
         public void WalkStraightToTheStartSphere()
         {
-            _targetDir = _control.aiProgress.pathfindfingAgent.startSphere.transform.position - _control.transform.position;
+            _targetDir = _control.aiProgress.pathfindingAgent.startSphere.transform.position - _control.transform.position;
 
             if (_targetDir.z > 0f)
             {
@@ -117,8 +60,7 @@ namespace My_MemoPlatformer
         }
         public void WalkStraightToTheEndSphere()
         {
-            _targetDir = _control.aiProgress.pathfindfingAgent.endSphere.transform.position
-                - _control.transform.position;
+            _targetDir = _control.aiProgress.pathfindingAgent.endSphere.transform.position - _control.transform.position;
 
             if (_targetDir.z > 0f)
             {
@@ -129,6 +71,36 @@ namespace My_MemoPlatformer
             {
                 _control.moveLeft = true;
                 _control.moveRight = false;
+            }
+        }
+
+        public bool RestartWalk()
+        {
+            if (_control.aiProgress.AIDistanceToEndSphere() < 1f)
+            {
+                if (_control.aiProgress.TargetDistanceToEndSphere() > 0.5f)
+                {
+                    if (_control.aiProgress.TargetIsGrounded())
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public bool IsAttacking()
+        {
+            AnimatorStateInfo info = _control.aiController.ANIMATOR.GetCurrentAnimatorStateInfo(0);
+
+            if (info.shortNameHash == HashManager.Instance.arrAIStateNames[(int)AI_State_Name.AI_Attack])
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

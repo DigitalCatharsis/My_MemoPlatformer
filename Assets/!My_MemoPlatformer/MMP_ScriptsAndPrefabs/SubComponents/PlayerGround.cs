@@ -4,16 +4,15 @@ namespace My_MemoPlatformer
 {
     public class PlayerGround : SubComponent
     {
-        public PlayerGround_Data playerGround_Data;
+        public Ground_Data playerGround_Data;
         private void Start()
         {
-            playerGround_Data = new PlayerGround_Data
+            playerGround_Data = new Ground_Data
             {
 
             };
 
-            control.subComponentProcessor.playerGround_Data = playerGround_Data;
-            control.subComponentProcessor.subcomponentsDictionary.Add(SubComponentType.PLAYER_GROUND, this);
+            control.subComponentProcessor.ground_Data = playerGround_Data;
         }
         public override void OnFixedUpdate()
         {

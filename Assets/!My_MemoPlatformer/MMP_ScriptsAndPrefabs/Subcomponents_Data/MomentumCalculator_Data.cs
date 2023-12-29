@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 namespace My_MemoPlatformer
 {
@@ -7,9 +6,7 @@ namespace My_MemoPlatformer
     public class MomentumCalculator_Data
     {
         public float momentum;
-
         public delegate void DoSomething(float speed, float maxMomentum);
-
-        public DoSomething CalcualteMomentum;
+        public DoSomething CalcualateMomentum;
     }
 }

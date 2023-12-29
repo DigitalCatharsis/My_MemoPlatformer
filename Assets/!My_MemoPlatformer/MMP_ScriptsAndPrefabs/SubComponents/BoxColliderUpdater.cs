@@ -4,15 +4,13 @@ namespace My_MemoPlatformer
 {
     public class BoxColliderUpdater : SubComponent
     {
-        [SerializeField]private bool _debug;
-
         BoxCollider_Data boxCollider_Data;
 
         private void Start()
         {
             boxCollider_Data = new BoxCollider_Data
             {
-                updatingSpheres = false,
+                isUpdatingSpheres = false,
                 isLanding = false,
 
                 size_Update_Speed = 0f,
@@ -24,30 +22,30 @@ namespace My_MemoPlatformer
             };
 
             subComponentProcessor.boxCollider_Data = boxCollider_Data;
-            subComponentProcessor.subcomponentsDictionary.Add(SubComponentType.BOX_COLLIDER_UPDATER, this);
+            subComponentProcessor.arrSubComponents[(int)SubComponentType.BOX_COLLIDER_UPDATER] = this;
         }
         public override void OnFixedUpdate()
         {
             //Spheres
-            boxCollider_Data.updatingSpheres = false;
+            boxCollider_Data.isUpdatingSpheres = false;
 
-            UpdateBoxColliderSize();
-            UpdateBoxColliderCenter();
+            UpdateBoxCollider_Size();
+            UpdateBoxCollider_Center();
 
-            if (boxCollider_Data.updatingSpheres)
+            if (boxCollider_Data.isUpdatingSpheres)
             {
-                control.COLLISION_SPHERES_DATA.Reposition_FrontSpheres();
-                control.COLLISION_SPHERES_DATA.Reposition_BottomSpheres();
-                control.COLLISION_SPHERES_DATA.Reposition_BackSpheres();
-                control.COLLISION_SPHERES_DATA.Reposition_UpSpheres();
+                control.COLLISION_SPHERE_DATA.Reposition_FrontSpheres();
+                control.COLLISION_SPHERE_DATA.Reposition_BottomSpheres();
+                control.COLLISION_SPHERE_DATA.Reposition_BackSpheres();
+                control.COLLISION_SPHERE_DATA.Reposition_UpSpheres();
 
                 if (boxCollider_Data.isLanding)  //prevent bug when idle after catching corner of platform
                 {
-                    if (_debug)
-                    {
-                        Debug.Log("repositioning y");
-                    }
-                    control.RIGID_BODY.MovePosition(new Vector3(0f, boxCollider_Data.landingPosition.y, this.transform.position.z));
+                    //Debug.Log("repositioning y");
+                    control.RIGID_BODY.MovePosition(new Vector3(
+                        0f,
+                        boxCollider_Data.landingPosition.y,
+                        this.transform.position.z));
                 }
             }
         }
@@ -57,33 +55,37 @@ namespace My_MemoPlatformer
             throw new System.NotImplementedException();
         }
 
-        public void UpdateBoxColliderSize()
+        public void UpdateBoxCollider_Size()
         {
-            if (!control.PLAYER_ANIMATION_DATA.IsRunning(typeof(UpdateBoxCollider)))
+            if (!control.ANIMATION_DATA.IsRunning(typeof(UpdateBoxCollider)))
             {
                 return;
             }
 
             if (Vector3.SqrMagnitude(control.boxCollider.size - boxCollider_Data.targetSize) > 0.00001f)
             {
-                control.boxCollider.size = Vector3.Lerp(control.boxCollider.size, boxCollider_Data.targetSize, Time.deltaTime * boxCollider_Data.size_Update_Speed);
+                control.boxCollider.size = Vector3.Lerp(control.boxCollider.size,
+                    boxCollider_Data.targetSize, 
+                    Time.deltaTime * boxCollider_Data.size_Update_Speed);
 
-                boxCollider_Data.updatingSpheres = true;
+                boxCollider_Data.isUpdatingSpheres = true;
             }
         }
 
-        public void UpdateBoxColliderCenter()
+        public void UpdateBoxCollider_Center()
         {
-            if (!control.PLAYER_ANIMATION_DATA.IsRunning(typeof(UpdateBoxCollider)))
+            if (!control.ANIMATION_DATA.IsRunning(typeof(UpdateBoxCollider)))
             {
                 return;
             }
 
             if (Vector3.SqrMagnitude(control.boxCollider.center - boxCollider_Data.targetCenter) > 0.0001f)
             {
-                control.boxCollider.center = Vector3.Lerp(control.boxCollider.center, boxCollider_Data.targetCenter, Time.deltaTime * boxCollider_Data.center_Update_Speed);
+                control.boxCollider.center = Vector3.Lerp(control.boxCollider.center,
+                    boxCollider_Data.targetCenter,
+                    Time.deltaTime * boxCollider_Data.center_Update_Speed);
 
-                boxCollider_Data.updatingSpheres = true;
+                boxCollider_Data.isUpdatingSpheres = true;
             }
         }
     }

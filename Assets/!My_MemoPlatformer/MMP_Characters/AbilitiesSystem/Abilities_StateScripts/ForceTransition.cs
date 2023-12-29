@@ -21,13 +21,13 @@ namespace My_MemoPlatformer
             // AnimatorStateInfo.normalizedTime  - The integer part is the number of time a state has been looped. The fractional part is the % (0-1) of progress in the current loop.
             if (stateInfo.normalizedTime >= transitionTiming)
             {
-                animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.ForceTransition], true);
+                animator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.ForceTransition], true);
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.ForceTransition], false);
+            animator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.ForceTransition], false);
         }
     }
 

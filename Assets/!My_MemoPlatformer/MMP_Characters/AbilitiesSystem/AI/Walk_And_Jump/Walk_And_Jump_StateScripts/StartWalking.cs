@@ -17,8 +17,8 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.SetBool(HashManager.Instance.ArrAITransitionParams[(int)AI_Transition.Jump_Platform], false);
-            animator.SetBool(HashManager.Instance.ArrAITransitionParams[(int)AI_Transition.Fall_Platform], false);
+            animator.SetBool(HashManager.Instance.arrAITransitionParams[(int)AI_Transition.Jump_Platform], false);
+            animator.SetBool(HashManager.Instance.arrAITransitionParams[(int)AI_Transition.Fall_Platform], false);
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -31,13 +31,13 @@ namespace My_MemoPlatformer
             if (characterState.characterControl.aiProgress.EndSphereIsHigher())
             {
                 //Jumping
-                if (characterState.characterControl.aiProgress.AI_DistanceToStartSphere() < 0.08f) //how close are we to the checkpoint    //Здесь часто бывает баг (когда иди бегает вокруг Start Point) из-за разных смещений платформы или ИИ относительно друг друга. Увелич да < 0.1f для дебага
+                if (characterState.characterControl.aiProgress.AIDistanceToStartSphere() < 0.08f) //how close are we to the checkpoint    //Здесь часто бывает баг (когда иди бегает вокруг Start Point) из-за разных смещений платформы или ИИ относительно друг друга. Увелич да < 0.1f для дебага
                 {
                     //Debug.DrawLine(control.aiProgress.pathfindfingAgent.startSphere.transform.position, control.transform.position, UnityEngine.Color.green, 2.5f);
                     characterState.characterControl.moveLeft = false;
                     characterState.characterControl.moveRight = false;
                     //Debug.Log($"<color=red>{control.moveLeft = false} </color>");
-                    animator.SetBool(HashManager.Instance.ArrAITransitionParams[(int)AI_Transition.Jump_Platform], true);
+                    animator.SetBool(HashManager.Instance.arrAITransitionParams[(int)AI_Transition.Jump_Platform], true);
                     return;
                 }
             }
@@ -46,12 +46,12 @@ namespace My_MemoPlatformer
             {
                 characterState.characterControl.aiController.WalkStraightToTheEndSphere();
 
-                animator.SetBool(HashManager.Instance.ArrAITransitionParams[(int)AI_Transition.Fall_Platform], true);
+                animator.SetBool(HashManager.Instance.arrAITransitionParams[(int)AI_Transition.Fall_Platform], true);
                 return;
             }
 
             //straight
-            if (characterState.characterControl.aiProgress.AI_DistanceToStartSphere() > 1.5f)
+            if (characterState.characterControl.aiProgress.AIDistanceToStartSphere() > 1.5f)
             {
                 characterState.characterControl.turbo = true;
             }
@@ -62,7 +62,7 @@ namespace My_MemoPlatformer
 
             characterState.characterControl.aiController.WalkStraightToTheStartSphere();
 
-            if (characterState.characterControl.aiProgress.AI_DistanceToEndSphere() < 1f)
+            if (characterState.characterControl.aiProgress.AIDistanceToEndSphere() < 1f)
             {
                 characterState.characterControl.turbo = false;
                 characterState.characterControl.moveLeft = false;

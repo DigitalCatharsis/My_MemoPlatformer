@@ -5,24 +5,26 @@ namespace My_MemoPlatformer
 {
     public class BlockingObjects : SubComponent
     {
-        public BlockingObj_Data blockingObjData;
+        public BlockingObj_Data blockingObj_Data;
 
         //Map each collided object to the collision detector
         private Dictionary<GameObject, GameObject> _frontBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
         private Dictionary<GameObject, GameObject> _upBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
         private Dictionary<GameObject, GameObject> _downBlockingObjects = new Dictionary<GameObject, GameObject>(); //key refers to the sphere where the raycast is coming from, and value is the actual gameobject being hit 
 
+        private List<CharacterControl> _airStompTargets = new List<CharacterControl>();
+
         //The entire list
         private List<GameObject> _frontBlockingObjList = new List<GameObject>();
-        private List<CharacterControl> _airStompTargets = new List<CharacterControl>();
         private List<GameObject> _frontBlockingCharacters = new List<GameObject>();
-        private List<GameObject> _frontSpheresList;
+
+        private GameObject[] _frontSpheresArray;
 
         private float _dirBlock;
 
         private void Start()
         {
-            blockingObjData = new BlockingObj_Data
+            blockingObj_Data = new BlockingObj_Data
             {
                 frontBlockingDictionaryCount = 0,
                 upBlockingDictionaryCount = 0,
@@ -33,13 +35,13 @@ namespace My_MemoPlatformer
                 GetFrontBlockingObjList = GetFrontBlockingObjList,
             };
 
-            subComponentProcessor.blockingObjData = blockingObjData;
-            subComponentProcessor.subcomponentsDictionary.Add(SubComponentType.BLOCKINGOBJECTS, this);
+            subComponentProcessor.blockingObj_Data = blockingObj_Data;
+            subComponentProcessor.arrSubComponents[(int)SubComponentType.BLOCKING_OBJECTS] = this;
         }
 
         public override void OnFixedUpdate()
         {
-            if (control.PLAYER_ANIMATION_DATA.IsRunning(typeof(MoveForward)))
+            if (control.ANIMATION_DATA.IsRunning(typeof(MoveForward)))
             {
                 CheckFrontBlocking();
             }
@@ -52,7 +54,7 @@ namespace My_MemoPlatformer
             }
 
             //checking while ledge grabbing
-            if (control.PLAYER_ANIMATION_DATA.IsRunning(typeof(MoveUp)))
+            if (control.ANIMATION_DATA.IsRunning(typeof(MoveUp)))
             {
                 if (control.animationProgress.latestMoveUpScript.speed > 0f)
                 {
@@ -84,11 +86,6 @@ namespace My_MemoPlatformer
                             }
                         }
                     }
-
-                    if (_upBlockingObjects.Count > 0)
-                    {
-                        control.RIGID_BODY.velocity = new Vector3(control.RIGID_BODY.velocity.x, 0f, control.RIGID_BODY.velocity.z);
-                    }
                 }
                 else
                 {
@@ -101,8 +98,8 @@ namespace My_MemoPlatformer
 
             CheckAirStomp();
 
-            blockingObjData.frontBlockingDictionaryCount = _frontBlockingObjects.Count;
-            blockingObjData.upBlockingDictionaryCount = _upBlockingObjects.Count;
+            blockingObj_Data.frontBlockingDictionaryCount = _frontBlockingObjects.Count;
+            blockingObj_Data.upBlockingDictionaryCount = _upBlockingObjects.Count;
         }
 
         public override void OnUpdate()
@@ -122,19 +119,24 @@ namespace My_MemoPlatformer
             if (_airStompTargets.Count > 0)
             {
                 control.RIGID_BODY.velocity = Vector3.zero;
-                control.RIGID_BODY.AddForce(Vector3.up * 350f);
+                control.RIGID_BODY.AddForce(Vector3.up * 250f);
 
-                foreach (var c in _airStompTargets)
+                foreach (CharacterControl c in _airStompTargets)
                 {
-                    var info = new AttackCondition();
-                    info.CopyInfo(c.DAMAGE_DETECTOR_DATA.airStompAttack, control);
+                    AttackCondition info = new AttackCondition();
+                    info.CopyInfo(c.DAMAGE_DATA.MarioStompAttack, control);
 
-                    int index = Random.Range(0, c.RAGDOLL_DATA.bodyParts.Count);
-                    var randomPart = c.RAGDOLL_DATA.bodyParts[index].GetComponent<TriggerDetector>();
+                    int index = Random.Range(0, c.RAGDOLL_DATA.arrBodyParts.Length);
+                    TriggerDetector randomPart = c.RAGDOLL_DATA.arrBodyParts[index].GetComponent<TriggerDetector>();
 
-                    c.DAMAGE_DETECTOR_DATA.SetData(control, c.DAMAGE_DETECTOR_DATA.airStompAttack, randomPart, control.rightFoot_Attack);
+                    c.DAMAGE_DATA.damageTaken = new DamageTaken(
+                        control,
+                        c.DAMAGE_DATA.MarioStompAttack,
+                        randomPart,
+                        control.rightFoot_Attack,
+                        Vector3.zero);
 
-                    c.DAMAGE_DETECTOR_DATA.TakeDamage(info);
+                    c.DAMAGE_DATA.TakeDamage(info);
                 }
 
                 _airStompTargets.Clear();
@@ -147,12 +149,14 @@ namespace My_MemoPlatformer
             {
                 foreach (KeyValuePair<GameObject, GameObject> data in _downBlockingObjects)
                 {
-                    var c = CharacterManager.Instance.GetCharacter(data.Value.transform.root.gameObject);
+                    CharacterControl c = CharacterManager.Instance.
+                        GetCharacter(data.Value.transform.root.gameObject);
+
                     if (c != null)
                     {
                         if (c.boxCollider.center.y + c.transform.position.y < control.transform.position.y)
                         {
-                            if (c != control)  //not self
+                            if (c != control)
                             {
                                 if (!_airStompTargets.Contains(c))
                                 {
@@ -169,70 +173,55 @@ namespace My_MemoPlatformer
         {
             if (!control.animationProgress.ForwardIsReversed())
             {
-                _frontSpheresList = control.COLLISION_SPHERES_DATA.frontSpheres;
+                _frontSpheresArray = control.COLLISION_SPHERE_DATA.frontSpheres;
                 _dirBlock = 1f;
 
-                foreach (var sphere in control.COLLISION_SPHERES_DATA.backSpheres)
+                foreach (GameObject s in control.COLLISION_SPHERE_DATA.backSpheres)
                 {
-                    if (_frontBlockingObjects.ContainsKey(sphere))
+                    if (_frontBlockingObjects.ContainsKey(s))
                     {
-                        _frontBlockingObjects.Remove(sphere);
+                        _frontBlockingObjects.Remove(s);
                     }
                 }
             }
             else
             {
-                _frontSpheresList = control.COLLISION_SPHERES_DATA.backSpheres;
-                _dirBlock = -1;
+                _frontSpheresArray = control.COLLISION_SPHERE_DATA.backSpheres;
+                _dirBlock = -1f;
 
-                foreach (GameObject sphere in control.COLLISION_SPHERES_DATA.frontSpheres)
+                foreach (var s in control.COLLISION_SPHERE_DATA.frontSpheres)
                 {
-                    if (_frontBlockingObjects.ContainsKey(sphere))
+                    if (_frontBlockingObjects.ContainsKey(s))
                     {
-                        _frontBlockingObjects.Remove(sphere);
+                        _frontBlockingObjects.Remove(s);
                     }
                 }
             }
 
-            foreach (var o in _frontSpheresList)
+            for (int i = 0; i < _frontSpheresArray.Length; i++)
             {
-                var blockingObj = CollisionDetection.GetCollidingObject
-                    (control, o, this.transform.forward * _dirBlock, control.animationProgress.latestMoveForwardScript.blockDistance, ref control.BLOCKING_OBJ_DATA.raycastContactPoint);
+                GameObject blockingObj = CollisionDetection.GetCollidingObject(
+                    control, _frontSpheresArray[i], this.transform.forward * _dirBlock,
+                    control.animationProgress.latestMoveForwardScript.blockDistance,
+                    ref control.BLOCKING_OBJ_DATA.raycastContactPoint);
 
                 if (blockingObj != null)
                 {
-                    AddBlockingObjToDictionary(_frontBlockingObjects, o, blockingObj);
+                    AddBlockingObjToDictionary(_frontBlockingObjects, _frontSpheresArray[i], blockingObj);
                 }
                 else
                 {
-                    RemoveBlockingObjFromDictionary(_frontBlockingObjects, o);
-                }
-            }
-        }
-
-
-        private void CheckUpBlocking()
-        {
-            foreach (var o in control.COLLISION_SPHERES_DATA.upSpheres)
-            {
-                var blockingObj = CollisionDetection.GetCollidingObject(control, o, this.transform.up, 0.3f, ref control.BLOCKING_OBJ_DATA.raycastContactPoint);
-
-                if (blockingObj != null)
-                {
-                    AddBlockingObjToDictionary(_upBlockingObjects, o, blockingObj);
-                }
-                else
-                {
-                    RemoveBlockingObjFromDictionary(_upBlockingObjects, o);
+                    RemoveBlockingObjFromDictionary(_frontBlockingObjects, _frontSpheresArray[i]);
                 }
             }
         }
 
         private void CheckDownBlocking()
         {
-            foreach (var o in control.COLLISION_SPHERES_DATA.bottomSpheres)
+            foreach (GameObject o in control.COLLISION_SPHERE_DATA.bottomSpheres)
             {
-                var blockingObj = CollisionDetection.GetCollidingObject(control, o, Vector3.down, 0.1f, ref control.BLOCKING_OBJ_DATA.raycastContactPoint);
+                GameObject blockingObj = CollisionDetection.GetCollidingObject(
+                    control, o, Vector3.down, 0.1f, ref control.BLOCKING_OBJ_DATA.raycastContactPoint);
 
                 if (blockingObj != null)
                 {
@@ -241,6 +230,24 @@ namespace My_MemoPlatformer
                 else
                 {
                     RemoveBlockingObjFromDictionary(_downBlockingObjects, o);
+                }
+            }
+        }
+
+        private void CheckUpBlocking()
+        {
+            foreach (GameObject o in control.COLLISION_SPHERE_DATA.upSpheres)
+            {
+                GameObject blockingObj = CollisionDetection.GetCollidingObject(control, o, this.transform.up, 0.3f,
+                    ref control.BLOCKING_OBJ_DATA.raycastContactPoint);
+
+                if (blockingObj != null)
+                {
+                    AddBlockingObjToDictionary(_upBlockingObjects, o, blockingObj);
+                }
+                else
+                {
+                    RemoveBlockingObjFromDictionary(_upBlockingObjects, o);
                 }
             }
         }
@@ -294,36 +301,13 @@ namespace My_MemoPlatformer
             _frontBlockingObjects.Clear();
         }
 
-        private bool UpBlockingObjDictionaryIsEmpty()
-        {
-            if (_upBlockingObjects.Count == 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        private bool FrontBlockingObjDictionaryIsEmpty()
-        {
-            if (_frontBlockingObjects.Count == 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
         private List<GameObject> GetFrontBlockingCharacterList()
         {
             _frontBlockingCharacters.Clear();
 
             foreach (KeyValuePair<GameObject, GameObject> data in _frontBlockingObjects)
             {
-                var c = CharacterManager.Instance.GetCharacter(data.Value.transform.root.gameObject);
+                CharacterControl c = CharacterManager.Instance.GetCharacter(data.Value.transform.root.gameObject);
 
                 if (c != null)
                 {

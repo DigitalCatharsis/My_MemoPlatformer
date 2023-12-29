@@ -14,22 +14,22 @@ namespace My_MemoPlatformer
             characterState.characterControl.moveRight = false;
 
             characterState.MomentumCalculator_Data.momentum = 0;
-            characterState.PlayerJump_Data.canWallJump = false;
+            characterState.Jump_Data.canWallJump = false;
 
-            characterState.VerticalVelocity_Data.maxWallSlideVelocity = maxFallVelocity;
+            characterState.Vertical_Velocity_Data.maxWallSlideVelocity = maxFallVelocity;
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             if (!characterState.characterControl.jump)
             {
-                characterState.PlayerJump_Data.canWallJump = true;
+                characterState.Jump_Data.canWallJump = true;
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            characterState.VerticalVelocity_Data.maxWallSlideVelocity = Vector3.zero;
+            characterState.Vertical_Velocity_Data.maxWallSlideVelocity = Vector3.zero;
         }
     }
 

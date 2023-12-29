@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -11,22 +12,22 @@ namespace My_MemoPlatformer
         {
             collisionSpheres_Data = new CollisionSpheres_Data
             {
-                bottomSpheres = new List<GameObject>(),
-                frontSpheres = new List<GameObject>(),
-                upSpheres = new List<GameObject>(),
-                backSpheres = new List<GameObject>(),
+                bottomSpheres = new GameObject[5],
+                frontSpheres = new GameObject[10],
+                backSpheres = new GameObject[10],
+                upSpheres = new GameObject[5],
 
-                frontOverlapCheckers = new List<OverlapChecker>(),
-                allOverlapCheckers = new List<OverlapChecker>(),
+                frontOverlapCheckers = new OverlapChecker[10],
+                FrontOverlapCheckerContains = FrontOverlapCheckerContains,
 
-                Reposition_BackSpheres = Reposition_BackSpheres,
-                Reposition_BottomSpheres = Reposition_BottomSpheres,
                 Reposition_FrontSpheres = Reposition_FrontSpheres,
+                Reposition_BottomSpheres = Reposition_BottomSpheres,
+                Reposition_BackSpheres = Reposition_BackSpheres,
                 Reposition_UpSpheres = Reposition_UpSpheres,
             };
 
             subComponentProcessor.collisionSpheres_Data = collisionSpheres_Data;
-            subComponentProcessor.subcomponentsDictionary.Add(SubComponentType.COLLISION_SPHERES, this);
+            subComponentProcessor.arrSubComponents[(int)SubComponentType.COLLISION_SPHERES] = this;
 
             SetColliderSpheres();
         }
@@ -37,9 +38,9 @@ namespace My_MemoPlatformer
 
         public override void OnFixedUpdate()
         {
-            foreach (OverlapChecker c in collisionSpheres_Data.allOverlapCheckers)
+            for (int i = 0; i < collisionSpheres_Data.allOverlapCheckers.Length; i++)
             {
-                c.UpdateChecker();
+                collisionSpheres_Data.allOverlapCheckers[i].UpdateChecker();
             }
         }
 
@@ -54,7 +55,7 @@ namespace My_MemoPlatformer
             for (int i = 0; i < 5; i++)
             {
                 var obj = LoadCollisionSpheres();
-                collisionSpheres_Data.bottomSpheres.Add(obj);
+                collisionSpheres_Data.bottomSpheres[i] = obj;
                 obj.transform.parent = this.transform.Find("Bottom");
             }
 
@@ -64,7 +65,7 @@ namespace My_MemoPlatformer
             for (int i = 0; i < 5; i++)
             {
                 var obj = LoadCollisionSpheres();
-                collisionSpheres_Data.upSpheres.Add(obj);
+                collisionSpheres_Data.upSpheres[i] = obj;
                 obj.transform.parent = this.transform.Find("Bottom");
             }
 
@@ -74,8 +75,8 @@ namespace My_MemoPlatformer
             for (int i = 0; i < 10; i++)
             {
                 var obj = LoadCollisionSpheres();
-                collisionSpheres_Data.frontSpheres.Add(obj);
-                collisionSpheres_Data.frontOverlapCheckers.Add(obj.GetComponent<OverlapChecker>());
+                collisionSpheres_Data.frontSpheres[i] = obj;
+                collisionSpheres_Data.frontOverlapCheckers[i] = obj.GetComponent<OverlapChecker>();
                 obj.transform.parent = this.transform.Find("Front");
             }
 
@@ -85,7 +86,7 @@ namespace My_MemoPlatformer
             for (int i = 0; i < 10; i++)
             {
                 var obj = LoadCollisionSpheres();
-                collisionSpheres_Data.backSpheres.Add(obj);
+                collisionSpheres_Data.backSpheres[i] = obj;
                 obj.transform.parent = this.transform.Find("Back");
             }
 
@@ -93,9 +94,29 @@ namespace My_MemoPlatformer
 
             //add every overlapChecker
             var arr = this.gameObject.GetComponentsInChildren<OverlapChecker>();
-            collisionSpheres_Data.allOverlapCheckers.Clear();
-            collisionSpheres_Data.allOverlapCheckers.AddRange(arr);
+            collisionSpheres_Data.allOverlapCheckers = arr;
 
+        }
+
+        private void Reposition_FrontSpheres()
+        {
+            var bottom = control.boxCollider.bounds.center.y - (control.boxCollider.bounds.size.y / 2f); // в центре внизу. 
+            var top = control.boxCollider.bounds.center.y + (control.boxCollider.bounds.size.y / 2f); // в центре вверху. ;
+            var front = control.boxCollider.bounds.center.z + (control.boxCollider.bounds.size.z / 2f); // в центре спереди. ;
+
+            collisionSpheres_Data.frontSpheres[0].transform.localPosition =
+                new Vector3(0f, bottom + 0.05f, front) - control.transform.position;
+
+            collisionSpheres_Data.frontSpheres[1].transform.localPosition =
+                new Vector3(0f, top, front) - control.transform.position;
+
+            float interval = (top - bottom + 0.05f) / 9;
+
+            for (int i = 2; i < collisionSpheres_Data.frontSpheres.Length; i++)
+            {
+                collisionSpheres_Data.frontSpheres[i].transform.localPosition =
+                    new Vector3(0f, bottom + (interval * (i - 1)), front) - control.transform.position;
+            }
         }
         private void Reposition_BackSpheres()
         {
@@ -103,71 +124,73 @@ namespace My_MemoPlatformer
             float top = control.boxCollider.bounds.center.y + (control.boxCollider.bounds.size.y / 2f); // в центре вверху.
             float back = control.boxCollider.bounds.center.z - (control.boxCollider.bounds.size.z / 2f); // в центре спереди.
 
-            collisionSpheres_Data.backSpheres[0].transform.localPosition = new Vector3(0f, bottom + 0.05f, back) - this.transform.position;
-            collisionSpheres_Data.backSpheres[1].transform.localPosition = new Vector3(0f, top, back) - this.transform.position;
+            collisionSpheres_Data.backSpheres[0].transform.localPosition =
+                new Vector3(0f, bottom + 0.05f, back) - control.transform.position;
+
+            collisionSpheres_Data.backSpheres[1].transform.localPosition =
+                new Vector3(0f, top, back) - control.transform.position;
 
             float interval = (top - bottom + 0.05f) / 9;
 
-            for (int i = 2; i < collisionSpheres_Data.backSpheres.Count; i++)
+            for (int i = 2; i < collisionSpheres_Data.backSpheres.Length; i++)
             {
-                collisionSpheres_Data.backSpheres[i].transform.localPosition = new Vector3(0f, bottom + (interval * (i - 1)), back)
-                     - this.transform.position;
-            }
-        }
-
-        private void Reposition_FrontSpheres()
-        {
-            float bottom = control.boxCollider.bounds.center.y - (control.boxCollider.bounds.size.y / 2f); // в центре внизу. 
-            float top = control.boxCollider.bounds.center.y + (control.boxCollider.bounds.size.y / 2f); // в центре вверху. ;
-            float front = control.boxCollider.bounds.center.z + (control.boxCollider.bounds.size.z / 2f); // в центре спереди. ;
-            //float back = boxCollider.bounds.center.z - boxCollider.bounds.size.z; // в центре сзади. ;;
-
-            collisionSpheres_Data.frontSpheres[0].transform.localPosition = new Vector3(0f, bottom + 0.05f, front) - this.transform.position;
-            collisionSpheres_Data.frontSpheres[1].transform.localPosition = new Vector3(0f, top, front) - this.transform.position;
-
-            float interval = (top - bottom + 0.05f) / 9;
-
-            for (int i = 2; i < collisionSpheres_Data.frontSpheres.Count; i++)
-            {
-                collisionSpheres_Data.frontSpheres[i].transform.localPosition = new Vector3(0f, bottom + (interval * (i - 1)), front)
-                     - this.transform.position;
+                collisionSpheres_Data.backSpheres[i].transform.localPosition =
+                    new Vector3(0f, bottom + (interval * (i - 1)), back) - control.transform.position;
             }
         }
 
         private void Reposition_BottomSpheres()
         {
-            float bottom = control.boxCollider.bounds.center.y - (control.boxCollider.bounds.size.y / 2f); // в центре внизу. 
-            //float top = boxCollider.bounds.center.y + boxCollider.bounds.size.y; // в центре вверху. ;
-            float front = control.boxCollider.bounds.center.z + (control.boxCollider.bounds.size.z / 2f); // в центре спереди. ;
-            float back = control.boxCollider.bounds.center.z - (control.boxCollider.bounds.size.z / 2f); // в центре сзади. ;;
+            var bottom = control.boxCollider.bounds.center.y - (control.boxCollider.bounds.size.y / 2f);
+            var front = control.boxCollider.bounds.center.z + (control.boxCollider.bounds.size.z / 2f);
+            var back = control.boxCollider.bounds.center.z - (control.boxCollider.bounds.size.z / 2f);
 
-            collisionSpheres_Data.bottomSpheres[0].transform.localPosition = new Vector3(0f, bottom, back) - this.transform.position;
-            collisionSpheres_Data.bottomSpheres[1].transform.localPosition = new Vector3(0f, bottom, front) - this.transform.position;
+            collisionSpheres_Data.bottomSpheres[0].transform.localPosition =
+                new Vector3(0f, bottom, back) - control.transform.position;
+
+            collisionSpheres_Data.bottomSpheres[1].transform.localPosition =
+                new Vector3(0f, bottom, front) - control.transform.position;
 
             float interval = (front - back) / 4;
 
-            for (int i = 2; i < collisionSpheres_Data.bottomSpheres.Count; i++)
+            for (int i = 2; i < collisionSpheres_Data.bottomSpheres.Length; i++)
             {
-                collisionSpheres_Data.bottomSpheres[i].transform.localPosition = new Vector3(0f, bottom, back + (interval * (i - 1)))
-                     - this.transform.position;
+                collisionSpheres_Data.bottomSpheres[i].transform.localPosition =
+                    new Vector3(0f, bottom, back + (interval * (i - 1))) - control.transform.position;
             }
         }
         private void Reposition_UpSpheres()
         {
-            float top = control.boxCollider.bounds.center.y + (control.boxCollider.bounds.size.y / 2f); // в центре вверху. 
-            float front = control.boxCollider.bounds.center.z + (control.boxCollider.bounds.size.z / 2f); // в центре спереди. ;
-            float back = control.boxCollider.bounds.center.z - (control.boxCollider.bounds.size.z / 2f); // в центре сзади. ;;
+            var top = control.boxCollider.bounds.center.y + (control.boxCollider.bounds.size.y / 2f);
+            var front = control.boxCollider.bounds.center.z + (control.boxCollider.bounds.size.z / 2f);
+            var back = control.boxCollider.bounds.center.z - (control.boxCollider.bounds.size.z / 2f);
 
-            collisionSpheres_Data.upSpheres[0].transform.localPosition = new Vector3(0f, top, back) - this.transform.position;
-            collisionSpheres_Data.upSpheres[1].transform.localPosition = new Vector3(0f, top, front) - this.transform.position;
+            collisionSpheres_Data.upSpheres[0].transform.localPosition =
+                new Vector3(0f, top, back) - control.transform.position;
+
+            collisionSpheres_Data.upSpheres[1].transform.localPosition =
+                new Vector3(0f, top, front) - control.transform.position;
 
             float interval = (front - back) / 4;
 
-            for (int i = 2; i < collisionSpheres_Data.upSpheres.Count; i++)
+            for (int i = 2; i < collisionSpheres_Data.upSpheres.Length; i++)
             {
-                collisionSpheres_Data.upSpheres[i].transform.localPosition = new Vector3(0f, top, back + (interval * (i - 1)))
-                     - this.transform.position;
+                collisionSpheres_Data.upSpheres[i].transform.localPosition =
+                    new Vector3(0f, top, back + (interval * (i - 1))) - control.transform.position;
             }
+        }
+
+        bool FrontOverlapCheckerContains(OverlapChecker checker)
+        {
+            for (int i = 0; i < collisionSpheres_Data.frontOverlapCheckers.Length; i++)
+            {
+                if (collisionSpheres_Data.frontOverlapCheckers[i] == checker)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

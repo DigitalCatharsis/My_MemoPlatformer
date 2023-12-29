@@ -6,19 +6,22 @@ namespace My_MemoPlatformer
     public class CharacterState : StateMachineBehaviour
     {
         public CharacterControl characterControl;
+
         [Space (10)]
         public List<CharacterAbility> ListAbilityData = new List<CharacterAbility>();
-        public BlockingObj_Data BlockingObjData => characterControl.subComponentProcessor.blockingObjData;
-        public Ragdoll_Data RagdollData => characterControl.subComponentProcessor.ragdollData;
+
+        public BlockingObj_Data BlockingObj_Data => characterControl.subComponentProcessor.blockingObj_Data;
+        public Ragdoll_Data RagdollData => characterControl.subComponentProcessor.ragdoll_Data;
         public BoxCollider_Data BoxCollider_Data => characterControl.subComponentProcessor.boxCollider_Data;
-        public VerticalVelocity_Data VerticalVelocity_Data => characterControl.subComponentProcessor.verticalVelocity_Data;
+        public VerticalVelocity_Data Vertical_Velocity_Data => characterControl.subComponentProcessor.verticalVelocity_Data;
         public MomentumCalculator_Data MomentumCalculator_Data => characterControl.subComponentProcessor.momentumCalculator_Data;
-        public PlayerRotation_Data PlayerRotation_Data => characterControl.subComponentProcessor.playerRotation_Data;
-        public PlayerJump_Data PlayerJump_Data => characterControl.subComponentProcessor.playerJump_Data;
+        public Rotation_Data Rotation_Data => characterControl.subComponentProcessor.rotation_Data;
+        public Jump_Data Jump_Data => characterControl.subComponentProcessor.jump_Data;
         public CollisionSpheres_Data CollisionSpheres_Data => characterControl.subComponentProcessor.collisionSpheres_Data;
-        public PlayerGround_Data PlayerGround_Data => characterControl.subComponentProcessor.playerGround_Data;
-        public PlayerAttack_Data PlayerAttack_Data => characterControl.subComponentProcessor.playerAttack_Data;
-        public PlayerAnimation_Data PlayerAnimation_Data => characterControl.subComponentProcessor.playerAnimation_Data;
+        public Ground_Data Ground_Data => characterControl.subComponentProcessor.ground_Data;
+        public Attack_Data Attack_Data => characterControl.subComponentProcessor.attack_Data;
+        public Animation_Data Animation_Data => characterControl.subComponentProcessor.animation_Data;
+        public AIController AI_CONTROLLER => characterControl.aiController;
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -31,13 +34,13 @@ namespace My_MemoPlatformer
             foreach (CharacterAbility d in ListAbilityData)
             {
                 d.OnEnter(this, animator, stateInfo);
-                if (characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities.ContainsKey(d))
+                if (characterControl.ANIMATION_DATA.currentRunningAbilities.ContainsKey(d))
                 {
-                    characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities[d] += 1;
+                    characterControl.ANIMATION_DATA.currentRunningAbilities[d] += 1;
                 }
                 else
                 {
-                    characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities.Add(d,1);
+                    characterControl.ANIMATION_DATA.currentRunningAbilities.Add(d,1);
                 }
             }
         }
@@ -60,13 +63,13 @@ namespace My_MemoPlatformer
             {
                 d.OnExit(this, animator, stateInfo);
 
-                if (characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities.ContainsKey(d))
+                if (characterControl.ANIMATION_DATA.currentRunningAbilities.ContainsKey(d))
                 {
-                    characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities[d] -= 1;
+                    characterControl.ANIMATION_DATA.currentRunningAbilities[d] -= 1;
 
-                    if (characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities[d] <= 0)
+                    if (characterControl.ANIMATION_DATA.currentRunningAbilities[d] <= 0)
                     {
-                        characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities.Remove(d);
+                        characterControl.ANIMATION_DATA.currentRunningAbilities.Remove(d);
                     }
                 }
             }

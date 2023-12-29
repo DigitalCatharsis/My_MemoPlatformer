@@ -5,15 +5,14 @@ namespace My_MemoPlatformer
 {
     [Serializable]
 
-    public class PlayerRotation_Data
+    public class Rotation_Data
     {
-        public bool lockEarlyTurn;
-        public bool lockDirectionNextState;
+        public bool lockTurn;
+        public float unlockTiming;
 
         public delegate bool ReturnBool();
-        public delegate void DoSomething(bool faceforward);
+        public delegate void DoSomething(bool faceForward);
 
-        public ReturnBool EarlyTurnIsLocked;
         public ReturnBool IsFacingForward;
         public DoSomething FaceForward;
     }

@@ -1,42 +1,76 @@
 using UnityEngine;
 
-
 namespace My_MemoPlatformer
 {
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/Jump")]
     public class Jump : CharacterAbility
-    {
+    {        
         [Range(0f, 1f)]
-        [SerializeField] private float jumpTiming;
-        [SerializeField] private float jumpForce;
+        public float jumpTiming;
+        public float jumpForce;
+        public int jumpIndex;
+        public bool clearPreviousVelocity;
 
         [Header("Extra Gravity")]
-        [SerializeField] private bool canselPull;
+        public bool cancelPull;
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            characterState.PlayerJump_Data.jumped = false;
-            if (jumpTiming == 0f)
+            if (!characterState.Jump_Data.dicJumped.ContainsKey(jumpIndex))
             {
-                characterState.characterControl.RIGID_BODY.AddForce(Vector3.up * jumpForce);
-                characterState.PlayerJump_Data.jumped = true;
+                characterState.Jump_Data.dicJumped.Add(jumpIndex, false);
             }
 
-            characterState.VerticalVelocity_Data.noJumpCancel = canselPull;
+            characterState.Vertical_Velocity_Data.noJumpCancel = cancelPull;
+
+            if (jumpTiming == 0f)
+            {
+                MakeJump(characterState.characterControl);
+            }
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {   
-            if (!characterState.PlayerJump_Data.jumped && stateInfo.normalizedTime >= jumpTiming)
+        {
+            if (!characterState.Jump_Data.dicJumped[jumpIndex] && stateInfo.normalizedTime >= jumpTiming)
             {
-                characterState.characterControl.RIGID_BODY.AddForce(Vector3.up * jumpForce);
-                characterState.PlayerJump_Data.jumped = true;
+                MakeJump(characterState.characterControl);
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            characterState.characterControl.JUMP_DATA.dicJumped[jumpIndex] = false;
+        }
 
+        void MakeJump(CharacterControl control)
+        {
+            if (DebugContainer.Instance.debug_Jump)
+            {
+                Debug.Log("Making jump: " + this.name);
+            }
+
+            if (control.JUMP_DATA.dicJumped[jumpIndex])
+            {
+                if (DebugContainer.Instance.debug_Jump)
+                {
+                    Debug.Log("Preventing double jump");
+                }
+                return;
+            }
+
+            if (clearPreviousVelocity)
+            {
+                control.RIGID_BODY.velocity = Vector3.zero;
+            }
+
+            // automatically turn gravity on before jumping
+            if (!control.RIGID_BODY.useGravity)
+            {
+                control.RIGID_BODY.useGravity = true;
+            }
+
+            control.RIGID_BODY.AddForce(Vector3.up * jumpForce);
+            control.JUMP_DATA.dicJumped[jumpIndex] = true;
         }
     }
 

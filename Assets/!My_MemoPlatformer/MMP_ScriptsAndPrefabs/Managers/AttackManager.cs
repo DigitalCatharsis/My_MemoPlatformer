@@ -1,14 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    public class AttackManager : Singleton<AttackManager>    //Whole list if current attacks
+    public class AttackManager : Singleton<AttackManager>    
     {
-        public List<AttackCondition> currentAttacks = new List<AttackCondition>();
+        public GameObject activeAttacks;
+        public List<AttackCondition> currentAttacks = new List<AttackCondition>(); //Whole list of current attacks
 
-        public void ForceDeregester(CharacterControl control)
+        public void ForceDeregister(CharacterControl control)
         {
             foreach (var info in currentAttacks)
             {

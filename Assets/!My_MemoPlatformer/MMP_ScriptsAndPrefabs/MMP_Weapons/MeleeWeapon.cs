@@ -6,14 +6,14 @@ namespace My_MemoPlatformer
     public class MeleeWeapon : MonoBehaviour
     {
         public CharacterControl control;
-        public Vector3 customPosition = new Vector3();
-        public Vector3 customRotation = new Vector3();
         public BoxCollider pickUpCollider;
         public BoxCollider attackCollider;
         public TriggerDetector triggerDetector;
+        public Vector3 customPosition = new Vector3();
+        public Vector3 customRotation = new Vector3();
 
         [Header("WeaponThrow")]
-        public Vector3 throwOffset;
+        public Vector3 throwOffset = new Vector3();
         public bool isThrown;
         public bool flyForward;
         public float flightSpeed;
@@ -71,13 +71,13 @@ namespace My_MemoPlatformer
 
         public void DropWeapon()
         {
-            var weapon = control.animationProgress.HoldingWeapon;
+            var weapon = control.animationProgress.holdingWeapon;
 
             if (weapon != null)
             {
                 weapon.transform.parent = null;
 
-                if (control.PLAYER_ROTATION_DATA.IsFacingForward())
+                if (control.ROTATION_DATA.IsFacingForward())
                 {
                     weapon.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
                 }
@@ -88,9 +88,9 @@ namespace My_MemoPlatformer
 
                 RemoveWeaponFromDictionary(control);
 
-                weapon.transform.position = control.transform.position + Vector3.up * 0.015f;
+                weapon.transform.position = control.transform.position + Vector3.up * 0.0225f;
 
-                control.animationProgress.HoldingWeapon = null;
+                control.animationProgress.holdingWeapon = null;
                 control = null;
 
                 weapon.triggerDetector.control = null;
@@ -99,13 +99,13 @@ namespace My_MemoPlatformer
 
         public void ThrowWeapon()
         {
-            var weapon = control.animationProgress.HoldingWeapon;
+            var weapon = control.animationProgress.holdingWeapon;
 
             if (weapon != null)
             {
                 weapon.transform.parent = null;
 
-                if (control.PLAYER_ROTATION_DATA.IsFacingForward())
+                if (control.ROTATION_DATA.IsFacingForward())
                 {
                     weapon.transform.rotation = Quaternion.Euler(90f, 0, 0f);
                 }
@@ -114,13 +114,13 @@ namespace My_MemoPlatformer
                     weapon.transform.rotation = Quaternion.Euler(-90f, 0, 0f);
                 }
 
-                flyForward = control.PLAYER_ROTATION_DATA.IsFacingForward();
+                flyForward = control.ROTATION_DATA.IsFacingForward();
 
                 weapon.transform.position = control.transform.position + Vector3.up * throwOffset.y;
                 weapon.transform.position += control.transform.forward * throwOffset.z;
 
                 thrower = control;
-                control.animationProgress.HoldingWeapon = null;
+                control.animationProgress.holdingWeapon = null;
                 control = null;
                 weapon.triggerDetector.control = null;
 
@@ -132,19 +132,19 @@ namespace My_MemoPlatformer
 
         public void RemoveWeaponFromDictionary(CharacterControl c)
         {
-            foreach (var col in c.RAGDOLL_DATA.bodyParts)
+            for (int i = 0; i < c.RAGDOLL_DATA.arrBodyParts.Length; i++)
             {
-                var t = col.GetComponent<TriggerDetector>();
+                TriggerDetector t = c.RAGDOLL_DATA.arrBodyParts[i].GetComponent<TriggerDetector>();
 
                 if (t != null)
                 {
-                    ProcRemove(c.animationProgress.collidingWeapons, t);
-                    ProcRemove(c.animationProgress.collidingBodyParts, t);
+                    ProcessRemove(c.animationProgress.collidingWeapons, t);
+                    ProcessRemove(c.animationProgress.collidingBodyParts, t);
                 }
             }
         }
 
-        private void ProcRemove(Dictionary<TriggerDetector, List<Collider>> d, TriggerDetector t)
+        private void ProcessRemove(Dictionary<TriggerDetector, List<Collider>> d, TriggerDetector t)
         {
             if (d.ContainsKey(t))
             {

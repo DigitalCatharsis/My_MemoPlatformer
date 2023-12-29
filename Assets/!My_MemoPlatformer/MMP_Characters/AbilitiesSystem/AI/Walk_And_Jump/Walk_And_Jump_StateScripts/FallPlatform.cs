@@ -12,7 +12,7 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (!characterState.characterControl.skinnedMeshAnimator.GetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Grounded]))
+            if (!characterState.characterControl.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
             {
                 return;
             }
@@ -23,18 +23,18 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (characterState.characterControl.transform.position.z < characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.z)
+            if (characterState.characterControl.transform.position.z < characterState.characterControl.aiProgress.pathfindingAgent.endSphere.transform.position.z)
             {
                 characterState.characterControl.moveRight = true;
                 characterState.characterControl.moveLeft = false;
             }
-            else if (characterState.characterControl.transform.position.z > characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.z)
+            else if (characterState.characterControl.transform.position.z > characterState.characterControl.aiProgress.pathfindingAgent.endSphere.transform.position.z)
             {
                 characterState.characterControl.moveRight = false;
                 characterState.characterControl.moveLeft = true;
             }
 
-            if (characterState.characterControl.aiProgress.AI_DistanceToStartSphere() > 3f)
+            if (characterState.characterControl.aiProgress.AIDistanceToStartSphere() > 3f)
             {
                 characterState.characterControl.turbo = true;
             }

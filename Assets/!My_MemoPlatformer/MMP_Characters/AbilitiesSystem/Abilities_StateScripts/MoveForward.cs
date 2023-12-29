@@ -1,19 +1,16 @@
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/MoveForward")]
     public class MoveForward : CharacterAbility
     {
-        [SerializeField] private bool debug;
-
         [Tooltip("Prevent turning when running from idle")] public bool allowEarlyTurn;
         public bool lockDirection;
-        public bool lockDirectionNextState;
         [Tooltip("Move no matter what")] public bool constant;
         public AnimationCurve speedGraph;
-        public float speed;
+        public float Speed;
         [Tooltip("Distance to prevent moving, \n MAKE SURE ITS LESS THAN ColliderEdge RADIUS!")] public float blockDistance;
 
         [Header("IgnoreCharacterBox")]
@@ -25,6 +22,7 @@ namespace My_MemoPlatformer
         public bool useMomentum;
         public float startingMomentum;
         public float maxMomentum;
+        public bool StartFromPreviousMomentum;
         public bool clearMomentumOnExit;
 
         [Header("MoveOnHit")]
@@ -37,53 +35,45 @@ namespace My_MemoPlatformer
             if (allowEarlyTurn)
             {
                 // early turn can be locked by previous states
-                if (!characterState.PlayerRotation_Data.EarlyTurnIsLocked())
+                if (characterState.characterControl.moveLeft)
                 {
-                    if (characterState.characterControl.moveLeft)
-                    {
-                        characterState.characterControl.PLAYER_ROTATION_DATA.FaceForward(false);
-                    }
-                    if (characterState.characterControl.moveRight)
-                    {
-                        characterState.characterControl.PLAYER_ROTATION_DATA.FaceForward(true);
-                    }
+                    characterState.Rotation_Data.FaceForward(false);
+                }
+                if (characterState.characterControl.moveRight)
+                {
+                    characterState.Rotation_Data.FaceForward(true);
                 }
             }
 
-            if (startingMomentum > 0.001f)
+            if (!StartFromPreviousMomentum)
             {
-                if (characterState.characterControl.PLAYER_ROTATION_DATA.IsFacingForward())
+                if (startingMomentum > 0.001f)
                 {
-                    characterState.MomentumCalculator_Data.momentum = startingMomentum;
-                }
-                else
-                {
-                    characterState.MomentumCalculator_Data.momentum = - startingMomentum;
+                    if (characterState.Rotation_Data.IsFacingForward())
+                    {
+                        characterState.MomentumCalculator_Data.momentum = startingMomentum;
+                    }
+                    else
+                    {
+                        characterState.MomentumCalculator_Data.momentum = -startingMomentum;
+                    }
                 }
             }
-
-            characterState.PlayerRotation_Data.lockEarlyTurn = false;
-            characterState.PlayerRotation_Data.lockDirectionNextState = false;
-
-
         }
-
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (debug)
+            if (DebugContainer.Instance.debug_MoveForward)
             {
                 Debug.Log(stateInfo.normalizedTime);
             }
-
-            characterState.PlayerRotation_Data.lockDirectionNextState = lockDirectionNextState;
 
             if (characterState.characterControl.animationProgress.latestMoveForwardScript != this)
             {
                 return;
             }
 
-            if (characterState.PlayerAnimation_Data.IsRunning(typeof(WallSlide))) //prevent bugs when calculating several states at the short duration
+            if (characterState.Animation_Data.IsRunning(typeof(WallSlide))) //prevent bugs when calculating several states at the short duration
             {
                 return;
             }
@@ -92,11 +82,11 @@ namespace My_MemoPlatformer
 
             if (characterState.characterControl.turbo)
             {
-                animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Turbo], true);
+                animator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Turbo], true);
             }
             else
             {
-                animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Turbo], false);
+                animator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Turbo], false);
             }
 
             if (useMomentum)
@@ -107,11 +97,11 @@ namespace My_MemoPlatformer
             {
                 if (constant)
                 {
-                    ConstantMove(characterState.characterControl, animator, stateInfo);
+                    ConstantMove(characterState.characterControl, stateInfo);
                 }
                 else
                 {
-                    ControlledMove(characterState.characterControl, animator, stateInfo);
+                    ControlledMove(characterState.characterControl, stateInfo);
                 }
             }
         }
@@ -127,26 +117,25 @@ namespace My_MemoPlatformer
 
         private void MoveOnMomentum(CharacterControl control, AnimatorStateInfo stateInfo)
         {
-            var currentSpeed = speedGraph.Evaluate(stateInfo.normalizedTime) * speed * Time.deltaTime;
-            control.MOMENTUM_CACULATOR_DATA.CalcualteMomentum(currentSpeed, maxMomentum);
+            var speed = speedGraph.Evaluate(stateInfo.normalizedTime) * Speed * Time.deltaTime;
+            control.MOMENTUM_DATA.CalcualateMomentum(speed, maxMomentum);
 
-            if (control.MOMENTUM_CACULATOR_DATA.momentum > 0f)
+            if (control.MOMENTUM_DATA.momentum > 0f)
             {
-                control.PLAYER_ROTATION_DATA.FaceForward(true);
+                control.ROTATION_DATA.FaceForward(true);
             }
-            else if (control.MOMENTUM_CACULATOR_DATA.momentum < 0f)
+            else if (control.MOMENTUM_DATA.momentum < 0f)
             {
-                control.PLAYER_ROTATION_DATA.FaceForward(false);
+                control.ROTATION_DATA.FaceForward(false);
             }
 
             if (!IsBlocked(control))
             {
-                control.MoveForward(speed, Mathf.Abs(control.MOMENTUM_CACULATOR_DATA.momentum));
+                control.MoveForward(Speed, Mathf.Abs(control.MOMENTUM_DATA.momentum));
             }
-
         }
 
-        private void ConstantMove(CharacterControl control, Animator animator, AnimatorStateInfo stateInfo)
+        private void ConstantMove(CharacterControl control, AnimatorStateInfo stateInfo)
         {
             if (!IsBlocked(control))
             {
@@ -154,40 +143,29 @@ namespace My_MemoPlatformer
                 {
                     if (!control.animationProgress.IsFacingAtacker())
                     {
-                        control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));  //make sure speed is >0 in SO
+                        control.MoveForward(Speed, speedGraph.Evaluate(stateInfo.normalizedTime));  //make sure speed is >0 in SO
                     }
                     else
                     {
-                        control.MoveForward(-speed, speedGraph.Evaluate(stateInfo.normalizedTime)); //make sure speed is >0 in SO
+                        control.MoveForward(-Speed, speedGraph.Evaluate(stateInfo.normalizedTime)); //make sure speed is >0 in SO
                     }
                 }
                 else
                 {
-                    control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
+                    control.MoveForward(Speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                 }               
-            }
-
-            if (!control.moveRight && !control.moveLeft)
-            {
-                animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Move], false);
-            }
-            else
-            {
-                animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Move], true);
             }
         }
 
-        private void ControlledMove(CharacterControl control, Animator animator, AnimatorStateInfo stateInfo)
+        private void ControlledMove(CharacterControl control, AnimatorStateInfo stateInfo)
         {
             if (control.moveRight && control.moveLeft)
             {
-                animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Move], false);
                 return;
             }
 
             if (!control.moveRight && !control.moveLeft)
             {
-                animator.SetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Move], false);
                 return;
             }
 
@@ -195,18 +173,16 @@ namespace My_MemoPlatformer
             {
                 if (!IsBlocked(control))
                 {
-                    control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
+                    control.MoveForward(Speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                 }
             }
 
             if (control.moveLeft)
             {
-                {
                     if (!IsBlocked(control))
                     {
-                        control.MoveForward(speed, speedGraph.Evaluate(stateInfo.normalizedTime));
+                        control.MoveForward(Speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                     }
-                }
             }
             CheckTurn(control);
         }
@@ -217,11 +193,12 @@ namespace My_MemoPlatformer
             {
                 if (control.moveRight)
                 {
-                    control.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                    control.ROTATION_DATA.FaceForward(true);
                 }
+
                 if (control.moveLeft)
                 {
-                    control.transform.rotation = Quaternion.Euler(0f, 180, 0f);
+                    control.ROTATION_DATA.FaceForward(false);
                 }
             }
         }
@@ -233,8 +210,8 @@ namespace My_MemoPlatformer
                 control.animationProgress.isIgnoreCharacterTime = false;
             }
 
-            if (stateInfo.normalizedTime > ignoreStartTime
-                && stateInfo.normalizedTime < ignoreEndTime)
+            if (stateInfo.normalizedTime > ignoreStartTime &&
+                stateInfo.normalizedTime < ignoreEndTime)
             {
                 control.animationProgress.isIgnoreCharacterTime = true;
             }
@@ -243,8 +220,6 @@ namespace My_MemoPlatformer
                 control.animationProgress.isIgnoreCharacterTime = false;
             }
         }
-
-
 
         private bool IsBlocked(CharacterControl control)
         {

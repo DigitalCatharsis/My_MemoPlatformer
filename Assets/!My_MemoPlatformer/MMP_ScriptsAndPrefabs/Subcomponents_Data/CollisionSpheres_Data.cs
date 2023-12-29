@@ -7,15 +7,20 @@ namespace My_MemoPlatformer
     [Serializable]
     public class CollisionSpheres_Data
     {
-        public List<GameObject> bottomSpheres;
-        public List<GameObject> frontSpheres;
-        public List<GameObject> backSpheres;
-        public List<GameObject> upSpheres;
+        public GameObject[] bottomSpheres;
+        public GameObject[] frontSpheres;
+        public GameObject[] backSpheres;
+        public GameObject[] upSpheres;
 
-        public List<OverlapChecker> frontOverlapCheckers;
-        public List<OverlapChecker> allOverlapCheckers;
+        public OverlapChecker[] frontOverlapCheckers; 
+        public OverlapChecker[] allOverlapCheckers; 
+
+        public delegate bool ReturnBool(OverlapChecker checker);
+
+        public ReturnBool FrontOverlapCheckerContains;
 
         public delegate void DoSomething();
+
         public DoSomething Reposition_FrontSpheres;
         public DoSomething Reposition_BottomSpheres;
         public DoSomething Reposition_BackSpheres;

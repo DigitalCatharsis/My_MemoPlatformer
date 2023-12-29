@@ -14,7 +14,7 @@ namespace My_MemoPlatformer
                 maxWallSlideVelocity = Vector3.zero,
             };
             subComponentProcessor.verticalVelocity_Data = verticalVelocity_Data;
-            subComponentProcessor.subcomponentsDictionary.Add(SubComponentType.VERTICALVELOCITY_DATA, this);
+            subComponentProcessor.arrSubComponents[(int)SubComponentType.VERTICAL_VELOCITY] = this;
         }
 
         public override void OnFixedUpdate()

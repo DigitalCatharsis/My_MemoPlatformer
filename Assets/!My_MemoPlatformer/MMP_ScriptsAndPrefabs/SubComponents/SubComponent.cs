@@ -4,19 +4,20 @@ namespace My_MemoPlatformer
 {
     public enum SubComponentType
     {
-        NONE,
-        MANUALINPUT,
-        LEDGECHECKER,
+        MANUAL_INPUT,
+        LEDGE_CHECKER,
         RAGDOLL,
-        BLOCKINGOBJECTS,
+        BLOCKING_OBJECTS,
         BOX_COLLIDER_UPDATER,
-        VERTICALVELOCITY_DATA,
-        DAMAGE_DETECTOR_DATA,
+        VERTICAL_VELOCITY,
+        DAMAGE_DETECTOR,
         COLLISION_SPHERES,
-        INSTAKILL,
-        PLAYER_GROUND,
+        INSTA_KILL,
         PLAYER_ATTACK,
-        PLAYER_ANIMATION
+        PLAYER_ANIMATION,
+        PLAYER_ROTATION,
+
+        COUNT,
     }
 
     public abstract class SubComponent : MonoBehaviour

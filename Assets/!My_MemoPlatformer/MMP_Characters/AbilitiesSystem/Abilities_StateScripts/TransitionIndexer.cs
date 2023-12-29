@@ -1,36 +1,46 @@
+using Roundbeargames;
 using System.Collections.Generic;
 using UnityEngine;
 
 public enum TransitionConditionType
 {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
-    ATTACK,
-    JUMP,
-    GRABBING_LEDGE,
-    LEFT_OR_RIGHT,
-    GROUNDED,
-    MOVE_FORWARD,
-    AIR,
-    BLOCKED_BY_WALL,
-    CAN_WALLJUMP,
-    NOT_GRABBING_LEDGE,
-    NOT_BLOCKED_BY_WALL,
-    MOVING_TO_BLOCKING_OBG,
-    DOUBLETAP_UP,
-    DOUBLETAP_DOWN,
-    DOUBLETAP_LEFT,
-    DOUBLETAP_RIGHT,
-    TOUCHING_WEAPON,
-    HOLDING_AXE,
-    NOT_MOVING,
-    RUN,
-    NOT_RUN,
-    BLOCKING,
-    NOT_BLOCKING,
-    ATTACK_ISBLOCKED,
+    UP = 0,
+    DOWN = 1,
+    LEFT = 2,
+    RIGHT = 3,
+    JUMP = 5,
+    LEFT_OR_RIGHT = 7,
+    MOVE_FORWARD = 9,
+    RUN = 23,
+    NOT_RUNNING = 24,
+    NOT_MOVING = 22,
+    NOT_TURBO = 28,
+
+    DOUBLE_TAP_UP = 16,
+    DOUBLE_TAP_DOWN = 17,
+    DOUBLE_TAP_LEFT = 18,
+    DOUBLE_TAP_RIGHT = 19,
+
+    ATTACK = 4,
+
+    GROUNDED = 8,
+    NOT_GROUNDED = 10,
+
+    GRABBING_LEDGE = 6,
+    NOT_GRABBING_LEDGE = 13,
+
+    BLOCKED_BY_WALL = 11,
+    NOT_BLOCKED_BY_WALL = 14,
+    CAN_WALLJUMP = 12,
+
+    MOVING_TO_BLOCKING_OBJ = 15,
+
+    TOUCHING_WEAPON = 20,
+    HOLDING_AXE = 21,
+
+    BLOCKING = 25,
+    NOT_BLOCKING = 26,
+    ATTACK_IS_BLOCKED = 27,
 }
 
 namespace My_MemoPlatformer
@@ -43,38 +53,39 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-
-            if (MakeTransition(characterState.characterControl))
+            if (TransitionConditionChecker.MakeTransition(characterState.characterControl, transitionConditions))
             {
-                animator.SetInteger(HashManager.Instance.ArrMainParams[(int)MainParameterType.TransitionIndex], Index);
+                animator.SetInteger(HashManager.Instance.arrMainParams[(int)MainParameterType.TransitionIndex], Index);
             }
         }
 
-
-
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            characterState.PlayerJump_Data.checkWallBlock = StartCheckingWallBlock();
+            characterState.Jump_Data.checkWallBlock = StartCheckingWallBlock();
 
-            if (animator.GetInteger(HashManager.Instance.ArrMainParams[(int)MainParameterType.TransitionIndex]) == 0)
+            if (animator.GetInteger(HashManager.Instance.arrMainParams[(int)MainParameterType.TransitionIndex]) == 0)
             {
-                if (MakeTransition(characterState.characterControl))
+                if (!characterState.characterControl.animationProgress.lockTransition)
                 {
-                    animator.SetInteger(HashManager.Instance.ArrMainParams[(int)MainParameterType.TransitionIndex], Index);
+                    if (TransitionConditionChecker.MakeTransition(characterState.characterControl, transitionConditions))
+                    {
+                        animator.SetInteger(HashManager.Instance.arrMainParams[(int)MainParameterType.TransitionIndex], Index);
+                    }
                 }
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.SetInteger(HashManager.Instance.ArrMainParams[(int)MainParameterType.TransitionIndex], 0);
+            animator.SetInteger(HashManager.Instance.arrMainParams[(int)MainParameterType.TransitionIndex], 0);
         }
 
         private bool StartCheckingWallBlock()
         {
             foreach (TransitionConditionType t in transitionConditions)
             {
-                if (t == TransitionConditionType.BLOCKED_BY_WALL || t == TransitionConditionType.NOT_BLOCKED_BY_WALL)
+                if (t == TransitionConditionType.BLOCKED_BY_WALL ||
+                    t == TransitionConditionType.NOT_BLOCKED_BY_WALL)
                 {
                     return true;
                 }
@@ -82,300 +93,6 @@ namespace My_MemoPlatformer
 
             return false;
         }
-
-        private bool MakeTransition(CharacterControl control)
-        {
-            foreach (TransitionConditionType c in transitionConditions)
-            {
-                switch (c)
-                {
-                    case TransitionConditionType.UP:
-                        {
-                            if (!control.moveUp)
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.DOWN:
-                        {
-                            if (!control.moveDown)
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.LEFT:
-                        {
-                            if (!control.moveLeft)
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.RIGHT:
-                        {
-                            if (!control.moveRight)
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.ATTACK:
-                        {
-                            if (!control.PLAYER_ATTACK_DATA.attackTriggered)
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.JUMP:
-                        {
-                            if (!control.jump)
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.GRABBING_LEDGE:
-                        {
-                            if (!control.LEDGE_GRAB_DATA.isGrabbingLedge)
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.NOT_GRABBING_LEDGE:
-                        {
-                            if (control.LEDGE_GRAB_DATA.isGrabbingLedge)
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.LEFT_OR_RIGHT:
-                        {
-                            if (!control.moveLeft && !control.moveRight)
-                            {
-                                return false;
-                            }
-                            if (control.moveLeft && control.moveRight)
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.GROUNDED:
-                        {
-                            if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Grounded]) == false)
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.MOVE_FORWARD:
-                        {
-                            if (control.PLAYER_ROTATION_DATA.IsFacingForward())
-                            {
-                                if (!control.moveRight)
-                                {
-                                    return false;
-                                }
-                            }
-                            else
-                            {
-                                if (!control.moveLeft)
-                                {
-                                    return false;
-                                }
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.AIR:
-                        {
-                            if (!control.skinnedMeshAnimator.GetBool(HashManager.Instance.ArrMainParams[(int)MainParameterType.Grounded]) == false)
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.CAN_WALLJUMP:
-                        {
-                            var canWallJump = control.PLAYER_JUMP_DATA.canWallJump;
-
-                            if (!canWallJump)
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.MOVING_TO_BLOCKING_OBG:
-                        {
-                            var objs = control.BLOCKING_OBJ_DATA.GetFrontBlockingObjList();
-
-                            foreach (var o in objs) 
-                            {
-                                var dir = o.transform.position - control.transform.position;
-
-                                if (dir.z > 0f && control.moveRight)
-                                {
-                                    return false;
-                                }
-                                if (dir.z < 0f && control.moveLeft)
-                                {
-                                    return false;
-                                }
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.BLOCKED_BY_WALL:
-                        {
-                            foreach (var oc in control.COLLISION_SPHERES_DATA.frontOverlapCheckers)
-                            {
-                                if (!oc.objIsOverlapping)
-                                {
-                                    return false;
-                                }
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.NOT_BLOCKED_BY_WALL:
-                        {
-                            bool allIsoverlapping = true;
-
-                            foreach (var oc in control.COLLISION_SPHERES_DATA.frontOverlapCheckers)
-                            {
-                                if (!oc.objIsOverlapping)
-                                {
-                                    allIsoverlapping = false;
-                                }
-                            }
-
-                            if (allIsoverlapping)
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.DOUBLETAP_UP:
-                        {
-                            if (!control.subComponentProcessor.subcomponentsDictionary.ContainsKey(SubComponentType.MANUALINPUT))
-                            {
-                                return false;
-                            }
-
-                            if (!control.MANUAL_INPUT_DATA.DoubleTapUp())
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.DOUBLETAP_DOWN:
-                        {
-                            if (!control.subComponentProcessor.subcomponentsDictionary.ContainsKey(SubComponentType.MANUALINPUT))
-                            {
-                                return false;
-                            }
-
-                            if (!control.MANUAL_INPUT_DATA.DoubleTapDown())
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.TOUCHING_WEAPON:
-                        {
-                            if (control.animationProgress.collidingWeapons.Count == 0)
-                            {
-                                if (control.animationProgress.HoldingWeapon == null)
-                                {
-                                    return false;
-                                }
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.HOLDING_AXE:
-                        {
-                            if (control.animationProgress.HoldingWeapon == null)
-                            {
-                                return false;
-                            }
-
-                            if (!control.animationProgress.HoldingWeapon.name.Contains("Blade_Knife"))
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.NOT_MOVING:
-                        {
-                            if (control.moveLeft || control.moveRight)
-                            {
-                                if (!(control.moveLeft && control.moveRight))
-                                {
-                                    return false;
-                                }
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.RUN:
-                        {
-                            if (!control.moveLeft && !control.moveRight)
-                            {
-                                return false;
-                            }
-                            if (control.moveLeft && control.moveRight)
-                            {
-                                return false;
-                            }
-                            if (!control.turbo)
-                            {
-                                return false;
-                            }
-                        }
-
-                        break;
-                    case TransitionConditionType.NOT_RUN:
-                        {
-                            if (control.turbo)
-                            {
-                                if (control.moveLeft || control.moveRight)
-                                {
-                                    if (!(control.moveLeft && control.moveRight))
-                                    {
-                                        return false;
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.BLOCKING:
-                        {
-                            if (!control.block)
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.NOT_BLOCKING:
-                        {
-                            if (control.block)
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                    case TransitionConditionType.ATTACK_ISBLOCKED:
-                        {
-                            if (control.DAMAGE_DETECTOR_DATA.blockedAttack == null)
-                            {
-                                return false;
-                            }
-                        }
-                        break;
-                }
-            }
-            return true;
-        }
+        
     }
 }

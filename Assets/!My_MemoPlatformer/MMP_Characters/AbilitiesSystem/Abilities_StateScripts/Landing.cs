@@ -10,7 +10,7 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            animator.SetBool(HashManager.Instance.ArrMainParams[(int)(int)MainParameterType.Move], false);
+            animator.SetBool(HashManager.Instance.arrMainParams[(int)(int)MainParameterType.Move], false);
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

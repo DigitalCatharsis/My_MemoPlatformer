@@ -7,12 +7,22 @@ namespace My_MemoPlatformer
     public class Ragdoll_Data
     {
         public bool ragdollTriggered;
-        public List<Collider> bodyParts;
+        public Collider[] arrBodyParts;
+        public FlyingRagdollData flyingRagdollData;
 
         public delegate Collider GetCollider(string name);
-        public delegate void DoSomething(bool value);
+        public delegate void ProcRagdoll(RagdollPushType type);
+        public delegate void DoSomething();
 
         public GetCollider GetBodypart;
-        public DoSomething AddForceToDamagedPart;
+        public ProcRagdoll AddForceToDamagedPart;
+        public DoSomething ClearExistingVelocity;
+    }
+
+    [System.Serializable]
+    public class FlyingRagdollData
+    {
+        public bool isTriggered = false;
+        public CharacterControl attacker = null;
     }
 }
