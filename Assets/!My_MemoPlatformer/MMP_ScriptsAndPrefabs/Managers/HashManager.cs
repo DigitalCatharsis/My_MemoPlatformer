@@ -6,10 +6,13 @@ namespace My_MemoPlatformer
     public enum MainParameterType
     {
         Move,
+        Left,
+        Right,
+        Up,
+        Down,
         Jump,
         ForceTransition,
         Grounded,
-        Attack,
         ClickAnimation,
         TransitionIndex,
         Turbo,

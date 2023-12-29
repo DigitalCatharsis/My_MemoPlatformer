@@ -20,9 +20,12 @@ namespace My_MemoPlatformer
 
         private void OnTriggerExit(Collider other)
         {
-            if (collidedObjects.Contains(other.gameObject))
+            if (!Ledge.IsCharacter(other.gameObject) && !MeleeWeapon.IsWeapon(other.gameObject))
             {
-                collidedObjects.Remove(other.gameObject);
+                if (collidedObjects.Contains(other.gameObject))
+                {
+                    collidedObjects.Remove(other.gameObject);
+                }
             }
         }
     }

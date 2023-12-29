@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 namespace My_MemoPlatformer
 {
     [CreateAssetMenu(fileName = "Settings", menuName = "My_MemoPlatformer/Settings/PhysicsSettings")]

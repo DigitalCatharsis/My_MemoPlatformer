@@ -1,4 +1,3 @@
-//using System.Diagnostics.Eventing.Reader;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -29,8 +28,7 @@ namespace My_MemoPlatformer
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             if (onEnd)
-            {
-                
+            {                
                 ToggleBoxCol(characterState.characterControl);
             }
         }

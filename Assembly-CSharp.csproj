@@ -88,7 +88,6 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\DebugContainer\DebugContainer.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\SendPathfindingAgent.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\Death\Ragdoll\TriggerRagdoll.cs" />
-    <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\AI\AISubset.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\LedgeChecker.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\AI\RestartAI.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\CollisionDetection.cs" />
@@ -151,7 +150,6 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_PoolingSystem\PoolObject.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\ToggleBoxCollider.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Input\InputDevices\PlayerInput.cs" />
-    <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\CheckAttackPress.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Managers\Singleton.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\TransitionIndexer.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\AI\AIProgress.cs" />

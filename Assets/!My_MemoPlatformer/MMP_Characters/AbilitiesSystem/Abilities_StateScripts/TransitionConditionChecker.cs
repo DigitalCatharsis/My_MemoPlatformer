@@ -1,8 +1,7 @@
-using My_MemoPlatformer;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Roundbeargames
+namespace My_MemoPlatformer
 {
     public static class TransitionConditionChecker
     {

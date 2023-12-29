@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
- namespace My_MemoPlatformer
+namespace My_MemoPlatformer
 {
-
     public enum PoolObjectType
     {
         ATTACK_CONDITION,

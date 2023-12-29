@@ -5,19 +5,18 @@ namespace My_MemoPlatformer
 {
     public class CameraState : StateMachineBehaviour
     {
-        CharacterControl mainCharacter;
-
-        CinemachineTransposer Transposer;
-        float DefaultOffsetX;
-        float ZoomOutOffsetX;
+        private CharacterControl _mainCharacter;
+        private CinemachineTransposer _transposer;
+        private float _defaultOffsetX;
+        private float _zoomOutOffsetX;
 
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (Transposer == null)
+            if (_transposer == null)
             {
-                Transposer = CameraManager.Instance.CAM_CONTROLLER.defaultCam.GetCinemachineComponent<CinemachineTransposer>();
-                DefaultOffsetX = Transposer.m_FollowOffset.x;
-                ZoomOutOffsetX = DefaultOffsetX * 10f;
+                _transposer = CameraManager.Instance.CAM_CONTROLLER.defaultCam.GetCinemachineComponent<CinemachineTransposer>();
+                _defaultOffsetX = _transposer.m_FollowOffset.x;
+                _zoomOutOffsetX = _defaultOffsetX * 10f;
             }
 
             for (int i = 0; i < (int)CameraTrigger.COUNT; i++)
@@ -36,20 +35,20 @@ namespace My_MemoPlatformer
                 }
             }
 
-            if (mainCharacter == null)
+            if (_mainCharacter == null)
             {
-                mainCharacter = CharacterManager.Instance.GetPlayableCharacter();
+                _mainCharacter = CharacterManager.Instance.GetPlayableCharacter();
             }
 
             if (stateInfo.shortNameHash == HashManager.Instance.dicCameraStates[Camera_States.Default])
             {
-                if (mainCharacter.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
+                if (_mainCharacter.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
                 {
                     LerpNormal(CameraManager.Instance.CAM_CONTROLLER);
                 }
                 else
                 {
-                    if (mainCharacter.RIGID_BODY.velocity.y < 0f)
+                    if (_mainCharacter.RIGID_BODY.velocity.y < 0f)
                     {
                         LerpZoomOut(CameraManager.Instance.CAM_CONTROLLER);
                     }
@@ -59,30 +58,30 @@ namespace My_MemoPlatformer
 
         private void LerpZoomOut(CameraController camCon)
         {
-            if (Transposer != null)
+            if (_transposer != null)
             {
-                if (Mathf.Abs(Transposer.m_FollowOffset.x - ZoomOutOffsetX) > 0.1f)
+                if (Mathf.Abs(_transposer.m_FollowOffset.x - _zoomOutOffsetX) > 0.1f)
                 {
                     if (DebugContainer.Instance.debug_CameraState)
                     {
                         Debug.Log("lerping zoom out");
                     }
-                    Transposer.m_FollowOffset.x = Mathf.Lerp(Transposer.m_FollowOffset.x, ZoomOutOffsetX, Time.deltaTime * camCon.zoomOutSpeed);
+                    _transposer.m_FollowOffset.x = Mathf.Lerp(_transposer.m_FollowOffset.x, _zoomOutOffsetX, Time.deltaTime * camCon.zoomOutSpeed);
                 }
             }
         }
 
         private void LerpNormal(CameraController camCon)
         {
-            if (Transposer != null)
+            if (_transposer != null)
             {
-                if (Mathf.Abs(Transposer.m_FollowOffset.x - DefaultOffsetX) > 0.1f)
+                if (Mathf.Abs(_transposer.m_FollowOffset.x - _defaultOffsetX) > 0.1f)
                 {
                     if (DebugContainer.Instance.debug_CameraState)
                     {
                         Debug.Log("lerping zoom int (back to default)");
                     }
-                    Transposer.m_FollowOffset.x = Mathf.Lerp(Transposer.m_FollowOffset.x, DefaultOffsetX, Time.deltaTime * camCon.zoomInSpeed);
+                    _transposer.m_FollowOffset.x = Mathf.Lerp(_transposer.m_FollowOffset.x, _defaultOffsetX, Time.deltaTime * camCon.zoomInSpeed);
                 }
             }
         }

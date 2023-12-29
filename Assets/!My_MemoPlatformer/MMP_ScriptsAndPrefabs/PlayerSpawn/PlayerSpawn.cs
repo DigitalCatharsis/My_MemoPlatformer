@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-
     public class PlayerSpawn : MonoBehaviour
     {
         [SerializeField] private CharacterSelect _characterSelect;

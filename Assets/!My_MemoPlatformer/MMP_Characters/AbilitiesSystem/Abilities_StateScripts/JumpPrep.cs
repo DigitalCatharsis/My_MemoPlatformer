@@ -1,17 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 namespace My_MemoPlatformer
 {
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/JumpPrep")]
     public class JumpPrep : CharacterAbility
-    {
-        
+    {        
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -22,5 +17,4 @@ namespace My_MemoPlatformer
         {
         }
     }
-
 }

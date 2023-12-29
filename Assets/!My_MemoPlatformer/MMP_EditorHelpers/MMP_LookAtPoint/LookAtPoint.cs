@@ -1,16 +1,7 @@
-using My_MemoPlatformer;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.XR;
-
 
 namespace My_MemoPlatformer
 {
-
-   // [ExecuteInEditMode]
-
     public class LookAtPoint : MonoBehaviour
     {
         public GameObject objectToLook;

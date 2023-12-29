@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -9,7 +8,6 @@ namespace My_MemoPlatformer
         public AnimationCurve speedGraph;
         public float speed;
 
-
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             characterState.characterControl.animationProgress.latestMoveUpScript = this;
@@ -19,9 +17,12 @@ namespace My_MemoPlatformer
         {
             if (!characterState.characterControl.RIGID_BODY.useGravity)
             {
-                if (characterState.BlockingObj_Data.frontBlockingDictionaryCount == 0)
+                if (characterState.BlockingObj_Data.upBlockingDictionaryCount == 0)
                 {
-                    characterState.characterControl.transform.Translate(Vector3.up * speed * speedGraph.Evaluate(stateInfo.normalizedTime) * Time.deltaTime);
+                    characterState.characterControl.transform.
+                        Translate(Vector3.up * speed *
+                        speedGraph.Evaluate(stateInfo.normalizedTime) *
+                        Time.deltaTime);
                 }
             }
         }

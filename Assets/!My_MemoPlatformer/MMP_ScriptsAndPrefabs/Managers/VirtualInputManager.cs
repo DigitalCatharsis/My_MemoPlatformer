@@ -37,8 +37,6 @@ namespace My_MemoPlatformer
         public bool attack;
         public bool block;
 
-        public bool debug;
-
         [Header("Custom Key Bindings")]
         public bool useCustomKeys;
         [Space(5)]
@@ -199,7 +197,7 @@ namespace My_MemoPlatformer
 
         private void SetCustomKey(InputKeyType inputKey, KeyCode key)
         {
-            if (debug)
+            if (DebugContainer.Instance.debug_InputManager)
             {
                 Debug.Log("Key changed: " + inputKey.ToString() + " -> " + key.ToString());
             }
@@ -216,7 +214,7 @@ namespace My_MemoPlatformer
             SaveKeys();
         }
 
-        bool KeyIsChanged(InputKeyType inputKey)
+        private bool KeyIsChanged(InputKeyType inputKey)
         {
             if (Input.anyKey)
             {

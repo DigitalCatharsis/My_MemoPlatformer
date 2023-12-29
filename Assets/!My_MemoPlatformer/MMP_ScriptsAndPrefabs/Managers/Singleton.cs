@@ -20,7 +20,5 @@ namespace My_MemoPlatformer
                 return _instance;
             }
         }
-
-
     }
 }

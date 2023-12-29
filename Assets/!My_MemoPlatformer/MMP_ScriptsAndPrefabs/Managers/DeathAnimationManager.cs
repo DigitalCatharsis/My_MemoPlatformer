@@ -1,18 +1,14 @@
-using My_MemoPlatformer;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    public class DeathAnimationManager : Singleton<DeathAnimationManager>
+    public class DeathAnimationManager : Singleton<DeathAnimationManager> //old
     {
-
         private DeathAnimationLoader _deathAnimationLoader;
-        private List<RuntimeAnimatorController> _Candidates = new List<RuntimeAnimatorController>();
+        private List<RuntimeAnimatorController> _candidates = new List<RuntimeAnimatorController>();
 
-
-        void SetupDeathAnimationLoader()
+        void SetupDeathAnimationLoader()  
         {
             if (_deathAnimationLoader == null)
             {

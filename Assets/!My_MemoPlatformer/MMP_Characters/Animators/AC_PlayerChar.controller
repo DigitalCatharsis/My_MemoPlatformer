@@ -155,7 +155,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: bce543ef390277e46b235710eba44d30, type: 2}
   - {fileID: 11400000, guid: 3290544530ef1f341b1b756c550a4c33, type: 2}
   - {fileID: 11400000, guid: e85a5f6f9551dc441b1b754f4ea81e40, type: 2}
@@ -197,7 +198,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: b722c59b64d452943ab79032f648d23c, type: 2}
   - {fileID: 11400000, guid: 23968493541976f419bea0d3f1a40f0f, type: 2}
   - {fileID: 11400000, guid: 609e4d6c413583f43a369a8b92ac14a0, type: 2}
@@ -611,13 +613,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: f893ecf6189846c4aada6d244806222e, type: 2}
   - {fileID: 11400000, guid: 82cfea98851c9da45aa612fb376e76eb, type: 2}
   - {fileID: 11400000, guid: c4dc48306b821084682efeaf15d7b2bb, type: 2}
   - {fileID: 11400000, guid: 47e26e7df83d0e5408c55a85213b3e4d, type: 2}
   - {fileID: 11400000, guid: c12ed0cc89ec7e848be4b097c2daaaad, type: 2}
-  - {fileID: 11400000, guid: fab11dc155a09574795195b57031d560, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: e85a5f6f9551dc441b1b754f4ea81e40, type: 2}
 --- !u!1101 &-6994998336433542186
 AnimatorStateTransition:
@@ -797,7 +800,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: b7211ce2791d0db4e84a3b7aedca5ee0, type: 2}
   - {fileID: 11400000, guid: 249ce07e039349449a3d0467e204ec80, type: 2}
   - {fileID: 11400000, guid: 800cd81866508634fb5607454636d655, type: 2}
@@ -870,7 +874,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 47c8756c0128ebf429a9963971830ea7, type: 2}
   - {fileID: 11400000, guid: a16638c2e4b32a741aed8952b93b04a0, type: 2}
   - {fileID: 11400000, guid: 2e2217b8fccfcbe45ab9548665951303, type: 2}
@@ -970,7 +975,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 784ce62cd0a2cfa4dbe0c61d08d31820, type: 2}
   - {fileID: 11400000, guid: 169be5c661cc30e48bde64a873a847eb, type: 2}
 --- !u!1102 &-5673726836419134560
@@ -1042,7 +1048,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 784ce62cd0a2cfa4dbe0c61d08d31820, type: 2}
   - {fileID: 11400000, guid: 169be5c661cc30e48bde64a873a847eb, type: 2}
   - {fileID: 11400000, guid: 660714febb24f2a448b29332cb928d95, type: 2}
@@ -1090,7 +1097,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: bfa1250036b17f54ea0c0f5715e4ecb6, type: 2}
   - {fileID: 11400000, guid: c70018d57fac29e4dbbabf33d334ada3, type: 2}
 --- !u!1101 &-5040266809367180545
@@ -1190,7 +1198,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 7734ddc504fdfbb4c8e2e8c3f3a54264, type: 2}
   - {fileID: 11400000, guid: d31863553b40392459c27e858e7951de, type: 2}
   - {fileID: 11400000, guid: da245a35f281ae94abf35b2da8e26ce9, type: 2}
@@ -1210,7 +1219,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: d9edb555885762942897b7b591a0a6e6, type: 2}
   - {fileID: 11400000, guid: c7300d6f81267054fbd5ac637a185f47, type: 2}
   - {fileID: 11400000, guid: ea750484aaa6127489b6f20fa6e9a2eb, type: 2}
@@ -1387,7 +1397,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 399ed5d01e2fc3b499e8e4ada48b61b9, type: 2}
 --- !u!1101 &-3943408208076569327
 AnimatorStateTransition:
@@ -1452,7 +1463,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: c72cc78f36c00694bb89963cc83032a6, type: 2}
   - {fileID: 11400000, guid: f1df18af6dffee84d9ad6dc6a2a9bd04, type: 2}
 --- !u!1107 &-3707171771870167225
@@ -1603,7 +1615,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 838b801484ee1d445bd8f8094d880b5b, type: 2}
 --- !u!1101 &-3044066643021882105
 AnimatorStateTransition:
@@ -1646,7 +1659,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: e85a5f6f9551dc441b1b754f4ea81e40, type: 2}
   - {fileID: 11400000, guid: c9f033f4f60f939469528223526c2c2c, type: 2}
 --- !u!114 &-2830494549356186521
@@ -1662,7 +1676,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 922bb585bc4120440bad7d705c1580df, type: 2}
   - {fileID: 11400000, guid: e464f51193b594a4ba1bbdf8a3e3c57b, type: 2}
   - {fileID: 11400000, guid: 29ece44f8d21bc445a131236e547a941, type: 2}
@@ -1796,7 +1811,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 898508c81d1e53f4f99c64ea08b7a4b5, type: 2}
   - {fileID: 11400000, guid: 8758a44893253aa4eb9a9d5665fe5d49, type: 2}
   - {fileID: 11400000, guid: f3ddb6d7b300ef743b92166dc65e4355, type: 2}
@@ -1969,7 +1985,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 31871942c935e1a42b6285ec04094f12, type: 2}
   - {fileID: 11400000, guid: 58b43d49be9474a4bbd20b15c7d25d5d, type: 2}
   - {fileID: 11400000, guid: 85fdf9287fae1f845ac095a6273536fc, type: 2}
@@ -2014,7 +2031,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: ba7fafee09982104399519da4c6e3830, type: 2}
   - {fileID: 11400000, guid: 381b266299275b0459b35f7db7b9a2fe, type: 2}
   - {fileID: 11400000, guid: 5dbc9478c8ce8c549bc9c2c917013e5d, type: 2}
@@ -2032,7 +2050,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 9c08fbe98b08e9746ac9dade8c5033f2, type: 2}
   - {fileID: 11400000, guid: 93b97bb60f068ce45af971f11c35bc9a, type: 2}
   - {fileID: 11400000, guid: d0c284cde82cb5d419afb0405ff87866, type: 2}
@@ -2121,7 +2140,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 4cd746a6dadefb744aa478eb6c262823, type: 2}
   - {fileID: 11400000, guid: 8ba3b74ceca459f4e82db2903035541e, type: 2}
   - {fileID: 11400000, guid: c76bf4c7a0a16ba47acb88ba8635922d, type: 2}
@@ -2253,7 +2273,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 1515a18150017f047affd7631810a6f1, type: 2}
 --- !u!1101 &-1053346379258637915
 AnimatorStateTransition:
@@ -2296,7 +2317,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 6e8257f8be8ed014cb81188ddc94bf7f, type: 2}
   - {fileID: 11400000, guid: fb8e82f57d926fe45a2ef7cf40620cf5, type: 2}
 --- !u!114 &-913466302982026719
@@ -2312,7 +2334,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 9cc3b90ab818ebb479f8060d75513eae, type: 2}
   - {fileID: 11400000, guid: e85a5f6f9551dc441b1b754f4ea81e40, type: 2}
 --- !u!1101 &-904543829635114663
@@ -2603,7 +2626,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 0ba845603f2aecd49a85d21a5cb06829, type: 2}
   - {fileID: 11400000, guid: a23d8d527f4f806458049336ec540c03, type: 2}
   - {fileID: 11400000, guid: 4191282039bf95c45a07a0ebbc1c6764, type: 2}
@@ -2965,7 +2989,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 02b4eba2db493de47b246c4ab90d48e6, type: 2}
   - {fileID: 11400000, guid: a3e7ea3c629d79d47a0105936aea77de, type: 2}
   - {fileID: 11400000, guid: 2f619052d74700f49885047e7f54b10f, type: 2}
@@ -3086,7 +3111,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 47e26e7df83d0e5408c55a85213b3e4d, type: 2}
   - {fileID: 11400000, guid: c12ed0cc89ec7e848be4b097c2daaaad, type: 2}
   - {fileID: 11400000, guid: 1e41e4c93de64a14e928e5d4a26e5f02, type: 2}
@@ -3376,7 +3402,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 1308e3bc677a7474aba37ea2d7259868, type: 2}
   - {fileID: 11400000, guid: 89b7d04473c2ba9449b022af6acc5120, type: 2}
   - {fileID: 11400000, guid: 830bd1a7702a7b44092cfcfd8bf0ee91, type: 2}
@@ -3500,7 +3527,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: b7211ce2791d0db4e84a3b7aedca5ee0, type: 2}
   - {fileID: 11400000, guid: 249ce07e039349449a3d0467e204ec80, type: 2}
   - {fileID: 11400000, guid: a13fef8dd70b3294db70955da9faa898, type: 2}
@@ -3787,7 +3815,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: e992d5d22618582498849ebc0d92f85a, type: 2}
   - {fileID: 11400000, guid: 750fb117c84a2774c98cef2d180b4978, type: 2}
   - {fileID: 11400000, guid: a32f4374f97e28246a0b5bfc9f5a6f73, type: 2}
@@ -3829,7 +3858,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 5c00ad91735ceff428d78ad2e8d4ad22, type: 2}
   - {fileID: 11400000, guid: 1f685a1f66d84de43bbc4c4c01bb9322, type: 2}
 --- !u!1101 &4027586811987681880
@@ -3907,7 +3937,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: ed29fd60948974b43aa09256dadc186b, type: 2}
   - {fileID: 11400000, guid: c5449cb73cbe69e4482349bc188564f2, type: 2}
   - {fileID: 11400000, guid: e85a5f6f9551dc441b1b754f4ea81e40, type: 2}
@@ -4030,7 +4061,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 64169e7d45e53384096eedd33735b21c, type: 2}
   - {fileID: 11400000, guid: e85a5f6f9551dc441b1b754f4ea81e40, type: 2}
   - {fileID: 11400000, guid: 7defb8a75fc400a469092fb8f12f47a2, type: 2}
@@ -4055,7 +4087,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: b722c59b64d452943ab79032f648d23c, type: 2}
   - {fileID: 11400000, guid: 48306d92b46918d4b8996a8bf0e53b47, type: 2}
   - {fileID: 11400000, guid: 609e4d6c413583f43a369a8b92ac14a0, type: 2}
@@ -4102,7 +4135,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: ce9c6dcf9979f564aa52235c031620c2, type: 2}
   - {fileID: 11400000, guid: a255b38ac24ce7c4ba70675752deaa70, type: 2}
   - {fileID: 11400000, guid: ac9e2424aaa569f419512817586f7a54, type: 2}
@@ -4119,7 +4153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 115b91d65ca437141bd17921441e69b0, type: 2}
   - {fileID: 11400000, guid: ed62f3a63baea9946b5a6878180137f6, type: 2}
   - {fileID: 11400000, guid: bdd22582cb8f4494180add5b860916f2, type: 2}
@@ -4138,7 +4173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: e93b295f66852894b80e7d1a982d5c3a, type: 2}
   - {fileID: 11400000, guid: 87ac012af0104a84889de8ddce61487c, type: 2}
   - {fileID: 11400000, guid: e29f1634afa2054409c158e2aefac660, type: 2}
@@ -4247,7 +4283,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 62d37c6a286c8ae4398b81f84bcd1039, type: 2}
   - {fileID: 11400000, guid: e85a5f6f9551dc441b1b754f4ea81e40, type: 2}
   - {fileID: 11400000, guid: 7defb8a75fc400a469092fb8f12f47a2, type: 2}
@@ -4267,7 +4304,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 77c432c617c7a4a488a866bc5403d198, type: 2}
   - {fileID: 11400000, guid: 24339e6f668ef0347ba00e9dfdfb4e1f, type: 2}
 --- !u!1107 &5259041084284573569
@@ -4560,7 +4598,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 9f0fe59805767bd4188a5ab37ee6180b, type: 2}
   - {fileID: 11400000, guid: 246a2f04ad2367b4c952b02a21717413, type: 2}
   - {fileID: 11400000, guid: c066411565a315447bef6f27cbc92e7e, type: 2}
@@ -4694,6 +4733,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
   ListAbilityData: []
+  arrAbilities: []
 --- !u!1101 &6479908917216445055
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -4782,7 +4822,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: eb2aa5eee779baa45b5847f0e3c603bb, type: 2}
   - {fileID: 11400000, guid: e85a5f6f9551dc441b1b754f4ea81e40, type: 2}
   - {fileID: 11400000, guid: ee3d33643c2ce954fb8d6d519fd0dd86, type: 2}
@@ -5039,7 +5080,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: f614ad743fc1c8d4da41e86fd33811a6, type: 2}
   - {fileID: 11400000, guid: ec6673b2b1eda0743bdacab950ff08a4, type: 2}
 --- !u!1101 &7466853964283349306
@@ -5564,7 +5606,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: aefe223b234933d45872e230f4ad227a, type: 2}
 --- !u!1101 &9004270261191402858
 AnimatorStateTransition:
@@ -5660,7 +5703,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 38bfb82a3faf17646ae6bb4849dd7820, type: 2}
   - {fileID: 11400000, guid: 84defb88113ea864abc9a9ac920dbf6b, type: 2}
 --- !u!1101 &9125562975667780391
@@ -5701,5 +5745,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 1d6887c3c2e6ff242b5f83661196cb38, type: 2}

@@ -1,14 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-
     public class GameEvent : MonoBehaviour
     {
         public List<GameEventListener> ListListeners = new List<GameEventListener>();
-        public GameObject eventObj;
+        private GameObject _eventObj;
+        public GameObject EVENTOBJ
+        {
+            get { return _eventObj; }
+        }
 
         private void Awake()
         {
@@ -24,10 +26,18 @@ namespace My_MemoPlatformer
         }
         public void Raise(GameObject eventObj)
         {
+            _eventObj = eventObj;
+
             foreach (GameEventListener listener in ListListeners)
             {
-                this.eventObj = eventObj;
                 listener.OnRaiseEvent();
+            }
+        }
+        public void AddListener(GameEventListener listener)
+        {
+            if (!ListListeners.Contains(listener))
+            {
+                ListListeners.Add(listener);
             }
         }
     }

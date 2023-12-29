@@ -1,7 +1,4 @@
-using System.Net;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
-
 
 namespace My_MemoPlatformer
 {
@@ -40,5 +37,4 @@ namespace My_MemoPlatformer
 
         }
     }
-
 }

@@ -12,7 +12,8 @@ namespace My_MemoPlatformer
         public bool debug_Ragdoll;
         public bool debug_MoveForward;
         public bool debug_Jump;
-
+        public bool debug_SpawnObjects;
+        public bool debug_InputManager;
     }
 }
 

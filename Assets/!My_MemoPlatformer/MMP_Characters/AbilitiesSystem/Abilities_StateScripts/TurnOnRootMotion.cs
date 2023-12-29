@@ -1,16 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/TurnOnRootMotion")]
     public class TurnOnRootMotion : CharacterAbility
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
-            
+        {            
             characterState.characterControl.skinnedMeshAnimator.applyRootMotion= true;
         }
 
@@ -20,8 +16,7 @@ namespace My_MemoPlatformer
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
-            
+        {            
             characterState.characterControl.skinnedMeshAnimator.applyRootMotion= false;
         }
     }

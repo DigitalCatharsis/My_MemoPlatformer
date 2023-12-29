@@ -1,4 +1,3 @@
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -55,7 +54,8 @@ namespace My_MemoPlatformer
             {
                 foreach (GameObject o in control.COLLISION_SPHERE_DATA.bottomSpheres)
                 {
-                    var blockingObj = CollisionDetection.GetCollidingObject(control, o, -Vector3.up, distance, ref control.BLOCKING_OBJ_DATA.raycastContactPoint);
+                    var blockingObj = CollisionDetection.GetCollidingObject
+                        (control, o, -Vector3.up, distance, ref control.BLOCKING_OBJ_DATA.raycastContactPoint);
 
                     if (blockingObj != null)
                     {
@@ -64,7 +64,11 @@ namespace My_MemoPlatformer
                         if (c == null)
                         {
                             control.GROUND_DATA.ground = blockingObj.transform.root.gameObject; //что колайдерит bottom сферы
-                            control.BOX_COLLIDER_DATA.landingPosition = new Vector3(0f, control.BLOCKING_OBJ_DATA.raycastContactPoint.y, control.BLOCKING_OBJ_DATA.raycastContactPoint.z);
+                            control.BOX_COLLIDER_DATA.landingPosition = new Vector3(
+                                0f, 
+                                control.BLOCKING_OBJ_DATA.raycastContactPoint.y, 
+                                control.BLOCKING_OBJ_DATA.raycastContactPoint.z);
+
                             return true;
                         }
                     }

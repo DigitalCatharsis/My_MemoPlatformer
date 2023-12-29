@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -11,18 +8,7 @@ namespace My_MemoPlatformer
         private CharacterControl _control;
         private Animator _animatorController;
 
-        public Animator ANIMATOR
-        {
-            get
-            {
-                return _animatorController;
-            }
-
-            private set
-            {
-
-            }
-        }
+        public Animator ANIMATOR => _animatorController;
 
         private void Awake()
         {
@@ -32,7 +18,7 @@ namespace My_MemoPlatformer
 
             var arr = _animatorController.GetBehaviours<CharacterState>();
 
-            foreach (CharacterState aiState in arr)
+            foreach (var aiState in arr)
             {
                 aiState.characterControl = _control;
             }
@@ -92,7 +78,7 @@ namespace My_MemoPlatformer
 
         public bool IsAttacking()
         {
-            AnimatorStateInfo info = _control.aiController.ANIMATOR.GetCurrentAnimatorStateInfo(0);
+            var info = _control.aiController.ANIMATOR.GetCurrentAnimatorStateInfo(0);
 
             if (info.shortNameHash == HashManager.Instance.arrAIStateNames[(int)AI_State_Name.AI_Attack])
             {
@@ -103,6 +89,5 @@ namespace My_MemoPlatformer
                 return false;
             }
         }
-
     }
 }

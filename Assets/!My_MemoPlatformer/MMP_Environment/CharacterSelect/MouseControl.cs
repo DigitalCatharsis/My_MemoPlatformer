@@ -1,9 +1,4 @@
-using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Rendering.Universal;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 namespace My_MemoPlatformer
 {
@@ -53,11 +48,9 @@ namespace My_MemoPlatformer
                 {
                     characterSelect.selectedCharacterType = this.selectedCharacterType;
                     _characterSelectLight.transform.position = _characterHoverLight.transform.position;
-                    CharacterControl control = CharacterManager.Instance.GetCharacter(selectedCharacterType);
+                    var control = CharacterManager.Instance.GetCharacter(selectedCharacterType);
                     _characterSelectLight.transform.parent = control.skinnedMeshAnimator.transform;
                     _characterSelectLight.light.enabled = true;
-
-
 
                     //Временно
                     _whiteSelection.SetActive(true);                    
@@ -72,11 +65,10 @@ namespace My_MemoPlatformer
                     _whiteSelection.SetActive(false);
                 }
 
-                foreach (CharacterControl c in CharacterManager.Instance.characters)
+                foreach (var c in CharacterManager.Instance.characters)
                 {
                     if (c.playableCharacterType == selectedCharacterType)
                     {
-
                         c.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.ClickAnimation], true);
                     }
                     else
@@ -84,7 +76,6 @@ namespace My_MemoPlatformer
                         c.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.ClickAnimation], false);
                     }
                 }
-
                 _characterSelectCamAnimator.SetBool(selectedCharacterType.ToString(), true);
             }
         }

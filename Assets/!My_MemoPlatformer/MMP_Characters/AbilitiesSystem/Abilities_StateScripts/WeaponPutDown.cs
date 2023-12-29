@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 namespace My_MemoPlatformer
 {
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/WeaponPutDown")]
@@ -29,5 +28,4 @@ namespace My_MemoPlatformer
 
         }
     }
-
 }

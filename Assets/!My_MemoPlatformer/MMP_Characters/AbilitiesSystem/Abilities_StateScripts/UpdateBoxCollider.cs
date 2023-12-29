@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/UpdateBoxCollider")]
     public class UpdateBoxCollider : CharacterAbility
     {
@@ -36,7 +35,7 @@ namespace My_MemoPlatformer
             {
                 if (stateInfo.normalizedTime > 0.7f)
                 {
-                    if (animator.GetBool(HashManager.Instance.arrMainParams[(int)(int)(int)MainParameterType.Grounded]) == true)
+                    if (animator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]) == true)
                     {
                         characterState.BoxCollider_Data.isLanding = true;
                     }

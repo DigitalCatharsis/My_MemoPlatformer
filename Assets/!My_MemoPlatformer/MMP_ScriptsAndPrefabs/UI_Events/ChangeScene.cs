@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 namespace My_MemoPlatformer
 {
     public class ChangeScene : MonoBehaviour
     {
-        [SerializeField] private  string nextScene;
+        [SerializeField] private string _nextScene;
 
         public void ChangeSceneTo()
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(_nextScene);
         }
     }
 }

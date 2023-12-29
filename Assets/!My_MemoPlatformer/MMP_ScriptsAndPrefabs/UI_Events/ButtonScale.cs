@@ -1,10 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    public enum UIPrameters
+    public enum UIParameters
     {
         ScaleUp, 
     }
@@ -13,18 +13,34 @@ namespace My_MemoPlatformer
     {
         private GameEventListener listener;
 
+        private Dictionary<GameObject, Animator> _dicButtons = new Dictionary<GameObject, Animator>();
+
         private void Awake()
         {
             listener = gameObject.GetComponent<GameEventListener>();
         }
         public void ScaleUpButton()
         {
-            listener.gameEvent.eventObj.GetComponent<Animator>().SetBool(UIPrameters.ScaleUp.ToString(), true);
+            GetButtonAnimator(listener.gameEvent.EVENTOBJ).SetBool(UIParameters.ScaleUp.ToString(), true);
         }
 
         public void ResetButtonScale()
         {
-            listener.gameEvent.eventObj.GetComponent<Animator>().SetBool(UIPrameters.ScaleUp.ToString(), false);
+            GetButtonAnimator(listener.gameEvent.EVENTOBJ).SetBool(UIParameters.ScaleUp.ToString(), false);
+        }
+
+        private Animator GetButtonAnimator(GameObject obj)
+        {
+            if (!_dicButtons.ContainsKey(obj))
+            {
+                Animator animator = obj.GetComponent<Animator>();
+                _dicButtons.Add(obj, animator);
+                return animator;
+            }
+            else
+            {
+                return _dicButtons[obj];
+            }
         }
     }
 }

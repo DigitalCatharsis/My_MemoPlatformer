@@ -2,8 +2,6 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    namespace Roundbeargames
-    {
         [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/LockTurn")]
         public class LockTurn : CharacterAbility
         {
@@ -32,5 +30,4 @@ namespace My_MemoPlatformer
 
             }
         }
-    }
 }

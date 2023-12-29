@@ -13,8 +13,7 @@ namespace My_MemoPlatformer
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             if (onStart)
-            {
-                
+            {                
                 ToggleGrav(characterState.characterControl);
             }
         }

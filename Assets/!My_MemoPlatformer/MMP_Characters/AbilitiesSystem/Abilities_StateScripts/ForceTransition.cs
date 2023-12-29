@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/ForceTransition")]
     public class ForceTransition : CharacterAbility
     {
@@ -30,5 +27,4 @@ namespace My_MemoPlatformer
             animator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.ForceTransition], false);
         }
     }
-
 }

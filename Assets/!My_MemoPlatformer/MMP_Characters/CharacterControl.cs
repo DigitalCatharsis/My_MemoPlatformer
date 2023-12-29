@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,9 +10,6 @@ namespace My_MemoPlatformer
     //4. CharacterControl contains actual fields about character moving etc.
     public class CharacterControl : MonoBehaviour
     {
-        [Header("Input")]
-        [SerializeField] bool _debug;
-
         [Header("Input")]
         public bool moveUp;
         public bool moveDown;
@@ -75,6 +71,8 @@ namespace My_MemoPlatformer
         private void Awake()
         {
             subComponentProcessor = GetComponentInChildren<SubComponentProcessor>();
+
+            //better to refactor
             animationProgress = GetComponent<AnimationProgress>();
             aiProgress = GetComponentInChildren<AIProgress>();
             boxCollider = GetComponent<BoxCollider>();
@@ -128,13 +126,11 @@ namespace My_MemoPlatformer
 
         public void MoveForward(float speed, float speedGraph)
         {
-            //Debug.Log($"Speed:{speed}#\tSpeedGraph:{speedGraph}#\tTime.DeltaTime:{Time.deltaTime}# \tTick: {Time.frameCount}");
             transform.Translate(Vector3.forward * speed * speedGraph * Time.deltaTime);
         }
 
         public GameObject GetChildObj(string name)
         {
-
             if (_childObjects.ContainsKey(name)) //check if Dictionary already has the object i am looking for
             {
                 return _childObjects[name];

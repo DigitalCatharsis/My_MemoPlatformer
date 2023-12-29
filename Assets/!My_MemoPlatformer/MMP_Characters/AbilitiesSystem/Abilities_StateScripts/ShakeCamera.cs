@@ -30,8 +30,7 @@ namespace My_MemoPlatformer
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
-            
+        {            
             characterState.characterControl.animationProgress.cameraShaken = false;
         }
     }

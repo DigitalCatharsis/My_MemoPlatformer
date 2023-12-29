@@ -17,7 +17,6 @@ namespace My_MemoPlatformer
                 return;
             }
 
-
             if (characterState.characterControl.attack)
             {
                 return;

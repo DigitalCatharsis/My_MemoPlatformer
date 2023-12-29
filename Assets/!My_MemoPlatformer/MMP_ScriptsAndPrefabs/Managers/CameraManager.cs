@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace My_MemoPlatformer
 {
@@ -10,18 +7,17 @@ namespace My_MemoPlatformer
     public class CameraManager : Singleton<CameraManager>
     {
         public Camera mainCamera;
-
         private Coroutine _routine;
-
-
+        private bool _camControllerInitiated = false;
         private CameraController _cameraController;
         public CameraController CAM_CONTROLLER
         {
             get
             {
-                if (_cameraController == null)
+                if (!_camControllerInitiated)
                 {
                     _cameraController = GameObject.FindObjectOfType<CameraController>();
+                    _camControllerInitiated = true;
                 }
                 return _cameraController;
             }
@@ -29,16 +25,19 @@ namespace My_MemoPlatformer
 
         private void Awake()
         {
-            GameObject obj = GameObject.Find("Main Camera");
+            var obj = GameObject.Find("Main Camera");
             mainCamera = obj.GetComponent<Camera>(); ;
         }
 
         //Controlling how long camera shake is. After some amount of second return to default camera
         IEnumerator _CamShake(float sec)
         {
-            CAM_CONTROLLER.TriggerCamera(CameraTrigger.Shake);
-            yield return new WaitForSeconds(sec);
-            CAM_CONTROLLER.TriggerCamera(CameraTrigger.Default);
+            if (CAM_CONTROLLER != null)
+            {
+                CAM_CONTROLLER.TriggerCamera(CameraTrigger.Shake);
+                yield return new WaitForSeconds(sec);
+                CAM_CONTROLLER.TriggerCamera(CameraTrigger.Default);
+            }
         }
 
         public void ShakeCamera(float sec)
@@ -51,8 +50,4 @@ namespace My_MemoPlatformer
             _routine = StartCoroutine(_CamShake (sec));
         }
     }
-
-    
-     
-
 }

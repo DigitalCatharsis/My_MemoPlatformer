@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,10 +13,7 @@ namespace My_MemoPlatformer
         {
             if (gameEvent != null)
             {
-                if (!gameEvent.ListListeners.Contains(this))
-                {
-                    gameEvent.ListListeners.Add(this);
-                }
+                gameEvent.AddListener(this);
             }
         }
 

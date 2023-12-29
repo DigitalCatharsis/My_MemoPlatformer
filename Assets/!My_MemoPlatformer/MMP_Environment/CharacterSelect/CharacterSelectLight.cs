@@ -10,7 +10,5 @@ namespace My_MemoPlatformer
             light = GetComponent<Light>();
             light.enabled = false;
         }
-
-
     }
 }

@@ -13,7 +13,6 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-
             if (characterState.characterControl.attack)
             {
                 return;
@@ -24,12 +23,10 @@ namespace My_MemoPlatformer
             float platformDistance = characterState.characterControl.aiProgress.pathfindingAgent.endSphere.transform.position.y 
                 - characterState.CollisionSpheres_Data.frontSpheres[0].transform.position.y;
 
-            //Debug.DrawLine(control.aiProgress.pathfindfingAgent.endSphere.transform.position, control.frontSpheres[1].transform.position, Color.magenta, 2.5f);
-            //Debug.DrawLine(control.aiProgress.pathfindfingAgent.endSphere.transform.position, control.frontSpheres[0].transform.position, Color.red, 2.5f);
-
             if (platformDistance > 0.5f)  //means it is on the same platform
             {
-                if (characterState.characterControl.aiProgress.pathfindingAgent.startSphere.transform.position.z < characterState.characterControl.aiProgress.pathfindingAgent.endSphere.transform.position.z)
+                if (characterState.characterControl.aiProgress.pathfindingAgent.startSphere.transform.position.z < 
+                    characterState.characterControl.aiProgress.pathfindingAgent.endSphere.transform.position.z)
                 {
                     characterState.characterControl.moveRight = true;
                     characterState.characterControl.moveLeft = false;
@@ -47,10 +44,6 @@ namespace My_MemoPlatformer
                 characterState.characterControl.moveLeft = false;
                 characterState.characterControl.moveUp=false;
                 characterState.characterControl.jump=false;
-
-                //characterState.characterControl.aiController.InitializeAI(); //after the climp we reaching new platform without landing mpotion. i need it for now
-                //animator.gameObject.SetActive(false);
-                //animator.gameObject.SetActive(true);
             }
         }
 
@@ -58,5 +51,4 @@ namespace My_MemoPlatformer
         {
         }
     }
-
 }

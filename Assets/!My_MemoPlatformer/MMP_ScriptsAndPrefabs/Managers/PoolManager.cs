@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -21,8 +19,6 @@ namespace My_MemoPlatformer
                     poolDictionary.Add(p, new List<GameObject>());
                 }
             }
-
-
         }
 
         public GameObject GetObject (PoolObjectType objType) // Когда мы активируем объект, он выходит из списка. Когда деактивируем, добавляем в список.
@@ -55,6 +51,5 @@ namespace My_MemoPlatformer
             list.Add(obj.gameObject);
             obj.gameObject.SetActive(false);
         }
-
     } 
 }

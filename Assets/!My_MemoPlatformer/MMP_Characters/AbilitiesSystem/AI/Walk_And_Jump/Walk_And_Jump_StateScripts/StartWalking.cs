@@ -1,7 +1,4 @@
-using UnityEngine.AI;
 using UnityEngine;
-using System;
-using System.Drawing;
 
 namespace My_MemoPlatformer
 {
@@ -10,15 +7,7 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-
             characterState.characterControl.aiProgress.SetRandomFlyingKick();
-            characterState.characterControl.aiController.WalkStraightToTheStartSphere();
-        }
-
-        public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
-            animator.SetBool(HashManager.Instance.arrAITransitionParams[(int)AI_Transition.Jump_Platform], false);
-            animator.SetBool(HashManager.Instance.arrAITransitionParams[(int)AI_Transition.Fall_Platform], false);
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -27,20 +16,20 @@ namespace My_MemoPlatformer
             {
                 return;
             }
-            //Debug.DrawLine(control.transform.position, control.aiProgress.pathfindfingAgent.startSphere.transform.position, UnityEngine.Color.magenta,0.1f);
+
+            //Jumping
             if (characterState.characterControl.aiProgress.EndSphereIsHigher())
             {
-                //Jumping
                 if (characterState.characterControl.aiProgress.AIDistanceToStartSphere() < 0.08f) //how close are we to the checkpoint    //Здесь часто бывает баг (когда иди бегает вокруг Start Point) из-за разных смещений платформы или ИИ относительно друг друга. Увелич да < 0.1f для дебага
                 {
-                    //Debug.DrawLine(control.aiProgress.pathfindfingAgent.startSphere.transform.position, control.transform.position, UnityEngine.Color.green, 2.5f);
                     characterState.characterControl.moveLeft = false;
                     characterState.characterControl.moveRight = false;
-                    //Debug.Log($"<color=red>{control.moveLeft = false} </color>");
+
                     animator.SetBool(HashManager.Instance.arrAITransitionParams[(int)AI_Transition.Jump_Platform], true);
                     return;
                 }
             }
+
             //fall
             if (characterState.characterControl.aiProgress.EndSphereIsLower())
             {
@@ -73,6 +62,12 @@ namespace My_MemoPlatformer
             {
                 characterState.characterControl.aiProgress.RepositionDestination();
             }
+        }
+
+        public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
+        {
+            animator.SetBool(HashManager.Instance.arrAITransitionParams[(int)AI_Transition.Jump_Platform], false);
+            animator.SetBool(HashManager.Instance.arrAITransitionParams[(int)AI_Transition.Fall_Platform], false);
         }
     }
 }

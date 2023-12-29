@@ -63,15 +63,6 @@ namespace My_MemoPlatformer
                         meshLinks.Add(_navMeshAgent.currentOffMeshLinkData.startPos);
                         meshLinks.Add(_navMeshAgent.currentOffMeshLinkData.endPos);
                     }
-
-                    //startSphere.transform.position = _navMeshAgent.currentOffMeshLinkData.startPos;
-                    //endSphere.transform.position = _navMeshAgent.currentOffMeshLinkData.endPos;
-
-                    //_navMeshAgent.CompleteOffMeshLink();
-
-                    //_navMeshAgent.isStopped = true;
-                    //startWalk = true;
-                    //break;
                 }
 
                 var dist = transform.position - _navMeshAgent.destination;  //между навигатором и его точкой назначения, а не control
@@ -100,6 +91,5 @@ namespace My_MemoPlatformer
 
             owner.navMeshObstacle.carving = true;
         }
-
     }
 }

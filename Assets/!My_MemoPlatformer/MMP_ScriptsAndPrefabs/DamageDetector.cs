@@ -3,12 +3,8 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-
     public class DamageDetector : SubComponent  //Compare collision info versus attack input that is being registered
     {
-
-        [SerializeField] private bool _debug;
-
         public Damage_Data damage_Data;
 
         [Header("Damage Setup")]

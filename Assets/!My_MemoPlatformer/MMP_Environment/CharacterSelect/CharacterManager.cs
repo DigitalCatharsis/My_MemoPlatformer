@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace My_MemoPlatformer
 {
     public class CharacterManager : Singleton<CharacterManager>

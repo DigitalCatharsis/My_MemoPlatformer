@@ -27,7 +27,6 @@ namespace My_MemoPlatformer
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-
             for (int i = 0; i < arrAbilities.Length; i++)
             {
                 arrAbilities[i].OnEnter(this, animator, stateInfo);

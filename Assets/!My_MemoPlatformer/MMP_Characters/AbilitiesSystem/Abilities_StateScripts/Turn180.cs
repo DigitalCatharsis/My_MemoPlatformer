@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 namespace My_MemoPlatformer
 {
@@ -9,18 +6,15 @@ namespace My_MemoPlatformer
     public class Turn180 : CharacterAbility
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {
-            
-
-            if (characterState.characterControl.ROTATION_DATA.IsFacingForward())
+        {        
+            if (characterState.Rotation_Data.IsFacingForward())
             {
-                characterState.characterControl.ROTATION_DATA.FaceForward(false);
+                characterState.Rotation_Data.FaceForward(false);
             }
             else
             {
-                characterState.characterControl.ROTATION_DATA.FaceForward(true);
+                characterState.Rotation_Data.FaceForward(true);
             }
-
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

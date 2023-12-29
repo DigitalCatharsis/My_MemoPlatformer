@@ -1,34 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/CheckRunningTurn")]
     public class CheckRunningTurn : CharacterAbility
     {
-
-
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             
         }
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {        
-            if (characterState.characterControl.ROTATION_DATA.IsFacingForward())
+        {
             {
-                if (characterState.characterControl.moveLeft)
+                if (characterState.Rotation_Data.lockTurn)
                 {
-                    animator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Turn], true);
+                    animator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Turn], false);
+                    return;
                 }
-            }
 
-            if (!characterState.characterControl.ROTATION_DATA.IsFacingForward())
-            {
-                if (characterState.characterControl.moveRight)
+                if (characterState.Rotation_Data.IsFacingForward())
                 {
-                    animator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Turn], true);
+                    if (characterState.characterControl.moveLeft)
+                    {
+                        animator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Turn], true);
+                    }
+                }
+
+                if (!characterState.Rotation_Data.IsFacingForward())
+                {
+                    if (characterState.characterControl.moveRight)
+                    {
+                        animator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Turn], true);
+                    }
                 }
             }
         }

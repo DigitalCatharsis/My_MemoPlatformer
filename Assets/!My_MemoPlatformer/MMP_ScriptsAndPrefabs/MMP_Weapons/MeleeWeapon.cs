@@ -134,7 +134,7 @@ namespace My_MemoPlatformer
         {
             for (int i = 0; i < c.RAGDOLL_DATA.arrBodyParts.Length; i++)
             {
-                TriggerDetector t = c.RAGDOLL_DATA.arrBodyParts[i].GetComponent<TriggerDetector>();
+                var t = c.RAGDOLL_DATA.arrBodyParts[i].GetComponent<TriggerDetector>();
 
                 if (t != null)
                 {
