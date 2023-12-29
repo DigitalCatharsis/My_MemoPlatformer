@@ -138,6 +138,7 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\CollisionSphere\OverlapChecker.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\Block.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\Death\Resources\DeathAnimationLoader.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_EditorHelpers\MMP_StateMachine_AbilityListToArray\StateMachine_AbilityListToArray.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\Landing.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_EditorHelpers\MMP_LookAtPoint\LookAtPoint.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Managers\CameraManager.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Environment\CharacterSelect\MouseControl.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\LockTransition.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Input\ManualInput.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_EditorHelpers\MMP_AbilitySearch\AbilitySearch.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\InstantTransition.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Managers\VirtualInputManager.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\SubComponent.cs" />

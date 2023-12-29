@@ -9,6 +9,8 @@ namespace My_MemoPlatformer
 
         [Space (10)]
         public List<CharacterAbility> ListAbilityData = new List<CharacterAbility>();
+        [Space(10)]
+        public CharacterAbility[] arrAbilities;
 
         public BlockingObj_Data BlockingObj_Data => characterControl.subComponentProcessor.blockingObj_Data;
         public Ragdoll_Data RagdollData => characterControl.subComponentProcessor.ragdoll_Data;
@@ -25,30 +27,26 @@ namespace My_MemoPlatformer
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            //if (characterControl == null)
-            //{
-            //    characterControl = animator.transform.root.gameObject.GetComponent<CharacterControl>();
-            //    characterControl.InitCharactersStates(animator);
-            //}
 
-            foreach (CharacterAbility d in ListAbilityData)
+            for (int i = 0; i < arrAbilities.Length; i++)
             {
-                d.OnEnter(this, animator, stateInfo);
-                if (characterControl.ANIMATION_DATA.currentRunningAbilities.ContainsKey(d))
+                arrAbilities[i].OnEnter(this, animator, stateInfo);
+
+                if (characterControl.ANIMATION_DATA.currentRunningAbilities.ContainsKey(arrAbilities[i]))
                 {
-                    characterControl.ANIMATION_DATA.currentRunningAbilities[d] += 1;
+                    characterControl.ANIMATION_DATA.currentRunningAbilities[arrAbilities[i]] += 1;
                 }
                 else
                 {
-                    characterControl.ANIMATION_DATA.currentRunningAbilities.Add(d,1);
+                    characterControl.ANIMATION_DATA.currentRunningAbilities.Add(arrAbilities[i], 1);
                 }
             }
         }
         public void UpdateAll(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            foreach (CharacterAbility d in ListAbilityData)
+            for (int i = 0; i < arrAbilities.Length; i++)
             {
-                d.UpdateAbility(characterState, animator, stateInfo);
+                arrAbilities[i].UpdateAbility(characterState, animator, stateInfo);
             }
         }
 
@@ -72,6 +70,16 @@ namespace My_MemoPlatformer
                         characterControl.ANIMATION_DATA.currentRunningAbilities.Remove(d);
                     }
                 }
+            }
+        }
+
+        public void PutStatesInArray()
+        {
+            arrAbilities = new CharacterAbility[ListAbilityData.Count];
+
+            for (int i = 0; i < ListAbilityData.Count; i++)
+            {
+                arrAbilities[i] = ListAbilityData[i];
             }
         }
     }
