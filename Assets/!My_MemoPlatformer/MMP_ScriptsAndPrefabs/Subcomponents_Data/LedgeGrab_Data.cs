@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace My_MemoPlatformer
 {
     [System.Serializable]
@@ -12,5 +8,4 @@ namespace My_MemoPlatformer
         public delegate void DoSomething();
         public DoSomething LedgeCollidersOff;
     }
-
 }

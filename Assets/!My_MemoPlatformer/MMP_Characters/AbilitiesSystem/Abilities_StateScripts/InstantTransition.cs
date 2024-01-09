@@ -6,8 +6,6 @@ namespace My_MemoPlatformer
     [CreateAssetMenu(fileName = "New State", menuName = "My_MemoPlatformer/AbilityData/InstantTransition")]
     public class InstantTransition : CharacterAbility
     {
-        static bool debugTransitionTiming = true;
-
         public Instant_Transition_States transitionTo;
         public List<TransitionConditionType> transitionConditions = new List<TransitionConditionType>();
         public float crossFade;
@@ -45,22 +43,18 @@ namespace My_MemoPlatformer
             }
             else
             {
-                if (debugTransitionTiming)
+                if (DebugContainer.Instance.debug_TransitionTiming)
                 {
                     Debug.Log("Instant transition to: " + transitionTo.ToString() + " - CrossFade: " + crossFade);
                 }
 
                 if (offset <= 0f)
                 {
-                    control.skinnedMeshAnimator.CrossFade(
-                        HashManager.Instance.arrInstantTransitionStates[(int)transitionTo],
-                        crossFade, 0);
+                    control.skinnedMeshAnimator.CrossFade(HashManager.Instance.arrInstantTransitionStates[(int)transitionTo],crossFade, 0);
                 }
                 else
                 {
-                    control.skinnedMeshAnimator.CrossFade(
-                        HashManager.Instance.arrInstantTransitionStates[(int)transitionTo],
-                        crossFade, 0, offset);
+                    control.skinnedMeshAnimator.CrossFade(HashManager.Instance.arrInstantTransitionStates[(int)transitionTo], crossFade, 0, offset);
                 }
             }
         }
@@ -77,7 +71,8 @@ namespace My_MemoPlatformer
                 return true;
             }
 
-            if (control.skinnedMeshAnimator.GetInteger(HashManager.Instance.arrMainParams[(int)MainParameterType.TransitionIndex]) != 0)
+            if (control.skinnedMeshAnimator.GetInteger(
+                HashManager.Instance.arrMainParams[(int)MainParameterType.TransitionIndex]) != 0)
             {
                 return true;
             }
@@ -90,7 +85,7 @@ namespace My_MemoPlatformer
                 }
             }
 
-            var nextInfo = control.skinnedMeshAnimator.GetNextAnimatorStateInfo(0);
+            AnimatorStateInfo nextInfo = control.skinnedMeshAnimator.GetNextAnimatorStateInfo(0);
 
             if (nextInfo.shortNameHash == HashManager.Instance.arrInstantTransitionStates[(int)transitionTo])
             {

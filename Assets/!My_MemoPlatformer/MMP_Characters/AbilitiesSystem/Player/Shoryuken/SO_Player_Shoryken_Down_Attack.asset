@@ -12,19 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d2138cfc2da18499f42578916d88ca, type: 3}
   m_Name: SO_Player_Shoryken_Down_Attack
   m_EditorClassIdentifier: 
-  debug: 0
   startAttackTime: 0.3
   endAttackTime: 0.35
   attackParts: 
   mustCollide: 0
   mustFaceAttacker: 0
-  lethalRange: 100
+  lethalRange: 1
   maxHits: 3
   damage: 3
-  comboStartTime: 0
-  comboEndTime: 0
-  forwardForce: 700
-  rightForce: 0
-  upForce: 6000
+  normalRagdollVelocity:
+    forwardForce: 700
+    rightForce: 0
+    upForce: 6000
+  collateralRagdollVelocity:
+    forwardForce: 0
+    rightForce: 0
+    upForce: 0
   useDeathParticles: 0
-  ParticleType: 3
+  particleType: 0
+  collateralDamageInfo:
+    createCollateral: 0

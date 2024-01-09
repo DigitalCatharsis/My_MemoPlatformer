@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.Rendering;
 using Debug = UnityEngine.Debug;
 
 namespace My_MemoPlatformer

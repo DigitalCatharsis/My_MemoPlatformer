@@ -86,14 +86,20 @@ namespace My_MemoPlatformer
                     weapon.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
                 }
 
-                RemoveWeaponFromDictionary(control);
 
-                weapon.transform.position = control.transform.position + Vector3.up * 0.0225f;
+                flyForward = control.ROTATION_DATA.IsFacingForward();
 
+                weapon.transform.position = control.transform.position + (Vector3.up * throwOffset.y);
+                weapon.transform.position += (control.transform.forward * throwOffset.z);
+
+                thrower = control;
                 control.animationProgress.holdingWeapon = null;
                 control = null;
-
                 weapon.triggerDetector.control = null;
+
+                isThrown = true;
+
+                RemoveWeaponFromDictionary(thrower);
             }
         }
 

@@ -1,4 +1,3 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -8,7 +7,7 @@ namespace My_MemoPlatformer
     {
         public AttackCondition blockedAttack;
         public float hp;
-        public Attack MarioStompAttack;
+        public Attack airStompAttack;
         public Attack AxeThrow;
 
         public DamageTaken damageTaken;
@@ -18,21 +17,17 @@ namespace My_MemoPlatformer
 
         public ReturnBool IsDead;
         public DoSomething TakeDamage;
-
-        //public void SetData(CharacterControl attacker, Attack attack, TriggerDetector damagedTrigger, GameObject attackingPart)
-        //{
-        //    this.attacker = attacker;
-        //    this.attack = attack;
-        //    this.damagedTrigger = damagedTrigger;
-        //    this.attackingPart = attackingPart;
-        //}
     }
 
     [System.Serializable]
     public class DamageTaken
     {
-        public DamageTaken(CharacterControl attacker,Attack attack,TriggerDetector damage_TG,
-                            GameObject damager,Vector3 incomingVelocity)
+        public DamageTaken(
+                CharacterControl attacker,
+                Attack attack,
+                TriggerDetector damage_TG,
+                GameObject damager,
+                Vector3 incomingVelocity)
         {
             mAttacker = attacker;
             mAttack = attack;

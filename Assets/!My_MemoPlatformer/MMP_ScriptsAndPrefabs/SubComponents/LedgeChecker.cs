@@ -116,11 +116,11 @@ namespace My_MemoPlatformer
             y = platform.transform.position.y + (boxCollider.size.y / 2f);
             if (control.ROTATION_DATA.IsFacingForward())
             {
-                z = platform.transform.position.z - (boxCollider.size.z / 2f);
+                z = platform.transform.position.z - (boxCollider.size.z * boxCollider.gameObject.transform.lossyScale.z / 2f);
             }
             else
             {
-                z = platform.transform.position.z + (boxCollider.size.z / 2f);
+                z = platform.transform.position.z + (boxCollider.size.z * boxCollider.gameObject.transform.lossyScale.z / 2f);
             }
 
             Vector3 platformEdge = new Vector3(0f, y, z);

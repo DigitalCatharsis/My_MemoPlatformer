@@ -4,11 +4,12 @@ namespace My_MemoPlatformer
 {
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/Jump")]
     public class Jump : CharacterAbility
-    {        
+    {
+        public int jumpIndex;
+
         [Range(0f, 1f)]
         public float jumpTiming;
         public float jumpForce;
-        public int jumpIndex;
         public bool clearPreviousVelocity;
 
         [Header("Extra Gravity")]

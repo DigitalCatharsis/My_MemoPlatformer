@@ -124,14 +124,14 @@ namespace My_MemoPlatformer
                 foreach (CharacterControl c in _airStompTargets)
                 {
                     AttackCondition info = new AttackCondition();
-                    info.CopyInfo(c.DAMAGE_DATA.MarioStompAttack, control);
+                    info.CopyInfo(c.DAMAGE_DATA.airStompAttack, control);
 
                     int index = Random.Range(0, c.RAGDOLL_DATA.arrBodyParts.Length);
                     TriggerDetector randomPart = c.RAGDOLL_DATA.arrBodyParts[index].GetComponent<TriggerDetector>();
 
                     c.DAMAGE_DATA.damageTaken = new DamageTaken(
                         control,
-                        c.DAMAGE_DATA.MarioStompAttack,
+                        c.DAMAGE_DATA.airStompAttack,
                         randomPart,
                         control.rightFoot_Attack,
                         Vector3.zero);

@@ -14,6 +14,7 @@ namespace My_MemoPlatformer
         public bool debug_Jump;
         public bool debug_SpawnObjects;
         public bool debug_InputManager;
+        public bool debug_TransitionTiming;
     }
 }
 

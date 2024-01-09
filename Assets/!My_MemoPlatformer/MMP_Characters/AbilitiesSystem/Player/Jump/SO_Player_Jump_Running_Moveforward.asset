@@ -12,10 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaff6f6f2abc0794896d70a63da7cbcf, type: 3}
   m_Name: SO_Player_Jump_Running_Moveforward
   m_EditorClassIdentifier: 
-  debug: 0
   allowEarlyTurn: 0
   lockDirection: 0
-  lockDirectionNextState: 0
   constant: 0
   speedGraph:
     serializedVersion: 2
@@ -50,12 +48,14 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  speed: 1.2
+  Speed: 1.3
   blockDistance: 0.125
   ignoreCharacterBox: 0
   ignoreStartTime: 0
   ignoreEndTime: 0
   useMomentum: 1
   startingMomentum: 1.5
-  maxMomentum: 3
+  maxMomentum: 3.5
+  StartFromPreviousMomentum: 0
   clearMomentumOnExit: 0
+  moveOnHit: 0

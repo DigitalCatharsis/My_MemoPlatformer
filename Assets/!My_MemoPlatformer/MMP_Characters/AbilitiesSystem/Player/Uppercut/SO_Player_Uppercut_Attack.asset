@@ -19,12 +19,16 @@ MonoBehaviour:
   mustFaceAttacker: 0
   lethalRange: 0
   maxHits: 1
-  debug: 0
   damage: 1
-  comboStartTime: 0
-  comboEndTime: 0
-  forwardForce: 0
-  rightForce: 0
-  upForce: 6500
+  normalRagdollVelocity:
+    forwardForce: 250
+    rightForce: 0
+    upForce: 8000
+  collateralRagdollVelocity:
+    forwardForce: 0
+    rightForce: 0
+    upForce: 0
   useDeathParticles: 1
-  ParticleType: 3
+  particleType: 3
+  collateralDamageInfo:
+    createCollateral: 0

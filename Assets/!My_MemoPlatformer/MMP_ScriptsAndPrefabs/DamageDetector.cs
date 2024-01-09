@@ -19,7 +19,7 @@ namespace My_MemoPlatformer
             {
                 blockedAttack = null,
                 hp = 1f,
-                MarioStompAttack = _airStompAttack,
+                airStompAttack = _airStompAttack,
                 AxeThrow = _axeThrow,
 
                 damageTaken = new DamageTaken(attacker: null, attack: null, damage_TG: null, damager: null, incomingVelocity: Vector3.zero),
@@ -245,7 +245,7 @@ namespace My_MemoPlatformer
             }
             else
             {
-                int randomIndex = Random.Range(0, (int)Hit_Reaction_States.COUNT);
+                var randomIndex = Random.Range(0, (int)Hit_Reaction_States.COUNT);
                 control.skinnedMeshAnimator.Play(HashManager.Instance.dicHitReactionStates[(Hit_Reaction_States)randomIndex], 0, 0f);
             }
 

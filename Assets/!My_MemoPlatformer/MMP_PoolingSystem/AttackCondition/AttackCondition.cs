@@ -56,6 +56,5 @@ namespace My_MemoPlatformer
         {
             isFinished = true;
         }
-
     }
 }

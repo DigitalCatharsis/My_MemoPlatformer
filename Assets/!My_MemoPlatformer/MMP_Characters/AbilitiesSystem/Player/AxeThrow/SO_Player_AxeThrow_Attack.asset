@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d2138cfc2da18499f42578916d88ca, type: 3}
   m_Name: SO_Player_AxeThrow_Attack
   m_EditorClassIdentifier: 
-  debug: 0
   startAttackTime: 0
   endAttackTime: 0
   attackParts: 
@@ -21,10 +20,15 @@ MonoBehaviour:
   lethalRange: 0
   maxHits: 0
   damage: 3
-  comboStartTime: 0
-  comboEndTime: 0
-  forwardForce: 3000
-  rightForce: 0
-  upForce: 3000
+  normalRagdollVelocity:
+    forwardForce: 2500
+    rightForce: 0
+    upForce: 2500
+  collateralRagdollVelocity:
+    forwardForce: 0
+    rightForce: 0
+    upForce: 0
   useDeathParticles: 0
-  ParticleType: 3
+  particleType: 0
+  collateralDamageInfo:
+    createCollateral: 0

@@ -24,6 +24,15 @@ namespace My_MemoPlatformer
         public Attack_Data Attack_Data => characterControl.subComponentProcessor.attack_Data;
         public Animation_Data Animation_Data => characterControl.subComponentProcessor.animation_Data;
         public AIController AI_CONTROLLER => characterControl.aiController;
+        public void PutStatesInArray()
+        {
+            arrAbilities = new CharacterAbility[ListAbilityData.Count];
+
+            for (int i = 0; i < ListAbilityData.Count; i++)
+            {
+                arrAbilities[i] = ListAbilityData[i];
+            }
+        }
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -56,29 +65,26 @@ namespace My_MemoPlatformer
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            foreach (CharacterAbility d in ListAbilityData)
+            for (int i = 0; i < arrAbilities.Length; i++)
             {
-                d.OnExit(this, animator, stateInfo);
-
-                if (characterControl.ANIMATION_DATA.currentRunningAbilities.ContainsKey(d))
+                try
                 {
-                    characterControl.ANIMATION_DATA.currentRunningAbilities[d] -= 1;
+                    arrAbilities[i].OnExit(this, animator, stateInfo);
 
-                    if (characterControl.ANIMATION_DATA.currentRunningAbilities[d] <= 0)
+                    if (characterControl.ANIMATION_DATA.currentRunningAbilities.ContainsKey(arrAbilities[i]))
                     {
-                        characterControl.ANIMATION_DATA.currentRunningAbilities.Remove(d);
+                        characterControl.ANIMATION_DATA.currentRunningAbilities[arrAbilities[i]] -= 1;
+
+                        if (characterControl.ANIMATION_DATA.currentRunningAbilities[arrAbilities[i]] <= 0)
+                        {
+                            characterControl.ANIMATION_DATA.currentRunningAbilities.Remove(arrAbilities[i]);
+                        }
                     }
                 }
-            }
-        }
-
-        public void PutStatesInArray()
-        {
-            arrAbilities = new CharacterAbility[ListAbilityData.Count];
-
-            for (int i = 0; i < ListAbilityData.Count; i++)
-            {
-                arrAbilities[i] = ListAbilityData[i];
+                catch (System.Exception e)
+                {
+                    Debug.Log(e);
+                }
             }
         }
     }

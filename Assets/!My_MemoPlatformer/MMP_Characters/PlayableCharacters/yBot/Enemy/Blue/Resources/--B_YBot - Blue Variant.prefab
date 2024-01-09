@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62680770faba644782c1749774ad210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathfindfingAgent: {fileID: 0}
+  flyingKickProbability: 0.4
+  pathfindingAgent: {fileID: 0}
   blockingCharacter: {fileID: 0}
   doFlyingKick: 0
 --- !u!114 &7793112528300896298
@@ -61,7 +62,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ef1307ee6ae684585648aefd3d6534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialAl: 1
 --- !u!1 &8257733769972336731
 GameObject:
   m_ObjectHideFlags: 0
@@ -72,7 +72,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1112126320939703414}
   - component: {fileID: 1743127014587393925}
-  - component: {fileID: 955113578701255219}
   m_Layer: 0
   m_Name: Walk
   m_TagString: Untagged
@@ -115,19 +114,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &955113578701255219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8257733769972336731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a849372afae4254a8a51b0063d3dcbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aiType: 1
 --- !u!1001 &7184928491295747288
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -146,7 +132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 936084455, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_CollisionDetection
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1747402107, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: maxPressTime
@@ -266,7 +252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3372119544377188092, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.94
+      value: -9.71
       objectReference: {fileID: 0}
     - target: {fileID: 3372119544377188092, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_LocalRotation.w

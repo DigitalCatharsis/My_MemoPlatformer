@@ -7,7 +7,7 @@ namespace My_MemoPlatformer
     {
         public static bool MakeTransition(CharacterControl control, List<TransitionConditionType> transitionConditions)
         {
-            foreach (TransitionConditionType c in transitionConditions)
+            foreach (var c in transitionConditions)
             {
                 switch (c)
                 {
@@ -135,14 +135,6 @@ namespace My_MemoPlatformer
                                     return false;
                                 }
                             }
-
-                            //foreach (OverlapChecker oc in control.COLLISION_SPHERE_DATA.FrontOverlapCheckers)
-                            //{
-                            //    if (!oc.ObjIsOverlapping)
-                            //    {
-                            //        return false;
-                            //    }
-                            //}
                         }
                         break;
                     case TransitionConditionType.NOT_BLOCKED_BY_WALL:
@@ -156,14 +148,6 @@ namespace My_MemoPlatformer
                                     AllIsOverlapping = false;
                                 }
                             }
-
-                            //foreach (OverlapChecker oc in control.COLLISION_SPHERE_DATA.FrontOverlapCheckers)
-                            //{
-                            //    if (!oc.ObjIsOverlapping)
-                            //    {
-                            //        AllIsOverlapping = false;
-                            //    }
-                            //}
 
                             if (AllIsOverlapping)
                             {
@@ -205,10 +189,6 @@ namespace My_MemoPlatformer
                             {
                                 return false;
                             }
-                            //if (!control.subComponentProcessor.ComponentsDic.ContainsKey(SubComponentType.MANUALINPUT))
-                            //{
-                            //    return false;
-                            //}
 
                             if (!control.MANUAL_INPUT_DATA.DoubleTapUp())
                             {
@@ -222,10 +202,6 @@ namespace My_MemoPlatformer
                             {
                                 return false;
                             }
-                            //if (!control.subComponentProcessor.ComponentsDic.ContainsKey(SubComponentType.MANUALINPUT))
-                            //{
-                            //    return false;
-                            //}
 
                             if (!control.MANUAL_INPUT_DATA.DoubleTapDown())
                             {
@@ -237,12 +213,10 @@ namespace My_MemoPlatformer
                         {
                             return false;
                         }
-                        break;
                     case TransitionConditionType.DOUBLE_TAP_RIGHT:
                         {
                             return false;
                         }
-                        break;
                     case TransitionConditionType.TOUCHING_WEAPON:
                         {
                             if (control.animationProgress.collidingWeapons.Count == 0)
@@ -261,7 +235,7 @@ namespace My_MemoPlatformer
                                 return false;
                             }
 
-                            if (!control.animationProgress.holdingWeapon.name.Contains("Axe"))
+                            if (!control.animationProgress.holdingWeapon.name.Contains("Pickup"))
                             {
                                 return false;
                             }

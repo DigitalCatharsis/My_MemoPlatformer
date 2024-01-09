@@ -60,6 +60,7 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+
             characterState.Jump_Data.checkWallBlock = StartCheckingWallBlock();
 
             if (animator.GetInteger(HashManager.Instance.arrMainParams[(int)MainParameterType.TransitionIndex]) == 0)
@@ -91,6 +92,6 @@ namespace My_MemoPlatformer
             }
 
             return false;
-        }        
+        }
     }
 }

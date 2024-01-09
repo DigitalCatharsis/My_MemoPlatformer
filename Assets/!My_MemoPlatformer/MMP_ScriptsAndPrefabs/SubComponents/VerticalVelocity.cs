@@ -4,7 +4,7 @@ namespace My_MemoPlatformer
 {
     public class VerticalVelocity : SubComponent
     {
-        private VerticalVelocity_Data verticalVelocity_Data;
+        public VerticalVelocity_Data verticalVelocity_Data;
 
         private void Start()
         {

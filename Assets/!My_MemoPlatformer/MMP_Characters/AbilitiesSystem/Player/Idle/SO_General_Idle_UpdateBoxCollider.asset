@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SO_General_Idle_UpdateBoxCollider
   m_EditorClassIdentifier: 
   targetCenter: {x: 0, y: 0.915, z: 0}
-  centerUpdateSpeed: 20
+  centerUpdateSpeed: 30
   targetSize: {x: 1, y: 1.85, z: 0.4}
-  sizeUpdateSpeed: 20
+  sizeUpdateSpeed: 30

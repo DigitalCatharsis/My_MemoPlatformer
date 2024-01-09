@@ -72,8 +72,8 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_EditorHelpers\MMP_MaterialChaner\MaterialChanger.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SpikeTrap\Spike.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\Attack\NormalRagdollVelocity.cs" />
-    <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Managers\AttackManager.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\WallJump_Prep.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Managers\AttackManager.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\Turn180.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_CameraGame\CameraContoller.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Subcomponents_Data\MomentumCalculator_Data.cs" />
@@ -179,6 +179,7 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\CollisionSpheres.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\Jump.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\CollateralDamageInfo.cs" />
+    <Compile Include="Assets\Temp.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\UI_Events\ButtonScale.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\PlayerJump.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\Ragdoll.cs" />

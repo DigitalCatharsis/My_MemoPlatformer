@@ -1,23 +1,20 @@
-using My_MemoPlatformer;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph;
-using UnityEngine;
 
 namespace My_MemoPlatformer
 {
     public class PlayerAnimation : SubComponent
     {
-        Animation_Data playerAnimation_Data;
+        public Animation_Data animation_Data;
         void Start()
         {
-            playerAnimation_Data = new Animation_Data
+            animation_Data = new Animation_Data
             {
                 instantTransitionMade = false,
                 currentRunningAbilities = new Dictionary<CharacterAbility, int>(),
                 IsRunning = IsRunning,
             };
 
-            subComponentProcessor.animation_Data = playerAnimation_Data;
+            subComponentProcessor.animation_Data = animation_Data;
             subComponentProcessor.arrSubComponents[(int)SubComponentType.PLAYER_ANIMATION] = this;
         }
         public override void OnFixedUpdate()
@@ -45,7 +42,7 @@ namespace My_MemoPlatformer
         }
         private bool IsRunning(System.Type type) //ability is running now?
         {
-            foreach (KeyValuePair<CharacterAbility, int> data in playerAnimation_Data.currentRunningAbilities)
+            foreach (KeyValuePair<CharacterAbility, int> data in animation_Data.currentRunningAbilities)
             {
                 if (data.Key.GetType() == type)
                 {

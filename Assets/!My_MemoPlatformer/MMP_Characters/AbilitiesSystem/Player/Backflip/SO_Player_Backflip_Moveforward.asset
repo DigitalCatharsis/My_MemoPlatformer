@@ -12,10 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaff6f6f2abc0794896d70a63da7cbcf, type: 3}
   m_Name: SO_Player_Backflip_Moveforward
   m_EditorClassIdentifier: 
-  debug: 0
   allowEarlyTurn: 0
   lockDirection: 1
-  lockDirectionNextState: 1
   constant: 1
   speedGraph:
     serializedVersion: 2
@@ -23,53 +21,53 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0.0027943964
-      outSlope: 0.0027943964
+      inSlope: 0
+      outSlope: 0
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.2010465
-      value: 0.0005618036
-      inSlope: -0.022700934
-      outSlope: -0.022700934
+      time: 0.2
+      value: 0
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.3606787
-    - serializedVersion: 3
-      time: 0.2917009
-      value: 0.9967532
-      inSlope: 1.187113
-      outSlope: 1.187113
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.49022323
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.6433347
-      value: 0.97868425
-      inSlope: -0.00623357
-      outSlope: -0.00623357
+      time: 0.29086667
+      value: 1.0022812
+      inSlope: 0.9173771
+      outSlope: 0.9173771
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.35935083
+      outWeight: 0.22391951
     - serializedVersion: 3
-      time: 0.80120444
-      value: -0.0015568435
-      inSlope: 0.0012073335
-      outSlope: 0.0012073335
+      time: 0.6413061
+      value: 0.98281765
+      inSlope: -0.013652688
+      outSlope: -0.013652688
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.34906924
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0.00783138
-      outSlope: 0.00783138
+      inSlope: 0
+      outSlope: 0
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -77,7 +75,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  speed: -2.15
+  Speed: -2.15
   blockDistance: 0.1
   ignoreCharacterBox: 0
   ignoreStartTime: 0
@@ -85,4 +83,6 @@ MonoBehaviour:
   useMomentum: 0
   startingMomentum: 0
   maxMomentum: 0
+  StartFromPreviousMomentum: 0
   clearMomentumOnExit: 0
+  moveOnHit: 0

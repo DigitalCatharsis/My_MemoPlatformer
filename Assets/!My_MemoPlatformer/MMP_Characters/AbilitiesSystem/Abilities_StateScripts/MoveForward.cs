@@ -107,7 +107,6 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-
             if (clearMomentumOnExit)
             {
                 characterState.MomentumCalculator_Data.momentum = 0f;
