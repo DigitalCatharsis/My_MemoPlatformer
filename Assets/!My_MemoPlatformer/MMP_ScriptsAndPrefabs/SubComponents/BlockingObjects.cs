@@ -70,7 +70,7 @@ namespace My_MemoPlatformer
 
                     foreach (KeyValuePair<GameObject, GameObject> data in _upBlockingObjects)
                     {
-                        var c = CharacterManager.Instance.GetCharacter(data.Value.transform.root.gameObject);
+                        var c = CharacterManager.Instance.GetCharacter(data.Value.transform.gameObject);
 
                         if (c == null)
                         {
@@ -149,7 +149,7 @@ namespace My_MemoPlatformer
             {
                 foreach (KeyValuePair<GameObject, GameObject> data in _downBlockingObjects)
                 {
-                    var c = CharacterManager.Instance.GetCharacter(data.Value.transform.root.gameObject);
+                    var c = CharacterManager.Instance.GetCharacter(data.Value.transform.gameObject);
 
                     if (c != null)
                     {
@@ -304,7 +304,7 @@ namespace My_MemoPlatformer
 
             foreach (KeyValuePair<GameObject, GameObject> data in _frontBlockingObjects)
             {
-                CharacterControl c = CharacterManager.Instance.GetCharacter(data.Value.transform.root.gameObject);
+                CharacterControl c = CharacterManager.Instance.GetCharacter(data.Value.transform.gameObject);
 
                 if (c != null)
                 {

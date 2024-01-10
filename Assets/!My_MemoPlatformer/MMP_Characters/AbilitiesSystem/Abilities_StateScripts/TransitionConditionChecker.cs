@@ -167,9 +167,9 @@ namespace My_MemoPlatformer
                         {
                             List<GameObject> objs = control.BLOCKING_OBJ_DATA.GetFrontBlockingObjList();
 
-                            foreach (GameObject o in objs)
+                            foreach (var o in objs)
                             {
-                                Vector3 dir = o.transform.position - control.transform.position;
+                                var dir = o.transform.position - control.transform.position;
 
                                 if (dir.z > 0f && !control.moveRight)
                                 {

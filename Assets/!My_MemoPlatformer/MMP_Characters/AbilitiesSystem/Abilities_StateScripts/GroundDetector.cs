@@ -63,7 +63,7 @@ namespace My_MemoPlatformer
 
                         if (c == null)
                         {
-                            control.GROUND_DATA.ground = blockingObj.transform.root.gameObject; //что колайдерит bottom сферы
+                            control.GROUND_DATA.ground = blockingObj.transform.gameObject; //что колайдерит bottom сферы
                             control.BOX_COLLIDER_DATA.landingPosition = new Vector3(
                                 0f, 
                                 control.BLOCKING_OBJ_DATA.raycastContactPoint.y, 

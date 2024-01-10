@@ -22,7 +22,7 @@ namespace My_MemoPlatformer
                     && !TrapSpikes.IsTrap(hit.collider.gameObject))
                 {
                     collisionPoint = hit.point;
-                    return hit.collider.transform.root.gameObject;
+                    return hit.collider.transform.gameObject;
                 }
                 else  
                 {
@@ -42,7 +42,7 @@ namespace My_MemoPlatformer
             }
             else
             {
-                var blockingCharacter = CharacterManager.Instance.GetCharacter(col.transform.root.root.gameObject);
+                var blockingCharacter = CharacterManager.Instance.GetCharacter(col.transform.root.gameObject);
 
                 if (blockingCharacter == null)
                 {
