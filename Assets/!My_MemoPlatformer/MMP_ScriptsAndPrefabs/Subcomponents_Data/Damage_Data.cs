@@ -8,7 +8,7 @@ namespace My_MemoPlatformer
         public AttackCondition blockedAttack;
         public float hp;
         public Attack airStompAttack;
-        public Attack AxeThrow;
+        public Attack weaponThrow;
 
         public DamageTaken damageTaken;
 

@@ -8,8 +8,11 @@ namespace My_MemoPlatformer
         public Damage_Data damage_Data;
 
         [Header("Damage Setup")]
-        [SerializeField] private Attack _axeThrow;
+        [SerializeField] private Attack _weaponThrow;
         [SerializeField] private Attack _airStompAttack;
+
+        [Header("HP Setup")]
+        [SerializeField] private float _hp;
 
         static string VFX_Prefix = "VFX";
 
@@ -18,9 +21,9 @@ namespace My_MemoPlatformer
             damage_Data = new Damage_Data
             {
                 blockedAttack = null,
-                hp = 1f,
+                hp = _hp,
                 airStompAttack = _airStompAttack,
-                AxeThrow = _axeThrow,
+                weaponThrow = _weaponThrow,
 
                 damageTaken = new DamageTaken(attacker: null, attack: null, damage_TG: null, damager: null, incomingVelocity: Vector3.zero),
 

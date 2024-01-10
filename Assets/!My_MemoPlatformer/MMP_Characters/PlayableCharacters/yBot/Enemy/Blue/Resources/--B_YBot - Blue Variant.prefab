@@ -454,6 +454,14 @@ PrefabInstance:
       propertyPath: m_Interpolate
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8443160812094211633, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
+      propertyPath: _hp
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8443160812094211633, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
+      propertyPath: damage_Data.hp
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8795519861354809597, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_IsActive
       value: 0

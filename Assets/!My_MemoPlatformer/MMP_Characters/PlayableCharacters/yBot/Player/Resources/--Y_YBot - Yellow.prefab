@@ -123,13 +123,6 @@ MonoBehaviour:
   ledgeCalibration: {x: 0, y: -2.3, z: -0.1}
   collider1: {fileID: 3335105432292074732}
   collider2: {fileID: 4451637664484933198}
-  ledgeTriggerStateNames:
-  - Jump_Running_Fall
-  - Jump_Normal
-  - Jump_Running
-  - Fall
-  - WallSlide
-  - WallJump
 --- !u!1 &60663959005926749
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +201,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ragdoll_Data:
     ragdollTriggered: 0
-    bodyParts: []
+    arrBodyParts: []
+    flyingRagdollData:
+      isTriggered: 0
+      attacker: {fileID: 0}
 --- !u!1 &708256176615141862
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,6 +283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _doubleTaps: 
   _upKeys: 
+  _doubleTapTime: 0.18
 --- !u!1 &876816306485884224
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,6 +359,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fee4fb8d5e8653449859c1d1257253d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  verticalVelocity_Data:
+    noJumpCancel: 0
+    maxWallSlideVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &1124313125906359194
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,6 +1353,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59fc8408911d7164092d3a152b832967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animation_Data:
+    instantTransitionMade: 0
 --- !u!1 &2806442753808599445
 GameObject:
   m_ObjectHideFlags: 0
@@ -1620,7 +1622,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee80179171b79c54e86b124755c65156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
   moveUp: 0
   moveDown: 0
   moveRight: 0
@@ -1682,7 +1683,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 114
+  m_Constraints: 112
   m_CollisionDetection: 2
 --- !u!114 &1747402107
 MonoBehaviour:
@@ -1702,7 +1703,7 @@ MonoBehaviour:
   latestMoveUpScript: {fileID: 0}
   isIgnoreCharacterTime: 0
   lockTransition: 0
-  HoldingWeapon: {fileID: 0}
+  holdingWeapon: {fileID: 0}
 --- !u!114 &8772349004802611497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2664,7 +2665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34a11615e00c33f4a9fe37e8e222824d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockingObjData:
+  blockingObj_Data:
     raycastContactPoint: {x: 0, y: 0, z: 0}
     frontBlockingDictionaryCount: 0
     upBlockingDictionaryCount: 0
@@ -3529,21 +3530,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ce156c695f6fa4dadd5a2b226dc977, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageDetector_Data:
-    attacker: {fileID: 0}
-    attack: {fileID: 0}
-    damagedTrigger: {fileID: 0}
-    attackingPart: {fileID: 0}
+  damage_Data:
     blockedAttack: {fileID: 0}
     hp: 0
-    AxeThrow: {fileID: 0}
     airStompAttack: {fileID: 0}
-  _debug: 0
-  _hitReactionList:
-  - {fileID: 9100000, guid: e06831303a0df0f4eabcb778560a1ea8, type: 2}
-  - {fileID: 9100000, guid: 59bd317eca619a2499e6be92d3e5c518, type: 2}
-  AxeThrow: {fileID: 11400000, guid: a887d67403fa15e4f9758370f2bce396, type: 2}
-  airStompAttack: {fileID: 11400000, guid: 270577db070e447499e094b119ff8aa1, type: 2}
+    weaponThrow: {fileID: 0}
+    damageTaken:
+      mAttacker: {fileID: 0}
+      mAttack: {fileID: 0}
+      mDamager: {fileID: 0}
+      mDamage_TG: {fileID: 0}
+      mIncomingVelocity: {x: 0, y: 0, z: 0}
+  _weaponThrow: {fileID: 11400000, guid: a887d67403fa15e4f9758370f2bce396, type: 2}
+  _airStompAttack: {fileID: 11400000, guid: 270577db070e447499e094b119ff8aa1, type: 2}
+  _hp: 5
 --- !u!1 &7020094712125406493
 GameObject:
   m_ObjectHideFlags: 0
@@ -3588,7 +3588,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5064a9a467d2e9b4d9b5d92fed279ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debug: 0
+  _boxCollider_Data:
+    isUpdatingSpheres: 0
+    isLanding: 0
+    size_Update_Speed: 0
+    center_Update_Speed: 0
+    targetCenter: {x: 0, y: 0, z: 0}
+    targetSize: {x: 0, y: 0, z: 0}
+    landingPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &7180817089236728352
 GameObject:
   m_ObjectHideFlags: 0
@@ -4077,18 +4084,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 398827a419a02cc46b79a4688f0f853a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrSubComponents: []
   control: {fileID: 0}
-  blockingObjData:
+  blockingObj_Data:
     raycastContactPoint: {x: 0, y: 0, z: 0}
     frontBlockingDictionaryCount: 0
     upBlockingDictionaryCount: 0
-  ledgeGrabData:
+  ledgeGrab_Data:
     isGrabbingLedge: 0
-  ragdollData:
+  ragdoll_Data:
     ragdollTriggered: 0
-    bodyParts: []
+    arrBodyParts: []
+    flyingRagdollData:
+      isTriggered: 0
+      attacker: {fileID: 0}
   boxCollider_Data:
-    updatingSpheres: 0
+    isUpdatingSpheres: 0
     isLanding: 0
     size_Update_Speed: 0
     center_Update_Speed: 0
@@ -4098,22 +4109,23 @@ MonoBehaviour:
   verticalVelocity_Data:
     noJumpCancel: 0
     maxWallSlideVelocity: {x: 0, y: 0, z: 0}
-  damageDetector_Data:
-    attacker: {fileID: 0}
-    attack: {fileID: 0}
-    damagedTrigger: {fileID: 0}
-    attackingPart: {fileID: 0}
+  damage_Data:
     blockedAttack: {fileID: 0}
     hp: 0
-    AxeThrow: {fileID: 0}
     airStompAttack: {fileID: 0}
+    weaponThrow: {fileID: 0}
+    damageTaken:
+      mAttacker: {fileID: 0}
+      mAttack: {fileID: 0}
+      mDamager: {fileID: 0}
+      mDamage_TG: {fileID: 0}
+      mIncomingVelocity: {x: 0, y: 0, z: 0}
   momentumCalculator_Data:
     momentum: 0
-  playerRotation_Data:
-    lockEarlyTurn: 0
-    lockDirectionNextState: 0
-  playerJump_Data:
-    jumped: 0
+  rotation_Data:
+    lockTurn: 0
+    unlockTiming: 0
+  jump_Data:
     canWallJump: 0
     checkWallBlock: 0
   collisionSpheres_Data:
@@ -4126,11 +4138,13 @@ MonoBehaviour:
   instaKill_Data:
     Animation_Assassin: {fileID: 0}
     Animation_Victim: {fileID: 0}
-  playerGround_Data:
+  ground_Data:
     ground: {fileID: 0}
-  playerAttack_Data:
+  attack_Data:
     attackTriggered: 0
     attackButtonIsReset: 0
+  animation_Data:
+    instantTransitionMade: 0
 --- !u!1 &7646921906402090757
 GameObject:
   m_ObjectHideFlags: 0

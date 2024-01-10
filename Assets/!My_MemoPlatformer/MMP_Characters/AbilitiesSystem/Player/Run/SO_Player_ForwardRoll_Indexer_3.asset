@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9529fa24d765c64bbdd4bdf25d51b94, type: 3}
-  m_Name: SO_Player_Shoryken_DownSmash_1
+  m_Name: SO_Player_ForwardRoll_Indexer_3
   m_EditorClassIdentifier: 
-  Index: 1
-  transitionConditions: 04000000
+  Index: 3
+  transitionConditions: 00000000

@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 17178801}
   - component: {fileID: 17178800}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Debug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scriptableObject: {fileID: 11400000, guid: c1fb774b741691c46a50df5ec68d5b80, type: 2}
+  test: 1
 --- !u!4 &17178801
 Transform:
   m_ObjectHideFlags: 0
@@ -4092,9 +4093,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6612290451445593296, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
+      propertyPath: doFlyingKick
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6860232510345727460, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5693,9 +5698,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6612290451445593296, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
+      propertyPath: doFlyingKick
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6860232510345727460, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

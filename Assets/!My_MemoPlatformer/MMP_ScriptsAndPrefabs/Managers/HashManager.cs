@@ -81,7 +81,7 @@ namespace My_MemoPlatformer
         Running_Jump = 3,
         Run_Stop_InPlace = 7,
 
-        AirCombo_Smash = 8,
+        //AirCombo_Smash = 8,
 
         COUNT,
     }

@@ -5,7 +5,6 @@ namespace My_MemoPlatformer
 {
     public class TriggerDetector : MonoBehaviour
     {
-        [SerializeField] private bool _debug;
         public CharacterControl control;
         public Collider triggerCollider;
         public Rigidbody rigidBody;
@@ -77,7 +76,7 @@ namespace My_MemoPlatformer
 
         private void CheckCollidingWeapons(Collider col)
         {
-            MeleeWeapon w = col.transform.root.gameObject.GetComponent<MeleeWeapon>();
+            var w = col.transform.root.gameObject.GetComponent<MeleeWeapon>();
 
             if (w == null)
             {
@@ -88,12 +87,12 @@ namespace My_MemoPlatformer
             {
                 if (w.thrower != control)
                 {
-                    AttackCondition info = new AttackCondition();
-                    info.CopyInfo(control.DAMAGE_DATA.AxeThrow, control);
+                    var info = new AttackCondition();
+                    info.CopyInfo(control.DAMAGE_DATA.weaponThrow, control);
 
                     control.DAMAGE_DATA.damageTaken = new DamageTaken(
                         w.thrower,
-                        control.DAMAGE_DATA.AxeThrow,
+                        control.DAMAGE_DATA.weaponThrow,
                         this,
                         null,
                         Vector3.zero);
@@ -186,7 +185,7 @@ namespace My_MemoPlatformer
                 {
                     var mag = Vector3.SqrMagnitude(col.attachedRigidbody.velocity);
 
-                    if (_debug)
+                    if (DebugContainer.Instance.debug_TriggerDetector)
                     {
                         Debug.Log("incoming ragdoll: " + attacker.gameObject.name + "\n" + "Velocity: " + mag);
                     }

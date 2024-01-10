@@ -135,6 +135,7 @@ namespace My_MemoPlatformer
                 TriggerDetector det = ragdoll_Data.arrBodyParts[i].GetComponent<TriggerDetector>();
                 ragdoll_Data.arrBodyParts[i].attachedRigidbody.MovePosition(det.lastPosition);
                 ragdoll_Data.arrBodyParts[i].attachedRigidbody.MoveRotation(det.lastRotation);
+                ragdoll_Data.arrBodyParts[i].attachedRigidbody.isKinematic = false;
                 ragdoll_Data.arrBodyParts[i].attachedRigidbody.velocity = Vector3.zero;
             }
 

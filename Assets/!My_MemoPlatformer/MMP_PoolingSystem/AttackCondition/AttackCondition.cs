@@ -7,7 +7,7 @@ namespace My_MemoPlatformer
     {
         public CharacterControl attacker = null;
         public Attack attackAbility;
-        public List<AttackPartType> attackParts = new List<AttackPartType>(); //name of the bodypards that gonna carry the attack
+        public List<AttackPartType> attackParts = new List<AttackPartType>(); //name of the bodypards that gonna carry the attack (got hit)
         public DeathType deathType;
         public bool mustCollide;
         public bool mustFaceAttacker;

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
+    [Serializable]
     //TODO: прицепить в инспектор
     public class DebugContainer : Singleton<DebugContainer>
     {
@@ -15,6 +16,7 @@ namespace My_MemoPlatformer
         public bool debug_SpawnObjects;
         public bool debug_InputManager;
         public bool debug_TransitionTiming;
+        public bool debug_TriggerDetector;
     }
 }
 

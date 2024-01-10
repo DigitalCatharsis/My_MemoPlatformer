@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e2ad0c09a8c084488ac77217f04cefb, type: 3}
-  m_Name: AbilitySearch
+  m_Script: {fileID: 11500000, guid: f9529fa24d765c64bbdd4bdf25d51b94, type: 3}
+  m_Name: SO_Player_Indexer_WallJump-HangingIdle_1
   m_EditorClassIdentifier: 
-  controllerToSearch: {fileID: 9100000, guid: 98f675c7edf570241b8ceabe58cf5a2f, type: 2}
-  abilityToSearch: {fileID: 11400000, guid: 1e68ed9406e1f0e44a3b51232e252d5a, type: 2}
+  Index: 1
+  transitionConditions: 0000000006000000

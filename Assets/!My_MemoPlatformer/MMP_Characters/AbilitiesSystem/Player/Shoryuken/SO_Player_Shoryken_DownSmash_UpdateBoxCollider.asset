@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9529fa24d765c64bbdd4bdf25d51b94, type: 3}
-  m_Name: SO_Player_Indexer_WallSlide-LedgeGrap_2
+  m_Script: {fileID: 11500000, guid: 80ed62a8fe4bde449b481791cd975f35, type: 3}
+  m_Name: SO_Player_Shoryken_DownSmash_UpdateBoxCollider
   m_EditorClassIdentifier: 
-  Index: 2
-  transitionConditions: 06000000
+  targetCenter: {x: 0, y: 0.915, z: 0}
+  centerUpdateSpeed: 10
+  targetSize: {x: 1, y: 1.85, z: 0.4}
+  sizeUpdateSpeed: 10

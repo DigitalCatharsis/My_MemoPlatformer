@@ -17,7 +17,7 @@ MonoBehaviour:
   attackParts: 
   mustCollide: 0
   mustFaceAttacker: 0
-  lethalRange: 1
+  lethalRange: 5
   maxHits: 3
   damage: 3
   normalRagdollVelocity:
@@ -27,7 +27,7 @@ MonoBehaviour:
   collateralRagdollVelocity:
     forwardForce: 0
     rightForce: 0
-    upForce: 0
+    upForce: 3000
   useDeathParticles: 0
   particleType: 0
   collateralDamageInfo:

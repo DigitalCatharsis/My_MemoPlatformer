@@ -29,6 +29,6 @@ MonoBehaviour:
     rightForce: 0
     upForce: 0
   useDeathParticles: 0
-  particleType: 0
+  particleType: 2
   collateralDamageInfo:
     createCollateral: 0

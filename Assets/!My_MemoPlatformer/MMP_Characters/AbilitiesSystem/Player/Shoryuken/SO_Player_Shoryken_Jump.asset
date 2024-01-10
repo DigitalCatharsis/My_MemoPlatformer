@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b095a8e4be93540459b40b21115b915c, type: 3}
   m_Name: SO_Player_Shoryken_Jump
   m_EditorClassIdentifier: 
+  jumpIndex: 0
   jumpTiming: 0.6
-  jumpForce: 420
-  canselPull: 0
+  jumpForce: 460
+  clearPreviousVelocity: 0
+  cancelPull: 0

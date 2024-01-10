@@ -47,7 +47,7 @@ namespace My_MemoPlatformer
 
         private bool IsLedgeGrabCondition()
         {
-            if (!control.jump)
+            if (!control.moveUp)
             {
                 return false;
             }
