@@ -199,7 +199,7 @@ namespace My_MemoPlatformer
 
             for (int i = 0; i < _frontSpheresArray.Length; i++)
             {
-                GameObject blockingObj = CollisionDetection.GetCollidingObject(
+                var blockingObj = CollisionDetection.GetCollidingObject(
                     control, _frontSpheresArray[i], this.transform.forward * _dirBlock,
                     control.animationProgress.latestMoveForwardScript.blockDistance,
                     ref control.BLOCKING_OBJ_DATA.raycastContactPoint);

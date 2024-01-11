@@ -4,7 +4,7 @@ namespace My_MemoPlatformer
 {
     public class PlayerRotation : SubComponent
     {
-        Rotation_Data rotation_Data;
+        public Rotation_Data rotation_Data;
         static string L_CharacterSelect = "L_CharacterSelect";
         private void Start()
         {

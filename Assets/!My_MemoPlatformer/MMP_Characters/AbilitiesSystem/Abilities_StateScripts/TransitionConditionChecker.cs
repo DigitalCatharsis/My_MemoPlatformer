@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using Unity.Burst.Intrinsics;
+using UnityEditor;
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -139,6 +142,43 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.NOT_BLOCKED_BY_WALL:
                         {
+                            var SI = control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
+
+                            for (int i = 0; i < (int)TempAbilitiesList.COUNT; i++)
+                            {
+                                if (SI.shortNameHash == HashManager.Instance.arrTempAbilitiesList[i])
+                                {
+                                    var ability = (TempAbilitiesList)i;
+                                    Debug.Log($"<color=magenta>{ability}</color>");
+                                }
+                            }
+
+                            Debug.Log("<color=Cyan>Some of current abilities are:</color>");
+
+                            foreach (var ability in control.ANIMATION_DATA.currentRunningAbilities)
+                            {
+                                Debug.Log($"<color=Cyan>{ability}</color>");
+                            }
+
+
+
+                            //Debug.Log($"<color=magenta>=================================</color>");
+
+                            //Animator animator = control.skinnedMeshAnimator;
+                            //string assetPath = AssetDatabase.GetAssetPath(animator.runtimeAnimatorController);
+                            //AnimatorController controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(assetPath);
+                            //var behaviors = controller.GetBehaviours<CharacterState>();
+
+                            //foreach (CharacterState state in behaviors)
+                            //{
+                            //    foreach (CharacterAbility ability in state.arrAbilities)
+                            //    {
+
+                            //    }
+                            //}
+
+                            //Debug.Log($"<color=magenta>=================================</color>");
+
                             bool AllIsOverlapping = true;
 
                             for (int i = 0; i < control.COLLISION_SPHERE_DATA.frontOverlapCheckers.Length; i++)
@@ -146,6 +186,29 @@ namespace My_MemoPlatformer
                                 if (!control.COLLISION_SPHERE_DATA.frontOverlapCheckers[i].objIsOverlapping)
                                 {
                                     AllIsOverlapping = false;
+
+                                    if (DebugContainer_Data.Instance.debug_WallOverlappingStatus)
+                                    {
+                                        Debug.Log($"<color=red>{control.COLLISION_SPHERE_DATA.frontOverlapCheckers[i].name}_{i} is NOT overlapping </color>");
+
+                                        foreach (var overLapedObject in control.COLLISION_SPHERE_DATA.frontOverlapCheckers[i].arrColliders)
+                                        {
+                                            Debug.Log($"<color=yellow>{control.COLLISION_SPHERE_DATA.frontOverlapCheckers[i].name}_{i} IS overlapping with {overLapedObject.name}</color>");
+                                        }
+                                        //EditorApplication.isPaused = true;
+                                    }
+                                }
+                                else
+                                {
+                                    if (DebugContainer_Data.Instance.debug_WallOverlappingStatus)
+                                    {
+                                        Debug.Log($"<color=green>{control.COLLISION_SPHERE_DATA.frontOverlapCheckers[i].name}_{i} IS overlapping </color>");
+
+                                        foreach (var overLapedObject in control.COLLISION_SPHERE_DATA.frontOverlapCheckers[i].arrColliders)
+                                        {
+                                            Debug.Log($"<color=yellow>{control.COLLISION_SPHERE_DATA.frontOverlapCheckers[i].name}_{i} IS overlapping with {overLapedObject.name}</color>");
+                                        }
+                                    }
                                 }
                             }
 
@@ -165,11 +228,11 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.MOVING_TO_BLOCKING_OBJ:
                         {
-                            List<GameObject> objs = control.BLOCKING_OBJ_DATA.GetFrontBlockingObjList();
+                            List<GameObject> blockingObjects = control.BLOCKING_OBJ_DATA.GetFrontBlockingObjList();
 
-                            foreach (var o in objs)
+                            foreach (var blockingObject in blockingObjects)
                             {
-                                var dir = o.transform.position - control.transform.position;
+                                var dir = blockingObject.transform.position - control.transform.position;
 
                                 if (dir.z > 0f && !control.moveRight)
                                 {

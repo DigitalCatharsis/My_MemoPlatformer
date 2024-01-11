@@ -3,6 +3,48 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
+    public enum TempAbilitiesList
+    {
+        Attack,
+        Block,
+        CheckMovement,
+        CheckRunningTurn,
+        CheckTurbo,
+        CheckTurboAndMovement,
+        ForceTransition,
+        GroundDetector,
+        Idle,
+        InstantTransition,
+        Jump,
+        JumpPrep,
+        Landing,
+        LockTransition,
+        LockTurn,
+        MoveForward,
+        MoveUp,
+        ResetLocalPosition,
+        ShakeCamera,
+        SpawnObject,
+        SwitchAnimator,
+        ToggleBoxCollider,
+        ToggleGravity,
+        TransitionConditionChecker,
+        TransitionIndexer,
+        Turn180,
+        TurnOnRootMotion,
+        UpdateBoxCollider,
+        WallJump_Prep,
+        WallSlide,
+        WeaponPickup,
+        WeaponPutDown,
+        WeaponThrow,
+        FallPlatform,
+        JumpPlatform,
+        SendPathfindingAgent,
+        StartWalking,
+        COUNT
+    }
+
     public enum MainParameterType
     {
         Move,
@@ -111,7 +153,7 @@ namespace My_MemoPlatformer
         Shake,
     }
 
-    public class HashManager : Singleton<HashManager> 
+    public class HashManager : Singleton<HashManager>
     {
         public int[] arrMainParams = new int[(int)MainParameterType.COUNT];
         public int[] arrCameraParams = new int[(int)CameraTrigger.COUNT];
@@ -123,6 +165,8 @@ namespace My_MemoPlatformer
 
         public int[] arrInstantTransitionStates = new int[(int)Instant_Transition_States.COUNT];
         public int[] arrLedgeTriggerStates = new int[(int)Ledge_Trigger_States.COUNT];
+
+        public int[] arrTempAbilitiesList = new int[(int)TempAbilitiesList.COUNT];
 
         public Dictionary<Camera_States, int> dicCameraStates = new Dictionary<Camera_States, int>();
 
@@ -171,6 +215,12 @@ namespace My_MemoPlatformer
             for (int i = 0; i < arrLedgeTriggerStates.Length; i++)
             {
                 arrLedgeTriggerStates[i] = Animator.StringToHash(((Ledge_Trigger_States)i).ToString());
+            }
+
+            // ledge trigger states
+            for (int i = 0; i < arrTempAbilitiesList.Length; i++)
+            {
+                arrTempAbilitiesList[i] = Animator.StringToHash(((TempAbilitiesList)i).ToString());
             }
 
             // camera states

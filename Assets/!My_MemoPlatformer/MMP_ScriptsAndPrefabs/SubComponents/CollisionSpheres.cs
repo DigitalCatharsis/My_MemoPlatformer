@@ -93,7 +93,6 @@ namespace My_MemoPlatformer
             //add every overlapChecker
             var arr = this.gameObject.GetComponentsInChildren<OverlapChecker>();
             collisionSpheres_Data.allOverlapCheckers = arr;
-
         }
 
         private void Reposition_FrontSpheres()

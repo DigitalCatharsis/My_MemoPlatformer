@@ -2525,7 +2525,7 @@ AnimatorStateMachine:
     m_Position: {x: 750, y: 210, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: -542776931407400156}
-    m_Position: {x: -140, y: 600, z: 0}
+    m_Position: {x: -130, y: 550, z: 0}
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
@@ -3254,9 +3254,9 @@ MonoBehaviour:
   arrAbilities:
   - {fileID: 11400000, guid: 47e26e7df83d0e5408c55a85213b3e4d, type: 2}
   - {fileID: 11400000, guid: c12ed0cc89ec7e848be4b097c2daaaad, type: 2}
+  - {fileID: 11400000, guid: e85a5f6f9551dc441b1b754f4ea81e40, type: 2}
   - {fileID: 11400000, guid: 1e41e4c93de64a14e928e5d4a26e5f02, type: 2}
   - {fileID: 11400000, guid: f5aaebf3793cca141b8e09a3e31f1ebf, type: 2}
-  - {fileID: 11400000, guid: e85a5f6f9551dc441b1b754f4ea81e40, type: 2}
   - {fileID: 11400000, guid: 47ad392040eff284280dbd6b98410659, type: 2}
   - {fileID: 11400000, guid: bc042e2c8ce407e4fa23d9aa4446f5d0, type: 2}
 --- !u!1101 &1829736818955722221
@@ -5822,13 +5822,13 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Turbo
-    m_EventTreshold: 0
-  - m_ConditionMode: 1
     m_ConditionEvent: Grounded
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Move
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: Turbo
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8679382419700747006}

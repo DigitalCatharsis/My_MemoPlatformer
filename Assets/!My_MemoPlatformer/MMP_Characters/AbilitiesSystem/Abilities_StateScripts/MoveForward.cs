@@ -103,6 +103,8 @@ namespace My_MemoPlatformer
                     ControlledMove(characterState.characterControl, stateInfo);
                 }
             }
+
+            //Debug.Log($"<color=red>{IsBlocked(characterState.characterControl)}</color>");
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -151,7 +153,7 @@ namespace My_MemoPlatformer
                 else
                 {
                     control.MoveForward(Speed, speedGraph.Evaluate(stateInfo.normalizedTime));
-                }               
+                }
             }
         }
 
@@ -177,10 +179,10 @@ namespace My_MemoPlatformer
 
             if (control.moveLeft)
             {
-                    if (!IsBlocked(control))
-                    {
-                        control.MoveForward(Speed, speedGraph.Evaluate(stateInfo.normalizedTime));
-                    }
+                if (!IsBlocked(control))
+                {
+                    control.MoveForward(Speed, speedGraph.Evaluate(stateInfo.normalizedTime));
+                }
             }
             CheckTurn(control);
         }

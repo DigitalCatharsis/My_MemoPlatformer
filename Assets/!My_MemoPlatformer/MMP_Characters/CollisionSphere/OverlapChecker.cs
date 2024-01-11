@@ -20,7 +20,7 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (_control.JUMP_DATA.checkWallBlock)
+            if (_control.JUMP_DATA.checkWallBlock)  //if transition condition
             {
                 if (_control.COLLISION_SPHERE_DATA.FrontOverlapCheckerContains(this))
                 {
