@@ -10,8 +10,8 @@ namespace My_MemoPlatformer
 
         [Header("Ledge Setup")]
         [SerializeField] private Vector3 ledgeCalibration = new Vector3();  //diffirence (offset) when we change character. (Bones changing)
-        [SerializeField] private LedgeCollider collider1; //bottom
-        [SerializeField] private LedgeCollider collider2; //top
+        public LedgeCollider collider1; //bottom
+        public LedgeCollider collider2; //top
 
         private void Start()
         {
