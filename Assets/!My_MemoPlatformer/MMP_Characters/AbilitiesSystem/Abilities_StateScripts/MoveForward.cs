@@ -62,7 +62,7 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (DebugContainer.Instance.debug_MoveForward)
+            if (DebugContainer_Data.Instance.debug_MoveForward)
             {
                 Debug.Log(stateInfo.normalizedTime);
             }

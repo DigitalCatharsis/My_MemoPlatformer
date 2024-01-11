@@ -47,7 +47,7 @@ namespace My_MemoPlatformer
 
             var obj = PoolManager.Instance.GetObject(objectType);
 
-            if (DebugContainer.Instance.debug_SpawnObjects)
+            if (DebugContainer_Data.Instance.debug_SpawnObjects)
             {
                 Debug.Log("spawning " + objectType.ToString() + " | looking for: " + parentObjectName);
             }

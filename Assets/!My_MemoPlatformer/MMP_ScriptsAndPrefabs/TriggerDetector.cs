@@ -185,7 +185,7 @@ namespace My_MemoPlatformer
                 {
                     var mag = Vector3.SqrMagnitude(col.attachedRigidbody.velocity);
 
-                    if (DebugContainer.Instance.debug_TriggerDetector)
+                    if (DebugContainer_Data.Instance.debug_TriggerDetector)
                     {
                         Debug.Log("incoming ragdoll: " + attacker.gameObject.name + "\n" + "Velocity: " + mag);
                     }

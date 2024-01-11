@@ -45,14 +45,14 @@ namespace My_MemoPlatformer
 
         void MakeJump(CharacterControl control)
         {
-            if (DebugContainer.Instance.debug_Jump)
+            if (DebugContainer_Data.Instance.debug_Jump)
             {
                 Debug.Log("Making jump: " + this.name);
             }
 
             if (control.JUMP_DATA.dicJumped[jumpIndex])
             {
-                if (DebugContainer.Instance.debug_Jump)
+                if (DebugContainer_Data.Instance.debug_Jump)
                 {
                     Debug.Log("Preventing double jump");
                 }

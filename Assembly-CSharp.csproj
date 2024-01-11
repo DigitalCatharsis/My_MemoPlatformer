@@ -85,9 +85,9 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\ToggleGravity.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_PoolingSystem\AttackCondition\AttackCondition.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Managers\PoolManager.cs" />
-    <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\DebugContainer\DebugContainer.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\SendPathfindingAgent.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\Death\Ragdoll\TriggerRagdoll.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\DebugContainer\DebugHelper.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\LedgeChecker.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\AI\RestartAI.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\CollisionDetection.cs" />
@@ -178,8 +178,8 @@
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\CollisionSpheres.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\Jump.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\DebugContainer\DebugContainer_Data.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\CollateralDamageInfo.cs" />
-    <Compile Include="Assets\Temp.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\UI_Events\ButtonScale.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\PlayerJump.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\Ragdoll.cs" />

@@ -197,7 +197,7 @@ namespace My_MemoPlatformer
 
         private void SetCustomKey(InputKeyType inputKey, KeyCode key)
         {
-            if (DebugContainer.Instance.debug_InputManager)
+            if (DebugContainer_Data.Instance.debug_InputManager)
             {
                 Debug.Log("Key changed: " + inputKey.ToString() + " -> " + key.ToString());
             }

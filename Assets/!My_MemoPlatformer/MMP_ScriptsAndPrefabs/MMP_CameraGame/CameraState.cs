@@ -62,7 +62,7 @@ namespace My_MemoPlatformer
             {
                 if (Mathf.Abs(_transposer.m_FollowOffset.x - _zoomOutOffsetX) > 0.1f)
                 {
-                    if (DebugContainer.Instance.debug_CameraState)
+                    if (DebugContainer_Data.Instance.debug_CameraState)
                     {
                         Debug.Log("lerping zoom out");
                     }
@@ -77,7 +77,7 @@ namespace My_MemoPlatformer
             {
                 if (Mathf.Abs(_transposer.m_FollowOffset.x - _defaultOffsetX) > 0.1f)
                 {
-                    if (DebugContainer.Instance.debug_CameraState)
+                    if (DebugContainer_Data.Instance.debug_CameraState)
                     {
                         Debug.Log("lerping zoom int (back to default)");
                     }

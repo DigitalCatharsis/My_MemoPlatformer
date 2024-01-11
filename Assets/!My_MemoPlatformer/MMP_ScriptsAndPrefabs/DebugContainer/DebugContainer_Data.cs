@@ -5,7 +5,7 @@ namespace My_MemoPlatformer
 {
     [Serializable]
     //TODO: прицепить в инспектор
-    public class DebugContainer : Singleton<DebugContainer>
+    public class DebugContainer_Data : Singleton<DebugContainer_Data>
     {
         public bool debug_CameraState;
         public bool debug_Attack;

@@ -88,7 +88,7 @@ namespace My_MemoPlatformer
 
                     if (!info.isRegistered && info.attackAbility == this)
                     {
-                        if (DebugContainer.Instance.debug_Attack)
+                        if (DebugContainer_Data.Instance.debug_Attack)
                         {
                             Debug.Log(this.name + " registered: " + stateInfo.normalizedTime);
                         }
@@ -122,7 +122,7 @@ namespace My_MemoPlatformer
                             }
                         }
 
-                        if (DebugContainer.Instance.debug_Attack)
+                        if (DebugContainer_Data.Instance.debug_Attack)
                         {
                             Debug.Log(this.name + " de-registered: " + stateInfo.normalizedTime);
                         }

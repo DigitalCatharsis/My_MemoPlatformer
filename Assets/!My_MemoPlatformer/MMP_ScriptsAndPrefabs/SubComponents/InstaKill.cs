@@ -86,7 +86,7 @@ namespace My_MemoPlatformer
                         continue;
                     }
 
-                    if (DebugContainer.Instance.debug_Instakill)
+                    if (DebugContainer_Data.Instance.debug_Instakill)
                     {
                         Debug.Log("InstaKill");
                     }

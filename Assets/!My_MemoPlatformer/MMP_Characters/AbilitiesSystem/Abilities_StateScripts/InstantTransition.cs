@@ -43,7 +43,7 @@ namespace My_MemoPlatformer
             }
             else
             {
-                if (DebugContainer.Instance.debug_TransitionTiming)
+                if (DebugContainer_Data.Instance.debug_TransitionTiming)
                 {
                     Debug.Log("Instant transition to: " + transitionTo.ToString() + " - CrossFade: " + crossFade);
                 }

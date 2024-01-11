@@ -154,7 +154,7 @@ namespace My_MemoPlatformer
 
                 if (Vector3.SqrMagnitude(incomingVelocity) > 0.0001f)
                 {
-                    if (DebugContainer.Instance.debug_Ragdoll)
+                    if (DebugContainer_Data.Instance.debug_Ragdoll)
                     {
                         Debug.Log(control.gameObject.name + ": taking damage from ragdoll");
                     }
