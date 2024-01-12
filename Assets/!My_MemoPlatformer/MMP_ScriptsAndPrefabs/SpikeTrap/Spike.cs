@@ -9,6 +9,7 @@ namespace My_MemoPlatformer
         {
             if (this.transform.localPosition.y < 0f)
             {
+                Debug.Log("<color=Red>SPIKES!!!!!!!</color>");
                 StartCoroutine(_Shoot());
             }
         }

@@ -170,9 +170,16 @@ namespace My_MemoPlatformer
 
         public float GetStartSphereHeight()
         {
-            Vector3 vec = _control.transform.position - pathfindingAgent.startSphere.transform.position;
+            var result = Mathf.Abs((_control.transform.position - pathfindingAgent.startSphere.transform.position).y);
 
-            return Mathf.Abs(vec.y);
+            return result;
+        }
+
+        public float GetEndSphereHeight()
+        {
+            var result = Mathf.Abs((_control.transform.position - pathfindingAgent.endSphere.transform.position).y);
+
+            return result;
         }
 
         public bool EndSphereIsHigher()
@@ -222,20 +229,20 @@ namespace My_MemoPlatformer
 
         public float AIDistanceToTarget()
         {
-            return Vector3.SqrMagnitude(
-                _control.aiProgress.pathfindingAgent.target.transform.position - _control.transform.position);
+            var dist = Vector3.SqrMagnitude(_control.aiProgress.pathfindingAgent.target.transform.position - _control.transform.position);
+            return dist;
         }
 
         public float AIDistanceToStartSphere()
         {
-            return Vector3.SqrMagnitude(
-                _control.aiProgress.pathfindingAgent.startSphere.transform.position - _control.transform.position);
+            var dist = Vector3.SqrMagnitude(_control.aiProgress.pathfindingAgent.startSphere.transform.position - _control.transform.position);
+            return dist;
         }
 
         public float AIDistanceToEndSphere()
         {
-            return Vector3.SqrMagnitude(
-                _control.aiProgress.pathfindingAgent.endSphere.transform.position - _control.transform.position);
+            var dist = Vector3.SqrMagnitude(_control.aiProgress.pathfindingAgent.endSphere.transform.position - _control.transform.position);
+            return dist;
         }
     }
 }

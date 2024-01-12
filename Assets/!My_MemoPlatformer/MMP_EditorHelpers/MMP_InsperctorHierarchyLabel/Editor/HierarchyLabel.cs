@@ -59,9 +59,11 @@ namespace My_MemoPlatformer
                 EditorGUI.DrawRect(selectionRect, Color.cyan);
                 EditorGUI.DropShadowLabel(selectionRect, obj.name.Replace("--Y", "").ToString());
             }
-
-            
-
+            else if (obj != null && obj.name.StartsWith($"{typeof(HierarchyLabel).Namespace}.", System.StringComparison.Ordinal))    //Every gameobject which starts with --- gonna be painted and have a shadow label
+            {
+                EditorGUI.DrawRect(selectionRect, Color.black);
+                EditorGUI.DropShadowLabel(selectionRect, obj.name.ToString());
+            }          
         }
     }
 }

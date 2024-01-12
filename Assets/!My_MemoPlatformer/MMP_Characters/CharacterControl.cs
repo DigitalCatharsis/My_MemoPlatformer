@@ -76,7 +76,7 @@ namespace My_MemoPlatformer
             animationProgress = GetComponent<AnimationProgress>();
             aiProgress = GetComponentInChildren<AIProgress>();
             boxCollider = GetComponent<BoxCollider>();
-            navMeshObstacle = GetComponentInChildren<NavMeshObstacle>();
+            navMeshObstacle = GetComponent<NavMeshObstacle>();
 
             aiController = GetComponentInChildren<AIController>();
 

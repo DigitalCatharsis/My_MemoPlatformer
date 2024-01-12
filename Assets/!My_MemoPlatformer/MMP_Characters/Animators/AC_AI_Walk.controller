@@ -145,11 +145,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 2417b7c9f29b69842a6ff3caad0b5a5c, type: 2}
   - {fileID: 11400000, guid: 77ca289b29cc79a4ca2a837548adacf5, type: 2}
   - {fileID: 11400000, guid: 5b6a5b84cfdcda44dbbfcd3a0a5eac61, type: 2}
-  arrAbilities: []
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -164,19 +164,19 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Jump_Platform
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Fall_Platform
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -255,9 +255,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 3b07827ff7ba0324bb622445e1214f11, type: 2}
-  arrAbilities: []
 --- !u!1107 &3534974542127392757
 AnimatorStateMachine:
   serializedVersion: 6
@@ -278,7 +278,7 @@ AnimatorStateMachine:
     m_Position: {x: 240, y: 300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5571154728051600383}
-    m_Position: {x: 460, y: 300, z: 0}
+    m_Position: {x: 470, y: 300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2982494379567413950}
     m_Position: {x: 630, y: 210, z: 0}
@@ -305,11 +305,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 04d66ddfba7fffd4cb2368909b0b68d4, type: 2}
   - {fileID: 11400000, guid: 77ca289b29cc79a4ca2a837548adacf5, type: 2}
   - {fileID: 11400000, guid: 5b6a5b84cfdcda44dbbfcd3a0a5eac61, type: 2}
-  arrAbilities: []
 --- !u!114 &7853499574483605495
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -323,10 +323,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterControl: {fileID: 0}
-  ListAbilityData:
+  ListAbilityData: []
+  arrAbilities:
   - {fileID: 11400000, guid: 4fd5957a6587d4f4aa3212510fe6951c, type: 2}
   - {fileID: 11400000, guid: 77ca289b29cc79a4ca2a837548adacf5, type: 2}
-  arrAbilities: []
 --- !u!114 &8258448342583162471
 MonoBehaviour:
   m_ObjectHideFlags: 1

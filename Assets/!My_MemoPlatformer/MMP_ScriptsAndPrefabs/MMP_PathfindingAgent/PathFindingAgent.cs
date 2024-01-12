@@ -23,6 +23,13 @@ namespace My_MemoPlatformer
             _navMeshAgent= GetComponent<NavMeshAgent>();
         }
 
+        private void Start()
+        {
+            //debug
+            var distChecker = owner.COLLISION_SPHERE_DATA.frontSpheres[0].AddComponent<DistanceBetweenTwoObjects>();
+            distChecker.farObject = endSphere;
+        }
+
         public void GoToTarget()
         {
             meshLinks.Clear();

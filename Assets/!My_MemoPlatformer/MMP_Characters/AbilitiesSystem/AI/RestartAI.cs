@@ -22,6 +22,18 @@ namespace My_MemoPlatformer
                 characterState.AI_CONTROLLER.InitializeAI();
             }
 
+            //fix from jumping after failed to ledgegrab
+            if (characterState.Animation_Data.IsRunning(typeof(Landing)))
+            {
+                characterState.characterControl.turbo = false;
+                characterState.characterControl.jump = false;
+                characterState.characterControl.moveUp = false;
+                characterState.characterControl.moveLeft = false;
+                characterState.characterControl.moveRight = false;
+                characterState.characterControl.moveDown = false;
+                characterState.characterControl.aiController.InitializeAI();
+            }
+
             if (characterState.AI_CONTROLLER.IsAttacking())
             {
                 if (characterState.characterControl.aiProgress.AIDistanceToTarget() > 3f ||
@@ -85,7 +97,8 @@ namespace My_MemoPlatformer
                 !characterState.Animation_Data.IsRunning(typeof(Jump)) &&
                 !characterState.Animation_Data.IsRunning(typeof(WallJump_Prep)))
             {
-                if (characterState.characterControl.aiProgress.GetStartSphereHeight() > 0.1f)
+                var height = characterState.characterControl.aiProgress.GetStartSphereHeight();
+                if (height > 0.1f)
                 {
                     characterState.characterControl.turbo = false;
                     characterState.characterControl.jump = false;
@@ -95,7 +108,37 @@ namespace My_MemoPlatformer
                     characterState.characterControl.moveDown = false;
                     characterState.characterControl.aiController.InitializeAI();
                 }
+                ////sometimes AI doing nothing while control.attack is true
+                else if (characterState.characterControl.aiProgress.TargetIsOnTheSamePlatform() && characterState.characterControl.attack)
+                {
+                    characterState.characterControl.attack = false;
+                    characterState.characterControl.turbo = false;
+                    characterState.characterControl.jump = false;
+                    characterState.characterControl.moveUp = false;
+                    characterState.characterControl.moveLeft = false;
+                    characterState.characterControl.moveRight = false;
+                    characterState.characterControl.moveDown = false;
+                    characterState.characterControl.aiController.InitializeAI();
+                }
             }
+
+            ////sometimes AI doing nothing while control.attack is true
+            //if (characterState.Ground_Data.ground != null &&
+            //    !characterState.Animation_Data.IsRunning(typeof(Jump)) &&
+            //    !characterState.Animation_Data.IsRunning(typeof(WallJump_Prep)) &&
+            //     characterState.characterControl.attack)
+            //{
+            //    if (characterState.characterControl.aiProgress.GetStartSphereHeight() == characterState.characterControl.aiProgress.GetEndSphereHeight())
+            //    {
+            //        characterState.characterControl.turbo = false;
+            //        characterState.characterControl.jump = false;
+            //        characterState.characterControl.moveUp = false;
+            //        characterState.characterControl.moveLeft = false;
+            //        characterState.characterControl.moveRight = false;
+            //        characterState.characterControl.moveDown = false;
+            //        characterState.characterControl.aiController.InitializeAI();
+            //    }
+            //}
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

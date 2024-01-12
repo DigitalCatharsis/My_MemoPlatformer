@@ -23,7 +23,6 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-
             if (characterState.characterControl.aiProgress.pathfindingAgent.startWalk)
             {
                 animator.SetBool(HashManager.Instance.arrAITransitionParams[(int)AI_Transition.Start_Walking], true);
@@ -35,5 +34,4 @@ namespace My_MemoPlatformer
             animator.SetBool(HashManager.Instance.arrAITransitionParams[(int)AI_Transition.Start_Walking], false);
         }
     }
-
 }

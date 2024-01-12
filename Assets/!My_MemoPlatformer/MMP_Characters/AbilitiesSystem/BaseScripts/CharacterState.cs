@@ -19,7 +19,7 @@ namespace My_MemoPlatformer
         public MomentumCalculator_Data MomentumCalculator_Data => characterControl.subComponentProcessor.momentumCalculator_Data;
         public Rotation_Data Rotation_Data => characterControl.subComponentProcessor.rotation_Data;
         public Jump_Data Jump_Data => characterControl.subComponentProcessor.jump_Data;
-        public CollisionSpheres_Data CollisionSpheres_Data => characterControl.subComponentProcessor.collisionSpheres_Data;
+        public CollisionSpheres_Data COLLISION_SPHERE_DATA => characterControl.subComponentProcessor.collisionSpheres_Data;
         public Ground_Data Ground_Data => characterControl.subComponentProcessor.ground_Data;
         public Attack_Data Attack_Data => characterControl.subComponentProcessor.attack_Data;
         public Animation_Data Animation_Data => characterControl.subComponentProcessor.animation_Data;

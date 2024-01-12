@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -6,7 +7,7 @@ namespace My_MemoPlatformer
     public class JumpPlatform : CharacterAbility
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {         
+        {
             characterState.characterControl.jump = true;
             characterState.characterControl.moveUp = true;
         }
@@ -20,12 +21,19 @@ namespace My_MemoPlatformer
 
             //Diffirence betwen character's top sphere (coliistion emulation) and End sphere of the pathfinding agent
             //float topDist = characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.y - characterState.characterControl.collisionSpheres.frontSpheres[1].transform.position.y;
-            float platformDistance = characterState.characterControl.aiProgress.pathfindingAgent.endSphere.transform.position.y 
-                - characterState.CollisionSpheres_Data.frontSpheres[0].transform.position.y;
+            var platformDistance = characterState.characterControl.aiProgress.pathfindingAgent.endSphere.transform.position.y
+                - characterState.COLLISION_SPHERE_DATA.frontSpheres[0].transform.position.y;
 
-            if (platformDistance > 0.5f)  //means it is on the same platform
+            if (platformDistance > 0.5f) 
             {
-                if (characterState.characterControl.aiProgress.pathfindingAgent.startSphere.transform.position.z < 
+                if (DebugContainer_Data.Instance.debug_temp)
+                {
+                    EditorApplication.isPaused = true;
+                }
+
+                //TODO Добавить проверку относительно стартовой сферы??
+
+                if (characterState.characterControl.aiProgress.pathfindingAgent.startSphere.transform.position.z <
                     characterState.characterControl.aiProgress.pathfindingAgent.endSphere.transform.position.z)
                 {
                     characterState.characterControl.moveRight = true;
@@ -38,12 +46,17 @@ namespace My_MemoPlatformer
                 }
             }
 
-            if (platformDistance < 0.5f)
+            if (platformDistance < 0.5f)  //means it is on the same platform
             {
+                if (DebugContainer_Data.Instance.debug_temp)
+                {
+                    EditorApplication.isPaused = true;
+                }
+
                 characterState.characterControl.moveRight = false;
                 characterState.characterControl.moveLeft = false;
-                characterState.characterControl.moveUp=false;
-                characterState.characterControl.jump=false;
+                characterState.characterControl.moveUp = false;
+                characterState.characterControl.jump = false;
             }
         }
 

@@ -35,10 +35,9 @@ namespace My_MemoPlatformer
         {
         }
 
-        bool FlyingKick(CharacterControl control)
+        private bool FlyingKick(CharacterControl control)
         {
-            if (control.aiProgress.doFlyingKick &&
-                control.aiProgress.TargetIsOnTheSamePlatform())
+            if (control.aiProgress.doFlyingKick && control.aiProgress.TargetIsOnTheSamePlatform())
             {
                 control.attack = true;
                 return true;
@@ -50,7 +49,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        void TriggerAttack(CharacterControl control)
+        private void TriggerAttack(CharacterControl control)
         {
             control.aiController.ANIMATOR.Play(HashManager.Instance.arrAIStateNames[(int)AI_State_Name.AI_Attack], 0);
         }

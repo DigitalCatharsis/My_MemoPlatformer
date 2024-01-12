@@ -87,6 +87,7 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Managers\PoolManager.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\SendPathfindingAgent.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\Death\Ragdoll\TriggerRagdoll.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_EditorHelpers\MMP_DistanceBetweenTwoObjects\DistanceBetweenTwoObjects.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\DebugContainer\DebugHelper.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\LedgeChecker.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\AI\RestartAI.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_CameraGame\CameraState.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Subcomponents_Data\InstaKill_Data.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\CheckMovement.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_EditorHelpers\ShowOnlyAttribute\ShowOnlyAttribute.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\CheckRunningTurn.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SpikeTrap\TrapSpikes.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\WeaponPutDown.cs" />

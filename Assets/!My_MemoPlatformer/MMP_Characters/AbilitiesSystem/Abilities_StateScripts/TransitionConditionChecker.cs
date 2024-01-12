@@ -142,43 +142,29 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.NOT_BLOCKED_BY_WALL:
                         {
-                            var SI = control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
-
-                            for (int i = 0; i < (int)TempAbilitiesList.COUNT; i++)
+                            #region debug
+                            if (DebugContainer_Data.Instance.debug_WallOverlappingStatus)
                             {
-                                if (SI.shortNameHash == HashManager.Instance.arrTempAbilitiesList[i])
+                                var SI = control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
+
+                                for (int i = 0; i < (int)TempAbilitiesList.COUNT; i++)
                                 {
-                                    var ability = (TempAbilitiesList)i;
-                                    Debug.Log($"<color=magenta>{ability}</color>");
+                                    if (SI.shortNameHash == HashManager.Instance.arrTempAbilitiesList[i])
+                                    {
+                                        var ability = (TempAbilitiesList)i;
+                                        Debug.Log($"<color=magenta>{ability}</color>");
+                                    }
+                                }
+
+                                Debug.Log("<color=Cyan>Some of current abilities are:</color>");
+
+                                foreach (var ability in control.ANIMATION_DATA.currentRunningAbilities)
+                                {
+                                    Debug.Log($"<color=Cyan>{ability}</color>");
                                 }
                             }
 
-                            Debug.Log("<color=Cyan>Some of current abilities are:</color>");
-
-                            foreach (var ability in control.ANIMATION_DATA.currentRunningAbilities)
-                            {
-                                Debug.Log($"<color=Cyan>{ability}</color>");
-                            }
-
-
-
-                            //Debug.Log($"<color=magenta>=================================</color>");
-
-                            //Animator animator = control.skinnedMeshAnimator;
-                            //string assetPath = AssetDatabase.GetAssetPath(animator.runtimeAnimatorController);
-                            //AnimatorController controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(assetPath);
-                            //var behaviors = controller.GetBehaviours<CharacterState>();
-
-                            //foreach (CharacterState state in behaviors)
-                            //{
-                            //    foreach (CharacterAbility ability in state.arrAbilities)
-                            //    {
-
-                            //    }
-                            //}
-
-                            //Debug.Log($"<color=magenta>=================================</color>");
-
+                            #endregion
                             bool AllIsOverlapping = true;
 
                             for (int i = 0; i < control.COLLISION_SPHERE_DATA.frontOverlapCheckers.Length; i++)
@@ -186,7 +172,7 @@ namespace My_MemoPlatformer
                                 if (!control.COLLISION_SPHERE_DATA.frontOverlapCheckers[i].objIsOverlapping)
                                 {
                                     AllIsOverlapping = false;
-
+                                    #region debug
                                     if (DebugContainer_Data.Instance.debug_WallOverlappingStatus)
                                     {
                                         Debug.Log($"<color=red>{control.COLLISION_SPHERE_DATA.frontOverlapCheckers[i].name}_{i} is NOT overlapping </color>");
@@ -197,7 +183,9 @@ namespace My_MemoPlatformer
                                         }
                                         //EditorApplication.isPaused = true;
                                     }
+                                    #endregion 
                                 }
+                                #region debug
                                 else
                                 {
                                     if (DebugContainer_Data.Instance.debug_WallOverlappingStatus)
@@ -210,6 +198,8 @@ namespace My_MemoPlatformer
                                         }
                                     }
                                 }
+
+                                #endregion
                             }
 
                             if (AllIsOverlapping)

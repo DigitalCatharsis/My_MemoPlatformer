@@ -190,7 +190,7 @@ namespace My_MemoPlatformer
                         Debug.Log("incoming ragdoll: " + attacker.gameObject.name + "\n" + "Velocity: " + mag);
                     }
 
-                    if (mag >= 10f)
+                    if (mag >= 10f && col.transform.root.gameObject.GetComponent<CharacterControl>())
                     {
                         control.DAMAGE_DATA.damageTaken = new DamageTaken(
                             attacker: null,
