@@ -26,13 +26,13 @@ namespace My_MemoPlatformer
 
             if (attacker != null)
             {
-                TakeCollateralDamage(attacker, col);
+                control.DAMAGE_DATA.TakeCollateralDamage(attacker, col, this);
             }
 
             CheckCollidingWeapons(col);
         }
 
-        private CharacterControl CheckCollidingBodyparts(Collider col)
+        private CharacterControl CheckCollidingBodyparts(Collider collider)
         {
             if (control == null)
             {
@@ -41,42 +41,33 @@ namespace My_MemoPlatformer
 
             for (int i = 0; i < control.RAGDOLL_DATA.arrBodyParts.Length; i++)
             {
-                if (control.RAGDOLL_DATA.arrBodyParts[i].Equals(col))
+                if (control.RAGDOLL_DATA.arrBodyParts[i].Equals(collider))
                 {
                     return null;
                 }
             }
 
-            var attacker = CharacterManager.Instance.GetCharacter(col.transform.root.gameObject);
+            var attacker = CharacterManager.Instance.GetCharacter(collider.transform.root.gameObject);
 
             if (attacker == null)
             {
                 return null;
             }
 
-            if (col.gameObject == attacker.gameObject)
+            if (collider.gameObject == attacker.gameObject)
             {
                 return null;
             }
 
             // add collider to dictionary
-
-            if (!control.animationProgress.collidingBodyParts.ContainsKey(this))
-            {
-                control.animationProgress.collidingBodyParts.Add(this, new List<Collider>());
-            }
-
-            if (!control.animationProgress.collidingBodyParts[this].Contains(col))
-            {
-                control.animationProgress.collidingBodyParts[this].Add(col);
-            }
+            control.DAMAGE_DATA.AddCollidersToDictionary(control.DAMAGE_DATA.collidingBodyParts_Dictionary, collider, this);
 
             return attacker;
         }
 
-        private void CheckCollidingWeapons(Collider col)
+        private void CheckCollidingWeapons(Collider collider)
         {
-            var w = col.transform.root.gameObject.GetComponent<MeleeWeapon>();
+            var w = collider.transform.root.gameObject.GetComponent<MeleeWeapon>();
 
             if (w == null)
             {
@@ -118,15 +109,7 @@ namespace My_MemoPlatformer
                 }
             }
 
-            if (!control.animationProgress.collidingWeapons.ContainsKey(this))
-            {
-                control.animationProgress.collidingWeapons.Add(this, new List<Collider>());
-            }
-
-            if (!control.animationProgress.collidingWeapons[this].Contains(col))
-            {
-                control.animationProgress.collidingWeapons[this].Add(col);
-            }
+            control.DAMAGE_DATA.AddCollidersToDictionary(control.DAMAGE_DATA.collidingWeapons_Dictionary, collider, this);
         }
 
 
@@ -136,73 +119,28 @@ namespace My_MemoPlatformer
             CheckExitingWeapons(col);
         }
 
-        private void CheckExitingBodypart(Collider col)
+        private void CheckExitingBodypart(Collider collider)
         {
             if (control == null)
             {
                 return;
             }
 
-            if (control.animationProgress.collidingBodyParts.ContainsKey(this))
+            if (control.DAMAGE_DATA.collidingBodyParts_Dictionary.ContainsKey(this))
             {
-                if (control.animationProgress.collidingBodyParts[this].Contains(col))
-                {
-                    control.animationProgress.collidingBodyParts[this].Remove(col);
-                }
-
-                if (control.animationProgress.collidingBodyParts[this].Count == 0)
-                {
-                    control.animationProgress.collidingBodyParts.Remove(this);
-                }
+                control.DAMAGE_DATA.RemoveCollidersFromDictionary(control.DAMAGE_DATA.collidingBodyParts_Dictionary, collider, this);
             }
         }
-        private void CheckExitingWeapons(Collider col)
+        private void CheckExitingWeapons(Collider collider)
         {
             if (control == null)
             {
                 return;
             }
 
-            if (control.animationProgress.collidingWeapons.ContainsKey(this))
+            if (control.DAMAGE_DATA.collidingWeapons_Dictionary.ContainsKey(this))
             {
-                if (control.animationProgress.collidingWeapons[this].Contains(col))
-                {
-                    control.animationProgress.collidingWeapons[this].Remove(col);
-                }
-
-                if (control.animationProgress.collidingWeapons[this].Count == 0)
-                {
-                    control.animationProgress.collidingWeapons.Remove(this);
-                }
-            }
-        }
-
-        private void TakeCollateralDamage(CharacterControl attacker, Collider col)
-        {
-            if (attacker.RAGDOLL_DATA.flyingRagdollData.isTriggered)
-            {
-                if (attacker.RAGDOLL_DATA.flyingRagdollData.attacker != control)
-                {
-                    var mag = Vector3.SqrMagnitude(col.attachedRigidbody.velocity);
-
-                    if (DebugContainer_Data.Instance.debug_TriggerDetector)
-                    {
-                        Debug.Log("incoming ragdoll: " + attacker.gameObject.name + "\n" + "Velocity: " + mag);
-                    }
-
-                    if (mag >= 10f && col.transform.root.gameObject.GetComponent<CharacterControl>())
-                    {
-                        control.DAMAGE_DATA.damageTaken = new DamageTaken(
-                            attacker: null,
-                            attack: null,
-                            damage_TG: this,
-                            damager: null,
-                            incomingVelocity: col.attachedRigidbody.velocity);
-
-                        control.DAMAGE_DATA.hp = 0;
-                        control.RAGDOLL_DATA.ragdollTriggered = true;
-                    }
-                }
+                control.DAMAGE_DATA.RemoveCollidersFromDictionary(control.DAMAGE_DATA.collidingWeapons_Dictionary, collider, this);
             }
         }
     }

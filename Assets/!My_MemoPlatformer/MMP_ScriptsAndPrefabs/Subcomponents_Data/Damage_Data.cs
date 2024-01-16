@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -12,11 +13,20 @@ namespace My_MemoPlatformer
 
         public DamageTaken damageTaken;
 
+        [Header("Colliding Objects")]
+        public Dictionary<TriggerDetector, List<Collider>> collidingBodyParts_Dictionary = new Dictionary<TriggerDetector, List<Collider>>(); //key trigger detectors, value - colliding bodyparts which are in contract with trigger detectors
+        public Dictionary<TriggerDetector, List<Collider>> collidingWeapons_Dictionary = new Dictionary<TriggerDetector, List<Collider>>(); //key trigger detectors, value - colliding bodyparts which are in contract with trigger detectors
+
         public delegate bool ReturnBool();
-        public delegate void DoSomething(AttackCondition info);
+        public delegate void DoDamage(AttackCondition info);
+        public delegate void DoCollateralDamage(CharacterControl attacker, Collider col, TriggerDetector triggerDetector);
+        public delegate void EditColliderDictionary(Dictionary<TriggerDetector, List<Collider>> colliders_Dictionary, Collider collider, TriggerDetector triggerDetector);
 
         public ReturnBool IsDead;
-        public DoSomething TakeDamage;
+        public DoDamage TakeDamage;
+        public DoCollateralDamage TakeCollateralDamage;
+        public EditColliderDictionary AddCollidersToDictionary;
+        public EditColliderDictionary RemoveCollidersFromDictionary;
     }
 
     [System.Serializable]

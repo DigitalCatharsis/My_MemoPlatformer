@@ -144,8 +144,8 @@ namespace My_MemoPlatformer
 
                 if (t != null)
                 {
-                    ProcessRemove(c.animationProgress.collidingWeapons, t);
-                    ProcessRemove(c.animationProgress.collidingBodyParts, t);
+                    ProcessRemove(c.DAMAGE_DATA.collidingWeapons_Dictionary, t);
+                    ProcessRemove(c.DAMAGE_DATA.collidingBodyParts_Dictionary, t);
                 }
             }
         }

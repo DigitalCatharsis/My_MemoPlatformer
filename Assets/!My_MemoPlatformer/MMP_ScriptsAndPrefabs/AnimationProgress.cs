@@ -12,11 +12,7 @@ namespace My_MemoPlatformer
         public MoveUp latestMoveUpScript;  //latest moveforward script
 
         [Header("GroundMovement")]
-        public bool isIgnoreCharacterTime; //slide beyond character (start ignoring character collider)
-
-        [Header("Colliding Objects")]
-        public Dictionary<TriggerDetector, List<Collider>> collidingBodyParts = new Dictionary<TriggerDetector, List<Collider>>(); //key trigger detectors, value - colliding bodyparts which are in contract with trigger detectors
-        public Dictionary<TriggerDetector, List<Collider>> collidingWeapons = new Dictionary<TriggerDetector, List<Collider>>(); //key trigger detectors, value - colliding bodyparts which are in contract with trigger detectors
+        public bool isIgnoreCharacterTime; //slide beyond character (start ignoring character collider)        
 
         [Header("Transition")]
         public bool lockTransition;
@@ -108,7 +104,7 @@ namespace My_MemoPlatformer
 
         public MeleeWeapon GetTouchingWeapon()
         {
-            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in collidingWeapons)
+            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in _control.DAMAGE_DATA.collidingWeapons_Dictionary)
             {
                 var w = data.Value[0].gameObject.GetComponent<MeleeWeapon>();
                 return w;

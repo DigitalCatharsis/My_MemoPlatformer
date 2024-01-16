@@ -272,7 +272,7 @@ namespace My_MemoPlatformer
                         }
                     case TransitionConditionType.TOUCHING_WEAPON:
                         {
-                            if (control.animationProgress.collidingWeapons.Count == 0)
+                            if (control.DAMAGE_DATA.collidingWeapons_Dictionary.Count == 0)
                             {
                                 if (control.animationProgress.holdingWeapon == null)
                                 {

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09d2138cfc2da18499f42578916d88ca, type: 3}
+  m_Name: SO_Player_SpinningBackKick_Attack
+  m_EditorClassIdentifier: 
+  startAttackTime: 0.35
+  endAttackTime: 0.75
+  attackParts: 03000000
+  mustCollide: 1
+  mustFaceAttacker: 0
+  lethalRange: 0
+  maxHits: 1
+  damage: 1
+  normalRagdollVelocity:
+    forwardForce: 3500
+    rightForce: 0
+    upForce: 500
+  collateralRagdollVelocity:
+    forwardForce: 7000
+    rightForce: 0
+    upForce: 1500
+  useDeathParticles: 1
+  particleType: 3
+  collateralDamageInfo:
+    createCollateral: 1

@@ -29,6 +29,10 @@ namespace My_MemoPlatformer
 
                 IsDead = IsDead,
                 TakeDamage = ProcessDamage,
+                TakeCollateralDamage = TakeCollateralDamage,
+
+                AddCollidersToDictionary = AddCollidersToDictionary,
+                RemoveCollidersFromDictionary = RemoveCollidersFromDictionary,
             };
 
             subComponentProcessor.damage_Data = damage_Data;
@@ -99,7 +103,7 @@ namespace My_MemoPlatformer
                 {
                     if (info.mustCollide)
                     {
-                        if (control.animationProgress.collidingBodyParts.Count != 0)
+                        if (control.DAMAGE_DATA.collidingBodyParts_Dictionary.Count != 0)
                         {
                             if (IsCollided(info))
                             {
@@ -120,7 +124,7 @@ namespace My_MemoPlatformer
 
         private bool IsCollided(AttackCondition info)
         {
-            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in control.animationProgress.collidingBodyParts)
+            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in control.DAMAGE_DATA.collidingBodyParts_Dictionary)
             {
                 foreach (var collider in data.Value)
                 {
@@ -260,6 +264,35 @@ namespace My_MemoPlatformer
             }
         }
 
+        private void TakeCollateralDamage(CharacterControl attacker, Collider col, TriggerDetector triggerDetector)
+        {
+            if (attacker.RAGDOLL_DATA.flyingRagdollData.isTriggered)
+            {
+                if (attacker.RAGDOLL_DATA.flyingRagdollData.attacker != control)
+                {
+                    var mag = Vector3.SqrMagnitude(col.attachedRigidbody.velocity);
+
+                    if (DebugContainer_Data.Instance.debug_TriggerDetector)
+                    {
+                        Debug.Log("incoming ragdoll: " + attacker.gameObject.name + "\n" + "Velocity: " + mag);
+                    }
+
+                    if (mag >= 10f && col.transform.root.gameObject.GetComponent<CharacterControl>())
+                    {
+                        control.DAMAGE_DATA.damageTaken = new DamageTaken(
+                            attacker: null,
+                            attack: null,
+                            damage_TG: triggerDetector,
+                            damager: null,
+                            incomingVelocity: col.attachedRigidbody.velocity);
+
+                        control.DAMAGE_DATA.hp = 0;
+                        control.RAGDOLL_DATA.ragdollTriggered = true;
+                    }
+                }
+            }
+        }
+
         private void ProcessHitParticles(AttackCondition info)
         {
             if (info.mustCollide)
@@ -305,12 +338,46 @@ namespace My_MemoPlatformer
                 return false;
             }
         }
+
         private void ProcessFlyingRagdoll(AttackCondition info)
         {
             if (info.attackAbility.collateralDamageInfo.createCollateral)
             {
                 control.RAGDOLL_DATA.flyingRagdollData.isTriggered = true;
                 control.RAGDOLL_DATA.flyingRagdollData.attacker = info.attacker;
+            }
+        }
+
+        private void AddCollidersToDictionary(Dictionary<TriggerDetector, List<Collider>> colliders_Dictionary, Collider collider, TriggerDetector triggerDetector)
+        {
+            if (!colliders_Dictionary.ContainsKey(triggerDetector))
+            {
+                colliders_Dictionary.Add(triggerDetector, new List<Collider>());
+            }
+
+            try
+            {
+                if (!colliders_Dictionary[triggerDetector].Contains(collider))
+                {
+                    colliders_Dictionary[triggerDetector].Add(collider);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Debug.Log(ex);
+            }
+        }
+
+        private void RemoveCollidersFromDictionary(Dictionary<TriggerDetector, List<Collider>> colliders_Dictionary, Collider collider, TriggerDetector triggerDetector)
+        {
+            if (colliders_Dictionary[triggerDetector].Contains(collider))
+            {
+                colliders_Dictionary[triggerDetector].Remove(collider);
+            }
+
+            if (colliders_Dictionary[triggerDetector].Count == 0)
+            {
+                colliders_Dictionary.Remove(triggerDetector);
             }
         }
     }

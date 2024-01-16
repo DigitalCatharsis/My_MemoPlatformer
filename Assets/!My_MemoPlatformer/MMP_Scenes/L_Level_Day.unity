@@ -7373,7 +7373,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: c1fb774b741691c46a50df5ec68d5b80, type: 2}
     - target: {fileID: 6805351866285292383, guid: eadd8c2cdfa043c42bcc618639243a87, type: 3}
       propertyPath: _debug_Instakill
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6805351866285292383, guid: eadd8c2cdfa043c42bcc618639243a87, type: 3}
       propertyPath: _debug_MoveForward

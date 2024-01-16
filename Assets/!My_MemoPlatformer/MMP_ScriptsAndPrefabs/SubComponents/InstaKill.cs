@@ -40,7 +40,7 @@ namespace My_MemoPlatformer
             }
 
             //if one of bodypart is player, there gonna be instakill
-            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in control.animationProgress.collidingBodyParts)
+            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in control.DAMAGE_DATA.collidingBodyParts_Dictionary)
             {
                 foreach (var col in data.Value)
                 {
