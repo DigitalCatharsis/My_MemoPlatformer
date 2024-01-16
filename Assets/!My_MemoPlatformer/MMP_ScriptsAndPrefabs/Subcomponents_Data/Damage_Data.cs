@@ -35,13 +35,13 @@ namespace My_MemoPlatformer
         public DamageTaken(
                 CharacterControl attacker,
                 Attack attack,
-                TriggerDetector damage_TG,
+                TriggerDetector damaged_TG,
                 GameObject damager,
                 Vector3 incomingVelocity)
         {
             mAttacker = attacker;
             mAttack = attack;
-            mDamage_TG = damage_TG;
+            mDamage_TG = damaged_TG;
             mDamager = damager;
             mIncomingVelocity = incomingVelocity;
         }

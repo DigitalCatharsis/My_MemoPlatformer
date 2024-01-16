@@ -25,7 +25,7 @@ namespace My_MemoPlatformer
                 airStompAttack = _airStompAttack,
                 weaponThrow = _weaponThrow,
 
-                damageTaken = new DamageTaken(attacker: null, attack: null, damage_TG: null, damager: null, incomingVelocity: Vector3.zero),
+                damageTaken = new DamageTaken(attacker: null, attack: null, damaged_TG: null, damager: null, incomingVelocity: Vector3.zero),
 
                 IsDead = IsDead,
                 TakeDamage = ProcessDamage,
@@ -282,7 +282,7 @@ namespace My_MemoPlatformer
                         control.DAMAGE_DATA.damageTaken = new DamageTaken(
                             attacker: null,
                             attack: null,
-                            damage_TG: triggerDetector,
+                            damaged_TG: triggerDetector,
                             damager: null,
                             incomingVelocity: col.attachedRigidbody.velocity);
 

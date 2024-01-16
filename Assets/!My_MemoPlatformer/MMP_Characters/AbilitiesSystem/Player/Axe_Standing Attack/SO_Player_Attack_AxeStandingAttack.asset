@@ -19,7 +19,7 @@ MonoBehaviour:
   mustFaceAttacker: 0
   lethalRange: 0
   maxHits: 3
-  damage: 1
+  damage: 3
   normalRagdollVelocity:
     forwardForce: 3000
     rightForce: -2000
