@@ -97,7 +97,7 @@ namespace My_MemoPlatformer
                 attacker: weapon.thrower,
                 attack: control.DAMAGE_DATA.weaponThrow,
                 damaged_TG: this,
-                damager: null,
+                damagerPart: null,
                 incomingVelocity: Vector3.zero);
 
             control.DAMAGE_DATA.TakeDamage(attackCondition_info);

@@ -125,7 +125,7 @@ namespace My_MemoPlatformer
             control.transform.LookAt(control.transform.position + (attacker.transform.forward * 5f), Vector3.up);
             control.transform.position = attacker.transform.position + (attacker.transform.forward * 0.45f);
 
-            control.DAMAGE_DATA.hp = 0f;
+            control.DAMAGE_DATA.currentHp = 0f;
         }
     }
 }

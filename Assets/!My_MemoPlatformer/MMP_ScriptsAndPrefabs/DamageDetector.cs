@@ -5,7 +5,7 @@ namespace My_MemoPlatformer
 {
     public class DamageDetector : SubComponent  //Compare collision info versus attack input that is being registered
     {
-        public Damage_Data damage_Data;
+        [SerializeField] private Damage_Data _damage_Data;
 
         [Header("Damage Setup")]
         [SerializeField] private Attack _weaponThrow;
@@ -14,28 +14,28 @@ namespace My_MemoPlatformer
         [Header("HP Setup")]
         [SerializeField] private float _hp;
 
-        static string VFX_Prefix = "VFX";
+        private static string _VFX_Prefix = "VFX";
 
         private void Start()
         {
-            damage_Data = new Damage_Data
+            _damage_Data = new Damage_Data
             {
                 blockedAttack = null,
-                hp = _hp,
+                currentHp = _hp,
                 airStompAttack = _airStompAttack,
                 weaponThrow = _weaponThrow,
 
-                damageTaken = new DamageTaken(attacker: null, attack: null, damaged_TG: null, damager: null, incomingVelocity: Vector3.zero),
+                damageTaken = new DamageTaken(attacker: null, attack: null, damaged_TG: null, damagerPart: null, incomingVelocity: Vector3.zero),
 
                 IsDead = IsDead,
                 TakeDamage = ProcessDamage,
-                TakeCollateralDamage = TakeCollateralDamage,
+                TakeCollateralDamage = ProcessCollateralDamage,
 
                 AddCollidersToDictionary = AddCollidersToDictionary,
                 RemoveCollidersFromDictionary = RemoveCollidersFromDictionary,
             };
 
-            subComponentProcessor.damage_Data = damage_Data;
+            subComponentProcessor.damage_Data = _damage_Data;
             subComponentProcessor.arrSubComponents[(int)SubComponentType.DAMAGE_DETECTOR] = this;
         }
 
@@ -46,48 +46,69 @@ namespace My_MemoPlatformer
                 CheckAttack();
             }
         }
-
-        public override void OnUpdate()
+        private void CheckAttack()
         {
+            foreach (var attackCondition_info in AttackManager.Instance.currentAttacks)
+            {
+                if (AttackIsValid(attackCondition_info))
+                {
+                    if (attackCondition_info.mustCollide)
+                    {
+                        if (control.DAMAGE_DATA.collidingBodyParts_Dictionary.Count != 0)
+                        {
+                            if (CheckForCollisionAndCreacteDamageTaken(attackCondition_info))
+                            {
+                                ProcessDamage(attackCondition_info);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (IsInLethalRange(attackCondition_info))
+                        {
+                            ProcessDamage(attackCondition_info);
+                        }
+                    }
+                }
+            }
         }
-
-        private bool AttackIsValid(AttackCondition info)
+        private bool AttackIsValid(AttackCondition attackCondition_Info)
         {
-            if (info == null)
+            if (attackCondition_Info == null)
             {
                 return false; ;
             }
 
-            if (!info.isRegistered)
+            if (!attackCondition_Info.isRegistered)
             {
                 return false;
             }
 
-            if (info.isFinished)
+            if (attackCondition_Info.isFinished)
             {
                 return false;
             }
 
-            if (info.currentHits >= info.maxHits)
+            if (attackCondition_Info.currentHits >= attackCondition_Info.maxHits)
             {
                 return false;
             }
 
-            if (info.attacker == control)
+            if (attackCondition_Info.attacker == control)
             {
                 return false;
             }
 
-            if (info.mustFaceAttacker)
+            if (attackCondition_Info.mustFaceAttacker)
             {
-                var vec = this.transform.position - info.attacker.transform.position;  //Вектор от жертвы до нападающего
-                if (vec.z * info.attacker.transform.forward.z < 0f) //Мы сравниваем 2 вектора, если они смотрят в разные стороны, со один из них отрицательный, следовательно, перменожение решает смотрят ли они друг на друга
+                var vec = this.transform.position - attackCondition_Info.attacker.transform.position;  
+                if (vec.z * attackCondition_Info.attacker.transform.forward.z < 0f)
                 {
                     return false;
                 }
             }
 
-            if (info.registeredTargets.Contains(this.control))  //prevent several times damage from one attack
+            if (attackCondition_Info.registeredTargets.Contains(this.control))  //prevent several times damage from one attack
             {
                 return false;
             }
@@ -95,48 +116,25 @@ namespace My_MemoPlatformer
             return true;
         }
 
-        private void CheckAttack()
+        public override void OnUpdate()
         {
-            foreach (var info in AttackManager.Instance.currentAttacks)
-            {
-                if (AttackIsValid(info))
-                {
-                    if (info.mustCollide)
-                    {
-                        if (control.DAMAGE_DATA.collidingBodyParts_Dictionary.Count != 0)
-                        {
-                            if (IsCollided(info))
-                            {
-                                ProcessDamage(info);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (IsInLethalRange(info))
-                        {
-                            ProcessDamage(info);
-                        }
-                    }
-                }
-            }
         }
 
-        private bool IsCollided(AttackCondition info)
+        private bool CheckForCollisionAndCreacteDamageTaken(AttackCondition attackCondition_Info)
         {
             foreach (KeyValuePair<TriggerDetector, List<Collider>> data in control.DAMAGE_DATA.collidingBodyParts_Dictionary)
             {
                 foreach (var collider in data.Value)
                 {
-                    foreach (var part in info.attackParts)
+                    foreach (var attackPart in attackCondition_Info.attackParts)
                     {
-                        if (info.attacker.GetAttackingPart(part) == collider.gameObject)
+                        if (attackCondition_Info.attacker.GetAttackingPart(attackPart) == collider.gameObject)
                         {
-                            damage_Data.damageTaken = new DamageTaken(
-                                info.attacker,
-                                info.attackAbility,
-                                data.Key,
-                                damager: info.attacker.GetAttackingPart(part),
+                            _damage_Data.damageTaken = new DamageTaken(
+                                attacker: attackCondition_Info.attacker,
+                                attack: attackCondition_Info.attackAbility,
+                                damaged_TG: data.Key,
+                                damagerPart: attackCondition_Info.attacker.GetAttackingPart(attackPart),
                                 incomingVelocity: Vector3.zero);
 
                             return true;
@@ -159,11 +157,11 @@ namespace My_MemoPlatformer
                     int index = Random.Range(0, control.RAGDOLL_DATA.arrBodyParts.Length);
                     var triggerDetector = control.RAGDOLL_DATA.arrBodyParts[index].GetComponent<TriggerDetector>();
 
-                    damage_Data.damageTaken = new DamageTaken(
+                    _damage_Data.damageTaken = new DamageTaken(
                         info.attacker,
                         info.attackAbility,
                         triggerDetector,
-                        damager: null,
+                        damagerPart: null,
                         incomingVelocity: Vector3.zero);
 
                     return true;
@@ -175,7 +173,7 @@ namespace My_MemoPlatformer
 
         private bool AttackIsBlocked(AttackCondition info)
         {
-            if (info == damage_Data.blockedAttack && damage_Data.blockedAttack != null)
+            if (info == _damage_Data.blockedAttack && _damage_Data.blockedAttack != null)
             {
                 return true;
             }
@@ -241,7 +239,7 @@ namespace My_MemoPlatformer
             ProcessHitParticles(info);
 
             info.currentHits++;
-            damage_Data.hp -= info.attackAbility.damage;
+            _damage_Data.currentHp -= info.attackAbility.damage;
 
             AttackManager.Instance.ForceDeregister(control);
             control.ANIMATION_DATA.currentRunningAbilities.Clear();
@@ -264,7 +262,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void TakeCollateralDamage(CharacterControl attacker, Collider col, TriggerDetector triggerDetector)
+        private void ProcessCollateralDamage(CharacterControl attacker, Collider col, TriggerDetector triggerDetector)
         {
             if (attacker.RAGDOLL_DATA.flyingRagdollData.isTriggered)
             {
@@ -283,10 +281,10 @@ namespace My_MemoPlatformer
                             attacker: null,
                             attack: null,
                             damaged_TG: triggerDetector,
-                            damager: null,
+                            damagerPart: null,
                             incomingVelocity: col.attachedRigidbody.velocity);
 
-                        control.DAMAGE_DATA.hp = 0;
+                        control.DAMAGE_DATA.currentHp = 0;
                         control.RAGDOLL_DATA.ragdollTriggered = true;
                     }
                 }
@@ -301,7 +299,7 @@ namespace My_MemoPlatformer
 
                 if (info.attackAbility.useDeathParticles)
                 {
-                    if (info.attackAbility.particleType.ToString().Contains(VFX_Prefix))
+                    if (info.attackAbility.particleType.ToString().Contains(_VFX_Prefix))
                     {
                         ShowHitParticles(info.attacker, info.attackAbility.particleType);
                     }
@@ -329,7 +327,7 @@ namespace My_MemoPlatformer
 
         private bool IsDead()
         {
-            if (damage_Data.hp <= 0f)
+            if (_damage_Data.currentHp <= 0f)
             {
                 return true;
             }

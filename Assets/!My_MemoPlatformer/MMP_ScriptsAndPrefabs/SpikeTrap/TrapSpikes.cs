@@ -44,7 +44,7 @@ namespace My_MemoPlatformer
                             if (!listOfSpikeVictims.Contains(control))
                             {
                                 listOfSpikeVictims.Add(control);
-                                control.DAMAGE_DATA.hp = 0;
+                                control.DAMAGE_DATA.currentHp = 0;
                                 control.DAMAGE_DATA.damageTaken = null;
                             }
                         }

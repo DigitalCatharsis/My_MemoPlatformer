@@ -7,7 +7,7 @@ namespace My_MemoPlatformer
     public class Damage_Data
     {
         public AttackCondition blockedAttack;
-        public float hp;
+        public float currentHp;
         public Attack airStompAttack;
         public Attack weaponThrow;
 
@@ -32,30 +32,30 @@ namespace My_MemoPlatformer
     [System.Serializable]
     public class DamageTaken
     {
+        [SerializeField] private CharacterControl _attacker = null;
+        [SerializeField] private Attack _attack = null;
+        [SerializeField] private GameObject _damagerPart = null;
+        [SerializeField] private TriggerDetector _damaged_TG = null;
+        [SerializeField] private Vector3 _incomingVelocity = Vector3.zero;
+
         public DamageTaken(
                 CharacterControl attacker,
                 Attack attack,
                 TriggerDetector damaged_TG,
-                GameObject damager,
+                GameObject damagerPart,
                 Vector3 incomingVelocity)
         {
-            mAttacker = attacker;
-            mAttack = attack;
-            mDamage_TG = damaged_TG;
-            mDamager = damager;
-            mIncomingVelocity = incomingVelocity;
+            _attacker = attacker;
+            _attack = attack;
+            _damaged_TG = damaged_TG;
+            _damagerPart = damagerPart;
+            _incomingVelocity = incomingVelocity;
         }
 
-        [SerializeField] CharacterControl mAttacker = null;
-        [SerializeField] Attack mAttack = null;
-        [SerializeField] GameObject mDamager = null;
-        [SerializeField] TriggerDetector mDamage_TG = null;
-        [SerializeField] Vector3 mIncomingVelocity = Vector3.zero;
-
-        public CharacterControl ATTACKER { get { return mAttacker; } }
-        public Attack ATTACK { get { return mAttack; } }
-        public GameObject DAMAGER { get { return mDamager; } }
-        public TriggerDetector DAMAGE_TG { get { return mDamage_TG; } }
-        public Vector3 INCOMING_VELOCITY { get { return mIncomingVelocity; } }
+        public CharacterControl ATTACKER { get { return _attacker; } }
+        public Attack ATTACK { get { return _attack; } }
+        public GameObject DAMAGER { get { return _damagerPart; } }
+        public TriggerDetector DAMAGE_TG { get { return _damaged_TG; } }
+        public Vector3 INCOMING_VELOCITY { get { return _incomingVelocity; } }
     }
 }
