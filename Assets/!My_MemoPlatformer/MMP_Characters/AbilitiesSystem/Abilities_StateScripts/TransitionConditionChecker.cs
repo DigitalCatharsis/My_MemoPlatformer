@@ -133,7 +133,7 @@ namespace My_MemoPlatformer
                         {
                             for (int i = 0; i < control.COLLISION_SPHERE_DATA.frontOverlapCheckers.Length; i++)
                             {
-                                if (!control.COLLISION_SPHERE_DATA.frontOverlapCheckers[i].objIsOverlapping)
+                                if (!control.COLLISION_SPHERE_DATA.frontOverlapCheckers[i].isObjOverlapping)
                                 {
                                     return false;
                                 }
@@ -169,7 +169,7 @@ namespace My_MemoPlatformer
 
                             for (int i = 0; i < control.COLLISION_SPHERE_DATA.frontOverlapCheckers.Length; i++)
                             {
-                                if (!control.COLLISION_SPHERE_DATA.frontOverlapCheckers[i].objIsOverlapping)
+                                if (!control.COLLISION_SPHERE_DATA.frontOverlapCheckers[i].isObjOverlapping)
                                 {
                                     AllIsOverlapping = false;
                                     #region debug

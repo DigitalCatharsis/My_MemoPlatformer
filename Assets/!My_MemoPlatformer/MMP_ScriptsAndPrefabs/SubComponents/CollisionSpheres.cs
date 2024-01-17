@@ -16,7 +16,7 @@ namespace My_MemoPlatformer
                 upSpheres = new GameObject[5],
 
                 frontOverlapCheckers = new OverlapChecker[10],
-                FrontOverlapCheckerContains = FrontOverlapCheckerContains,
+                FrontOverlapCheckerContains = IsSphereContainsOverlapChecker,
 
                 Reposition_FrontSpheres = Reposition_FrontSpheres,
                 Reposition_BottomSpheres = Reposition_BottomSpheres,
@@ -177,7 +177,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        bool FrontOverlapCheckerContains(OverlapChecker checker)
+        private bool IsSphereContainsOverlapChecker(OverlapChecker checker)
         {
             for (int i = 0; i < collisionSpheres_Data.frontOverlapCheckers.Length; i++)
             {

@@ -6,7 +6,7 @@ namespace My_MemoPlatformer
     {
         private CharacterControl _control;
         public Collider[] arrColliders;
-        public bool objIsOverlapping;
+        public bool isObjOverlapping;
 
         private void Start()
         {
@@ -24,12 +24,12 @@ namespace My_MemoPlatformer
             {
                 if (_control.COLLISION_SPHERE_DATA.FrontOverlapCheckerContains(this))
                 {
-                    objIsOverlapping = CheckObj();
+                    isObjOverlapping = CheckObj();
                 }
             }
             else
             {
-                objIsOverlapping = false;
+                isObjOverlapping = false;
             }
         }
 
