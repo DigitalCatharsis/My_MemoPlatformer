@@ -12,7 +12,7 @@ namespace My_MemoPlatformer
 
             };
 
-            control.subComponentProcessor.ground_Data = playerGround_Data;
+            Control.subComponentProcessor.ground_Data = playerGround_Data;
         }
         public override void OnFixedUpdate()
         {

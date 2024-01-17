@@ -50,11 +50,11 @@ namespace My_MemoPlatformer
         {
             foreach (var attackCondition_info in AttackManager.Instance.currentAttacks)
             {
-                if (AttackIsValid(attackCondition_info))
+                if (IsAttackValid(attackCondition_info))
                 {
                     if (attackCondition_info.mustCollide)
                     {
-                        if (control.DAMAGE_DATA.collidingBodyParts_Dictionary.Count != 0)
+                        if (Control.DAMAGE_DATA.collidingBodyParts_Dictionary.Count != 0)
                         {
                             if (CheckForCollisionAndCreacteDamageTaken(attackCondition_info))
                             {
@@ -64,7 +64,7 @@ namespace My_MemoPlatformer
                     }
                     else
                     {
-                        if (IsInLethalRange(attackCondition_info))
+                        if (CheckForLethalRangeAndCreateDamageTaken(attackCondition_info))
                         {
                             ProcessDamage(attackCondition_info);
                         }
@@ -72,7 +72,7 @@ namespace My_MemoPlatformer
                 }
             }
         }
-        private bool AttackIsValid(AttackCondition attackCondition_Info)
+        private bool IsAttackValid(AttackCondition attackCondition_Info)
         {
             if (attackCondition_Info == null)
             {
@@ -94,7 +94,7 @@ namespace My_MemoPlatformer
                 return false;
             }
 
-            if (attackCondition_Info.attacker == control)
+            if (attackCondition_Info.attacker == Control)
             {
                 return false;
             }
@@ -108,7 +108,7 @@ namespace My_MemoPlatformer
                 }
             }
 
-            if (attackCondition_Info.registeredTargets.Contains(this.control))  //prevent several times damage from one attack
+            if (attackCondition_Info.registeredTargets.Contains(this.Control))  //prevent several times damage from one attack
             {
                 return false;
             }
@@ -122,7 +122,7 @@ namespace My_MemoPlatformer
 
         private bool CheckForCollisionAndCreacteDamageTaken(AttackCondition attackCondition_Info)
         {
-            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in control.DAMAGE_DATA.collidingBodyParts_Dictionary)
+            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in Control.DAMAGE_DATA.collidingBodyParts_Dictionary)
             {
                 foreach (var collider in data.Value)
                 {
@@ -146,20 +146,20 @@ namespace My_MemoPlatformer
             return false;
         }
 
-        private bool IsInLethalRange(AttackCondition info)
+        private bool CheckForLethalRangeAndCreateDamageTaken(AttackCondition attackCondition_info)
         {
-            for (int i = 0; i < control.RAGDOLL_DATA.arrBodyParts.Length; i++)
+            for (int i = 0; i < Control.RAGDOLL_DATA.arrBodyParts.Length; i++)
             {
-                float dist = Vector3.SqrMagnitude(control.RAGDOLL_DATA.arrBodyParts[i].transform.position - info.attacker.transform.position);
+                var dist = Vector3.SqrMagnitude(Control.RAGDOLL_DATA.arrBodyParts[i].transform.position - attackCondition_info.attacker.transform.position);
 
-                if (dist <= info.lethalRange)
+                if (dist <= attackCondition_info.lethalRange)
                 {
-                    int index = Random.Range(0, control.RAGDOLL_DATA.arrBodyParts.Length);
-                    var triggerDetector = control.RAGDOLL_DATA.arrBodyParts[index].GetComponent<TriggerDetector>();
+                    int index = Random.Range(0, Control.RAGDOLL_DATA.arrBodyParts.Length);
+                    var triggerDetector = Control.RAGDOLL_DATA.arrBodyParts[index].GetComponent<TriggerDetector>();
 
                     _damage_Data.damageTaken = new DamageTaken(
-                        info.attacker,
-                        info.attackAbility,
+                        attackCondition_info.attacker,
+                        attackCondition_info.attackAbility,
                         triggerDetector,
                         damagerPart: null,
                         incomingVelocity: Vector3.zero);
@@ -167,7 +167,6 @@ namespace My_MemoPlatformer
                     return true;
                 }
             }
-
             return false;
         }
 
@@ -178,20 +177,20 @@ namespace My_MemoPlatformer
                 return true;
             }
 
-            if (control.ANIMATION_DATA.IsRunning(typeof(Block)))
+            if (Control.ANIMATION_DATA.IsRunning(typeof(Block)))
             {
-                var dir = info.attacker.transform.position - control.transform.position;
+                var dir = info.attacker.transform.position - Control.transform.position;
 
                 if (dir.z > 0f)
                 {
-                    if (control.ROTATION_DATA.IsFacingForward())
+                    if (Control.ROTATION_DATA.IsFacingForward())
                     {
                         return true;
                     }
                 }
                 else if (dir.z < 0f)
                 {
-                    if (!control.ROTATION_DATA.IsFacingForward())
+                    if (!Control.ROTATION_DATA.IsFacingForward())
                     {
                         return true;
                     }
@@ -211,54 +210,54 @@ namespace My_MemoPlatformer
             {
                 if (!AttackIsBlocked(info))
                 {
-                    TakeDamage(info);
+                    OnTakeDamage(info);
                 }
             }
         }
 
-        private void PushDeadBody(AttackCondition info)
+        private void PushDeadBody(AttackCondition attackCondition_Info)
         {
-            if (!info.registeredTargets.Contains(this.control))
+            if (!attackCondition_Info.registeredTargets.Contains(this.Control))
             {
-                if (info.attackAbility.collateralDamageInfo.createCollateral)
+                if (attackCondition_Info.attackAbility.collateralDamageInfo.createCollateral)
                 {
-                    ShowHitParticles(info.attacker, info.attackAbility.particleType);
-                    ProcessFlyingRagdoll(info);
+                    ShowHitParticles(attackCondition_Info.attacker, attackCondition_Info.attackAbility.particleType);
+                    ProcessFlyingRagdoll(attackCondition_Info);
                 }
 
-                info.registeredTargets.Add(this.control);
-                control.RAGDOLL_DATA.ClearExistingVelocity();
-                control.RAGDOLL_DATA.AddForceToDamagedPart(RagdollPushType.DEAD_BODY);
+                attackCondition_Info.registeredTargets.Add(this.Control);
+                Control.RAGDOLL_DATA.ClearExistingVelocity();
+                Control.RAGDOLL_DATA.AddForceToDamagedPart(RagdollPushType.DEAD_BODY);
             }
 
             return;
         }
 
-        private void TakeDamage(AttackCondition info)
+        private void OnTakeDamage(AttackCondition attackCondition_Info)
         {
-            ProcessHitParticles(info);
+            ProcessHitParticles(attackCondition_Info);
 
-            info.currentHits++;
-            _damage_Data.currentHp -= info.attackAbility.damage;
+            attackCondition_Info.currentHits++;
+            _damage_Data.currentHp -= attackCondition_Info.attackAbility.damage;
 
-            AttackManager.Instance.ForceDeregister(control);
-            control.ANIMATION_DATA.currentRunningAbilities.Clear();
+            AttackManager.Instance.ForceDeregister(Control);
+            Control.ANIMATION_DATA.currentRunningAbilities.Clear();
 
             if (IsDead())
             {
-                control.RAGDOLL_DATA.ragdollTriggered = true;
+                Control.RAGDOLL_DATA.ragdollTriggered = true;
             }
             else
             {
                 var randomIndex = Random.Range(0, (int)Hit_Reaction_States.COUNT);
-                control.skinnedMeshAnimator.Play(HashManager.Instance.dicHitReactionStates[(Hit_Reaction_States)randomIndex], 0, 0f);
+                Control.skinnedMeshAnimator.Play(HashManager.Instance.dicHitReactionStates[(Hit_Reaction_States)randomIndex], 0, 0f);
             }
 
-            ProcessFlyingRagdoll(info);
+            ProcessFlyingRagdoll(attackCondition_Info);
 
-            if (!info.registeredTargets.Contains(this.control))
+            if (!attackCondition_Info.registeredTargets.Contains(this.Control))
             {
-                info.registeredTargets.Add(this.control);
+                attackCondition_Info.registeredTargets.Add(this.Control);
             }
         }
 
@@ -266,7 +265,7 @@ namespace My_MemoPlatformer
         {
             if (attacker.RAGDOLL_DATA.flyingRagdollData.isTriggered)
             {
-                if (attacker.RAGDOLL_DATA.flyingRagdollData.attacker != control)
+                if (attacker.RAGDOLL_DATA.flyingRagdollData.attacker != Control)
                 {
                     var mag = Vector3.SqrMagnitude(col.attachedRigidbody.velocity);
 
@@ -277,15 +276,15 @@ namespace My_MemoPlatformer
 
                     if (mag >= 10f && col.transform.root.gameObject.GetComponent<CharacterControl>())
                     {
-                        control.DAMAGE_DATA.damageTaken = new DamageTaken(
+                        Control.DAMAGE_DATA.damageTaken = new DamageTaken(
                             attacker: null,
                             attack: null,
                             damaged_TG: triggerDetector,
                             damagerPart: null,
                             incomingVelocity: col.attachedRigidbody.velocity);
 
-                        control.DAMAGE_DATA.currentHp = 0;
-                        control.RAGDOLL_DATA.ragdollTriggered = true;
+                        Control.DAMAGE_DATA.currentHp = 0;
+                        Control.RAGDOLL_DATA.ragdollTriggered = true;
                     }
                 }
             }
@@ -311,7 +310,7 @@ namespace My_MemoPlatformer
         {
             var vfx = PoolManager.Instance.GetObject(effectsType);
 
-            vfx.transform.position = control.DAMAGE_DATA.damageTaken.DAMAGE_TG.triggerCollider.bounds.center;
+            vfx.transform.position = Control.DAMAGE_DATA.damageTaken.DAMAGE_TG.triggerCollider.bounds.center;
 
             vfx.SetActive(true);
 
@@ -337,12 +336,12 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void ProcessFlyingRagdoll(AttackCondition info)
+        private void ProcessFlyingRagdoll(AttackCondition attackCondition_Info)
         {
-            if (info.attackAbility.collateralDamageInfo.createCollateral)
+            if (attackCondition_Info.attackAbility.collateralDamageInfo.createCollateral)
             {
-                control.RAGDOLL_DATA.flyingRagdollData.isTriggered = true;
-                control.RAGDOLL_DATA.flyingRagdollData.attacker = info.attacker;
+                Control.RAGDOLL_DATA.flyingRagdollData.isTriggered = true;
+                Control.RAGDOLL_DATA.flyingRagdollData.attacker = attackCondition_Info.attacker;
             }
         }
 

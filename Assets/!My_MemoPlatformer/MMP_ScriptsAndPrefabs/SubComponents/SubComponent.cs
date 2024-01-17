@@ -24,7 +24,7 @@ namespace My_MemoPlatformer
     {
         protected SubComponentProcessor subComponentProcessor;
 
-        public CharacterControl control
+        public CharacterControl Control
         {
             get
             {

@@ -31,9 +31,9 @@ namespace My_MemoPlatformer
         }
         public override void OnFixedUpdate()
         {
-            if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
+            if (Control.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
             {
-                if (control.RIGID_BODY.useGravity)
+                if (Control.RIGID_BODY.useGravity)
                 {
                     ledgeGrab_Data.isGrabbingLedge = false;
                 }
@@ -47,14 +47,14 @@ namespace My_MemoPlatformer
 
         private bool IsLedgeGrabCondition()
         {
-            if (!control.moveUp)
+            if (!Control.moveUp)
             {
                 return false;
             }
 
             for (int i = 0; i < HashManager.Instance.arrLedgeTriggerStates.Length; i++)
             {
-                var info = control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
+                var info = Control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
                 if (info.shortNameHash == HashManager.Instance.arrLedgeTriggerStates[i])
                 {
                     return true;
@@ -66,7 +66,7 @@ namespace My_MemoPlatformer
 
         private void ProcessLedgeGrab()
         {
-            if (!control.skinnedMeshAnimator.GetBool(
+            if (!Control.skinnedMeshAnimator.GetBool(
                 HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
             {
                 foreach (GameObject obj in collider1.collidedObjects)
@@ -109,12 +109,12 @@ namespace My_MemoPlatformer
             }
 
             ledgeGrab_Data.isGrabbingLedge = true;
-            control.RIGID_BODY.useGravity = false;
-            control.RIGID_BODY.velocity = Vector3.zero;
+            Control.RIGID_BODY.useGravity = false;
+            Control.RIGID_BODY.velocity = Vector3.zero;
 
             float y, z;
             y = platform.transform.position.y + (boxCollider.size.y / 2f);
-            if (control.ROTATION_DATA.IsFacingForward())
+            if (Control.ROTATION_DATA.IsFacingForward())
             {
                 z = platform.transform.position.z - (boxCollider.size.z * boxCollider.gameObject.transform.lossyScale.z / 2f);
             }
@@ -125,14 +125,14 @@ namespace My_MemoPlatformer
 
             Vector3 platformEdge = new Vector3(0f, y, z);
 
-            if (control.ROTATION_DATA.IsFacingForward())
+            if (Control.ROTATION_DATA.IsFacingForward())
             {
-                control.RIGID_BODY.MovePosition(
+                Control.RIGID_BODY.MovePosition(
                     platformEdge + ledgeCalibration);
             }
             else
             {
-                control.RIGID_BODY.MovePosition(
+                Control.RIGID_BODY.MovePosition(
                     platformEdge + new Vector3(0f, ledgeCalibration.y, -ledgeCalibration.z));
             }
 

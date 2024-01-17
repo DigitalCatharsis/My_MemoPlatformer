@@ -29,24 +29,24 @@ namespace My_MemoPlatformer
 
         public override void OnFixedUpdate()
         {
-            if (control.subComponentProcessor.arrSubComponents[(int)SubComponentType.MANUAL_INPUT] != null)
+            if (Control.subComponentProcessor.arrSubComponents[(int)SubComponentType.MANUAL_INPUT] != null)
             {
                 return;
             }
 
-            if (!control.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
+            if (!Control.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
             {
                 return;
             }
 
             //if one of bodypart is player, there gonna be instakill
-            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in control.DAMAGE_DATA.collidingBodyParts_Dictionary)
+            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in Control.DAMAGE_DATA.collidingBodyParts_Dictionary)
             {
                 foreach (var col in data.Value)
                 {
                     var c = CharacterManager.Instance.GetCharacter(col.transform.root.gameObject);
 
-                    if (c == control)
+                    if (c == Control)
                     {
                         continue;
                     }
@@ -66,7 +66,7 @@ namespace My_MemoPlatformer
                         continue;
                     }
 
-                    if (control.ANIMATION_DATA.IsRunning(typeof(Attack)))
+                    if (Control.ANIMATION_DATA.IsRunning(typeof(Attack)))
                     {
                         continue;
                     }
@@ -81,7 +81,7 @@ namespace My_MemoPlatformer
                         continue;
                     }
 
-                    if (control.DAMAGE_DATA.IsDead())
+                    if (Control.DAMAGE_DATA.IsDead())
                     {
                         continue;
                     }
@@ -100,18 +100,18 @@ namespace My_MemoPlatformer
 
         private void DeathByInstakill(CharacterControl attacker)
         {
-            control.ANIMATION_DATA.currentRunningAbilities.Clear();
+            Control.ANIMATION_DATA.currentRunningAbilities.Clear();
             attacker.ANIMATION_DATA.currentRunningAbilities.Clear();
 
-            control.RIGID_BODY.useGravity = false;
-            control.boxCollider.enabled = false;
-            control.skinnedMeshAnimator.runtimeAnimatorController = control.INSTA_KILL_DATA.Animation_Victim;
+            Control.RIGID_BODY.useGravity = false;
+            Control.boxCollider.enabled = false;
+            Control.skinnedMeshAnimator.runtimeAnimatorController = Control.INSTA_KILL_DATA.Animation_Victim;
 
             attacker.RIGID_BODY.useGravity = false;
             attacker.boxCollider.enabled = false;
-            attacker.skinnedMeshAnimator.runtimeAnimatorController = control.INSTA_KILL_DATA.Animation_Assassin;
+            attacker.skinnedMeshAnimator.runtimeAnimatorController = Control.INSTA_KILL_DATA.Animation_Assassin;
 
-            Vector3 dir = control.transform.position - attacker.transform.position;
+            Vector3 dir = Control.transform.position - attacker.transform.position;
 
             if (dir.z < 0f)
             {
@@ -122,10 +122,10 @@ namespace My_MemoPlatformer
                 attacker.ROTATION_DATA.FaceForward(true);
             }
 
-            control.transform.LookAt(control.transform.position + (attacker.transform.forward * 5f), Vector3.up);
-            control.transform.position = attacker.transform.position + (attacker.transform.forward * 0.45f);
+            Control.transform.LookAt(Control.transform.position + (attacker.transform.forward * 5f), Vector3.up);
+            Control.transform.position = attacker.transform.position + (attacker.transform.forward * 0.45f);
 
-            control.DAMAGE_DATA.currentHp = 0f;
+            Control.DAMAGE_DATA.currentHp = 0f;
         }
     }
 }

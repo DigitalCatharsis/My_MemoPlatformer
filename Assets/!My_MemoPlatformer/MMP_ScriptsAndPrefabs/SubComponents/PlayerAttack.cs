@@ -24,7 +24,7 @@ namespace My_MemoPlatformer
 
         public override void OnUpdate()
         {
-            if (control.attack)
+            if (Control.attack)
             { //dont trigger attack several times
                 if (playerAttack_Data.attackButtonIsReset)
                 {

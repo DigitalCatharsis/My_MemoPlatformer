@@ -15,7 +15,7 @@ namespace My_MemoPlatformer
             RaycastHit hit;
             if (Physics.Raycast(start.transform.position, dir, out hit, blockDistance))
             {
-                if (!IsBodyPart(control, hit.collider)
+                if (!IsOwnBodyPart(control, hit.collider)
                     && !IsIgnoringCharacter(control, hit.collider)
                     && !Ledge.IsLedgeChecker(hit.collider.gameObject)  // Проверка, что мы ничего не задеваем, включая Ledge (платформы, за котоыре можно зацепиться)
                     && !MeleeWeapon.IsWeapon(hit.collider.gameObject)
@@ -60,7 +60,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        public static bool IsBodyPart(CharacterControl control, Collider col)
+        public static bool IsOwnBodyPart(CharacterControl control, Collider col)
         {
             if (col.transform.root.gameObject == control.gameObject)
             {

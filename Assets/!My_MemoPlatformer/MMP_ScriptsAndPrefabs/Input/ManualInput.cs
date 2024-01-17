@@ -39,89 +39,89 @@ namespace My_MemoPlatformer
         {
             if (VirtualInputManager.Instance.turbo)
             {
-                control.turbo = true;
+                Control.turbo = true;
                 ProcessDoubleTap(InputKeyType.KEY_TURBO);
             }
             else
             {
-                control.turbo = false;
+                Control.turbo = false;
                 RemoveDoubleTap(InputKeyType.KEY_TURBO);
             }
 
             if (VirtualInputManager.Instance.moveUp)
             {
-                control.moveUp = true;
+                Control.moveUp = true;
                 ProcessDoubleTap(InputKeyType.KEY_MOVE_UP);
             }
             else
             {
-                control.moveUp = false;
+                Control.moveUp = false;
                 RemoveDoubleTap(InputKeyType.KEY_MOVE_UP);
             }
 
             if (VirtualInputManager.Instance.moveDown)
             {
-                control.moveDown = true;
+                Control.moveDown = true;
                 ProcessDoubleTap(InputKeyType.KEY_MOVE_DOWN);
             }
             else
             {
-                control.moveDown = false;
+                Control.moveDown = false;
                 RemoveDoubleTap(InputKeyType.KEY_MOVE_DOWN);
             }
 
             if (VirtualInputManager.Instance.moveRight)
             {
-                control.moveRight = true;
+                Control.moveRight = true;
                 ProcessDoubleTap(InputKeyType.KEY_MOVE_RIGHT);
             }
             else
             {
-                control.moveRight = false;
+                Control.moveRight = false;
                 RemoveDoubleTap(InputKeyType.KEY_MOVE_RIGHT);
             }
 
             if (VirtualInputManager.Instance.moveLeft)
             {
-                control.moveLeft = true;
+                Control.moveLeft = true;
                 ProcessDoubleTap(InputKeyType.KEY_MOVE_LEFT);
             }
             else
             {
-                control.moveLeft = false;
+                Control.moveLeft = false;
                 RemoveDoubleTap(InputKeyType.KEY_MOVE_LEFT);
             }
 
             if (VirtualInputManager.Instance.jump)
             {
-                control.jump = true;
+                Control.jump = true;
                 ProcessDoubleTap(InputKeyType.KEY_JUMP);
             }
             else
             {
-                control.jump = false;
+                Control.jump = false;
                 RemoveDoubleTap(InputKeyType.KEY_JUMP);
             }
 
             if (VirtualInputManager.Instance.block)
             {
-                control.block = true;
+                Control.block = true;
                 ProcessDoubleTap(InputKeyType.KEY_BLOCK);
             }
             else
             {
-                control.block = false;
+                Control.block = false;
                 RemoveDoubleTap(InputKeyType.KEY_BLOCK);
             }
 
             if (VirtualInputManager.Instance.attack)
             {
-                control.attack = true;
+                Control.attack = true;
                 ProcessDoubleTap(InputKeyType.KEY_ATTACK);
             }
             else
             {
-                control.attack = false;
+                Control.attack = false;
                 RemoveDoubleTap(InputKeyType.KEY_ATTACK);
             }
 
@@ -129,11 +129,11 @@ namespace My_MemoPlatformer
             if (_doubleTaps.Contains(InputKeyType.KEY_MOVE_RIGHT) ||
                 _doubleTaps.Contains(InputKeyType.KEY_MOVE_LEFT))
             {
-                control.turbo = true;
+                Control.turbo = true;
             }
 
             //double tap running turn
-            if (control.moveRight && control.moveLeft)
+            if (Control.moveRight && Control.moveLeft)
             {
                 if (_doubleTaps.Contains(InputKeyType.KEY_MOVE_RIGHT) ||
                     _doubleTaps.Contains(InputKeyType.KEY_MOVE_LEFT))

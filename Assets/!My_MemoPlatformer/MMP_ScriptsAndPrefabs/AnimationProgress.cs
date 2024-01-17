@@ -61,9 +61,9 @@ namespace My_MemoPlatformer
             return true;
         }
 
-        public bool ForwardIsReversed()
+        public bool IsForwardReversed()
         {
-            if (latestMoveForwardScript.moveOnHit)
+            if (latestMoveForwardScript.moveOnHit)  //Move back when punched
             {
                 if (IsFacingAtacker())
                 {

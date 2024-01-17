@@ -29,23 +29,23 @@ namespace My_MemoPlatformer
 
         private void CalculateMomentum(float speed, float maxMomentum)
         {
-            if (!control.BLOCKING_OBJ_DATA.RightSideBLocked())
+            if (!Control.BLOCKING_OBJ_DATA.RightSideBLocked())
             {
-                if (control.moveRight)
+                if (Control.moveRight)
                 {
                     momentumCalculator_Data.momentum += speed;
                 }
             }
 
-            if (!control.BLOCKING_OBJ_DATA.LeftSideBlocked())
+            if (!Control.BLOCKING_OBJ_DATA.LeftSideBlocked())
             {
-                if (control.moveLeft)
+                if (Control.moveLeft)
                 {
                     momentumCalculator_Data.momentum -= speed;
                 }
             }
 
-            if (control.BLOCKING_OBJ_DATA.RightSideBLocked() || control.BLOCKING_OBJ_DATA.LeftSideBlocked())
+            if (Control.BLOCKING_OBJ_DATA.RightSideBLocked() || Control.BLOCKING_OBJ_DATA.LeftSideBlocked())
             {
                 var lerped = Mathf.Lerp(momentumCalculator_Data.momentum, 0f, Time.deltaTime * 1.5f);
                 momentumCalculator_Data.momentum = lerped;

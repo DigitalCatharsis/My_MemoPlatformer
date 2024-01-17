@@ -34,15 +34,15 @@ namespace My_MemoPlatformer
 
             if (_boxCollider_Data.isUpdatingSpheres)
             {
-                control.COLLISION_SPHERE_DATA.Reposition_FrontSpheres();
-                control.COLLISION_SPHERE_DATA.Reposition_BottomSpheres();
-                control.COLLISION_SPHERE_DATA.Reposition_BackSpheres();
-                control.COLLISION_SPHERE_DATA.Reposition_UpSpheres();
+                Control.COLLISION_SPHERE_DATA.Reposition_FrontSpheres();
+                Control.COLLISION_SPHERE_DATA.Reposition_BottomSpheres();
+                Control.COLLISION_SPHERE_DATA.Reposition_BackSpheres();
+                Control.COLLISION_SPHERE_DATA.Reposition_UpSpheres();
 
                 if (_boxCollider_Data.isLanding)  //prevent bug when idle after catching corner of platform
                 {
                     //Debug.Log("repositioning y");
-                    control.RIGID_BODY.MovePosition(new Vector3(
+                    Control.RIGID_BODY.MovePosition(new Vector3(
                         0f,
                         _boxCollider_Data.landingPosition.y,
                         this.transform.position.z));
@@ -57,14 +57,14 @@ namespace My_MemoPlatformer
 
         public void UpdateBoxCollider_Size()
         {
-            if (!control.ANIMATION_DATA.IsRunning(typeof(UpdateBoxCollider)))
+            if (!Control.ANIMATION_DATA.IsRunning(typeof(UpdateBoxCollider)))
             {
                 return;
             }
 
-            if (Vector3.SqrMagnitude(control.boxCollider.size - _boxCollider_Data.targetSize) > 0.00001f)
+            if (Vector3.SqrMagnitude(Control.boxCollider.size - _boxCollider_Data.targetSize) > 0.00001f)
             {
-                control.boxCollider.size = Vector3.Lerp(control.boxCollider.size,
+                Control.boxCollider.size = Vector3.Lerp(Control.boxCollider.size,
                     _boxCollider_Data.targetSize, 
                     Time.deltaTime * _boxCollider_Data.size_Update_Speed);
 
@@ -74,14 +74,14 @@ namespace My_MemoPlatformer
 
         public void UpdateBoxCollider_Center()
         {
-            if (!control.ANIMATION_DATA.IsRunning(typeof(UpdateBoxCollider)))
+            if (!Control.ANIMATION_DATA.IsRunning(typeof(UpdateBoxCollider)))
             {
                 return;
             }
 
-            if (Vector3.SqrMagnitude(control.boxCollider.center - _boxCollider_Data.targetCenter) > 0.0001f)
+            if (Vector3.SqrMagnitude(Control.boxCollider.center - _boxCollider_Data.targetCenter) > 0.0001f)
             {
-                control.boxCollider.center = Vector3.Lerp(control.boxCollider.center,
+                Control.boxCollider.center = Vector3.Lerp(Control.boxCollider.center,
                     _boxCollider_Data.targetCenter,
                     Time.deltaTime * _boxCollider_Data.center_Update_Speed);
 

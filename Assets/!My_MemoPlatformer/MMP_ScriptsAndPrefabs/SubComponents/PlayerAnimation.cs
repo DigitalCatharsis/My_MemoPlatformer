@@ -26,18 +26,18 @@ namespace My_MemoPlatformer
         {
             if (IsRunning(typeof(LockTransition)))
             {
-                if (control.animationProgress.lockTransition)
+                if (Control.animationProgress.lockTransition)
                 {
-                    control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.LockTransition], true);
+                    Control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.LockTransition], true);
                 }
                 else
                 {
-                    control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.LockTransition], false);
+                    Control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.LockTransition], false);
                 }
             }
             else
             {
-                control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.LockTransition], false);
+                Control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.LockTransition], false);
             }
         }
         private bool IsRunning(System.Type type) //ability is running now?

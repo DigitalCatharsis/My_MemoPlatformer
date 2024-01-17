@@ -46,11 +46,11 @@ namespace My_MemoPlatformer
         public void SetupBodyParts()
         {
             var bodyParts = new List<Collider>();
-            var colliders = control.gameObject.GetComponentsInChildren<Collider>(); //Get all the colliders in the hierarchy
+            var colliders = Control.gameObject.GetComponentsInChildren<Collider>(); //Get all the colliders in the hierarchy
 
             foreach (var c in colliders)
             {
-                if (c.gameObject != control.gameObject)  //if the collider that we found is not the same as in the charactercontrol (//not a boxcolllider itself)
+                if (c.gameObject != Control.gameObject)  //if the collider that we found is not the same as in the charactercontrol (//not a boxcolllider itself)
                 {
                     if (c.gameObject.GetComponent<LedgeChecker>() == null && c.gameObject.GetComponent<LedgeCollider>() == null)
                     {
@@ -86,13 +86,13 @@ namespace My_MemoPlatformer
         {
             ragdoll_Data.ragdollTriggered = false;
 
-            if (control.skinnedMeshAnimator.avatar == null)
+            if (Control.skinnedMeshAnimator.avatar == null)
             {
                 return;
             }
 
             //change components layers from character to DeadBody to prevent unnessesary collisions.
-            var arr = control.gameObject.GetComponentsInChildren<Transform>();
+            var arr = Control.gameObject.GetComponentsInChildren<Transform>();
             foreach (var t in arr)
             {
                 t.gameObject.layer = LayerMask.NameToLayer(MMP_Layers.DeadBody.ToString());
@@ -107,20 +107,20 @@ namespace My_MemoPlatformer
             }
 
             //turn off animator, avatar
-            control.RIGID_BODY.useGravity = false;
-            control.RIGID_BODY.velocity = Vector3.zero;
-            control.gameObject.GetComponent<BoxCollider>().enabled = false;
-            control.skinnedMeshAnimator.enabled = false;
-            control.skinnedMeshAnimator.avatar = null;
+            Control.RIGID_BODY.useGravity = false;
+            Control.RIGID_BODY.velocity = Vector3.zero;
+            Control.gameObject.GetComponent<BoxCollider>().enabled = false;
+            Control.skinnedMeshAnimator.enabled = false;
+            Control.skinnedMeshAnimator.avatar = null;
 
             //Turn off ledge colliders
-            control.LEDGE_GRAB_DATA.LedgeCollidersOff();
+            Control.LEDGE_GRAB_DATA.LedgeCollidersOff();
 
             //turn off ai
-            if (control.aiController != null)
+            if (Control.aiController != null)
             {
-                control.aiController.gameObject.SetActive(false);
-                control.navMeshObstacle.enabled = false;
+                Control.aiController.gameObject.SetActive(false);
+                Control.navMeshObstacle.enabled = false;
             }
 
             //turn on ragdoll
@@ -146,17 +146,17 @@ namespace My_MemoPlatformer
 
             ragdoll_Data.ClearExistingVelocity();
 
-            if (control.DAMAGE_DATA.damageTaken != null)
+            if (Control.DAMAGE_DATA.damageTaken != null)
             {
                 //take damage from ragdoll
-                var incomingVelocity = control.DAMAGE_DATA.damageTaken.INCOMING_VELOCITY;
-                var damagedPart = control.DAMAGE_DATA.damageTaken.DAMAGE_TG;
+                var incomingVelocity = Control.DAMAGE_DATA.damageTaken.INCOMING_VELOCITY;
+                var damagedPart = Control.DAMAGE_DATA.damageTaken.DAMAGE_TG;
 
                 if (Vector3.SqrMagnitude(incomingVelocity) > 0.0001f)
                 {
                     if (DebugContainer_Data.Instance.debug_Ragdoll)
                     {
-                        Debug.Log(control.gameObject.name + ": taking damage from ragdoll");
+                        Debug.Log(Control.gameObject.name + ": taking damage from ragdoll");
                     }
                     damagedPart.rigidBody.AddForce(incomingVelocity * 0.7f);
                 }
@@ -183,23 +183,23 @@ namespace My_MemoPlatformer
         }
         void AddForceToDamagedPart(RagdollPushType pushType)
         {
-            if (control.DAMAGE_DATA.damageTaken == null)
+            if (Control.DAMAGE_DATA.damageTaken == null)
             {
                 return;
             }
 
-            if (control.DAMAGE_DATA.damageTaken.ATTACKER == null)
+            if (Control.DAMAGE_DATA.damageTaken.ATTACKER == null)
             {
                 return;
             }
 
-            var damageData = control.DAMAGE_DATA;
+            var damageData = Control.DAMAGE_DATA;
 
             var forwardDir = damageData.damageTaken.ATTACKER.transform.forward;
             var rightDir = damageData.damageTaken.ATTACKER.transform.right;
             var upDir = damageData.damageTaken.ATTACKER.transform.up;
 
-            var body = control.DAMAGE_DATA.damageTaken.DAMAGE_TG.GetComponent<Rigidbody>();
+            var body = Control.DAMAGE_DATA.damageTaken.DAMAGE_TG.GetComponent<Rigidbody>();
             var attack = damageData.damageTaken.ATTACK;
 
             if (pushType == RagdollPushType.NORMAL)

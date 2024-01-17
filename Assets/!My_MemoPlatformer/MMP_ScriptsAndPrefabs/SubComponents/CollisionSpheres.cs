@@ -97,83 +97,83 @@ namespace My_MemoPlatformer
 
         private void Reposition_FrontSpheres()
         {
-            var bottom = control.boxCollider.bounds.center.y - (control.boxCollider.bounds.size.y / 2f); // в центре внизу. 
-            var top = control.boxCollider.bounds.center.y + (control.boxCollider.bounds.size.y / 2f); // в центре вверху. ;
-            var front = control.boxCollider.bounds.center.z + (control.boxCollider.bounds.size.z / 2f); // в центре спереди. ;
+            var bottom = Control.boxCollider.bounds.center.y - (Control.boxCollider.bounds.size.y / 2f); // в центре внизу. 
+            var top = Control.boxCollider.bounds.center.y + (Control.boxCollider.bounds.size.y / 2f); // в центре вверху. ;
+            var front = Control.boxCollider.bounds.center.z + (Control.boxCollider.bounds.size.z / 2f); // в центре спереди. ;
 
             collisionSpheres_Data.frontSpheres[0].transform.localPosition =
-                new Vector3(0f, bottom + 0.05f, front) - control.transform.position;
+                new Vector3(0f, bottom + 0.05f, front) - Control.transform.position;
 
             collisionSpheres_Data.frontSpheres[1].transform.localPosition =
-                new Vector3(0f, top, front) - control.transform.position;
+                new Vector3(0f, top, front) - Control.transform.position;
 
             float interval = (top - bottom + 0.05f) / 9;
 
             for (int i = 2; i < collisionSpheres_Data.frontSpheres.Length; i++)
             {
                 collisionSpheres_Data.frontSpheres[i].transform.localPosition =
-                    new Vector3(0f, bottom + (interval * (i - 1)), front) - control.transform.position;
+                    new Vector3(0f, bottom + (interval * (i - 1)), front) - Control.transform.position;
             }
         }
         private void Reposition_BackSpheres()
         {
-            float bottom = control.boxCollider.bounds.center.y - (control.boxCollider.bounds.size.y / 2f); // в центре внизу. 
-            float top = control.boxCollider.bounds.center.y + (control.boxCollider.bounds.size.y / 2f); // в центре вверху.
-            float back = control.boxCollider.bounds.center.z - (control.boxCollider.bounds.size.z / 2f); // в центре спереди.
+            float bottom = Control.boxCollider.bounds.center.y - (Control.boxCollider.bounds.size.y / 2f); // в центре внизу. 
+            float top = Control.boxCollider.bounds.center.y + (Control.boxCollider.bounds.size.y / 2f); // в центре вверху.
+            float back = Control.boxCollider.bounds.center.z - (Control.boxCollider.bounds.size.z / 2f); // в центре спереди.
 
             collisionSpheres_Data.backSpheres[0].transform.localPosition =
-                new Vector3(0f, bottom + 0.05f, back) - control.transform.position;
+                new Vector3(0f, bottom + 0.05f, back) - Control.transform.position;
 
             collisionSpheres_Data.backSpheres[1].transform.localPosition =
-                new Vector3(0f, top, back) - control.transform.position;
+                new Vector3(0f, top, back) - Control.transform.position;
 
             float interval = (top - bottom + 0.05f) / 9;
 
             for (int i = 2; i < collisionSpheres_Data.backSpheres.Length; i++)
             {
                 collisionSpheres_Data.backSpheres[i].transform.localPosition =
-                    new Vector3(0f, bottom + (interval * (i - 1)), back) - control.transform.position;
+                    new Vector3(0f, bottom + (interval * (i - 1)), back) - Control.transform.position;
             }
         }
 
         private void Reposition_BottomSpheres()
         {
-            var bottom = control.boxCollider.bounds.center.y - (control.boxCollider.bounds.size.y / 2f);
-            var front = control.boxCollider.bounds.center.z + (control.boxCollider.bounds.size.z / 2f);
-            var back = control.boxCollider.bounds.center.z - (control.boxCollider.bounds.size.z / 2f);
+            var bottom = Control.boxCollider.bounds.center.y - (Control.boxCollider.bounds.size.y / 2f);
+            var front = Control.boxCollider.bounds.center.z + (Control.boxCollider.bounds.size.z / 2f);
+            var back = Control.boxCollider.bounds.center.z - (Control.boxCollider.bounds.size.z / 2f);
 
             collisionSpheres_Data.bottomSpheres[0].transform.localPosition =
-                new Vector3(0f, bottom, back) - control.transform.position;
+                new Vector3(0f, bottom, back) - Control.transform.position;
 
             collisionSpheres_Data.bottomSpheres[1].transform.localPosition =
-                new Vector3(0f, bottom, front) - control.transform.position;
+                new Vector3(0f, bottom, front) - Control.transform.position;
 
             float interval = (front - back) / 4;
 
             for (int i = 2; i < collisionSpheres_Data.bottomSpheres.Length; i++)
             {
                 collisionSpheres_Data.bottomSpheres[i].transform.localPosition =
-                    new Vector3(0f, bottom, back + (interval * (i - 1))) - control.transform.position;
+                    new Vector3(0f, bottom, back + (interval * (i - 1))) - Control.transform.position;
             }
         }
         private void Reposition_UpSpheres()
         {
-            var top = control.boxCollider.bounds.center.y + (control.boxCollider.bounds.size.y / 2f);
-            var front = control.boxCollider.bounds.center.z + (control.boxCollider.bounds.size.z / 2f);
-            var back = control.boxCollider.bounds.center.z - (control.boxCollider.bounds.size.z / 2f);
+            var top = Control.boxCollider.bounds.center.y + (Control.boxCollider.bounds.size.y / 2f);
+            var front = Control.boxCollider.bounds.center.z + (Control.boxCollider.bounds.size.z / 2f);
+            var back = Control.boxCollider.bounds.center.z - (Control.boxCollider.bounds.size.z / 2f);
 
             collisionSpheres_Data.upSpheres[0].transform.localPosition =
-                new Vector3(0f, top, back) - control.transform.position;
+                new Vector3(0f, top, back) - Control.transform.position;
 
             collisionSpheres_Data.upSpheres[1].transform.localPosition =
-                new Vector3(0f, top, front) - control.transform.position;
+                new Vector3(0f, top, front) - Control.transform.position;
 
             float interval = (front - back) / 4;
 
             for (int i = 2; i < collisionSpheres_Data.upSpheres.Length; i++)
             {
                 collisionSpheres_Data.upSpheres[i].transform.localPosition =
-                    new Vector3(0f, top, back + (interval * (i - 1))) - control.transform.position;
+                    new Vector3(0f, top, back + (interval * (i - 1))) - Control.transform.position;
             }
         }
 

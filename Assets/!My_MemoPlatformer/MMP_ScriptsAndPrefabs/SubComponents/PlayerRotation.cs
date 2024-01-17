@@ -35,29 +35,29 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (!control.skinnedMeshAnimator.enabled)   //to prevent rotating after death
+            if (!Control.skinnedMeshAnimator.enabled)   //to prevent rotating after death
             {
                 return;
             }
 
-            if (control.ROTATION_DATA.lockTurn)
+            if (Control.ROTATION_DATA.lockTurn)
             {
                 return;
             }
 
             if (forward)
             {
-                control.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                Control.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
             }
             else
             {
-                control.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+                Control.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
             }
         }
         private bool IsFacingForward()
         {
-            if (control.transform.forward.z > 0f)
+            if (Control.transform.forward.z > 0f)
             {
                 return true;
             }
@@ -69,11 +69,11 @@ namespace My_MemoPlatformer
 
         void ClearTurnLock()
         {
-            if (!control.ANIMATION_DATA.IsRunning(typeof(LockTurn)))
+            if (!Control.ANIMATION_DATA.IsRunning(typeof(LockTurn)))
             {
                 if (rotation_Data.lockTurn)
                 {
-                    AnimatorStateInfo info = control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
+                    AnimatorStateInfo info = Control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
 
                     if (info.normalizedTime >= rotation_Data.unlockTiming)
                     {
