@@ -46,29 +46,29 @@ namespace My_MemoPlatformer
         public void SetupBodyParts()
         {
             var bodyParts = new List<Collider>();
-            var colliders = Control.gameObject.GetComponentsInChildren<Collider>(); //Get all the colliders in the hierarchy
+            var colliders = Control.gameObject.GetComponentsInChildren<Collider>();
 
-            foreach (var c in colliders)
+            foreach (var collider in colliders)
             {
-                if (c.gameObject != Control.gameObject)  //if the collider that we found is not the same as in the charactercontrol (//not a boxcolllider itself)
+                if (collider.gameObject != Control.gameObject)  //not a boxCollider
                 {
-                    if (c.gameObject.GetComponent<LedgeChecker>() == null && c.gameObject.GetComponent<LedgeCollider>() == null)
+                    if (collider.gameObject.GetComponent<LedgeChecker>() == null && collider.gameObject.GetComponent<LedgeCollider>() == null)
                     {
                         //thats means its a ragdoll
-                        c.isTrigger = true;
-                        bodyParts.Add(c);
-                        c.attachedRigidbody.interpolation = RigidbodyInterpolation.None;  //убрать дрожжание //Окей, если каждая часть будет интерполированной, то начинается вакханалия
-                        c.attachedRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic; //расчет физики, предотвращение прохождения сквозь объекты
+                        collider.isTrigger = true;
+                        bodyParts.Add(collider);
+                        collider.attachedRigidbody.interpolation = RigidbodyInterpolation.Interpolate;  //убрать дрожжание //Окей, если каждая часть будет интерполированной, то начинается вакханалия
+                        collider.attachedRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic; //расчет физики, предотвращение прохождения сквозь объекты
 
-                        CharacterJoint joint = c.GetComponent<CharacterJoint>();
+                        CharacterJoint joint = collider.GetComponent<CharacterJoint>();
                         if (joint != null)
                         {
                             joint.enableProjection = true; //https://docs.unity3d.com/Manual/RagdollStability.html
                         }
 
-                        if (c.GetComponent<TriggerDetector>() == null)
+                        if (collider.GetComponent<TriggerDetector>() == null)
                         {
-                            c.gameObject.AddComponent<TriggerDetector>();
+                            collider.gameObject.AddComponent<TriggerDetector>();
                         }
                     }
                 }
@@ -92,18 +92,18 @@ namespace My_MemoPlatformer
             }
 
             //change components layers from character to DeadBody to prevent unnessesary collisions.
-            var arr = Control.gameObject.GetComponentsInChildren<Transform>();
-            foreach (var t in arr)
+            var bodypartsTransforms_Array = Control.gameObject.GetComponentsInChildren<Transform>();
+            foreach (var transform in bodypartsTransforms_Array)
             {
-                t.gameObject.layer = LayerMask.NameToLayer(MMP_Layers.DeadBody.ToString());
+                transform.gameObject.layer = LayerMask.NameToLayer(MMP_Layers.DeadBody.ToString());
             }
 
             //save bodypart positions to prevent teleporting
             for (int i = 0; i < ragdoll_Data.arrBodyParts.Length; i++)
             {
-                var det = ragdoll_Data.arrBodyParts[i].GetComponent<TriggerDetector>();
-                det.lastPosition = ragdoll_Data.arrBodyParts[i].gameObject.transform.position;
-                det.lastRotation = ragdoll_Data.arrBodyParts[i].gameObject.transform.rotation;
+                var triggerDetector = ragdoll_Data.arrBodyParts[i].GetComponent<TriggerDetector>();
+                triggerDetector.lastPosition = ragdoll_Data.arrBodyParts[i].gameObject.transform.position;
+                triggerDetector.lastRotation = ragdoll_Data.arrBodyParts[i].gameObject.transform.rotation;
             }
 
             //turn off animator, avatar
@@ -132,9 +132,9 @@ namespace My_MemoPlatformer
 
             for (int i = 0; i < ragdoll_Data.arrBodyParts.Length; i++)
             {
-                TriggerDetector det = ragdoll_Data.arrBodyParts[i].GetComponent<TriggerDetector>();
-                ragdoll_Data.arrBodyParts[i].attachedRigidbody.MovePosition(det.lastPosition);
-                ragdoll_Data.arrBodyParts[i].attachedRigidbody.MoveRotation(det.lastRotation);
+                var triggerDetector = ragdoll_Data.arrBodyParts[i].GetComponent<TriggerDetector>();
+                ragdoll_Data.arrBodyParts[i].attachedRigidbody.MovePosition(triggerDetector.lastPosition);
+                ragdoll_Data.arrBodyParts[i].attachedRigidbody.MoveRotation(triggerDetector.lastRotation);
                 ragdoll_Data.arrBodyParts[i].attachedRigidbody.isKinematic = false;
                 ragdoll_Data.arrBodyParts[i].attachedRigidbody.velocity = Vector3.zero;
             }
@@ -150,7 +150,7 @@ namespace My_MemoPlatformer
             {
                 //take damage from ragdoll
                 var incomingVelocity = Control.DAMAGE_DATA.damageTaken.INCOMING_VELOCITY;
-                var damagedPart = Control.DAMAGE_DATA.damageTaken.DAMAGE_TG;
+                var damagedPart = Control.DAMAGE_DATA.damageTaken.DAMAGED_TG;
 
                 if (Vector3.SqrMagnitude(incomingVelocity) > 0.0001f)
                 {
@@ -169,7 +169,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        Collider GetBodyPart(string name)
+        private Collider GetBodyPart(string name)
         {
             for (int i = 0; i < ragdoll_Data.arrBodyParts.Length; i++)
             {
@@ -181,7 +181,7 @@ namespace My_MemoPlatformer
 
             return null;
         }
-        void AddForceToDamagedPart(RagdollPushType pushType)
+        private void AddForceToDamagedPart(RagdollPushType pushType)
         {
             if (Control.DAMAGE_DATA.damageTaken == null)
             {
@@ -199,7 +199,7 @@ namespace My_MemoPlatformer
             var rightDir = damageData.damageTaken.ATTACKER.transform.right;
             var upDir = damageData.damageTaken.ATTACKER.transform.up;
 
-            var body = Control.DAMAGE_DATA.damageTaken.DAMAGE_TG.GetComponent<Rigidbody>();
+            var body = Control.DAMAGE_DATA.damageTaken.DAMAGED_TG.GetComponent<Rigidbody>();
             var attack = damageData.damageTaken.ATTACK;
 
             if (pushType == RagdollPushType.NORMAL)

@@ -22,7 +22,7 @@ namespace My_MemoPlatformer
 
             if (_control.JUMP_DATA.checkWallBlock)  //if transition condition
             {
-                if (_control.COLLISION_SPHERE_DATA.FrontOverlapCheckerContains(this))
+                if (_control.COLLISION_SPHERE_DATA.IsFrontSphereContainsOverlapChecker(this))
                 {
                     isObjOverlapping = CheckObj();
                 }

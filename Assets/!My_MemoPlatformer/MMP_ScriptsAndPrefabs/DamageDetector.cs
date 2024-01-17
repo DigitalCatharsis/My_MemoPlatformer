@@ -27,7 +27,7 @@ namespace My_MemoPlatformer
 
                 damageTaken = new DamageTaken(attacker: null, attack: null, damaged_TG: null, damagerPart: null, incomingVelocity: Vector3.zero),
 
-                IsDead = IsDead,
+                IsDead = IsCharacterDead,
                 TakeDamage = ProcessDamage,
                 TakeCollateralDamage = ProcessCollateralDamage,
 
@@ -202,9 +202,9 @@ namespace My_MemoPlatformer
 
         private void ProcessDamage(AttackCondition info)
         {
-            if (IsDead())
+            if (IsCharacterDead())
             {
-                PushDeadBody(info);
+                PushThisDeadBody(info);
             }
             else
             {
@@ -215,7 +215,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void PushDeadBody(AttackCondition attackCondition_Info)
+        private void PushThisDeadBody(AttackCondition attackCondition_Info)
         {
             if (!attackCondition_Info.registeredTargets.Contains(this.Control))
             {
@@ -243,17 +243,16 @@ namespace My_MemoPlatformer
             AttackManager.Instance.ForceDeregister(Control);
             Control.ANIMATION_DATA.currentRunningAbilities.Clear();
 
-            if (IsDead())
+            if (IsCharacterDead())
             {
                 Control.RAGDOLL_DATA.ragdollTriggered = true;
+                ProcessFlyingRagdoll(attackCondition_Info);
             }
             else
             {
                 var randomIndex = Random.Range(0, (int)Hit_Reaction_States.COUNT);
                 Control.skinnedMeshAnimator.Play(HashManager.Instance.dicHitReactionStates[(Hit_Reaction_States)randomIndex], 0, 0f);
             }
-
-            ProcessFlyingRagdoll(attackCondition_Info);
 
             if (!attackCondition_Info.registeredTargets.Contains(this.Control))
             {
@@ -265,26 +264,26 @@ namespace My_MemoPlatformer
         {
             if (attacker.RAGDOLL_DATA.flyingRagdollData.isTriggered)
             {
-                if (attacker.RAGDOLL_DATA.flyingRagdollData.attacker != Control)
+                if (attacker.RAGDOLL_DATA.flyingRagdollData.attacker != triggerDetector.control)
                 {
                     var mag = Vector3.SqrMagnitude(col.attachedRigidbody.velocity);
 
                     if (DebugContainer_Data.Instance.debug_TriggerDetector)
                     {
-                        Debug.Log("incoming ragdoll: " + attacker.gameObject.name + "\n" + "Velocity: " + mag);
+                        Debug.Log("incoming ragdoll: " + attacker.gameObject.name + " to "+ triggerDetector.control.gameObject.name + "\n" + "Velocity: " + mag);
                     }
 
-                    if (mag >= 10f && col.transform.root.gameObject.GetComponent<CharacterControl>())
+                    if (mag >= 10f)
                     {
-                        Control.DAMAGE_DATA.damageTaken = new DamageTaken(
+                        triggerDetector.control.DAMAGE_DATA.damageTaken = new DamageTaken(
                             attacker: null,
                             attack: null,
                             damaged_TG: triggerDetector,
                             damagerPart: null,
                             incomingVelocity: col.attachedRigidbody.velocity);
 
-                        Control.DAMAGE_DATA.currentHp = 0;
-                        Control.RAGDOLL_DATA.ragdollTriggered = true;
+                        triggerDetector.control.DAMAGE_DATA.currentHp = 0;
+                        triggerDetector.control.RAGDOLL_DATA.ragdollTriggered = true;
                     }
                 }
             }
@@ -310,7 +309,7 @@ namespace My_MemoPlatformer
         {
             var vfx = PoolManager.Instance.GetObject(effectsType);
 
-            vfx.transform.position = Control.DAMAGE_DATA.damageTaken.DAMAGE_TG.triggerCollider.bounds.center;
+            vfx.transform.position = Control.DAMAGE_DATA.damageTaken.DAMAGED_TG.triggerCollider.bounds.center;
 
             vfx.SetActive(true);
 
@@ -324,7 +323,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        private bool IsDead()
+        private bool IsCharacterDead()
         {
             if (_damage_Data.currentHp <= 0f)
             {

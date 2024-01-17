@@ -17,7 +17,7 @@ namespace My_MemoPlatformer
 
         public delegate bool ReturnBool(OverlapChecker checker);
 
-        public ReturnBool FrontOverlapCheckerContains;
+        public ReturnBool IsFrontSphereContainsOverlapChecker;
 
         public delegate void DoSomething();
 

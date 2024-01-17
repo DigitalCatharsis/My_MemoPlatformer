@@ -22,11 +22,10 @@ namespace My_MemoPlatformer
 
         private void OnTriggerEnter(Collider collider) //callback function whenever somth touches or enters raggdoll body parts
         {
-            var attacker = CheckForAttacker(collider);
+            var attacker = GetCollidingCharacter(collider);
 
             if (attacker != null)
             {
-                control.DAMAGE_DATA.AddCollidersToDictionary(control.DAMAGE_DATA.collidingBodyParts_Dictionary, collider, this);
                 control.DAMAGE_DATA.TakeCollateralDamage(attacker, collider, this);
             }
 
@@ -46,7 +45,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        private CharacterControl CheckForAttacker(Collider hittedCollider)
+        private CharacterControl GetCollidingCharacter(Collider hittedCollider)
         {
             if (control == null)
             {
@@ -72,6 +71,8 @@ namespace My_MemoPlatformer
             {
                 return null;
             }
+
+            control.DAMAGE_DATA.AddCollidersToDictionary(control.DAMAGE_DATA.collidingBodyParts_Dictionary, hittedCollider, this);
 
             return attacker;
         }

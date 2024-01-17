@@ -16,7 +16,7 @@ namespace My_MemoPlatformer
                 upSpheres = new GameObject[5],
 
                 frontOverlapCheckers = new OverlapChecker[10],
-                FrontOverlapCheckerContains = IsSphereContainsOverlapChecker,
+                IsFrontSphereContainsOverlapChecker = IsFrontSphereContainsOverlapChecker,
 
                 Reposition_FrontSpheres = Reposition_FrontSpheres,
                 Reposition_BottomSpheres = Reposition_BottomSpheres,
@@ -52,9 +52,9 @@ namespace My_MemoPlatformer
             //bottom
             for (int i = 0; i < 5; i++)
             {
-                var obj = LoadCollisionSpheres();
-                collisionSpheres_Data.bottomSpheres[i] = obj;
-                obj.transform.parent = this.transform.Find("Bottom");
+                var sphere = LoadCollisionSpheres();
+                collisionSpheres_Data.bottomSpheres[i] = sphere;
+                sphere.transform.parent = this.transform.Find("Bottom");
             }
 
             Reposition_BottomSpheres();
@@ -62,9 +62,9 @@ namespace My_MemoPlatformer
             //top
             for (int i = 0; i < 5; i++)
             {
-                var obj = LoadCollisionSpheres();
-                collisionSpheres_Data.upSpheres[i] = obj;
-                obj.transform.parent = this.transform.Find("Bottom");
+                var sphere = LoadCollisionSpheres();
+                collisionSpheres_Data.upSpheres[i] = sphere;
+                sphere.transform.parent = this.transform.Find("Up");
             }
 
             Reposition_UpSpheres();
@@ -72,10 +72,10 @@ namespace My_MemoPlatformer
             //front
             for (int i = 0; i < 10; i++)
             {
-                var obj = LoadCollisionSpheres();
-                collisionSpheres_Data.frontSpheres[i] = obj;
-                collisionSpheres_Data.frontOverlapCheckers[i] = obj.GetComponent<OverlapChecker>();
-                obj.transform.parent = this.transform.Find("Front");
+                var sphere = LoadCollisionSpheres();
+                collisionSpheres_Data.frontSpheres[i] = sphere;
+                collisionSpheres_Data.frontOverlapCheckers[i] = sphere.GetComponent<OverlapChecker>();
+                sphere.transform.parent = this.transform.Find("Front");
             }
 
             Reposition_FrontSpheres();
@@ -83,16 +83,16 @@ namespace My_MemoPlatformer
             //back
             for (int i = 0; i < 10; i++)
             {
-                var obj = LoadCollisionSpheres();
-                collisionSpheres_Data.backSpheres[i] = obj;
-                obj.transform.parent = this.transform.Find("Back");
+                var sphere = LoadCollisionSpheres();
+                collisionSpheres_Data.backSpheres[i] = sphere;
+                sphere.transform.parent = this.transform.Find("Back");
             }
 
             Reposition_BackSpheres();
 
             //add every overlapChecker
-            var arr = this.gameObject.GetComponentsInChildren<OverlapChecker>();
-            collisionSpheres_Data.allOverlapCheckers = arr;
+            var overlapCheckers_Array = this.gameObject.GetComponentsInChildren<OverlapChecker>();
+            collisionSpheres_Data.allOverlapCheckers = overlapCheckers_Array;
         }
 
         private void Reposition_FrontSpheres()
@@ -177,7 +177,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        private bool IsSphereContainsOverlapChecker(OverlapChecker checker)
+        private bool IsFrontSphereContainsOverlapChecker(OverlapChecker checker)
         {
             for (int i = 0; i < collisionSpheres_Data.frontOverlapCheckers.Length; i++)
             {

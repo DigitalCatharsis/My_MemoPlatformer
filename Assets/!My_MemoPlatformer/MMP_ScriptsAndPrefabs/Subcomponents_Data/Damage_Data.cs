@@ -55,7 +55,7 @@ namespace My_MemoPlatformer
         public CharacterControl ATTACKER { get { return _attacker; } }
         public Attack ATTACK { get { return _attack; } }
         public GameObject DAMAGER { get { return _damagerPart; } }
-        public TriggerDetector DAMAGE_TG { get { return _damaged_TG; } }
+        public TriggerDetector DAMAGED_TG { get { return _damaged_TG; } }
         public Vector3 INCOMING_VELOCITY { get { return _incomingVelocity; } }
     }
 }

@@ -32,8 +32,7 @@ namespace My_MemoPlatformer
         }
         public bool IsFacingAtacker()
         {
-            var vec = _control.DAMAGE_DATA.damageTaken.ATTACKER.transform.position -
-                _control.transform.position;
+            var vec = _control.DAMAGE_DATA.damageTaken.ATTACKER.transform.position - _control.transform.position;
 
             if (vec.z < 0f)
             {

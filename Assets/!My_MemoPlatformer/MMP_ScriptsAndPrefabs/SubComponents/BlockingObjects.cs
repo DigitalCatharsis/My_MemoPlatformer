@@ -44,8 +44,11 @@ namespace My_MemoPlatformer
         {
             if (Control.ANIMATION_DATA.IsRunning(typeof(MoveForward)))
             {
-                DefineFrontSpheres();  //Consist of the side we a moving to
-                CheckFrontBlocking();
+                if (!Control.DAMAGE_DATA.IsDead())
+                {
+                    DefineFrontSpheres();  //Consist of the side we a moving to
+                    CheckFrontBlocking();
+                }
             }
             else
             {
