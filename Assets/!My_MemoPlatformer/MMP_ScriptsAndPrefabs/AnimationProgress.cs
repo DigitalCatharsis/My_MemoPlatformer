@@ -8,8 +8,8 @@ namespace My_MemoPlatformer
         public bool cameraShaken;
         public List<PoolObjectType> poolObjectList = new List<PoolObjectType>();
 
-        public MoveForward latestMoveForwardScript;  //latest moveforward script
-        public MoveUp latestMoveUpScript;  //latest moveforward script
+        public MoveForward latestMoveForwardScript;  //latest moveForward script
+        public MoveUp latestMoveUpScript;  //latest moveUp script
 
         [Header("GroundMovement")]
         public bool isIgnoreCharacterTime; //slide beyond character (start ignoring character collider)        

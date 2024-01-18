@@ -2924,6 +2924,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3121aa4e082ed4c92413999d79ee6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation_Data:
+    lockTurn: 0
+    unlockTiming: 0
 --- !u!1 &5580213925392410522
 GameObject:
   m_ObjectHideFlags: 0
@@ -3634,17 +3637,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ce156c695f6fa4dadd5a2b226dc977, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage_Data:
+  _damage_Data:
     blockedAttack: {fileID: 0}
-    hp: 0
+    currentHp: 0
     airStompAttack: {fileID: 0}
     weaponThrow: {fileID: 0}
     damageTaken:
-      mAttacker: {fileID: 0}
-      mAttack: {fileID: 0}
-      mDamager: {fileID: 0}
-      mDamage_TG: {fileID: 0}
-      mIncomingVelocity: {x: 0, y: 0, z: 0}
+      _attacker: {fileID: 0}
+      _attack: {fileID: 0}
+      _damagerPart: {fileID: 0}
+      _damaged_TG: {fileID: 0}
+      _incomingVelocity: {x: 0, y: 0, z: 0}
   _weaponThrow: {fileID: 11400000, guid: a887d67403fa15e4f9758370f2bce396, type: 2}
   _airStompAttack: {fileID: 11400000, guid: 270577db070e447499e094b119ff8aa1, type: 2}
   _hp: 5
@@ -4215,15 +4218,15 @@ MonoBehaviour:
     maxWallSlideVelocity: {x: 0, y: 0, z: 0}
   damage_Data:
     blockedAttack: {fileID: 0}
-    hp: 0
+    currentHp: 0
     airStompAttack: {fileID: 0}
     weaponThrow: {fileID: 0}
     damageTaken:
-      mAttacker: {fileID: 0}
-      mAttack: {fileID: 0}
-      mDamager: {fileID: 0}
-      mDamage_TG: {fileID: 0}
-      mIncomingVelocity: {x: 0, y: 0, z: 0}
+      _attacker: {fileID: 0}
+      _attack: {fileID: 0}
+      _damagerPart: {fileID: 0}
+      _damaged_TG: {fileID: 0}
+      _incomingVelocity: {x: 0, y: 0, z: 0}
   momentumCalculator_Data:
     momentum: 0
   rotation_Data:
@@ -5129,6 +5132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e21d38de1707a33419d05f45760dd2ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _jump_Data:
+    canWallJump: 0
+    checkWallBlock: 0
 --- !u!1 &8851103156749298972
 GameObject:
   m_ObjectHideFlags: 0
