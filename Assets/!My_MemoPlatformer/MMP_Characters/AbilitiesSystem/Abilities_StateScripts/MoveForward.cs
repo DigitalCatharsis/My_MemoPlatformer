@@ -5,12 +5,15 @@ namespace My_MemoPlatformer
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/MoveForward")]
     public class MoveForward : CharacterAbility
     {
-        [Tooltip("Prevent turning when running from idle")] public bool allowEarlyTurn;
+        [Tooltip("Prevent turning when running from idle")] 
+        public bool allowEarlyTurn;
         public bool lockDirection;
-        [Tooltip("Move no matter what")] public bool constant;
+        [Tooltip("Move no matter what")] 
+        public bool constant;
         public AnimationCurve speedGraph;
         public float Speed;
-        [Tooltip("Distance to prevent moving, \n MAKE SURE ITS LESS THAN ColliderEdge RADIUS!")] public float blockDistance;
+        [Tooltip("Distance to prevent moving, \n MAKE SURE ITS LESS THAN ColliderEdge RADIUS!")] 
+        public float blockDistance;
 
         [Header("IgnoreCharacterBox")]
         public bool ignoreCharacterBox;
@@ -25,11 +28,13 @@ namespace My_MemoPlatformer
         public bool clearMomentumOnExit;
 
         [Header("MoveOnHit")]
-        [Tooltip("Move to direction away from Attacker")] public bool moveOnHit;
+        [Tooltip("Move to direction away from Attacker")] 
+        public bool moveOnHit;
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            characterState.characterControl.animationProgress.latestMoveForwardScript = this;
+            characterState.characterControl.animationProgress.latestMoveForwardScript = this; //При переходе между стейтами moveForward предыдущего
+                                                                                              //стейта может не успеть отработать и вызвать баги
 
             if (allowEarlyTurn)
             {

@@ -57,5 +57,5 @@ MonoBehaviour:
   startingMomentum: 0.1
   maxMomentum: 3.25
   StartFromPreviousMomentum: 0
-  clearMomentumOnExit: 1
+  clearMomentumOnExit: 0
   moveOnHit: 0

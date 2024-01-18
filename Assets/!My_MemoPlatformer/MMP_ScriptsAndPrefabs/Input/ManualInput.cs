@@ -17,6 +17,7 @@ namespace My_MemoPlatformer
         [SerializeField] private Dictionary<InputKeyType, float> _doubleTapTimings = new Dictionary<InputKeyType, float>();
 
         [SerializeField] private float _doubleTapTime = 0.18f;
+        [SerializeField] private bool useDoubleTapsForMoving;
 
         private void Start()
         {
@@ -36,6 +37,12 @@ namespace My_MemoPlatformer
         }
 
         public override void OnUpdate()
+        {
+            UpdateDoubleTapsInDictionary();
+            DoubleTapsMovement();
+        }
+
+        private void UpdateDoubleTapsInDictionary()
         {
             if (VirtualInputManager.Instance.turbo)
             {
@@ -124,6 +131,14 @@ namespace My_MemoPlatformer
                 Control.attack = false;
                 RemoveDoubleTap(InputKeyType.KEY_ATTACK);
             }
+        }
+
+        private void DoubleTapsMovement()
+        {
+            if (!useDoubleTapsForMoving)
+            {
+                return;
+            }
 
             //double tap running
             if (_doubleTaps.Contains(InputKeyType.KEY_MOVE_RIGHT) ||
@@ -133,6 +148,7 @@ namespace My_MemoPlatformer
             }
 
             //double tap running turn
+
             if (Control.moveRight && Control.moveLeft)
             {
                 if (_doubleTaps.Contains(InputKeyType.KEY_MOVE_RIGHT) ||
@@ -162,6 +178,7 @@ namespace My_MemoPlatformer
                 return false;
             }
         }
+
         private bool IsDoubleTap_Down()
         {
             if (_doubleTaps.Contains(InputKeyType.KEY_MOVE_DOWN))
@@ -176,6 +193,7 @@ namespace My_MemoPlatformer
 
         private void ProcessDoubleTap(InputKeyType keyType)
         {
+
             if (!_doubleTapTimings.ContainsKey(keyType))
             {
                 _doubleTapTimings.Add(keyType, 0f);
