@@ -149,7 +149,7 @@ namespace My_MemoPlatformer
 
                                 for (int i = 0; i < (int)TempAbilitiesList.COUNT; i++)
                                 {
-                                    if (SI.shortNameHash == HashManager.Instance.arrTempAbilitiesList[i])
+                                    if (SI.shortNameHash == HashManager.Instance.arrAllAbilitiesList[i])
                                     {
                                         var ability = (TempAbilitiesList)i;
                                         Debug.Log($"<color=magenta>{ability}</color>");

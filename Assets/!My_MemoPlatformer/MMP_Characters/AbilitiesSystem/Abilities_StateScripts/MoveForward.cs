@@ -35,7 +35,6 @@ namespace My_MemoPlatformer
         {
             characterState.characterControl.animationProgress.latestMoveForwardScript = this; //При переходе между стейтами moveForward предыдущего
                                                                                               //стейта может не успеть отработать и вызвать баги
-
             if (allowEarlyTurn)
             {
                 // early turn can be locked by previous states

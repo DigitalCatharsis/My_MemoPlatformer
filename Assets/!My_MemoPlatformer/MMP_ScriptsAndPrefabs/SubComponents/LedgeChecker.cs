@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
@@ -31,17 +32,22 @@ namespace My_MemoPlatformer
         }
         public override void OnFixedUpdate()
         {
+            OnBeingGrounded();
+
+            if (IsLedgeGrabCondition())
+            {
+                ProcessLedgeGrab();
+            }
+        }
+
+        private void OnBeingGrounded()
+        {
             if (Control.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
             {
                 if (Control.RIGID_BODY.useGravity)
                 {
                     ledgeGrab_Data.isGrabbingLedge = false;
                 }
-            }
-
-            if (IsLedgeGrabCondition())
-            {
-                ProcessLedgeGrab();
             }
         }
 
@@ -57,6 +63,7 @@ namespace My_MemoPlatformer
                 var info = Control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
                 if (info.shortNameHash == HashManager.Instance.arrLedgeTriggerStates[i])
                 {
+                    Debug.Log(Enum.GetName(typeof(Ledge_Trigger_States),i));
                     return true;
                 }
             }

@@ -1,4 +1,7 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -113,15 +116,15 @@ namespace My_MemoPlatformer
     public enum Instant_Transition_States
     {
         Jump_Normal_Landing = 0,
-        Jump_3m_Prep = 1,
+        //Jump_3m_Prep = 1,
         Hanging_Idle = 2,
         Idle = 4,
 
         Jump_Normal_Prep = 5,
         Jump_Running = 6,
 
-        Running_Jump = 3,
-        Run_Stop_InPlace = 7,
+        //Running_Jump = 3,
+        //Run_Stop_InPlace = 7,
 
         //AirCombo_Smash = 8,
 
@@ -147,12 +150,12 @@ namespace My_MemoPlatformer
 
         COUNT,
     }
+
     public enum Camera_States
     {
         Default,
         Shake,
     }
-
     public class HashManager : Singleton<HashManager>
     {
         public int[] arrMainParams = new int[(int)MainParameterType.COUNT];
@@ -166,7 +169,7 @@ namespace My_MemoPlatformer
         public int[] arrInstantTransitionStates = new int[(int)Instant_Transition_States.COUNT];
         public int[] arrLedgeTriggerStates = new int[(int)Ledge_Trigger_States.COUNT];
 
-        public int[] arrTempAbilitiesList = new int[(int)TempAbilitiesList.COUNT];
+        public int[] arrAllAbilitiesList = new int[(int)TempAbilitiesList.COUNT];
 
         public Dictionary<Camera_States, int> dicCameraStates = new Dictionary<Camera_States, int>();
 
@@ -177,6 +180,8 @@ namespace My_MemoPlatformer
             {
                 arrMainParams[i] = Animator.StringToHash(((MainParameterType)i).ToString()); //https://docs.unity3d.com/ScriptReference/Animator.StringToHash.html
             }
+
+            //test.Add(FillHashDataList(typeof(MainParameterType), arrMainParams));
 
             // camera transitions
             for (int i = 0; i < (int)CameraTrigger.COUNT; i++)
@@ -218,9 +223,9 @@ namespace My_MemoPlatformer
             }
 
             // ledge trigger states
-            for (int i = 0; i < arrTempAbilitiesList.Length; i++)
+            for (int i = 0; i < arrAllAbilitiesList.Length; i++)
             {
-                arrTempAbilitiesList[i] = Animator.StringToHash(((TempAbilitiesList)i).ToString());
+                arrAllAbilitiesList[i] = Animator.StringToHash(((TempAbilitiesList)i).ToString());
             }
 
             // camera states

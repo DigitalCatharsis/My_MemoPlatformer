@@ -1,9 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-
     public class DebugHelper : MonoBehaviour
     {
         [Header("SO_Refs")]
@@ -26,6 +26,9 @@ namespace My_MemoPlatformer
         [SerializeField] private bool _displaySpheresAndColliders;
         [SerializeField] private bool _displayLedgeCheckers;
 
+        [Space(10)]
+        public SerializableList<HashData> test2 = new SerializableList<HashData> { };
+
         #region TODO
         /*
          * 1. Пофиксить AI 
@@ -44,40 +47,76 @@ namespace My_MemoPlatformer
          * 12. Left Right Up Down в стейт машиине?
          * 13. Исправить приближение камеры
          */
-
         #endregion
 
+        private void Start()
+        {
+            for (var i = 0; i < 10; i++)
+            {
+                test2.Add(
+                        new HashData
+                        {
+                            stateName = "State_" + i,
+                            hashedNameValue = i,
+                        }
+                        );
+            }
+
+            var list = new List<HashData>();
+        }
+
+        public void UpdateDebugHelpersDict()
+        {
+
+        }
 
         private void Update()
-        {            
+        {
             DebugContainer_Data.Instance.debug_CameraState = _debug_CameraState;
-            
+
             DebugContainer_Data.Instance.debug_Attack = _debug_Attack;
-            
+
             DebugContainer_Data.Instance.debug_Instakill = _debug_Instakill;
-            
+
             DebugContainer_Data.Instance.debug_Ragdoll = _debug_Ragdoll;
-            
+
             DebugContainer_Data.Instance.debug_MoveForward = _debug_MoveForward;
-            
+
             DebugContainer_Data.Instance.debug_Jump = _debug_Jump;
-            
+
             DebugContainer_Data.Instance.debug_SpawnObjects = _debug_SpawnObjects;
-            
+
             DebugContainer_Data.Instance.debug_InputManager = _debug_InputManager;
-            
+
             DebugContainer_Data.Instance.debug_TransitionTiming = _debug_TransitionTiming;
-            
+
             DebugContainer_Data.Instance.debug_TriggerDetector = _debug_TriggerDetector;
-            
+
             DebugContainer_Data.Instance.debug_WallOverlappingStatus = _debug_WallOverlappingStatus;
-            
+
             DebugContainer_Data.Instance.displaySpheresAndColliders = _displaySpheresAndColliders;
-            
+
             DebugContainer_Data.Instance.displayLedgeCheckers = _displayLedgeCheckers;
 
             ChangeSpheresRendererStatus();
             ChangeLedgeCheckerStatus();
+        }
+
+        public List<HashData> FillHashDataList<T>(Type statesType_Collection, T hashValues_Collection) where T : IList<int>
+        {
+            var resultSubList = new List<HashData>();
+
+            for (var i = 0; i < hashValues_Collection.Count; i++)
+            {
+                resultSubList.Add(
+                    new HashData
+                    {
+                        hashedNameValue = hashValues_Collection[i],
+                        stateName = Enum.GetName(statesType_Collection, i),
+                    });
+            }
+
+            return resultSubList;
         }
 
         private void ChangeSpheresRendererStatus()
@@ -151,5 +190,13 @@ namespace My_MemoPlatformer
                 }
             }
         }
+    }
+    [Serializable]
+    public class HashData
+    {
+        [SerializeField]
+        public string stateName;
+        [SerializeField]
+        public int hashedNameValue;
     }
 }
