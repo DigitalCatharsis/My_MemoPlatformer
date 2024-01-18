@@ -3314,6 +3314,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5866215039608073417, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
+      propertyPath: _instakillChance
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 6860232510345727460, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -4781,7 +4785,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3046520408400585082, guid: adff31e199afa174c9c544399732b118, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.07
+      value: -12.09
       objectReference: {fileID: 0}
     - target: {fileID: 3046520408400585082, guid: adff31e199afa174c9c544399732b118, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4891,6 +4895,10 @@ PrefabInstance:
     - target: {fileID: 5582724929851568676, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866215039608073417, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
+      propertyPath: _instakillChance
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 6860232510345727460, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
       propertyPath: m_IsActive
@@ -5414,6 +5422,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5866215039608073417, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
+      propertyPath: _instakillChance
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 6860232510345727460, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -5670,6 +5682,10 @@ PrefabInstance:
     - target: {fileID: 5582724929851568676, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866215039608073417, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
+      propertyPath: _instakillChance
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 6860232510345727460, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
       propertyPath: m_IsActive
@@ -6833,6 +6849,10 @@ PrefabInstance:
     - target: {fileID: 5582724929851568676, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866215039608073417, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
+      propertyPath: _instakillChance
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 6860232510345727460, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
       propertyPath: m_IsActive

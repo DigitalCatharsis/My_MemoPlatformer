@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -7,6 +8,13 @@ namespace My_MemoPlatformer
     {
         public InstaKill_Data instaKill_Data;
 
+        [Header("Setup")]
+        [Range(0,1)]
+        [Header("Chance to execute instakill")]
+        [SerializeField] private float _instakillChance;
+
+        [Header("RuntimeAnimatorController")]
+        [Space(10)]
         [SerializeField] private RuntimeAnimatorController Assassination_Assassin;
         [SerializeField] private RuntimeAnimatorController Assassination_Victim;
 
@@ -87,12 +95,15 @@ namespace My_MemoPlatformer
                         continue;
                     }
 
-                    if (DebugContainer_Data.Instance.debug_Instakill)
+                    if (InstakillChanceRandomizer())
                     {
-                        Debug.Log("InstaKill");
-                    }
+                        if (DebugContainer_Data.Instance.debug_Instakill)
+                        {
+                            Debug.Log("InstaKill");
+                        }
 
-                    control.INSTA_KILL_DATA.ProcessInstakill(Control);
+                        control.INSTA_KILL_DATA.ProcessInstakill(Control);
+                    }
 
                     return;
                 }
@@ -127,6 +138,17 @@ namespace My_MemoPlatformer
             Control.transform.position = assassin.transform.position + (assassin.transform.forward * 0.45f);
 
             Control.DAMAGE_DATA.currentHp = 0f;
+        }
+        public bool InstakillChanceRandomizer()
+        {
+            if (Random.Range(0f, 1f) < _instakillChance )
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
