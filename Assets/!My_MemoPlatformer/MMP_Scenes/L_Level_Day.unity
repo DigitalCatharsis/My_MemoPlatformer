@@ -7476,6 +7476,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6805351866285292383, guid: eadd8c2cdfa043c42bcc618639243a87, type: 3}
+      propertyPath: testListOfLists.instance.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6805351866285292383, guid: eadd8c2cdfa043c42bcc618639243a87, type: 3}
       propertyPath: test.Array.data[0].sampleList.Array.size
       value: 2
       objectReference: {fileID: 0}

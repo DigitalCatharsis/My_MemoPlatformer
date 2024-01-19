@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -27,7 +28,8 @@ namespace My_MemoPlatformer
         [SerializeField] private bool _displayLedgeCheckers;
 
         [Space(10)]
-        public SerializableList<HashData> test2 = new SerializableList<HashData> { };
+        public Serializable_List<StatesHashData> testListOfLists = new Serializable_List<StatesHashData> { };
+        static public Serializable_List<StatesHashData> testOfStates = new Serializable_List<StatesHashData> { };
 
         #region TODO
         /*
@@ -51,18 +53,38 @@ namespace My_MemoPlatformer
 
         private void Start()
         {
-            for (var i = 0; i < 10; i++)
-            {
-                test2.Add(
-                        new HashData
-                        {
-                            stateName = "State_" + i,
-                            hashedNameValue = i,
-                        }
-                        );
-            }
+            //for (var i = 0; i < 10; i++)
+            //{
+            //    testListOfLists.instance.Add(
+            //        new Serializable_SubList<StatesHashData>
+            //        {
+            //            subList = new List<StatesHashData>()
+            //            {
+            //                new StatesHashData
+            //                {
+            //                    stateName = "SubList_Data_" + i,
+            //                    hashedNameValue = i,
 
-            var list = new List<HashData>();
+            //                },
+            //            },
+            //        }); ;
+            //} 
+
+            var HN = new int[] { 0,1, 2 };
+            var SN = new string[] { "0","1","2"};
+
+            AddValuesToTestOfLists(HN, SN);
+
+        }
+
+        public void AddValuesToTestOfLists(int[] hashesNames, string[] stateNamess)
+        {
+            testListOfLists.instance.Add(new Serializable_SubList<StatesHashData>());
+
+            for (int i = 0; i < hashesNames.Length; i++)
+            {
+                testListOfLists.instance.Last().subList.Add(new StatesHashData { hashedNameValue = hashesNames[i], stateName = stateNamess[i] });
+            }
         }
 
         public void UpdateDebugHelpersDict()
@@ -102,14 +124,14 @@ namespace My_MemoPlatformer
             ChangeLedgeCheckerStatus();
         }
 
-        public List<HashData> FillHashDataList<T>(Type statesType_Collection, T hashValues_Collection) where T : IList<int>
+        public List<StatesHashData> FillHashDataList<T>(Type statesType_Collection, T hashValues_Collection) where T : IList<int>
         {
-            var resultSubList = new List<HashData>();
+            var resultSubList = new List<StatesHashData>();
 
             for (var i = 0; i < hashValues_Collection.Count; i++)
             {
                 resultSubList.Add(
-                    new HashData
+                    new StatesHashData
                     {
                         hashedNameValue = hashValues_Collection[i],
                         stateName = Enum.GetName(statesType_Collection, i),
@@ -192,7 +214,7 @@ namespace My_MemoPlatformer
         }
     }
     [Serializable]
-    public class HashData
+    public class StatesHashData
     {
         [SerializeField]
         public string stateName;

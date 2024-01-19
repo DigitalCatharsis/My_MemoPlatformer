@@ -175,66 +175,67 @@ namespace My_MemoPlatformer
 
         private void Awake()
         {
-            // animation transitions
-            for (int i = 0; i < (int)MainParameterType.COUNT; i++)
             {
-                arrMainParams[i] = Animator.StringToHash(((MainParameterType)i).ToString()); //https://docs.unity3d.com/ScriptReference/Animator.StringToHash.html
-            }
+                // animation transitions
+                for (int i = 0; i < (int)MainParameterType.COUNT; i++)
+                {
+                    arrMainParams[i] = Animator.StringToHash(((MainParameterType)i).ToString()); //https://docs.unity3d.com/ScriptReference/Animator.StringToHash.html
+                }
 
-            //test.Add(FillHashDataList(typeof(MainParameterType), arrMainParams));
 
-            // camera transitions
-            for (int i = 0; i < (int)CameraTrigger.COUNT; i++)
-            {
-                arrCameraParams[i] = Animator.StringToHash(((CameraTrigger)i).ToString()); //https://docs.unity3d.com/ScriptReference/Animator.StringToHash.html
-            }
+                // camera transitions
+                for (int i = 0; i < (int)CameraTrigger.COUNT; i++)
+                {
+                    arrCameraParams[i] = Animator.StringToHash(((CameraTrigger)i).ToString()); //https://docs.unity3d.com/ScriptReference/Animator.StringToHash.html
+                }
 
-            // ai transitions
-            for (int i = 0; i < (int)AI_Transition.COUNT; i++)
-            {
-                arrAITransitionParams[i] = Animator.StringToHash(((AI_Transition)i).ToString());
-            }
+                // ai transitions
+                for (int i = 0; i < (int)AI_Transition.COUNT; i++)
+                {
+                    arrAITransitionParams[i] = Animator.StringToHash(((AI_Transition)i).ToString());
+                }
 
-            // ai states
-            for (int i = 0; i < (int)AI_State_Name.COUNT; i++)
-            {
-                arrAIStateNames[i] = Animator.StringToHash(((AI_State_Name)i).ToString());
-            }
+                // ai states
+                for (int i = 0; i < (int)AI_State_Name.COUNT; i++)
+                {
+                    arrAIStateNames[i] = Animator.StringToHash(((AI_State_Name)i).ToString());
+                }
 
-            // hit reaction states
-            Hit_Reaction_States[] arrHitReactionStates = System.Enum.GetValues(typeof(Hit_Reaction_States))
-                as Hit_Reaction_States[];
+                // hit reaction states
+                Hit_Reaction_States[] arrHitReactionStates = System.Enum.GetValues(typeof(Hit_Reaction_States))
+                    as Hit_Reaction_States[];
 
-            foreach (var t in arrHitReactionStates)
-            {
-                dicHitReactionStates.Add(t, Animator.StringToHash(t.ToString()));
-            }
+                foreach (var t in arrHitReactionStates)
+                {
+                    dicHitReactionStates.Add(t, Animator.StringToHash(t.ToString()));
+                }
 
-            // instant transition states
-            for (int i = 0; i < arrInstantTransitionStates.Length; i++)
-            {
-                arrInstantTransitionStates[i] = Animator.StringToHash(((Instant_Transition_States)i).ToString());
-            }
+                // instant transition states
+                for (int i = 0; i < arrInstantTransitionStates.Length; i++)
+                {
+                    arrInstantTransitionStates[i] = Animator.StringToHash(((Instant_Transition_States)i).ToString());
+                }
 
-            // ledge trigger states
-            for (int i = 0; i < arrLedgeTriggerStates.Length; i++)
-            {
-                arrLedgeTriggerStates[i] = Animator.StringToHash(((Ledge_Trigger_States)i).ToString());
-            }
+                // ledge trigger states
+                for (int i = 0; i < arrLedgeTriggerStates.Length; i++)
+                {
+                    arrLedgeTriggerStates[i] = Animator.StringToHash(((Ledge_Trigger_States)i).ToString());
+                }
 
-            // ledge trigger states
-            for (int i = 0; i < arrAllAbilitiesList.Length; i++)
-            {
-                arrAllAbilitiesList[i] = Animator.StringToHash(((TempAbilitiesList)i).ToString());
-            }
+                // ledge trigger states
+                for (int i = 0; i < arrAllAbilitiesList.Length; i++)
+                {
+                    arrAllAbilitiesList[i] = Animator.StringToHash(((TempAbilitiesList)i).ToString());
+                }
 
-            // camera states
-            Camera_States[] arrCameraStates = System.Enum.GetValues(typeof(Camera_States))
-                as Camera_States[];
+                // camera states
+                Camera_States[] arrCameraStates = System.Enum.GetValues(typeof(Camera_States))
+                    as Camera_States[];
 
-            foreach (Camera_States t in arrCameraStates)
-            {
-                dicCameraStates.Add(t, Animator.StringToHash(t.ToString()));
+                foreach (Camera_States t in arrCameraStates)
+                {
+                    dicCameraStates.Add(t, Animator.StringToHash(t.ToString()));
+                }
             }
         }
     }

@@ -91,6 +91,7 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\SendPathfindingAgent.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\Death\Ragdoll\TriggerRagdoll.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\DebugContainer\DebugHelper.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\!MMP_Tutorial_Refs\CustomPropertyDrawer\ColorPointTester.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\LedgeChecker.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\AI\RestartAI.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\CollisionDetection.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\AI\AIController.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_Weapons\MeleeWeapon.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\MomentumCalculator.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\!MMP_Tutorial_Refs\CustomPropertyDrawer\ColorPoint_Data.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\TriggerDetector.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\PlayerGround.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\TransitionConditionChecker.cs" />
@@ -182,6 +184,7 @@
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\CollisionSpheres.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\Jump.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\!MMP_Tutorial_Refs\CustomPropertyDrawer\ListTester.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\DebugContainer\DebugContainer_Data.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\CollateralDamageInfo.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\UI_Events\ButtonScale.cs" />

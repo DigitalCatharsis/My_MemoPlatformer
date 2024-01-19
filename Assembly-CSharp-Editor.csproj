@@ -61,10 +61,13 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\MMP_StateMachine_AbilityListToArray\Editor\StateMachine_AbilityListToArray.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\MMP_InsperctorHierarchyLabel\Editor\HierarchyLabel.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\MMP_LayerAdder\Editor\LayerChangerEditor.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\!MMP_Tutorial_Refs\CustomPropertyDrawer\Editor\EditorList.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\MMP_AbilitySearch\Editor\AbilitySearchEditor.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\!MMP_Tutorial_Refs\CustomPropertyDrawer\Editor\ListTesterInspector.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\ShowOnlyAttribute\Editor\ShowOnlyDrawer.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_PathfindingAgent\Editor\PathFindingAgentEditor.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\MMP_MaterialChaner\Editor\MaterialChangerEditor.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\!MMP_Tutorial_Refs\CustomPropertyDrawer\Editor\ColorPointDrawer.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\MMP_LayerAdder\Editor\LayerAdderEditor.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\MMP_LookAtPoint\Editor\LookAtPointEditor.cs" />
   </ItemGroup>
