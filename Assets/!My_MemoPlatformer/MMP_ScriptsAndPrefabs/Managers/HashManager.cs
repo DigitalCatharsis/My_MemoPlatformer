@@ -173,6 +173,8 @@ namespace My_MemoPlatformer
 
         public Dictionary<Camera_States, int> dicCameraStates = new Dictionary<Camera_States, int>();
 
+        public StatesHashList states = new StatesHashList();
+
         private void Awake()
         {
             {
@@ -237,6 +239,34 @@ namespace My_MemoPlatformer
                     dicCameraStates.Add(t, Animator.StringToHash(t.ToString()));
                 }
             }
+
+            states.Fill <Camera_States>();
+            states.Fill <MainParameterType>();
+            states.Fill <CameraTrigger>();
+            states.Fill <AI_Transition>();
+            states.Fill <AI_State_Name>();
+            states.Fill <Instant_Transition_States>();
+            states.Fill <Ledge_Trigger_States>();
+            states.Fill <TempAbilitiesList>();
+
+        }
+    }
+
+    [Serializable]
+    public class StatesHashList : Serializable_List<StatesHashData>
+    {
+        public void Fill<TEnum>() where TEnum : Enum
+        {
+            var list = new Serializable_SubList<StatesHashData>
+            {
+                subList = ((TEnum[])Enum.GetValues(typeof(TEnum))).Select(v => new StatesHashData
+                {
+                    stateName = Enum.GetName(typeof(TEnum), v),
+                    hashedNameValue = Animator.StringToHash(v.ToString()) // replace with your hash function
+                }).ToList()
+            };
+
+            instance.Add(list);
         }
     }
 }

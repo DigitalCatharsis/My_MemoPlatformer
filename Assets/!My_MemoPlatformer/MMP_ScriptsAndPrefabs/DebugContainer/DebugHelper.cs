@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -30,6 +31,7 @@ namespace My_MemoPlatformer
         [Space(10)]
         public Serializable_List<StatesHashData> testListOfLists = new Serializable_List<StatesHashData> { };
         static public Serializable_List<StatesHashData> testOfStates = new Serializable_List<StatesHashData> { };
+        public StatesHashList testStatesHashList = new StatesHashList();
 
         #region TODO
         /*
