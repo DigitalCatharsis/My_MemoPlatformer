@@ -70,14 +70,13 @@ namespace My_MemoPlatformer
 
         private void ProcessLedgeGrab()
         {
-            if (!Control.skinnedMeshAnimator.GetBool(
-                HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
+            if (!Control.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
             {
-                foreach (var obj in collider1.collidedObjects)
+                foreach (var collidedObject in collider1.collidedObjects)
                 {
-                    if (!collider2.collidedObjects.Contains(obj))
+                    if (!collider2.collidedObjects.Contains(collidedObject))
                     {
-                        if (OffsetPosition(obj))
+                        if (OffsetPosition(collidedObject))
                         {
                             break;
                         }
@@ -100,6 +99,7 @@ namespace My_MemoPlatformer
         }
         private bool OffsetPosition(GameObject platform)
         {
+            //TODO: раздробить
             var boxCollider = platform.GetComponent<BoxCollider>();
 
             if (boxCollider == null)
@@ -117,27 +117,25 @@ namespace My_MemoPlatformer
             Control.RIGID_BODY.velocity = Vector3.zero;
 
             float y, z;
-            y = platform.transform.position.y + (boxCollider.size.y / 2f);
+            y = platform.transform.position.y + (boxCollider.transform.lossyScale.y / 2f);
             if (Control.ROTATION_DATA.IsFacingForward())
             {
-                z = platform.transform.position.z - (boxCollider.size.z * boxCollider.gameObject.transform.lossyScale.z / 2f);
+                z = platform.transform.position.z - (boxCollider.gameObject.transform.lossyScale.z /2f);
             }
             else
             {
-                z = platform.transform.position.z + (boxCollider.size.z * boxCollider.gameObject.transform.lossyScale.z / 2f);
+                z = platform.transform.position.z + (boxCollider.gameObject.transform.lossyScale.z /2f);
             }
 
             Vector3 platformEdge = new Vector3(0f, y, z);
 
             if (Control.ROTATION_DATA.IsFacingForward())
             {
-                Control.RIGID_BODY.MovePosition(
-                    platformEdge + ledgeCalibration);
+                Control.RIGID_BODY.MovePosition(platformEdge + ledgeCalibration);
             }
             else
             {
-                Control.RIGID_BODY.MovePosition(
-                    platformEdge + new Vector3(0f, ledgeCalibration.y, -ledgeCalibration.z));
+                Control.RIGID_BODY.MovePosition(platformEdge + new Vector3(0f, ledgeCalibration.y, -ledgeCalibration.z));
             }
 
             return true;

@@ -9,18 +9,24 @@ namespace My_MemoPlatformer
 {
     public enum StatesList
     {
+        //Ground Movement
         Running,
         Walking,
-        Crouch_Idle,
+
+        //Running Transitions
         BackFlip,
         RunningTurn_180,
         ForwardRoll_End,
         ForwardRoll_Start,
         RunningSlide,
         RunToStop,
+
+        //Base
         Idle,
         Block,
         BlockReaction,
+
+        //Ground Attacks
         Uppercut,
         FlyingKick,
         SpinningBackKick,
@@ -33,8 +39,12 @@ namespace My_MemoPlatformer
         JumpingPunch,
         JebCrossHookCombo_Hook,
         JebCrossHookCombo_Cross,
+
+        //Damage Reaction
         Head_Hit,
         Zombie_Death,
+
+        //Axe
         Axe_StandingAttack,
         Axe_Idle,
         Axe_Running,
@@ -42,6 +52,8 @@ namespace My_MemoPlatformer
         Throw_Axe,
         WeaponPickUp,
         WeaponPutDown,
+
+        //Air Movement
         Fall,
         Jump_Normal_Prep,
         Jump_Normal,
@@ -164,17 +176,11 @@ namespace My_MemoPlatformer
     public enum Instant_Transition_States
     {
         Jump_Normal_Landing = 0,
-        //Jump_3m_Prep = 1,
         Hanging_Idle = 2,
         Idle = 4,
 
         Jump_Normal_Prep = 5,
         Jump_Running = 6,
-
-        //Running_Jump = 3,
-        //Run_Stop_InPlace = 7,
-
-        //AirCombo_Smash = 8,
 
         COUNT,
     }
@@ -260,19 +266,19 @@ namespace My_MemoPlatformer
                     dicHitReactionStates.Add(t, Animator.StringToHash(t.ToString()));
                 }
 
-                // instant transition states
+
                 for (int i = 0; i < arrInstantTransitionStates.Length; i++)
                 {
                     arrInstantTransitionStates[i] = Animator.StringToHash(((Instant_Transition_States)i).ToString());
                 }
 
-                // ledge trigger states
+
                 for (int i = 0; i < arrLedgeTriggerStates.Length; i++)
                 {
                     arrLedgeTriggerStates[i] = Animator.StringToHash(((Ledge_Trigger_States)i).ToString());
                 }
 
-                // ledge trigger states
+
                 for (int i = 0; i < arrAllAbilitiesList.Length; i++)
                 {
                     arrAllAbilitiesList[i] = Animator.StringToHash(((AbilitiesList)i).ToString());

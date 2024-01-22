@@ -52666,6 +52666,7 @@ GameObject:
   - component: {fileID: 3298157505497867716}
   - component: {fileID: 7150512808997576171}
   - component: {fileID: 8931554185046278758}
+  - component: {fileID: 5201818028872993372}
   m_Layer: 0
   m_Name: polySurface1463
   m_TagString: Untagged
@@ -52743,6 +52744,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5201818028872993372
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7365570118676094867}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300140, guid: 5953c93a3133177479d85c596497a194, type: 3}
 --- !u!1 &7365782048379685238
 GameObject:
   m_ObjectHideFlags: 0
@@ -62849,7 +62872,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2535749923828700297
 Transform:

@@ -111,9 +111,9 @@ namespace My_MemoPlatformer
         {
             CharacterState[] arr = animator.GetBehaviours<CharacterState>();
 
-            foreach (CharacterState c in arr)
+            foreach (var charState in arr)
             {
-                c.characterControl = this;   //For AIState check awake in AiController
+                charState.characterControl = this;   //For AIState check awake in AiController
             }
         }
         private void RegisterCharacter()
