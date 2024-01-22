@@ -39,6 +39,7 @@ namespace My_MemoPlatformer
             FixedUpdateSubComponent(SubComponentType.INSTA_KILL);
             FixedUpdateSubComponent(SubComponentType.DAMAGE_DETECTOR);
             FixedUpdateSubComponent(SubComponentType.PLAYER_ROTATION);
+            FixedUpdateSubComponent(SubComponentType.PLAYER_ANIMATION);
         }
         public void UpdateSubComponents()
         {

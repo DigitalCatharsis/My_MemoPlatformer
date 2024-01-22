@@ -9,6 +9,7 @@ namespace My_MemoPlatformer
         {
             animation_Data = new Animation_Data
             {
+                currentState = null,
                 instantTransitionMade = false,
                 currentRunningAbilities = new Dictionary<CharacterAbility, int>(),
                 IsRunning = IsRunning,
@@ -19,7 +20,12 @@ namespace My_MemoPlatformer
         }
         public override void OnFixedUpdate()
         {
+            animation_Data.currentState = SetCurrentState();
+        }
 
+        private string SetCurrentState()
+        {
+            return HashManager.Instance.GetStateNameByHash<StatesList>(Control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash);
         }
 
         public override void OnUpdate()

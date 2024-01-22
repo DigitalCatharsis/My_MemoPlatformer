@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace My_MemoPlatformer
 {
@@ -23,15 +24,12 @@ namespace My_MemoPlatformer
         [SerializeField] private bool _debug_TransitionTiming;
         [SerializeField] private bool _debug_TriggerDetector;
         [SerializeField] private bool _debug_WallOverlappingStatus;
+        [SerializeField] private bool _debug_HashManager;
+        [SerializeField] private bool _debug_AI;
 
         [Space(10)]
         [SerializeField] private bool _displaySpheresAndColliders;
         [SerializeField] private bool _displayLedgeCheckers;
-
-        [Space(10)]
-        public Serializable_List<StatesHashData> testListOfLists = new Serializable_List<StatesHashData> { };
-        static public Serializable_List<StatesHashData> testOfStates = new Serializable_List<StatesHashData> { };
-        public StatesHashList testStatesHashList = new StatesHashList();
 
         #region TODO
         /*
@@ -72,22 +70,22 @@ namespace My_MemoPlatformer
             //        }); ;
             //} 
 
-            var HN = new int[] { 0,1, 2 };
-            var SN = new string[] { "0","1","2"};
+            //var HN = new int[] { 0,1, 2 };
+            //var SN = new string[] { "0","1","2"};
 
-            AddValuesToTestOfLists(HN, SN);
+            //AddValuesToTestOfLists(HN, SN);
 
         }
 
-        public void AddValuesToTestOfLists(int[] hashesNames, string[] stateNamess)
-        {
-            testListOfLists.instance.Add(new Serializable_SubList<StatesHashData>());
+        //public void AddValuesToTestOfLists(int[] hashesNames, string[] stateNamess)
+        //{
+        //    testListOfLists.instance.Add(new Serializable_SubList<StatesHashData>());
 
-            for (int i = 0; i < hashesNames.Length; i++)
-            {
-                testListOfLists.instance.Last().subList.Add(new StatesHashData { hashedNameValue = hashesNames[i], stateName = stateNamess[i] });
-            }
-        }
+        //    for (int i = 0; i < hashesNames.Length; i++)
+        //    {
+        //        testListOfLists.instance.Last().subList.Add(new StatesHashData { hashedNameValue = hashesNames[i], stateName = stateNamess[i] });
+        //    }
+        //}
 
         public void UpdateDebugHelpersDict()
         {
@@ -117,110 +115,66 @@ namespace My_MemoPlatformer
             DebugContainer_Data.Instance.debug_TriggerDetector = _debug_TriggerDetector;
 
             DebugContainer_Data.Instance.debug_WallOverlappingStatus = _debug_WallOverlappingStatus;
+            DebugContainer_Data.Instance.debug_HashManager = _debug_HashManager;
+            DebugContainer_Data.Instance.debug_AI = _debug_AI;
 
             DebugContainer_Data.Instance.displaySpheresAndColliders = _displaySpheresAndColliders;
 
             DebugContainer_Data.Instance.displayLedgeCheckers = _displayLedgeCheckers;
 
-            ChangeSpheresRendererStatus();
-            ChangeLedgeCheckerStatus();
+            ChangeSpheresRendererStatus(_displaySpheresAndColliders);
+            ChangeLedgeCheckerStatus(_displayLedgeCheckers);
         }
 
-        public List<StatesHashData> FillHashDataList<T>(Type statesType_Collection, T hashValues_Collection) where T : IList<int>
+        //public List<StatesHashData> FillHashDataList<T>(Type statesType_Collection, T hashValues_Collection) where T : IList<int>
+        //{
+        //    var resultSubList = new List<StatesHashData>();
+
+        //    for (var i = 0; i < hashValues_Collection.Count; i++)
+        //    {
+        //        resultSubList.Add(
+        //            new StatesHashData
+        //            {
+        //                hashedNameValue = hashValues_Collection[i],
+        //                stateName = Enum.GetName(statesType_Collection, i),
+        //            });
+        //    }
+
+        //    return resultSubList;
+        //}
+
+        private void ChangeSpheresRendererStatus(bool isEnabled)
         {
-            var resultSubList = new List<StatesHashData>();
-
-            for (var i = 0; i < hashValues_Collection.Count; i++)
+            foreach (var control in CharacterManager.Instance.characters)
             {
-                resultSubList.Add(
-                    new StatesHashData
-                    {
-                        hashedNameValue = hashValues_Collection[i],
-                        stateName = Enum.GetName(statesType_Collection, i),
-                    });
-            }
+                var listOfSpheres = new List<GameObject>();
+                listOfSpheres.AddRange(control.COLLISION_SPHERE_DATA.frontSpheres);
+                listOfSpheres.AddRange(control.COLLISION_SPHERE_DATA.backSpheres);
+                listOfSpheres.AddRange(control.COLLISION_SPHERE_DATA.upSpheres);
+                listOfSpheres.AddRange(control.COLLISION_SPHERE_DATA.bottomSpheres);
 
-            return resultSubList;
-        }
 
-        private void ChangeSpheresRendererStatus()
-        {
-            //Render all Spheres
-            if (_displaySpheresAndColliders)
-            {
-                foreach (var control in CharacterManager.Instance.characters)
+                foreach (var sphere in listOfSpheres)
                 {
-                    var listOfSpheres = new List<GameObject>();
-                    listOfSpheres.AddRange(control.COLLISION_SPHERE_DATA.frontSpheres);
-                    listOfSpheres.AddRange(control.COLLISION_SPHERE_DATA.backSpheres);
-                    listOfSpheres.AddRange(control.COLLISION_SPHERE_DATA.upSpheres);
-                    listOfSpheres.AddRange(control.COLLISION_SPHERE_DATA.bottomSpheres);
-
-
-                    foreach (var sphere in listOfSpheres)
-                    {
-                        sphere.GetComponent<MeshRenderer>().enabled = true;
-                    }
-                }
-            }
-            else
-            {
-                foreach (var control in CharacterManager.Instance.characters)
-                {
-                    var listOfSpheres = new List<GameObject>();
-                    listOfSpheres.AddRange(control.COLLISION_SPHERE_DATA.frontSpheres);
-                    listOfSpheres.AddRange(control.COLLISION_SPHERE_DATA.backSpheres);
-                    listOfSpheres.AddRange(control.COLLISION_SPHERE_DATA.upSpheres);
-                    listOfSpheres.AddRange(control.COLLISION_SPHERE_DATA.bottomSpheres);
-
-                    //Render all Spheres
-                    foreach (var sphere in listOfSpheres)
-                    {
-                        sphere.GetComponent<MeshRenderer>().enabled = false;
-                    }
+                    sphere.GetComponent<MeshRenderer>().enabled = isEnabled;
                 }
             }
         }
 
-        private void ChangeLedgeCheckerStatus()
+        private void ChangeLedgeCheckerStatus(bool enabled)
         {
-            //Render all Spheres
-            if (_displayLedgeCheckers)
+            foreach (var control in CharacterManager.Instance.characters)
             {
-                foreach (var control in CharacterManager.Instance.characters)
-                {
-                    var listOfLedgeCheckers = new List<LedgeChecker>();
-                    listOfLedgeCheckers.AddRange(control.GetComponentsInChildren<LedgeChecker>());
+                var listOfLedgeCheckers = new List<LedgeChecker>();
+                listOfLedgeCheckers.AddRange(control.GetComponentsInChildren<LedgeChecker>());
 
-                    foreach (var ledgeChecker in listOfLedgeCheckers)
-                    {
-                        ledgeChecker.collider1.gameObject.GetComponent<MeshRenderer>().enabled = true;
-                        ledgeChecker.collider2.gameObject.GetComponent<MeshRenderer>().enabled = true;
-                    }
-                }
-            }
-            else
-            {
-                foreach (var control in CharacterManager.Instance.characters)
+                foreach (var ledgeChecker in listOfLedgeCheckers)
                 {
-                    var listOfLedgeCheckers = new List<LedgeChecker>();
-                    listOfLedgeCheckers.AddRange(control.GetComponentsInChildren<LedgeChecker>());
-
-                    foreach (var ledgeChecker in listOfLedgeCheckers)
-                    {
-                        ledgeChecker.collider1.gameObject.GetComponent<MeshRenderer>().enabled = false;
-                        ledgeChecker.collider2.gameObject.GetComponent<MeshRenderer>().enabled = false;
-                    }
+                    ledgeChecker.collider1.gameObject.GetComponent<MeshRenderer>().enabled = enabled;
+                    ledgeChecker.collider2.gameObject.GetComponent<MeshRenderer>().enabled = enabled;
                 }
             }
         }
     }
-    [Serializable]
-    public class StatesHashData
-    {
-        [SerializeField]
-        public string stateName;
-        [SerializeField]
-        public int hashedNameValue;
-    }
+
 }

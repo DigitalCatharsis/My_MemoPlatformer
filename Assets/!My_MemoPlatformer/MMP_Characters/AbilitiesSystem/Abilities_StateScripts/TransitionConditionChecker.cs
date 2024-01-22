@@ -147,11 +147,11 @@ namespace My_MemoPlatformer
                             {
                                 var SI = control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
 
-                                for (int i = 0; i < (int)TempAbilitiesList.COUNT; i++)
+                                for (int i = 0; i < (int)AbilitiesList.COUNT; i++)
                                 {
                                     if (SI.shortNameHash == HashManager.Instance.arrAllAbilitiesList[i])
                                     {
-                                        var ability = (TempAbilitiesList)i;
+                                        var ability = (AbilitiesList)i;
                                         Debug.Log($"<color=magenta>{ability}</color>");
                                     }
                                 }

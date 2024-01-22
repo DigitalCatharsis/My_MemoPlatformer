@@ -18,7 +18,8 @@ namespace My_MemoPlatformer
         public bool debug_TransitionTiming;
         public bool debug_TriggerDetector;
         public bool debug_WallOverlappingStatus;
-        public bool debug_temp;
+        public bool debug_AI;
+        public bool debug_HashManager;
         public bool displaySpheresAndColliders;
         public bool displayLedgeCheckers;
     }

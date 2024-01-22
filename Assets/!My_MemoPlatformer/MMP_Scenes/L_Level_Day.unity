@@ -5639,6 +5639,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: --B_YBot - Blue Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5582724929851568672, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5582724929851568676, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -7445,7 +7449,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6805351866285292383, guid: eadd8c2cdfa043c42bcc618639243a87, type: 3}
       propertyPath: _displayLedgeCheckers
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6805351866285292383, guid: eadd8c2cdfa043c42bcc618639243a87, type: 3}
       propertyPath: _debug_TriggerDetector

@@ -26,7 +26,7 @@ namespace My_MemoPlatformer
 
             if (platformDistance > 0.5f) 
             {
-                if (DebugContainer_Data.Instance.debug_temp)
+                if (DebugContainer_Data.Instance.debug_AI)
                 {
                     EditorApplication.isPaused = true;
                 }
@@ -48,7 +48,7 @@ namespace My_MemoPlatformer
 
             if (platformDistance < 0.5f)  //means it is on the same platform
             {
-                if (DebugContainer_Data.Instance.debug_temp)
+                if (DebugContainer_Data.Instance.debug_AI)
                 {
                     EditorApplication.isPaused = true;
                 }

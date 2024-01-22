@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: IIdle
+  m_Name: Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -4521,9 +4521,9 @@ AnimatorStateMachine:
   m_StateMachineTransitions:
   - first: {fileID: 509333692979961190}
     second: []
-  - first: {fileID: 2228852158456686311}
-    second: []
   - first: {fileID: 5259041084284573569}
+    second: []
+  - first: {fileID: 2228852158456686311}
     second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 140, y: -220, z: 0}

@@ -58,15 +58,12 @@ namespace My_MemoPlatformer
                 return false;
             }
 
-            for (int i = 0; i < HashManager.Instance.arrLedgeTriggerStates.Length; i++)
+            var info = Control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
+
+            if (HashManager.Instance.IsStateInCurrent_StateEnum<Ledge_Trigger_States>(Control, info.shortNameHash))
             {
-                var info = Control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
-                if (info.shortNameHash == HashManager.Instance.arrLedgeTriggerStates[i])
-                {
-                    Debug.Log(Enum.GetName(typeof(Ledge_Trigger_States),i));
-                    return true;
-                }
-            }
+                return true;
+            }           
 
             return false;
         }
@@ -76,7 +73,7 @@ namespace My_MemoPlatformer
             if (!Control.skinnedMeshAnimator.GetBool(
                 HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
             {
-                foreach (GameObject obj in collider1.collidedObjects)
+                foreach (var obj in collider1.collidedObjects)
                 {
                     if (!collider2.collidedObjects.Contains(obj))
                     {

@@ -2,11 +2,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    public enum TempAbilitiesList
+    public enum StatesList
+    {
+        Running,
+        Walking,
+        Crouch_Idle,
+        BackFlip,
+        RunningTurn_180,
+        ForwardRoll_End,
+        ForwardRoll_Start,
+        RunningSlide,
+        RunToStop,
+        Idle,
+    }
+
+    public enum AbilitiesList
     {
         Attack,
         Block,
@@ -82,8 +97,6 @@ namespace My_MemoPlatformer
 
         COUNT,
     }
-
-
     public enum MMP_Scenes
     {
         L_CharacterSelect,
@@ -137,11 +150,11 @@ namespace My_MemoPlatformer
 
         // normal jump
         Jump_Normal,
-        Heroic_Fall,
+        //Heroic_Fall,
 
         // running jump
         Running_Jump,
-        Running_Heroic_Fall,
+        //Running_Heroic_Fall,
         Jump_Running,
 
         Fall,
@@ -169,11 +182,11 @@ namespace My_MemoPlatformer
         public int[] arrInstantTransitionStates = new int[(int)Instant_Transition_States.COUNT];
         public int[] arrLedgeTriggerStates = new int[(int)Ledge_Trigger_States.COUNT];
 
-        public int[] arrAllAbilitiesList = new int[(int)TempAbilitiesList.COUNT];
+        public int[] arrAllAbilitiesList = new int[(int)AbilitiesList.COUNT];
 
         public Dictionary<Camera_States, int> dicCameraStates = new Dictionary<Camera_States, int>();
 
-        public StatesHashList states = new StatesHashList();
+        public StatesHashList statesHashViewer = new StatesHashList();
 
         private void Awake()
         {
@@ -227,7 +240,7 @@ namespace My_MemoPlatformer
                 // ledge trigger states
                 for (int i = 0; i < arrAllAbilitiesList.Length; i++)
                 {
-                    arrAllAbilitiesList[i] = Animator.StringToHash(((TempAbilitiesList)i).ToString());
+                    arrAllAbilitiesList[i] = Animator.StringToHash(((AbilitiesList)i).ToString());
                 }
 
                 // camera states
@@ -240,15 +253,67 @@ namespace My_MemoPlatformer
                 }
             }
 
-            states.Fill <Camera_States>();
-            states.Fill <MainParameterType>();
-            states.Fill <CameraTrigger>();
-            states.Fill <AI_Transition>();
-            states.Fill <AI_State_Name>();
-            states.Fill <Instant_Transition_States>();
-            states.Fill <Ledge_Trigger_States>();
-            states.Fill <TempAbilitiesList>();
+            statesHashViewer.Fill<Camera_States>();
+            statesHashViewer.Fill<MainParameterType>();
+            statesHashViewer.Fill<CameraTrigger>();
+            statesHashViewer.Fill<AI_Transition>();
+            statesHashViewer.Fill<AI_State_Name>();
+            statesHashViewer.Fill<Instant_Transition_States>();
+            statesHashViewer.Fill<Ledge_Trigger_States>();
+            statesHashViewer.Fill<AbilitiesList>();
+            statesHashViewer.Fill<StatesList>();
 
+        }
+
+        public bool IsStateInCurrent_StateEnum<T>(CharacterControl control, int hash) where T : Enum
+        {
+            var statesHashViewerList = statesHashViewer.GetSublistByName(typeof(T).ToString());
+
+            for (int i = 0; i < statesHashViewerList.subList.Count; i++)
+            {
+                if (hash == statesHashViewerList.subList[i].hashedNameValue)
+                {
+                    if (DebugContainer_Data.Instance.debug_HashManager)
+                    {
+                        Debug.Log($"{control.gameObject.name} currently is in state : {Enum.GetName(typeof(T), i)}. Current EnumStates_Name {typeof(T)}");
+                    }
+                    return true;
+                }
+            }
+            if (DebugContainer_Data.Instance.debug_HashManager)
+            {
+                Debug.Log($"{control.gameObject.name} currently is NOT in StateEnum : {typeof(T)}");
+            }
+            return false;
+        }
+
+        public string GetStateNameByHash<T>(int hash)
+        {
+            var statesHashViewerList = statesHashViewer.GetSublistByName(typeof(T).ToString());
+
+            for (int i = 0; i < statesHashViewerList.subList.Count; i++)
+                if (hash == statesHashViewerList.subList[i].hashedNameValue)
+                {
+                    return statesHashViewerList.subList[i].stateName;
+                }
+            return null;
+        }
+
+        public string FindStateName_Everywhere_ByHash(int hash)
+        {
+            foreach (var subList in statesHashViewer.instance)
+            {
+                foreach (var data in subList.subList)
+                {
+                    if (data.hashedNameValue == hash)
+                    {
+                        Debug.Log($"Found hash! State name: {data.stateName}\n stateEnum: {subList.name}");
+                        return data.stateName;
+                    }
+                }
+            }
+
+            return null;
         }
     }
 
@@ -257,17 +322,27 @@ namespace My_MemoPlatformer
     {
         public void Fill<TEnum>() where TEnum : Enum
         {
-            var list = new Serializable_SubList<StatesHashData>
+            var list = new Serializable_SubList<StatesHashData>()
             {
+                name = typeof(TEnum).ToString().Replace(typeof(HashManager).Namespace + ".", ""),
                 subList = ((TEnum[])Enum.GetValues(typeof(TEnum))).Select(v => new StatesHashData
                 {
                     stateName = Enum.GetName(typeof(TEnum), v),
-                    hashedNameValue = Animator.StringToHash(v.ToString()) // replace with your hash function
+                    hashedNameValue = Animator.StringToHash(v.ToString())
                 }).ToList()
             };
 
             instance.Add(list);
         }
+    }
+
+    [Serializable]
+    public class StatesHashData
+    {
+        [SerializeField]
+        public string stateName;
+        [SerializeField]
+        public int hashedNameValue;
     }
 }
 
