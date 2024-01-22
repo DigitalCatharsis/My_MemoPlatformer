@@ -114,11 +114,11 @@ namespace My_MemoPlatformer
                         info.isFinished = true;
                         info.GetComponent<PoolObject>().TurnOff();
 
-                        foreach (CharacterControl c in CharacterManager.Instance.characters)
+                        foreach (var control in CharacterManager.Instance.characters)
                         {
-                            if (c.DAMAGE_DATA.blockedAttack == info)
+                            if (control.DAMAGE_DATA.blockedAttack == info)
                             {
-                                c.DAMAGE_DATA.blockedAttack = null;
+                                control.DAMAGE_DATA.blockedAttack = null;
                             }
                         }
 

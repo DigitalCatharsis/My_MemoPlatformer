@@ -212,6 +212,11 @@ namespace My_MemoPlatformer
                 {
                     OnTakeDamage(info);
                 }
+                else
+                {
+                    _damage_Data.blockedAttack = info;
+                    return;
+                }
             }
         }
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace My_MemoPlatformer
 {
@@ -21,6 +22,7 @@ namespace My_MemoPlatformer
         public override void OnFixedUpdate()
         {
             animation_Data.currentState = SetCurrentState();
+            //Debug.Log(animation_Data.currentState);
         }
 
         private string SetCurrentState()
