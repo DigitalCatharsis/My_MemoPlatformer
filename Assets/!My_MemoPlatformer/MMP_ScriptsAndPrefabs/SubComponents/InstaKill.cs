@@ -112,8 +112,8 @@ namespace My_MemoPlatformer
 
         private void ProcessInstaKill(CharacterControl assassin)
         {
-            Control.ANIMATION_DATA.currentRunningAbilities.Clear();
-            assassin.ANIMATION_DATA.currentRunningAbilities.Clear();
+            Control.ANIMATION_DATA.currentRunningAbilities_Dictionary.Clear();
+            assassin.ANIMATION_DATA.currentRunningAbilities_Dictionary.Clear();
 
             Control.RIGID_BODY.useGravity = false;
             Control.boxCollider.enabled = false;

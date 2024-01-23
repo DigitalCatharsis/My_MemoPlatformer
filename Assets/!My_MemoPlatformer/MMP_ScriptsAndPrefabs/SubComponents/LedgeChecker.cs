@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
 
@@ -60,12 +61,60 @@ namespace My_MemoPlatformer
 
             var info = Control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
 
-            if (HashManager.Instance.IsStateInCurrent_StateEnum<Ledge_Trigger_States>(Control, info.shortNameHash))
+            if (!HashManager.Instance.IsStateInCurrent_StateEnum<Ledge_Trigger_States>(Control, info.shortNameHash))
+            {
+                return false;
+            }
+
+            if (CheckUpBlockingForLedgeGrabCondition())
+            {
+                return false;
+            }
+            else
             {
                 return true;
-            }           
+            }
+        }
 
+        private bool CheckUpBlockingForLedgeGrabCondition()
+        {
+            var start = Control.COLLISION_SPHERE_DATA.upSpheres[4];
+
+            //draw DebugLine
+            Debug.DrawRay(start.transform.position, Vector3.up, Color.red);
+
+            //check collision
+            RaycastHit hit;
+            if (Physics.Raycast(start.transform.position, Vector3.up, out hit, 1))
+            {
+                if (!Ledge.IsLedgeCollider(hit.collider.gameObject))
+                {
+                    Debug.Log(hit.collider.transform.gameObject.ToString());
+                    return true;
+                }
+                else
+                {
+                    Debug.Log("notthing1");
+                    //EditorApplication.isPaused = true;
+                    return false;
+                }
+            }
+
+            Debug.Log("notthing2");
+            //EditorApplication.isPaused = true;
             return false;
+
+            //var blockingObj = CollisionDetection.GetCollidingObject(Control, Control.COLLISION_SPHERE_DATA.upSpheres[4], this.transform.up, 1f, ref Control.BLOCKING_OBJ_DATA.raycastContactPoint);
+
+            //if (blockingObj != null)
+            //{
+            //    return true;
+            //}
+            //else
+            //{
+            //    EditorApplication.isPaused = true;
+            //    return false;
+            //}
         }
 
         private void ProcessLedgeGrab()
@@ -120,11 +169,11 @@ namespace My_MemoPlatformer
             y = platform.transform.position.y + (boxCollider.transform.lossyScale.y / 2f);
             if (Control.ROTATION_DATA.IsFacingForward())
             {
-                z = platform.transform.position.z - (boxCollider.gameObject.transform.lossyScale.z /2f);
+                z = platform.transform.position.z - (boxCollider.gameObject.transform.lossyScale.z / 2f);
             }
             else
             {
-                z = platform.transform.position.z + (boxCollider.gameObject.transform.lossyScale.z /2f);
+                z = platform.transform.position.z + (boxCollider.gameObject.transform.lossyScale.z / 2f);
             }
 
             Vector3 platformEdge = new Vector3(0f, y, z);

@@ -158,7 +158,7 @@ namespace My_MemoPlatformer
 
                                 Debug.Log("<color=Cyan>Some of current abilities are:</color>");
 
-                                foreach (var ability in control.ANIMATION_DATA.currentRunningAbilities)
+                                foreach (var ability in control.ANIMATION_DATA.currentRunningAbilities_Dictionary)
                                 {
                                     Debug.Log($"<color=Cyan>{ability}</color>");
                                 }

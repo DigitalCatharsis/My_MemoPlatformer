@@ -6,22 +6,49 @@ namespace My_MemoPlatformer
     public class PlayerAnimation : SubComponent
     {
         public Animation_Data animation_Data;
+
+        private List<string> _currentList = new List<string> {};
+        private List<string> _previousList = new List<string> {};
+        private string _currentState;
+
         void Start()
         {
             animation_Data = new Animation_Data
             {
                 currentState = null,
+                previousState = null,
                 instantTransitionMade = false,
-                currentRunningAbilities = new Dictionary<CharacterAbility, int>(),
+                currentRunningAbilities_Dictionary = new Dictionary<CharacterAbility, int>(),
+                currentRunningAbilities_PreviewList = new List<string>(),
+                PreviousRunningAbilities_PreviewList = new List<string>(),
                 IsRunning = IsRunning,
             };
 
             subComponentProcessor.animation_Data = animation_Data;
             subComponentProcessor.arrSubComponents[(int)SubComponentType.PLAYER_ANIMATION] = this;
         }
+
         public override void OnFixedUpdate()
         {
+            if (_currentState != animation_Data.currentState)
+            {
+                if (_previousList != null)
+                {
+                    animation_Data.PreviousRunningAbilities_PreviewList.Clear();
+                    animation_Data.PreviousRunningAbilities_PreviewList.AddRange(_previousList);
+                }                
+
+                animation_Data.previousState = _currentState;
+                _previousList = _currentList;
+
+
+                _currentState = animation_Data.currentState;
+                _currentList.Clear();
+                _currentList.AddRange(animation_Data.currentRunningAbilities_PreviewList);
+            }
+
             animation_Data.currentState = SetCurrentState();
+            SetListsOfCurrentAbilities_Previews(animation_Data.currentRunningAbilities_PreviewList);
             //Debug.Log(animation_Data.currentState);
         }
 
@@ -50,7 +77,7 @@ namespace My_MemoPlatformer
         }
         private bool IsRunning(System.Type type) //ability is running now?
         {
-            foreach (KeyValuePair<CharacterAbility, int> data in animation_Data.currentRunningAbilities)
+            foreach (KeyValuePair<CharacterAbility, int> data in animation_Data.currentRunningAbilities_Dictionary)
             {
                 if (data.Key.GetType() == type)
                 {
@@ -58,6 +85,16 @@ namespace My_MemoPlatformer
                 }
             }
             return false;
+        }
+
+        private void SetListsOfCurrentAbilities_Previews(List<string> currentList)
+        {
+            currentList.Clear();
+
+            foreach (KeyValuePair<CharacterAbility, int> data in animation_Data.currentRunningAbilities_Dictionary)
+            {
+                currentList.Add(data.Key.ToString());
+            }
         }
     }
 }

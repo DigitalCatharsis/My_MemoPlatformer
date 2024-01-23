@@ -246,7 +246,7 @@ namespace My_MemoPlatformer
             _damage_Data.currentHp -= attackCondition_Info.attackAbility.damage;
 
             AttackManager.Instance.ForceDeregister(Control);
-            Control.ANIMATION_DATA.currentRunningAbilities.Clear();
+            Control.ANIMATION_DATA.currentRunningAbilities_Dictionary.Clear();
 
             if (IsCharacterDead())
             {

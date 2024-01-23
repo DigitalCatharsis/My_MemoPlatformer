@@ -40,13 +40,13 @@ namespace My_MemoPlatformer
             {
                 arrAbilities[i].OnEnter(this, animator, stateInfo);
 
-                if (characterControl.ANIMATION_DATA.currentRunningAbilities.ContainsKey(arrAbilities[i]))
+                if (characterControl.ANIMATION_DATA.currentRunningAbilities_Dictionary.ContainsKey(arrAbilities[i]))
                 {
-                    characterControl.ANIMATION_DATA.currentRunningAbilities[arrAbilities[i]] += 1;
+                    characterControl.ANIMATION_DATA.currentRunningAbilities_Dictionary[arrAbilities[i]] += 1;
                 }
                 else
                 {
-                    characterControl.ANIMATION_DATA.currentRunningAbilities.Add(arrAbilities[i], 1);
+                    characterControl.ANIMATION_DATA.currentRunningAbilities_Dictionary.Add(arrAbilities[i], 1);
                 }
             }
         }
@@ -71,13 +71,13 @@ namespace My_MemoPlatformer
                 {
                     arrAbilities[i].OnExit(this, animator, stateInfo);
 
-                    if (characterControl.ANIMATION_DATA.currentRunningAbilities.ContainsKey(arrAbilities[i]))
+                    if (characterControl.ANIMATION_DATA.currentRunningAbilities_Dictionary.ContainsKey(arrAbilities[i]))
                     {
-                        characterControl.ANIMATION_DATA.currentRunningAbilities[arrAbilities[i]] -= 1;
+                        characterControl.ANIMATION_DATA.currentRunningAbilities_Dictionary[arrAbilities[i]] -= 1;
 
-                        if (characterControl.ANIMATION_DATA.currentRunningAbilities[arrAbilities[i]] <= 0)
+                        if (characterControl.ANIMATION_DATA.currentRunningAbilities_Dictionary[arrAbilities[i]] <= 0)
                         {
-                            characterControl.ANIMATION_DATA.currentRunningAbilities.Remove(arrAbilities[i]);
+                            characterControl.ANIMATION_DATA.currentRunningAbilities_Dictionary.Remove(arrAbilities[i]);
                         }
                     }
                 }

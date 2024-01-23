@@ -5,7 +5,7 @@ namespace My_MemoPlatformer
     {
         public Vector3 offset;
 
-        public static bool IsLedgeChecker(GameObject obj)
+        public static bool IsLedgeCollider(GameObject obj)
         {
             if(obj.GetComponent<LedgeCollider>() == null)
             {

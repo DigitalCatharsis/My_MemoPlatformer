@@ -17,7 +17,7 @@ namespace My_MemoPlatformer
             {
                 if (!IsOwnBodyPart(control, hit.collider)
                     && !IsIgnoringCharacter(control, hit.collider)
-                    && !Ledge.IsLedgeChecker(hit.collider.gameObject)  // Проверка, что мы ничего не задеваем, включая Ledge (платформы, за котоыре можно зацепиться)
+                    && !Ledge.IsLedgeCollider(hit.collider.gameObject)  // Проверка, что мы ничего не задеваем, включая Ledge (платформы, за котоыре можно зацепиться)
                     && !MeleeWeapon.IsWeapon(hit.collider.gameObject)
                     && !TrapSpikes.IsTrap(hit.collider.gameObject))
                 {
