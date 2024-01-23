@@ -114,7 +114,7 @@ namespace My_MemoPlatformer
             Control.skinnedMeshAnimator.avatar = null;
 
             //Turn off ledge colliders
-            Control.LEDGE_GRAB_DATA.LedgeCollidersOff();
+            Control.LEDGE_GRAB_DATA.DisableLedgeColliders();
 
             //turn off ai
             if (Control.aiController != null)

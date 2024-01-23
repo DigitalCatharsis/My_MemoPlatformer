@@ -6,6 +6,6 @@ namespace My_MemoPlatformer
         public bool isGrabbingLedge;
 
         public delegate void DoSomething();
-        public DoSomething LedgeCollidersOff;
+        public DoSomething DisableLedgeColliders;
     }
 }

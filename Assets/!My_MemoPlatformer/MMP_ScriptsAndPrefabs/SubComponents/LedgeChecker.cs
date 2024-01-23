@@ -19,7 +19,7 @@ namespace My_MemoPlatformer
             ledgeGrab_Data = new LedgeGrab_Data
             {
                 isGrabbingLedge = false,
-                LedgeCollidersOff = LedgeCollidersOff,
+                DisableLedgeColliders = DisableLedgeColliders,
             };
 
             subComponentProcessor.ledgeGrab_Data = ledgeGrab_Data;
@@ -141,7 +141,7 @@ namespace My_MemoPlatformer
             return true;
         }
 
-        public void LedgeCollidersOff()
+        public void DisableLedgeColliders()
         {
             collider1.GetComponent<BoxCollider>().enabled = false;
             collider2.GetComponent<BoxCollider>().enabled = false;
