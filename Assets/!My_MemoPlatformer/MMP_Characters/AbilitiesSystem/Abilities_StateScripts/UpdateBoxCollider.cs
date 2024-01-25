@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace My_MemoPlatformer
 {
@@ -15,14 +16,20 @@ namespace My_MemoPlatformer
         private const string _climbingState = "LedgeClimb";
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {      
+        {
+            if (DebugContainer_Data.Instance.debug_Colliders)
+            {
+                Debug.Log("Entered to UpdateBoxCollider OnEnter");
+                Debug.Log("Setting values -> BoxColliderData");
+                Debug.Log($"<color=Red> Current State:{characterState.Animation_Data.currentState}</color>");
+            }
             characterState.BoxCollider_Data.targetSize = targetSize;
             characterState.BoxCollider_Data.size_Update_Speed = sizeUpdateSpeed;
-                          
+
             characterState.BoxCollider_Data.targetCenter = targetCenter;
             characterState.BoxCollider_Data.center_Update_Speed = centerUpdateSpeed;
 
-            if (stateInfo.IsName(_landingState)) 
+            if (stateInfo.IsName(_landingState))
             {
                 characterState.BoxCollider_Data.isLanding = true;
             }
@@ -52,6 +59,10 @@ namespace My_MemoPlatformer
         }
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            if (DebugContainer_Data.Instance.debug_Colliders)
+            {
+                Debug.Log("Finished updateing BoxCollider State");
+            }
             if (stateInfo.IsName(_landingState) || stateInfo.IsName(_climbingState))
             {
                 characterState.BoxCollider_Data.isLanding = false;

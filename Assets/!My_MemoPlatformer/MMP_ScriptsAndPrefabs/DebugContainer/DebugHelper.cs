@@ -26,6 +26,7 @@ namespace My_MemoPlatformer
         [SerializeField] private bool _debug_WallOverlappingStatus;
         [SerializeField] private bool _debug_HashManager;
         [SerializeField] private bool _debug_AI;
+        [SerializeField] private bool _debug_Colliders;
 
         [Space(10)]
         [SerializeField] private bool _displaySpheresAndColliders;
@@ -115,6 +116,7 @@ namespace My_MemoPlatformer
             DebugContainer_Data.Instance.debug_WallOverlappingStatus = _debug_WallOverlappingStatus;
             DebugContainer_Data.Instance.debug_HashManager = _debug_HashManager;
             DebugContainer_Data.Instance.debug_AI = _debug_AI;
+            DebugContainer_Data.Instance.debug_Colliders = _debug_Colliders;
 
             DebugContainer_Data.Instance.displaySpheresAndColliders = _displaySpheresAndColliders;
 

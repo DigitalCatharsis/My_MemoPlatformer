@@ -7,6 +7,12 @@ namespace My_MemoPlatformer
     {
         public List<GameObject> collidedObjects = new List<GameObject>();
 
+        private void Start()
+        {
+            int LayerIgnoreRaycast = LayerMask.NameToLayer("Visual_NoRayCast");
+            this.gameObject.layer= LayerIgnoreRaycast;
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (!Ledge.IsCharacter(other.gameObject) && !MeleeWeapon.IsWeapon(other.gameObject))

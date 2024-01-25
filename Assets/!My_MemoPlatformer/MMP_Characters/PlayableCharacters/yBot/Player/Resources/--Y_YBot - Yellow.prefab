@@ -284,6 +284,7 @@ MonoBehaviour:
   _doubleTaps: 
   _upKeys: 
   _doubleTapTime: 0.18
+  useDoubleTapsForMoving: 0
 --- !u!1 &876816306485884224
 GameObject:
   m_ObjectHideFlags: 0
@@ -1355,6 +1356,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animation_Data:
     instantTransitionMade: 0
+    currentState: 
+    currentRunningAbilities_PreviewList: []
+    previousState: 
+    PreviousRunningAbilities_PreviewList: []
 --- !u!1 &2806442753808599445
 GameObject:
   m_ObjectHideFlags: 0
@@ -1899,7 +1904,7 @@ GameObject:
   - component: {fileID: 3335105432292074732}
   - component: {fileID: 6514579335991725668}
   - component: {fileID: 2556090061209913744}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Col1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3392,7 +3397,7 @@ GameObject:
   - component: {fileID: 4451637664484933198}
   - component: {fileID: 2520508446896568363}
   - component: {fileID: 6250041133930855065}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Col2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4252,6 +4257,10 @@ MonoBehaviour:
     attackButtonIsReset: 0
   animation_Data:
     instantTransitionMade: 0
+    currentState: 
+    currentRunningAbilities_PreviewList: []
+    previousState: 
+    PreviousRunningAbilities_PreviewList: []
 --- !u!1 &7646921906402090757
 GameObject:
   m_ObjectHideFlags: 0
@@ -5086,6 +5095,7 @@ MonoBehaviour:
   instaKill_Data:
     Animation_Assassin: {fileID: 0}
     Animation_Victim: {fileID: 0}
+  _instakillChance: 0
   Assassination_Assassin: {fileID: 9100000, guid: 1ff8244958f934742a2835e1c827d59c, type: 2}
   Assassination_Victim: {fileID: 9100000, guid: ae6282d82d780684b889b8ad9c9da487, type: 2}
 --- !u!1 &8838438393441778181

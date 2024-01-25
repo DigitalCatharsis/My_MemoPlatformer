@@ -38,8 +38,10 @@ namespace My_MemoPlatformer
                 }
 
                 Physics.IgnoreLayerCollision(dic["Default"], dic["Default"], false);
+                Physics.IgnoreLayerCollision(dic["Ignore Raycast"], dic["Default"], true);
                 Physics.IgnoreLayerCollision(dic[MMP_Layers.CHARACTER.ToString()], dic["Default"], false);
                 Physics.IgnoreLayerCollision(dic[MMP_Layers.DeadBody.ToString()], dic["Default"], false);
+                Physics.IgnoreLayerCollision(dic[MMP_Layers.Visual_NoRayCast.ToString()], dic["Default"], false);
 
                 Debug.Log("default collisions set");
             }

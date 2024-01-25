@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace My_MemoPlatformer
 {
@@ -49,6 +50,11 @@ namespace My_MemoPlatformer
 
         private void SetColliderSpheres()
         {
+            if (DebugContainer_Data.Instance.debug_Colliders)
+            {
+                Debug.Log("Setting Collider Spheres");
+            }
+
             //bottom
             for (int i = 0; i < 5; i++)
             {
@@ -97,6 +103,11 @@ namespace My_MemoPlatformer
 
         private void Reposition_FrontSpheres()
         {
+            if(DebugContainer_Data.Instance.debug_Colliders)
+            {
+                Debug.Log("Repositioning Front Spheres");
+            }
+
             var bottom = Control.boxCollider.bounds.center.y - (Control.boxCollider.bounds.size.y / 2f); // в центре внизу. 
             var top = Control.boxCollider.bounds.center.y + (Control.boxCollider.bounds.size.y / 2f); // в центре вверху. ;
             var front = Control.boxCollider.bounds.center.z + (Control.boxCollider.bounds.size.z / 2f); // в центре спереди. ;
@@ -117,6 +128,11 @@ namespace My_MemoPlatformer
         }
         private void Reposition_BackSpheres()
         {
+            if (DebugContainer_Data.Instance.debug_Colliders)
+            {
+                Debug.Log("Repositioning Back Spheres");
+            }
+
             float bottom = Control.boxCollider.bounds.center.y - (Control.boxCollider.bounds.size.y / 2f); // в центре внизу. 
             float top = Control.boxCollider.bounds.center.y + (Control.boxCollider.bounds.size.y / 2f); // в центре вверху.
             float back = Control.boxCollider.bounds.center.z - (Control.boxCollider.bounds.size.z / 2f); // в центре спереди.
@@ -138,6 +154,11 @@ namespace My_MemoPlatformer
 
         private void Reposition_BottomSpheres()
         {
+            if (DebugContainer_Data.Instance.debug_Colliders)
+            {
+                Debug.Log("Repositioning Bottom Spheres");
+            }
+
             var bottom = Control.boxCollider.bounds.center.y - (Control.boxCollider.bounds.size.y / 2f);
             var front = Control.boxCollider.bounds.center.z + (Control.boxCollider.bounds.size.z / 2f);
             var back = Control.boxCollider.bounds.center.z - (Control.boxCollider.bounds.size.z / 2f);
@@ -158,6 +179,11 @@ namespace My_MemoPlatformer
         }
         private void Reposition_UpSpheres()
         {
+            if (DebugContainer_Data.Instance.debug_Colliders)
+            {
+                Debug.Log("Repositioning Up Spheres");
+            }
+
             var top = Control.boxCollider.bounds.center.y + (Control.boxCollider.bounds.size.y / 2f);
             var front = Control.boxCollider.bounds.center.z + (Control.boxCollider.bounds.size.z / 2f);
             var back = Control.boxCollider.bounds.center.z - (Control.boxCollider.bounds.size.z / 2f);

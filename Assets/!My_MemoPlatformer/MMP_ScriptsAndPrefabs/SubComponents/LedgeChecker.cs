@@ -94,27 +94,12 @@ namespace My_MemoPlatformer
                 }
                 else
                 {
-                    Debug.Log("notthing1");
-                    //EditorApplication.isPaused = true;
                     return false;
                 }
             }
 
-            Debug.Log("notthing2");
-            //EditorApplication.isPaused = true;
+            Debug.Log("nothing");
             return false;
-
-            //var blockingObj = CollisionDetection.GetCollidingObject(Control, Control.COLLISION_SPHERE_DATA.upSpheres[4], this.transform.up, 1f, ref Control.BLOCKING_OBJ_DATA.raycastContactPoint);
-
-            //if (blockingObj != null)
-            //{
-            //    return true;
-            //}
-            //else
-            //{
-            //    EditorApplication.isPaused = true;
-            //    return false;
-            //}
         }
 
         private void ProcessLedgeGrab()

@@ -9,6 +9,7 @@ namespace My_MemoPlatformer
         BOT,
         GROUND,
         DeadBody,
+        Visual_NoRayCast,
     }
 
     public class LayerAdder : MonoBehaviour

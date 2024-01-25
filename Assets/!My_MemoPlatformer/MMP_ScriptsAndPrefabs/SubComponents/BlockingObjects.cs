@@ -176,6 +176,11 @@ namespace My_MemoPlatformer
 
         private void CheckFrontBlocking()  //Проверка на коллизии
         {
+            if (DebugContainer_Data.Instance.debug_Colliders)
+            {
+                Debug.Log("Checking Front Blocking (BlockingObject.CS");
+            }
+
             for (int i = 0; i < _frontSpheresArray.Length; i++)
             {
                 var blockingObj = CollisionDetection.GetCollidingObject(
