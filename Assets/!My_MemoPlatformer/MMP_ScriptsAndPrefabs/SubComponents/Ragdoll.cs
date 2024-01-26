@@ -57,8 +57,9 @@ namespace My_MemoPlatformer
                         //thats means its a ragdoll
                         collider.isTrigger = true;
                         bodyParts.Add(collider);
-                        collider.attachedRigidbody.interpolation = RigidbodyInterpolation.Interpolate;  //убрать дрожжание //Окей, если каждая часть будет интерполированной, то начинается вакханалия
+                        collider.attachedRigidbody.interpolation = RigidbodyInterpolation.None;  //убрать дрожжание //Окей, если каждая часть будет интерполированной, то начинается вакханалия
                         collider.attachedRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic; //расчет физики, предотвращение прохождения сквозь объекты
+                        collider.attachedRigidbody.useGravity = false;
 
                         CharacterJoint joint = collider.GetComponent<CharacterJoint>();
                         if (joint != null)
@@ -74,11 +75,11 @@ namespace My_MemoPlatformer
                 }
             }
 
-            ragdoll_Data.arrBodyParts = new Collider[bodyParts.Count];
+            ragdoll_Data.arrBodyPartsColliders = new Collider[bodyParts.Count];
 
-            for (int i = 0; i < ragdoll_Data.arrBodyParts.Length; i++)
+            for (int i = 0; i < ragdoll_Data.arrBodyPartsColliders.Length; i++)
             {
-                ragdoll_Data.arrBodyParts[i] = bodyParts[i];
+                ragdoll_Data.arrBodyPartsColliders[i] = bodyParts[i];
             }
         }
 
@@ -99,11 +100,11 @@ namespace My_MemoPlatformer
             }
 
             //save bodypart positions to prevent teleporting
-            for (int i = 0; i < ragdoll_Data.arrBodyParts.Length; i++)
+            for (int i = 0; i < ragdoll_Data.arrBodyPartsColliders.Length; i++)
             {
-                var triggerDetector = ragdoll_Data.arrBodyParts[i].GetComponent<TriggerDetector>();
-                triggerDetector.lastPosition = ragdoll_Data.arrBodyParts[i].gameObject.transform.position;
-                triggerDetector.lastRotation = ragdoll_Data.arrBodyParts[i].gameObject.transform.rotation;
+                var triggerDetector = ragdoll_Data.arrBodyPartsColliders[i].GetComponent<TriggerDetector>();
+                triggerDetector.lastPosition = ragdoll_Data.arrBodyPartsColliders[i].gameObject.transform.position;
+                triggerDetector.lastRotation = ragdoll_Data.arrBodyPartsColliders[i].gameObject.transform.rotation;
             }
 
             //turn off animator, avatar
@@ -124,24 +125,25 @@ namespace My_MemoPlatformer
             }
 
             //turn on ragdoll
-            for (int i = 0; i < ragdoll_Data.arrBodyParts.Length; i++)
+            for (int i = 0; i < ragdoll_Data.arrBodyPartsColliders.Length; i++)
             {
-                ragdoll_Data.arrBodyParts[i].isTrigger = false;
-                ragdoll_Data.arrBodyParts[i].attachedRigidbody.isKinematic = true;
+                ragdoll_Data.arrBodyPartsColliders[i].isTrigger = false;
+                ragdoll_Data.arrBodyPartsColliders[i].attachedRigidbody.isKinematic = true;
             }
 
-            for (int i = 0; i < ragdoll_Data.arrBodyParts.Length; i++)
+            for (int i = 0; i < ragdoll_Data.arrBodyPartsColliders.Length; i++)
             {
-                var triggerDetector = ragdoll_Data.arrBodyParts[i].GetComponent<TriggerDetector>();
-                ragdoll_Data.arrBodyParts[i].attachedRigidbody.MovePosition(triggerDetector.lastPosition);
-                ragdoll_Data.arrBodyParts[i].attachedRigidbody.MoveRotation(triggerDetector.lastRotation);
-                ragdoll_Data.arrBodyParts[i].attachedRigidbody.isKinematic = false;
-                ragdoll_Data.arrBodyParts[i].attachedRigidbody.velocity = Vector3.zero;
+                var triggerDetector = ragdoll_Data.arrBodyPartsColliders[i].GetComponent<TriggerDetector>();
+                ragdoll_Data.arrBodyPartsColliders[i].attachedRigidbody.MovePosition(triggerDetector.lastPosition);
+                ragdoll_Data.arrBodyPartsColliders[i].attachedRigidbody.MoveRotation(triggerDetector.lastRotation);
+                ragdoll_Data.arrBodyPartsColliders[i].attachedRigidbody.isKinematic = false;
+                ragdoll_Data.arrBodyPartsColliders[i].attachedRigidbody.velocity = Vector3.zero;
+                ragdoll_Data.arrBodyPartsColliders[i].attachedRigidbody.useGravity = true;   /////////////?????????????????????????WORTH IT?
             }
 
-            for (int i = 0; i < ragdoll_Data.arrBodyParts.Length; i++)
+            for (int i = 0; i < ragdoll_Data.arrBodyPartsColliders.Length; i++)
             {
-                ragdoll_Data.arrBodyParts[i].attachedRigidbody.isKinematic = false;
+                ragdoll_Data.arrBodyPartsColliders[i].attachedRigidbody.isKinematic = false;
             }
 
             ragdoll_Data.ClearExistingVelocity();
@@ -171,11 +173,11 @@ namespace My_MemoPlatformer
 
         private Collider GetBodyPart(string name)
         {
-            for (int i = 0; i < ragdoll_Data.arrBodyParts.Length; i++)
+            for (int i = 0; i < ragdoll_Data.arrBodyPartsColliders.Length; i++)
             {
-                if (ragdoll_Data.arrBodyParts[i].name.Contains(name))
+                if (ragdoll_Data.arrBodyPartsColliders[i].name.Contains(name))
                 {
-                    return ragdoll_Data.arrBodyParts[i];
+                    return ragdoll_Data.arrBodyPartsColliders[i];
                 }
             }
 
@@ -220,9 +222,9 @@ namespace My_MemoPlatformer
 
         void ClearExistingVelocity()
         {
-            for (int i = 0; i < ragdoll_Data.arrBodyParts.Length; i++)
+            for (int i = 0; i < ragdoll_Data.arrBodyPartsColliders.Length; i++)
             {
-                ragdoll_Data.arrBodyParts[i].attachedRigidbody.velocity = Vector3.zero;
+                ragdoll_Data.arrBodyPartsColliders[i].attachedRigidbody.velocity = Vector3.zero;
             }
         }
     }

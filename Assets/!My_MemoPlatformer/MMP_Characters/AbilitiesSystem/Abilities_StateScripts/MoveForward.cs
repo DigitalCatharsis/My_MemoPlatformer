@@ -107,8 +107,6 @@ namespace My_MemoPlatformer
                     ControlledMove(characterState.characterControl, stateInfo);
                 }
             }
-
-            //Debug.Log($"<color=red>{IsBlocked(characterState.characterControl)}</color>");
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

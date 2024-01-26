@@ -29,9 +29,18 @@ namespace My_MemoPlatformer
             //Spheres
             _boxCollider_Data.isUpdatingSpheres = false;
 
-            Debug.Log("Updating Size");
+            if (DebugContainer_Data.Instance.debug_Colliders)
+            {
+                Debug.Log("Updating Size");
+            }
+
             UpdateBoxCollider_Size();
-            Debug.Log("Updating Center");
+
+            if (DebugContainer_Data.Instance.debug_Colliders)
+            {
+                Debug.Log("Updating Center");
+            }
+
             UpdateBoxCollider_Center();
 
             if (_boxCollider_Data.isUpdatingSpheres)
@@ -69,7 +78,7 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (Vector3.SqrMagnitude(Control.boxCollider.size - _boxCollider_Data.targetSize) > 0.00001f)
+            if (Vector3.SqrMagnitude(Control.boxCollider.size - _boxCollider_Data.targetSize) > 0.00001f || Vector3.SqrMagnitude(Control.boxCollider.size - _boxCollider_Data.targetSize) < 0.00001f)
             {
                 if (DebugContainer_Data.Instance.debug_Colliders)
                 {
@@ -78,7 +87,7 @@ namespace My_MemoPlatformer
 
                 Control.boxCollider.size = Vector3.Lerp(
                     Control.boxCollider.size,
-                    _boxCollider_Data.targetSize, 
+                    _boxCollider_Data.targetSize,
                     Time.deltaTime * _boxCollider_Data.size_Update_Speed);
 
                 _boxCollider_Data.isUpdatingSpheres = true;
@@ -92,7 +101,7 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (Vector3.SqrMagnitude(Control.boxCollider.center - _boxCollider_Data.targetCenter) > 0.0001f)
+            if (Vector3.SqrMagnitude(Control.boxCollider.center - _boxCollider_Data.targetCenter) > 0.00001f || Vector3.SqrMagnitude(Control.boxCollider.center - _boxCollider_Data.targetCenter) < 0.00001f)
             {
                 if (DebugContainer_Data.Instance.debug_Colliders)
                 {

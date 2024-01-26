@@ -21,7 +21,11 @@ namespace My_MemoPlatformer
 
         private GameObject[] _frontSpheresArray;
 
-        private float _dirBlock;
+        [Header("Setup blocking distance")]
+        [Space(10)]
+        [SerializeField] private float _frontBlocking_Distance;
+        [SerializeField] private float _downBlocking_Distance;
+        [SerializeField] private float _upBlocking_Distance;
 
         private void Start()
         {
@@ -29,6 +33,11 @@ namespace My_MemoPlatformer
             {
                 frontBlockingDictionaryCount = 0,
                 upBlockingDictionaryCount = 0,
+
+                frontBlocking_Distance = _frontBlocking_Distance,
+                downBlocking_Distance = _downBlocking_Distance,
+                upBlocking_Distance = _upBlocking_Distance,
+
                 ClearFrontBlockingObjDic = ClearFrontBlockingObjDictionary,
                 LeftSideBlocked = LeftSideIsBlocked,
                 RightSideBLocked = RightSideIsBlocked,
@@ -132,8 +141,8 @@ namespace My_MemoPlatformer
                     var attackCondition_Info = new AttackCondition();
                     attackCondition_Info.CopyInfo(control.DAMAGE_DATA.airStompAttack, base.Control);
 
-                    var index = Random.Range(0, control.RAGDOLL_DATA.arrBodyParts.Length);
-                    var randomPart = control.RAGDOLL_DATA.arrBodyParts[index].GetComponent<TriggerDetector>();
+                    var index = Random.Range(0, control.RAGDOLL_DATA.arrBodyPartsColliders.Length);
+                    var randomPart = control.RAGDOLL_DATA.arrBodyPartsColliders[index].GetComponent<TriggerDetector>();
 
                     control.DAMAGE_DATA.damageTaken = new DamageTaken(
                         attacker: base.Control,
@@ -184,7 +193,7 @@ namespace My_MemoPlatformer
             for (int i = 0; i < _frontSpheresArray.Length; i++)
             {
                 var blockingObj = CollisionDetection.GetCollidingObject(
-                    Control, _frontSpheresArray[i], this.transform.forward * _dirBlock,
+                    Control, _frontSpheresArray[i], this.transform.forward * blockingObj_Data.frontBlocking_Distance,
                     Control.animationProgress.latestMoveForwardScript.blockDistance,
                     ref Control.BLOCKING_OBJ_DATA.raycastContactPoint);
 
@@ -203,14 +212,14 @@ namespace My_MemoPlatformer
             if (!Control.animationProgress.IsForwardReversed())
             {
                 _frontSpheresArray = Control.COLLISION_SPHERE_DATA.frontSpheres;
-                _dirBlock = 1f;
+                blockingObj_Data.frontBlocking_Distance = _frontBlocking_Distance;
 
                 RemoveSpheresInArrayFromDictionary(Control.COLLISION_SPHERE_DATA.backSpheres, _frontBlockingObjects_dictionary);
             }
             else
             {
                 _frontSpheresArray = Control.COLLISION_SPHERE_DATA.backSpheres;
-                _dirBlock = -1f;
+                blockingObj_Data.frontBlocking_Distance = -_frontBlocking_Distance;
 
                 RemoveSpheresInArrayFromDictionary(Control.COLLISION_SPHERE_DATA.frontSpheres, _frontBlockingObjects_dictionary);
             }
@@ -231,7 +240,7 @@ namespace My_MemoPlatformer
         {
             foreach (var sphere in Control.COLLISION_SPHERE_DATA.bottomSpheres)
             {
-                GameObject blockingObj = CollisionDetection.GetCollidingObject(Control, sphere, Vector3.down, 0.1f, ref Control.BLOCKING_OBJ_DATA.raycastContactPoint);
+                GameObject blockingObj = CollisionDetection.GetCollidingObject(Control, sphere, Vector3.down, blockingObj_Data.downBlocking_Distance, ref Control.BLOCKING_OBJ_DATA.raycastContactPoint);
 
                 if (blockingObj != null)
                 {
@@ -248,7 +257,7 @@ namespace My_MemoPlatformer
         {
             foreach (var o in Control.COLLISION_SPHERE_DATA.upSpheres)
             {
-                var blockingObj = CollisionDetection.GetCollidingObject(Control, o, this.transform.up, 0.3f, ref Control.BLOCKING_OBJ_DATA.raycastContactPoint);
+                var blockingObj = CollisionDetection.GetCollidingObject(Control, o, this.transform.up, blockingObj_Data.upBlocking_Distance, ref Control.BLOCKING_OBJ_DATA.raycastContactPoint);
 
                 if (blockingObj != null)
                 {

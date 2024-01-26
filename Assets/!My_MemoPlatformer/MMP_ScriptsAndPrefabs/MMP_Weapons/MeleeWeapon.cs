@@ -138,9 +138,9 @@ namespace My_MemoPlatformer
 
         public void RemoveWeaponFromDictionary(CharacterControl c)
         {
-            for (int i = 0; i < c.RAGDOLL_DATA.arrBodyParts.Length; i++)
+            for (int i = 0; i < c.RAGDOLL_DATA.arrBodyPartsColliders.Length; i++)
             {
-                var t = c.RAGDOLL_DATA.arrBodyParts[i].GetComponent<TriggerDetector>();
+                var t = c.RAGDOLL_DATA.arrBodyPartsColliders[i].GetComponent<TriggerDetector>();
 
                 if (t != null)
                 {

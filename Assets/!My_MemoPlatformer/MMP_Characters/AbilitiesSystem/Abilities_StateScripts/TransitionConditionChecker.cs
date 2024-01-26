@@ -10,9 +10,9 @@ namespace My_MemoPlatformer
     {
         public static bool MakeTransition(CharacterControl control, List<TransitionConditionType> transitionConditions)
         {
-            foreach (var c in transitionConditions)
+            foreach (var transitionCondition in transitionConditions)
             {
-                switch (c)
+                switch (transitionCondition)
                 {
                     case TransitionConditionType.UP:
                         {
@@ -131,10 +131,15 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.BLOCKED_BY_WALL:
                         {
+
                             for (int i = 0; i < control.COLLISION_SPHERE_DATA.frontOverlapCheckers.Length; i++)
                             {
                                 if (!control.COLLISION_SPHERE_DATA.frontOverlapCheckers[i].isObjOverlapping)
                                 {
+                                    //Debug.Log($"<color=Magenta>Current State: {control.ANIMATION_DATA.currentState}</color>");
+
+                                    //Debug.Log($"<color=red>{control.COLLISION_SPHERE_DATA.frontOverlapCheckers[i].name}_{i} is NOT overlapping </color>");
+
                                     return false;
                                 }
                             }
@@ -142,30 +147,9 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.NOT_BLOCKED_BY_WALL:
                         {
-                            #region debug
-                            if (DebugContainer_Data.Instance.debug_WallOverlappingStatus)
-                            {
-                                var SI = control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
-
-                                for (int i = 0; i < (int)AbilitiesList.COUNT; i++)
-                                {
-                                    if (SI.shortNameHash == HashManager.Instance.arrAllAbilitiesList[i])
-                                    {
-                                        var ability = (AbilitiesList)i;
-                                        Debug.Log($"<color=magenta>{ability}</color>");
-                                    }
-                                }
-
-                                Debug.Log("<color=Cyan>Some of current abilities are:</color>");
-
-                                foreach (var ability in control.ANIMATION_DATA.currentRunningAbilities_Dictionary)
-                                {
-                                    Debug.Log($"<color=Cyan>{ability}</color>");
-                                }
-                            }
-
-                            #endregion
                             bool AllIsOverlapping = true;
+
+                            //Debug.Log($"<color=Magenta>Current State: {control.ANIMATION_DATA.currentState}</color>");
 
                             for (int i = 0; i < control.COLLISION_SPHERE_DATA.frontOverlapCheckers.Length; i++)
                             {

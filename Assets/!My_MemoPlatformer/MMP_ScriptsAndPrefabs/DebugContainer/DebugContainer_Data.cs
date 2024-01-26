@@ -21,6 +21,8 @@ namespace My_MemoPlatformer
         public bool debug_AI;
         public bool debug_HashManager;
         public bool debug_Colliders;
+        public bool debug_Ledges;
+
 
         public bool displaySpheresAndColliders;
         public bool displayLedgeCheckers;

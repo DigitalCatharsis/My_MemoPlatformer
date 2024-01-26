@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace My_MemoPlatformer
 {
@@ -39,12 +40,28 @@ namespace My_MemoPlatformer
 
             foreach (var collider in arrColliders)
             {
-                if (CharacterManager.Instance.GetCharacter(collider.transform.root.gameObject) == null)  //non character
+                if (!_control.JUMP_DATA.checkWallBlock)
+                {
+                    Debug.Break();
+                }
+                if (DebugContainer_Data.Instance.debug_Colliders)
+                {
+                    OnDrawGizmos();
+                }
+
+                if (CharacterManager.Instance.GetCharacter(collider.transform.root.gameObject) == null)  //Collided object IS NOT character
                 {
                     return true;
                 }
             }
             return false;
+        }
+
+        private void OnDrawGizmos()
+        {
+
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(this.transform.position, 0.13f);
         }
     }
 }

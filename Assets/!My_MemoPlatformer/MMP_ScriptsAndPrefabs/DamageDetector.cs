@@ -148,14 +148,14 @@ namespace My_MemoPlatformer
 
         private bool CheckForLethalRangeAndCreateDamageTaken(AttackCondition attackCondition_info)
         {
-            for (int i = 0; i < Control.RAGDOLL_DATA.arrBodyParts.Length; i++)
+            for (int i = 0; i < Control.RAGDOLL_DATA.arrBodyPartsColliders.Length; i++)
             {
-                var dist = Vector3.SqrMagnitude(Control.RAGDOLL_DATA.arrBodyParts[i].transform.position - attackCondition_info.attacker.transform.position);
+                var dist = Vector3.SqrMagnitude(Control.RAGDOLL_DATA.arrBodyPartsColliders[i].transform.position - attackCondition_info.attacker.transform.position);
 
                 if (dist <= attackCondition_info.lethalRange)
                 {
-                    int index = Random.Range(0, Control.RAGDOLL_DATA.arrBodyParts.Length);
-                    var triggerDetector = Control.RAGDOLL_DATA.arrBodyParts[index].GetComponent<TriggerDetector>();
+                    int index = Random.Range(0, Control.RAGDOLL_DATA.arrBodyPartsColliders.Length);
+                    var triggerDetector = Control.RAGDOLL_DATA.arrBodyPartsColliders[index].GetComponent<TriggerDetector>();
 
                     _damage_Data.damageTaken = new DamageTaken(
                         attackCondition_info.attacker,

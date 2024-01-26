@@ -27,6 +27,7 @@ namespace My_MemoPlatformer
         [SerializeField] private bool _debug_HashManager;
         [SerializeField] private bool _debug_AI;
         [SerializeField] private bool _debug_Colliders;
+        [SerializeField] private bool _debug_Ledges;
 
         [Space(10)]
         [SerializeField] private bool _displaySpheresAndColliders;
@@ -117,6 +118,7 @@ namespace My_MemoPlatformer
             DebugContainer_Data.Instance.debug_HashManager = _debug_HashManager;
             DebugContainer_Data.Instance.debug_AI = _debug_AI;
             DebugContainer_Data.Instance.debug_Colliders = _debug_Colliders;
+            DebugContainer_Data.Instance.debug_Ledges = _debug_Ledges;
 
             DebugContainer_Data.Instance.displaySpheresAndColliders = _displaySpheresAndColliders;
 
@@ -170,8 +172,8 @@ namespace My_MemoPlatformer
 
                 foreach (var ledgeChecker in listOfLedgeCheckers)
                 {
-                    ledgeChecker.collider1.gameObject.GetComponent<MeshRenderer>().enabled = enabled;
-                    ledgeChecker.collider2.gameObject.GetComponent<MeshRenderer>().enabled = enabled;
+                    ledgeChecker.colliderBot.gameObject.GetComponent<MeshRenderer>().enabled = enabled;
+                    ledgeChecker.colliderTop.gameObject.GetComponent<MeshRenderer>().enabled = enabled;
                 }
             }
         }

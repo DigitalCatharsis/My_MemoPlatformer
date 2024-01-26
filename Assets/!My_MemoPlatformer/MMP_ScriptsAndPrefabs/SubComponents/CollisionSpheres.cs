@@ -103,7 +103,7 @@ namespace My_MemoPlatformer
 
         private void Reposition_FrontSpheres()
         {
-            if(DebugContainer_Data.Instance.debug_Colliders)
+            if (DebugContainer_Data.Instance.debug_Colliders)
             {
                 Debug.Log("Repositioning Front Spheres");
             }
@@ -128,27 +128,13 @@ namespace My_MemoPlatformer
         }
         private void Reposition_BackSpheres()
         {
-            if (DebugContainer_Data.Instance.debug_Colliders)
+
+            for (int i = 0; i < collisionSpheres_Data.backSpheres.Length; i++)
             {
-                Debug.Log("Repositioning Back Spheres");
-            }
-
-            float bottom = Control.boxCollider.bounds.center.y - (Control.boxCollider.bounds.size.y / 2f); // в центре внизу. 
-            float top = Control.boxCollider.bounds.center.y + (Control.boxCollider.bounds.size.y / 2f); // в центре вверху.
-            float back = Control.boxCollider.bounds.center.z - (Control.boxCollider.bounds.size.z / 2f); // в центре спереди.
-
-            collisionSpheres_Data.backSpheres[0].transform.localPosition =
-                new Vector3(0f, bottom + 0.05f, back) - Control.transform.position;
-
-            collisionSpheres_Data.backSpheres[1].transform.localPosition =
-                new Vector3(0f, top, back) - Control.transform.position;
-
-            float interval = (top - bottom + 0.05f) / 9;
-
-            for (int i = 2; i < collisionSpheres_Data.backSpheres.Length; i++)
-            {
-                collisionSpheres_Data.backSpheres[i].transform.localPosition =
-                    new Vector3(0f, bottom + (interval * (i - 1)), back) - Control.transform.position;
+                collisionSpheres_Data.backSpheres[i].transform.localPosition = new Vector3(
+                    0,
+                    collisionSpheres_Data.frontSpheres[i].transform.localPosition.y,
+                    collisionSpheres_Data.frontSpheres[i].transform.localPosition.z * -1);
             }
         }
 
@@ -161,22 +147,22 @@ namespace My_MemoPlatformer
 
             var bottom = Control.boxCollider.bounds.center.y - (Control.boxCollider.bounds.size.y / 2f);
             var front = Control.boxCollider.bounds.center.z + (Control.boxCollider.bounds.size.z / 2f);
-            var back = Control.boxCollider.bounds.center.z - (Control.boxCollider.bounds.size.z / 2f);
 
-            collisionSpheres_Data.bottomSpheres[0].transform.localPosition =
-                new Vector3(0f, bottom, back) - Control.transform.position;
+            var front_BottomSphere = new Vector3(0f, bottom, front) - Control.transform.position;
+            collisionSpheres_Data.bottomSpheres[1].transform.localPosition = front_BottomSphere;
 
-            collisionSpheres_Data.bottomSpheres[1].transform.localPosition =
-                new Vector3(0f, bottom, front) - Control.transform.position;
+            var back_BottomSphere = new Vector3(0, front_BottomSphere.y, -front_BottomSphere.z);
+            collisionSpheres_Data.bottomSpheres[0].transform.localPosition = back_BottomSphere;
 
-            float interval = (front - back) / 4;
+            float interval = (front_BottomSphere.z - back_BottomSphere.z) / 4;
 
             for (int i = 2; i < collisionSpheres_Data.bottomSpheres.Length; i++)
             {
                 collisionSpheres_Data.bottomSpheres[i].transform.localPosition =
-                    new Vector3(0f, bottom, back + (interval * (i - 1))) - Control.transform.position;
+                    new Vector3(0f, front_BottomSphere.y, back_BottomSphere.z + (interval * (i - 1)));
             }
         }
+
         private void Reposition_UpSpheres()
         {
             if (DebugContainer_Data.Instance.debug_Colliders)
@@ -186,20 +172,19 @@ namespace My_MemoPlatformer
 
             var top = Control.boxCollider.bounds.center.y + (Control.boxCollider.bounds.size.y / 2f);
             var front = Control.boxCollider.bounds.center.z + (Control.boxCollider.bounds.size.z / 2f);
-            var back = Control.boxCollider.bounds.center.z - (Control.boxCollider.bounds.size.z / 2f);
 
-            collisionSpheres_Data.upSpheres[0].transform.localPosition =
-                new Vector3(0f, top, back) - Control.transform.position;
+            var front_UpSphere = new Vector3(0f, top, front) - Control.transform.position;
+            collisionSpheres_Data.upSpheres[1].transform.localPosition = front_UpSphere;
 
-            collisionSpheres_Data.upSpheres[1].transform.localPosition =
-                new Vector3(0f, top, front) - Control.transform.position;
+            var back_UpSphere = new Vector3(0, front_UpSphere.y, -front_UpSphere.z);
+            collisionSpheres_Data.upSpheres[0].transform.localPosition = back_UpSphere;
 
-            float interval = (front - back) / 4;
+            float interval = (front_UpSphere.z - back_UpSphere.z) / 4;
 
             for (int i = 2; i < collisionSpheres_Data.upSpheres.Length; i++)
             {
                 collisionSpheres_Data.upSpheres[i].transform.localPosition =
-                    new Vector3(0f, top, back + (interval * (i - 1))) - Control.transform.position;
+                    new Vector3(0f, front_UpSphere.y, back_UpSphere.z + (interval * (i - 1)));
             }
         }
 

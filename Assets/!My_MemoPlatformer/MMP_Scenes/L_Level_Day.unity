@@ -1327,8 +1327,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497410157}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.371, z: 2.11}
-  m_LocalScale: {x: 0.7, y: 1.5189307, z: 3.6237812}
+  m_LocalPosition: {x: 0, y: -1.371, z: 2.53}
+  m_LocalScale: {x: 0.7, y: 1.5189307, z: 8.463703}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1153169849}
@@ -5349,7 +5349,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408238357}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.03281486, y: -0.34, z: -8.77}
+  m_LocalPosition: {x: -0.03281486, y: -0.34, z: -7.91}
   m_LocalScale: {x: 0.7, y: 0.23702392, z: 8.585626}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5918,11 +5918,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3046520408400585082, guid: adff31e199afa174c9c544399732b118, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.09
+      value: -3.13
       objectReference: {fileID: 0}
     - target: {fileID: 3046520408400585082, guid: adff31e199afa174c9c544399732b118, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.26
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 3046520408400585082, guid: adff31e199afa174c9c544399732b118, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8876,6 +8876,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6805351866285292383, guid: eadd8c2cdfa043c42bcc618639243a87, type: 3}
+      propertyPath: _debug_Ledges
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6805351866285292383, guid: eadd8c2cdfa043c42bcc618639243a87, type: 3}
       propertyPath: _debug_Ragdoll
       value: 0
       objectReference: {fileID: 0}
@@ -8889,11 +8893,11 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: c1fb774b741691c46a50df5ec68d5b80, type: 2}
     - target: {fileID: 6805351866285292383, guid: eadd8c2cdfa043c42bcc618639243a87, type: 3}
       propertyPath: _debug_Colliders
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6805351866285292383, guid: eadd8c2cdfa043c42bcc618639243a87, type: 3}
       propertyPath: _debug_Instakill
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6805351866285292383, guid: eadd8c2cdfa043c42bcc618639243a87, type: 3}
       propertyPath: _debug_MoveForward

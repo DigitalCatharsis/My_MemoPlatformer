@@ -52,9 +52,9 @@ namespace My_MemoPlatformer
                 return null;
             }
 
-            for (int i = 0; i < control.RAGDOLL_DATA.arrBodyParts.Length; i++) //not self
+            for (int i = 0; i < control.RAGDOLL_DATA.arrBodyPartsColliders.Length; i++) //not self
             {
-                if (control.RAGDOLL_DATA.arrBodyParts[i].Equals(hittedCollider))
+                if (control.RAGDOLL_DATA.arrBodyPartsColliders[i].Equals(hittedCollider))
                 {
                     return null;
                 }

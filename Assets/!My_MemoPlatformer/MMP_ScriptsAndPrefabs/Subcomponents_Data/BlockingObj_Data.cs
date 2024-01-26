@@ -11,6 +11,10 @@ namespace My_MemoPlatformer
         public int frontBlockingDictionaryCount;
         public int upBlockingDictionaryCount;
 
+        public float frontBlocking_Distance;
+        public float downBlocking_Distance;
+        public float upBlocking_Distance;
+
         public delegate void DoSomething();
         public delegate bool ReturnBool();
         public delegate List<GameObject> ReturnGameOjbList();

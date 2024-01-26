@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace My_MemoPlatformer
 {
@@ -12,13 +14,14 @@ namespace My_MemoPlatformer
 
         [Header("Ledge Setup")]
         [SerializeField] private Vector3 ledgeCalibration = new Vector3();  //diffirence (offset) when we change character. (Bones changing)
-        public LedgeCollider collider1; //bottom
-        public LedgeCollider collider2; //top
+        public LedgeCollider colliderTop; //top
+        public LedgeCollider colliderBot; //bottom
 
         private void Start()
         {
             ledgeGrab_Data = new LedgeGrab_Data
             {
+                upBlockingObjects = new List<Collider>(),
                 isGrabbingLedge = false,
                 DisableLedgeColliders = DisableLedgeColliders,
             };
@@ -37,13 +40,50 @@ namespace My_MemoPlatformer
 
             if (IsLedgeGrabCondition())
             {
-                ProcessLedgeGrab();
+                if (!Control.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))  //!grounded
+                {
+                    foreach (var collidedObject in colliderBot.collidedObjects)
+                    {
+
+                        var boxCollider = collidedObject.GetComponent<BoxCollider>();
+
+                        if (boxCollider == null)
+                        {
+                            break;
+                        }
+
+                        if (ledgeGrab_Data.isGrabbingLedge)   //if already grabbing
+                        {
+                            break;
+                        }
+                        if (!colliderTop.collidedObjects.Contains(collidedObject))
+                        {
+
+                            ProcessPositionOffset(collidedObject, boxCollider);
+                            break;
+
+                        }
+                        else
+                        {
+                            ledgeGrab_Data.isGrabbingLedge = false;
+                        }
+                    }
+                }
+                else
+                {
+                    ledgeGrab_Data.isGrabbingLedge = false;
+                }
+
+                if (colliderBot.collidedObjects.Count == 0)
+                {
+                    ledgeGrab_Data.isGrabbingLedge = false;
+                }
             }
         }
 
         private void OnBeingGrounded()
         {
-            if (Control.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
+            if (!Control.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
             {
                 if (Control.RIGID_BODY.useGravity)
                 {
@@ -58,7 +98,6 @@ namespace My_MemoPlatformer
             {
                 return false;
             }
-
             var info = Control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
 
             if (!HashManager.Instance.IsStateInCurrent_StateEnum<Ledge_Trigger_States>(Control, info.shortNameHash))
@@ -66,7 +105,7 @@ namespace My_MemoPlatformer
                 return false;
             }
 
-            if (CheckUpBlockingForLedgeGrabCondition())
+            if (IsUpBlocking())
             {
                 return false;
             }
@@ -76,75 +115,87 @@ namespace My_MemoPlatformer
             }
         }
 
-        private bool CheckUpBlockingForLedgeGrabCondition()
+
+        private bool IsIn_LedgeTrigger_State()
         {
-            var start = Control.COLLISION_SPHERE_DATA.upSpheres[4];
+            var info = Control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
 
-            //draw DebugLine
-            Debug.DrawRay(start.transform.position, Vector3.up, Color.red);
-
-            //check collision
-            RaycastHit hit;
-            if (Physics.Raycast(start.transform.position, Vector3.up, out hit, 1))
+            if (HashManager.Instance.IsStateInCurrent_StateEnum<Ledge_Trigger_States>(Control, info.shortNameHash))
             {
-                if (!Ledge.IsLedgeCollider(hit.collider.gameObject))
-                {
-                    Debug.Log(hit.collider.transform.gameObject.ToString());
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-
-            Debug.Log("nothing");
-            return false;
-        }
-
-        private void ProcessLedgeGrab()
-        {
-            if (!Control.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
-            {
-                foreach (var collidedObject in collider1.collidedObjects)
-                {
-                    if (!collider2.collidedObjects.Contains(collidedObject))
-                    {
-                        if (OffsetPosition(collidedObject))
-                        {
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        ledgeGrab_Data.isGrabbingLedge = false;
-                    }
-                }
+                return true;
             }
             else
             {
-                ledgeGrab_Data.isGrabbingLedge = false;
-            }
-
-            if (collider1.collidedObjects.Count == 0)
-            {
-                ledgeGrab_Data.isGrabbingLedge = false;
+                return false;
             }
         }
-        private bool OffsetPosition(GameObject platform)
+        private bool IsUpBlocking()
         {
-            //TODO: раздробить
-            var boxCollider = platform.GetComponent<BoxCollider>();
+            var startingPosition = Control.COLLISION_SPHERE_DATA.upSpheres[4];
+            ledgeGrab_Data.upBlockingObjects.Clear();
+            ledgeGrab_Data.upBlockingObjects.AddRange(Physics.OverlapSphere(
+                new Vector3(startingPosition.transform.position.x,
+                startingPosition.transform.position.y + Control.BLOCKING_OBJ_DATA.upBlocking_Distance,
+                startingPosition.transform.position.z)
+                , 0.13f)); //less than colliderEdge radius
 
-            if (boxCollider == null)
+            if (ledgeGrab_Data.upBlockingObjects.Count > 0)
             {
-                return false;
+                foreach (var collider in ledgeGrab_Data.upBlockingObjects)
+                {
+                    Debug.Log(collider.gameObject.name);
+                    if (!Ledge.IsLedgeCollider(collider.gameObject)
+                        && collider.transform.root.gameObject != Control.gameObject
+                        && !Control.RAGDOLL_DATA.arrBodyPartsColliders.Contains<Collider>(collider)
+                        )
+                    {
+
+
+                        ledgeGrab_Data.upBlockingObjects.Clear();
+                        Debug.Log("true");
+                        return true;
+                    }
+                }
             }
 
-            if (ledgeGrab_Data.isGrabbingLedge)   //if already grabbing
-            {
-                return false;
-            }
+            Debug.Log("false2");
+            return false;
+
+            //draw DebugLine
+            //Debug.DrawRay(start.transform.position, Vector3.up, Color.red);
+
+            ////check collision
+            //RaycastHit hit;
+            //if (Physics.Raycast(start.transform.position, Vector3.up, out hit, 1, layerMask: 13))   //13 visual no Raycast
+            //{
+            //    if (!Ledge.IsLedgeCollider(hit.collider.gameObject))
+            //    {
+            //        if (this.transform.root.Find(hit.collider.gameObject.name) != null)
+            //        {
+            //            return true;
+            //        }
+
+            //        if (DebugContainer_Data.Instance.debug_Ledges)
+            //        {
+            //            Debug.Log(hit.collider.transform.gameObject.ToString());
+            //        }
+
+            //            return false;
+            //        //Debug.Break();
+            //    }
+            //    else
+            //    {
+            //        Debug.Log(hit.collider.gameObject.ToString());
+            //        return false;
+            //    }
+            //}
+
+            ////Debug.Log("nothing");
+            //return false;
+        }
+        private void ProcessPositionOffset(GameObject platform, BoxCollider boxCollider)
+        {
+            //TODO: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
             ledgeGrab_Data.isGrabbingLedge = true;
             Control.RIGID_BODY.useGravity = false;
@@ -161,7 +212,7 @@ namespace My_MemoPlatformer
                 z = platform.transform.position.z + (boxCollider.gameObject.transform.lossyScale.z / 2f);
             }
 
-            Vector3 platformEdge = new Vector3(0f, y, z);
+            var platformEdge = new Vector3(0f, y, z);
 
             if (Control.ROTATION_DATA.IsFacingForward())
             {
@@ -171,14 +222,12 @@ namespace My_MemoPlatformer
             {
                 Control.RIGID_BODY.MovePosition(platformEdge + new Vector3(0f, ledgeCalibration.y, -ledgeCalibration.z));
             }
-
-            return true;
         }
 
         public void DisableLedgeColliders()
         {
-            collider1.GetComponent<BoxCollider>().enabled = false;
-            collider2.GetComponent<BoxCollider>().enabled = false;
+            colliderBot.GetComponent<BoxCollider>().enabled = false;
+            colliderTop.GetComponent<BoxCollider>().enabled = false;
         }
     }
 }

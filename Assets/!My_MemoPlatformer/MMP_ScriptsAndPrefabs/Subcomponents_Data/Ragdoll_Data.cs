@@ -7,7 +7,7 @@ namespace My_MemoPlatformer
     public class Ragdoll_Data
     {
         public bool ragdollTriggered;
-        public Collider[] arrBodyParts;
+        public Collider[] arrBodyPartsColliders;
         public FlyingRagdollData flyingRagdollData;
 
         public delegate Collider GetCollider(string name);
