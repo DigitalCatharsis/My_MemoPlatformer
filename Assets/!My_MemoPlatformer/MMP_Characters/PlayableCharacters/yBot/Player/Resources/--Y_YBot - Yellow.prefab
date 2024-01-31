@@ -89,12 +89,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1260156243}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.309, z: 0.231}
-  m_LocalScale: {x: 2, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5048502664790285771}
   - {fileID: 1530509413396575398}
+  - {fileID: 4753009003827058637}
   m_Father: {fileID: 2838286670764771645}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -120,9 +121,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ledgeGrab_Data:
     isGrabbingLedge: 0
+    upBlockingObjects: []
   ledgeCalibration: {x: 0, y: -2.3, z: -0.1}
   colliderTop: {fileID: 4451637664484933198}
   colliderBot: {fileID: 3335105432292074732}
+  upBlockChecker: {fileID: 3404098166471016861}
 --- !u!1 &60663959005926749
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,7 +204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ragdoll_Data:
     ragdollTriggered: 0
-    arrBodyParts: []
+    arrBodyPartsColliders: []
     flyingRagdollData:
       isTriggered: 0
       attacker: {fileID: 0}
@@ -423,7 +426,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 2
   m_CollisionDetection: 2
 --- !u!144 &6594525562613736973
 CharacterJoint:
@@ -820,7 +823,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 2
   m_CollisionDetection: 2
 --- !u!144 &7821167913546809637
 CharacterJoint:
@@ -1044,7 +1047,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 2
   m_CollisionDetection: 2
 --- !u!144 &547816563144958133
 CharacterJoint:
@@ -1175,7 +1178,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 2
   m_CollisionDetection: 2
 --- !u!144 &3132865352065649683
 CharacterJoint:
@@ -1452,7 +1455,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 2
   m_CollisionDetection: 2
 --- !u!144 &8919960499466995103
 CharacterJoint:
@@ -1640,6 +1643,9 @@ MonoBehaviour:
   aiProgress: {fileID: 0}
   aiController: {fileID: 0}
   boxCollider: {fileID: 0}
+  boxColliderBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   navMeshObstacle: {fileID: 0}
   playableCharacterType: 1
   skinnedMeshAnimator: {fileID: 2428127011527154921}
@@ -1688,7 +1694,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 114
   m_CollisionDetection: 2
 --- !u!114 &1747402107
 MonoBehaviour:
@@ -1706,6 +1712,7 @@ MonoBehaviour:
   poolObjectList: 
   latestMoveForwardScript: {fileID: 0}
   latestMoveUpScript: {fileID: 0}
+  latestUpdateBoxCollider: {fileID: 0}
   isIgnoreCharacterTime: 0
   lockTransition: 0
   holdingWeapon: {fileID: 0}
@@ -1820,7 +1827,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 2
   m_CollisionDetection: 2
 --- !u!144 &8398125883435872098
 CharacterJoint:
@@ -1891,6 +1898,111 @@ CapsuleCollider:
   m_Height: 0.4
   m_Direction: 2
   m_Center: {x: 0, y: -0.06, z: 0.06}
+--- !u!1 &3404098166471016861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4753009003827058637}
+  - component: {fileID: 7380562134504746961}
+  - component: {fileID: 4393799060532377242}
+  - component: {fileID: 3788960335484008632}
+  m_Layer: 0
+  m_Name: UpBlockChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4753009003827058637
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3404098166471016861}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.391, z: 0.027}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1260156244}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &7380562134504746961
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3404098166471016861}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &4393799060532377242
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3404098166471016861}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &3788960335484008632
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3404098166471016861}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.25
+  m_Center: {x: 0, y: 0.0000076293945, z: 0}
 --- !u!1 &3532776749558174189
 GameObject:
   m_ObjectHideFlags: 0
@@ -1918,9 +2030,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3532776749558174189}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.309, z: 0.23099999}
+  m_LocalScale: {x: 2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1260156244}
@@ -1975,7 +2087,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3532776749558174189}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2337,7 +2449,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 2
   m_CollisionDetection: 2
 --- !u!144 &604496895596124170
 CharacterJoint:
@@ -2546,7 +2658,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 2
   m_CollisionDetection: 2
 --- !u!144 &5434205163927889262
 CharacterJoint:
@@ -2727,10 +2839,10 @@ MonoBehaviour:
     frontBlockingDictionaryCount: 0
     upBlockingDictionaryCount: 0
     frontBlocking_Distance: 0
-    downBlocking_Distance: 0
+    airStompDownBlocking_Distance: 0
     upBlocking_Distance: 0
   _frontBlocking_Distance: 1
-  _downBlocking_Distance: 0.1
+  _airStompDownBlocking_Distance: 0
   _upBlocking_Distance: 0.3
 --- !u!1 &5135971744954625573
 GameObject:
@@ -3149,7 +3261,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 2
   m_CollisionDetection: 2
 --- !u!65 &7117825540649358566
 BoxCollider:
@@ -3287,7 +3399,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 2
   m_CollisionDetection: 2
 --- !u!144 &7954435978596677754
 CharacterJoint:
@@ -3417,9 +3529,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6583600971012616426}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.01, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.511, z: 0.23099999}
+  m_LocalScale: {x: 2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1260156244}
@@ -3474,7 +3586,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6583600971012616426}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -3947,7 +4059,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 2
   m_CollisionDetection: 2
 --- !u!144 &8143940892109588563
 CharacterJoint:
@@ -4209,13 +4321,14 @@ MonoBehaviour:
     frontBlockingDictionaryCount: 0
     upBlockingDictionaryCount: 0
     frontBlocking_Distance: 0
-    downBlocking_Distance: 0
+    airStompDownBlocking_Distance: 0
     upBlocking_Distance: 0
   ledgeGrab_Data:
     isGrabbingLedge: 0
+    upBlockingObjects: []
   ragdoll_Data:
     ragdollTriggered: 0
-    arrBodyParts: []
+    arrBodyPartsColliders: []
     flyingRagdollData:
       isTriggered: 0
       attacker: {fileID: 0}
@@ -4408,7 +4521,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 2
   m_CollisionDetection: 2
 --- !u!144 &8814362097303117797
 CharacterJoint:
@@ -4665,7 +4778,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 2
   m_CollisionDetection: 2
 --- !u!144 &1647237627428464554
 CharacterJoint:
@@ -4828,7 +4941,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 2
   m_CollisionDetection: 2
 --- !u!144 &9165520093812419422
 CharacterJoint:
@@ -5344,7 +5457,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 2
   m_CollisionDetection: 2
 --- !u!144 &2062409849946582295
 CharacterJoint:

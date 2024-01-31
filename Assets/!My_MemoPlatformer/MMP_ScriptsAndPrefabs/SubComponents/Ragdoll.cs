@@ -50,9 +50,11 @@ namespace My_MemoPlatformer
 
             foreach (var collider in colliders)
             {
-                if (collider.gameObject != Control.gameObject)  //not a boxCollider
+                if (collider != Control.boxCollider)  //not a boxCollider
                 {
-                    if (collider.gameObject.GetComponent<LedgeChecker>() == null && collider.gameObject.GetComponent<LedgeCollider>() == null)
+                    if (collider.gameObject.GetComponent<LedgeChecker>() == null 
+                        && collider.gameObject.GetComponent<LedgeCollider>() == null
+                        && collider.gameObject.name != "UpBlockChecker")
                     {
                         //thats means its a ragdoll
                         collider.isTrigger = true;

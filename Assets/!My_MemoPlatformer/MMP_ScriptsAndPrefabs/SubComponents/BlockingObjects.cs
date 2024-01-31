@@ -24,7 +24,7 @@ namespace My_MemoPlatformer
         [Header("Setup blocking distance")]
         [Space(10)]
         [SerializeField] private float _frontBlocking_Distance;
-        [SerializeField] private float _downBlocking_Distance;
+        [SerializeField] private float _airStompDownBlocking_Distance;
         [SerializeField] private float _upBlocking_Distance;
 
         private void Start()
@@ -35,7 +35,7 @@ namespace My_MemoPlatformer
                 upBlockingDictionaryCount = 0,
 
                 frontBlocking_Distance = _frontBlocking_Distance,
-                downBlocking_Distance = _downBlocking_Distance,
+                airStompDownBlocking_Distance = _airStompDownBlocking_Distance,
                 upBlocking_Distance = _upBlocking_Distance,
 
                 ClearFrontBlockingObjDic = ClearFrontBlockingObjDictionary,
@@ -72,7 +72,7 @@ namespace My_MemoPlatformer
             {
                 if (Control.animationProgress.latestMoveUpScript.speed > 0f)
                 {
-                    CheckUpBlocking();
+                    CheckUpBlockingAndAddToDictionary();
                 }
             }
             else
@@ -80,7 +80,7 @@ namespace My_MemoPlatformer
                 //checking while player is jumping
                 if (Control.RIGID_BODY.velocity.y > 0.001f)
                 {
-                    CheckUpBlocking();
+                    CheckUpBlockingAndAddToDictionary();
 
                     foreach (KeyValuePair<GameObject, GameObject> upBlockingObj_Data in _upBlockingObjects)
                     {
@@ -240,7 +240,7 @@ namespace My_MemoPlatformer
         {
             foreach (var sphere in Control.COLLISION_SPHERE_DATA.bottomSpheres)
             {
-                GameObject blockingObj = CollisionDetection.GetCollidingObject(Control, sphere, Vector3.down, blockingObj_Data.downBlocking_Distance, ref Control.BLOCKING_OBJ_DATA.raycastContactPoint);
+                GameObject blockingObj = CollisionDetection.GetCollidingObject(Control, sphere, Vector3.down, blockingObj_Data.airStompDownBlocking_Distance, ref Control.BLOCKING_OBJ_DATA.raycastContactPoint);
 
                 if (blockingObj != null)
                 {
@@ -253,7 +253,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void CheckUpBlocking()
+        private void CheckUpBlockingAndAddToDictionary()
         {
             foreach (var o in Control.COLLISION_SPHERE_DATA.upSpheres)
             {

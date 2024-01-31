@@ -19,8 +19,9 @@ namespace My_MemoPlatformer
             {
                 if (characterState.BlockingObj_Data.upBlockingDictionaryCount == 0)
                 {
-                    characterState.characterControl.transform.
-                        Translate(Vector3.up * speed *
+                    characterState.characterControl.transform.Translate(
+                        Vector3.up *
+                        speed *
                         speedGraph.Evaluate(stateInfo.normalizedTime) *
                         Time.deltaTime);
                 }

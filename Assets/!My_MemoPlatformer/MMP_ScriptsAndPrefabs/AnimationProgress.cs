@@ -10,6 +10,7 @@ namespace My_MemoPlatformer
 
         public MoveForward latestMoveForwardScript;  //latest moveForward script
         public MoveUp latestMoveUpScript;  //latest moveUp script
+        public UpdateBoxCollider latestUpdateBoxCollider;  //latest moveUp script
 
         [Header("GroundMovement")]
         public bool isIgnoreCharacterTime; //slide beyond character (start ignoring character collider)        

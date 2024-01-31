@@ -1,10 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace My_MemoPlatformer
 {
@@ -16,6 +12,7 @@ namespace My_MemoPlatformer
         [SerializeField] private Vector3 ledgeCalibration = new Vector3();  //diffirence (offset) when we change character. (Bones changing)
         public LedgeCollider colliderTop; //top
         public LedgeCollider colliderBot; //bottom
+        public GameObject upBlockChecker; //bottom
 
         private void Start()
         {
@@ -44,7 +41,6 @@ namespace My_MemoPlatformer
                 {
                     foreach (var collidedObject in colliderBot.collidedObjects)
                     {
-
                         var boxCollider = collidedObject.GetComponent<BoxCollider>();
 
                         if (boxCollider == null)
@@ -56,9 +52,9 @@ namespace My_MemoPlatformer
                         {
                             break;
                         }
+
                         if (!colliderTop.collidedObjects.Contains(collidedObject))
                         {
-
                             ProcessPositionOffset(collidedObject, boxCollider);
                             break;
 
@@ -115,29 +111,18 @@ namespace My_MemoPlatformer
             }
         }
 
-
-        private bool IsIn_LedgeTrigger_State()
+        private void OnDrawGizmos()
         {
-            var info = Control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
 
-            if (HashManager.Instance.IsStateInCurrent_StateEnum<Ledge_Trigger_States>(Control, info.shortNameHash))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(upBlockChecker.transform.position, upBlockChecker.GetComponent<SphereCollider>().radius);
         }
+
         private bool IsUpBlocking()
         {
-            var startingPosition = Control.COLLISION_SPHERE_DATA.upSpheres[4];
             ledgeGrab_Data.upBlockingObjects.Clear();
-            ledgeGrab_Data.upBlockingObjects.AddRange(Physics.OverlapSphere(
-                new Vector3(startingPosition.transform.position.x,
-                startingPosition.transform.position.y + Control.BLOCKING_OBJ_DATA.upBlocking_Distance,
-                startingPosition.transform.position.z)
-                , 0.13f)); //less than colliderEdge radius
+            ledgeGrab_Data.upBlockingObjects.AddRange(Physics.OverlapSphere(upBlockChecker.transform.position, upBlockChecker.GetComponent<SphereCollider>().radius));
+
 
             if (ledgeGrab_Data.upBlockingObjects.Count > 0)
             {
@@ -149,9 +134,6 @@ namespace My_MemoPlatformer
                         && !Control.RAGDOLL_DATA.arrBodyPartsColliders.Contains<Collider>(collider)
                         )
                     {
-
-
-                        ledgeGrab_Data.upBlockingObjects.Clear();
                         Debug.Log("true");
                         return true;
                     }
@@ -180,7 +162,7 @@ namespace My_MemoPlatformer
             //            Debug.Log(hit.collider.transform.gameObject.ToString());
             //        }
 
-            //            return false;
+            //        return false;
             //        //Debug.Break();
             //    }
             //    else

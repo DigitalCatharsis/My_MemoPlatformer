@@ -17,6 +17,9 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            characterState.characterControl.animationProgress.latestUpdateBoxCollider = this;
+
+
             if (DebugContainer_Data.Instance.debug_Colliders)
             {
                 Debug.Log("Entered to UpdateBoxCollider OnEnter");
@@ -37,6 +40,11 @@ namespace My_MemoPlatformer
         }
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            if (characterState.characterControl.animationProgress.latestUpdateBoxCollider != this)
+            {
+                return;
+            }
+
             //preventing pull back from platform when climbing cause of collider
             if (stateInfo.IsName(_climbingState))
             {

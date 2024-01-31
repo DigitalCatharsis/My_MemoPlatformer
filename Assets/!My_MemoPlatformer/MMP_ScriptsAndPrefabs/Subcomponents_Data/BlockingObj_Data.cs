@@ -12,7 +12,7 @@ namespace My_MemoPlatformer
         public int upBlockingDictionaryCount;
 
         public float frontBlocking_Distance;
-        public float downBlocking_Distance;
+        public float airStompDownBlocking_Distance;
         public float upBlocking_Distance;
 
         public delegate void DoSomething();

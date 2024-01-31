@@ -27,7 +27,10 @@ namespace My_MemoPlatformer
         public AnimationProgress animationProgress;
         public AIProgress aiProgress;
         public AIController aiController;
+
         public BoxCollider boxCollider;
+        public Bounds boxColliderBounds;
+
         public NavMeshObstacle navMeshObstacle;
 
         public BlockingObj_Data BLOCKING_OBJ_DATA => subComponentProcessor.blockingObj_Data;
@@ -77,6 +80,7 @@ namespace My_MemoPlatformer
             aiProgress = GetComponentInChildren<AIProgress>();
             boxCollider = GetComponent<BoxCollider>();
             navMeshObstacle = GetComponent<NavMeshObstacle>();
+            boxColliderBounds = GetBoxColliderBounds(boxCollider);
 
             aiController = GetComponentInChildren<AIController>();
 
@@ -99,6 +103,7 @@ namespace My_MemoPlatformer
 
         private void FixedUpdate()
         {
+            boxColliderBounds = GetBoxColliderBounds(boxCollider);
             subComponentProcessor.FixedUpdateSubComponents();
         }
 
@@ -176,6 +181,11 @@ namespace My_MemoPlatformer
                 default:
                     return null;
             }
+        }
+
+        public Bounds GetBoxColliderBounds(BoxCollider boxCollider)
+        {
+            return new Bounds(boxCollider.center, boxCollider.size);
         }
     }
 }
