@@ -14,8 +14,9 @@ namespace My_MemoPlatformer
         COLLISION_SPHERES,
         INSTA_KILL,
         PLAYER_ATTACK,
-        PLAYER_ANIMATION,
         PLAYER_ROTATION,
+        PLAYER_ANIMATION,
+        PLAYER_GROUND,
 
         COUNT,
     }

@@ -11,18 +11,20 @@ namespace My_MemoPlatformer
         public int frontBlockingDictionaryCount;
         public int upBlockingDictionaryCount;
 
-        public float frontBlocking_Distance;
+        [ShowOnlyAttribute] public float frontBlocking_Distance;
         public float airStompDownBlocking_Distance;
         public float upBlocking_Distance;
 
         public delegate void DoSomething();
         public delegate bool ReturnBool();
         public delegate List<GameObject> ReturnGameOjbList();
+        public delegate bool IsSteppble(GameObject obj);
 
         public DoSomething ClearFrontBlockingObjDic;
         public ReturnBool LeftSideBlocked;
         public ReturnBool RightSideBLocked;
         public ReturnGameOjbList GetFrontBlockingObjList;
         public ReturnGameOjbList GetFrontBlockingCharactersList;
+        public IsSteppble IsSteppbleObject;
     }
 }

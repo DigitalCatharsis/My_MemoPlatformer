@@ -40,6 +40,7 @@ namespace My_MemoPlatformer
             FixedUpdateSubComponent(SubComponentType.DAMAGE_DETECTOR);
             FixedUpdateSubComponent(SubComponentType.PLAYER_ROTATION);
             FixedUpdateSubComponent(SubComponentType.PLAYER_ANIMATION);
+            FixedUpdateSubComponent(SubComponentType.PLAYER_GROUND);
         }
         public void UpdateSubComponents()
         {

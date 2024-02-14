@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 namespace My_MemoPlatformer
 {
@@ -33,6 +35,8 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            characterState.characterControl.BLOCKING_OBJ_DATA.frontBlocking_Distance = blockDistance;
+
             characterState.characterControl.animationProgress.latestMoveForwardScript = this; //При переходе между стейтами moveForward предыдущего
                                                                                               //стейта может не успеть отработать и вызвать баги
             if (allowEarlyTurn)
@@ -66,6 +70,8 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            characterState.characterControl.BLOCKING_OBJ_DATA.frontBlocking_Distance = blockDistance;
+
             if (DebugContainer_Data.Instance.debug_MoveForward)
             {
                 Debug.Log(stateInfo.normalizedTime);
@@ -111,6 +117,8 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            characterState.characterControl.BLOCKING_OBJ_DATA.frontBlocking_Distance = 0;
+
             if (clearMomentumOnExit)
             {
                 characterState.MomentumCalculator_Data.momentum = 0f;
@@ -139,6 +147,23 @@ namespace My_MemoPlatformer
 
         private void ConstantMove(CharacterControl control, AnimatorStateInfo stateInfo)
         {
+            //if (IsBlocked(control))
+            //{
+            //    var frontBlockingObjList = control.BLOCKING_OBJ_DATA.GetFrontBlockingObjList();
+
+            //    foreach (var blockingObject in frontBlockingObjList)
+            //    {
+            //        if (control.BLOCKING_OBJ_DATA.IsSteppbleObject(blockingObject)) //add && isGrounded)
+            //        {
+            //            //player position y = hit position
+            //        }
+            //        else
+            //        {
+            //            //basic move
+            //        }
+            //    }
+            //}
+
             if (!IsBlocked(control))
             {
                 if (moveOnHit)

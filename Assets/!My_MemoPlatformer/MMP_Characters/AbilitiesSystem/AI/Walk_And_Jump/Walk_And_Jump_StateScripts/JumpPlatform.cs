@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -21,10 +22,10 @@ namespace My_MemoPlatformer
 
             //Diffirence betwen character's top sphere (coliistion emulation) and End sphere of the pathfinding agent
             //float topDist = characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.y - characterState.characterControl.collisionSpheres.frontSpheres[1].transform.position.y;
-            var platformDistance = characterState.characterControl.aiProgress.pathfindingAgent.endSphere.transform.position.y
-                - characterState.COLLISION_SPHERE_DATA.frontSpheres[0].transform.position.y;
+            var platformDistance = characterState.characterControl.aiProgress.pathfindingAgent.endSphere.transform.position
+                - characterState.COLLISION_SPHERE_DATA.frontSpheres[0].transform.position;
 
-            if (platformDistance > 0.5f) 
+            if (platformDistance.y > 0.5f) 
             {
                 if (DebugContainer_Data.Instance.debug_AI)
                 {
@@ -46,17 +47,20 @@ namespace My_MemoPlatformer
                 }
             }
 
-            if (platformDistance < 0.5f)  //means it is on the same platform
+            if (Math.Abs(platformDistance.z) < 0.1f)  //means it is on the same platform
             {
-                if (DebugContainer_Data.Instance.debug_AI)
+                if (platformDistance.y < 0.3f)
                 {
-                    EditorApplication.isPaused = true;
-                }
+                    if (DebugContainer_Data.Instance.debug_AI)
+                    {
+                        EditorApplication.isPaused = true;
+                    }
 
-                characterState.characterControl.moveRight = false;
-                characterState.characterControl.moveLeft = false;
-                characterState.characterControl.moveUp = false;
-                characterState.characterControl.jump = false;
+                    characterState.characterControl.moveRight = false;
+                    characterState.characterControl.moveLeft = false;
+                    characterState.characterControl.moveUp = false;
+                    characterState.characterControl.jump = false;
+                }
             }
         }
 

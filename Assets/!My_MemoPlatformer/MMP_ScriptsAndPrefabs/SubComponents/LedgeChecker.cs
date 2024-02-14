@@ -121,8 +121,10 @@ namespace My_MemoPlatformer
         private bool IsUpBlocking()
         {
             ledgeGrab_Data.upBlockingObjects.Clear();
-            ledgeGrab_Data.upBlockingObjects.AddRange(Physics.OverlapSphere(upBlockChecker.transform.position, upBlockChecker.GetComponent<SphereCollider>().radius));
-
+            ledgeGrab_Data.upBlockingObjects.AddRange(Physics.OverlapSphere(
+                    upBlockChecker.transform.position,
+                    upBlockChecker.GetComponent<SphereCollider>().radius,
+                    layerMask: LayerMask.GetMask("GROUND")));
 
             if (ledgeGrab_Data.upBlockingObjects.Count > 0)
             {
@@ -131,7 +133,7 @@ namespace My_MemoPlatformer
                     Debug.Log(collider.gameObject.name);
                     if (!Ledge.IsLedgeCollider(collider.gameObject)
                         && collider.transform.root.gameObject != Control.gameObject
-                        && !Control.RAGDOLL_DATA.arrBodyPartsColliders.Contains<Collider>(collider)
+                        && Control.RAGDOLL_DATA.GetBodypart(collider.gameObject.name)
                         )
                     {
                         Debug.Log("true");

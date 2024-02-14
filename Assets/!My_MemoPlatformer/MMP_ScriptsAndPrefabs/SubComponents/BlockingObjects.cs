@@ -23,7 +23,6 @@ namespace My_MemoPlatformer
 
         [Header("Setup blocking distance")]
         [Space(10)]
-        [SerializeField] private float _frontBlocking_Distance;
         [SerializeField] private float _airStompDownBlocking_Distance;
         [SerializeField] private float _upBlocking_Distance;
 
@@ -34,7 +33,7 @@ namespace My_MemoPlatformer
                 frontBlockingDictionaryCount = 0,
                 upBlockingDictionaryCount = 0,
 
-                frontBlocking_Distance = _frontBlocking_Distance,
+                frontBlocking_Distance = 0,
                 airStompDownBlocking_Distance = _airStompDownBlocking_Distance,
                 upBlocking_Distance = _upBlocking_Distance,
 
@@ -43,6 +42,7 @@ namespace My_MemoPlatformer
                 RightSideBLocked = RightSideIsBlocked,
                 GetFrontBlockingCharactersList = GetFrontBlockingCharacterList,
                 GetFrontBlockingObjList = GetFrontBlockingObjList,
+                //IsSteppbleObject = IsAbutting,
             };
 
             subComponentProcessor.blockingObj_Data = blockingObj_Data;
@@ -114,6 +114,8 @@ namespace My_MemoPlatformer
 
             blockingObj_Data.frontBlockingDictionaryCount = _frontBlockingObjects_dictionary.Count;
             blockingObj_Data.upBlockingDictionaryCount = _upBlockingObjects.Count;
+
+
         }
 
         public override void OnUpdate()
@@ -193,7 +195,7 @@ namespace My_MemoPlatformer
             for (int i = 0; i < _frontSpheresArray.Length; i++)
             {
                 var blockingObj = CollisionDetection.GetCollidingObject(
-                    Control, _frontSpheresArray[i], this.transform.forward * blockingObj_Data.frontBlocking_Distance,
+                    Control, _frontSpheresArray[i], this.transform.forward * blockingObj_Data.frontBlocking_Distance * 25,  //25 is just for visual ray
                     Control.animationProgress.latestMoveForwardScript.blockDistance,
                     ref Control.BLOCKING_OBJ_DATA.raycastContactPoint);
 
@@ -207,20 +209,17 @@ namespace My_MemoPlatformer
                 }
             }
         }
+
         private void DefineFrontSpheres()         //Consist of the side we a moving to
         {
             if (!Control.animationProgress.IsForwardReversed())
             {
                 _frontSpheresArray = Control.COLLISION_SPHERE_DATA.frontSpheres;
-                blockingObj_Data.frontBlocking_Distance = _frontBlocking_Distance;
-
                 RemoveSpheresInArrayFromDictionary(Control.COLLISION_SPHERE_DATA.backSpheres, _frontBlockingObjects_dictionary);
             }
             else
             {
                 _frontSpheresArray = Control.COLLISION_SPHERE_DATA.backSpheres;
-                blockingObj_Data.frontBlocking_Distance = -_frontBlocking_Distance;
-
                 RemoveSpheresInArrayFromDictionary(Control.COLLISION_SPHERE_DATA.frontSpheres, _frontBlockingObjects_dictionary);
             }
         }
@@ -353,5 +352,15 @@ namespace My_MemoPlatformer
 
             return _frontBlockingObjList;
         }
+
+        //private bool IsAbutting(GameObject obj)
+        //{
+        //    if ((obj.gameObject.transform.position - new Vector3(0, Control.boxColliderBounds.min.y, Control.boxColliderBounds.max.z)).sqrMagnitude < 0.1f)
+        //    {
+        //        Debug.Log("IsAbutting");
+        //        return true;
+        //    }
+        //    return false;
+        //}
     }
 }

@@ -5,7 +5,8 @@ namespace My_MemoPlatformer
 {
     public class CollisionSpheres : SubComponent
     {
-        [Header("Spheres")][Space(10)]
+        [Header("Spheres")]
+        [Space(10)]
         public CollisionSpheres_Data collisionSpheres_Data;
 
         private void Start()
@@ -51,7 +52,7 @@ namespace My_MemoPlatformer
 
         private void OnDrawGizmos()
         {
-            BoxCollider boxCollider = Control.boxCollider;
+            BoxCollider boxCollider = gameObject.transform.root.GetComponent<BoxCollider>();
 
             Bounds localBounds = new Bounds(boxCollider.center, boxCollider.size);
 
@@ -151,29 +152,6 @@ namespace My_MemoPlatformer
                 collisionSpheres_Data.frontSpheres[i].transform.localPosition =
                     new Vector3(0f, upPosition.y - (interval * (i - 1)), upPosition.z);
             }
-
-            //if (DebugContainer_Data.Instance.debug_Colliders)
-            //{
-            //    Debug.Log("Repositioning Front Spheres");
-            //}
-
-            //var bottom = Control.boxCollider.bounds.center.y - (Control.boxCollider.bounds.size.y / 2f); // в центре внизу. 
-            //var top = Control.boxCollider.bounds.center.y + (Control.boxCollider.bounds.size.y / 2f); // в центре вверху. ;
-            //var front = Control.boxCollider.bounds.center.z + (Control.boxCollider.bounds.size.z / 2f); // в центре спереди. ;
-
-            //collisionSpheres_Data.frontSpheres[0].transform.localPosition =
-            //    new Vector3(0f, bottom + 0.05f, front) - Control.transform.position;
-
-            //collisionSpheres_Data.frontSpheres[1].transform.localPosition =
-            //    new Vector3(0f, top, front) - Control.transform.position;
-
-            //float interval = (top - bottom + 0.05f) / 9;
-
-            //for (int i = 2; i < collisionSpheres_Data.frontSpheres.Length; i++)
-            //{
-            //    collisionSpheres_Data.frontSpheres[i].transform.localPosition =
-            //        new Vector3(0f, bottom + (interval * (i - 1)), front) - Control.transform.position;
-            //}
         }
         private void Reposition_BackSpheres()
         {
@@ -192,14 +170,6 @@ namespace My_MemoPlatformer
                 collisionSpheres_Data.backSpheres[i].transform.localPosition =
                     new Vector3(0f, upPosition.y - (interval * (i - 1)), upPosition.z);
             }
-
-            //for (int i = 0; i < collisionSpheres_Data.backSpheres.Length; i++)
-            //{
-            //    collisionSpheres_Data.backSpheres[i].transform.localPosition = new Vector3(
-            //        0,
-            //        collisionSpheres_Data.frontSpheres[i].transform.localPosition.y,
-            //        collisionSpheres_Data.frontSpheres[i].transform.localPosition.z * -1);
-            //}
         }
 
         private void Reposition_BottomSpheres()
@@ -213,35 +183,13 @@ namespace My_MemoPlatformer
                 collisionSpheres_Data.bottomSpheres[0].transform.localPosition = frontPosition;
                 collisionSpheres_Data.bottomSpheres[1].transform.localPosition = backPosition;
 
-                float interval = (frontPosition.z - backPosition.z + 0.05f) / 4;
+                float interval = (frontPosition.z - backPosition.z) / 4;
 
                 for (int i = 2; i < collisionSpheres_Data.bottomSpheres.Length; i++)
                 {
                     collisionSpheres_Data.bottomSpheres[i].transform.localPosition =
                         new Vector3(0f, frontPosition.y, frontPosition.z - (interval * (i - 1)));
                 }
-
-                //if (DebugContainer_Data.Instance.debug_Colliders)
-                //{
-                //    Debug.Log("Repositioning Bottom Spheres");
-                //}
-
-                //var bottom = Control.boxCollider.bounds.center.y - (Control.boxCollider.bounds.size.y / 2f);
-                //var front = Control.boxCollider.bounds.center.z + (Control.boxCollider.bounds.size.z / 2f);
-
-                //var front_BottomSphere = new Vector3(0f, bottom, front) - Control.transform.position;
-                //collisionSpheres_Data.bottomSpheres[1].transform.localPosition = front_BottomSphere;
-
-                //var back_BottomSphere = new Vector3(0, front_BottomSphere.y, -front_BottomSphere.z);
-                //collisionSpheres_Data.bottomSpheres[0].transform.localPosition = back_BottomSphere;
-
-                //float interval = (front_BottomSphere.z - back_BottomSphere.z) / 4;
-
-                //for (int i = 2; i < collisionSpheres_Data.bottomSpheres.Length; i++)
-                //{
-                //    collisionSpheres_Data.bottomSpheres[i].transform.localPosition =
-                //        new Vector3(0f, front_BottomSphere.y, back_BottomSphere.z + (interval * (i - 1)));
-                //}
             }
         }
 
