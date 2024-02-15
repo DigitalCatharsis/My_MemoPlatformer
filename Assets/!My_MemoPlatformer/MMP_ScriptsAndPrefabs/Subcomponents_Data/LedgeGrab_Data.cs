@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,6 @@ namespace My_MemoPlatformer
         public bool isGrabbingLedge;
         public List<Collider> upBlockingObjects;
 
-        public delegate void DoSomething();
-        public DoSomething DisableLedgeColliders;
+        public Action DisableLedgeColliders;
     }
 }

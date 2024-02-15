@@ -35,7 +35,7 @@ namespace My_MemoPlatformer
 
         private void ToggleBoxCol(CharacterControl control)
         {
-            control.RIGID_BODY.velocity = Vector3.zero;
+            control.rigidBody.velocity = Vector3.zero;
             control.GetComponent<BoxCollider>().enabled= on;
 
             if (repositionSpheres)

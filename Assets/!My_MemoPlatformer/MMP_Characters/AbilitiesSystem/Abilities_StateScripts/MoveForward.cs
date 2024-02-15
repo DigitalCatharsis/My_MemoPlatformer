@@ -37,7 +37,7 @@ namespace My_MemoPlatformer
         {
             characterState.characterControl.BLOCKING_OBJ_DATA.frontBlocking_Distance = blockDistance;
 
-            characterState.characterControl.animationProgress.latestMoveForwardScript = this; //При переходе между стейтами moveForward предыдущего
+            characterState.characterControl.CHARACTER_MOVEMENT_DATA.latestMoveForwardScript = this; //При переходе между стейтами moveForward предыдущего
                                                                                               //стейта может не успеть отработать и вызвать баги
             if (allowEarlyTurn)
             {
@@ -77,12 +77,12 @@ namespace My_MemoPlatformer
                 Debug.Log(stateInfo.normalizedTime);
             }
 
-            if (characterState.characterControl.animationProgress.latestMoveForwardScript != this)
+            if (characterState.characterControl.CHARACTER_MOVEMENT_DATA.latestMoveForwardScript != this)
             {
                 return;
             }
 
-            if (characterState.Animation_Data.IsRunning(typeof(WallSlide))) //prevent bugs when calculating several states at the short duration
+            if (characterState.Player_Animation_Data.IsRunning(typeof(WallSlide))) //prevent bugs when calculating several states at the short duration
             {
                 return;
             }
@@ -141,7 +141,7 @@ namespace My_MemoPlatformer
 
             if (!IsBlocked(control))
             {
-                control.MoveForward(Speed, Mathf.Abs(control.MOMENTUM_DATA.momentum));
+                control.CHARACTER_MOVEMENT_DATA.MoveCharacterForward(Speed, Mathf.Abs(control.MOMENTUM_DATA.momentum));
             }
         }
 
@@ -168,18 +168,18 @@ namespace My_MemoPlatformer
             {
                 if (moveOnHit)
                 {
-                    if (!control.animationProgress.IsFacingAtacker())
+                    if (!control.CHARACTER_MOVEMENT_DATA.IsFacingAtacker())
                     {
-                        control.MoveForward(Speed, speedGraph.Evaluate(stateInfo.normalizedTime));  //make sure speed is >0 in SO
+                        control.CHARACTER_MOVEMENT_DATA.MoveCharacterForward(Speed, speedGraph.Evaluate(stateInfo.normalizedTime));  //make sure speed is >0 in SO
                     }
                     else
                     {
-                        control.MoveForward(-Speed, speedGraph.Evaluate(stateInfo.normalizedTime)); //make sure speed is >0 in SO
+                        control.CHARACTER_MOVEMENT_DATA.MoveCharacterForward(-Speed, speedGraph.Evaluate(stateInfo.normalizedTime)); //make sure speed is >0 in SO
                     }
                 }
                 else
                 {
-                    control.MoveForward(Speed, speedGraph.Evaluate(stateInfo.normalizedTime));
+                    control.CHARACTER_MOVEMENT_DATA.MoveCharacterForward(Speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                 }
             }
         }
@@ -200,7 +200,7 @@ namespace My_MemoPlatformer
             {
                 if (!IsBlocked(control))
                 {
-                    control.MoveForward(Speed, speedGraph.Evaluate(stateInfo.normalizedTime));
+                    control.CHARACTER_MOVEMENT_DATA.MoveCharacterForward(Speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                 }
             }
 
@@ -208,7 +208,7 @@ namespace My_MemoPlatformer
             {
                 if (!IsBlocked(control))
                 {
-                    control.MoveForward(Speed, speedGraph.Evaluate(stateInfo.normalizedTime));
+                    control.CHARACTER_MOVEMENT_DATA.MoveCharacterForward(Speed, speedGraph.Evaluate(stateInfo.normalizedTime));
                 }
             }
             CheckTurn(control);
@@ -234,17 +234,17 @@ namespace My_MemoPlatformer
         {
             if (!ignoreCharacterBox)
             {
-                control.animationProgress.isIgnoreCharacterTime = false;
+                control.CHARACTER_MOVEMENT_DATA.isIgnoreCharacterTime = false;
             }
 
             if (stateInfo.normalizedTime > ignoreStartTime &&
                 stateInfo.normalizedTime < ignoreEndTime)
             {
-                control.animationProgress.isIgnoreCharacterTime = true;
+                control.CHARACTER_MOVEMENT_DATA.isIgnoreCharacterTime = true;
             }
             else
             {
-                control.animationProgress.isIgnoreCharacterTime = false;
+                control.CHARACTER_MOVEMENT_DATA.isIgnoreCharacterTime = false;
             }
         }
 

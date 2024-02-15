@@ -11,7 +11,7 @@ namespace My_MemoPlatformer
             characterState.characterControl.moveRight = false;
             characterState.MomentumCalculator_Data.momentum = 0f;
 
-            characterState.characterControl.RIGID_BODY.velocity = Vector3.zero;
+            characterState.characterControl.rigidBody.velocity = Vector3.zero;
 
             if (characterState.characterControl.ROTATION_DATA.IsFacingForward())   //make the character turn 
             {

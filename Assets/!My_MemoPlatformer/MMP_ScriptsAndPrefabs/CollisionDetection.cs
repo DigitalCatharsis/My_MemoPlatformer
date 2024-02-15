@@ -36,7 +36,7 @@ namespace My_MemoPlatformer
         }
         public static bool IsIgnoringCharacter(CharacterControl control, Collider col)
         {
-            if (!control.animationProgress.isIgnoreCharacterTime)
+            if (!control.CHARACTER_MOVEMENT_DATA.isIgnoreCharacterTime)
             {
                 return false;
             }

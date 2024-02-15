@@ -39,7 +39,7 @@ namespace My_MemoPlatformer
 
                     if (yDiffirence < 0.01f)
                     {
-                        if (Mathf.Abs(control.RIGID_BODY.velocity.y) < 0.001f)
+                        if (Mathf.Abs(control.rigidBody.velocity.y) < 0.001f)
                         {
                             //control.animationProgress.ground = c.otherCollider.transform.root.gameObject; //что колайдерит bottom сферы
                             control.GROUND_DATA.ground = c.otherCollider.transform.gameObject; //что колайдерит bottom сферы
@@ -50,7 +50,7 @@ namespace My_MemoPlatformer
                 }
             }
 
-            if (control.RIGID_BODY.velocity.y < 0f)
+            if (control.rigidBody.velocity.y < 0f)
             {
                 foreach (GameObject o in control.COLLISION_SPHERE_DATA.bottomSpheres)
                 {

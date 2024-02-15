@@ -48,7 +48,7 @@ namespace My_MemoPlatformer
                 }
                 else
                 {
-                    if (_mainCharacter.RIGID_BODY.velocity.y < 0f)
+                    if (_mainCharacter.rigidBody.velocity.y < 0f)
                     {
                         LerpZoomOut(CameraManager.Instance.CAM_CONTROLLER);
                     }

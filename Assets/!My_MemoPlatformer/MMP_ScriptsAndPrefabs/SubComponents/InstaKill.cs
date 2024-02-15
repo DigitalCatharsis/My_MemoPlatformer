@@ -10,11 +10,9 @@ namespace My_MemoPlatformer
 
         [Header("Setup")]
         [Range(0,1)]
-        [Header("Chance to execute instakill")]
         [SerializeField] private float _instakillChance;
 
-        [Header("RuntimeAnimatorController")]
-        [Space(10)]
+        [Header("Setup RuntimeAnimatorController")]
         [SerializeField] private RuntimeAnimatorController Assassination_Assassin;
         [SerializeField] private RuntimeAnimatorController Assassination_Victim;
 
@@ -70,17 +68,17 @@ namespace My_MemoPlatformer
                         continue;
                     }
 
-                    if (control.ANIMATION_DATA.IsRunning(typeof(Attack)))
+                    if (control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Attack)))
                     {
                         continue;
                     }
 
-                    if (Control.ANIMATION_DATA.IsRunning(typeof(Attack)))
+                    if (Control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Attack)))
                     {
                         continue;
                     }
 
-                    if (control.animationProgress.StateNameContains("RunningSlide"))
+                    if (control.PLAYER_ANIMATION_DATA.StateNameContains("RunningSlide"))
                     {
                         continue;
                     }
@@ -112,14 +110,14 @@ namespace My_MemoPlatformer
 
         private void ProcessInstaKill(CharacterControl assassin)
         {
-            Control.ANIMATION_DATA.currentRunningAbilities_Dictionary.Clear();
-            assassin.ANIMATION_DATA.currentRunningAbilities_Dictionary.Clear();
+            Control.PLAYER_ANIMATION_DATA.currentRunningAbilities_Dictionary.Clear();
+            assassin.PLAYER_ANIMATION_DATA.currentRunningAbilities_Dictionary.Clear();
 
-            Control.RIGID_BODY.useGravity = false;
+            Control.rigidBody.useGravity = false;
             Control.boxCollider.enabled = false;
             Control.skinnedMeshAnimator.runtimeAnimatorController = Control.INSTA_KILL_DATA.Animation_Victim;
 
-            assassin.RIGID_BODY.useGravity = false;
+            assassin.rigidBody.useGravity = false;
             assassin.boxCollider.enabled = false;
             assassin.skinnedMeshAnimator.runtimeAnimatorController = assassin.INSTA_KILL_DATA.Animation_Assassin;
 

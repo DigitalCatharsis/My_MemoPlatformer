@@ -65,7 +65,7 @@ namespace My_MemoPlatformer
 
             if (animator.GetInteger(HashManager.Instance.arrMainParams[(int)MainParameterType.TransitionIndex]) == 0)
             {
-                if (!characterState.characterControl.animationProgress.lockTransition)
+                if (!characterState.characterControl.PLAYER_ANIMATION_DATA.lockTransition)
                 {
                     if (TransitionConditionChecker.MakeTransition(characterState.characterControl, transitionConditions))
                     {

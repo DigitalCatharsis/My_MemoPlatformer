@@ -10,6 +10,9 @@ namespace My_MemoPlatformer
         {
             _boxCollider_Data = new BoxCollider_Data
             {
+
+                latestUpdateBoxCollider = null,
+
                 isUpdatingSpheres = false,
                 isLanding = false,
 
@@ -19,6 +22,8 @@ namespace My_MemoPlatformer
                 targetCenter = Vector3.zero,
                 targetSize = Vector3.zero,
                 landingPosition = Vector3.zero,
+
+                boxColliderBounds = GetBoxColliderBounds(Control.boxCollider),
             };
 
             subComponentProcessor.boxCollider_Data = _boxCollider_Data;
@@ -26,6 +31,8 @@ namespace My_MemoPlatformer
         }
         public override void OnFixedUpdate()
         {
+            _boxCollider_Data.boxColliderBounds = GetBoxColliderBounds(Control.boxCollider);
+
             //Spheres
             _boxCollider_Data.isUpdatingSpheres = false;
 
@@ -58,7 +65,7 @@ namespace My_MemoPlatformer
                 if (_boxCollider_Data.isLanding)  //prevent bug when idle after catching corner of platform
                 {
                     //Debug.Log("repositioning y");
-                    Control.RIGID_BODY.MovePosition(new Vector3(
+                    Control.rigidBody.MovePosition(new Vector3(
                         0f,
                         _boxCollider_Data.landingPosition.y,
                         this.transform.position.z));
@@ -73,7 +80,7 @@ namespace My_MemoPlatformer
 
         public void UpdateBoxCollider_Size()
         {
-            if (!Control.ANIMATION_DATA.IsRunning(typeof(UpdateBoxCollider)))
+            if (!Control.PLAYER_ANIMATION_DATA.IsRunning(typeof(UpdateBoxCollider)))
             {
                 return;
             }
@@ -96,7 +103,7 @@ namespace My_MemoPlatformer
 
         public void UpdateBoxCollider_Center()
         {
-            if (!Control.ANIMATION_DATA.IsRunning(typeof(UpdateBoxCollider)))
+            if (!Control.PLAYER_ANIMATION_DATA.IsRunning(typeof(UpdateBoxCollider)))
             {
                 return;
             }
@@ -114,6 +121,11 @@ namespace My_MemoPlatformer
 
                 _boxCollider_Data.isUpdatingSpheres = true;
             }
+        }
+
+        public Bounds GetBoxColliderBounds(BoxCollider boxCollider)
+        {
+            return new Bounds(boxCollider.center, boxCollider.size);
         }
     }
 }

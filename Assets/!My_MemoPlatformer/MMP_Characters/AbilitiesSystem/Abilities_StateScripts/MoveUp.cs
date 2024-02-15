@@ -10,12 +10,12 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            characterState.characterControl.animationProgress.latestMoveUpScript = this;
+            characterState.characterControl.CHARACTER_MOVEMENT_DATA.latestMoveUpScript = this;
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (!characterState.characterControl.RIGID_BODY.useGravity)
+            if (!characterState.characterControl.rigidBody.useGravity)
             {
                 if (characterState.BlockingObj_Data.upBlockingDictionaryCount == 0)
                 {

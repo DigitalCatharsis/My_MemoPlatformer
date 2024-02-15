@@ -1359,6 +1359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animation_Data:
     instantTransitionMade: 0
+    lockTransition: 0
     currentState: 
     currentRunningAbilities_PreviewList: []
     previousState: 
@@ -1569,7 +1570,6 @@ GameObject:
   - component: {fileID: 2430949021683835267}
   - component: {fileID: 8003498278013731179}
   - component: {fileID: 936084455}
-  - component: {fileID: 1747402107}
   - component: {fileID: 8772349004802611497}
   - component: {fileID: 2729992175947334301}
   m_Layer: 9
@@ -1639,7 +1639,6 @@ MonoBehaviour:
   attack: 0
   block: 0
   subComponentProcessor: {fileID: 0}
-  animationProgress: {fileID: 0}
   aiProgress: {fileID: 0}
   aiController: {fileID: 0}
   boxCollider: {fileID: 0}
@@ -1653,6 +1652,7 @@ MonoBehaviour:
   leftHand_Attack: {fileID: 7264828609573986013}
   leftFoot_Attack: {fileID: 4152838678372553637}
   rightFoot_Attack: {fileID: 3396455527245553538}
+  rigidBody: {fileID: 0}
 --- !u!114 &8003498278013731179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1696,26 +1696,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 114
   m_CollisionDetection: 2
---- !u!114 &1747402107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3372119544377188088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7dc2d5d4cbdf1f4f890b95530896b58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraShaken: 0
-  poolObjectList: 
-  latestMoveForwardScript: {fileID: 0}
-  latestMoveUpScript: {fileID: 0}
-  latestUpdateBoxCollider: {fileID: 0}
-  isIgnoreCharacterTime: 0
-  lockTransition: 0
-  holdingWeapon: {fileID: 0}
 --- !u!114 &8772349004802611497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2563,7 +2543,7 @@ GameObject:
   - component: {fileID: 8814590958624048433}
   - component: {fileID: 8484232170395984330}
   m_Layer: 9
-  m_Name: PlayerAttack
+  m_Name: --MPlayerAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2596,6 +2576,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f26cc03572b787e41b9600b49e3fa8d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAttack_Data:
+    attackTriggered: 0
+    attackButtonIsReset: 0
+    airStompAttack: {fileID: 0}
+    holdingWeapon: {fileID: 0}
+    weaponThrowAttack: {fileID: 0}
+  _weaponThrow: {fileID: 11400000, guid: 270577db070e447499e094b119ff8aa1, type: 2}
+  _airStompAttack: {fileID: 11400000, guid: a887d67403fa15e4f9758370f2bce396, type: 2}
 --- !u!1 &4465252547933066357
 GameObject:
   m_ObjectHideFlags: 0
@@ -2841,7 +2829,6 @@ MonoBehaviour:
     frontBlocking_Distance: 0
     airStompDownBlocking_Distance: 0
     upBlocking_Distance: 0
-  _frontBlocking_Distance: 1
   _airStompDownBlocking_Distance: 0
   _upBlocking_Distance: 0.3
 --- !u!1 &5135971744954625573
@@ -3339,6 +3326,54 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!1 &6255105844804436754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7161507858017712816}
+  - component: {fileID: 4730897473208058107}
+  m_Layer: 9
+  m_Name: CharacterMovement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7161507858017712816
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6255105844804436754}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2838286670764771645}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4730897473208058107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6255105844804436754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ef0ac4ddcfcb964f8330e8715fbe84d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterMovement_Data:
+    latestMoveForwardScript: {fileID: 0}
+    latestMoveUpScript: {fileID: 0}
+    isIgnoreCharacterTime: 0
 --- !u!1 &6390529184369956183
 GameObject:
   m_ObjectHideFlags: 0
@@ -3470,6 +3505,50 @@ CapsuleCollider:
   m_Height: 0.2740468
   m_Direction: 0
   m_Center: {x: 0.1370234, y: 0, z: 0}
+--- !u!1 &6465847565872757384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9044425793393334320}
+  - component: {fileID: 3589323581888599464}
+  m_Layer: 9
+  m_Name: Interaction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9044425793393334320
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6465847565872757384}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2838286670764771645}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3589323581888599464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6465847565872757384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1220a57bb2482343b2f6a14102b2751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6525732377822747112
 GameObject:
   m_ObjectHideFlags: 0
@@ -3763,16 +3842,12 @@ MonoBehaviour:
   _damage_Data:
     blockedAttack: {fileID: 0}
     currentHp: 0
-    airStompAttack: {fileID: 0}
-    weaponThrow: {fileID: 0}
     damageTaken:
       _attacker: {fileID: 0}
       _attack: {fileID: 0}
       _damagerPart: {fileID: 0}
       _damaged_TG: {fileID: 0}
       _incomingVelocity: {x: 0, y: 0, z: 0}
-  _weaponThrow: {fileID: 11400000, guid: a887d67403fa15e4f9758370f2bce396, type: 2}
-  _airStompAttack: {fileID: 11400000, guid: 270577db070e447499e094b119ff8aa1, type: 2}
   _hp: 5
 --- !u!1 &7020094712125406493
 GameObject:
@@ -3819,6 +3894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _boxCollider_Data:
+    latestUpdateBoxCollider: {fileID: 0}
     isUpdatingSpheres: 0
     isLanding: 0
     size_Update_Speed: 0
@@ -4284,10 +4360,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2047273890012996326}
   - {fileID: 1260156244}
   - {fileID: 5415747056367200280}
   - {fileID: 4751183889889371912}
+  - {fileID: 8814590958624048433}
+  - {fileID: 2047273890012996326}
   - {fileID: 2212010676037463706}
   - {fileID: 6629428920720007203}
   - {fileID: 559100818167184587}
@@ -4297,8 +4374,9 @@ Transform:
   - {fileID: 4522960269502612960}
   - {fileID: 4633267999339462008}
   - {fileID: 1318701341189441266}
-  - {fileID: 8814590958624048433}
   - {fileID: 2892271239179928753}
+  - {fileID: 7161507858017712816}
+  - {fileID: 9044425793393334320}
   m_Father: {fileID: 3372119544377188092}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4333,6 +4411,7 @@ MonoBehaviour:
       isTriggered: 0
       attacker: {fileID: 0}
   boxCollider_Data:
+    latestUpdateBoxCollider: {fileID: 0}
     isUpdatingSpheres: 0
     isLanding: 0
     size_Update_Speed: 0
@@ -4346,8 +4425,6 @@ MonoBehaviour:
   damage_Data:
     blockedAttack: {fileID: 0}
     currentHp: 0
-    airStompAttack: {fileID: 0}
-    weaponThrow: {fileID: 0}
     damageTaken:
       _attacker: {fileID: 0}
       _attack: {fileID: 0}
@@ -4377,12 +4454,20 @@ MonoBehaviour:
   attack_Data:
     attackTriggered: 0
     attackButtonIsReset: 0
+    airStompAttack: {fileID: 0}
+    holdingWeapon: {fileID: 0}
+    weaponThrowAttack: {fileID: 0}
   animation_Data:
     instantTransitionMade: 0
+    lockTransition: 0
     currentState: 
     currentRunningAbilities_PreviewList: []
     previousState: 
     PreviousRunningAbilities_PreviewList: []
+  characterMovement_Data:
+    latestMoveForwardScript: {fileID: 0}
+    latestMoveUpScript: {fileID: 0}
+    isIgnoreCharacterTime: 0
 --- !u!1 &7646921906402090757
 GameObject:
   m_ObjectHideFlags: 0

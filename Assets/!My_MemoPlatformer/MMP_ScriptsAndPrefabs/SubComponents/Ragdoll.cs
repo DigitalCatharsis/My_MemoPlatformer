@@ -110,8 +110,8 @@ namespace My_MemoPlatformer
             }
 
             //turn off animator, avatar
-            Control.RIGID_BODY.useGravity = false;
-            Control.RIGID_BODY.velocity = Vector3.zero;
+            Control.rigidBody.useGravity = false;
+            Control.rigidBody.velocity = Vector3.zero;
             Control.gameObject.GetComponent<BoxCollider>().enabled = false;
             Control.skinnedMeshAnimator.enabled = false;
             Control.skinnedMeshAnimator.avatar = null;

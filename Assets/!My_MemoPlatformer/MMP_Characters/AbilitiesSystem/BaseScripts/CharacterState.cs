@@ -7,7 +7,7 @@ namespace My_MemoPlatformer
     {
         public CharacterControl characterControl;
 
-        [Space (10)]
+        [Space(10)]
         public List<CharacterAbility> ListAbilityData = new List<CharacterAbility>();
         [Space(10)]
         public CharacterAbility[] arrAbilities;
@@ -22,8 +22,9 @@ namespace My_MemoPlatformer
         public CollisionSpheres_Data COLLISION_SPHERE_DATA => characterControl.subComponentProcessor.collisionSpheres_Data;
         public Ground_Data Ground_Data => characterControl.subComponentProcessor.ground_Data;
         public Attack_Data Attack_Data => characterControl.subComponentProcessor.attack_Data;
-        public Animation_Data Animation_Data => characterControl.subComponentProcessor.animation_Data;
+        public PlayerAnimation_Data Player_Animation_Data => characterControl.subComponentProcessor.animation_Data;
         public AIController AI_CONTROLLER => characterControl.aiController;
+        public CharacterMovement_Data CharacterMovement_Data => characterControl.CHARACTER_MOVEMENT_DATA;
         public void PutStatesInArray()
         {
             arrAbilities = new CharacterAbility[ListAbilityData.Count];
@@ -38,15 +39,23 @@ namespace My_MemoPlatformer
         {
             for (int i = 0; i < arrAbilities.Length; i++)
             {
-                arrAbilities[i].OnEnter(this, animator, stateInfo);
-
-                if (characterControl.ANIMATION_DATA.currentRunningAbilities_Dictionary.ContainsKey(arrAbilities[i]))
+                try
                 {
-                    characterControl.ANIMATION_DATA.currentRunningAbilities_Dictionary[arrAbilities[i]] += 1;
+
+                arrAbilities[i].OnEnter(this, animator, stateInfo);
+                }
+                catch 
+                {
+                    Debug.Log(arrAbilities[i]);
+                }
+
+                if (characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities_Dictionary.ContainsKey(arrAbilities[i]))
+                {
+                    characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities_Dictionary[arrAbilities[i]] += 1;
                 }
                 else
                 {
-                    characterControl.ANIMATION_DATA.currentRunningAbilities_Dictionary.Add(arrAbilities[i], 1);
+                    characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities_Dictionary.Add(arrAbilities[i], 1);
                 }
             }
         }
@@ -60,7 +69,7 @@ namespace My_MemoPlatformer
 
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)    //this is a place where was fixed move forward x4 speed bug with uncessesary foreach
         {
-                UpdateAll(this, animator, stateInfo);
+            UpdateAll(this, animator, stateInfo);
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -71,13 +80,13 @@ namespace My_MemoPlatformer
                 {
                     arrAbilities[i].OnExit(this, animator, stateInfo);
 
-                    if (characterControl.ANIMATION_DATA.currentRunningAbilities_Dictionary.ContainsKey(arrAbilities[i]))
+                    if (characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities_Dictionary.ContainsKey(arrAbilities[i]))
                     {
-                        characterControl.ANIMATION_DATA.currentRunningAbilities_Dictionary[arrAbilities[i]] -= 1;
+                        characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities_Dictionary[arrAbilities[i]] -= 1;
 
-                        if (characterControl.ANIMATION_DATA.currentRunningAbilities_Dictionary[arrAbilities[i]] <= 0)
+                        if (characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities_Dictionary[arrAbilities[i]] <= 0)
                         {
-                            characterControl.ANIMATION_DATA.currentRunningAbilities_Dictionary.Remove(arrAbilities[i]);
+                            characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities_Dictionary.Remove(arrAbilities[i]);
                         }
                     }
                 }

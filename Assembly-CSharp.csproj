@@ -62,8 +62,8 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Subcomponents_Data\Ragdoll_Data.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\MMP_MaterialChaner\MaterialChanger.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\PlayerAnimation.cs" />
-    <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\SpawnObject.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\ShakeCamera.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\Interaction.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_PathfindingAgent\PathFindingAgent.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\UI_Events\ChangeScene.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\BaseScripts\CharacterState.cs" />
@@ -79,6 +79,7 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\Turn180.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_CameraGame\CameraContoller.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Subcomponents_Data\MomentumCalculator_Data.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Subcomponents_Data\PlayerAnimation_Data.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\SubComponentProcessor.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\ShowOnlyAttribute\ShowOnlyAttribute.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Managers\HashManager.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\CheckTurbo.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\UI_Events\GameEventListener.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\MMP_LayerAdder\LayerChanger.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SpawnObject.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\AI\AIController.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\MMP_Weapons\MeleeWeapon.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\MomentumCalculator.cs" />
@@ -137,7 +139,6 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\LedgeGtab_Ledge\Ledge.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\InstaKill.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Subcomponents_Data\Rotation_Data.cs" />
-    <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\AnimationProgress.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\LockTurn.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\WallSlide.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\Idle.cs" />
@@ -149,7 +150,6 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Settings\FrameSettings.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\ResetLocalPosition.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\MMP_ListOfLists\SerializableList.cs" />
-    <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Subcomponents_Data\Animation_Data.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_PoolingSystem\PoolObjectLoader.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\UpdateBoxCollider.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\MMP_StateMachine_AbilityListToArray\StateMachine_AbilityListToArray.cs" />
@@ -179,10 +179,12 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\AI\Walk_And_Jump\Walk_And_Jump_StateScripts\StartWalking.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\VerticalVelocity.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\MMP_DistanceBetweenTwoObjects\DistanceBetweenTwoObjects.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\CharacterMovement.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\SwitchAnimator.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\BlockingObjects.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\CollisionSpheres.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Subcomponents_Data\Interaction_Data.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\Jump.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\!MMP_Tutorial_Refs\CustomPropertyDrawer\ListTester.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\DebugContainer\DebugContainer_Data.cs" />
@@ -192,6 +194,7 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\Ragdoll.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterSelect.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\Attack\CollateralRagdollVelocity.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Subcomponents_Data\CharacterMovement_Data.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Subcomponents_Data\CollisionSpheres_Data.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\Subcomponents_Data\Attack_Data.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\Attack\Attack.cs" />

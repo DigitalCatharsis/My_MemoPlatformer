@@ -23,7 +23,7 @@ namespace My_MemoPlatformer
             }
 
             //fix from jumping after failed to ledgegrab
-            if (characterState.Animation_Data.IsRunning(typeof(Landing)))
+            if (characterState.Player_Animation_Data.IsRunning(typeof(Landing)))
             {
                 characterState.characterControl.turbo = false;
                 characterState.characterControl.jump = false;
@@ -78,8 +78,8 @@ namespace My_MemoPlatformer
             {
                 if (characterState.Ground_Data.ground != null)
                 {
-                    if (!characterState.Animation_Data.IsRunning(typeof(Jump)) &&
-                        !characterState.Animation_Data.IsRunning(typeof(JumpPrep)))
+                    if (!characterState.Player_Animation_Data.IsRunning(typeof(Jump)) &&
+                        !characterState.Player_Animation_Data.IsRunning(typeof(JumpPrep)))
                     {
                         characterState.characterControl.turbo = false;
                         characterState.characterControl.jump = false;
@@ -94,8 +94,8 @@ namespace My_MemoPlatformer
 
             //startsphere height
             if (characterState.Ground_Data.ground != null &&
-                !characterState.Animation_Data.IsRunning(typeof(Jump)) &&
-                !characterState.Animation_Data.IsRunning(typeof(WallJump_Prep)))
+                !characterState.Player_Animation_Data.IsRunning(typeof(Jump)) &&
+                !characterState.Player_Animation_Data.IsRunning(typeof(WallJump_Prep)))
             {
                 var height = characterState.characterControl.aiProgress.GetStartSphereHeight();
                 if (height > 0.1f)
@@ -148,12 +148,12 @@ namespace My_MemoPlatformer
 
         private bool AIIsOnGround(CharacterControl control)
         {
-            if (control.ANIMATION_DATA.IsRunning(typeof(MoveUp)))
+            if (control.PLAYER_ANIMATION_DATA.IsRunning(typeof(MoveUp)))
             {
                 return false;
             }
 
-            if (control.RIGID_BODY.useGravity)
+            if (control.rigidBody.useGravity)
             {
                 if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
                 {

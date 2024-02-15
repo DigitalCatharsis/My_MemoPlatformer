@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -8,8 +10,6 @@ namespace My_MemoPlatformer
     {
         public AttackCondition blockedAttack;
         public float currentHp;
-        public Attack airStompAttack;
-        public Attack weaponThrow;
 
         public DamageTaken damageTaken;
 
@@ -17,16 +17,11 @@ namespace My_MemoPlatformer
         public Dictionary<TriggerDetector, List<Collider>> collidingBodyParts_Dictionary = new Dictionary<TriggerDetector, List<Collider>>(); //key trigger detectors, value - colliding bodyparts which are in contract with trigger detectors
         public Dictionary<TriggerDetector, List<Collider>> collidingWeapons_Dictionary = new Dictionary<TriggerDetector, List<Collider>>(); //key trigger detectors, value - colliding bodyparts which are in contract with trigger detectors
 
-        public delegate bool ReturnBool();
-        public delegate void DoDamage(AttackCondition info);
-        public delegate void DoCollateralDamage(CharacterControl attacker, Collider col, TriggerDetector triggerDetector);
-        public delegate void EditColliderDictionary(Dictionary<TriggerDetector, List<Collider>> colliders_Dictionary, Collider collider, TriggerDetector triggerDetector);
-
-        public ReturnBool IsDead;
-        public DoDamage TakeDamage;
-        public DoCollateralDamage TakeCollateralDamage;
-        public EditColliderDictionary AddCollidersToDictionary;
-        public EditColliderDictionary RemoveCollidersFromDictionary;
+        public Func<bool> IsDead;
+        public Action<AttackCondition> TakeDamage;
+        public Action<CharacterControl, Collider, TriggerDetector> TakeCollateralDamage;
+        public Action<Dictionary<TriggerDetector, List<Collider>>, Collider, TriggerDetector> AddCollidersToDictionary;
+        public Action<Dictionary<TriggerDetector, List<Collider>>, Collider, TriggerDetector> RemoveCollidersFromDictionary;
     }
 
     [System.Serializable]

@@ -20,7 +20,7 @@ namespace My_MemoPlatformer
             }
             else
             {
-                if (!characterState.Animation_Data.IsRunning(typeof(Jump)))   //double update fix. Guess idle is overlapping jump or moveforward
+                if (!characterState.Player_Animation_Data.IsRunning(typeof(Jump)))   //double update fix. Guess idle is overlapping jump or moveforward
                 {
                     characterState.Jump_Data.dicJumped.Clear();
                 }

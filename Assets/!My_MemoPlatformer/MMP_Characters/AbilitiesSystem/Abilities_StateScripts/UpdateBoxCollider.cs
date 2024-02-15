@@ -8,6 +8,7 @@ namespace My_MemoPlatformer
     {
         public Vector3 targetCenter;
         public float centerUpdateSpeed;
+
         [Space(10)]
         public Vector3 targetSize;
         public float sizeUpdateSpeed;
@@ -17,14 +18,14 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            characterState.characterControl.animationProgress.latestUpdateBoxCollider = this;
+            characterState.characterControl.BOX_COLLIDER_DATA.latestUpdateBoxCollider = this;
 
 
             if (DebugContainer_Data.Instance.debug_Colliders)
             {
                 Debug.Log("Entered to UpdateBoxCollider OnEnter");
                 Debug.Log("Setting values -> BoxColliderData");
-                Debug.Log($"<color=Red> Current State:{characterState.Animation_Data.currentState}</color>");
+                Debug.Log($"<color=Red> Current State:{characterState.Player_Animation_Data.currentState}</color>");
             }
             characterState.BoxCollider_Data.targetSize = targetSize;
             characterState.BoxCollider_Data.size_Update_Speed = sizeUpdateSpeed;
@@ -40,7 +41,7 @@ namespace My_MemoPlatformer
         }
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (characterState.characterControl.animationProgress.latestUpdateBoxCollider != this)
+            if (characterState.characterControl.BOX_COLLIDER_DATA.latestUpdateBoxCollider != this)
             {
                 return;
             }

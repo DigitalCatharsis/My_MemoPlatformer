@@ -9,7 +9,6 @@ namespace My_MemoPlatformer
         public RuntimeAnimatorController Animation_Assassin;
         public RuntimeAnimatorController Animation_Victim;
 
-        public delegate void DoSomething(CharacterControl control);
-        public DoSomething ProcessInstakill;
+        public Action<CharacterControl> ProcessInstakill;
     }
 }

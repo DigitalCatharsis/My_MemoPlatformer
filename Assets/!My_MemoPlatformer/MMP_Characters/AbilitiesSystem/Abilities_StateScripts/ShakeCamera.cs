@@ -13,25 +13,28 @@ namespace My_MemoPlatformer
             if (_shakeTiming == 0f) 
             {                
                 CameraManager.Instance.ShakeCamera(shakeLength);
-                characterState.characterControl.animationProgress.cameraShaken = true;
+                //TODO:
+                //characterState.characterControl.animationProgress.cameraShaken = true;
             }
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {           
-            if (!characterState.characterControl.animationProgress.cameraShaken)
-            {
-                if (stateInfo.normalizedTime >= _shakeTiming)
-                {
-                    characterState.characterControl.animationProgress.cameraShaken = true;
-                    CameraManager.Instance.ShakeCamera(shakeLength);
-                }
-            }
+        {
+            //TODO:
+            //if (!characterState.characterControl.animationProgress.cameraShaken)
+            //{
+            //    if (stateInfo.normalizedTime >= _shakeTiming)
+            //    {
+            //        characterState.characterControl.animationProgress.cameraShaken = true;
+            //        CameraManager.Instance.ShakeCamera(shakeLength);
+            //    }
+            //}
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {            
-            characterState.characterControl.animationProgress.cameraShaken = false;
+        {
+            //TODO:
+            //characterState.characterControl.animationProgress.cameraShaken = false;
         }
     }
 }

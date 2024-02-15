@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
     public class PlayerAnimation : SubComponent
     {
-        public Animation_Data animation_Data;
+        public PlayerAnimation_Data animation_Data;
 
         private List<string> _currentList = new List<string> {};
         private List<string> _previousList = new List<string> {};
@@ -13,15 +14,17 @@ namespace My_MemoPlatformer
 
         void Start()
         {
-            animation_Data = new Animation_Data
+            animation_Data = new PlayerAnimation_Data
             {
                 currentState = null,
                 previousState = null,
+                lockTransition = false,
                 instantTransitionMade = false,
                 currentRunningAbilities_Dictionary = new Dictionary<CharacterAbility, int>(),
                 currentRunningAbilities_PreviewList = new List<string>(),
                 PreviousRunningAbilities_PreviewList = new List<string>(),
                 IsRunning = IsRunning,
+                StateNameContains = StateNameContains,
             };
 
             subComponentProcessor.animation_Data = animation_Data;
@@ -61,7 +64,7 @@ namespace My_MemoPlatformer
         {
             if (IsRunning(typeof(LockTransition)))
             {
-                if (Control.animationProgress.lockTransition)
+                if (Control.PLAYER_ANIMATION_DATA.lockTransition)
                 {
                     Control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.LockTransition], true);
                 }
@@ -95,6 +98,20 @@ namespace My_MemoPlatformer
             {
                 currentList.Add(data.Key.ToString());
             }
+        }
+        public bool StateNameContains(string str)
+        {
+            AnimatorClipInfo[] arr = Control.skinnedMeshAnimator.GetCurrentAnimatorClipInfo(0); //have only one layer which is zero
+
+            foreach (var clipinfo in arr)
+            {
+                if (clipinfo.clip.name.Contains(str))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

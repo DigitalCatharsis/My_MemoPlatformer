@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -5,6 +6,7 @@ namespace My_MemoPlatformer
     [System.Serializable]
     public class BoxCollider_Data
     {
+        public UpdateBoxCollider latestUpdateBoxCollider;
         public bool isUpdatingSpheres;
         public bool isLanding;
 
@@ -14,6 +16,8 @@ namespace My_MemoPlatformer
         public Vector3 targetCenter;
         public Vector3 targetSize;
         public Vector3 landingPosition;
+
+        public Bounds boxColliderBounds;
     }
 }
 

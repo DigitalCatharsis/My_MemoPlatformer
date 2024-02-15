@@ -51,7 +51,7 @@ namespace My_MemoPlatformer
 
         public override void OnFixedUpdate()
         {
-            if (Control.ANIMATION_DATA.IsRunning(typeof(MoveForward)))
+            if (Control.PLAYER_ANIMATION_DATA.IsRunning(typeof(MoveForward)))
             {
                 if (!Control.DAMAGE_DATA.IsDead())
                 {
@@ -68,9 +68,9 @@ namespace My_MemoPlatformer
             }
 
             //checking while ledge grabbing
-            if (Control.ANIMATION_DATA.IsRunning(typeof(MoveUp)))
+            if (Control.PLAYER_ANIMATION_DATA.IsRunning(typeof(MoveUp)))
             {
-                if (Control.animationProgress.latestMoveUpScript.speed > 0f)
+                if (Control.CHARACTER_MOVEMENT_DATA.latestMoveUpScript.speed > 0f)
                 {
                     CheckUpBlockingAndAddToDictionary();
                 }
@@ -78,7 +78,7 @@ namespace My_MemoPlatformer
             else
             {
                 //checking while player is jumping
-                if (Control.RIGID_BODY.velocity.y > 0.001f)
+                if (Control.rigidBody.velocity.y > 0.001f)
                 {
                     CheckUpBlockingAndAddToDictionary();
 
@@ -88,14 +88,14 @@ namespace My_MemoPlatformer
 
                         if (characterControl == null)
                         {
-                            Control.animationProgress.NullifyUpVelocity();
+                            Control.CHARACTER_MOVEMENT_DATA.NullifyUpVelocity();
                             break;
                         }
                         else
                         {
                             if (Control.transform.position.y + Control.boxCollider.center.y < characterControl.transform.position.y)
                             {
-                                Control.animationProgress.NullifyUpVelocity();
+                                Control.CHARACTER_MOVEMENT_DATA.NullifyUpVelocity();
                                 break;
                             }
                         }
@@ -125,7 +125,7 @@ namespace My_MemoPlatformer
 
         private void CheckAndProcessAirStomp()
         {
-            if (Control.RIGID_BODY.velocity.y >= 0f)
+            if (Control.rigidBody.velocity.y >= 0f)
             {
                 _airStompTargets.Clear();
                 _downBlockingObjects.Clear();
@@ -134,21 +134,21 @@ namespace My_MemoPlatformer
 
             if (_airStompTargets.Count > 0)
             {
-                Control.RIGID_BODY.velocity = Vector3.zero;
+                Control.rigidBody.velocity = Vector3.zero;
                 //TODO: Оптимизировать силу, вынести в поле
-                Control.RIGID_BODY.AddForce(Vector3.up * 250f);
+                Control.rigidBody.AddForce(Vector3.up * 250f);
 
                 foreach (var control in _airStompTargets)
                 {
                     var attackCondition_Info = new AttackCondition();
-                    attackCondition_Info.CopyInfo(control.DAMAGE_DATA.airStompAttack, base.Control);
+                    attackCondition_Info.CopyInfo(control.ATTACK_DATA.airStompAttack, base.Control);
 
                     var index = Random.Range(0, control.RAGDOLL_DATA.arrBodyPartsColliders.Length);
                     var randomPart = control.RAGDOLL_DATA.arrBodyPartsColliders[index].GetComponent<TriggerDetector>();
 
                     control.DAMAGE_DATA.damageTaken = new DamageTaken(
                         attacker: base.Control,
-                        attack: control.DAMAGE_DATA.airStompAttack,
+                        attack: control.ATTACK_DATA.airStompAttack,
                         damaged_TG: randomPart,
                         damagerPart: base.Control.rightFoot_Attack,
                         incomingVelocity: Vector3.zero);
@@ -196,7 +196,7 @@ namespace My_MemoPlatformer
             {
                 var blockingObj = CollisionDetection.GetCollidingObject(
                     Control, _frontSpheresArray[i], this.transform.forward * blockingObj_Data.frontBlocking_Distance * 25,  //25 is just for visual ray
-                    Control.animationProgress.latestMoveForwardScript.blockDistance,
+                    Control.CHARACTER_MOVEMENT_DATA.latestMoveForwardScript.blockDistance,
                     ref Control.BLOCKING_OBJ_DATA.raycastContactPoint);
 
                 if (blockingObj != null)
@@ -212,7 +212,7 @@ namespace My_MemoPlatformer
 
         private void DefineFrontSpheres()         //Consist of the side we a moving to
         {
-            if (!Control.animationProgress.IsForwardReversed())
+            if (!Control.CHARACTER_MOVEMENT_DATA.IsForwardReversed())
             {
                 _frontSpheresArray = Control.COLLISION_SPHERE_DATA.frontSpheres;
                 RemoveSpheresInArrayFromDictionary(Control.COLLISION_SPHERE_DATA.backSpheres, _frontBlockingObjects_dictionary);

@@ -71,7 +71,7 @@ namespace My_MemoPlatformer
 
         public void DropWeapon()
         {
-            var weapon = control.animationProgress.holdingWeapon;
+            var weapon = control.ATTACK_DATA.holdingWeapon;
 
             if (weapon != null)
             {
@@ -93,7 +93,7 @@ namespace My_MemoPlatformer
                 weapon.transform.position += (control.transform.forward * throwOffset.z);
 
                 thrower = control;
-                control.animationProgress.holdingWeapon = null;
+                control.ATTACK_DATA.holdingWeapon = null;
                 control = null;
                 weapon.triggerDetector.control = null;
 
@@ -105,7 +105,7 @@ namespace My_MemoPlatformer
 
         public void ThrowWeapon()
         {
-            var weapon = control.animationProgress.holdingWeapon;
+            var weapon = control.ATTACK_DATA.holdingWeapon;
 
             if (weapon != null)
             {
@@ -126,7 +126,7 @@ namespace My_MemoPlatformer
                 weapon.transform.position += control.transform.forward * throwOffset.z;
 
                 thrower = control;
-                control.animationProgress.holdingWeapon = null;
+                control.ATTACK_DATA.holdingWeapon = null;
                 control = null;
                 weapon.triggerDetector.control = null;
 

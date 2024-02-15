@@ -137,7 +137,7 @@ namespace My_MemoPlatformer
 
         private void Reposition_FrontSpheres()
         {
-            var bounds = Control.boxColliderBounds;
+            var bounds = Control.BOX_COLLIDER_DATA.boxColliderBounds;
 
             var upPosition = new Vector3(0, bounds.max.y, bounds.max.z);
             var bottomPosition = new Vector3(0, bounds.min.y, bounds.max.z);
@@ -155,7 +155,7 @@ namespace My_MemoPlatformer
         }
         private void Reposition_BackSpheres()
         {
-            var bounds = Control.boxColliderBounds;
+            var bounds = Control.BOX_COLLIDER_DATA.boxColliderBounds;
 
             var upPosition = new Vector3(0, bounds.max.y, bounds.min.z);
             var bottomPosition = new Vector3(0, bounds.min.y, bounds.min.z);
@@ -175,7 +175,7 @@ namespace My_MemoPlatformer
         private void Reposition_BottomSpheres()
         {
             {
-                var bounds = Control.boxColliderBounds;
+                var bounds = Control.BOX_COLLIDER_DATA.boxColliderBounds;
 
                 var frontPosition = new Vector3(0, bounds.min.y, bounds.max.z);
                 var backPosition = new Vector3(0, bounds.min.y, bounds.min.z);
@@ -195,7 +195,7 @@ namespace My_MemoPlatformer
 
         private void Reposition_UpSpheres()
         {
-            var bounds = Control.boxColliderBounds;
+            var bounds = Control.BOX_COLLIDER_DATA.boxColliderBounds;
 
             var frontPosition = new Vector3(0, bounds.max.y, bounds.max.z);
             var backPosition = new Vector3(0, bounds.max.y, bounds.min.z);

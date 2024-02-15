@@ -17,6 +17,8 @@ namespace My_MemoPlatformer
         PLAYER_ROTATION,
         PLAYER_ANIMATION,
         PLAYER_GROUND,
+        CHARACTER_MOVEMENT,
+        INTERACTION,
 
         COUNT,
     }

@@ -5,6 +5,7 @@ namespace My_MemoPlatformer
     public class PlayerRotation : SubComponent
     {
         public Rotation_Data rotation_Data;
+        //TODO: remove
         static string L_CharacterSelect = "L_CharacterSelect";
         private void Start()
         {
@@ -66,10 +67,9 @@ namespace My_MemoPlatformer
                 return false;
             }
         }
-
-        void ClearTurnLock()
+        private void ClearTurnLock()
         {
-            if (!Control.ANIMATION_DATA.IsRunning(typeof(LockTurn)))
+            if (!Control.PLAYER_ANIMATION_DATA.IsRunning(typeof(LockTurn)))
             {
                 if (rotation_Data.lockTurn)
                 {

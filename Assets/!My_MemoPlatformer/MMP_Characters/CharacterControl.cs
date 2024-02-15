@@ -10,6 +10,8 @@ namespace My_MemoPlatformer
     //4. CharacterControl contains actual fields about character moving etc.
     public class CharacterControl : MonoBehaviour
     {
+        public List<PoolObjectType> poolObjectList = new List<PoolObjectType>();
+
         [Header("Input")]
         public bool moveUp;
         public bool moveDown;
@@ -24,12 +26,10 @@ namespace My_MemoPlatformer
         public SubComponentProcessor subComponentProcessor;
 
         //have to dispose
-        public AnimationProgress animationProgress;
         public AIProgress aiProgress;
         public AIController aiController;
 
         public BoxCollider boxCollider;
-        public Bounds boxColliderBounds;
 
         public NavMeshObstacle navMeshObstacle;
 
@@ -46,7 +46,9 @@ namespace My_MemoPlatformer
         public InstaKill_Data INSTA_KILL_DATA => subComponentProcessor.instaKill_Data;
         public Ground_Data GROUND_DATA => subComponentProcessor.ground_Data;
         public Attack_Data ATTACK_DATA => subComponentProcessor.attack_Data;
-        public Animation_Data ANIMATION_DATA => subComponentProcessor.animation_Data;
+        public PlayerAnimation_Data PLAYER_ANIMATION_DATA => subComponentProcessor.animation_Data;
+        public CharacterMovement_Data CHARACTER_MOVEMENT_DATA => subComponentProcessor.characterMovement_Data;
+        public Interaction_Data interaction_Data => subComponentProcessor.interaction_Data;
 
         [Header("Setup")]
         public PlayableCharacterType playableCharacterType;
@@ -58,29 +60,17 @@ namespace My_MemoPlatformer
 
         private Dictionary<string, GameObject> _childObjects = new Dictionary<string, GameObject>();
 
-        private Rigidbody _rigidBody;
-        public Rigidbody RIGID_BODY
-        {
-            get
-            {
-                if (_rigidBody == null)
-                {
-                    _rigidBody = GetComponent<Rigidbody>();
-                }
-                return _rigidBody;
-            }
-        }
+        public Rigidbody rigidBody;
 
         private void Awake()
         {
             subComponentProcessor = GetComponentInChildren<SubComponentProcessor>();
 
             //better to refactor
-            animationProgress = GetComponent<AnimationProgress>();
+            rigidBody = GetComponent<Rigidbody>();
             aiProgress = GetComponentInChildren<AIProgress>();
             boxCollider = GetComponent<BoxCollider>();
             navMeshObstacle = GetComponent<NavMeshObstacle>();
-            boxColliderBounds = GetBoxColliderBounds(boxCollider);
 
             aiController = GetComponentInChildren<AIController>();
 
@@ -103,7 +93,6 @@ namespace My_MemoPlatformer
 
         private void FixedUpdate()
         {
-            boxColliderBounds = GetBoxColliderBounds(boxCollider);
             subComponentProcessor.FixedUpdateSubComponents();
         }
 
@@ -128,12 +117,6 @@ namespace My_MemoPlatformer
                 CharacterManager.Instance.characters.Add(this);
             }
         }
-
-        public void MoveForward(float speed, float speedGraph)
-        {
-            transform.Translate(Vector3.forward * speed * speedGraph * Time.deltaTime);
-        }
-
         public GameObject GetChildObj(string name)
         {
             if (_childObjects.ContainsKey(name)) //check if Dictionary already has the object i am looking for
@@ -176,16 +159,11 @@ namespace My_MemoPlatformer
                     }
                 case AttackPartType.MELEE_WEAPON:
                     {
-                        return animationProgress.holdingWeapon.triggerDetector.gameObject;
+                        return ATTACK_DATA.holdingWeapon.triggerDetector.gameObject;
                     }
                 default:
                     return null;
             }
-        }
-
-        public Bounds GetBoxColliderBounds(BoxCollider boxCollider)
-        {
-            return new Bounds(boxCollider.center, boxCollider.size);
         }
     }
 }

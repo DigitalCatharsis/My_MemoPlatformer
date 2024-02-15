@@ -21,7 +21,9 @@ namespace My_MemoPlatformer
         [Space(15)] public InstaKill_Data instaKill_Data;
         [Space(15)] public Ground_Data ground_Data;
         [Space(15)] public Attack_Data attack_Data;
-        [Space(15)] public Animation_Data animation_Data;
+        [Space(15)] public PlayerAnimation_Data animation_Data;
+        [Space(15)] public CharacterMovement_Data characterMovement_Data;
+        [Space(15)] public Interaction_Data interaction_Data;
 
         private void Awake()
         {
@@ -41,12 +43,16 @@ namespace My_MemoPlatformer
             FixedUpdateSubComponent(SubComponentType.PLAYER_ROTATION);
             FixedUpdateSubComponent(SubComponentType.PLAYER_ANIMATION);
             FixedUpdateSubComponent(SubComponentType.PLAYER_GROUND);
+            FixedUpdateSubComponent(SubComponentType.CHARACTER_MOVEMENT);
+            FixedUpdateSubComponent(SubComponentType.INTERACTION);
         }
         public void UpdateSubComponents()
         {
             UpdateSubComponent(SubComponentType.MANUAL_INPUT);
             UpdateSubComponent(SubComponentType.PLAYER_ATTACK);
             UpdateSubComponent(SubComponentType.PLAYER_ANIMATION);
+            UpdateSubComponent(SubComponentType.CHARACTER_MOVEMENT);
+            UpdateSubComponent(SubComponentType.INTERACTION);
         }
 
         private void UpdateSubComponent(SubComponentType type)

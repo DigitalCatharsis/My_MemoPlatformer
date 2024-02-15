@@ -6,7 +6,7 @@ namespace My_MemoPlatformer
     public class MomentumCalculator_Data
     {
         public float momentum;
-        public delegate void DoSomething(float speed, float maxMomentum);
-        public DoSomething CalcualateMomentum;
+
+        public Action<float,float> CalcualateMomentum;
     }
 }

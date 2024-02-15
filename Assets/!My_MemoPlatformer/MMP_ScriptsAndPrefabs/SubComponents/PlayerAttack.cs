@@ -1,16 +1,27 @@
+using System.Collections.Generic;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
     public class PlayerAttack : SubComponent
     {
-        Attack_Data playerAttack_Data;
+        public Attack_Data playerAttack_Data;
+
+        [Header("Damage Setup")]
+        [SerializeField] private Attack _weaponThrow;
+        [SerializeField] private Attack _airStompAttack;
+
         private void Start()
         {
             playerAttack_Data = new Attack_Data
             {
+                holdingWeapon = null,
                 attackButtonIsReset = false,
                 attackTriggered = false,
+
+                airStompAttack = _airStompAttack,
+                weaponThrowAttack = _weaponThrow,
             };
 
             subComponentProcessor.arrSubComponents[(int)SubComponentType.PLAYER_ATTACK] = this;

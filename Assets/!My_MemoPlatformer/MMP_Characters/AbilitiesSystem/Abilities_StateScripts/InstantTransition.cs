@@ -23,7 +23,7 @@ namespace My_MemoPlatformer
             {
                 if (TransitionConditionChecker.MakeTransition(characterState.characterControl, transitionConditions))
                 {
-                    characterState.Animation_Data.instantTransitionMade = true;
+                    characterState.Player_Animation_Data.instantTransitionMade = true;
                     MakeInstantTransition(characterState.characterControl);
                 }
             }
@@ -31,7 +31,7 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            characterState.Animation_Data.instantTransitionMade = false;
+            characterState.Player_Animation_Data.instantTransitionMade = false;
         }
 
         void MakeInstantTransition(CharacterControl control)
@@ -61,12 +61,12 @@ namespace My_MemoPlatformer
 
         private bool Interfered(CharacterControl control)
         {
-            if (control.animationProgress.lockTransition)
+            if (control.PLAYER_ANIMATION_DATA.lockTransition)
             {
                 return true;
             }
 
-            if (control.ANIMATION_DATA.instantTransitionMade)
+            if (control.PLAYER_ANIMATION_DATA.instantTransitionMade)
             {
                 return true;
             }
@@ -79,7 +79,7 @@ namespace My_MemoPlatformer
 
             if (!ignoreAttackAbility)
             {
-                if (control.ANIMATION_DATA.IsRunning(typeof(Attack)))
+                if (control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Attack)))
                 {
                     return true;
                 }

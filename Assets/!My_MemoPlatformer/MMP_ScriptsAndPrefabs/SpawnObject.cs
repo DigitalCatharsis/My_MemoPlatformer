@@ -13,18 +13,18 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (spawnTiming== 0f)
-            {                
+            if (spawnTiming == 0f)
+            {
                 SpawnObj(characterState.characterControl);
             }
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
-        {          
-            if (!characterState.characterControl.animationProgress.poolObjectList.Contains(objectType))
+        {
+            if (!characterState.characterControl.poolObjectList.Contains(objectType))
             {
                 if (stateInfo.normalizedTime >= spawnTiming)
-                {                    
+                {
                     SpawnObj(characterState.characterControl);
                 }
             }
@@ -32,15 +32,15 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (characterState.characterControl.animationProgress.poolObjectList.Contains(objectType))
+            if (characterState.characterControl.poolObjectList.Contains(objectType))
             {
-                characterState.characterControl.animationProgress.poolObjectList.Remove(objectType);
+                characterState.characterControl.poolObjectList.Remove(objectType);
             }
         }
 
         private void SpawnObj(CharacterControl control)
         {
-            if (control.animationProgress.poolObjectList.Contains(objectType))
+            if (control.poolObjectList.Contains(objectType))
             {
                 return;
             }
@@ -67,7 +67,7 @@ namespace My_MemoPlatformer
 
             obj.SetActive(true);
 
-            control.animationProgress.poolObjectList.Add(objectType);
+            control.poolObjectList.Add(objectType);
         }
     }
 }

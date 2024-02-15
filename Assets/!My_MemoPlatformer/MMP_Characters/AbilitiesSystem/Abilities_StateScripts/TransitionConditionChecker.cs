@@ -1,7 +1,4 @@
 using System.Collections.Generic;
-using Unity.Burst.Intrinsics;
-using UnityEditor;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -149,8 +146,6 @@ namespace My_MemoPlatformer
                         {
                             bool AllIsOverlapping = true;
 
-                            //Debug.Log($"<color=Magenta>Current State: {control.ANIMATION_DATA.currentState}</color>");
-
                             for (int i = 0; i < control.COLLISION_SPHERE_DATA.frontOverlapCheckers.Length; i++)
                             {
                                 if (!control.COLLISION_SPHERE_DATA.frontOverlapCheckers[i].isObjOverlapping)
@@ -165,7 +160,6 @@ namespace My_MemoPlatformer
                                         {
                                             Debug.Log($"<color=yellow>{control.COLLISION_SPHERE_DATA.frontOverlapCheckers[i].name}_{i} IS overlapping with {overLapedObject.name}</color>");
                                         }
-                                        //EditorApplication.isPaused = true;
                                     }
                                     #endregion 
                                 }
@@ -258,7 +252,7 @@ namespace My_MemoPlatformer
                         {
                             if (control.DAMAGE_DATA.collidingWeapons_Dictionary.Count == 0)
                             {
-                                if (control.animationProgress.holdingWeapon == null)
+                                if (control.ATTACK_DATA.holdingWeapon == null)
                                 {
                                     return false;
                                 }
@@ -267,12 +261,12 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.HOLDING_AXE:
                         {
-                            if (control.animationProgress.holdingWeapon == null)
+                            if (control.ATTACK_DATA.holdingWeapon == null)
                             {
                                 return false;
                             }
 
-                            if (!control.animationProgress.holdingWeapon.name.Contains("Pickup"))
+                            if (!control.ATTACK_DATA.holdingWeapon.name.Contains("Pickup"))
                             {
                                 return false;
                             }

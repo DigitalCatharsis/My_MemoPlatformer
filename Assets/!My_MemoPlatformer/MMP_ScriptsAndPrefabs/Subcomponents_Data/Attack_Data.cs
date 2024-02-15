@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace My_MemoPlatformer
 {
@@ -7,5 +8,12 @@ namespace My_MemoPlatformer
     {
         public bool attackTriggered;
         public bool attackButtonIsReset;
+
+        [Header("AirStomp")]
+        public Attack airStompAttack;
+
+        [Header("Weapon")]
+        public MeleeWeapon holdingWeapon;
+        public Attack weaponThrowAttack;
     }
 }

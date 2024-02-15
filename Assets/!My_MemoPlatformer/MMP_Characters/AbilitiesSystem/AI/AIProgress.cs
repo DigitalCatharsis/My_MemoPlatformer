@@ -67,7 +67,7 @@ namespace My_MemoPlatformer
         }
         private void PrococessForwardGroundAttack(CharacterControl control)
         {
-            if (control.aiProgress.IsFacingTarget() && control.ANIMATION_DATA.IsRunning(typeof(MoveForward)))
+            if (control.aiProgress.IsFacingTarget() && control.PLAYER_ANIMATION_DATA.IsRunning(typeof(MoveForward)))
             {
                 control.ATTACK_DATA.attackTriggered = true;
                 control.attack = false;

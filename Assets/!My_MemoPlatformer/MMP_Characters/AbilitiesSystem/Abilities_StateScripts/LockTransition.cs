@@ -9,18 +9,18 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            characterState.characterControl.animationProgress.lockTransition = true;
+            characterState.characterControl.PLAYER_ANIMATION_DATA.lockTransition = true;
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             if (stateInfo.normalizedTime > unlockTime)
             {
-                characterState.characterControl.animationProgress.lockTransition = false;
+                characterState.characterControl.PLAYER_ANIMATION_DATA.lockTransition = false;
             }
             else
             {
-                characterState.characterControl.animationProgress.lockTransition = true;
+                characterState.characterControl.PLAYER_ANIMATION_DATA.lockTransition = true;
             }
         }
 

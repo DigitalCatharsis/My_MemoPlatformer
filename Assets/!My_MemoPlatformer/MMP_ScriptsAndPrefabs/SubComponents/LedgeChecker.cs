@@ -81,7 +81,7 @@ namespace My_MemoPlatformer
         {
             if (!Control.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
             {
-                if (Control.RIGID_BODY.useGravity)
+                if (Control.rigidBody.useGravity)
                 {
                     ledgeGrab_Data.isGrabbingLedge = false;
                 }
@@ -130,60 +130,25 @@ namespace My_MemoPlatformer
             {
                 foreach (var collider in ledgeGrab_Data.upBlockingObjects)
                 {
-                    Debug.Log(collider.gameObject.name);
+                    //Debug.Log(collider.gameObject.name);
                     if (!Ledge.IsLedgeCollider(collider.gameObject)
                         && collider.transform.root.gameObject != Control.gameObject
                         && Control.RAGDOLL_DATA.GetBodypart(collider.gameObject.name)
                         )
                     {
-                        Debug.Log("true");
                         return true;
                     }
                 }
             }
-
-            Debug.Log("false2");
             return false;
-
-            //draw DebugLine
-            //Debug.DrawRay(start.transform.position, Vector3.up, Color.red);
-
-            ////check collision
-            //RaycastHit hit;
-            //if (Physics.Raycast(start.transform.position, Vector3.up, out hit, 1, layerMask: 13))   //13 visual no Raycast
-            //{
-            //    if (!Ledge.IsLedgeCollider(hit.collider.gameObject))
-            //    {
-            //        if (this.transform.root.Find(hit.collider.gameObject.name) != null)
-            //        {
-            //            return true;
-            //        }
-
-            //        if (DebugContainer_Data.Instance.debug_Ledges)
-            //        {
-            //            Debug.Log(hit.collider.transform.gameObject.ToString());
-            //        }
-
-            //        return false;
-            //        //Debug.Break();
-            //    }
-            //    else
-            //    {
-            //        Debug.Log(hit.collider.gameObject.ToString());
-            //        return false;
-            //    }
-            //}
-
-            ////Debug.Log("nothing");
-            //return false;
         }
         private void ProcessPositionOffset(GameObject platform, BoxCollider boxCollider)
         {
             //TODO: ����������
 
             ledgeGrab_Data.isGrabbingLedge = true;
-            Control.RIGID_BODY.useGravity = false;
-            Control.RIGID_BODY.velocity = Vector3.zero;
+            Control.rigidBody.useGravity = false;
+            Control.rigidBody.velocity = Vector3.zero;
 
             float y, z;
             y = platform.transform.position.y + (boxCollider.transform.lossyScale.y / 2f);
@@ -200,11 +165,11 @@ namespace My_MemoPlatformer
 
             if (Control.ROTATION_DATA.IsFacingForward())
             {
-                Control.RIGID_BODY.MovePosition(platformEdge + ledgeCalibration);
+                Control.rigidBody.MovePosition(platformEdge + ledgeCalibration);
             }
             else
             {
-                Control.RIGID_BODY.MovePosition(platformEdge + new Vector3(0f, ledgeCalibration.y, -ledgeCalibration.z));
+                Control.rigidBody.MovePosition(platformEdge + new Vector3(0f, ledgeCalibration.y, -ledgeCalibration.z));
             }
         }
 

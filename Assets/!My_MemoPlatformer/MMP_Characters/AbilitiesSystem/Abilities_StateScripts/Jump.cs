@@ -61,16 +61,16 @@ namespace My_MemoPlatformer
 
             if (clearPreviousVelocity)
             {
-                control.RIGID_BODY.velocity = Vector3.zero;
+                control.rigidBody.velocity = Vector3.zero;
             }
 
             // automatically turn gravity on before jumping
-            if (!control.RIGID_BODY.useGravity)
+            if (!control.rigidBody.useGravity)
             {
-                control.RIGID_BODY.useGravity = true;
+                control.rigidBody.useGravity = true;
             }
 
-            control.RIGID_BODY.AddForce(Vector3.up * jumpForce);
+            control.rigidBody.AddForce(Vector3.up * jumpForce);
             control.JUMP_DATA.dicJumped[jumpIndex] = true;
         }
     }

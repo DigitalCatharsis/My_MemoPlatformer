@@ -9,11 +9,7 @@ namespace My_MemoPlatformer
         public bool lockTurn;
         public float unlockTiming;
 
-        public delegate bool ReturnBool();
-        public delegate void DoSomething(bool faceForward);
-
-        public ReturnBool IsFacingForward;
-        public DoSomething FaceForward;
+        public Func<bool> IsFacingForward;
+        public Action<bool> FaceForward;
     }
-
 }

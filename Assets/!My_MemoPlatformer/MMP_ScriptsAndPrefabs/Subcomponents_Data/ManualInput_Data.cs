@@ -6,9 +6,8 @@ namespace My_MemoPlatformer
     [Serializable]
     public class ManualInput_Data
     {
-        public delegate bool ReturnBool();
-        public ReturnBool DoubleTapUp;
-        public ReturnBool DoubleTapDown;
+        public Func<bool> DoubleTapUp;
+        public Func<bool> DoubleTapDown;
     }
 }
 

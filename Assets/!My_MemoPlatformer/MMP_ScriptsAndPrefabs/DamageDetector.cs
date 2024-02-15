@@ -7,10 +7,6 @@ namespace My_MemoPlatformer
     {
         [SerializeField] private Damage_Data _damage_Data;
 
-        [Header("Damage Setup")]
-        [SerializeField] private Attack _weaponThrow;
-        [SerializeField] private Attack _airStompAttack;
-
         [Header("HP Setup")]
         [SerializeField] private float _hp;
 
@@ -22,8 +18,6 @@ namespace My_MemoPlatformer
             {
                 blockedAttack = null,
                 currentHp = _hp,
-                airStompAttack = _airStompAttack,
-                weaponThrow = _weaponThrow,
 
                 damageTaken = new DamageTaken(attacker: null, attack: null, damaged_TG: null, damagerPart: null, incomingVelocity: Vector3.zero),
 
@@ -177,7 +171,7 @@ namespace My_MemoPlatformer
                 return true;
             }
 
-            if (Control.ANIMATION_DATA.IsRunning(typeof(Block)))
+            if (Control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Block)))
             {
                 var dir = info.attacker.transform.position - Control.transform.position;
 
@@ -246,7 +240,7 @@ namespace My_MemoPlatformer
             _damage_Data.currentHp -= attackCondition_Info.attackAbility.damage;
 
             AttackManager.Instance.ForceDeregister(Control);
-            Control.ANIMATION_DATA.currentRunningAbilities_Dictionary.Clear();
+            Control.PLAYER_ANIMATION_DATA.currentRunningAbilities_Dictionary.Clear();
 
             if (IsCharacterDead())
             {

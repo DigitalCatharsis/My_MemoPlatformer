@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,16 +16,11 @@ namespace My_MemoPlatformer
         public float airStompDownBlocking_Distance;
         public float upBlocking_Distance;
 
-        public delegate void DoSomething();
-        public delegate bool ReturnBool();
-        public delegate List<GameObject> ReturnGameOjbList();
-        public delegate bool IsSteppble(GameObject obj);
-
-        public DoSomething ClearFrontBlockingObjDic;
-        public ReturnBool LeftSideBlocked;
-        public ReturnBool RightSideBLocked;
-        public ReturnGameOjbList GetFrontBlockingObjList;
-        public ReturnGameOjbList GetFrontBlockingCharactersList;
-        public IsSteppble IsSteppbleObject;
+        public Action ClearFrontBlockingObjDic;
+        public Func<bool> LeftSideBlocked;
+        public Func<bool> RightSideBLocked;
+        public Func<List<GameObject>> GetFrontBlockingObjList;
+        public Func<List<GameObject>> GetFrontBlockingCharactersList;
+        public Func<GameObject, bool> IsSteppbleObject;
     }
 }

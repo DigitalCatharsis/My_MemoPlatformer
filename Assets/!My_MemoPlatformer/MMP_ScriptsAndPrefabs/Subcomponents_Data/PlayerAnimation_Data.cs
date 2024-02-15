@@ -1,13 +1,16 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
     [Serializable]
-    public class Animation_Data
+    public class PlayerAnimation_Data
     {
+        [Header("Transition")]
         public bool instantTransitionMade;
+        public bool lockTransition;  //TODO: Где-то сбоит Lock transition (не выключается). Если пешка получает урон, можно иногда это увидеть.
 
         [Space(10)][Header("Current")]
         public string currentState;
@@ -16,11 +19,10 @@ namespace My_MemoPlatformer
         [Space (10)][Header("Previous")]
         public string previousState;
         public List<string> PreviousRunningAbilities_PreviewList;
-
-
         public Dictionary<CharacterAbility, int> currentRunningAbilities_Dictionary = new Dictionary<CharacterAbility, int>();
 
-        public delegate bool bool_type(Type type);
-        public bool_type IsRunning;
+        public Func<Type,bool> IsRunning;
+        public Predicate<string> StateNameContains;
+
     }
 }

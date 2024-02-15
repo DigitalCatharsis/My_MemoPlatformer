@@ -92,11 +92,11 @@ namespace My_MemoPlatformer
         private void GetHitByThrowedWeapon(MeleeWeapon weapon)
         {
             var attackCondition_info = new AttackCondition();
-            attackCondition_info.CopyInfo(control.DAMAGE_DATA.weaponThrow, control);
+            attackCondition_info.CopyInfo(control.ATTACK_DATA.weaponThrowAttack, control);
 
             control.DAMAGE_DATA.damageTaken = new DamageTaken(
                 attacker: weapon.thrower,
-                attack: control.DAMAGE_DATA.weaponThrow,
+                attack: control.ATTACK_DATA.weaponThrowAttack,
                 damaged_TG: this,
                 damagerPart: null,
                 incomingVelocity: Vector3.zero);
