@@ -15,29 +15,31 @@ namespace My_MemoPlatformer
             {
                 case PlayableCharacterType.YELLOW:
                     {
-                        _objName = "--Y_YBot - Yellow";
+                        _objName = CharacterType.__Y_YBot_Yellow.ToString();
                     }
                     break;
                 case PlayableCharacterType.RED:
                     {
-                        _objName = "--Y_YBot - Red Variant";
+                        _objName = CharacterType.__G_YBot_Green.ToString();
                     }
                     break;
                 case PlayableCharacterType.GREEN:
                     {
-                        _objName = "--G_YBot - Green Variant";
+                        _objName = CharacterType.__G_YBot_Green.ToString();
                     }
                     break;
                 case PlayableCharacterType.NONE:
                     {
                         _characterSelect.selectedCharacterType = PlayableCharacterType.YELLOW;
-                        _objName = "--Y_YBot - Yellow";
+                        _objName = CharacterType.__Y_YBot_Yellow.ToString();
                     }
                     break;
             }
 
-            var obj = Instantiate(Resources.Load(_objName,typeof(GameObject))) as GameObject;
-            obj.transform.position = this.transform.position;
+            var obj = PoolManager.Instance.GetObject(CharacterType.__Y_YBot_Yellow, PoolManager.Instance.CharacterPoolDictionary, this.transform.position, Quaternion.identity);
+
+            //var obj = Instantiate(Resources.Load(_objName,typeof(GameObject))) as GameObject;
+            //obj.transform.position = this.transform.position;
             GetComponent<MeshRenderer>().enabled = false;
 
             yield return new WaitForEndOfFrame(); //get some time for cinemachine to catch target, cause of control.RagdollData.GetBodypart is not initialized yet

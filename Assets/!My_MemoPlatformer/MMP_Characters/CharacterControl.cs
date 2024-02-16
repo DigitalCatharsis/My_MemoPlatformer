@@ -10,7 +10,7 @@ namespace My_MemoPlatformer
     //4. CharacterControl contains actual fields about character moving etc.
     public class CharacterControl : MonoBehaviour
     {
-        public List<PoolObjectType> poolObjectList = new List<PoolObjectType>();
+        //public List<PoolObjectType> poolObjectList = new List<PoolObjectType>();
 
         [Header("Input")]
         public bool moveUp;
@@ -48,7 +48,8 @@ namespace My_MemoPlatformer
         public Attack_Data ATTACK_DATA => subComponentProcessor.attack_Data;
         public PlayerAnimation_Data PLAYER_ANIMATION_DATA => subComponentProcessor.animation_Data;
         public CharacterMovement_Data CHARACTER_MOVEMENT_DATA => subComponentProcessor.characterMovement_Data;
-        public Interaction_Data interaction_Data => subComponentProcessor.interaction_Data;
+        public Interaction_Data INTERACTION_DATA => subComponentProcessor.interaction_Data;
+        public ObjPooling_Data OBJ_POOLING_DATA => subComponentProcessor.objPoolingData;
 
         [Header("Setup")]
         public PlayableCharacterType playableCharacterType;

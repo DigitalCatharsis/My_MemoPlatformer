@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    public class PoolObject : MonoBehaviour
+    public class DataPoolObject : MonoBehaviour, IPoolObject
     {
-        public PoolObjectType poolObjectType;
+        public DataType poolObjectType;
         [SerializeField] float scheduledOffTime;
         private Coroutine offRoutine;
 
@@ -27,16 +27,23 @@ namespace My_MemoPlatformer
             this.transform.parent = null;
             this.transform.position = Vector3.zero;
             this.transform.rotation = Quaternion.identity;
-
-            PoolManager.Instance.AddObject(this);
         }
 
         IEnumerator _ScheduledOff()
         {
             yield return new WaitForSeconds (scheduledOffTime);
-            if (!PoolManager.Instance.poolDictionary[poolObjectType].Contains(this.gameObject))
+            if (!PoolManager.Instance.dataPoolDictionary[poolObjectType].Contains(this.gameObject))
             {
-                TurnOff(); 
+                TurnOff();
+                ReturnToPool();
+            }
+        }
+
+        public void ReturnToPool()
+        {
+            if (!PoolManager.Instance.dataPoolDictionary[poolObjectType].Contains(this.gameObject))
+            {
+                PoolManager.Instance.AddObject(poolObjectType, PoolManager.Instance.dataPoolDictionary, this.gameObject);
             }
         }
     }

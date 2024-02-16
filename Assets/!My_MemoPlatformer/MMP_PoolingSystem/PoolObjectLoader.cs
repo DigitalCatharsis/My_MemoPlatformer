@@ -1,50 +1,34 @@
+using System;
 using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    public enum PoolObjectType
+    public class PoolObjectLoader : Singleton<PoolObjectLoader>
     {
-        ATTACK_CONDITION,
-        HAMMER_OBJ,
-        HAMMER_VFX,
-        DAMAGE_WHITE_VFX,
-    }
-
-    public class PoolObjectLoader : MonoBehaviour
-    {
-        public static PoolObject InstantiatePrefab(PoolObjectType objType)
+        public GameObject InstantiatePrefab<T>(T objType, Vector3 position, Quaternion rotation)
         {
-            GameObject obj = null;
-
-            switch (objType)
+            var typelist = objType switch
             {
-                case PoolObjectType.ATTACK_CONDITION:
-                    {
-                        obj = Instantiate(Resources.Load("AttackCondition", typeof (GameObject)) as GameObject);
-                        break; 
-                    }
-                case PoolObjectType.HAMMER_OBJ:
-                    {
-                        obj = Instantiate(Resources.Load("ThorHammer", typeof(GameObject)) as GameObject);
-                        break;
-                    }         
-                case PoolObjectType.HAMMER_VFX:
-                    {
-                        obj = Instantiate(Resources.Load("VFX_HammerDown", typeof(GameObject)) as GameObject);
-                        break;
-                    }           
-                case PoolObjectType.DAMAGE_WHITE_VFX:
-                    {
-                        obj = Instantiate(Resources.Load("VFX_Damage_White", typeof(GameObject)) as GameObject);
-                        break;
-                    }
-            }
-
-            return obj.GetComponent<PoolObject>();
+                CharacterType characterType => InstantiateCharacter(characterType, position, rotation),
+                VFXType powerUpType => InstantiateVFX(powerUpType, position, rotation),
+                DataType dataType => InstantiateProjectile(dataType, position, rotation),
+                var unknownType => throw new Exception($"{unknownType?.GetType()}")
+            };
+            return typelist;
         }
 
+        public GameObject InstantiateCharacter(CharacterType poolObjectType, Vector3 position, Quaternion rotation)
+        {
+            return Spawner.Instance.CharacterFactory.SpawnGameobject(poolObjectType, position, rotation);
+        }
 
-
-
+        public GameObject InstantiateVFX(VFXType poolObjectType, Vector3 position, Quaternion rotation)
+        {
+            return Spawner.Instance.vFXFactory.SpawnGameobject(poolObjectType, position, rotation);
+        }
+        public GameObject InstantiateProjectile(DataType poolObjectType, Vector3 position, Quaternion rotation)
+        {
+            return Spawner.Instance.dataFactory.SpawnGameobject(poolObjectType, position, rotation);
+        }
     }
 }

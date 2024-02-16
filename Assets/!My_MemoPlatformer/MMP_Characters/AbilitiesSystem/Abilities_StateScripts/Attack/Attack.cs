@@ -33,7 +33,7 @@ namespace My_MemoPlatformer
 
         [Header("Death Particles")]
         public bool useDeathParticles;
-        public PoolObjectType particleType;
+        public VFXType particleType;
 
         [Space(10)]
         public CollateralDamageInfo collateralDamageInfo;
@@ -44,7 +44,7 @@ namespace My_MemoPlatformer
         {
             characterState.Attack_Data.attackTriggered = false;
 
-            var obj = PoolManager.Instance.GetObject(PoolObjectType.ATTACK_CONDITION);
+            var obj = PoolManager.Instance.GetObject(DataType.AttackCondition, PoolManager.Instance.dataPoolDictionary, Vector3.zero, Quaternion.identity);
             var info = obj.GetComponent<AttackCondition>();
 
             if (AttackManager.Instance.activeAttacks == null)
@@ -112,7 +112,7 @@ namespace My_MemoPlatformer
                     if (info.attackAbility == this && !info.isFinished)
                     {
                         info.isFinished = true;
-                        info.GetComponent<PoolObject>().TurnOff();
+                        info.GetComponent<DataPoolObject>().TurnOff();
 
                         foreach (var control in CharacterManager.Instance.characters)
                         {

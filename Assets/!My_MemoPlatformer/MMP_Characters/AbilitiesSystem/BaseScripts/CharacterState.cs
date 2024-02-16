@@ -25,6 +25,7 @@ namespace My_MemoPlatformer
         public PlayerAnimation_Data Player_Animation_Data => characterControl.subComponentProcessor.animation_Data;
         public AIController AI_CONTROLLER => characterControl.aiController;
         public CharacterMovement_Data CharacterMovement_Data => characterControl.CHARACTER_MOVEMENT_DATA;
+        public ObjPooling_Data ObjPooling_Data => characterControl.OBJ_POOLING_DATA;
         public void PutStatesInArray()
         {
             arrAbilities = new CharacterAbility[ListAbilityData.Count];

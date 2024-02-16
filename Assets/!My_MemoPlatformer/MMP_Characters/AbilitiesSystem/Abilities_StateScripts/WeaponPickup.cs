@@ -9,7 +9,7 @@ namespace My_MemoPlatformer
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            characterState.characterControl.ATTACK_DATA.holdingWeapon = characterState.characterControl.interaction_Data.GetTouchingWeapon();
+            characterState.characterControl.ATTACK_DATA.holdingWeapon = characterState.characterControl.INTERACTION_DATA.GetTouchingWeapon();
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

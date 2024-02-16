@@ -19,6 +19,7 @@ namespace My_MemoPlatformer
         PLAYER_GROUND,
         CHARACTER_MOVEMENT,
         INTERACTION,
+        OBJ_POOLING_DATA,
 
         COUNT,
     }

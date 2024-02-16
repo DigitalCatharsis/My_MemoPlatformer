@@ -175,7 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3016116376653407422}
-  - component: {fileID: 5178973972576816176}
+  - component: {fileID: -4197724544868852034}
   m_Layer: 0
   m_Name: ThorHammer
   m_TagString: Untagged
@@ -205,7 +205,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5178973972576816176
+--- !u!114 &-4197724544868852034
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -214,11 +214,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2269880207055574701}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bc6e6beda03f6a43aae03b325d4e974, type: 3}
+  m_Script: {fileID: 11500000, guid: 050ce6b596700bb4f882bffbf440e4a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolObjectType: 1
-  scheduledOffTime: 0.2
+  poolObjectType: 0
+  scheduledOffTime: 0
 --- !u!1 &3083724461906893039
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 2
+  m_Version: 3
   m_UsePipelineSettings: 1
   m_AdditionalLightsShadowResolutionTier: 2
   m_LightLayerMask: 1
@@ -336,7 +336,7 @@ MonoBehaviour:
   m_ShadowRenderingLayers: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 1
+  m_SoftShadowQuality: 2
 --- !u!1 &4784254659134805393
 GameObject:
   m_ObjectHideFlags: 0

@@ -304,7 +304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 78875188}
   m_Layer: 0
-  m_Name: ---Camera
+  m_Name: ___Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -864,7 +864,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5582724929851568672, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
       propertyPath: m_Name
-      value: --B_YBot - Blue Variant (2)
+      value: __B_YBot - Blue Variant (2)
       objectReference: {fileID: 0}
     - target: {fileID: 5582724929851568672, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
       propertyPath: m_IsActive
@@ -1413,7 +1413,7 @@ GameObject:
   m_Component:
   - component: {fileID: 374185471}
   m_Layer: 0
-  m_Name: ---Pawns
+  m_Name: ___Pawns
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1444,7 +1444,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5582724929851568672, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
       propertyPath: m_Name
-      value: --B_YBot - Blue Variant (1)
+      value: __B_YBot - Blue Variant (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5582724929851568672, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
       propertyPath: m_IsActive
@@ -2170,7 +2170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 581673806}
   m_Layer: 0
-  m_Name: ---Lighting
+  m_Name: ___Lighting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4520,7 +4520,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1012962189}
   m_Layer: 0
-  m_Name: ---Environment
+  m_Name: ___Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4928,7 +4928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1129275433}
   m_Layer: 0
-  m_Name: ---IntereactionEnvironment
+  m_Name: ___IntereactionEnvironment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5377,7 +5377,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1285368525}
   m_Layer: 0
-  m_Name: ---Settings and Helpers
+  m_Name: ___Settings and Helpers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5621,7 +5621,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1367099202}
   m_Layer: 0
-  m_Name: ---UI
+  m_Name: ___UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6051,7 +6051,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5582724929851568672, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
       propertyPath: m_Name
-      value: --B_YBot - Blue Variant
+      value: __B_YBot - Blue Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5582724929851568672, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
       propertyPath: m_IsActive
@@ -7951,7 +7951,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1973278237}
   m_Layer: 0
-  m_Name: ---RealTime
+  m_Name: ___RealTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7982,7 +7982,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1997439632}
   m_Layer: 0
-  m_Name: ---Lights_Effects_Etc
+  m_Name: ___Lights_Effects_Etc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8119,7 +8119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2014423948}
   m_Layer: 0
-  m_Name: ---Level Design
+  m_Name: ___Level Design
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

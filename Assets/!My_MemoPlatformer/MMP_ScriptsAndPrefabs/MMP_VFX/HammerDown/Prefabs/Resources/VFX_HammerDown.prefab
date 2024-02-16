@@ -4873,7 +4873,7 @@ GameObject:
   - component: {fileID: 2170643027879816157}
   - component: {fileID: 2170643027879816156}
   - component: {fileID: 2170643027879816159}
-  - component: {fileID: 873191767259324498}
+  - component: {fileID: -863755073075303931}
   m_Layer: 0
   m_Name: VFX_HammerDown
   m_TagString: Untagged
@@ -9711,7 +9711,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &873191767259324498
+--- !u!114 &-863755073075303931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9720,10 +9720,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2170643027879816158}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bc6e6beda03f6a43aae03b325d4e974, type: 3}
+  m_Script: {fileID: 11500000, guid: 050ce6b596700bb4f882bffbf440e4a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolObjectType: 2
+  poolObjectType: 0
   scheduledOffTime: 2
 --- !u!1 &2170643027890962384
 GameObject:

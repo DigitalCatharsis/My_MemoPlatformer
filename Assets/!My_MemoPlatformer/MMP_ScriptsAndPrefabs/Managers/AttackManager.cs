@@ -15,7 +15,7 @@ namespace My_MemoPlatformer
                 if (info.attacker == control)
                 {
                     info.isFinished = true;
-                    info.GetComponent<PoolObject>().TurnOff();
+                    info.GetComponent<DataPoolObject>().TurnOff();
                 }
             }
         }

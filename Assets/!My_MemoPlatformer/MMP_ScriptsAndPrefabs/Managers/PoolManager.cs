@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,14 +6,17 @@ namespace My_MemoPlatformer
 {
     public class PoolManager : Singleton<PoolManager>
     {
-        public Dictionary<PoolObjectType, List<GameObject>> poolDictionary = new Dictionary<PoolObjectType, List<GameObject>>();
+        public Dictionary<CharacterType, List<GameObject>> CharacterPoolDictionary = new Dictionary<CharacterType, List<GameObject>>();
+        public Dictionary<VFXType, List<GameObject>> vfxPoolDictionary = new Dictionary<VFXType, List<GameObject>>();
+        public Dictionary<DataType, List<GameObject>> dataPoolDictionary = new Dictionary<DataType, List<GameObject>>();
 
-        public void SetUpDictionary()   
+        #region SetupDictionary
+
+        private void SetUpDictionary<T>(Dictionary<T,List<GameObject>> poolDictionary)
         {
-            //get every enum in PoolObjedtType
-            PoolObjectType[] arr = System.Enum.GetValues(typeof(PoolObjectType)) as PoolObjectType[];
-            
-            foreach (PoolObjectType p in arr)
+            T[] arr = Enum.GetValues(typeof(T)) as T[];
+
+            foreach (T p in arr)
             {
                 if (!poolDictionary.ContainsKey(p))
                 {
@@ -20,36 +24,41 @@ namespace My_MemoPlatformer
                 }
             }
         }
+        #endregion
 
-        public GameObject GetObject (PoolObjectType objType) // Когда мы активируем объект, он выходит из списка. Когда деактивируем, добавляем в список.
+        #region GetObjectFromPool
+        public GameObject GetObject<T>(T objType, Dictionary<T, List<GameObject>> poolDictionary,  Vector3 position, Quaternion rotation)
+        {
+                return ObjectGetter(poolDictionary, objType, position, rotation);
+        }
+
+        private GameObject ObjectGetter<T>(Dictionary<T, List<GameObject>> poolDictionary, T objType, Vector3 position, Quaternion rotation)
         {
             if (poolDictionary.Count == 0)
             {
-                SetUpDictionary();
+                SetUpDictionary(poolDictionary);
             }
 
-            List<GameObject> list = poolDictionary[objType];
-            GameObject obj = null;
+             List<GameObject> list = poolDictionary[objType];
 
-            if (list.Count > 0)    // Опять забыл, не забывай, что это не совсем сам объект, а pull object, шаблончик под объект. мы смотрим, что есть свободные шаблончики. Например пуль 30, а шаблончиков 29, то далее мы выделяем 30-ый шаблончек...вроде так. 
+            if (list.Count > 0)
             {
-                obj = list[0];
+                var obj = list[0];
                 list.RemoveAt(0);
+                return obj;
             }
-
             else
             {
-                obj = PoolObjectLoader.InstantiatePrefab(objType).gameObject;
+                return PoolObjectLoader.Instance.InstantiatePrefab(objType, position, rotation);
             }
-
-            return obj;
         }
+        #endregion
 
-        public void AddObject (PoolObject obj)  //Добавляем, когда poolObject выключаетя
+        public void AddObject<T>(T objType, Dictionary<T, List<GameObject>> poolDictionary, GameObject poolGameObject)
         {
-            List<GameObject> list = poolDictionary[obj.poolObjectType];
-            list.Add(obj.gameObject);
-            obj.gameObject.SetActive(false);
+            var listOfGameObjects = poolDictionary[(T)objType];
+            listOfGameObjects.Add(poolGameObject);
+            poolGameObject.SetActive(false);
         }
-    } 
+    }
 }

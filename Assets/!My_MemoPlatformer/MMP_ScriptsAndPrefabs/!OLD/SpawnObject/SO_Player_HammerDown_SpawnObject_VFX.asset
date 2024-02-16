@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0229fd54aa7d6b54792cc426c3f3c024, type: 3}
   m_Name: SO_Player_HammerDown_SpawnObject_VFX
   m_EditorClassIdentifier: 
-  objectType: 2
+  objectType: 0
   spawnTiming: 0.3
   parentObjectName: HammerDown
   stickToParent: 0

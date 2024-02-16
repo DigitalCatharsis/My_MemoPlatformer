@@ -95,7 +95,7 @@ namespace My_MemoPlatformer
 
             if (attackCondition_Info.mustFaceAttacker)
             {
-                var vec = this.transform.position - attackCondition_Info.attacker.transform.position;  
+                var vec = this.transform.position - attackCondition_Info.attacker.transform.position;
                 if (vec.z * attackCondition_Info.attacker.transform.forward.z < 0f)
                 {
                     return false;
@@ -269,7 +269,7 @@ namespace My_MemoPlatformer
 
                     if (DebugContainer_Data.Instance.debug_TriggerDetector)
                     {
-                        Debug.Log("incoming ragdoll: " + attacker.gameObject.name + " to "+ triggerDetector.control.gameObject.name + "\n" + "Velocity: " + mag);
+                        Debug.Log("incoming ragdoll: " + attacker.gameObject.name + " to " + triggerDetector.control.gameObject.name + "\n" + "Velocity: " + mag);
                     }
 
                     if (mag >= 10f)
@@ -304,11 +304,15 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void ShowHitParticles(CharacterControl attacker, PoolObjectType effectsType)
+        private void ShowHitParticles(CharacterControl attacker, VFXType effectsType)
         {
-            var vfx = PoolManager.Instance.GetObject(effectsType);
-
-            vfx.transform.position = Control.DAMAGE_DATA.damageTaken.DAMAGED_TG.triggerCollider.bounds.center;
+            var vfx = PoolManager.Instance.GetObject
+                (
+                    effectsType,
+                    PoolManager.Instance.vfxPoolDictionary,
+                    position: Control.DAMAGE_DATA.damageTaken.DAMAGED_TG.triggerCollider.bounds.center,
+                    Quaternion.identity
+                );
 
             vfx.SetActive(true);
 

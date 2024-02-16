@@ -666,6 +666,37 @@ Transform:
   m_Father: {fileID: 4829326505233475801}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1427508249028206846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8824335831346654147}
+  m_Layer: 9
+  m_Name: ObjPooling
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8824335831346654147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427508249028206846}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2838286670764771645}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1469790418116602316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1573,7 +1604,7 @@ GameObject:
   - component: {fileID: 8772349004802611497}
   - component: {fileID: 2729992175947334301}
   m_Layer: 9
-  m_Name: --Y_YBot - Yellow
+  m_Name: __Y_YBot_Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1630,6 +1661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee80179171b79c54e86b124755c65156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolObjectList: 
   moveUp: 0
   moveDown: 0
   moveRight: 0
@@ -1642,9 +1674,6 @@ MonoBehaviour:
   aiProgress: {fileID: 0}
   aiController: {fileID: 0}
   boxCollider: {fileID: 0}
-  boxColliderBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
   navMeshObstacle: {fileID: 0}
   playableCharacterType: 1
   skinnedMeshAnimator: {fileID: 2428127011527154921}
@@ -3902,6 +3931,9 @@ MonoBehaviour:
     targetCenter: {x: 0, y: 0, z: 0}
     targetSize: {x: 0, y: 0, z: 0}
     landingPosition: {x: 0, y: 0, z: 0}
+    boxColliderBounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
 --- !u!1 &7180817089236728352
 GameObject:
   m_ObjectHideFlags: 0
@@ -4377,6 +4409,7 @@ Transform:
   - {fileID: 2892271239179928753}
   - {fileID: 7161507858017712816}
   - {fileID: 9044425793393334320}
+  - {fileID: 8824335831346654147}
   m_Father: {fileID: 3372119544377188092}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4419,6 +4452,9 @@ MonoBehaviour:
     targetCenter: {x: 0, y: 0, z: 0}
     targetSize: {x: 0, y: 0, z: 0}
     landingPosition: {x: 0, y: 0, z: 0}
+    boxColliderBounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
   verticalVelocity_Data:
     noJumpCancel: 0
     maxWallSlideVelocity: {x: 0, y: 0, z: 0}

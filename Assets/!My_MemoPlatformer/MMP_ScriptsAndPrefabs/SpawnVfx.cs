@@ -3,9 +3,9 @@ using UnityEngine;
 namespace My_MemoPlatformer
 {
     [CreateAssetMenu(fileName = "New state", menuName = "My_MemoPlatformer/AbilityData/SpawnObject")]
-    public class SpawnObject : CharacterAbility
+    public class SpawnVfx : CharacterAbility
     {
-        public PoolObjectType objectType;
+        public VFXType objectType;
         [Range(0f, 1f)]
         public float spawnTiming;
         public string parentObjectName = string.Empty;
@@ -21,7 +21,7 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (!characterState.characterControl.poolObjectList.Contains(objectType))
+            if (!characterState.characterControl.OBJ_POOLING_DATA.Vfxs.Contains(objectType))
             {
                 if (stateInfo.normalizedTime >= spawnTiming)
                 {
@@ -32,20 +32,20 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (characterState.characterControl.poolObjectList.Contains(objectType))
+            if (characterState.characterControl.OBJ_POOLING_DATA.Vfxs.Contains(objectType))
             {
-                characterState.characterControl.poolObjectList.Remove(objectType);
+                characterState.characterControl.OBJ_POOLING_DATA.Vfxs.Remove(objectType);
             }
         }
 
         private void SpawnObj(CharacterControl control)
         {
-            if (control.poolObjectList.Contains(objectType))
+            if (control.OBJ_POOLING_DATA.Vfxs.Contains(objectType))
             {
                 return;
             }
 
-            var obj = PoolManager.Instance.GetObject(objectType);
+            var obj = PoolManager.Instance.GetObject(objectType, PoolManager.Instance.vfxPoolDictionary, Vector3.zero, Quaternion.identity);
 
             if (DebugContainer_Data.Instance.debug_SpawnObjects)
             {
@@ -67,7 +67,7 @@ namespace My_MemoPlatformer
 
             obj.SetActive(true);
 
-            control.poolObjectList.Add(objectType);
+            control.OBJ_POOLING_DATA.Vfxs.Add(objectType);
         }
     }
 }
