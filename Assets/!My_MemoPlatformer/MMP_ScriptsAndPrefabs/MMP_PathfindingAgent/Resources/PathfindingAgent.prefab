@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 3402749585685384182}
   - component: {fileID: 1637963907}
   - component: {fileID: -3835273245842438327}
+  - component: {fileID: -4320898034263983399}
   m_Layer: 0
   m_Name: PathfindingAgent
   m_TagString: Untagged
@@ -357,3 +358,21 @@ MonoBehaviour:
   vectorToObject: {x: 0, y: 0, z: 0}
   target_WorldPosition: {x: 0, y: 0, z: 0}
   farObject_WorldPosition: {x: 0, y: 0, z: 0}
+--- !u!1818360609 &-4320898034263983399
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8801515615342999332}
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Weight: 1
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_RotationOffset: {x: 0, y: 0, z: 0}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_Active: 1
+  m_IsLocked: 1
+  m_Sources: []

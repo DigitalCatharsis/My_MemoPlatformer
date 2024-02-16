@@ -55,7 +55,7 @@ namespace My_MemoPlatformer
 
                         if (!colliderTop.collidedObjects.Contains(collidedObject))
                         {
-                            ProcessPositionOffset(collidedObject, boxCollider);
+                            ProcessPositionOffset(boxCollider);
                             break;
 
                         }
@@ -113,7 +113,6 @@ namespace My_MemoPlatformer
 
         private void OnDrawGizmos()
         {
-
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(upBlockChecker.transform.position, upBlockChecker.GetComponent<SphereCollider>().radius);
         }
@@ -142,26 +141,23 @@ namespace My_MemoPlatformer
             }
             return false;
         }
-        private void ProcessPositionOffset(GameObject platform, BoxCollider boxCollider)
+        private void ProcessPositionOffset(BoxCollider boxCollider)
         {
-            //TODO: ����������
-
             ledgeGrab_Data.isGrabbingLedge = true;
             Control.rigidBody.useGravity = false;
             Control.rigidBody.velocity = Vector3.zero;
 
-            float y, z;
-            y = platform.transform.position.y + (boxCollider.transform.lossyScale.y / 2f);
-            if (Control.ROTATION_DATA.IsFacingForward())
+            int layer = 1 << 11; //ground
+
+            RaycastHit hit;
+            var startPoint = new Vector3(0f, colliderBot.GetComponent<BoxCollider>().bounds.min.y, colliderBot.transform.position.z);
+            Physics.Raycast(startPoint, colliderBot.transform.forward, out hit, 3, layer);
+            if (hit.point.z == 0)
             {
-                z = platform.transform.position.z - (boxCollider.gameObject.transform.lossyScale.z / 2f);
-            }
-            else
-            {
-                z = platform.transform.position.z + (boxCollider.gameObject.transform.lossyScale.z / 2f);
+                Debug.DrawRay(colliderBot.transform.position, colliderBot.transform.forward, Color.cyan, 3f);
             }
 
-            var platformEdge = new Vector3(0f, y, z);
+            var platformEdge = new Vector3(0, boxCollider.bounds.max.y, hit.point.z);
 
             if (Control.ROTATION_DATA.IsFacingForward())
             {
