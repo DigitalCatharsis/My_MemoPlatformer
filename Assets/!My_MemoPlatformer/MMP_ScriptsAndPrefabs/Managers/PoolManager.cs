@@ -1,3 +1,4 @@
+using AYellowpaper.SerializedCollections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +7,19 @@ namespace My_MemoPlatformer
 {
     public class PoolManager : Singleton<PoolManager>
     {
-        public Dictionary<CharacterType, List<GameObject>> CharacterPoolDictionary = new Dictionary<CharacterType, List<GameObject>>();
-        public Dictionary<VFXType, List<GameObject>> vfxPoolDictionary = new Dictionary<VFXType, List<GameObject>>();
-        public Dictionary<DataType, List<GameObject>> dataPoolDictionary = new Dictionary<DataType, List<GameObject>>();
+        [SerializedDictionary("CharacterType", "Values")]
+        public SerializedDictionary<CharacterType, List<GameObject>> characterPoolDictionary = new SerializedDictionary<CharacterType, List<GameObject>>();
+
+        [SerializedDictionary("VFXType", "Values")]
+        public SerializedDictionary<VFXType, List<GameObject>> vfxPoolDictionary = new SerializedDictionary<VFXType, List<GameObject>>();
+
+        [SerializedDictionary("DataType", "Values")]
+        public SerializedDictionary<DataType, List<GameObject>> dataPoolDictionary = new SerializedDictionary<DataType, List<GameObject>>();
+
+        [SerializedDictionary("DataType", "Values")]
+        public SerializedDictionary<DataType, SerializedDictionary<DataType, GameObject>> testList = new SerializedDictionary<DataType, SerializedDictionary<DataType, GameObject>>();
 
         #region SetupDictionary
-
         private void SetUpDictionary<T>(Dictionary<T,List<GameObject>> poolDictionary)
         {
             T[] arr = Enum.GetValues(typeof(T)) as T[];

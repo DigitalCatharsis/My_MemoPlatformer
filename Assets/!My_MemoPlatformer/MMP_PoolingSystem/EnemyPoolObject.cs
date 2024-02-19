@@ -22,9 +22,9 @@ namespace My_MemoPlatformer
 
         public void ReturnToPool()
         {
-            if (!PoolManager.Instance.CharacterPoolDictionary[poolObjectType].Contains(this.gameObject))
+            if (!PoolManager.Instance.characterPoolDictionary[poolObjectType].Contains(this.gameObject))
             {
-                PoolManager.Instance.AddObject(poolObjectType, PoolManager.Instance.CharacterPoolDictionary, this.gameObject);
+                PoolManager.Instance.AddObject(poolObjectType, PoolManager.Instance.characterPoolDictionary, this.gameObject);
             }
         }
     }

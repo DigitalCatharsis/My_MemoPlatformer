@@ -36,7 +36,7 @@ namespace My_MemoPlatformer
                     break;
             }
 
-            var obj = PoolManager.Instance.GetObject(CharacterType.__Y_YBot_Yellow, PoolManager.Instance.CharacterPoolDictionary, this.transform.position, Quaternion.identity);
+            var obj = PoolManager.Instance.GetObject(CharacterType.__Y_YBot_Yellow, PoolManager.Instance.characterPoolDictionary, this.transform.position, Quaternion.identity);
 
             //var obj = Instantiate(Resources.Load(_objName,typeof(GameObject))) as GameObject;
             //obj.transform.position = this.transform.position;
