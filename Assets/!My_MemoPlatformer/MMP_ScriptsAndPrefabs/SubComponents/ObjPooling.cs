@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using My_MemoPlatformer;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -7,28 +6,70 @@ namespace My_MemoPlatformer
 
     public class ObjPooling : SubComponent
     {
-        public ObjPooling_Data objPoolingData;
+        public ObjPooling_Data objPooling_Data;
 
         private void Start()
         {
-            objPoolingData = new ObjPooling_Data
+            objPooling_Data = new ObjPooling_Data
             {
-                dataTypes = new List<DataType>(),
-                Vfxs = new List<VFXType>(),
+                dataTypes = new List<GameObject>(),
+                Vfxs = new List<GameObject>(),
+
+                AddToList = AddToList,
+                RemoveFromList = RemoveFromList,
             };
 
-            subComponentProcessor.objPoolingData = objPoolingData;
+            subComponentProcessor.objPoolingData = objPooling_Data;
             subComponentProcessor.arrSubComponents[(int)SubComponentType.OBJ_POOLING_DATA] = this;
         }
         public override void OnFixedUpdate()
         {
-            throw new System.NotImplementedException();
         }
 
         public override void OnUpdate()
         {
-            throw new System.NotImplementedException();
+        }
+
+        private void AddToList<T>(GameObject spawnedObject, T poolObjectType)
+        {
+            switch (poolObjectType)
+            {
+                case
+                    DataType:
+                    if (!objPooling_Data.dataTypes.Contains(spawnedObject))
+                    {
+                        objPooling_Data.dataTypes.Add(spawnedObject);
+                    }
+                    break;
+                case
+                    VFXType:
+                    if (!objPooling_Data.Vfxs.Contains(spawnedObject))
+                    {
+                        objPooling_Data.Vfxs.Add(spawnedObject);
+                    }
+                    break;
+            }
+        }
+
+        private void RemoveFromList<T>(GameObject spawnedObject, T poolObjectType)
+        {
+            switch (poolObjectType)
+            {
+                case
+                    DataType:
+                    if (objPooling_Data.dataTypes.Contains(spawnedObject))
+                    {
+                        objPooling_Data.dataTypes.Remove(spawnedObject);
+                    }
+                    break;
+                case
+                    VFXType:
+                    if (objPooling_Data.Vfxs.Contains(spawnedObject))
+                    {
+                        objPooling_Data.Vfxs.Remove(spawnedObject);
+                    }
+                    break;
+            }
         }
     }
-
 }

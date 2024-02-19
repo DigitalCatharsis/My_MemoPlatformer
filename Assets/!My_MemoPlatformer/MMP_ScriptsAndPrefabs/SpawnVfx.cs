@@ -11,41 +11,44 @@ namespace My_MemoPlatformer
         public string parentObjectName = string.Empty;
         public bool stickToParent;
 
+        private GameObject _spawnedVFX;
+
+        //TODO: передлать условия спауна, т.к тут оно делает отдельно
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             if (spawnTiming == 0f)
             {
-                SpawnObj(characterState.characterControl);
+                SpawnVFX(characterState.characterControl);
             }
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (!characterState.characterControl.OBJ_POOLING_DATA.Vfxs.Contains(objectType))
+            if (!characterState.characterControl.OBJ_POOLING_DATA.Vfxs.Contains(_spawnedVFX))
             {
                 if (stateInfo.normalizedTime >= spawnTiming)
                 {
-                    SpawnObj(characterState.characterControl);
+                    SpawnVFX(characterState.characterControl);
                 }
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (characterState.characterControl.OBJ_POOLING_DATA.Vfxs.Contains(objectType))
+            if (characterState.characterControl.OBJ_POOLING_DATA.Vfxs.Contains(_spawnedVFX))
             {
-                characterState.characterControl.OBJ_POOLING_DATA.Vfxs.Remove(objectType);
+                characterState.characterControl.OBJ_POOLING_DATA.Vfxs.Remove(_spawnedVFX);
             }
         }
 
-        private void SpawnObj(CharacterControl control)
+        private void SpawnVFX(CharacterControl control)
         {
-            if (control.OBJ_POOLING_DATA.Vfxs.Contains(objectType))
+            if (control.OBJ_POOLING_DATA.Vfxs.Contains(this._spawnedVFX))
             {
                 return;
             }
 
-            var obj = PoolManager.Instance.GetObject(objectType, PoolManager.Instance.vfxPoolDictionary, Vector3.zero, Quaternion.identity);
+            _spawnedVFX = PoolManager.Instance.GetObject(objectType, PoolManager.Instance.vfxPoolDictionary, Vector3.zero, Quaternion.identity);
 
             if (DebugContainer_Data.Instance.debug_SpawnObjects)
             {
@@ -55,19 +58,19 @@ namespace My_MemoPlatformer
             if (!string.IsNullOrEmpty(parentObjectName))
             {
                 var p = control.GetChildObj(parentObjectName);
-                obj.transform.parent = p.transform;
-                obj.transform.localPosition = Vector3.zero;
-                obj.transform.localRotation = Quaternion.identity;
+                _spawnedVFX.transform.parent = p.transform;
+                _spawnedVFX.transform.localPosition = Vector3.zero;
+                _spawnedVFX.transform.localRotation = Quaternion.identity;
             }
 
             if (!stickToParent)
             {
-                obj.transform.parent = null;
+                _spawnedVFX.transform.parent = null;
             }
 
-            obj.SetActive(true);
+            _spawnedVFX.SetActive(true);
 
-            control.OBJ_POOLING_DATA.Vfxs.Add(objectType);
+            control.OBJ_POOLING_DATA.Vfxs.Add(_spawnedVFX);
         }
     }
 }

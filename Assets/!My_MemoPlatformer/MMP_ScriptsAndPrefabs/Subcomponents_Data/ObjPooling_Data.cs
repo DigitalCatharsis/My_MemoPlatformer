@@ -7,7 +7,10 @@ namespace My_MemoPlatformer
     [System.Serializable]
     public class ObjPooling_Data
     {
-        public List<DataType> dataTypes;
-        public List<VFXType> Vfxs;
+        public List<GameObject> dataTypes;
+        public List<GameObject> Vfxs;
+
+        public Action<GameObject, Enum> AddToList;
+        public Action<GameObject, Enum> RemoveFromList;
     }
 }

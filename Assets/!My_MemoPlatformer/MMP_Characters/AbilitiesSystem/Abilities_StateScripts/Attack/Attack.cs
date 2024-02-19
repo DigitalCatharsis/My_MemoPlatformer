@@ -39,13 +39,15 @@ namespace My_MemoPlatformer
         public CollateralDamageInfo collateralDamageInfo;
 
         private List<AttackCondition> _finishedAttacks = new List<AttackCondition>();
+        private GameObject _spawnedAttackCondition;
 
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             characterState.Attack_Data.attackTriggered = false;
 
-            var obj = PoolManager.Instance.GetObject(DataType.AttackCondition, PoolManager.Instance.dataPoolDictionary, Vector3.zero, Quaternion.identity);
-            var info = obj.GetComponent<AttackCondition>();
+            _spawnedAttackCondition = PoolManager.Instance.GetObject(DataType.AttackCondition, PoolManager.Instance.dataPoolDictionary, Vector3.zero, Quaternion.identity);
+            characterState.characterControl.OBJ_POOLING_DATA.AddToList(_spawnedAttackCondition, DataType.AttackCondition);
+            var info = _spawnedAttackCondition.GetComponent<AttackCondition>();
 
             if (AttackManager.Instance.activeAttacks == null)
             {
@@ -60,7 +62,7 @@ namespace My_MemoPlatformer
                 info.transform.parent = AttackManager.Instance.activeAttacks.transform;
             }
 
-            obj.SetActive(true);
+            _spawnedAttackCondition.SetActive(true);
             info.ResetInfo(this, characterState.characterControl);
 
             if (!AttackManager.Instance.currentAttacks.Contains(info))
@@ -133,6 +135,7 @@ namespace My_MemoPlatformer
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             ClearAttack();
+            characterState.characterControl.OBJ_POOLING_DATA.RemoveFromList(_spawnedAttackCondition, DataType.AttackCondition);
         }
         public void ClearAttack()
         {

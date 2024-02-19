@@ -234,7 +234,7 @@ namespace My_MemoPlatformer
 
         private void OnTakeDamage(AttackCondition attackCondition_Info)
         {
-            ProcessHitParticles(attackCondition_Info);
+            ProcessHitParticlesAndShakeCamera(attackCondition_Info);
 
             attackCondition_Info.currentHits++;
             _damage_Data.currentHp -= attackCondition_Info.attackAbility.damage;
@@ -288,7 +288,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void ProcessHitParticles(AttackCondition info)
+        private void ProcessHitParticlesAndShakeCamera(AttackCondition info)
         {
             if (info.mustCollide)
             {
@@ -313,6 +313,8 @@ namespace My_MemoPlatformer
                     position: Control.DAMAGE_DATA.damageTaken.DAMAGED_TG.triggerCollider.bounds.center,
                     Quaternion.identity
                 );
+
+            attacker.OBJ_POOLING_DATA.AddToList(vfx, effectsType);
 
             vfx.SetActive(true);
 

@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 1260156248}
   - component: {fileID: 1260156245}
   m_Layer: 0
-  m_Name: --MLedgeChecker
+  m_Name: __MLedgeChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -675,6 +675,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8824335831346654147}
+  - component: {fileID: 3686867525366640024}
   m_Layer: 9
   m_Name: ObjPooling
   m_TagString: Untagged
@@ -697,6 +698,21 @@ Transform:
   m_Father: {fileID: 2838286670764771645}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3686867525366640024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427508249028206846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed262b10ad1340647b2a489844b07f5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objPooling_Data:
+    dataTypes: []
+    Vfxs: []
 --- !u!1 &1469790418116602316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1661,7 +1677,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee80179171b79c54e86b124755c65156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolObjectList: 
   moveUp: 0
   moveDown: 0
   moveRight: 0
@@ -2572,7 +2587,7 @@ GameObject:
   - component: {fileID: 8814590958624048433}
   - component: {fileID: 8484232170395984330}
   m_Layer: 9
-  m_Name: --MPlayerAttack
+  m_Name: __MPlayerAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2818,7 +2833,7 @@ GameObject:
   - component: {fileID: 4751183889889371912}
   - component: {fileID: 4295287655711446000}
   m_Layer: 9
-  m_Name: --MBlockingObjects
+  m_Name: __MBlockingObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3835,7 +3850,7 @@ GameObject:
   - component: {fileID: 2047273890012996326}
   - component: {fileID: 8443160812094211633}
   m_Layer: 9
-  m_Name: --MDamageDetector
+  m_Name: __MDamageDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4504,6 +4519,9 @@ MonoBehaviour:
     latestMoveForwardScript: {fileID: 0}
     latestMoveUpScript: {fileID: 0}
     isIgnoreCharacterTime: 0
+  objPoolingData:
+    dataTypes: []
+    Vfxs: []
 --- !u!1 &7646921906402090757
 GameObject:
   m_ObjectHideFlags: 0
@@ -5302,7 +5320,7 @@ GameObject:
   - component: {fileID: 5415747056367200280}
   - component: {fileID: 3665091282178441233}
   m_Layer: 9
-  m_Name: --MInstaKill
+  m_Name: __MInstaKill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
