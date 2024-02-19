@@ -1920,11 +1920,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!1 &563920668 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4898334169665228375, guid: bdf246899bbd6184f8132c1f5274552b, type: 3}
-  m_PrefabInstance: {fileID: 2909208742406713261}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &566755092
 GameObject:
   m_ObjectHideFlags: 0
@@ -18088,36 +18083,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7516340293599200451, guid: bdf246899bbd6184f8132c1f5274552b, type: 3}
   m_PrefabInstance: {fileID: 2909208742406713261}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1293291008985233166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 563920668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_CollideAgainst:
-    serializedVersion: 2
-    m_Bits: 1
-  m_IgnoreTag: 
-  m_TransparentLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_MinimumDistanceFromTarget: 0.1
-  m_AvoidObstacles: 1
-  m_DistanceLimit: 0
-  m_MinimumOcclusionTime: 0
-  m_CameraRadius: 0.1
-  m_Strategy: 0
-  m_MaximumEffort: 4
-  m_SmoothingTime: 0
-  m_Damping: 0
-  m_DampingWhenOccluded: 0
-  m_OptimalTargetDistance: 0
 --- !u!1 &1295281774047899047
 GameObject:
   m_ObjectHideFlags: 0
@@ -29314,7 +29279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5892810392348212212, guid: bdf246899bbd6184f8132c1f5274552b, type: 3}
       propertyPath: m_ChildCameras.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7516340293599200451, guid: bdf246899bbd6184f8132c1f5274552b, type: 3}
       propertyPath: m_RootOrder
@@ -29363,10 +29328,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4898334169665228375, guid: bdf246899bbd6184f8132c1f5274552b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1293291008985233166}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdf246899bbd6184f8132c1f5274552b, type: 3}
 --- !u!23 &2914715064534854889
 MeshRenderer:
