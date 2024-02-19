@@ -6,13 +6,13 @@ namespace My_MemoPlatformer
     [CreateAssetMenu(fileName = "New State", menuName = "My_MemoPlatformer/Helper/StateMachine_AbilityListToArray")]
     public class AbilityListToArray : ScriptableObject
     {
-        public AnimatorController TargetAnimator;
+        public AnimatorController targetAnimator = new AnimatorController();
 
         public void Convert()
         {
             try
             {
-                CharacterState[] arr = TargetAnimator.GetBehaviours<CharacterState>();
+                CharacterState[] arr = targetAnimator.GetBehaviours<CharacterState>();
 
                 foreach (CharacterState state in arr)
                 {
@@ -31,7 +31,7 @@ namespace My_MemoPlatformer
 
         public void ClearLists()
         {
-            CharacterState[] arr = TargetAnimator.GetBehaviours<CharacterState>();
+            CharacterState[] arr = targetAnimator.GetBehaviours<CharacterState>();
 
             foreach (CharacterState state in arr)
             {
