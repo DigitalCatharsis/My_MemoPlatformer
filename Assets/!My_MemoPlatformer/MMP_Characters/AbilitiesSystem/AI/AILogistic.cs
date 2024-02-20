@@ -4,45 +4,46 @@ namespace My_MemoPlatformer
 {
     public class AILogistic : MonoBehaviour
     {
-        private AIController _controller;
+        private CharacterControl _control;
+
         private void Start()
         {
-            _controller = GetComponent<AIController>();
+            _control = GetComponentInParent<CharacterControl>();
         }
 
         public float TargetDistanceToEndSphere()
         {
-            return Vector3.SqrMagnitude(_controller.pathfindingAgent.endSphere.transform.position - _controller.pathfindingAgent.target.transform.position);
+            return Vector3.SqrMagnitude(_control.AICONTROLLER_DATA.pathfindingAgent.endSphere.transform.position - _control.AICONTROLLER_DATA.pathfindingAgent.target.transform.position);
         }
         public float GetStartSphereHeight()
         {
-            var result = Mathf.Abs((_controller.Control.transform.position - _controller.pathfindingAgent.startSphere.transform.position).y);
+            var result = Mathf.Abs((_control.transform.position - _control.AICONTROLLER_DATA.pathfindingAgent.startSphere.transform.position).y);
 
             return result;
         }
 
         public float GetEndSphereHeight()
         {
-            var result = Mathf.Abs((_controller.Control.transform.position - _controller.pathfindingAgent.endSphere.transform.position).y);
+            var result = Mathf.Abs((_control.transform.position - _control.AICONTROLLER_DATA.pathfindingAgent.endSphere.transform.position).y);
 
             return result;
         }
 
         public float AIDistanceToTarget()
         {
-            var dist = Vector3.SqrMagnitude(_controller.pathfindingAgent.target.transform.position - _controller.Control.transform.position);
+            var dist = Vector3.SqrMagnitude(_control.AICONTROLLER_DATA.pathfindingAgent.target.transform.position - _control.transform.position);
             return dist;
         }
 
         public float AIDistanceToStartSphere()
         {
-            var dist = Vector3.SqrMagnitude(_controller.pathfindingAgent.startSphere.transform.position - _controller.Control.transform.position);
+            var dist = Vector3.SqrMagnitude(_control.AICONTROLLER_DATA.pathfindingAgent.startSphere.transform.position - _control.transform.position);
             return dist;    
         }
 
         public float AIDistanceToEndSphere()
         {
-            var dist = Vector3.SqrMagnitude(_controller.pathfindingAgent.endSphere.transform.position - _controller.Control.transform.position);
+            var dist = Vector3.SqrMagnitude(_control.AICONTROLLER_DATA.pathfindingAgent.endSphere.transform.position - _control.transform.position);
             return dist;
         }
     }

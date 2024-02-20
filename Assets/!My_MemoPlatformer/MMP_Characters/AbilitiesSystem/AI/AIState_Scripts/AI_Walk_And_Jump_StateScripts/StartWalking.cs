@@ -7,7 +7,7 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            characterState.characterControl.aiProgress.SetRandomFlyingKick();
+            characterState.characterControl.AICONTROLLER_DATA.aIAttacks.SetRandomFlyingKick();
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -18,9 +18,9 @@ namespace My_MemoPlatformer
             }
 
             //Jumping
-            if (characterState.characterControl.aiProgress.EndSphereIsHigher())
+            if (characterState.characterControl.AICONTROLLER_DATA.aIConditions.EndSphereIsHigher())
             {
-                if (characterState.characterControl.aiProgress.AIDistanceToStartSphere() < 0.08f) //how close are we to the checkpoint    //Здесь часто бывает баг (когда иди бегает вокруг Start Point) из-за разных смещений платформы или ИИ относительно друг друга. Увелич да < 0.1f для дебага
+                if (characterState.characterControl.AICONTROLLER_DATA.aiLogistic.AIDistanceToStartSphere() < 0.08f) //how close are we to the checkpoint    //Здесь часто бывает баг (когда иди бегает вокруг Start Point) из-за разных смещений платформы или ИИ относительно друг друга. Увелич да < 0.1f для дебага
                 {
                     characterState.characterControl.moveLeft = false;
                     characterState.characterControl.moveRight = false;
@@ -31,16 +31,16 @@ namespace My_MemoPlatformer
             }
 
             //fall
-            if (characterState.characterControl.aiProgress.EndSphereIsLower())
+            if (characterState.characterControl.AICONTROLLER_DATA.aIConditions.EndSphereIsLower())
             {
-                characterState.characterControl.aiController.WalkStraightToTheEndSphere();
+                characterState.characterControl.AICONTROLLER_DATA.aIBehavior.WalkStraightToTheEndSphere();
 
                 animator.SetBool(HashManager.Instance.arrAITransitionParams[(int)AI_Transition.Fall_Platform], true);
                 return;
             }
 
             //straight
-            if (characterState.characterControl.aiProgress.AIDistanceToStartSphere() > 1.5f)
+            if (characterState.characterControl.AICONTROLLER_DATA.aiLogistic.AIDistanceToStartSphere() > 1.5f)
             {
                 characterState.characterControl.turbo = true;
             }
@@ -49,18 +49,18 @@ namespace My_MemoPlatformer
                 characterState.characterControl.turbo = false;
             }
 
-            characterState.characterControl.aiController.WalkStraightToTheStartSphere();
+            characterState.characterControl.AICONTROLLER_DATA.aIBehavior.WalkStraightToTheStartSphere();
 
-            if (characterState.characterControl.aiProgress.AIDistanceToEndSphere() < 1f)
+            if (characterState.characterControl.AICONTROLLER_DATA.aiLogistic.AIDistanceToEndSphere() < 1f)
             {
                 characterState.characterControl.turbo = false;
                 characterState.characterControl.moveLeft = false;
                 characterState.characterControl.moveRight = false;
             }
 
-            if (characterState.characterControl.aiProgress.TargetIsOnTheSamePlatform())
+            if (characterState.characterControl.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform())
             {
-                characterState.characterControl.aiProgress.RepositionDestination();
+                characterState.characterControl.AICONTROLLER_DATA.aIBehavior.RepositionDestination();
             }
         }
 

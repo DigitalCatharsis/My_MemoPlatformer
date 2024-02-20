@@ -17,9 +17,10 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (characterState.AI_CONTROLLER.RestartWalk())
+            if (characterState.AI_CONTROLLER_DATA.aIBehavior.RestartWalk())
             {
-                characterState.AI_CONTROLLER.InitializeAI();
+                //TODO: ?????????????
+                characterState.AI_CONTROLLER_DATA.InitializeAI();
             }
 
             //fix from jumping after failed to ledgegrab
@@ -31,13 +32,14 @@ namespace My_MemoPlatformer
                 characterState.characterControl.moveLeft = false;
                 characterState.characterControl.moveRight = false;
                 characterState.characterControl.moveDown = false;
-                characterState.characterControl.aiController.InitializeAI();
+                //TODO: ??????????????????
+                characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
             }
 
-            if (characterState.AI_CONTROLLER.IsAttacking())
+            if (characterState.AI_CONTROLLER_DATA.aIConditions.IsAttacking())
             {
-                if (characterState.characterControl.aiProgress.AIDistanceToTarget() > 3f ||
-                    !characterState.characterControl.aiProgress.TargetIsOnTheSamePlatform())
+                if (characterState.characterControl.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() > 3f ||
+                    !characterState.characterControl.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform())
                 {
                     characterState.characterControl.turbo = false;
                     characterState.characterControl.jump = false;
@@ -45,14 +47,14 @@ namespace My_MemoPlatformer
                     characterState.characterControl.moveLeft = false;
                     characterState.characterControl.moveRight = false;
                     characterState.characterControl.moveDown = false;
-                    characterState.characterControl.aiController.InitializeAI();
+                    characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
                 }
             }
 
             // path is blocked
             if (characterState.BlockingObj_Data.frontBlockingDictionaryCount == 0)
             {
-                characterState.characterControl.aiProgress.blockingCharacter = null;
+                characterState.characterControl.AICONTROLLER_DATA.blockingCharacter = null;   //TODO: ?????
             }
             else
             {
@@ -64,17 +66,17 @@ namespace My_MemoPlatformer
 
                     if (blockingChar != null)
                     {
-                        characterState.characterControl.aiProgress.blockingCharacter = blockingChar;
+                        characterState.characterControl.AICONTROLLER_DATA.blockingCharacter = blockingChar;
                         break;
                     }
                     else
                     {
-                        characterState.characterControl.aiProgress.blockingCharacter = null;
+                        characterState.characterControl.AICONTROLLER_DATA.blockingCharacter = null;
                     }
                 }
             }
 
-            if (characterState.characterControl.aiProgress.blockingCharacter != null)
+            if (characterState.characterControl.AICONTROLLER_DATA.blockingCharacter != null)
             {
                 if (characterState.Ground_Data.ground != null)
                 {
@@ -87,7 +89,7 @@ namespace My_MemoPlatformer
                         characterState.characterControl.moveLeft = false;
                         characterState.characterControl.moveRight = false;
                         characterState.characterControl.moveDown = false;
-                        characterState.characterControl.aiController.InitializeAI();
+                        characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
                     }
                 }
             }
@@ -97,7 +99,7 @@ namespace My_MemoPlatformer
                 !characterState.Player_Animation_Data.IsRunning(typeof(Jump)) &&
                 !characterState.Player_Animation_Data.IsRunning(typeof(WallJump_Prep)))
             {
-                var height = characterState.characterControl.aiProgress.GetStartSphereHeight();
+                var height = characterState.characterControl.AICONTROLLER_DATA.GetStartSphereHeight();
                 if (height > 0.1f)
                 {
                     characterState.characterControl.turbo = false;
@@ -106,10 +108,10 @@ namespace My_MemoPlatformer
                     characterState.characterControl.moveLeft = false;
                     characterState.characterControl.moveRight = false;
                     characterState.characterControl.moveDown = false;
-                    characterState.characterControl.aiController.InitializeAI();
+                    characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
                 }
                 ////sometimes AI doing nothing while control.attack is true
-                else if (characterState.characterControl.aiProgress.TargetIsOnTheSamePlatform() && characterState.characterControl.attack)
+                else if (characterState.characterControl.AICONTROLLER_DATA.TargetIsOnTheSamePlatform() && characterState.characterControl.attack)
                 {
                     characterState.characterControl.attack = false;
                     characterState.characterControl.turbo = false;
@@ -118,7 +120,7 @@ namespace My_MemoPlatformer
                     characterState.characterControl.moveLeft = false;
                     characterState.characterControl.moveRight = false;
                     characterState.characterControl.moveDown = false;
-                    characterState.characterControl.aiController.InitializeAI();
+                    characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
                 }
             }
 
@@ -128,7 +130,7 @@ namespace My_MemoPlatformer
             //    !characterState.Animation_Data.IsRunning(typeof(WallJump_Prep)) &&
             //     characterState.characterControl.attack)
             //{
-            //    if (characterState.characterControl.aiProgress.GetStartSphereHeight() == characterState.characterControl.aiProgress.GetEndSphereHeight())
+            //    if (characterState.characterControl.AICONTROLLER_DATA.GetStartSphereHeight() == characterState.characterControl.AICONTROLLER_DATA.GetEndSphereHeight())
             //    {
             //        characterState.characterControl.turbo = false;
             //        characterState.characterControl.jump = false;

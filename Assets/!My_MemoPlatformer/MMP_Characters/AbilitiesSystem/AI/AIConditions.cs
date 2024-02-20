@@ -4,15 +4,15 @@ namespace My_MemoPlatformer
 {
     public class AIConditions : MonoBehaviour
     {
-        private AIController _aiController;
+        private CharacterControl _control;
 
         private void Start()
         {
-            _aiController = GetComponent<AIController>();
+            _control = GetComponentInParent<CharacterControl>();
         }
-        private bool IsAttacking()
+        public bool IsAttacking()
         {
-            var info = _aiController.Control.PLAYER_ANIMATION_DATA.animator.GetCurrentAnimatorStateInfo(0);
+            var info = _control.PLAYER_ANIMATION_DATA.animator.GetCurrentAnimatorStateInfo(0);
 
             if (info.shortNameHash == HashManager.Instance.arrAIStateNames[(int)AI_State_Name.AI_Attack])
             {
@@ -25,7 +25,7 @@ namespace My_MemoPlatformer
         }
         public bool TargetIsOnRightSide()
         {
-            if ((_aiController.pathfindingAgent.transform.position - _aiController.Control.transform.position).z > 0f)
+            if ((_control.AICONTROLLER_DATA.pathfindingAgent.transform.position - _control.transform.position).z > 0f)
             {
                 return true;
             }
@@ -36,16 +36,16 @@ namespace My_MemoPlatformer
         }
         public bool IsFacingTarget()
         {
-            if ((_aiController.pathfindingAgent.target.transform.position - _aiController.Control.transform.position).z > 0f)
+            if ((_control.AICONTROLLER_DATA.pathfindingAgent.target.transform.position - _control.transform.position).z > 0f)
             {
-                if (_aiController.Control.ROTATION_DATA.IsFacingForward())
+                if (_control.ROTATION_DATA.IsFacingForward())
                 {
                     return true;
                 }
             }
             else
             {
-                if (!_aiController.Control.ROTATION_DATA.IsFacingForward())
+                if (!_control.ROTATION_DATA.IsFacingForward())
                 {
                     return true;
                 }
@@ -53,9 +53,9 @@ namespace My_MemoPlatformer
 
             return false;
         }
-        private bool TargetIsDead()
+        public bool TargetIsDead()
         {
-            if (CharacterManager.Instance.GetCharacter(_aiController.pathfindingAgent.target).DAMAGE_DATA.IsDead())
+            if (CharacterManager.Instance.GetCharacter(_control.AICONTROLLER_DATA.pathfindingAgent.target).DAMAGE_DATA.IsDead())
             {
                 return true;
             }
@@ -64,14 +64,14 @@ namespace My_MemoPlatformer
                 return false;
             }
         }
-        private bool EndSphereIsHigher()
+        public bool EndSphereIsHigher()
         {
             if (EndSphereIsStraight())
             {
                 return false;
             }
 
-            if (_aiController.pathfindingAgent.endSphere.transform.position.y - _aiController.pathfindingAgent.startSphere.transform.position.y > 0f)
+            if (_control.AICONTROLLER_DATA.pathfindingAgent.endSphere.transform.position.y - _control.AICONTROLLER_DATA.pathfindingAgent.startSphere.transform.position.y > 0f)
             {
                 return true;
             }
@@ -80,14 +80,14 @@ namespace My_MemoPlatformer
                 return false;
             }
         }
-        private bool EndSphereIsLower()
+        public bool EndSphereIsLower()
         {
             if (EndSphereIsStraight())
             {
                 return false;
             }
 
-            if (_aiController.pathfindingAgent.endSphere.transform.position.y - _aiController.pathfindingAgent.startSphere.transform.position.y > 0f)
+            if (_control.AICONTROLLER_DATA.pathfindingAgent.endSphere.transform.position.y - _control.AICONTROLLER_DATA.pathfindingAgent.startSphere.transform.position.y > 0f)
             {
                 return false;
             }
@@ -99,7 +99,7 @@ namespace My_MemoPlatformer
 
         private bool EndSphereIsStraight()
         {
-            if (Mathf.Abs(_aiController.pathfindingAgent.endSphere.transform.position.y - _aiController.pathfindingAgent.startSphere.transform.position.y) > 0.01f)
+            if (Mathf.Abs(_control.AICONTROLLER_DATA.pathfindingAgent.endSphere.transform.position.y - _control.AICONTROLLER_DATA.pathfindingAgent.startSphere.transform.position.y) > 0.01f)
             {
                 return false;
             }
@@ -110,7 +110,7 @@ namespace My_MemoPlatformer
         }
         public bool TargetIsGrounded()
         {
-            var target = CharacterManager.Instance.GetCharacter(_aiController.pathfindingAgent.target);
+            var target = CharacterManager.Instance.GetCharacter(_control.AICONTROLLER_DATA.pathfindingAgent.target);
             if (target.GROUND_DATA.ground == null)
             {
                 return false;
@@ -120,11 +120,11 @@ namespace My_MemoPlatformer
                 return true;
             }
         }
-        private bool TargetIsOnTheSamePlatform()
+        public bool TargetIsOnTheSamePlatform()
         {
-            var target = CharacterManager.Instance.GetCharacter(_aiController.pathfindingAgent.target);
+            var target = CharacterManager.Instance.GetCharacter(_control.AICONTROLLER_DATA.pathfindingAgent.target);
 
-            if (target.GROUND_DATA.ground == _aiController.Control.GROUND_DATA.ground)
+            if (target.GROUND_DATA.ground == _control.GROUND_DATA.ground)
             {
                 return true;
             }

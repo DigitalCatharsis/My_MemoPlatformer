@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -7,11 +6,11 @@ namespace My_MemoPlatformer
     public class AIAttacks : MonoBehaviour
     {
         private int _attackIndex;
-        private AIController _aiController;
+        private CharacterControl _control;
 
         private void Start()
         {
-            _aiController = GetComponent<AIController>();
+            _control = GetComponentInParent<CharacterControl>();
         }
 
         public void NormalGroundAttack(CharacterControl control)
@@ -25,7 +24,7 @@ namespace My_MemoPlatformer
 
         public void ForwardGroundAttack(CharacterControl control)
         {
-            if (_aiController._aIConditions.TargetIsOnRightSide())
+            if (_control.AICONTROLLER_DATA.aIConditions.TargetIsOnRightSide())
             {
                 control.moveRight = true;
                 control.moveLeft = false;
@@ -42,22 +41,22 @@ namespace My_MemoPlatformer
         }
         private void PrococessForwardGroundAttack(CharacterControl control)
         {
-            if (_aiController._aIConditions.IsFacingTarget() && control.PLAYER_ANIMATION_DATA.IsRunning(typeof(MoveForward)))
+            if (_control.AICONTROLLER_DATA.aIConditions.IsFacingTarget() && control.PLAYER_ANIMATION_DATA.IsRunning(typeof(MoveForward)))
             {
                 control.ATTACK_DATA.attackTriggered = true;
                 control.attack = false;
             }
         }
-        private void SetRandomFlyingKick()
+        public void SetRandomFlyingKick()
         {
-            if (UnityEngine.Random.Range(0f, 1f) < _aiController.flyingKickProbability)
+            if (Random.Range(0f, 1f) < _control.AICONTROLLER_DATA.flyingKickProbability)
             {
                 //TODO: ??????????????
-                _aiController.aIController_Data.doFlyingKick = true;
+                _control.AICONTROLLER_DATA.doFlyingKick = true;
             }
             else
             {
-                _aiController.aIController_Data.doFlyingKick = false;
+                _control.AICONTROLLER_DATA.doFlyingKick = false;
             }
         }
 
@@ -65,14 +64,14 @@ namespace My_MemoPlatformer
         {
             while (true)
             {
-                _attackIndex = UnityEngine.Random.Range(0, _aiController.aIController_Data.listGroundAttacks.Count);
+                _attackIndex = UnityEngine.Random.Range(0, _control.AICONTROLLER_DATA.listGroundAttacks.Count);
                 yield return new WaitForSeconds(2f);
             }
         }
 
         public void Attack()
         {
-            _aiController.aIController_Data.listGroundAttacks[_attackIndex](_aiController.Control);
+            _control.AICONTROLLER_DATA.listGroundAttacks[_attackIndex](_control);
         }
     }
 }
