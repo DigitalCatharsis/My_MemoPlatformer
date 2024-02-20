@@ -42,7 +42,6 @@ namespace My_MemoPlatformer
             {
                 try
                 {
-
                 arrAbilities[i].OnEnter(this, animator, stateInfo);
                 }
                 catch 

@@ -37,14 +37,14 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void OnDrawGizmos()
-        {
-            if (farObject != null)
-            {
-                GUI.color = Color.black;
-                Handles.Label(transform.position - (transform.position -
-                farObject.transform.position) / 2, distanceBetweenObjects.ToString());
-            }
-        }
+        //private void OnDrawGizmos()
+        //{
+        //    if (farObject != null)
+        //    {
+        //        GUI.color = Color.black;
+        //        Handles.Label(transform.position - (transform.position -
+        //        farObject.transform.position) / 2, distanceBetweenObjects.ToString());
+        //    }
+        //}
     }
 }

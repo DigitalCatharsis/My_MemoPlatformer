@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace My_MemoPlatformer
     [CreateAssetMenu(fileName = "New State", menuName = "My_MemoPlatformer/Helper/StateMachine_AbilityListToArray")]
     public class AbilityListToArray : ScriptableObject
     {
-        public AnimatorController targetAnimator = new AnimatorController();
+        public AnimatorController targetAnimator;
 
         public void Convert()
         {
@@ -41,3 +42,4 @@ namespace My_MemoPlatformer
         }
     }
 }
+#endif

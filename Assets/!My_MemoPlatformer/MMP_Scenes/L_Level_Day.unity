@@ -8159,11 +8159,12 @@ MonoBehaviour:
     Up arrow - climp ledge
 
     C - Attack
+    (combo it with arrows)
 
-    Space
-    - Jump
+    X - Jump (combo it with up and down arrow)
 
-    Hold Shift - Run
+    Hold
+    Shift - Run
 
     R - Restart'
   m_isRightToLeft: 0
@@ -8260,7 +8261,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2070360565
 RectTransform:
   m_ObjectHideFlags: 0

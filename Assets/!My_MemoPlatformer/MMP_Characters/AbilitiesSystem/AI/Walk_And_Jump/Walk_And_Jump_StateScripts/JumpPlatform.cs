@@ -27,11 +27,6 @@ namespace My_MemoPlatformer
 
             if (platformDistance.y > 0.5f) 
             {
-                if (DebugContainer_Data.Instance.debug_AI)
-                {
-                    EditorApplication.isPaused = true;
-                }
-
                 //TODO Добавить проверку относительно стартовой сферы??
 
                 if (characterState.characterControl.aiProgress.pathfindingAgent.startSphere.transform.position.z <
@@ -51,11 +46,6 @@ namespace My_MemoPlatformer
             {
                 if (platformDistance.y < 0.3f)
                 {
-                    if (DebugContainer_Data.Instance.debug_AI)
-                    {
-                        EditorApplication.isPaused = true;
-                    }
-
                     characterState.characterControl.moveRight = false;
                     characterState.characterControl.moveLeft = false;
                     characterState.characterControl.moveUp = false;

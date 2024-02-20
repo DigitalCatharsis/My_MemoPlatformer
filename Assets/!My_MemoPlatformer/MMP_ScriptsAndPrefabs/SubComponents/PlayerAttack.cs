@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 namespace My_MemoPlatformer
