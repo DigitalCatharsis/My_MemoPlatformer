@@ -314,8 +314,6 @@ namespace My_MemoPlatformer
                     Quaternion.identity
                 );
 
-            attacker.OBJ_POOLING_DATA.AddToList(vfx, effectsType);
-
             vfx.SetActive(true);
 
             if (attacker.ROTATION_DATA.IsFacingForward())

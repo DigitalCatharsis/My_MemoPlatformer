@@ -151,20 +151,6 @@ namespace My_MemoPlatformer
         L_Level_Day,
     }
 
-    public enum AI_TYPE
-    {
-        NONE,
-        WALK_AND_JUMP,
-    }
-
-    public enum AI_State_Name
-    {
-        SendPathfindingAgent,
-        AI_Attack,
-
-        COUNT,
-    }
-
     public enum Hit_Reaction_States
     {
         Head_Hit,

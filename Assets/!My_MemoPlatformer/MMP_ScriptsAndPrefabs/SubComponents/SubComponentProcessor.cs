@@ -24,7 +24,7 @@ namespace My_MemoPlatformer
         [Space(15)] public PlayerAnimation_Data animation_Data;
         [Space(15)] public CharacterMovement_Data characterMovement_Data;
         [Space(15)] public Interaction_Data interaction_Data;
-        [Space(15)] public ObjPooling_Data objPoolingData;
+        [Space(15)] public AIController_Data aIController_Data;
 
         private void Awake()
         {
@@ -47,6 +47,7 @@ namespace My_MemoPlatformer
             FixedUpdateSubComponent(SubComponentType.CHARACTER_MOVEMENT);
             FixedUpdateSubComponent(SubComponentType.INTERACTION);
             FixedUpdateSubComponent(SubComponentType.OBJ_POOLING_DATA);
+            FixedUpdateSubComponent(SubComponentType.AI_CONTROLLER_DATA);
         }
         public void UpdateSubComponents()
         {
@@ -56,6 +57,7 @@ namespace My_MemoPlatformer
             UpdateSubComponent(SubComponentType.CHARACTER_MOVEMENT);
             UpdateSubComponent(SubComponentType.INTERACTION);
             UpdateSubComponent(SubComponentType.OBJ_POOLING_DATA);
+            UpdateSubComponent(SubComponentType.AI_CONTROLLER_DATA);
         }
 
         private void UpdateSubComponent(SubComponentType type)

@@ -51,7 +51,7 @@ namespace My_MemoPlatformer
 
         private void TriggerAttack(CharacterControl control)
         {
-            control.aiController.ANIMATOR.Play(HashManager.Instance.arrAIStateNames[(int)AI_State_Name.AI_Attack], 0);
+            control.PLAYER_ANIMATION_DATA.animator.Play(HashManager.Instance.arrAIStateNames[(int)AI_State_Name.AI_Attack], 0);
         }
     }
 }

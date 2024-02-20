@@ -20,6 +20,7 @@ namespace My_MemoPlatformer
         CHARACTER_MOVEMENT,
         INTERACTION,
         OBJ_POOLING_DATA,
+        AI_CONTROLLER_DATA,
 
         COUNT,
     }

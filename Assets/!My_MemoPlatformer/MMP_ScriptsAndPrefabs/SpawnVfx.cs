@@ -24,29 +24,18 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (!characterState.characterControl.OBJ_POOLING_DATA.Vfxs.Contains(_spawnedVFX))
+            if (stateInfo.normalizedTime >= spawnTiming)
             {
-                if (stateInfo.normalizedTime >= spawnTiming)
-                {
-                    SpawnVFX(characterState.characterControl);
-                }
+                SpawnVFX(characterState.characterControl);
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (characterState.characterControl.OBJ_POOLING_DATA.Vfxs.Contains(_spawnedVFX))
-            {
-                characterState.characterControl.OBJ_POOLING_DATA.Vfxs.Remove(_spawnedVFX);
-            }
         }
 
         private void SpawnVFX(CharacterControl control)
         {
-            if (control.OBJ_POOLING_DATA.Vfxs.Contains(this._spawnedVFX))
-            {
-                return;
-            }
 
             _spawnedVFX = PoolManager.Instance.GetObject(objectType, PoolManager.Instance.vfxPoolDictionary, Vector3.zero, Quaternion.identity);
 
@@ -69,8 +58,6 @@ namespace My_MemoPlatformer
             }
 
             _spawnedVFX.SetActive(true);
-
-            control.OBJ_POOLING_DATA.Vfxs.Add(_spawnedVFX);
         }
     }
 }

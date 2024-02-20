@@ -15,6 +15,7 @@ namespace My_MemoPlatformer
         {
             animation_Data = new PlayerAnimation_Data
             {
+                animator = Control.GetComponentInChildren<Animator>(),
                 currentState = null,
                 previousState = null,
                 lockTransition = false,

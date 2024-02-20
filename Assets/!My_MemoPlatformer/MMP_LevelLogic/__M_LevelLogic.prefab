@@ -169,7 +169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5454991035804638131}
   m_Layer: 0
-  m_Name: LevelLogic
+  m_Name: __M_LevelLogic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

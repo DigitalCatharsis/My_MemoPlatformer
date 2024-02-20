@@ -26,8 +26,8 @@ namespace My_MemoPlatformer
         public SubComponentProcessor subComponentProcessor;
 
         //have to dispose
-        public AIProgress aiProgress;
-        public AIController aiController;
+        //public AIProgress aiProgress;
+        //public AIController aiController;
 
         public BoxCollider boxCollider;
 
@@ -49,7 +49,7 @@ namespace My_MemoPlatformer
         public PlayerAnimation_Data PLAYER_ANIMATION_DATA => subComponentProcessor.animation_Data;
         public CharacterMovement_Data CHARACTER_MOVEMENT_DATA => subComponentProcessor.characterMovement_Data;
         public Interaction_Data INTERACTION_DATA => subComponentProcessor.interaction_Data;
-        public ObjPooling_Data OBJ_POOLING_DATA => subComponentProcessor.objPoolingData;
+        public AIController_Data AICONTROLLER_DATA => subComponentProcessor.aIController_Data;
 
         [Header("Setup")]
         public PlayableCharacterType playableCharacterType;
@@ -69,18 +69,12 @@ namespace My_MemoPlatformer
 
             //better to refactor
             rigidBody = GetComponent<Rigidbody>();
-            aiProgress = GetComponentInChildren<AIProgress>();
             boxCollider = GetComponent<BoxCollider>();
             navMeshObstacle = GetComponent<NavMeshObstacle>();
-
-            aiController = GetComponentInChildren<AIController>();
-
-            if (aiController == null)
+            
+            if (navMeshObstacle != null)
             {
-                if (navMeshObstacle != null)
-                {
-                    navMeshObstacle.carving = true;
-                }
+                navMeshObstacle.carving = true;
             }
 
             RegisterCharacter();

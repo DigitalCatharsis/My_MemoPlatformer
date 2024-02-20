@@ -46,7 +46,6 @@ namespace My_MemoPlatformer
             characterState.Attack_Data.attackTriggered = false;
 
             _spawnedAttackCondition = PoolManager.Instance.GetObject(DataType.AttackCondition, PoolManager.Instance.dataPoolDictionary, Vector3.zero, Quaternion.identity);
-            characterState.characterControl.OBJ_POOLING_DATA.AddToList(_spawnedAttackCondition, DataType.AttackCondition);
             var info = _spawnedAttackCondition.GetComponent<AttackCondition>();
 
             if (AttackManager.Instance.activeAttacks == null)
@@ -135,7 +134,6 @@ namespace My_MemoPlatformer
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             ClearAttack();
-            characterState.characterControl.OBJ_POOLING_DATA.RemoveFromList(_spawnedAttackCondition, DataType.AttackCondition);
         }
         public void ClearAttack()
         {

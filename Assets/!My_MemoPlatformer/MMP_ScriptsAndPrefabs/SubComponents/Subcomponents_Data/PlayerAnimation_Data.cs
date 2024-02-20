@@ -7,6 +7,9 @@ namespace My_MemoPlatformer
     [Serializable]
     public class PlayerAnimation_Data
     {
+        [Header("Animator")]
+        public Animator animator;
+
         [Header("Transition")]
         public bool instantTransitionMade;
         public bool lockTransition;  //TODO: Где-то сбоит Lock transition (не выключается). Если пешка получает урон, можно иногда это увидеть.
