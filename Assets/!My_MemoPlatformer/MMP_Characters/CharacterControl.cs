@@ -96,7 +96,7 @@ namespace My_MemoPlatformer
             GROUND_DATA.BoxColliderContacts = collision.contacts;
         }
 
-        private void InitCharactersStates(Animator animator)  //Передает стейтам аниматора CharacterControl референс
+        public void InitCharactersStates(Animator animator)  //Передает стейтам аниматора CharacterControl референс
         {
             CharacterState[] arr = animator.GetBehaviours<CharacterState>();
 

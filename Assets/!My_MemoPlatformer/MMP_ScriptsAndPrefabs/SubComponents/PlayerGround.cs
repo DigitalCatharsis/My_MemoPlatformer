@@ -13,15 +13,14 @@ namespace My_MemoPlatformer
             };
 
             Control.subComponentProcessor.ground_Data = playerGround_Data;
+            subComponentProcessor.arrSubComponents[(int)SubComponentType.PLAYER_GROUND] = this;
         }
         public override void OnFixedUpdate()
         {
-            throw new System.NotImplementedException();
         }
 
         public override void OnUpdate()
         {
-            throw new System.NotImplementedException();
         }
     }
 

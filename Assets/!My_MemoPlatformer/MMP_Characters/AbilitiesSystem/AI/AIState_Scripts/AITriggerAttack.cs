@@ -12,17 +12,17 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (characterState.characterControl.aiProgress.TargetIsDead())
+            if (characterState.characterControl.AICONTROLLER_DATA.aIConditions.TargetIsDead())
             {
                 characterState.characterControl.attack = false;
             }
             else
             {
-                if (characterState.characterControl.aiProgress.AIDistanceToTarget() < 8f)
+                if (characterState.characterControl.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() < 8f)
                 {
                     if (!FlyingKick(characterState.characterControl))
                     {
-                        if (characterState.characterControl.aiProgress.AIDistanceToTarget() < 2f)
+                        if (characterState.characterControl.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() < 2f)
                         {
                             TriggerAttack(characterState.characterControl);
                         }
@@ -37,7 +37,7 @@ namespace My_MemoPlatformer
 
         private bool FlyingKick(CharacterControl control)
         {
-            if (control.aiProgress.doFlyingKick && control.aiProgress.TargetIsOnTheSamePlatform())
+            if (control.AICONTROLLER_DATA.doFlyingKick && control.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform())
             {
                 control.attack = true;
                 return true;

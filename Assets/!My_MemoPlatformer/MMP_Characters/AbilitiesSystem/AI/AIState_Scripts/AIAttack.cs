@@ -12,9 +12,9 @@ namespace My_MemoPlatformer
         }
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (!characterState.characterControl.aiProgress.TargetIsDead())
+            if (!characterState.characterControl.AICONTROLLER_DATA.aIConditions.TargetIsDead())
             {
-                characterState.characterControl.aiProgress.DoAttack();
+                characterState.characterControl.AICONTROLLER_DATA.aIBehavior.ProcessAttack();
             }
             else
             {

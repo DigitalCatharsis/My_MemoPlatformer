@@ -120,9 +120,9 @@ namespace My_MemoPlatformer
             Control.LEDGE_GRAB_DATA.DisableLedgeColliders();
 
             //turn off ai
-            if (Control.aiController != null)
+            if (Control.AICONTROLLER_DATA.playerType == PlayerType.Bot)
             {
-                Control.aiController.gameObject.SetActive(false);
+                Control.AICONTROLLER_DATA.playerType = PlayerType.None;
                 Control.navMeshObstacle.enabled = false;
             }
 

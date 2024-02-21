@@ -99,7 +99,7 @@ namespace My_MemoPlatformer
                 !characterState.Player_Animation_Data.IsRunning(typeof(Jump)) &&
                 !characterState.Player_Animation_Data.IsRunning(typeof(WallJump_Prep)))
             {
-                var height = characterState.characterControl.AICONTROLLER_DATA.GetStartSphereHeight();
+                var height = characterState.characterControl.AICONTROLLER_DATA.aiLogistic.GetStartSphereHeight();
                 if (height > 0.1f)
                 {
                     characterState.characterControl.turbo = false;
@@ -111,7 +111,7 @@ namespace My_MemoPlatformer
                     characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
                 }
                 ////sometimes AI doing nothing while control.attack is true
-                else if (characterState.characterControl.AICONTROLLER_DATA.TargetIsOnTheSamePlatform() && characterState.characterControl.attack)
+                else if (characterState.characterControl.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform() && characterState.characterControl.attack)
                 {
                     characterState.characterControl.attack = false;
                     characterState.characterControl.turbo = false;

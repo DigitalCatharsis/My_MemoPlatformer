@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -28,9 +29,10 @@ namespace My_MemoPlatformer
 
         private void Awake()
         {
-            arrSubComponents = new SubComponent[(int)SubComponentType.COUNT];
+            arrSubComponents = new SubComponent[Enum.GetNames(typeof(SubComponentType)).Length];
             control = GetComponentInParent<CharacterControl>();
         }
+
         public void FixedUpdateSubComponents()
         {
             FixedUpdateSubComponent(SubComponentType.LEDGE_CHECKER);
@@ -46,7 +48,6 @@ namespace My_MemoPlatformer
             FixedUpdateSubComponent(SubComponentType.PLAYER_GROUND);
             FixedUpdateSubComponent(SubComponentType.CHARACTER_MOVEMENT);
             FixedUpdateSubComponent(SubComponentType.INTERACTION);
-            FixedUpdateSubComponent(SubComponentType.OBJ_POOLING_DATA);
             FixedUpdateSubComponent(SubComponentType.AI_CONTROLLER_DATA);
         }
         public void UpdateSubComponents()
@@ -56,7 +57,6 @@ namespace My_MemoPlatformer
             UpdateSubComponent(SubComponentType.PLAYER_ANIMATION);
             UpdateSubComponent(SubComponentType.CHARACTER_MOVEMENT);
             UpdateSubComponent(SubComponentType.INTERACTION);
-            UpdateSubComponent(SubComponentType.OBJ_POOLING_DATA);
             UpdateSubComponent(SubComponentType.AI_CONTROLLER_DATA);
         }
 

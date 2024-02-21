@@ -8,7 +8,9 @@ namespace My_MemoPlatformer
     public class AIController_Data
     {
         [ShowOnly] public string aiStatus;
+        public PlayerType playerType;
         public List<GroundAttack> listGroundAttacks = new List<GroundAttack>();
+        public CharacterControl blockingCharacter;
 
         public bool doFlyingKick;
         public float flyingKickProbability;

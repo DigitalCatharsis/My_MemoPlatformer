@@ -22,15 +22,15 @@ namespace My_MemoPlatformer
 
             //Diffirence betwen character's top sphere (coliistion emulation) and End sphere of the pathfinding agent
             //float topDist = characterState.characterControl.aiProgress.pathfindfingAgent.endSphere.transform.position.y - characterState.characterControl.collisionSpheres.frontSpheres[1].transform.position.y;
-            var platformDistance = characterState.characterControl.aiProgress.pathfindingAgent.endSphere.transform.position
+            var platformDistance = characterState.characterControl.AICONTROLLER_DATA.pathfindingAgent.endSphere.transform.position
                 - characterState.COLLISION_SPHERE_DATA.frontSpheres[0].transform.position;
 
             if (platformDistance.y > 0.5f) 
             {
                 //TODO Добавить проверку относительно стартовой сферы??
 
-                if (characterState.characterControl.aiProgress.pathfindingAgent.startSphere.transform.position.z <
-                    characterState.characterControl.aiProgress.pathfindingAgent.endSphere.transform.position.z)
+                if (characterState.characterControl.AICONTROLLER_DATA.pathfindingAgent.startSphere.transform.position.z <
+                    characterState.characterControl.AICONTROLLER_DATA.pathfindingAgent.endSphere.transform.position.z)
                 {
                     characterState.characterControl.moveRight = true;
                     characterState.characterControl.moveLeft = false;
