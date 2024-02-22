@@ -10,7 +10,7 @@ namespace My_MemoPlatformer
         {
             _control = GetComponentInParent<CharacterControl>();
         }
-        public bool IsAttacking()
+        public bool IsInAttackingAnimation()
         {
             var info = _control.PLAYER_ANIMATION_DATA.animator.GetCurrentAnimatorStateInfo(0);
 

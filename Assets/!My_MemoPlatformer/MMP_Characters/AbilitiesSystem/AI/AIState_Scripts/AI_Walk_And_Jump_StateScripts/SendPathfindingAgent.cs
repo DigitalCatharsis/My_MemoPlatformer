@@ -18,7 +18,7 @@ namespace My_MemoPlatformer
             characterState.characterControl.AICONTROLLER_DATA.pathfindingAgent.GetComponent<NavMeshAgent>().enabled = false;
             characterState.characterControl.AICONTROLLER_DATA.pathfindingAgent.transform.position = characterState.characterControl.transform.position + (Vector3.up * 0.5f);
             characterState.characterControl.navMeshObstacle.carving = false; //to prevent bug when carving forbids agent to move
-            characterState.characterControl.AICONTROLLER_DATA.pathfindingAgent.GoToTarget();
+            characterState.characterControl.AICONTROLLER_DATA.pathfindingAgent.ReinitAgent_And_CheckDestination();
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

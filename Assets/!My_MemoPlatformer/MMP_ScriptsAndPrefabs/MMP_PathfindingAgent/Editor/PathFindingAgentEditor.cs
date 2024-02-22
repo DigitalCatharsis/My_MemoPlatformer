@@ -17,7 +17,7 @@ namespace My_MemoPlatformer
 
             if (GUILayout.Button("Go to target"))
             {
-                pathFindingAgent.GoToTarget();
+                pathFindingAgent.ReinitAgent_And_CheckDestination();
             }
         }
 

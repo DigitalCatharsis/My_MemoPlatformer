@@ -17,7 +17,7 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (characterState.AI_CONTROLLER_DATA.aIBehavior.RestartWalk())
+            if (characterState.AI_CONTROLLER_DATA.aIBehavior.IsRestartWalkCondition())
             {
                 //TODO: ?????????????
                 characterState.AI_CONTROLLER_DATA.InitializeAI();
@@ -36,7 +36,7 @@ namespace My_MemoPlatformer
                 characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
             }
 
-            if (characterState.AI_CONTROLLER_DATA.aIConditions.IsAttacking())
+            if (characterState.AI_CONTROLLER_DATA.aIConditions.IsInAttackingAnimation())
             {
                 if (characterState.characterControl.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() > 3f ||
                     !characterState.characterControl.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform())
@@ -54,7 +54,7 @@ namespace My_MemoPlatformer
             // path is blocked
             if (characterState.BlockingObj_Data.frontBlockingDictionaryCount == 0)
             {
-                characterState.characterControl.AICONTROLLER_DATA.blockingCharacter = null;   //TODO: ?????
+                characterState.characterControl.AICONTROLLER_DATA.blockingCharacter = null;
             }
             else
             {

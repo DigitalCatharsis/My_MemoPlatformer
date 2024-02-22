@@ -30,7 +30,7 @@ namespace My_MemoPlatformer
             distChecker.farObject = endSphere;
         }
 
-        public void GoToTarget()
+        public void ReinitAgent_And_CheckDestination()
         {
             meshLinks.Clear();
 
@@ -48,7 +48,7 @@ namespace My_MemoPlatformer
 
             _navMeshAgent.SetDestination(target.transform.position);
 
-            _moveRoutine = StartCoroutine(Move());
+            _moveRoutine = StartCoroutine(OnDestinationCheck_Routine());
         }
 
         private void OnEnable()
@@ -59,7 +59,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        IEnumerator Move()
+        private IEnumerator OnDestinationCheck_Routine()
         {
             while (true)
             {

@@ -58,7 +58,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        public bool RestartWalk()
+        public bool IsRestartWalkCondition()
         {
             if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToEndSphere() < 1f)
             {
@@ -70,7 +70,6 @@ namespace My_MemoPlatformer
                     }
                 }
             }
-
             return false;
         }
     }
