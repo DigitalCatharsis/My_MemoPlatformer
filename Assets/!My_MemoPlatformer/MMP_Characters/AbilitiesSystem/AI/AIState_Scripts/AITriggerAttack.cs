@@ -28,6 +28,11 @@ namespace My_MemoPlatformer
                         }
                     }
                 }
+                else
+                {
+                    //bug when ai stand and doing nothin
+                    characterState.characterControl.attack = false;
+                }
             }
         }
 
@@ -51,7 +56,9 @@ namespace My_MemoPlatformer
 
         private void TriggerAttack(CharacterControl control)
         {
-            control.PLAYER_ANIMATION_DATA.animator.Play(HashManager.Instance.arrAIStateNames[(int)AI_State_Name.AI_Attack], 0);
+            //control.PLAYER_ANIMATION_DATA.animator.Play("AI_Attack");
+            //control.PLAYER_ANIMATION_DATA.animator.Play(HashManager.Instance.arrAIStateNames[(int)AI_State_Name.AI_Attack], 0);
+            control.AICONTROLLER_DATA.aiAnimator.Play(HashManager.Instance.arrAIStateNames[(int)AI_State_Name.AI_Attack], 0);
         }
     }
 }

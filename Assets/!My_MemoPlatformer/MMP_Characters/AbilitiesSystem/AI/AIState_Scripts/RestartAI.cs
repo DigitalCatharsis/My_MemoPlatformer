@@ -21,6 +21,7 @@ namespace My_MemoPlatformer
             {
                 //TODO: ?????????????
                 characterState.AI_CONTROLLER_DATA.InitializeAI();
+                characterState.characterControl.AICONTROLLER_DATA.aIBehavior.StartAi();
             }
 
             //fix from jumping after failed to ledgegrab
@@ -34,6 +35,7 @@ namespace My_MemoPlatformer
                 characterState.characterControl.moveDown = false;
                 //TODO: ??????????????????
                 characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
+                characterState.characterControl.AICONTROLLER_DATA.aIBehavior.StartAi();
             }
 
             if (characterState.AI_CONTROLLER_DATA.aIConditions.IsInAttackingAnimation())
@@ -48,6 +50,7 @@ namespace My_MemoPlatformer
                     characterState.characterControl.moveRight = false;
                     characterState.characterControl.moveDown = false;
                     characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
+                    characterState.characterControl.AICONTROLLER_DATA.aIBehavior.StartAi();
                 }
             }
 
@@ -90,6 +93,7 @@ namespace My_MemoPlatformer
                         characterState.characterControl.moveRight = false;
                         characterState.characterControl.moveDown = false;
                         characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
+                        characterState.characterControl.AICONTROLLER_DATA.aIBehavior.StartAi();
                     }
                 }
             }
@@ -109,19 +113,20 @@ namespace My_MemoPlatformer
                     characterState.characterControl.moveRight = false;
                     characterState.characterControl.moveDown = false;
                     characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
+                    characterState.characterControl.AICONTROLLER_DATA.aIBehavior.StartAi();
                 }
-                ////sometimes AI doing nothing while control.attack is true
-                else if (characterState.characterControl.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform() && characterState.characterControl.attack)
-                {
-                    characterState.characterControl.attack = false;
-                    characterState.characterControl.turbo = false;
-                    characterState.characterControl.jump = false;
-                    characterState.characterControl.moveUp = false;
-                    characterState.characterControl.moveLeft = false;
-                    characterState.characterControl.moveRight = false;
-                    characterState.characterControl.moveDown = false;
-                    characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
-                }
+                //////sometimes AI doing nothing while control.attack is true
+                //else if (characterState.characterControl.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform() && characterState.characterControl.attack)
+                //{
+                //    characterState.characterControl.attack = false;
+                //    characterState.characterControl.turbo = false;
+                //    characterState.characterControl.jump = false;
+                //    characterState.characterControl.moveUp = false;
+                //    characterState.characterControl.moveLeft = false;
+                //    characterState.characterControl.moveRight = false;
+                //    characterState.characterControl.moveDown = false;
+                //    characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
+                //}
             }
 
             ////sometimes AI doing nothing while control.attack is true
