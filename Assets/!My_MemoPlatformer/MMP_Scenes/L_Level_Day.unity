@@ -38032,7 +38032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6329450125771097236, guid: 27c6ede939c39d247ac0894bd4f38a02, type: 3}
       propertyPath: _maxEnemyNumber
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6329450125771097236, guid: 27c6ede939c39d247ac0894bd4f38a02, type: 3}
       propertyPath: _timeBetweenSpawn

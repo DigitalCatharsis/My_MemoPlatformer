@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Android;
 using static My_MemoPlatformer.AIController_Data;
 
 namespace My_MemoPlatformer
@@ -94,8 +95,7 @@ namespace My_MemoPlatformer
 
             if (Control.DAMAGE_DATA.IsDead())
             {
-                gameObject.SetActive(false);
-                _aiAnimator.enabled = false;
+                OnCharacterDies();
             }
         }
         public void InitializeAI() //TODO: Check all calls
@@ -126,6 +126,20 @@ namespace My_MemoPlatformer
             }
 
             aiIsInitialized = true;
+        }
+
+        //TODO: replace and parse. Happens every update, have to fix
+        private void OnCharacterDies()
+        {
+            if (subComponentProcessor.gameObject.activeSelf)
+            {                
+                _aiAnimator.enabled = false;
+                Destroy(aIController_Data.pathfindingAgent.startSphere.gameObject);
+                Destroy(aIController_Data.pathfindingAgent.endSphere.gameObject);
+                Destroy(aIController_Data.pathfindingAgent.gameObject);
+                subComponentProcessor.gameObject.SetActive(false);
+                gameObject.SetActive(false);
+            }
         }
     }
 }

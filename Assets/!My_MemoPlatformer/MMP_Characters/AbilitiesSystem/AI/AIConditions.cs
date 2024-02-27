@@ -26,7 +26,7 @@ namespace My_MemoPlatformer
         }
         public bool IsInAttackingAnimation()
         {
-            var info = _control.PLAYER_ANIMATION_DATA.animator.GetCurrentAnimatorStateInfo(0);
+            var info = _control.AICONTROLLER_DATA.aiAnimator.GetCurrentAnimatorStateInfo(0);
 
             if (info.shortNameHash == HashManager.Instance.arrAIStateNames[(int)AI_State_Name.AI_Attack])
             {
