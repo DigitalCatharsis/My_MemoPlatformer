@@ -14,7 +14,7 @@ namespace My_MemoPlatformer
         public LedgeCollider colliderBot; //bottom
         public GameObject upBlockChecker; //bottom
 
-        private void Start()
+        private void OnEnable()
         {
             ledgeGrab_Data = new LedgeGrab_Data
             {

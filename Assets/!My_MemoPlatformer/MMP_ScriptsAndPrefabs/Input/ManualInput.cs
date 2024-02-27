@@ -19,7 +19,7 @@ namespace My_MemoPlatformer
         [SerializeField] private float _doubleTapTime = 0.18f;
         [SerializeField] private bool useDoubleTapsForMoving;
 
-        private void Start()
+        private void OnEnable()
         {
             manualInputData = new ManualInput_Data
             {
@@ -30,6 +30,18 @@ namespace My_MemoPlatformer
             subComponentProcessor.manualInput_Data = manualInputData;
             subComponentProcessor.arrSubComponents[(int)SubComponentType.MANUAL_INPUT] = this;
         }
+
+        //private void Start()
+        //{
+        //    manualInputData = new ManualInput_Data
+        //    {
+        //        DoubleTapDown = IsDoubleTap_Down,
+        //        DoubleTapUp = IsDoubleTap_Up,
+        //    };
+
+        //    subComponentProcessor.manualInput_Data = manualInputData;
+        //    subComponentProcessor.arrSubComponents[(int)SubComponentType.MANUAL_INPUT] = this;
+        //}
 
         public override void OnFixedUpdate()
         {

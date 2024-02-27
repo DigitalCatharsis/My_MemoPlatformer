@@ -6,7 +6,7 @@ namespace My_MemoPlatformer
     {
         public BoxCollider_Data _boxCollider_Data;
 
-        private void Start()
+        private void OnEnable()
         {
             _boxCollider_Data = new BoxCollider_Data
             {

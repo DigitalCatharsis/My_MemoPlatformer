@@ -5,7 +5,7 @@ namespace My_MemoPlatformer
     public class PlayerGround : SubComponent
     {
         public Ground_Data playerGround_Data;
-        private void Start()
+        private void OnEnable()
         {
             playerGround_Data = new Ground_Data
             {

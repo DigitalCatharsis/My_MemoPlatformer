@@ -9,7 +9,7 @@ namespace My_MemoPlatformer
         [Space(10)]
         public CollisionSpheres_Data collisionSpheres_Data;
 
-        private void Start()
+        private void OnEnable()
         {
             collisionSpheres_Data = new CollisionSpheres_Data
             {

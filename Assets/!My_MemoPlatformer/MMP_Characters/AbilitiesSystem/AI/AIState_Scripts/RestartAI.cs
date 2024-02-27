@@ -12,14 +12,14 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (!AIIsOnGround(characterState.characterControl))
+            if (!characterState.characterControl.AICONTROLLER_DATA.aIConditions.AIIsOnGround(characterState.characterControl))
             {
                 return;
             }
 
-            if (characterState.AI_CONTROLLER_DATA.aIBehavior.IsRestartWalkCondition())
+            //Walk again
+            if (characterState.AI_CONTROLLER_DATA.aIConditions.IsRestartWalkCondition())
             {
-                //TODO: ?????????????
                 characterState.AI_CONTROLLER_DATA.InitializeAI();
                 characterState.characterControl.AICONTROLLER_DATA.aIBehavior.StartAi();
             }
@@ -33,7 +33,7 @@ namespace My_MemoPlatformer
                 characterState.characterControl.moveLeft = false;
                 characterState.characterControl.moveRight = false;
                 characterState.characterControl.moveDown = false;
-                //TODO: ??????????????????
+
                 characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
                 characterState.characterControl.AICONTROLLER_DATA.aIBehavior.StartAi();
             }
@@ -115,60 +115,12 @@ namespace My_MemoPlatformer
                     characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
                     characterState.characterControl.AICONTROLLER_DATA.aIBehavior.StartAi();
                 }
-                //////sometimes AI doing nothing while control.attack is true
-                //else if (characterState.characterControl.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform() && characterState.characterControl.attack)
-                //{
-                //    characterState.characterControl.attack = false;
-                //    characterState.characterControl.turbo = false;
-                //    characterState.characterControl.jump = false;
-                //    characterState.characterControl.moveUp = false;
-                //    characterState.characterControl.moveLeft = false;
-                //    characterState.characterControl.moveRight = false;
-                //    characterState.characterControl.moveDown = false;
-                //    characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
-                //}
             }
-
-            ////sometimes AI doing nothing while control.attack is true
-            //if (characterState.Ground_Data.ground != null &&
-            //    !characterState.Animation_Data.IsRunning(typeof(Jump)) &&
-            //    !characterState.Animation_Data.IsRunning(typeof(WallJump_Prep)) &&
-            //     characterState.characterControl.attack)
-            //{
-            //    if (characterState.characterControl.AICONTROLLER_DATA.GetStartSphereHeight() == characterState.characterControl.AICONTROLLER_DATA.GetEndSphereHeight())
-            //    {
-            //        characterState.characterControl.turbo = false;
-            //        characterState.characterControl.jump = false;
-            //        characterState.characterControl.moveUp = false;
-            //        characterState.characterControl.moveLeft = false;
-            //        characterState.characterControl.moveRight = false;
-            //        characterState.characterControl.moveDown = false;
-            //        characterState.characterControl.aiController.InitializeAI();
-            //    }
-            //}
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
 
-        }
-
-        private bool AIIsOnGround(CharacterControl control)
-        {
-            if (control.PLAYER_ANIMATION_DATA.IsRunning(typeof(MoveUp)))
-            {
-                return false;
-            }
-
-            if (control.rigidBody.useGravity)
-            {
-                if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
     }
 }

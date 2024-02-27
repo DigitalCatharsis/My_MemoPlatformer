@@ -53,6 +53,8 @@ namespace My_MemoPlatformer
 
         [Header("Setup")]
         public PlayableCharacterType playableCharacterType;
+        public PlayerType aiType;
+
         public Animator skinnedMeshAnimator;
         public GameObject rightHand_Attack;
         public GameObject leftHand_Attack;

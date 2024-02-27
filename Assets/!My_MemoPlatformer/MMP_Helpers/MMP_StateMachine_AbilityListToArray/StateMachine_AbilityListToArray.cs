@@ -20,7 +20,7 @@ namespace My_MemoPlatformer
                     if (state.ListAbilityData.Count != 0)
                     {
                         Debug.Log("List to array: " + state.name);
-                        state.PutStatesInArray();
+                        PutStatesInArray(state);
                     }
                 }
             }
@@ -38,6 +38,16 @@ namespace My_MemoPlatformer
             {
                 Debug.Log("Clearing list: " + state.name);
                 state.ListAbilityData.Clear();
+            }
+        }
+
+        private void PutStatesInArray(CharacterState characterState)
+        {
+            characterState.arrAbilities = new CharacterAbility[characterState.ListAbilityData.Count];
+
+            for (int i = 0; i < characterState.ListAbilityData.Count; i++)
+            {
+                characterState.arrAbilities[i] = characterState.ListAbilityData[i];
             }
         }
     }

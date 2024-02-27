@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -24,7 +25,17 @@ namespace My_MemoPlatformer
         }
         public void ProcessAttack()
         {
-            _control.AICONTROLLER_DATA.aIAttacks.Attack();
+            RandomizeNextAttack();
+            _control.AICONTROLLER_DATA.listGroundAttacks[RandomizeNextAttack()](_control);
+        }
+        private int RandomizeNextAttack()
+        {
+            return Random.Range(0, _control.AICONTROLLER_DATA.listGroundAttacks.Count);
+        }
+
+        public void TriggerAttackState(CharacterControl control)
+        {
+            control.AICONTROLLER_DATA.aiAnimator.Play(HashManager.Instance.arrAIStateNames[(int)AI_State_Name.AI_Attack], 0);
         }
 
         public void WalkStraightToTheStartSphere()
@@ -58,19 +69,5 @@ namespace My_MemoPlatformer
             }
         }
 
-        public bool IsRestartWalkCondition()
-        {
-            if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToEndSphere() < 1f)
-            {
-                if (_control.AICONTROLLER_DATA.aiLogistic.TargetDistanceToEndSphere() > 0.5f)
-                {
-                    if (_control.AICONTROLLER_DATA.aIConditions.TargetIsGrounded())
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
     }
 }

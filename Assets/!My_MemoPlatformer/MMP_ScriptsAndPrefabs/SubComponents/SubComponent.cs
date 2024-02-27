@@ -19,7 +19,7 @@ namespace My_MemoPlatformer
         PLAYER_GROUND,
         CHARACTER_MOVEMENT,
         INTERACTION,
-        AI_CONTROLLER_DATA,
+        AI_CONTROLLER,
     }
 
     public abstract class SubComponent : MonoBehaviour

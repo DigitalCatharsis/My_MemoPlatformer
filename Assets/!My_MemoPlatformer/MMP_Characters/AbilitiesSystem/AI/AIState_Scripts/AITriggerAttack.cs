@@ -24,7 +24,7 @@ namespace My_MemoPlatformer
                     {
                         if (characterState.characterControl.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() < 2f)
                         {
-                            TriggerAttack(characterState.characterControl);
+                            characterState.characterControl.AICONTROLLER_DATA.aIBehavior.TriggerAttackState(characterState.characterControl);
                         }
                     }
                 }
@@ -54,11 +54,5 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void TriggerAttack(CharacterControl control)
-        {
-            //control.PLAYER_ANIMATION_DATA.animator.Play("AI_Attack");
-            //control.PLAYER_ANIMATION_DATA.animator.Play(HashManager.Instance.arrAIStateNames[(int)AI_State_Name.AI_Attack], 0);
-            control.AICONTROLLER_DATA.aiAnimator.Play(HashManager.Instance.arrAIStateNames[(int)AI_State_Name.AI_Attack], 0);
-        }
     }
 }

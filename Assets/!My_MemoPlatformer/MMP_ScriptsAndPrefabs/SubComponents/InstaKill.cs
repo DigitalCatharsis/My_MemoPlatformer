@@ -16,7 +16,7 @@ namespace My_MemoPlatformer
         [SerializeField] private RuntimeAnimatorController Assassination_Assassin;
         [SerializeField] private RuntimeAnimatorController Assassination_Victim;
 
-        private void Start()
+        private void OnEnable()
         {
             instaKill_Data = new InstaKill_Data
             {

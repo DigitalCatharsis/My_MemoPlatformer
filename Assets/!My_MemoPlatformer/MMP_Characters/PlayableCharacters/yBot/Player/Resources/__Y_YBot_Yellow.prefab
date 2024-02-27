@@ -1758,6 +1758,7 @@ MonoBehaviour:
   boxCollider: {fileID: 0}
   navMeshObstacle: {fileID: 0}
   playableCharacterType: 1
+  aiType: 1
   skinnedMeshAnimator: {fileID: 2428127011527154921}
   rightHand_Attack: {fileID: 9160105403987278352}
   leftHand_Attack: {fileID: 7264828609573986013}

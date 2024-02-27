@@ -26,7 +26,7 @@ namespace My_MemoPlatformer
         [SerializeField] private float _airStompDownBlocking_Distance;
         [SerializeField] private float _upBlocking_Distance;
 
-        private void Start()
+        private void OnEnable()
         {
             blockingObj_Data = new BlockingObj_Data
             {

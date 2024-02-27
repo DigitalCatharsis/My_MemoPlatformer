@@ -33,6 +33,31 @@ namespace My_MemoPlatformer
             control = GetComponentInParent<CharacterControl>();
         }
 
+        private void Start()
+        {
+            //StartSubcomponents();
+        }
+
+        //public void StartSubcomponents()
+        //{
+        //    StartSubcomponent(SubComponentType.LEDGE_CHECKER);
+        //    StartSubcomponent(SubComponentType.INSTA_KILL);
+        //    StartSubcomponent(SubComponentType.BLOCKING_OBJECTS);
+        //    StartSubcomponent(SubComponentType.PLAYER_ATTACK);
+        //    StartSubcomponent(SubComponentType.DAMAGE_DETECTOR);
+        //    StartSubcomponent(SubComponentType.AI_CONTROLLER);
+        //    StartSubcomponent(SubComponentType.MANUAL_INPUT);
+        //    StartSubcomponent(SubComponentType.RAGDOLL);
+        //    StartSubcomponent(SubComponentType.BOX_COLLIDER_UPDATER);
+        //    StartSubcomponent(SubComponentType.VERTICAL_VELOCITY);
+        //    StartSubcomponent(SubComponentType.PLAYER_ROTATION);
+        //    StartSubcomponent(SubComponentType.PLAYER_GROUND);
+        //    StartSubcomponent(SubComponentType.COLLISION_SPHERES);
+        //    StartSubcomponent(SubComponentType.PLAYER_ANIMATION);
+        //    StartSubcomponent(SubComponentType.CHARACTER_MOVEMENT);
+        //    StartSubcomponent(SubComponentType.INTERACTION);
+        //}
+
         public void FixedUpdateSubComponents()
         {
             FixedUpdateSubComponent(SubComponentType.LEDGE_CHECKER);
@@ -48,7 +73,7 @@ namespace My_MemoPlatformer
             FixedUpdateSubComponent(SubComponentType.PLAYER_GROUND);
             FixedUpdateSubComponent(SubComponentType.CHARACTER_MOVEMENT);
             FixedUpdateSubComponent(SubComponentType.INTERACTION);
-            FixedUpdateSubComponent(SubComponentType.AI_CONTROLLER_DATA);
+            FixedUpdateSubComponent(SubComponentType.AI_CONTROLLER);
         }
         public void UpdateSubComponents()
         {
@@ -57,8 +82,16 @@ namespace My_MemoPlatformer
             UpdateSubComponent(SubComponentType.PLAYER_ANIMATION);
             UpdateSubComponent(SubComponentType.CHARACTER_MOVEMENT);
             UpdateSubComponent(SubComponentType.INTERACTION);
-            UpdateSubComponent(SubComponentType.AI_CONTROLLER_DATA);
+            UpdateSubComponent(SubComponentType.AI_CONTROLLER);
         }
+        //private void StartSubcomponent(SubComponentType type)
+        //{
+        //    var subComps = GetComponentsInChildren<SubComponent>();
+        //    foreach( var subComp in subComps )
+        //    {
+        //        subComp.OnEnable();
+        //    }
+        //}
 
         private void UpdateSubComponent(SubComponentType type)
         {

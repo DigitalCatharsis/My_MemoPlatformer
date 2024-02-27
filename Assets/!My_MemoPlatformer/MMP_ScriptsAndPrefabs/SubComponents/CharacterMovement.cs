@@ -6,7 +6,7 @@ namespace My_MemoPlatformer
     {
         [SerializeField] private CharacterMovement_Data characterMovement_Data;
 
-        private void Start()
+        private void OnEnable()
         {
             characterMovement_Data = new CharacterMovement_Data
             {

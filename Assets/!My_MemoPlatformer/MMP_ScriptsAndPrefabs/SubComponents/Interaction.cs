@@ -6,7 +6,7 @@ namespace My_MemoPlatformer
     public class Interaction : SubComponent
     {
         public Interaction_Data interaction_Data;
-        private void Start()
+        private void OnEnable()
         {
             interaction_Data = new Interaction_Data
             {

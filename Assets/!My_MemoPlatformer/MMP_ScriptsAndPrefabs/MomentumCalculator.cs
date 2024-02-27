@@ -4,9 +4,10 @@ namespace My_MemoPlatformer
 {
     public class MomentumCalculator : SubComponent
     {
+        //TODO: Is it used?
         public MomentumCalculator_Data momentumCalculator_Data;
 
-        private void Start()
+        private void OnEnable()
         {
             momentumCalculator_Data = new MomentumCalculator_Data
             {
@@ -16,6 +17,17 @@ namespace My_MemoPlatformer
 
             subComponentProcessor.momentumCalculator_Data = momentumCalculator_Data;
         }
+
+        //private void Start()
+        //{
+        //    momentumCalculator_Data = new MomentumCalculator_Data
+        //    {
+        //        momentum = 0,
+        //        CalcualateMomentum = CalculateMomentum,
+        //    };
+
+        //    subComponentProcessor.momentumCalculator_Data = momentumCalculator_Data;
+        //}
 
         public override void OnFixedUpdate()
         {

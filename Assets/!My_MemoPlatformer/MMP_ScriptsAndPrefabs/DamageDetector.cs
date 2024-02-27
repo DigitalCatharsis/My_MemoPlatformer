@@ -12,7 +12,7 @@ namespace My_MemoPlatformer
 
         private static string _VFX_Prefix = "VFX";
 
-        private void Start()
+        private void OnEnable()
         {
             _damage_Data = new Damage_Data
             {
@@ -31,6 +31,27 @@ namespace My_MemoPlatformer
 
             subComponentProcessor.damage_Data = _damage_Data;
             subComponentProcessor.arrSubComponents[(int)SubComponentType.DAMAGE_DETECTOR] = this;
+        }
+
+        private void Start()
+        {
+            //_damage_Data = new Damage_Data
+            //{
+            //    blockedAttack = null,
+            //    currentHp = _hp,
+
+            //    damageTaken = new DamageTaken(attacker: null, attack: null, damaged_TG: null, damagerPart: null, incomingVelocity: Vector3.zero),
+
+            //    IsDead = IsCharacterDead,
+            //    TakeDamage = ProcessDamage,
+            //    TakeCollateralDamage = ProcessCollateralDamage,
+
+            //    AddCollidersToDictionary = AddCollidersToDictionary,
+            //    RemoveCollidersFromDictionary = RemoveCollidersFromDictionary,
+            //};
+
+            //subComponentProcessor.damage_Data = _damage_Data;
+            //subComponentProcessor.arrSubComponents[(int)SubComponentType.DAMAGE_DETECTOR] = this;
         }
 
         public override void OnFixedUpdate()

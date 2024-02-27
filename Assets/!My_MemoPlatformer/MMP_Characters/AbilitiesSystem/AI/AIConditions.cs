@@ -10,6 +10,20 @@ namespace My_MemoPlatformer
         {
             _control = GetComponentInParent<CharacterControl>();
         }
+        public bool IsRestartWalkCondition()
+        {
+            if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToEndSphere() < 1f)
+            {
+                if (_control.AICONTROLLER_DATA.aiLogistic.TargetDistanceToEndSphere() > 0.5f)
+                {
+                    if (_control.AICONTROLLER_DATA.aIConditions.TargetIsGrounded())
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
         public bool IsInAttackingAnimation()
         {
             var info = _control.PLAYER_ANIMATION_DATA.animator.GetCurrentAnimatorStateInfo(0);
@@ -25,7 +39,7 @@ namespace My_MemoPlatformer
         }
         public bool TargetIsOnRightSide()
         {
-            if ((_control.AICONTROLLER_DATA.pathfindingAgent.transform.position - _control.transform.position).z > 0f)
+            if ((_control.AICONTROLLER_DATA.pathfindingAgent.target.transform.position - _control.transform.position).z > 0f)
             {
                 return true;
             }
@@ -132,6 +146,23 @@ namespace My_MemoPlatformer
             {
                 return false;
             }
+        }
+        public bool AIIsOnGround(CharacterControl control)
+        {
+            if (control.PLAYER_ANIMATION_DATA.IsRunning(typeof(MoveUp)))
+            {
+                return false;
+            }
+
+            if (control.rigidBody.useGravity)
+            {
+                if (control.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

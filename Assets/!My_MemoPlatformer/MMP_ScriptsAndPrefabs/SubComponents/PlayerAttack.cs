@@ -10,7 +10,7 @@ namespace My_MemoPlatformer
         [SerializeField] private Attack _weaponThrow;
         [SerializeField] private Attack _airStompAttack;
 
-        private void Start()
+        private void OnEnable()
         {
             playerAttack_Data = new Attack_Data
             {

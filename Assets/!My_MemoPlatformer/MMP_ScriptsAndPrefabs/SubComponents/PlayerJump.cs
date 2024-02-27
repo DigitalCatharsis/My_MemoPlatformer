@@ -6,7 +6,7 @@ namespace My_MemoPlatformer
     {
         [SerializeField] private Jump_Data _jump_Data;
 
-        private void Start()
+        private void OnEnable()
         {
             _jump_Data = new Jump_Data
             {

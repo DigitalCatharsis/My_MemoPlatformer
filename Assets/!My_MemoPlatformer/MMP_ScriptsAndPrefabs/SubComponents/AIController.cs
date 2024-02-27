@@ -1,10 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.EventSystems;
 using static My_MemoPlatformer.AIController_Data;
 
 namespace My_MemoPlatformer
@@ -55,12 +51,11 @@ namespace My_MemoPlatformer
 
         [Header("Parameters Setup")][Space(10)]
         [SerializeField] private Animator _aiAnimator;
-        [SerializeField] private PlayerType _playerType;
         [Range(0f, 1f)][SerializeField] private float _flyingKickProbability;
 
         private bool aiIsInitialized = false;
 
-        private void Start()
+        private void OnEnable()
         {
             aIController_Data = new AIController_Data
             {
@@ -83,17 +78,24 @@ namespace My_MemoPlatformer
             Control.InitCharactersStates(_aiAnimator);
 
             subComponentProcessor.aIController_Data = aIController_Data;
-            subComponentProcessor.arrSubComponents[(int)SubComponentType.AI_CONTROLLER_DATA] = this;
+            subComponentProcessor.arrSubComponents[(int)SubComponentType.AI_CONTROLLER] = this;
         }
+
         public override void OnUpdate()
         {
         }
 
         public override void OnFixedUpdate()
         {
-            if (_playerType == PlayerType.Bot && aiIsInitialized == false)
+            if (Control.aiType == PlayerType.Bot && aiIsInitialized == false)
             {
                 InitializeAI();
+            }
+
+            if (Control.DAMAGE_DATA.IsDead())
+            {
+                gameObject.SetActive(false);
+                _aiAnimator.enabled = false;
             }
         }
         public void InitializeAI() //TODO: Check all calls
@@ -115,9 +117,7 @@ namespace My_MemoPlatformer
                 _aIAttacks.ForwardGroundAttack
             };
 
-            StartCoroutine(_aIAttacks._RandomizeNextAttack());
-
-            if (_playerType == PlayerType.Bot)
+            if (Control.aiType == PlayerType.Bot)
             {
                 if (Control.navMeshObstacle != null)
                 {

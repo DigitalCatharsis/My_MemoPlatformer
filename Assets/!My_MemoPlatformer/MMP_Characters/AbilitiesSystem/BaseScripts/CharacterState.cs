@@ -6,7 +6,6 @@ namespace My_MemoPlatformer
     public class CharacterState : StateMachineBehaviour
     {
         public CharacterControl characterControl;
-
         [Space(10)]
         public List<CharacterAbility> ListAbilityData = new List<CharacterAbility>();
         [Space(10)]
@@ -26,28 +25,12 @@ namespace My_MemoPlatformer
         public AIController_Data AI_CONTROLLER_DATA => characterControl.AICONTROLLER_DATA;
         public CharacterMovement_Data CharacterMovement_Data => characterControl.CHARACTER_MOVEMENT_DATA;
         public AIController_Data AIController_Data => characterControl.AICONTROLLER_DATA;
-        public void PutStatesInArray()
-        {
-            arrAbilities = new CharacterAbility[ListAbilityData.Count];
-
-            for (int i = 0; i < ListAbilityData.Count; i++)
-            {
-                arrAbilities[i] = ListAbilityData[i];
-            }
-        }
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             for (int i = 0; i < arrAbilities.Length; i++)
             {
-                try
-                {
                 arrAbilities[i].OnEnter(this, animator, stateInfo);
-                }
-                catch 
-                {
-                    Debug.Log(arrAbilities[i]);
-                }
 
                 if (characterControl.PLAYER_ANIMATION_DATA.currentRunningAbilities_Dictionary.ContainsKey(arrAbilities[i]))
                 {
@@ -59,6 +42,7 @@ namespace My_MemoPlatformer
                 }
             }
         }
+
         public void UpdateAll(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             for (int i = 0; i < arrAbilities.Length; i++)
@@ -93,6 +77,7 @@ namespace My_MemoPlatformer
                 catch (System.Exception e)
                 {
                     Debug.Log(e);
+                    throw e;
                 }
             }
         }

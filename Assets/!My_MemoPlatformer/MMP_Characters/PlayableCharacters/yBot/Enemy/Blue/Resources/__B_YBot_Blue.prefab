@@ -93,6 +93,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2430949021683835267, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
+      propertyPath: aiType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2430949021683835267, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: playableCharacterType
       value: 0
       objectReference: {fileID: 0}

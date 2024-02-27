@@ -13,7 +13,7 @@ namespace My_MemoPlatformer
     {
         public Ragdoll_Data ragdoll_Data;
 
-        private void Start()
+        private void OnEnable()
         {
             ragdoll_Data = new Ragdoll_Data
             {

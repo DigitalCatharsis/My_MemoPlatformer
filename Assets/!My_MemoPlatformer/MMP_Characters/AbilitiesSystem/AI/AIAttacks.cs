@@ -5,7 +5,6 @@ namespace My_MemoPlatformer
 {
     public class AIAttacks : MonoBehaviour
     {
-        private int _attackIndex;
         private CharacterControl _control;
 
         private void Start()
@@ -58,20 +57,6 @@ namespace My_MemoPlatformer
             {
                 _control.AICONTROLLER_DATA.doFlyingKick = false;
             }
-        }
-
-        public IEnumerator _RandomizeNextAttack()
-        {
-            while (true)
-            {
-                _attackIndex = UnityEngine.Random.Range(0, _control.AICONTROLLER_DATA.listGroundAttacks.Count);
-                yield return new WaitForSeconds(2f);
-            }
-        }
-
-        public void Attack()
-        {
-            _control.AICONTROLLER_DATA.listGroundAttacks[_attackIndex](_control);
         }
     }
 }

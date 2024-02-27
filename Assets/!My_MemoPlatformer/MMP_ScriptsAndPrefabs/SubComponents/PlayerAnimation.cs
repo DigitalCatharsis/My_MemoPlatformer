@@ -11,7 +11,7 @@ namespace My_MemoPlatformer
         private List<string> _previousList = new List<string> {};
         private string _currentState;
 
-        void Start()
+        private void OnEnable()
         {
             animation_Data = new PlayerAnimation_Data
             {

@@ -6,7 +6,7 @@ namespace My_MemoPlatformer
     {
         public VerticalVelocity_Data verticalVelocity_Data;
 
-        private void Start()
+        private void OnEnable()
         {
             verticalVelocity_Data = new VerticalVelocity_Data
             {

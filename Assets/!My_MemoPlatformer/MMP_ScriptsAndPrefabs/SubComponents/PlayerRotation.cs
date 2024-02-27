@@ -7,7 +7,7 @@ namespace My_MemoPlatformer
         public Rotation_Data rotation_Data;
         //TODO: remove
         static string L_CharacterSelect = "L_CharacterSelect";
-        private void Start()
+        private void OnEnable()
         {
             rotation_Data = new Rotation_Data
             {
