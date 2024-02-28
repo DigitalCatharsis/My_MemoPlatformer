@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 namespace My_MemoPlatformer
 {
@@ -6,7 +8,7 @@ namespace My_MemoPlatformer
     {
         [SerializeField] private Jump_Data _jump_Data;
 
-        private void OnEnable()
+        public override void OnComponentEnabled()
         {
             _jump_Data = new Jump_Data
             {
@@ -19,12 +21,10 @@ namespace My_MemoPlatformer
         }
         public override void OnFixedUpdate()
         {
-            throw new System.NotImplementedException();
         }
 
         public override void OnUpdate()
         {
-            throw new System.NotImplementedException();
         }
     }
 

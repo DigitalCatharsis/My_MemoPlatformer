@@ -27,71 +27,84 @@ namespace My_MemoPlatformer
         [Space(15)] public Interaction_Data interaction_Data;
         [Space(15)] public AIController_Data aIController_Data;
 
-        private void Awake()
+        public void InitSubCompProc()
         {
             arrSubComponents = new SubComponent[Enum.GetNames(typeof(SubComponentType)).Length];
+            arrSubComponents = GetComponentsInChildren<SubComponent>();
             control = GetComponentInParent<CharacterControl>();
-        }
 
-        private void Start()
+            foreach (var component in arrSubComponents)
+            {
+                component.OnAwake();
+            }
+        }
+        public void OnEnableSubcomponents()
         {
-            //StartSubcomponents();
-        }
+            foreach (var component in arrSubComponents)
+            {
+                component.OnComponentEnabled();
+            }
 
-        //public void StartSubcomponents()
-        //{
-        //    StartSubcomponent(SubComponentType.LEDGE_CHECKER);
-        //    StartSubcomponent(SubComponentType.INSTA_KILL);
-        //    StartSubcomponent(SubComponentType.BLOCKING_OBJECTS);
-        //    StartSubcomponent(SubComponentType.PLAYER_ATTACK);
-        //    StartSubcomponent(SubComponentType.DAMAGE_DETECTOR);
-        //    StartSubcomponent(SubComponentType.AI_CONTROLLER);
-        //    StartSubcomponent(SubComponentType.MANUAL_INPUT);
-        //    StartSubcomponent(SubComponentType.RAGDOLL);
-        //    StartSubcomponent(SubComponentType.BOX_COLLIDER_UPDATER);
-        //    StartSubcomponent(SubComponentType.VERTICAL_VELOCITY);
-        //    StartSubcomponent(SubComponentType.PLAYER_ROTATION);
-        //    StartSubcomponent(SubComponentType.PLAYER_GROUND);
-        //    StartSubcomponent(SubComponentType.COLLISION_SPHERES);
-        //    StartSubcomponent(SubComponentType.PLAYER_ANIMATION);
-        //    StartSubcomponent(SubComponentType.CHARACTER_MOVEMENT);
-        //    StartSubcomponent(SubComponentType.INTERACTION);
-        //}
+            //OnEnableSubcomponent(SubComponentType.LEDGE_CHECKER);
+            //OnEnableSubcomponent(SubComponentType.INSTA_KILL);
+            //OnEnableSubcomponent(SubComponentType.BLOCKING_OBJECTS);
+            //OnEnableSubcomponent(SubComponentType.PLAYER_ATTACK);
+            //OnEnableSubcomponent(SubComponentType.DAMAGE_DETECTOR);
+            //OnEnableSubcomponent(SubComponentType.AI_CONTROLLER);
+            //OnEnableSubcomponent(SubComponentType.MANUAL_INPUT);
+            //OnEnableSubcomponent(SubComponentType.RAGDOLL);
+            //OnEnableSubcomponent(SubComponentType.BOX_COLLIDER_UPDATER);
+            //OnEnableSubcomponent(SubComponentType.VERTICAL_VELOCITY);
+            //OnEnableSubcomponent(SubComponentType.PLAYER_ROTATION);
+            //OnEnableSubcomponent(SubComponentType.PLAYER_GROUND);
+            //OnEnableSubcomponent(SubComponentType.COLLISION_SPHERES);
+            //OnEnableSubcomponent(SubComponentType.PLAYER_ANIMATION);
+            //OnEnableSubcomponent(SubComponentType.CHARACTER_MOVEMENT);
+            //OnEnableSubcomponent(SubComponentType.INTERACTION);
+        }
 
         public void FixedUpdateSubComponents()
         {
-            FixedUpdateSubComponent(SubComponentType.LEDGE_CHECKER);
-            FixedUpdateSubComponent(SubComponentType.RAGDOLL);
-            FixedUpdateSubComponent(SubComponentType.BLOCKING_OBJECTS);
-            FixedUpdateSubComponent(SubComponentType.BOX_COLLIDER_UPDATER);
-            FixedUpdateSubComponent(SubComponentType.VERTICAL_VELOCITY);
-            FixedUpdateSubComponent(SubComponentType.COLLISION_SPHERES);
-            FixedUpdateSubComponent(SubComponentType.INSTA_KILL);
-            FixedUpdateSubComponent(SubComponentType.DAMAGE_DETECTOR);
-            FixedUpdateSubComponent(SubComponentType.PLAYER_ROTATION);
-            FixedUpdateSubComponent(SubComponentType.PLAYER_ANIMATION);
-            FixedUpdateSubComponent(SubComponentType.PLAYER_GROUND);
-            FixedUpdateSubComponent(SubComponentType.CHARACTER_MOVEMENT);
-            FixedUpdateSubComponent(SubComponentType.INTERACTION);
-            FixedUpdateSubComponent(SubComponentType.AI_CONTROLLER);
+            foreach ( var component in arrSubComponents)
+            {
+                component.OnFixedUpdate();
+            }
+            //FixedUpdateSubComponent(SubComponentType.LEDGE_CHECKER);
+            //FixedUpdateSubComponent(SubComponentType.RAGDOLL);
+            //FixedUpdateSubComponent(SubComponentType.BLOCKING_OBJECTS);
+            //FixedUpdateSubComponent(SubComponentType.BOX_COLLIDER_UPDATER);
+            //FixedUpdateSubComponent(SubComponentType.VERTICAL_VELOCITY);
+            //FixedUpdateSubComponent(SubComponentType.COLLISION_SPHERES);
+            //FixedUpdateSubComponent(SubComponentType.INSTA_KILL);
+            //FixedUpdateSubComponent(SubComponentType.DAMAGE_DETECTOR);
+            //FixedUpdateSubComponent(SubComponentType.PLAYER_ROTATION);
+            //FixedUpdateSubComponent(SubComponentType.PLAYER_ANIMATION);
+            //FixedUpdateSubComponent(SubComponentType.PLAYER_GROUND);
+            //FixedUpdateSubComponent(SubComponentType.CHARACTER_MOVEMENT);
+            //FixedUpdateSubComponent(SubComponentType.INTERACTION);
+            //FixedUpdateSubComponent(SubComponentType.AI_CONTROLLER);
         }
         public void UpdateSubComponents()
         {
-            UpdateSubComponent(SubComponentType.MANUAL_INPUT);
-            UpdateSubComponent(SubComponentType.PLAYER_ATTACK);
-            UpdateSubComponent(SubComponentType.PLAYER_ANIMATION);
-            UpdateSubComponent(SubComponentType.CHARACTER_MOVEMENT);
-            UpdateSubComponent(SubComponentType.INTERACTION);
-            UpdateSubComponent(SubComponentType.AI_CONTROLLER);
+            foreach( var component in arrSubComponents)
+            {
+                component.OnUpdate();
+            }
+            //UpdateSubComponent(SubComponentType.MANUAL_INPUT);
+            //UpdateSubComponent(SubComponentType.PLAYER_ATTACK);
+            //UpdateSubComponent(SubComponentType.PLAYER_ANIMATION);
+            //UpdateSubComponent(SubComponentType.CHARACTER_MOVEMENT);
+            //UpdateSubComponent(SubComponentType.INTERACTION);
+            //UpdateSubComponent(SubComponentType.AI_CONTROLLER);
         }
-        //private void StartSubcomponent(SubComponentType type)
-        //{
-        //    var subComps = GetComponentsInChildren<SubComponent>();
-        //    foreach( var subComp in subComps )
-        //    {
-        //        subComp.OnEnable();
-        //    }
-        //}
+        
+        private void OnEnableSubcomponent(SubComponentType type)
+        {
+            if (arrSubComponents[(int)type] != null)
+            {
+                arrSubComponents[(int)type].OnComponentEnabled();
+            }
+        }
 
         private void UpdateSubComponent(SubComponentType type)
         {

@@ -7,6 +7,7 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            characterState.characterControl.AICONTROLLER_DATA.aiStatus = Ai_Status.Starting_To_Walk.ToString();
             characterState.characterControl.AICONTROLLER_DATA.aIAttacks.SetRandomFlyingKick();
         }
 
@@ -48,7 +49,6 @@ namespace My_MemoPlatformer
             {
                 characterState.characterControl.turbo = false;
             }
-
             characterState.characterControl.AICONTROLLER_DATA.aIBehavior.WalkStraightToTheStartSphere();
 
             if (characterState.characterControl.AICONTROLLER_DATA.aiLogistic.AIDistanceToEndSphere() < 1f)

@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -10,10 +12,12 @@ namespace My_MemoPlatformer
         [Header("HP Setup")]
         [SerializeField] private float _hp;
 
+        //TODO: static?
         private static string _VFX_Prefix = "VFX";
 
-        private void OnEnable()
+        public override void OnComponentEnabled()
         {
+
             _damage_Data = new Damage_Data
             {
                 blockedAttack = null,
@@ -30,28 +34,6 @@ namespace My_MemoPlatformer
             };
 
             subComponentProcessor.damage_Data = _damage_Data;
-            subComponentProcessor.arrSubComponents[(int)SubComponentType.DAMAGE_DETECTOR] = this;
-        }
-
-        private void Start()
-        {
-            //_damage_Data = new Damage_Data
-            //{
-            //    blockedAttack = null,
-            //    currentHp = _hp,
-
-            //    damageTaken = new DamageTaken(attacker: null, attack: null, damaged_TG: null, damagerPart: null, incomingVelocity: Vector3.zero),
-
-            //    IsDead = IsCharacterDead,
-            //    TakeDamage = ProcessDamage,
-            //    TakeCollateralDamage = ProcessCollateralDamage,
-
-            //    AddCollidersToDictionary = AddCollidersToDictionary,
-            //    RemoveCollidersFromDictionary = RemoveCollidersFromDictionary,
-            //};
-
-            //subComponentProcessor.damage_Data = _damage_Data;
-            //subComponentProcessor.arrSubComponents[(int)SubComponentType.DAMAGE_DETECTOR] = this;
         }
 
         public override void OnFixedUpdate()
@@ -69,7 +51,7 @@ namespace My_MemoPlatformer
                 {
                     if (attackCondition_info.mustCollide)
                     {
-                        if (Control.DAMAGE_DATA.collidingBodyParts_Dictionary.Count != 0)
+                        if (control.DAMAGE_DATA.collidingBodyParts_Dictionary.Count != 0)
                         {
                             if (CheckForCollisionAndCreacteDamageTaken(attackCondition_info))
                             {
@@ -109,7 +91,7 @@ namespace My_MemoPlatformer
                 return false;
             }
 
-            if (attackCondition_Info.attacker == Control)
+            if (attackCondition_Info.attacker == control)
             {
                 return false;
             }
@@ -123,7 +105,7 @@ namespace My_MemoPlatformer
                 }
             }
 
-            if (attackCondition_Info.registeredTargets.Contains(this.Control))  //prevent several times damage from one attack
+            if (attackCondition_Info.registeredTargets.Contains(this.control))  //prevent several times damage from one attack
             {
                 return false;
             }
@@ -137,7 +119,7 @@ namespace My_MemoPlatformer
 
         private bool CheckForCollisionAndCreacteDamageTaken(AttackCondition attackCondition_Info)
         {
-            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in Control.DAMAGE_DATA.collidingBodyParts_Dictionary)
+            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in control.DAMAGE_DATA.collidingBodyParts_Dictionary)
             {
                 foreach (var collider in data.Value)
                 {
@@ -163,14 +145,14 @@ namespace My_MemoPlatformer
 
         private bool CheckForLethalRangeAndCreateDamageTaken(AttackCondition attackCondition_info)
         {
-            for (int i = 0; i < Control.RAGDOLL_DATA.arrBodyPartsColliders.Length; i++)
+            for (int i = 0; i < control.RAGDOLL_DATA.arrBodyPartsColliders.Length; i++)
             {
-                var dist = Vector3.SqrMagnitude(Control.RAGDOLL_DATA.arrBodyPartsColliders[i].transform.position - attackCondition_info.attacker.transform.position);
+                var dist = Vector3.SqrMagnitude(control.RAGDOLL_DATA.arrBodyPartsColliders[i].transform.position - attackCondition_info.attacker.transform.position);
 
                 if (dist <= attackCondition_info.lethalRange)
                 {
-                    int index = Random.Range(0, Control.RAGDOLL_DATA.arrBodyPartsColliders.Length);
-                    var triggerDetector = Control.RAGDOLL_DATA.arrBodyPartsColliders[index].GetComponent<TriggerDetector>();
+                    int index = Random.Range(0, control.RAGDOLL_DATA.arrBodyPartsColliders.Length);
+                    var triggerDetector = control.RAGDOLL_DATA.arrBodyPartsColliders[index].GetComponent<TriggerDetector>();
 
                     _damage_Data.damageTaken = new DamageTaken(
                         attackCondition_info.attacker,
@@ -192,20 +174,20 @@ namespace My_MemoPlatformer
                 return true;
             }
 
-            if (Control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Block)))
+            if (control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Block)))
             {
-                var dir = info.attacker.transform.position - Control.transform.position;
+                var dir = info.attacker.transform.position - control.transform.position;
 
                 if (dir.z > 0f)
                 {
-                    if (Control.ROTATION_DATA.IsFacingForward())
+                    if (control.ROTATION_DATA.IsFacingForward())
                     {
                         return true;
                     }
                 }
                 else if (dir.z < 0f)
                 {
-                    if (!Control.ROTATION_DATA.IsFacingForward())
+                    if (!control.ROTATION_DATA.IsFacingForward())
                     {
                         return true;
                     }
@@ -237,7 +219,7 @@ namespace My_MemoPlatformer
 
         private void PushThisDeadBody(AttackCondition attackCondition_Info)
         {
-            if (!attackCondition_Info.registeredTargets.Contains(this.Control))
+            if (!attackCondition_Info.registeredTargets.Contains(this.control))
             {
                 if (attackCondition_Info.attackAbility.collateralDamageInfo.createCollateral)
                 {
@@ -245,9 +227,9 @@ namespace My_MemoPlatformer
                     ProcessFlyingRagdoll(attackCondition_Info);
                 }
 
-                attackCondition_Info.registeredTargets.Add(this.Control);
-                Control.RAGDOLL_DATA.ClearExistingVelocity();
-                Control.RAGDOLL_DATA.AddForceToDamagedPart(RagdollPushType.DEAD_BODY);
+                attackCondition_Info.registeredTargets.Add(this.control);
+                control.RAGDOLL_DATA.ClearExistingVelocity();
+                control.RAGDOLL_DATA.AddForceToDamagedPart(RagdollPushType.DEAD_BODY);
             }
 
             return;
@@ -260,23 +242,23 @@ namespace My_MemoPlatformer
             attackCondition_Info.currentHits++;
             _damage_Data.currentHp -= attackCondition_Info.attackAbility.damage;
 
-            AttackManager.Instance.ForceDeregister(Control);
-            Control.PLAYER_ANIMATION_DATA.currentRunningAbilities_Dictionary.Clear();
+            AttackManager.Instance.ForceDeregister(control);
+            control.PLAYER_ANIMATION_DATA.currentRunningAbilities_Dictionary.Clear();
 
             if (IsCharacterDead())
             {
-                Control.RAGDOLL_DATA.ragdollTriggered = true;
+                control.RAGDOLL_DATA.ragdollTriggered = true;
                 ProcessFlyingRagdoll(attackCondition_Info);
             }
             else
             {
                 var randomIndex = Random.Range(0, (int)Hit_Reaction_States.COUNT);
-                Control.skinnedMeshAnimator.Play(HashManager.Instance.dicHitReactionStates[(Hit_Reaction_States)randomIndex], 0, 0f);
+                control.skinnedMeshAnimator.Play(HashManager.Instance.dicHitReactionStates[(Hit_Reaction_States)randomIndex], 0, 0f);
             }
 
-            if (!attackCondition_Info.registeredTargets.Contains(this.Control))
+            if (!attackCondition_Info.registeredTargets.Contains(this.control))
             {
-                attackCondition_Info.registeredTargets.Add(this.Control);
+                attackCondition_Info.registeredTargets.Add(this.control);
             }
         }
 
@@ -331,7 +313,7 @@ namespace My_MemoPlatformer
                 (
                     effectsType,
                     PoolManager.Instance.vfxPoolDictionary,
-                    position: Control.DAMAGE_DATA.damageTaken.DAMAGED_TG.triggerCollider.bounds.center,
+                    position: control.DAMAGE_DATA.damageTaken.DAMAGED_TG.triggerCollider.bounds.center,
                     Quaternion.identity
                 );
 
@@ -363,8 +345,8 @@ namespace My_MemoPlatformer
         {
             if (attackCondition_Info.attackAbility.collateralDamageInfo.createCollateral)
             {
-                Control.RAGDOLL_DATA.flyingRagdollData.isTriggered = true;
-                Control.RAGDOLL_DATA.flyingRagdollData.attacker = attackCondition_Info.attacker;
+                control.RAGDOLL_DATA.flyingRagdollData.isTriggered = true;
+                control.RAGDOLL_DATA.flyingRagdollData.attacker = attackCondition_Info.attacker;
             }
         }
 

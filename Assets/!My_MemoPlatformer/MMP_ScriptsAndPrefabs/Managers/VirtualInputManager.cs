@@ -1,3 +1,4 @@
+using AYellowpaper.SerializedCollections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -51,7 +52,8 @@ namespace My_MemoPlatformer
         public bool bind_Block;
 
         [Space(10)]
-        public Dictionary<InputKeyType, KeyCode> dicKeys = new Dictionary<InputKeyType, KeyCode>();
+        [SerializedDictionary("Input Key Type", "Key")] 
+        public SerializedDictionary<InputKeyType, KeyCode> dicKeys = new SerializedDictionary<InputKeyType, KeyCode>();
         [SerializeField] private KeyCode[] _possibleKeys;
 
 

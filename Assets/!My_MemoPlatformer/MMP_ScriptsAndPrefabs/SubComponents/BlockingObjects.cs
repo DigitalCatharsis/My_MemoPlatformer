@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Android;
 
@@ -26,7 +28,7 @@ namespace My_MemoPlatformer
         [SerializeField] private float _airStompDownBlocking_Distance;
         [SerializeField] private float _upBlocking_Distance;
 
-        private void OnEnable()
+        public override void OnComponentEnabled()
         {
             blockingObj_Data = new BlockingObj_Data
             {
@@ -42,18 +44,15 @@ namespace My_MemoPlatformer
                 RightSideBLocked = RightSideIsBlocked,
                 GetFrontBlockingCharactersList = GetFrontBlockingCharacterList,
                 GetFrontBlockingObjList = GetFrontBlockingObjList,
-                //IsSteppbleObject = IsAbutting,
             };
 
             subComponentProcessor.blockingObj_Data = blockingObj_Data;
-            subComponentProcessor.arrSubComponents[(int)SubComponentType.BLOCKING_OBJECTS] = this;
         }
-
         public override void OnFixedUpdate()
         {
-            if (Control.PLAYER_ANIMATION_DATA.IsRunning(typeof(MoveForward)))
+            if (control.PLAYER_ANIMATION_DATA.IsRunning(typeof(MoveForward)))
             {
-                if (!Control.DAMAGE_DATA.IsDead())
+                if (!control.DAMAGE_DATA.IsDead())
                 {
                     DefineFrontSpheres();  //Consist of the side we a moving to
                     CheckFrontBlocking();
@@ -68,9 +67,9 @@ namespace My_MemoPlatformer
             }
 
             //checking while ledge grabbing
-            if (Control.PLAYER_ANIMATION_DATA.IsRunning(typeof(MoveUp)))
+            if (control.PLAYER_ANIMATION_DATA.IsRunning(typeof(MoveUp)))
             {
-                if (Control.CHARACTER_MOVEMENT_DATA.latestMoveUpScript.speed > 0f)
+                if (control.CHARACTER_MOVEMENT_DATA.latestMoveUpScript.speed > 0f)
                 {
                     CheckUpBlockingAndAddToDictionary();
                 }
@@ -78,7 +77,7 @@ namespace My_MemoPlatformer
             else
             {
                 //checking while player is jumping
-                if (Control.rigidBody.velocity.y > 0.001f)
+                if (control.rigidBody.velocity.y > 0.001f)
                 {
                     CheckUpBlockingAndAddToDictionary();
 
@@ -88,14 +87,14 @@ namespace My_MemoPlatformer
 
                         if (characterControl == null)
                         {
-                            Control.CHARACTER_MOVEMENT_DATA.NullifyUpVelocity();
+                            control.CHARACTER_MOVEMENT_DATA.NullifyUpVelocity();
                             break;
                         }
                         else
                         {
-                            if (Control.transform.position.y + Control.boxCollider.center.y < characterControl.transform.position.y)
+                            if (control.transform.position.y + control.boxCollider.center.y < characterControl.transform.position.y)
                             {
-                                Control.CHARACTER_MOVEMENT_DATA.NullifyUpVelocity();
+                                control.CHARACTER_MOVEMENT_DATA.NullifyUpVelocity();
                                 break;
                             }
                         }
@@ -120,12 +119,11 @@ namespace My_MemoPlatformer
 
         public override void OnUpdate()
         {
-            throw new System.NotImplementedException();
         }
 
         private void CheckAndProcessAirStomp()
         {
-            if (Control.rigidBody.velocity.y >= 0f)
+            if (control.rigidBody.velocity.y >= 0f)
             {
                 _airStompTargets.Clear();
                 _downBlockingObjects.Clear();
@@ -134,23 +132,23 @@ namespace My_MemoPlatformer
 
             if (_airStompTargets.Count > 0)
             {
-                Control.rigidBody.velocity = Vector3.zero;
+                control.rigidBody.velocity = Vector3.zero;
                 //TODO: Оптимизировать силу, вынести в поле
-                Control.rigidBody.AddForce(Vector3.up * 250f);
+                control.rigidBody.AddForce(Vector3.up * 250f);
 
                 foreach (var control in _airStompTargets)
                 {
                     var attackCondition_Info = new AttackCondition();
-                    attackCondition_Info.CopyInfo(control.ATTACK_DATA.airStompAttack, base.Control);
+                    attackCondition_Info.CopyInfo(control.ATTACK_DATA.airStompAttack, base.control);
 
                     var index = Random.Range(0, control.RAGDOLL_DATA.arrBodyPartsColliders.Length);
                     var randomPart = control.RAGDOLL_DATA.arrBodyPartsColliders[index].GetComponent<TriggerDetector>();
 
                     control.DAMAGE_DATA.damageTaken = new DamageTaken(
-                        attacker: base.Control,
+                        attacker: base.control,
                         attack: control.ATTACK_DATA.airStompAttack,
                         damaged_TG: randomPart,
-                        damagerPart: base.Control.rightFoot_Attack,
+                        damagerPart: base.control.rightFoot_Attack,
                         incomingVelocity: Vector3.zero);
 
                     control.DAMAGE_DATA.TakeDamage(attackCondition_Info);
@@ -170,9 +168,9 @@ namespace My_MemoPlatformer
 
                     if (control != null)
                     {
-                        if (control.boxCollider.center.y + control.transform.position.y < Control.transform.position.y)
+                        if (control.boxCollider.center.y + control.transform.position.y < base.control.transform.position.y)
                         {
-                            if (control != Control)
+                            if (control != base.control)
                             {
                                 if (!_airStompTargets.Contains(control))
                                 {
@@ -195,9 +193,9 @@ namespace My_MemoPlatformer
             for (int i = 0; i < _frontSpheresArray.Length; i++)
             {
                 var blockingObj = CollisionDetection.GetCollidingObject(
-                    Control, _frontSpheresArray[i], this.transform.forward * blockingObj_Data.frontBlocking_Distance * 25,  //25 is just for visual ray
-                    Control.CHARACTER_MOVEMENT_DATA.latestMoveForwardScript.blockDistance,
-                    ref Control.BLOCKING_OBJ_DATA.raycastContactPoint);
+                    control, _frontSpheresArray[i], this.transform.forward * blockingObj_Data.frontBlocking_Distance * 25,  //25 is just for visual ray
+                    control.CHARACTER_MOVEMENT_DATA.latestMoveForwardScript.blockDistance,
+                    ref control.BLOCKING_OBJ_DATA.raycastContactPoint);
 
                 if (blockingObj != null)
                 {
@@ -212,15 +210,15 @@ namespace My_MemoPlatformer
 
         private void DefineFrontSpheres()         //Consist of the side we a moving to
         {
-            if (!Control.CHARACTER_MOVEMENT_DATA.IsForwardReversed())
+            if (!control.CHARACTER_MOVEMENT_DATA.IsForwardReversed())
             {
-                _frontSpheresArray = Control.COLLISION_SPHERE_DATA.frontSpheres;
-                RemoveSpheresInArrayFromDictionary(Control.COLLISION_SPHERE_DATA.backSpheres, _frontBlockingObjects_dictionary);
+                _frontSpheresArray = control.COLLISION_SPHERE_DATA.frontSpheres;
+                RemoveSpheresInArrayFromDictionary(control.COLLISION_SPHERE_DATA.backSpheres, _frontBlockingObjects_dictionary);
             }
             else
             {
-                _frontSpheresArray = Control.COLLISION_SPHERE_DATA.backSpheres;
-                RemoveSpheresInArrayFromDictionary(Control.COLLISION_SPHERE_DATA.frontSpheres, _frontBlockingObjects_dictionary);
+                _frontSpheresArray = control.COLLISION_SPHERE_DATA.backSpheres;
+                RemoveSpheresInArrayFromDictionary(control.COLLISION_SPHERE_DATA.frontSpheres, _frontBlockingObjects_dictionary);
             }
         }
 
@@ -237,9 +235,9 @@ namespace My_MemoPlatformer
 
         private void CheckDownBlocking()
         {
-            foreach (var sphere in Control.COLLISION_SPHERE_DATA.bottomSpheres)
+            foreach (var sphere in control.COLLISION_SPHERE_DATA.bottomSpheres)
             {
-                GameObject blockingObj = CollisionDetection.GetCollidingObject(Control, sphere, Vector3.down, blockingObj_Data.airStompDownBlocking_Distance, ref Control.BLOCKING_OBJ_DATA.raycastContactPoint);
+                GameObject blockingObj = CollisionDetection.GetCollidingObject(control, sphere, Vector3.down, blockingObj_Data.airStompDownBlocking_Distance, ref control.BLOCKING_OBJ_DATA.raycastContactPoint);
 
                 if (blockingObj != null)
                 {
@@ -254,9 +252,9 @@ namespace My_MemoPlatformer
 
         private void CheckUpBlockingAndAddToDictionary()
         {
-            foreach (var o in Control.COLLISION_SPHERE_DATA.upSpheres)
+            foreach (var o in control.COLLISION_SPHERE_DATA.upSpheres)
             {
-                var blockingObj = CollisionDetection.GetCollidingObject(Control, o, this.transform.up, blockingObj_Data.upBlocking_Distance, ref Control.BLOCKING_OBJ_DATA.raycastContactPoint);
+                var blockingObj = CollisionDetection.GetCollidingObject(control, o, this.transform.up, blockingObj_Data.upBlocking_Distance, ref control.BLOCKING_OBJ_DATA.raycastContactPoint);
 
                 if (blockingObj != null)
                 {
@@ -293,7 +291,7 @@ namespace My_MemoPlatformer
         {
             foreach (KeyValuePair<GameObject, GameObject> data in _frontBlockingObjects_dictionary)
             {
-                if ((data.Value.transform.position - Control.transform.position).z > 0f)
+                if ((data.Value.transform.position - control.transform.position).z > 0f)
                 {
                     return true;
                 }
@@ -305,7 +303,7 @@ namespace My_MemoPlatformer
         {
             foreach (KeyValuePair<GameObject, GameObject> data in _frontBlockingObjects_dictionary)
             {
-                if ((data.Value.transform.position - Control.transform.position).z < 0f)
+                if ((data.Value.transform.position - control.transform.position).z < 0f)
                 {
                     return true;
                 }

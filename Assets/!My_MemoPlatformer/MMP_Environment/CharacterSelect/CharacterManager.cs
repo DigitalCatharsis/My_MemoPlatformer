@@ -47,7 +47,7 @@ namespace My_MemoPlatformer
         {
             foreach (var control in characters)
             {
-                if (control.aiType == PlayerType.Player)
+                if (control.aiType == AI_Type.Player)
                 {
                     return control;
                 }

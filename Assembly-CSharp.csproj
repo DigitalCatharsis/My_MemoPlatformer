@@ -98,7 +98,6 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\Death\Ragdoll\TriggerRagdoll.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_PoolingSystem\VFXPoolObject.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\DebugContainer\DebugHelper.cs" />
-    <Compile Include="Assets\!My_MemoPlatformer\MMP_PoolingSystem\EnemyPoolObject.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\Subcomponents_Data\Interaction_Data.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Helpers\!MMP_Tutorial_Refs\CustomPropertyDrawer\ColorPointTester.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\LedgeChecker.cs" />
@@ -205,6 +204,7 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\CollateralDamageInfo.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\UI_Events\ButtonScale.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\PlayerJump.cs" />
+    <Compile Include="Assets\!My_MemoPlatformer\MMP_PoolingSystem\CharacterPoolObject.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\Subcomponents_Data\LedgeGrab_Data.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\Ragdoll.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Environment\CharacterSelect\CharacterSelect.cs" />

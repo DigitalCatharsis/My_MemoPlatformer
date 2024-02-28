@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -7,7 +9,7 @@ namespace My_MemoPlatformer
         public Rotation_Data rotation_Data;
         //TODO: remove
         static string L_CharacterSelect = "L_CharacterSelect";
-        private void OnEnable()
+        public override void OnComponentEnabled()
         {
             rotation_Data = new Rotation_Data
             {
@@ -18,7 +20,6 @@ namespace My_MemoPlatformer
             };
 
             subComponentProcessor.rotation_Data = rotation_Data;
-            subComponentProcessor.arrSubComponents[(int)SubComponentType.PLAYER_ROTATION] = this;
         }
         public override void OnFixedUpdate()
         {
@@ -27,7 +28,6 @@ namespace My_MemoPlatformer
 
         public override void OnUpdate()
         {
-            throw new System.NotImplementedException();
         }
         private void FaceForward(bool forward)
         {
@@ -36,29 +36,29 @@ namespace My_MemoPlatformer
                 return;
             }
 
-            if (!Control.skinnedMeshAnimator.enabled)   //to prevent rotating after death
+            if (!control.skinnedMeshAnimator.enabled)   //to prevent rotating after death
             {
                 return;
             }
 
-            if (Control.ROTATION_DATA.lockTurn)
+            if (control.ROTATION_DATA.lockTurn)
             {
                 return;
             }
 
             if (forward)
             {
-                Control.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                control.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
             }
             else
             {
-                Control.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+                control.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
             }
         }
         private bool IsFacingForward()
         {
-            if (Control.transform.forward.z > 0f)
+            if (control.transform.forward.z > 0f)
             {
                 return true;
             }
@@ -69,11 +69,11 @@ namespace My_MemoPlatformer
         }
         private void ClearTurnLock()
         {
-            if (!Control.PLAYER_ANIMATION_DATA.IsRunning(typeof(LockTurn)))
+            if (!control.PLAYER_ANIMATION_DATA.IsRunning(typeof(LockTurn)))
             {
                 if (rotation_Data.lockTurn)
                 {
-                    AnimatorStateInfo info = Control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
+                    AnimatorStateInfo info = control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0);
 
                     if (info.normalizedTime >= rotation_Data.unlockTiming)
                     {

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    public class EnemyPoolObject : MonoBehaviour, IPoolObject
+    public class CharacterPoolObject : MonoBehaviour, IPoolObject
     {
         public CharacterType poolObjectType;
 

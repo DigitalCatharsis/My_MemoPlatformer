@@ -258,7 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aIController_Data:
     aiStatus: 
-    playerType: 0
+    aiType: 0
     blockingCharacter: {fileID: 0}
     doFlyingKick: 0
     flyingKickProbability: 0
@@ -273,7 +273,6 @@ MonoBehaviour:
   _aIConditions: {fileID: 8664558090355761590}
   _aiLogistic: {fileID: 484652006543390627}
   _aiAnimator: {fileID: 2428127011527154921}
-  _playerType: 1
   _flyingKickProbability: 0.0001
 --- !u!114 &9215528708244499142
 MonoBehaviour:
@@ -1754,7 +1753,7 @@ MonoBehaviour:
   jump: 0
   attack: 0
   block: 0
-  subComponentProcessor: {fileID: 0}
+  subComponentProcessor: {fileID: 7446479350593793540}
   boxCollider: {fileID: 0}
   navMeshObstacle: {fileID: 0}
   playableCharacterType: 1
@@ -4590,7 +4589,7 @@ MonoBehaviour:
     isIgnoreCharacterTime: 0
   aIController_Data:
     aiStatus: 
-    playerType: 0
+    aiType: 0
     blockingCharacter: {fileID: 0}
     doFlyingKick: 0
     flyingKickProbability: 0

@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -9,7 +11,7 @@ namespace My_MemoPlatformer
         [Space(10)]
         public CollisionSpheres_Data collisionSpheres_Data;
 
-        private void OnEnable()
+        public override void OnComponentEnabled()
         {
             collisionSpheres_Data = new CollisionSpheres_Data
             {
@@ -28,7 +30,6 @@ namespace My_MemoPlatformer
             };
 
             subComponentProcessor.collisionSpheres_Data = collisionSpheres_Data;
-            subComponentProcessor.arrSubComponents[(int)SubComponentType.COLLISION_SPHERES] = this;
 
             SetColliderSpheres();
         }
@@ -137,7 +138,7 @@ namespace My_MemoPlatformer
 
         private void Reposition_FrontSpheres()
         {
-            var bounds = Control.BOX_COLLIDER_DATA.boxColliderBounds;
+            var bounds = control.BOX_COLLIDER_DATA.boxColliderBounds;
 
             var upPosition = new Vector3(0, bounds.max.y, bounds.max.z);
             var bottomPosition = new Vector3(0, bounds.min.y, bounds.max.z);
@@ -155,7 +156,7 @@ namespace My_MemoPlatformer
         }
         private void Reposition_BackSpheres()
         {
-            var bounds = Control.BOX_COLLIDER_DATA.boxColliderBounds;
+            var bounds = control.BOX_COLLIDER_DATA.boxColliderBounds;
 
             var upPosition = new Vector3(0, bounds.max.y, bounds.min.z);
             var bottomPosition = new Vector3(0, bounds.min.y, bounds.min.z);
@@ -175,7 +176,7 @@ namespace My_MemoPlatformer
         private void Reposition_BottomSpheres()
         {
             {
-                var bounds = Control.BOX_COLLIDER_DATA.boxColliderBounds;
+                var bounds = control.BOX_COLLIDER_DATA.boxColliderBounds;
 
                 var frontPosition = new Vector3(0, bounds.min.y, bounds.max.z);
                 var backPosition = new Vector3(0, bounds.min.y, bounds.min.z);
@@ -195,7 +196,7 @@ namespace My_MemoPlatformer
 
         private void Reposition_UpSpheres()
         {
-            var bounds = Control.BOX_COLLIDER_DATA.boxColliderBounds;
+            var bounds = control.BOX_COLLIDER_DATA.boxColliderBounds;
 
             var frontPosition = new Vector3(0, bounds.max.y, bounds.max.z);
             var backPosition = new Vector3(0, bounds.max.y, bounds.min.z);

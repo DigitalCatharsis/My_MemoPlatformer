@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -26,20 +27,16 @@ namespace My_MemoPlatformer
     {
         protected SubComponentProcessor subComponentProcessor;
 
-        public CharacterControl Control
-        {
-            get
-            {
-                return subComponentProcessor.control;
-            }
-        }
+        protected CharacterControl control;
 
-        private void Awake()
+        public void OnAwake()
         {
             subComponentProcessor = this.gameObject.GetComponentInParent<SubComponentProcessor>();
+            control = subComponentProcessor.control;
         }
 
         public abstract void OnUpdate();
+        public abstract void OnComponentEnabled();
         public abstract void OnFixedUpdate();
     }
 }

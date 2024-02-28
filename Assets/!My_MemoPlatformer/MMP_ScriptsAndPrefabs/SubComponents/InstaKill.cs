@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -16,7 +18,7 @@ namespace My_MemoPlatformer
         [SerializeField] private RuntimeAnimatorController Assassination_Assassin;
         [SerializeField] private RuntimeAnimatorController Assassination_Victim;
 
-        private void OnEnable()
+        public override void OnComponentEnabled()
         {
             instaKill_Data = new InstaKill_Data
             {
@@ -26,39 +28,37 @@ namespace My_MemoPlatformer
             };
 
             subComponentProcessor.instaKill_Data = instaKill_Data;
-            subComponentProcessor.arrSubComponents[(int)SubComponentType.INSTA_KILL] = this;
         }
         public override void OnUpdate()
         {
-            throw new System.NotImplementedException();
         }
 
         public override void OnFixedUpdate()
         {
             //not a player
-            if (Control.subComponentProcessor.arrSubComponents[(int)SubComponentType.MANUAL_INPUT] != null)
+            if (control.AICONTROLLER_DATA.aiType == AI_Type.Player)
             {
                 return;
             }
 
-            if (!Control.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
+            if (!control.skinnedMeshAnimator.GetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Grounded]))
             {
                 return;
             }
 
             //if one of bodypart is player, there gonna be instakill
-            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in Control.DAMAGE_DATA.collidingBodyParts_Dictionary)
+            foreach (KeyValuePair<TriggerDetector, List<Collider>> data in control.DAMAGE_DATA.collidingBodyParts_Dictionary)
             {
                 foreach (var collider in data.Value)
                 {
                     var control = CharacterManager.Instance.GetCharacter(collider.transform.root.gameObject);
 
-                    if (control == Control) //if self, check next
+                    if (control == base.control) //if self, check next
                     {
                         continue;
                     }
 
-                    if (control.subComponentProcessor.arrSubComponents[(int)SubComponentType.MANUAL_INPUT] == null) //has to be a player, if not - next
+                    if (control.AICONTROLLER_DATA.aiType != AI_Type.Player) //has to be a player, if not - next
                     {
                         continue;
                     }
@@ -73,7 +73,7 @@ namespace My_MemoPlatformer
                         continue;
                     }
 
-                    if (Control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Attack)))
+                    if (base.control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Attack)))
                     {
                         continue;
                     }
@@ -88,7 +88,7 @@ namespace My_MemoPlatformer
                         continue;
                     }
 
-                    if (Control.DAMAGE_DATA.IsDead())
+                    if (base.control.DAMAGE_DATA.IsDead())
                     {
                         continue;
                     }
@@ -100,7 +100,7 @@ namespace My_MemoPlatformer
                             Debug.Log("InstaKill");
                         }
 
-                        control.INSTA_KILL_DATA.ProcessInstakill(Control);
+                        control.INSTA_KILL_DATA.ProcessInstakill(base.control);
                     }
 
                     return;
@@ -110,18 +110,18 @@ namespace My_MemoPlatformer
 
         private void ProcessInstaKill(CharacterControl assassin)
         {
-            Control.PLAYER_ANIMATION_DATA.currentRunningAbilities_Dictionary.Clear();
+            control.PLAYER_ANIMATION_DATA.currentRunningAbilities_Dictionary.Clear();
             assassin.PLAYER_ANIMATION_DATA.currentRunningAbilities_Dictionary.Clear();
 
-            Control.rigidBody.useGravity = false;
-            Control.boxCollider.enabled = false;
-            Control.skinnedMeshAnimator.runtimeAnimatorController = Control.INSTA_KILL_DATA.Animation_Victim;
+            control.rigidBody.useGravity = false;
+            control.boxCollider.enabled = false;
+            control.skinnedMeshAnimator.runtimeAnimatorController = control.INSTA_KILL_DATA.Animation_Victim;
 
             assassin.rigidBody.useGravity = false;
             assassin.boxCollider.enabled = false;
             assassin.skinnedMeshAnimator.runtimeAnimatorController = assassin.INSTA_KILL_DATA.Animation_Assassin;
 
-            var dir = Control.transform.position - assassin.transform.position;
+            var dir = control.transform.position - assassin.transform.position;
 
             if (dir.z < 0f)
             {
@@ -132,10 +132,10 @@ namespace My_MemoPlatformer
                 assassin.ROTATION_DATA.FaceForward(true);
             }
 
-            Control.transform.LookAt(Control.transform.position + (assassin.transform.forward * 5f), Vector3.up);
-            Control.transform.position = assassin.transform.position + (assassin.transform.forward * 0.45f);
+            control.transform.LookAt(control.transform.position + (assassin.transform.forward * 5f), Vector3.up);
+            control.transform.position = assassin.transform.position + (assassin.transform.forward * 0.45f);
 
-            Control.DAMAGE_DATA.currentHp = 0f;
+            control.DAMAGE_DATA.currentHp = 0f;
         }
         public bool InstakillChanceRandomizer()
         {

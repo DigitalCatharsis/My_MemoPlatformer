@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -6,7 +8,7 @@ namespace My_MemoPlatformer
     {
         public VerticalVelocity_Data verticalVelocity_Data;
 
-        private void OnEnable()
+        public override void OnComponentEnabled()
         {
             verticalVelocity_Data = new VerticalVelocity_Data
             {
@@ -14,7 +16,6 @@ namespace My_MemoPlatformer
                 maxWallSlideVelocity = Vector3.zero,
             };
             subComponentProcessor.verticalVelocity_Data = verticalVelocity_Data;
-            subComponentProcessor.arrSubComponents[(int)SubComponentType.VERTICAL_VELOCITY] = this;
         }
 
         public override void OnFixedUpdate()
@@ -22,25 +23,24 @@ namespace My_MemoPlatformer
             // jump cancel after letting go JumpKey
             if (!verticalVelocity_Data.noJumpCancel)
             {
-                if (Control.rigidBody.velocity.y > 0f && !Control.jump)
+                if (control.rigidBody.velocity.y > 0f && !control.jump)
                 {
-                    Control.rigidBody.velocity -= (Vector3.up * Control.rigidBody.velocity.y * 0.1f);    //Высота прыжка в зависимости от длительности нажатия
+                    control.rigidBody.velocity -= (Vector3.up * control.rigidBody.velocity.y * 0.1f);    //Высота прыжка в зависимости от длительности нажатия
                 }
             }
 
             //slow down wallslide
             if (verticalVelocity_Data.maxWallSlideVelocity.y != 0f)
             {
-                if (Control.rigidBody.velocity.y <= verticalVelocity_Data.maxWallSlideVelocity.y)
+                if (control.rigidBody.velocity.y <= verticalVelocity_Data.maxWallSlideVelocity.y)
                 {
-                    Control.rigidBody.velocity = verticalVelocity_Data.maxWallSlideVelocity;
+                    control.rigidBody.velocity = verticalVelocity_Data.maxWallSlideVelocity;
                 }
             }
         }
 
         public override void OnUpdate()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

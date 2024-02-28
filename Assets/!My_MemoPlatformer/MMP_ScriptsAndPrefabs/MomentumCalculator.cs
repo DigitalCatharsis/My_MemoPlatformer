@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -7,7 +9,7 @@ namespace My_MemoPlatformer
         //TODO: Is it used?
         public MomentumCalculator_Data momentumCalculator_Data;
 
-        private void OnEnable()
+        public override void OnComponentEnabled()
         {
             momentumCalculator_Data = new MomentumCalculator_Data
             {
@@ -17,17 +19,6 @@ namespace My_MemoPlatformer
 
             subComponentProcessor.momentumCalculator_Data = momentumCalculator_Data;
         }
-
-        //private void Start()
-        //{
-        //    momentumCalculator_Data = new MomentumCalculator_Data
-        //    {
-        //        momentum = 0,
-        //        CalcualateMomentum = CalculateMomentum,
-        //    };
-
-        //    subComponentProcessor.momentumCalculator_Data = momentumCalculator_Data;
-        //}
 
         public override void OnFixedUpdate()
         {
@@ -41,23 +32,23 @@ namespace My_MemoPlatformer
 
         private void CalculateMomentum(float speed, float maxMomentum)
         {
-            if (!Control.BLOCKING_OBJ_DATA.RightSideBLocked())
+            if (!control.BLOCKING_OBJ_DATA.RightSideBLocked())
             {
-                if (Control.moveRight)
+                if (control.moveRight)
                 {
                     momentumCalculator_Data.momentum += speed;
                 }
             }
 
-            if (!Control.BLOCKING_OBJ_DATA.LeftSideBlocked())
+            if (!control.BLOCKING_OBJ_DATA.LeftSideBlocked())
             {
-                if (Control.moveLeft)
+                if (control.moveLeft)
                 {
                     momentumCalculator_Data.momentum -= speed;
                 }
             }
 
-            if (Control.BLOCKING_OBJ_DATA.RightSideBLocked() || Control.BLOCKING_OBJ_DATA.LeftSideBlocked())
+            if (control.BLOCKING_OBJ_DATA.RightSideBLocked() || control.BLOCKING_OBJ_DATA.LeftSideBlocked())
             {
                 var lerped = Mathf.Lerp(momentumCalculator_Data.momentum, 0f, Time.deltaTime * 1.5f);
                 momentumCalculator_Data.momentum = lerped;

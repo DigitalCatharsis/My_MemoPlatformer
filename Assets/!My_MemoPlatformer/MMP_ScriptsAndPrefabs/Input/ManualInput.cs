@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -19,7 +21,7 @@ namespace My_MemoPlatformer
         [SerializeField] private float _doubleTapTime = 0.18f;
         [SerializeField] private bool useDoubleTapsForMoving;
 
-        private void OnEnable()
+        public override void OnComponentEnabled()
         {
             manualInputData = new ManualInput_Data
             {
@@ -28,28 +30,19 @@ namespace My_MemoPlatformer
             };
 
             subComponentProcessor.manualInput_Data = manualInputData;
-            subComponentProcessor.arrSubComponents[(int)SubComponentType.MANUAL_INPUT] = this;
         }
-
-        //private void Start()
-        //{
-        //    manualInputData = new ManualInput_Data
-        //    {
-        //        DoubleTapDown = IsDoubleTap_Down,
-        //        DoubleTapUp = IsDoubleTap_Up,
-        //    };
-
-        //    subComponentProcessor.manualInput_Data = manualInputData;
-        //    subComponentProcessor.arrSubComponents[(int)SubComponentType.MANUAL_INPUT] = this;
-        //}
 
         public override void OnFixedUpdate()
         {
-            throw new System.NotImplementedException();
         }
 
         public override void OnUpdate()
         {
+            if (control.AICONTROLLER_DATA.aiType != AI_Type.Player)
+            {
+                return;
+            }
+
             UpdateDoubleTapsInDictionary();
             DoubleTapsMovement();
         }
@@ -58,89 +51,89 @@ namespace My_MemoPlatformer
         {
             if (VirtualInputManager.Instance.turbo)
             {
-                Control.turbo = true;
+                control.turbo = true;
                 ProcessDoubleTap(InputKeyType.KEY_TURBO);
             }
             else
             {
-                Control.turbo = false;
+                control.turbo = false;
                 RemoveDoubleTap(InputKeyType.KEY_TURBO);
             }
 
             if (VirtualInputManager.Instance.moveUp)
             {
-                Control.moveUp = true;
+                control.moveUp = true;
                 ProcessDoubleTap(InputKeyType.KEY_MOVE_UP);
             }
             else
             {
-                Control.moveUp = false;
+                control.moveUp = false;
                 RemoveDoubleTap(InputKeyType.KEY_MOVE_UP);
             }
 
             if (VirtualInputManager.Instance.moveDown)
             {
-                Control.moveDown = true;
+                control.moveDown = true;
                 ProcessDoubleTap(InputKeyType.KEY_MOVE_DOWN);
             }
             else
             {
-                Control.moveDown = false;
+                control.moveDown = false;
                 RemoveDoubleTap(InputKeyType.KEY_MOVE_DOWN);
             }
 
             if (VirtualInputManager.Instance.moveRight)
             {
-                Control.moveRight = true;
+                control.moveRight = true;
                 ProcessDoubleTap(InputKeyType.KEY_MOVE_RIGHT);
             }
             else
             {
-                Control.moveRight = false;
+                control.moveRight = false;
                 RemoveDoubleTap(InputKeyType.KEY_MOVE_RIGHT);
             }
 
             if (VirtualInputManager.Instance.moveLeft)
             {
-                Control.moveLeft = true;
+                control.moveLeft = true;
                 ProcessDoubleTap(InputKeyType.KEY_MOVE_LEFT);
             }
             else
             {
-                Control.moveLeft = false;
+                control.moveLeft = false;
                 RemoveDoubleTap(InputKeyType.KEY_MOVE_LEFT);
             }
 
             if (VirtualInputManager.Instance.jump)
             {
-                Control.jump = true;
+                control.jump = true;
                 ProcessDoubleTap(InputKeyType.KEY_JUMP);
             }
             else
             {
-                Control.jump = false;
+                control.jump = false;
                 RemoveDoubleTap(InputKeyType.KEY_JUMP);
             }
 
             if (VirtualInputManager.Instance.block)
             {
-                Control.block = true;
+                control.block = true;
                 ProcessDoubleTap(InputKeyType.KEY_BLOCK);
             }
             else
             {
-                Control.block = false;
+                control.block = false;
                 RemoveDoubleTap(InputKeyType.KEY_BLOCK);
             }
 
             if (VirtualInputManager.Instance.attack)
             {
-                Control.attack = true;
+                control.attack = true;
                 ProcessDoubleTap(InputKeyType.KEY_ATTACK);
             }
             else
             {
-                Control.attack = false;
+                control.attack = false;
                 RemoveDoubleTap(InputKeyType.KEY_ATTACK);
             }
         }
@@ -156,12 +149,12 @@ namespace My_MemoPlatformer
             if (_doubleTaps.Contains(InputKeyType.KEY_MOVE_RIGHT) ||
                 _doubleTaps.Contains(InputKeyType.KEY_MOVE_LEFT))
             {
-                Control.turbo = true;
+                control.turbo = true;
             }
 
             //double tap running turn
 
-            if (Control.moveRight && Control.moveLeft)
+            if (control.moveRight && control.moveLeft)
             {
                 if (_doubleTaps.Contains(InputKeyType.KEY_MOVE_RIGHT) ||
                     _doubleTaps.Contains(InputKeyType.KEY_MOVE_LEFT))

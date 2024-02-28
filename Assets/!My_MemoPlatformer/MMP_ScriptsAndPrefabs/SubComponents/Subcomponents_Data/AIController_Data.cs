@@ -8,7 +8,7 @@ namespace My_MemoPlatformer
     public class AIController_Data
     {
         [ShowOnly] public string aiStatus;
-        public PlayerType playerType;
+        public AI_Type aiType;
         public List<GroundAttack> listGroundAttacks = new List<GroundAttack>();
         public CharacterControl blockingCharacter;
 

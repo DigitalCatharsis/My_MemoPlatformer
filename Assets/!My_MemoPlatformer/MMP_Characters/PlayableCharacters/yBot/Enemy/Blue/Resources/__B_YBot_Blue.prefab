@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 936084455, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_Constraints
-      value: 112
+      value: 114
       objectReference: {fileID: 0}
     - target: {fileID: 936084455, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_CollisionDetection
@@ -81,6 +81,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1614951800250864923, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
+      propertyPath: _pathfindingAgent
+      value: 
+      objectReference: {fileID: 1637963907, guid: b835de273f96868449800228afbf7544, type: 3}
+    - target: {fileID: 1614951800250864923, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: _flyingKickProbability
       value: 0.1
       objectReference: {fileID: 0}
@@ -146,7 +150,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3372119544377188092, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3372119544377188092, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_LocalPosition.x

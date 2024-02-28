@@ -223,8 +223,6 @@ GameObject:
   - component: {fileID: 7347153174042742678}
   - component: {fileID: 3402749585685384182}
   - component: {fileID: 1637963907}
-  - component: {fileID: -3835273245842438327}
-  - component: {fileID: -4320898034263983399}
   m_Layer: 0
   m_Name: PathfindingAgent
   m_TagString: Untagged
@@ -240,7 +238,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8801515615342999332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -3.691772, z: 17.86}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -340,39 +338,3 @@ MonoBehaviour:
   startWalk: 0
   meshLinks: []
   owner: {fileID: 0}
---- !u!114 &-3835273245842438327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8801515615342999332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e98c657ca39797a43815785f3e8fb5f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  farObject: {fileID: 0}
-  distanceBetweenObjects: 0
-  SqrMagnitude: 0
-  vectorToObject: {x: 0, y: 0, z: 0}
-  target_WorldPosition: {x: 0, y: 0, z: 0}
-  farObject_WorldPosition: {x: 0, y: 0, z: 0}
---- !u!1818360609 &-4320898034263983399
-RotationConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8801515615342999332}
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Weight: 1
-  m_RotationAtRest: {x: 0, y: 0, z: 0}
-  m_RotationOffset: {x: 0, y: 0, z: 0}
-  m_AffectRotationX: 1
-  m_AffectRotationY: 1
-  m_AffectRotationZ: 1
-  m_Active: 1
-  m_IsLocked: 1
-  m_Sources: []

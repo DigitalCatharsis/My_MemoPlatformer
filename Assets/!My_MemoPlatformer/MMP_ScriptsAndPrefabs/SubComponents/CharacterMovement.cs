@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -6,7 +8,7 @@ namespace My_MemoPlatformer
     {
         [SerializeField] private CharacterMovement_Data characterMovement_Data;
 
-        private void OnEnable()
+        public override void OnComponentEnabled()
         {
             characterMovement_Data = new CharacterMovement_Data
             {
@@ -20,7 +22,6 @@ namespace My_MemoPlatformer
             };
 
             subComponentProcessor.characterMovement_Data = characterMovement_Data;
-            subComponentProcessor.arrSubComponents[(int)SubComponentType.CHARACTER_MOVEMENT] = this;
         }
 
         public override void OnFixedUpdate()
@@ -32,15 +33,15 @@ namespace My_MemoPlatformer
         }
         public void NullifyUpVelocity()
         {
-            Control.rigidBody.velocity = new Vector3(Control.rigidBody.velocity.x, 0f, Control.rigidBody.velocity.z);
+            control.rigidBody.velocity = new Vector3(control.rigidBody.velocity.x, 0f, control.rigidBody.velocity.z);
         }
         public bool IsFacingAtacker()
         {
-            var vec = Control.DAMAGE_DATA.damageTaken.ATTACKER.transform.position - Control.transform.position;
+            var vec = control.DAMAGE_DATA.damageTaken.ATTACKER.transform.position - control.transform.position;
 
             if (vec.z < 0f)
             {
-                if (Control.ROTATION_DATA.IsFacingForward())
+                if (control.ROTATION_DATA.IsFacingForward())
                 {
                     return false;
                 }
@@ -51,7 +52,7 @@ namespace My_MemoPlatformer
             }
             else if (vec.z > 0f)
             {
-                if (Control.ROTATION_DATA.IsFacingForward())
+                if (control.ROTATION_DATA.IsFacingForward())
                 {
                     return true;
                 }
@@ -90,7 +91,7 @@ namespace My_MemoPlatformer
         }
         public void MoveCharacterForward(float speed, float speedGraph)
         {
-            Control.gameObject.transform.Translate(Vector3.forward * speed * speedGraph * Time.deltaTime);
+            control.gameObject.transform.Translate(Vector3.forward * speed * speedGraph * Time.deltaTime);
         }
     }
 }

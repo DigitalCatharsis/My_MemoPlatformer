@@ -8,6 +8,7 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            characterState.characterControl.AICONTROLLER_DATA.aiStatus = Ai_Status.Restarting_AI.ToString();
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)

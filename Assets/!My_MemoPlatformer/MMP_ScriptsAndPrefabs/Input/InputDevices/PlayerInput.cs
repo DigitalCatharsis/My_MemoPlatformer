@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,10 +28,21 @@ namespace My_MemoPlatformer
             if (Input.GetKey(VirtualInputManager.Instance.dicKeys[InputKeyType.KEY_RESTART]))
             {
                 Scene scene = SceneManager.GetActiveScene();
-                SceneManager.LoadScene(scene.name);
+                StartCoroutine(LoadScene_Routine(scene));
             }
         }
 
+        //TODO: temp
+        private IEnumerator LoadScene_Routine(Scene scene)
+        {
+            // Start loading the scene
+            AsyncOperation asyncLoadLevel = SceneManager.LoadSceneAsync(scene.name, LoadSceneMode.Single);
+            // Wait until the level finish loading
+            while (!asyncLoadLevel.isDone)
+                yield return null;
+            // Wait a frame so every Awake and Start method is called
+            yield return new WaitForEndOfFrame();
+        }
     }
 }
 

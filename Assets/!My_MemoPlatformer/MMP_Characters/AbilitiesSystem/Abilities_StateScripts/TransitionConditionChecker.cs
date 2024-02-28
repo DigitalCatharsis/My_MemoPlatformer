@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -216,7 +217,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.DOUBLE_TAP_UP:
                         {
-                            if (control.subComponentProcessor.arrSubComponents[(int)SubComponentType.MANUAL_INPUT] == null)
+                            if (control.AICONTROLLER_DATA.aiType != AI_Type.Player)
                             {
                                 return false;
                             }
@@ -229,7 +230,7 @@ namespace My_MemoPlatformer
                         break;
                     case TransitionConditionType.DOUBLE_TAP_DOWN:
                         {
-                            if (control.subComponentProcessor.arrSubComponents[(int)SubComponentType.MANUAL_INPUT] == null)
+                            if (control.AICONTROLLER_DATA.aiType != AI_Type.Player)
                             {
                                 return false;
                             }

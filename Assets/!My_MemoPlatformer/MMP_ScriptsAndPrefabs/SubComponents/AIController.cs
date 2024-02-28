@@ -1,14 +1,19 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Android;
 using static My_MemoPlatformer.AIController_Data;
 
 namespace My_MemoPlatformer
 {
-    public enum AiStatus
+    public enum Ai_Status
     {
         Initializing,
+        Restarting_AI,
+        Starting_AI,
+        Starting_To_Walk,
         Idle,
         Walking_To_StartSphere,
         Walking_To_EndSphere,
@@ -16,14 +21,10 @@ namespace My_MemoPlatformer
         Jumping,
         LedgeClimbing,
         Attacking,
+        Triggering_AI_State,
+        Sending_Pathfinding_Agent,
+        Repositioning_Destination,
     }
-
-    public enum AI_TYPE
-    {
-        NONE,
-        WALK_AND_JUMP,
-    }
-
     public enum AI_State_Name
     {
         SendPathfindingAgent,
@@ -32,7 +33,7 @@ namespace My_MemoPlatformer
         COUNT,
     }
 
-    public enum PlayerType
+    public enum AI_Type
     {
         None,
         Player,
@@ -48,67 +49,62 @@ namespace My_MemoPlatformer
         [SerializeField] private AIAttacks _aIAttacks;
         [SerializeField] private AIBehavior _aIBehavior;
         [SerializeField] private AIConditions _aIConditions;
-        [SerializeField] private AILogistic _aiLogistic;
 
-        [Header("Parameters Setup")][Space(10)]
+        [Header("Parameters Setup")]
+        [Space(10)]
+        [SerializeField] private AILogistic _aiLogistic;
         [SerializeField] private Animator _aiAnimator;
         [Range(0f, 1f)][SerializeField] private float _flyingKickProbability;
 
-        private bool aiIsInitialized = false;
-
-        private void OnEnable()
+        public override void OnComponentEnabled()
         {
+            control.InitCharactersStates(_aiAnimator);
+
             aIController_Data = new AIController_Data
             {
-                aIAttacks = null,
-                aIBehavior = null,
-                aIConditions = null,
-                aiLogistic = null,
+                aIAttacks = _aIAttacks,
+                aIBehavior = _aIBehavior,
+                aIConditions = _aIConditions,
+                aiLogistic = _aiLogistic,
 
                 listGroundAttacks = new List<GroundAttack>(),
                 doFlyingKick = false,
                 aiStatus = null,
-                aiAnimator = null,
+                aiAnimator = _aiAnimator,
                 pathfindingAgent = null,
-                playerType = PlayerType.None,
+                aiType = control.aiType,
                 blockingCharacter = null,
 
                 InitializeAI = InitializeAI,
             };
 
-            Control.InitCharactersStates(_aiAnimator);
-
+            if (aIController_Data.aiType != AI_Type.Player)
+            {
+                InitializeAI();
+            }
             subComponentProcessor.aIController_Data = aIController_Data;
-            subComponentProcessor.arrSubComponents[(int)SubComponentType.AI_CONTROLLER] = this;
         }
-
         public override void OnUpdate()
         {
         }
 
         public override void OnFixedUpdate()
         {
-            if (Control.aiType == PlayerType.Bot && aiIsInitialized == false)
+            if (control.DAMAGE_DATA.IsDead == null)
             {
-                InitializeAI();
+                return;
             }
 
-            if (Control.DAMAGE_DATA.IsDead())
+            if (control.DAMAGE_DATA.IsDead())
             {
                 OnCharacterDies();
             }
         }
+
         public void InitializeAI() //TODO: Check all calls
         {
-            aIController_Data.aiStatus = AiStatus.Initializing.ToString();
-            aIController_Data.playerType = PlayerType.Bot;
-
-            aIController_Data.aIAttacks = _aIAttacks;
-            aIController_Data.aIBehavior = _aIBehavior;
-            aIController_Data.aIConditions = _aIConditions;
-            aIController_Data.aiLogistic = _aiLogistic;
-
-            aIController_Data.aiAnimator = _aiAnimator;
+            aIController_Data.aiStatus = Ai_Status.Initializing.ToString();
+            aIController_Data.aiType = AI_Type.Bot;
             aIController_Data.flyingKickProbability = _flyingKickProbability;
 
             aIController_Data.listGroundAttacks = new List<GroundAttack>
@@ -117,22 +113,25 @@ namespace My_MemoPlatformer
                 _aIAttacks.ForwardGroundAttack
             };
 
-            if (Control.aiType == PlayerType.Bot)
+            if (aIController_Data.pathfindingAgent == null)
             {
-                if (Control.navMeshObstacle != null)
-                {
-                    Control.navMeshObstacle.carving = false;
-                }
+                aIController_Data.pathfindingAgent = Instantiate(Resources.Load("PathfindingAgent", typeof(GameObject)) as GameObject).GetComponent<PathFindingAgent>();
             }
 
-            aiIsInitialized = true;
+            if (control.aiType == AI_Type.Bot)
+            {
+                if (control.navMeshObstacle != null)
+                {
+                    control.navMeshObstacle.carving = false;
+                }
+            }
         }
 
         //TODO: replace and parse. Happens every update, have to fix
         private void OnCharacterDies()
         {
-            if (subComponentProcessor.gameObject.activeSelf)
-            {                
+            if (subComponentProcessor.gameObject.activeSelf && aIController_Data.aiType != AI_Type.Player)
+            {
                 _aiAnimator.enabled = false;
                 Destroy(aIController_Data.pathfindingAgent.startSphere.gameObject);
                 Destroy(aIController_Data.pathfindingAgent.endSphere.gameObject);

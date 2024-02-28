@@ -53,7 +53,7 @@ namespace My_MemoPlatformer
 
         [Header("Setup")]
         public PlayableCharacterType playableCharacterType;
-        public PlayerType aiType;
+        public AI_Type aiType;
 
         public Animator skinnedMeshAnimator;
         public GameObject rightHand_Attack;
@@ -67,8 +67,6 @@ namespace My_MemoPlatformer
 
         private void Awake()
         {
-            subComponentProcessor = GetComponentInChildren<SubComponentProcessor>();
-
             //better to refactor
             rigidBody = GetComponent<Rigidbody>();
             boxCollider = GetComponent<BoxCollider>();
@@ -81,6 +79,13 @@ namespace My_MemoPlatformer
 
             RegisterCharacter();
             InitCharactersStates(skinnedMeshAnimator);
+
+            subComponentProcessor.InitSubCompProc();
+        }
+
+        private void OnEnable()
+        {
+            subComponentProcessor.OnEnableSubcomponents();
         }
 
         private void Update()
@@ -97,7 +102,6 @@ namespace My_MemoPlatformer
         {
             GROUND_DATA.BoxColliderContacts = collision.contacts;
         }
-
         public void InitCharactersStates(Animator animator)  //Передает стейтам аниматора CharacterControl референс
         {
             CharacterState[] arr = animator.GetBehaviours<CharacterState>();
@@ -107,6 +111,7 @@ namespace My_MemoPlatformer
                 charState.characterControl = this;   //For AIState check awake in AiController
             }
         }
+
         private void RegisterCharacter()
         {
             if (!CharacterManager.Instance.characters.Contains(this))
@@ -114,6 +119,7 @@ namespace My_MemoPlatformer
                 CharacterManager.Instance.characters.Add(this);
             }
         }
+
         public GameObject GetChildObj(string name)
         {
             if (_childObjects.ContainsKey(name)) //check if Dictionary already has the object i am looking for

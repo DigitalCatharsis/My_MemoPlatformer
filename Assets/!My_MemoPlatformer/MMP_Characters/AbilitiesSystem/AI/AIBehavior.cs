@@ -15,17 +15,20 @@ namespace My_MemoPlatformer
 
         public void StartAi()
         {
+            _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Starting_AI.ToString();
             _control.AICONTROLLER_DATA.aiAnimator.Play(HashManager.Instance.arrAIStateNames[(int)AI_State_Name.SendPathfindingAgent], 0);
         }
 
         public void RepositionDestination()
         {
+            _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Repositioning_Destination.ToString();
+            //TODO: часто тут застревает
             _control.AICONTROLLER_DATA.pathfindingAgent.startSphere.transform.position = _control.AICONTROLLER_DATA.pathfindingAgent.target.transform.position;
             _control.AICONTROLLER_DATA.pathfindingAgent.endSphere.transform.position = _control.AICONTROLLER_DATA.pathfindingAgent.target.transform.position;
         }
         public void ProcessAttack()
         {
-            RandomizeNextAttack();
+            _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Attacking.ToString();
             _control.AICONTROLLER_DATA.listGroundAttacks[RandomizeNextAttack()](_control);
         }
         private int RandomizeNextAttack()
@@ -35,11 +38,13 @@ namespace My_MemoPlatformer
 
         public void TriggerAttackState(CharacterControl control)
         {
+            _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Triggering_AI_State.ToString();
             control.AICONTROLLER_DATA.aiAnimator.Play(HashManager.Instance.arrAIStateNames[(int)AI_State_Name.AI_Attack], 0);
         }
 
         public void WalkStraightToTheStartSphere()
         {
+            _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Walking_To_StartSphere.ToString();
             _targetDir = _control.AICONTROLLER_DATA.pathfindingAgent.startSphere.transform.position - _control.transform.position;
 
             if (_targetDir.z > 0f)
@@ -55,6 +60,8 @@ namespace My_MemoPlatformer
         }
         public void WalkStraightToTheEndSphere()
         {
+            _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Walking_To_EndSphere.ToString();
+
             _targetDir = _control.AICONTROLLER_DATA.pathfindingAgent.endSphere.transform.position - _control.transform.position;
 
             if (_targetDir.z > 0f)

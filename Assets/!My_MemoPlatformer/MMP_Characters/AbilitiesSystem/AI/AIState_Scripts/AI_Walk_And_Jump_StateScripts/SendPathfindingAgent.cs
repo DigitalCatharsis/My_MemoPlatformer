@@ -8,12 +8,7 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (characterState.characterControl.AICONTROLLER_DATA.pathfindingAgent == null)
-            {
-                var pfAgent = Instantiate(Resources.Load("PathfindingAgent", typeof(GameObject)) as GameObject);
-                characterState.characterControl.AICONTROLLER_DATA.pathfindingAgent = pfAgent.GetComponent<PathFindingAgent>();
-            }   
-
+            characterState.characterControl.AICONTROLLER_DATA.aiStatus = Ai_Status.Sending_Pathfinding_Agent.ToString();
             characterState.characterControl.AICONTROLLER_DATA.pathfindingAgent.owner = characterState.characterControl;
             characterState.characterControl.AICONTROLLER_DATA.pathfindingAgent.GetComponent<NavMeshAgent>().enabled = false;
             characterState.characterControl.AICONTROLLER_DATA.pathfindingAgent.transform.position = characterState.characterControl.transform.position + (Vector3.up * 0.5f);

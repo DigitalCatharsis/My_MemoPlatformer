@@ -7,6 +7,7 @@ namespace My_MemoPlatformer
     {
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            characterState.characterControl.AICONTROLLER_DATA.aiStatus = Ai_Status.Attacking.ToString();
             characterState.characterControl.turbo = false;
             characterState.characterControl.attack = false;
         }

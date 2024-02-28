@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -10,7 +12,7 @@ namespace My_MemoPlatformer
         [SerializeField] private Attack _weaponThrow;
         [SerializeField] private Attack _airStompAttack;
 
-        private void OnEnable()
+        public override void OnComponentEnabled()
         {
             playerAttack_Data = new Attack_Data
             {
@@ -22,18 +24,16 @@ namespace My_MemoPlatformer
                 weaponThrowAttack = _weaponThrow,
             };
 
-            subComponentProcessor.arrSubComponents[(int)SubComponentType.PLAYER_ATTACK] = this;
             subComponentProcessor.attack_Data = playerAttack_Data;
-
         }
+
         public override void OnFixedUpdate()
         {
-            throw new System.NotImplementedException();
         }
 
         public override void OnUpdate()
         {
-            if (Control.attack)
+            if (control.attack)
             { //dont trigger attack several times
                 if (playerAttack_Data.attackButtonIsReset)
                 {

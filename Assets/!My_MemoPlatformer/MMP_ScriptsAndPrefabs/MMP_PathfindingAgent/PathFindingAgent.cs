@@ -25,9 +25,6 @@ namespace My_MemoPlatformer
 
         private void Start()
         {
-            //debug
-            var distChecker = owner.COLLISION_SPHERE_DATA.frontSpheres[0].AddComponent<DistanceBetweenTwoObjects>();
-            distChecker.farObject = endSphere;
         }
 
         public void ReinitAgent_And_CheckDestination()

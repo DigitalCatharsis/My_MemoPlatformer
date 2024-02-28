@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -11,11 +13,11 @@ namespace My_MemoPlatformer
         private List<string> _previousList = new List<string> {};
         private string _currentState;
 
-        private void OnEnable()
+        public override void OnComponentEnabled()
         {
             animation_Data = new PlayerAnimation_Data
             {
-                animator = Control.GetComponentInChildren<Animator>(),
+                animator = control.GetComponentInChildren<Animator>(),
                 currentState = null,
                 previousState = null,
                 lockTransition = false,
@@ -28,7 +30,6 @@ namespace My_MemoPlatformer
             };
 
             subComponentProcessor.animation_Data = animation_Data;
-            subComponentProcessor.arrSubComponents[(int)SubComponentType.PLAYER_ANIMATION] = this;
         }
 
         public override void OnFixedUpdate()
@@ -57,25 +58,25 @@ namespace My_MemoPlatformer
 
         private string SetCurrentState()
         {
-            return HashManager.Instance.GetStateNameByHash<StatesList>(Control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash);
+            return HashManager.Instance.GetStateNameByHash<StatesList>(control.skinnedMeshAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash);
         }
 
         public override void OnUpdate()
         {
             if (IsRunning(typeof(LockTransition)))
             {
-                if (Control.PLAYER_ANIMATION_DATA.lockTransition)
+                if (control.PLAYER_ANIMATION_DATA.lockTransition)
                 {
-                    Control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.LockTransition], true);
+                    control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.LockTransition], true);
                 }
                 else
                 {
-                    Control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.LockTransition], false);
+                    control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.LockTransition], false);
                 }
             }
             else
             {
-                Control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.LockTransition], false);
+                control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.LockTransition], false);
             }
         }
         private bool IsRunning(System.Type type) //ability is running now?
@@ -101,7 +102,7 @@ namespace My_MemoPlatformer
         }
         public bool StateNameContains(string str)
         {
-            AnimatorClipInfo[] arr = Control.skinnedMeshAnimator.GetCurrentAnimatorClipInfo(0); //have only one layer which is zero
+            AnimatorClipInfo[] arr = control.skinnedMeshAnimator.GetCurrentAnimatorClipInfo(0); //have only one layer which is zero
 
             foreach (var clipinfo in arr)
             {
