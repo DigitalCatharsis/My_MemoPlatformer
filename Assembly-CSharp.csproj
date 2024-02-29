@@ -114,6 +114,7 @@
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\HangingTheLedge.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\CheckRunningTurn.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SpikeTrap\TrapSpikes.cs" />
+    <Compile Include="Assets\CorutinesManager.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Characters\AbilitiesSystem\Abilities_StateScripts\WeaponPutDown.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_Factory\IFactory.cs" />
     <Compile Include="Assets\!My_MemoPlatformer\MMP_ScriptsAndPrefabs\SubComponents\Subcomponents_Data\InstaKill_Data.cs" />

@@ -23,12 +23,14 @@ namespace My_MemoPlatformer
             _navMeshAgent= GetComponent<NavMeshAgent>();
         }
 
-        private void Start()
-        {
-        }
-
         public void ReinitAgent_And_CheckDestination()
         {
+            if (_moveRoutine != null)
+            {
+                StopCoroutine(_moveRoutine);
+                CorutinesManager.Instance.RemoveValueFromDictionary(this.gameObject, nameof(OnDestinationCheck_Routine));
+            }
+
             meshLinks.Clear();
 
             _navMeshAgent.enabled = true;
@@ -44,7 +46,6 @@ namespace My_MemoPlatformer
             }
 
             _navMeshAgent.SetDestination(target.transform.position);
-
             _moveRoutine = StartCoroutine(OnDestinationCheck_Routine());
         }
 
@@ -56,8 +57,18 @@ namespace My_MemoPlatformer
             }
         }
 
+        private void OnDestroy()
+        {
+            if (!this.gameObject.scene.isLoaded) return;
+
+            StopCoroutine(_moveRoutine);
+            CorutinesManager.Instance.RemoveValueFromDictionary(this.gameObject, nameof(OnDestinationCheck_Routine));
+            CorutinesManager.Instance.RemoveKeyFromDictionary(this.gameObject);
+        }
+
         private IEnumerator OnDestinationCheck_Routine()
         {
+            CorutinesManager.Instance.AddValueToDictionary(this.gameObject, nameof(OnDestinationCheck_Routine));
             while (true)
             {
                 if (_navMeshAgent.isOnOffMeshLink)
@@ -94,6 +105,7 @@ namespace My_MemoPlatformer
             yield return new WaitForSeconds(0.5f);
 
             owner.navMeshObstacle.carving = true;
+            CorutinesManager.Instance.RemoveValueFromDictionary(this.gameObject, nameof(OnDestinationCheck_Routine));
         }
     }
 }

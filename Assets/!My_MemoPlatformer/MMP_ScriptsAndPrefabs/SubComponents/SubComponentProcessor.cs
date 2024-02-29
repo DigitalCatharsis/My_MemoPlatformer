@@ -44,23 +44,6 @@ namespace My_MemoPlatformer
             {
                 component.OnComponentEnabled();
             }
-
-            //OnEnableSubcomponent(SubComponentType.LEDGE_CHECKER);
-            //OnEnableSubcomponent(SubComponentType.INSTA_KILL);
-            //OnEnableSubcomponent(SubComponentType.BLOCKING_OBJECTS);
-            //OnEnableSubcomponent(SubComponentType.PLAYER_ATTACK);
-            //OnEnableSubcomponent(SubComponentType.DAMAGE_DETECTOR);
-            //OnEnableSubcomponent(SubComponentType.AI_CONTROLLER);
-            //OnEnableSubcomponent(SubComponentType.MANUAL_INPUT);
-            //OnEnableSubcomponent(SubComponentType.RAGDOLL);
-            //OnEnableSubcomponent(SubComponentType.BOX_COLLIDER_UPDATER);
-            //OnEnableSubcomponent(SubComponentType.VERTICAL_VELOCITY);
-            //OnEnableSubcomponent(SubComponentType.PLAYER_ROTATION);
-            //OnEnableSubcomponent(SubComponentType.PLAYER_GROUND);
-            //OnEnableSubcomponent(SubComponentType.COLLISION_SPHERES);
-            //OnEnableSubcomponent(SubComponentType.PLAYER_ANIMATION);
-            //OnEnableSubcomponent(SubComponentType.CHARACTER_MOVEMENT);
-            //OnEnableSubcomponent(SubComponentType.INTERACTION);
         }
 
         public void FixedUpdateSubComponents()
@@ -69,55 +52,12 @@ namespace My_MemoPlatformer
             {
                 component.OnFixedUpdate();
             }
-            //FixedUpdateSubComponent(SubComponentType.LEDGE_CHECKER);
-            //FixedUpdateSubComponent(SubComponentType.RAGDOLL);
-            //FixedUpdateSubComponent(SubComponentType.BLOCKING_OBJECTS);
-            //FixedUpdateSubComponent(SubComponentType.BOX_COLLIDER_UPDATER);
-            //FixedUpdateSubComponent(SubComponentType.VERTICAL_VELOCITY);
-            //FixedUpdateSubComponent(SubComponentType.COLLISION_SPHERES);
-            //FixedUpdateSubComponent(SubComponentType.INSTA_KILL);
-            //FixedUpdateSubComponent(SubComponentType.DAMAGE_DETECTOR);
-            //FixedUpdateSubComponent(SubComponentType.PLAYER_ROTATION);
-            //FixedUpdateSubComponent(SubComponentType.PLAYER_ANIMATION);
-            //FixedUpdateSubComponent(SubComponentType.PLAYER_GROUND);
-            //FixedUpdateSubComponent(SubComponentType.CHARACTER_MOVEMENT);
-            //FixedUpdateSubComponent(SubComponentType.INTERACTION);
-            //FixedUpdateSubComponent(SubComponentType.AI_CONTROLLER);
         }
         public void UpdateSubComponents()
         {
             foreach( var component in arrSubComponents)
             {
                 component.OnUpdate();
-            }
-            //UpdateSubComponent(SubComponentType.MANUAL_INPUT);
-            //UpdateSubComponent(SubComponentType.PLAYER_ATTACK);
-            //UpdateSubComponent(SubComponentType.PLAYER_ANIMATION);
-            //UpdateSubComponent(SubComponentType.CHARACTER_MOVEMENT);
-            //UpdateSubComponent(SubComponentType.INTERACTION);
-            //UpdateSubComponent(SubComponentType.AI_CONTROLLER);
-        }
-        
-        private void OnEnableSubcomponent(SubComponentType type)
-        {
-            if (arrSubComponents[(int)type] != null)
-            {
-                arrSubComponents[(int)type].OnComponentEnabled();
-            }
-        }
-
-        private void UpdateSubComponent(SubComponentType type)
-        {
-            if (arrSubComponents[(int)type] != null)
-            {
-                arrSubComponents[(int)type].OnUpdate();
-            }
-        }
-        private void FixedUpdateSubComponent(SubComponentType type)
-        {
-            if (arrSubComponents[(int)type] != null)
-            {
-                arrSubComponents[(int)type].OnFixedUpdate();
             }
         }
     }
