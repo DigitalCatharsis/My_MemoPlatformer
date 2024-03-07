@@ -9,70 +9,41 @@ namespace My_MemoPlatformer
     {
         public bool targetPlayableCharacter;
         public GameObject target;
-        private NavMeshAgent _navMeshAgent;
+        public NavMeshAgent _navMeshAgent;
         private Coroutine _moveRoutine;
         public GameObject startSphere;
         public GameObject endSphere;
-        public bool startWalk;
+        public bool hasFinishedPathfind;
         public List<Vector3> meshLinks = new List<Vector3>();
 
-        public CharacterControl owner = null;
+        public CharacterControl owner = null; //OLD
 
         private void Awake()
         {
-            _navMeshAgent= GetComponent<NavMeshAgent>();
-        }
-
-        public void ReinitAgent_And_CheckDestination()
-        {
-            if (_moveRoutine != null)
-            {
-                StopCoroutine(_moveRoutine);
-                CorutinesManager.Instance.RemoveValueFromDictionary(this.gameObject, nameof(OnDestinationCheck_Routine));
-            }
-
-            meshLinks.Clear();
-
-            _navMeshAgent.enabled = true;
+            _navMeshAgent = GetComponent<NavMeshAgent>();
             startSphere.transform.parent = null;
             endSphere.transform.parent = null;
-            startWalk = false;
+        }
 
-            _navMeshAgent.isStopped = false;
+        public void ProocedPathfindingAgent(CharacterControl owner)
+        {
+            //StopCoroutine(OnDestinationCheck_Routine(owner));
+            owner.navMeshObstacle.carving = false; //to prevent bug when carving forbids agent to move
 
-            if (targetPlayableCharacter)
-            {
-                target = CharacterManager.Instance.GetPlayableCharacter().gameObject;
-            }
-
+            this.transform.position = owner.transform.position + (Vector3.up * 0.5f);
+            _navMeshAgent.enabled = true;
+            hasFinishedPathfind = false;
             _navMeshAgent.SetDestination(target.transform.position);
-            _moveRoutine = StartCoroutine(OnDestinationCheck_Routine());
+
+            StartCoroutine(OnDestinationCheck_Routine(owner));
         }
-
-        private void OnEnable()
+        private IEnumerator OnDestinationCheck_Routine(CharacterControl owner)
         {
-            if (_moveRoutine != null)
-            {
-                StopCoroutine(_moveRoutine);
-            }
-        }
-
-        private void OnDestroy()
-        {
-            if (!this.gameObject.scene.isLoaded) return;
-
-            StopCoroutine(_moveRoutine);
-            CorutinesManager.Instance.RemoveValueFromDictionary(this.gameObject, nameof(OnDestinationCheck_Routine));
-            CorutinesManager.Instance.RemoveKeyFromDictionary(this.gameObject);
-        }
-
-        private IEnumerator OnDestinationCheck_Routine()
-        {
-            CorutinesManager.Instance.AddValueToDictionary(this.gameObject, nameof(OnDestinationCheck_Routine));
+            meshLinks.Clear();
             while (true)
             {
                 if (_navMeshAgent.isOnOffMeshLink)
-                { 
+                {
                     if (meshLinks.Count == 0)
                     {
                         meshLinks.Add(_navMeshAgent.currentOffMeshLinkData.startPos);
@@ -81,7 +52,7 @@ namespace My_MemoPlatformer
                 }
 
                 var dist = transform.position - _navMeshAgent.destination;  //между навигатором и его точкой назначения, а не control
-                if (Vector3.SqrMagnitude(dist) < 0.5f)  
+                if (Vector3.SqrMagnitude(dist) < 0.5f)
                 {
                     if (meshLinks.Count > 0)
                     {
@@ -95,17 +66,58 @@ namespace My_MemoPlatformer
                     }
 
                     _navMeshAgent.isStopped = true;
-                    startWalk = true;
-                    break;
+                    hasFinishedPathfind = true;
                 }
 
                 yield return new WaitForEndOfFrame();
+                owner.navMeshObstacle.carving = true;
             }
 
-            yield return new WaitForSeconds(0.5f);
-
-            owner.navMeshObstacle.carving = true;
-            CorutinesManager.Instance.RemoveValueFromDictionary(this.gameObject, nameof(OnDestinationCheck_Routine));
         }
+
+        public void ReinitAgent_And_CheckDestination()
+        {
+            if (_moveRoutine != null)
+            {
+                StopCoroutine(_moveRoutine);
+                CorutinesManager.Instance.RemoveValueFromDictionary(this.gameObject, nameof(OnDestinationCheck_Routine));
+            }
+
+            meshLinks.Clear();
+
+            _navMeshAgent.isStopped = false;
+            _navMeshAgent.enabled = true;
+            startSphere.transform.parent = null;
+            endSphere.transform.parent = null;
+            hasFinishedPathfind = false;
+
+            _navMeshAgent.isStopped = false;
+
+            if (targetPlayableCharacter)
+            {
+                target = CharacterManager.Instance.GetPlayableCharacter().gameObject;
+            }
+
+            _navMeshAgent.SetDestination(target.transform.position);
+            _moveRoutine = StartCoroutine(OnDestinationCheck_Routine(owner));
+        }
+
+        //private void OnEnable()
+        //{
+        //    if (_moveRoutine != null)
+        //    {
+        //        StopCoroutine(_moveRoutine);
+        //    }
+        //}
+
+        private void OnDestroy()
+        {
+            if (!this.gameObject.scene.isLoaded) return;
+
+            StopCoroutine(_moveRoutine);
+            CorutinesManager.Instance.RemoveValueFromDictionary(this.gameObject, nameof(OnDestinationCheck_Routine));
+            CorutinesManager.Instance.RemoveKeyFromDictionary(this.gameObject);
+        }
+
     }
 }

@@ -16,13 +16,25 @@ namespace My_MemoPlatformer
             {
                 if (_control.AICONTROLLER_DATA.aiLogistic.TargetDistanceToEndSphere() > 0.5f)
                 {
-                    if (_control.AICONTROLLER_DATA.aIConditions.TargetIsGrounded())
+                    if (_control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(CharacterManager.Instance.GetPlayableCharacter()))
                     {
                         return true;
                     }
                 }
             }
             return false;
+        }
+        public bool IsRunningCondition()
+        {
+            //straight
+            if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToStartSphere() > 1.5f)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         public bool IsInAttackingAnimation()
         {
@@ -78,9 +90,9 @@ namespace My_MemoPlatformer
                 return false;
             }
         }
-        public bool EndSphereIsHigher()
+        public bool EndSphereIsHigherThanStartSphere()
         {
-            if (EndSphereIsStraight())
+            if (EndSphereIsStraightWithStart())
             {
                 return false;
             }
@@ -94,9 +106,9 @@ namespace My_MemoPlatformer
                 return false;
             }
         }
-        public bool EndSphereIsLower()
+        public bool EndSphereIsLowerThanStartSphere()
         {
-            if (EndSphereIsStraight())
+            if (EndSphereIsStraightWithStart())
             {
                 return false;
             }
@@ -110,8 +122,7 @@ namespace My_MemoPlatformer
                 return true;
             }
         }
-
-        private bool EndSphereIsStraight()
+        private bool EndSphereIsStraightWithStart()
         {
             if (Mathf.Abs(_control.AICONTROLLER_DATA.pathfindingAgent.endSphere.transform.position.y - _control.AICONTROLLER_DATA.pathfindingAgent.startSphere.transform.position.y) > 0.01f)
             {
@@ -122,10 +133,9 @@ namespace My_MemoPlatformer
                 return true;
             }
         }
-        public bool TargetIsGrounded()
+        public bool CharacterIsGrounded(CharacterControl character)
         {
-            var target = CharacterManager.Instance.GetCharacter(_control.AICONTROLLER_DATA.pathfindingAgent.target);
-            if (target.GROUND_DATA.ground == null)
+            if (character.GROUND_DATA.ground == null)
             {
                 return false;
             }

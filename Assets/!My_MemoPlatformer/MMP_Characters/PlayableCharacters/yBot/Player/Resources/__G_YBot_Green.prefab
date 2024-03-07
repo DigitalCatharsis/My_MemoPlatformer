@@ -14,11 +14,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2102996198334159225, guid: fc7ff9bf0acaf7b4eb9fa2e6d6c0cfad, type: 3}
       propertyPath: m_Name
-      value: YBot - Green Variant
+      value: __G_YBot_Green
       objectReference: {fileID: 0}
     - target: {fileID: 2102996198334159229, guid: fc7ff9bf0acaf7b4eb9fa2e6d6c0cfad, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2102996198334159229, guid: fc7ff9bf0acaf7b4eb9fa2e6d6c0cfad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e0edac867979f5345986ea8c41d51fab, type: 2}
+    - target: {fileID: 5102395016281227696, guid: fc7ff9bf0acaf7b4eb9fa2e6d6c0cfad, type: 3}
+      propertyPath: _hp
+      value: 9999
+      objectReference: {fileID: 0}
     - target: {fileID: 6697231401986606826, guid: fc7ff9bf0acaf7b4eb9fa2e6d6c0cfad, type: 3}
       propertyPath: NewMaterials.Array.data[1]
       value: 

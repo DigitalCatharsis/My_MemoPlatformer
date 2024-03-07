@@ -19,7 +19,7 @@ namespace My_MemoPlatformer
             _control.AICONTROLLER_DATA.aiAnimator.Play(HashManager.Instance.arrAIStateNames[(int)AI_State_Name.SendPathfindingAgent], 0);
         }
 
-        public void RepositionDestination()
+        public void RepositionPESpheresDestination()
         {
             _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Repositioning_Destination.ToString();
             //TODO: часто тут застревает
@@ -42,10 +42,12 @@ namespace My_MemoPlatformer
             control.AICONTROLLER_DATA.aiAnimator.Play(HashManager.Instance.arrAIStateNames[(int)AI_State_Name.AI_Attack], 0);
         }
 
-        public void WalkStraightToTheStartSphere()
+        public void MoveToTheStartSphere()
         {
             _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Walking_To_StartSphere.ToString();
             _targetDir = _control.AICONTROLLER_DATA.pathfindingAgent.startSphere.transform.position - _control.transform.position;
+
+            _control.turbo = _control.AICONTROLLER_DATA.aIConditions.IsRunningCondition();
 
             if (_targetDir.z > 0f)
             {
@@ -76,5 +78,14 @@ namespace My_MemoPlatformer
             }
         }
 
+        public void StopCharacter()
+        {
+            _control.moveUp = false;
+            _control.moveRight = false;
+            _control.moveLeft = false;
+            _control.attack = false;
+            _control.turbo = false;
+            _control.jump = false;
+        }
     }
 }

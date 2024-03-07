@@ -19,7 +19,7 @@ namespace My_MemoPlatformer
             }
 
             //Jumping
-            if (characterState.characterControl.AICONTROLLER_DATA.aIConditions.EndSphereIsHigher())
+            if (characterState.characterControl.AICONTROLLER_DATA.aIConditions.EndSphereIsHigherThanStartSphere())
             {
                 if (characterState.characterControl.AICONTROLLER_DATA.aiLogistic.AIDistanceToStartSphere() < 0.08f) //how close are we to the checkpoint    //Здесь часто бывает баг (когда иди бегает вокруг Start Point) из-за разных смещений платформы или ИИ относительно друг друга. Увелич да < 0.1f для дебага
                 {
@@ -32,7 +32,7 @@ namespace My_MemoPlatformer
             }
 
             //fall
-            if (characterState.characterControl.AICONTROLLER_DATA.aIConditions.EndSphereIsLower())
+            if (characterState.characterControl.AICONTROLLER_DATA.aIConditions.EndSphereIsLowerThanStartSphere())
             {
                 characterState.characterControl.AICONTROLLER_DATA.aIBehavior.WalkStraightToTheEndSphere();
 
@@ -49,7 +49,7 @@ namespace My_MemoPlatformer
             {
                 characterState.characterControl.turbo = false;
             }
-            characterState.characterControl.AICONTROLLER_DATA.aIBehavior.WalkStraightToTheStartSphere();
+            characterState.characterControl.AICONTROLLER_DATA.aIBehavior.MoveToTheStartSphere();
 
             if (characterState.characterControl.AICONTROLLER_DATA.aiLogistic.AIDistanceToEndSphere() < 1f)
             {
@@ -60,7 +60,7 @@ namespace My_MemoPlatformer
 
             if (characterState.characterControl.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform())
             {
-                characterState.characterControl.AICONTROLLER_DATA.aIBehavior.RepositionDestination();
+                characterState.characterControl.AICONTROLLER_DATA.aIBehavior.RepositionPESpheresDestination();
             }
         }
 
