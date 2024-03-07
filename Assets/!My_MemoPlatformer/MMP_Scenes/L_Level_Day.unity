@@ -208,8 +208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84fad483ef3a3c6419cd39eef37e1fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _aiHasReachedDestination: 0
-  _finishedToClimb: 0
+  _aiHasReachedDestination: 1
+  _finishedToClimb: 1
 --- !u!1001 &74541085
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6168,7 +6168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3046520408400585082, guid: adff31e199afa174c9c544399732b118, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.57
+      value: 8.4
       objectReference: {fileID: 0}
     - target: {fileID: 3046520408400585082, guid: adff31e199afa174c9c544399732b118, type: 3}
       propertyPath: m_LocalRotation.w

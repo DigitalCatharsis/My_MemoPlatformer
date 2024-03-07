@@ -8,7 +8,7 @@ namespace My_MemoPlatformer
     {
         private CharacterControl _control;
         private PathFindingAgent _pathFindingAgent;
-        [SerializeField] private bool _aiHasReachedDestination;
+        [SerializeField] private bool _aiHasReachedDestination = true;
         [SerializeField] private bool _finishedToClimb = true;
 
         private void Awake()
@@ -29,25 +29,28 @@ namespace My_MemoPlatformer
             _pathFindingAgent.target = CharacterManager.Instance.GetPlayableCharacter().gameObject;
 
             Debug.Log("Started AI: " + _control.name);
-            SendPathfindingAgent();
+            //SendPathfindingAgent();
             while (true)
             {
+                Debug.Log("AIProcessot: new cycle");
+
                 if (_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Landing)))
                 {
                     _control.AICONTROLLER_DATA.aIBehavior.StopCharacter(); //get rid from MoveUp after jump
                 }
 
-                if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() <= 1f)
-                {
-                    _control.AICONTROLLER_DATA.aIBehavior.ProcessAttack();
-                    _control.turbo = false;
-                    yield return new WaitForEndOfFrame();
-                    continue;
-                }
+                //if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() <= 1f)
+                //{
+                //    _control.AICONTROLLER_DATA.aIBehavior.ProcessAttack();
+                //    _control.turbo = false;
+                //    yield return new WaitForEndOfFrame();
+                //    continue;
+                //}
 
                 if (_control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(_control)
-                    && _control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(CharacterManager.Instance.GetPlayableCharacter())
-                    && _aiHasReachedDestination
+                    //&& _control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(CharacterManager.Instance.GetPlayableCharacter())
+                    //&& _aiHasReachedDestination
+                    //&& _pathFindingAgent.hasFinishedPathfind
                     && !_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(JumpPrep)))
                 {
                     SendPathfindingAgent();
@@ -56,11 +59,13 @@ namespace My_MemoPlatformer
                 //Check for pathfind is finished
                 if (!_pathFindingAgent.hasFinishedPathfind)
                 {
-                    yield return new WaitForEndOfFrame();
+                    Debug.Log("AOPROCESSOR: PA havent finished pathfind. Restarting Cycle");
+                    yield return new WaitForSeconds(0.2f);
                     continue;
                 }
 
                 //Move
+                Debug.Log("AIPROCESSOR: STARTING MOVING LOGIC");
                 if (_control.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform())
                 {
                     _control.AICONTROLLER_DATA.aIBehavior.MoveToTheStartSphere();
@@ -75,38 +80,40 @@ namespace My_MemoPlatformer
                     }
                 }
 
-                if (!_control.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform())
-                {
-                    if (_control.AICONTROLLER_DATA.aIConditions.EndSphereIsHigherThanStartSphere())
-                    {
-                        if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToStartSphere() < 0.08f) //how close are we to the checkpoint    //Здесь часто бывает баг (когда иди бегает вокруг Start Point) из-за разных смещений платформы или ИИ относительно друг друга. Увелич да < 0.1f для дебага
-                        {
-                            //_control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
-                            _control.jump = true;
-                            _control.moveUp = true;
+                //if (!_control.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform())
+                //{
+                //    if (_control.AICONTROLLER_DATA.aIConditions.EndSphereIsHigherThanStartSphere())
+                //    {
+                //        if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToStartSphere() < 0.08f) //how close are we to the checkpoint    //Здесь часто бывает баг (когда иди бегает вокруг Start Point) из-за разных смещений платформы или ИИ относительно друг друга. Увелич да < 0.1f для дебага
+                //        {
+                //            //_control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                //            _control.jump = true;
+                //            _control.moveUp = true;
 
-                            //StopCoroutine(OnJumpingToPlatform_Routine());
-                            StartCoroutine(OnJumpingToPlatform_Routine());
-                        }
-                        else if (_control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(_control))
-                        {
-                            _control.AICONTROLLER_DATA.aIBehavior.MoveToTheStartSphere();
-                        }
-                    }
-                }
+                //            //StopCoroutine(OnJumpingToPlatform_Routine());
+                //            StartCoroutine(OnJumpingToPlatform_Routine());
+                //        }
+                //        else if (_control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(_control))
+                //        {
+                //            _control.AICONTROLLER_DATA.aIBehavior.MoveToTheStartSphere();
+                //        }
+                //    }
+                //}
 
                 //Stop if we reach target
+                Debug.Log("AIPROCESSOT: WE REACHED STARTSPHERE!");
                 if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToEndSphere() < 1f)
                 {
                     _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
                 }
 
                 //We should update spheres for keeping AI move
+                Debug.Log("AIProcessor: UPDATING SPHERES POSITION!");
                 if (_control.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform())
                 {
                     _control.AICONTROLLER_DATA.aIBehavior.RepositionPESpheresDestination();
                 }
-                yield return new WaitForEndOfFrame();
+                yield return new WaitForSeconds(0.3f);
             }
         }
 
