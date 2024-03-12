@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
+using static UnityEngine.UI.GridLayoutGroup;
 
 namespace My_MemoPlatformer
 {
@@ -23,45 +25,52 @@ namespace My_MemoPlatformer
 
         private IEnumerator ProcessAI_Routine()
         {
-            yield return new WaitForEndOfFrame();
+            Debug.Log("Started AI: " + _control.name);
+            yield return null;
 
             _pathFindingAgent = _control.AICONTROLLER_DATA.pathfindingAgent;
             _pathFindingAgent.target = CharacterManager.Instance.GetPlayableCharacter().gameObject;
 
-            Debug.Log("Started AI: " + _control.name);
-            //SendPathfindingAgent();
+            yield return StartCoroutine(_pathFindingAgent.ReinitAndSendPA(_control));
+
             while (true)
             {
                 Debug.Log("AIProcessot: new cycle");
+                if (_pathFindingAgent == null)
+                {
+                    _pathFindingAgent = _control.AICONTROLLER_DATA.pathfindingAgent;
+                }
 
                 if (_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Landing)))
                 {
                     _control.AICONTROLLER_DATA.aIBehavior.StopCharacter(); //get rid from MoveUp after jump
+                    yield return null;
+                    continue;
                 }
 
-                //if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() <= 1f)
-                //{
-                //    _control.AICONTROLLER_DATA.aIBehavior.ProcessAttack();
-                //    _control.turbo = false;
-                //    yield return new WaitForEndOfFrame();
-                //    continue;
-                //}
+                if (!_control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(_control)
+                    && !_control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(CharacterManager.Instance.GetPlayableCharacter()))
+                {
+                    yield return null;
+                    continue;
+                }
+                if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() <= 1f)
+                {
+                    _control.AICONTROLLER_DATA.aIBehavior.ProcessAttack();
+                    _control.turbo = false;
+                    yield return new WaitForSeconds(0.2f); //не делай маленьким, или пешка будет дергаться
+                    continue;
+                }
+
+
 
                 if (_control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(_control)
-                    //&& _control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(CharacterManager.Instance.GetPlayableCharacter())
-                    //&& _aiHasReachedDestination
-                    //&& _pathFindingAgent.hasFinishedPathfind
+                    && _control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(CharacterManager.Instance.GetPlayableCharacter())
+                    && _aiHasReachedDestination
+                    && _pathFindingAgent.hasFinishedPathfind
                     && !_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(JumpPrep)))
                 {
-                    SendPathfindingAgent();
-                }
-
-                //Check for pathfind is finished
-                if (!_pathFindingAgent.hasFinishedPathfind)
-                {
-                    Debug.Log("AOPROCESSOR: PA havent finished pathfind. Restarting Cycle");
-                    yield return new WaitForSeconds(0.2f);
-                    continue;
+                    yield return StartCoroutine(_pathFindingAgent.ReinitAndSendPA(_control));
                 }
 
                 //Move
@@ -73,6 +82,7 @@ namespace My_MemoPlatformer
                     if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToStartSphere() <= 1f)
                     {
                         _aiHasReachedDestination = true;
+                        _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
                     }
                     else
                     {
@@ -113,7 +123,8 @@ namespace My_MemoPlatformer
                 {
                     _control.AICONTROLLER_DATA.aIBehavior.RepositionPESpheresDestination();
                 }
-                yield return new WaitForSeconds(0.3f);
+
+                yield return null;
             }
         }
 
@@ -121,7 +132,7 @@ namespace My_MemoPlatformer
         {
             _finishedToClimb = false;
             while (_finishedToClimb == false)
-            {          
+            {
                 //Diffirence betwen character's top sphere (coliistion emulation) and End sphere of the pathfinding agent            
                 var platformDistance = _pathFindingAgent.endSphere.transform.position
                     - _control.COLLISION_SPHERE_DATA.frontSpheres[0].transform.position;
@@ -154,16 +165,6 @@ namespace My_MemoPlatformer
                 }
                 yield return new WaitForSeconds(0.1f);
             }
-        }
-
-        private void SendPathfindingAgent()
-        {
-            Debug.Log("Sending PE");
-            if (_pathFindingAgent == null)
-            {
-                _pathFindingAgent = _control.AICONTROLLER_DATA.pathfindingAgent;
-            }
-            _pathFindingAgent.ProocedPathfindingAgent(_control);
         }
     }
 }

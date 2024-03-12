@@ -150,7 +150,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3372119544377188092, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3372119544377188092, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_LocalPosition.x
@@ -398,7 +398,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8795519861354809597, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8817898887671123598, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_Interpolate
@@ -462,6 +462,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 456771901857731864, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7513265251122846832}
+    - targetCorrespondingSourceObject: {fileID: 456771901857731864, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4211718568367362699}
   m_SourcePrefab: {fileID: 100100000, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
 --- !u!1 &555484109281424539 stripped
 GameObject:
@@ -634,6 +637,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &4211718568367362699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7341775567036365248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84fad483ef3a3c6419cd39eef37e1fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _aiHasReachedDestination: 1
+  _finishedToClimb: 1
 --- !u!1 &7790803363405079563 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1129136888719444179, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}

@@ -26,28 +26,24 @@ namespace My_MemoPlatformer
             endSphere.transform.parent = null;
             testSphere.transform.parent = null;
         }
-
-        public void ProocedPathfindingAgent(CharacterControl owner)
+        public IEnumerator ReinitAndSendPA(CharacterControl owner)
         {
             Debug.Log("PA: ProceedingPA");
-            //StopCoroutine(OnDestinationCheck_Routine(owner));
             owner.navMeshObstacle.carving = false; //to prevent bug when carving forbids agent to move
 
-            this.transform.position = owner.transform.position + (Vector3.up * 0.5f);
+            this.transform.position = owner.transform.position + (Vector3.up * 0.5f) + (owner.transform.forward * 1f);
             _navMeshAgent.enabled = true;
+            _navMeshAgent.isStopped = false;
             hasFinishedPathfind = false;
 
-            StopCoroutine(OnDestinationCheck_Routine(owner));
-            StartCoroutine(OnDestinationCheck_Routine(owner));
-        }
-        private IEnumerator OnDestinationCheck_Routine(CharacterControl owner)
-        {
             Debug.Log("STARTED OnDestinationCheck_Routine");
-            _navMeshAgent.SetDestination(target.transform.position);
-            _navMeshAgent.Move(target.transform.position);
-            meshLinks.Clear();
-            while (true)
+
+
+            while (hasFinishedPathfind != true)
             {
+                meshLinks.Clear();
+                _navMeshAgent.SetDestination(target.transform.position);
+                //_navMeshAgent.Move(target.transform.position);
                 if (_navMeshAgent.isOnOffMeshLink)
                 {
                     if (meshLinks.Count == 0)
@@ -73,16 +69,11 @@ namespace My_MemoPlatformer
                     }
 
                     _navMeshAgent.isStopped = true;
-                    hasFinishedPathfind = true;
                     owner.navMeshObstacle.carving = true;
+                    hasFinishedPathfind = true;
                     Debug.Log("PA hasFinishedPathfind");
                 }
-
-                //if (hasFinishedPathfind)
-                //{
-                //    Debug.Log("FINISHED OnDestinationCheck_Routine");
-                //    break;
-                //}
+                ColorDebugLog.Log($"{_navMeshAgent.CalculatePath(target.transform.position, new NavMeshPath())}", System.Drawing.KnownColor.RosyBrown);
                 Debug.Log("End of OnDestinationCheck_Routine");
                 yield return new WaitForSeconds(0.1f);
             }
@@ -92,7 +83,7 @@ namespace My_MemoPlatformer
             if (!this.gameObject.scene.isLoaded) return;
 
             StopCoroutine(_moveRoutine);
-            CorutinesManager.Instance.RemoveValueFromDictionary(this.gameObject, nameof(OnDestinationCheck_Routine));
+            CorutinesManager.Instance.RemoveValueFromDictionary(this.gameObject, nameof(ReinitAndSendPA));
             CorutinesManager.Instance.RemoveKeyFromDictionary(this.gameObject);
         }
 
