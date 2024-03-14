@@ -34,7 +34,7 @@ namespace My_MemoPlatformer
             //fall
             if (characterState.characterControl.AICONTROLLER_DATA.aIConditions.EndSphereIsLowerThanStartSphere())
             {
-                characterState.characterControl.AICONTROLLER_DATA.aIBehavior.WalkStraightToTheEndSphere();
+                characterState.characterControl.AICONTROLLER_DATA.aIBehavior.MoveToTheEndSphere();
 
                 animator.SetBool(HashManager.Instance.arrAITransitionParams[(int)AI_Transition.Fall_Platform], true);
                 return;

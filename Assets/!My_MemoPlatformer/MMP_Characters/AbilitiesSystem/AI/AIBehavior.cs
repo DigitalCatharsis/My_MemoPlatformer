@@ -60,7 +60,7 @@ namespace My_MemoPlatformer
                 _control.moveRight = false;
             }
         }
-        public void WalkStraightToTheEndSphere()
+        public void MoveToTheEndSphere()
         {
             _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Walking_To_EndSphere.ToString();
 

@@ -82,8 +82,6 @@ namespace My_MemoPlatformer
         private void OnDestroy()
         {
             if (!this.gameObject.scene.isLoaded) return;
-
-            StopCoroutine(_moveRoutine);
             CorutinesManager.Instance.RemoveValueFromDictionary(this.gameObject, nameof(ReinitAndSendPA));
             CorutinesManager.Instance.RemoveKeyFromDictionary(this.gameObject);
         }

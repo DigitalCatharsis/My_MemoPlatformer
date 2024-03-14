@@ -65,11 +65,12 @@ namespace My_MemoPlatformer
                 //Send PA
                 if (_control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(_control)
                     && _control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(CharacterManager.Instance.GetPlayableCharacter())
-                    && _aiHasReachedDestination
+                    //&& _aiHasReachedDestination
                     && _pathFindingAgent.hasFinishedPathfind
                     && !_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(JumpPrep))
                     && !_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(LockTransition)))
                 {
+                    yield return new WaitForSeconds(0.1f);
                     yield return StartCoroutine(_pathFindingAgent.ReinitAndSendPA(_control));
                 }
 
@@ -99,6 +100,10 @@ namespace My_MemoPlatformer
                             {
                                 MoveToStartSphere();
                             }
+                        }
+                        else
+                        {
+                            _control.AICONTROLLER_DATA.aIBehavior.MoveToTheEndSphere();
                         }
                     }
                     else
