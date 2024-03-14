@@ -148,6 +148,11 @@ namespace My_MemoPlatformer
         {
             var target = CharacterManager.Instance.GetCharacter(_control.AICONTROLLER_DATA.pathfindingAgent.target);
 
+            if (target.GROUND_DATA.ground == null && _control.GROUND_DATA.ground == null)
+            {
+                return false;
+            }
+
             if (target.GROUND_DATA.ground == _control.GROUND_DATA.ground)
             {
                 return true;

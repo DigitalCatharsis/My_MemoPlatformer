@@ -19,7 +19,7 @@ namespace My_MemoPlatformer
             _control.AICONTROLLER_DATA.aiAnimator.Play(HashManager.Instance.arrAIStateNames[(int)AI_State_Name.SendPathfindingAgent], 0);
         }
 
-        public void RepositionPESpheresDestination()
+        public void ResetPASpheresPosition()
         {
             _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Repositioning_Destination.ToString();
             //TODO: часто тут застревает

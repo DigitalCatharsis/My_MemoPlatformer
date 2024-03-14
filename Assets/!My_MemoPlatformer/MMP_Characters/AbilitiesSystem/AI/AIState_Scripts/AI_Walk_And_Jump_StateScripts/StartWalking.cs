@@ -60,7 +60,7 @@ namespace My_MemoPlatformer
 
             if (characterState.characterControl.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform())
             {
-                characterState.characterControl.AICONTROLLER_DATA.aIBehavior.RepositionPESpheresDestination();
+                characterState.characterControl.AICONTROLLER_DATA.aIBehavior.ResetPASpheresPosition();
             }
         }
 

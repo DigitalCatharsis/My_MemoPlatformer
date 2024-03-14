@@ -1402,7 +1402,7 @@ Transform:
   m_GameObject: {fileID: 497410157}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.03281486, y: -1.4602025, z: 2.53}
-  m_LocalScale: {x: 0.7, y: 1.5, z: 4.0834956}
+  m_LocalScale: {x: 0.7, y: 1.5, z: 9.661142}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1153169849}
@@ -6138,11 +6138,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3046520408400585082, guid: adff31e199afa174c9c544399732b118, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.42
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 3046520408400585082, guid: adff31e199afa174c9c544399732b118, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.4
+      value: 8.73
       objectReference: {fileID: 0}
     - target: {fileID: 3046520408400585082, guid: adff31e199afa174c9c544399732b118, type: 3}
       propertyPath: m_LocalRotation.w
@@ -38093,11 +38093,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6329450125771097236, guid: 27c6ede939c39d247ac0894bd4f38a02, type: 3}
       propertyPath: _maxEnemyNumber
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6329450125771097236, guid: 27c6ede939c39d247ac0894bd4f38a02, type: 3}
       propertyPath: _timeBetweenSpawn
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6850378854998594764, guid: 27c6ede939c39d247ac0894bd4f38a02, type: 3}
       propertyPath: m_Enabled

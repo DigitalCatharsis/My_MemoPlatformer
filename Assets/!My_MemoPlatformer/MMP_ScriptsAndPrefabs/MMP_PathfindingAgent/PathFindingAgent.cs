@@ -29,21 +29,22 @@ namespace My_MemoPlatformer
         public IEnumerator ReinitAndSendPA(CharacterControl owner)
         {
             Debug.Log("PA: ProceedingPA");
+            meshLinks.Clear();
+            _navMeshAgent.Warp(owner.transform.position + (Vector3.up * 0.5f));
+
             owner.navMeshObstacle.carving = false; //to prevent bug when carving forbids agent to move
 
-            this.transform.position = owner.transform.position + (Vector3.up * 0.5f) + (owner.transform.forward * 1f);
             _navMeshAgent.enabled = true;
             _navMeshAgent.isStopped = false;
             hasFinishedPathfind = false;
+
 
             Debug.Log("STARTED OnDestinationCheck_Routine");
 
 
             while (hasFinishedPathfind != true)
             {
-                meshLinks.Clear();
                 _navMeshAgent.SetDestination(target.transform.position);
-                //_navMeshAgent.Move(target.transform.position);
                 if (_navMeshAgent.isOnOffMeshLink)
                 {
                     if (meshLinks.Count == 0)
@@ -75,7 +76,7 @@ namespace My_MemoPlatformer
                 }
                 ColorDebugLog.Log($"{_navMeshAgent.CalculatePath(target.transform.position, new NavMeshPath())}", System.Drawing.KnownColor.RosyBrown);
                 Debug.Log("End of OnDestinationCheck_Routine");
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForEndOfFrame();   //DONT CHANGE OR IT WILL GET THROUGH PUCKIN MESH LINKS WAAAAAGHHHHHH!!!!!!!
             }
         }
         private void OnDestroy()
@@ -89,37 +90,6 @@ namespace My_MemoPlatformer
 
         public void ReinitAgent_And_CheckDestination()
         {
-            //if (_moveRoutine != null)
-            //{
-            //    StopCoroutine(_moveRoutine);
-            //    CorutinesManager.Instance.RemoveValueFromDictionary(this.gameObject, nameof(OnDestinationCheck_Routine));
-            //}
-
-            //meshLinks.Clear();
-
-            //_navMeshAgent.isStopped = false;
-            //_navMeshAgent.enabled = true;
-            //startSphere.transform.parent = null;
-            //endSphere.transform.parent = null;
-            //hasFinishedPathfind = false;
-
-            //_navMeshAgent.isStopped = false;
-
-            //if (targetPlayableCharacter)
-            //{
-            //    target = CharacterManager.Instance.GetPlayableCharacter().gameObject;
-            //}
-
-            //_navMeshAgent.SetDestination(target.transform.position);
-            //_moveRoutine = StartCoroutine(OnDestinationCheck_Routine(owner));
         }
-
-        //private void OnEnable()
-        //{
-        //    if (_moveRoutine != null)
-        //    {
-        //        StopCoroutine(_moveRoutine);
-        //    }
-        //}
     }
 }
