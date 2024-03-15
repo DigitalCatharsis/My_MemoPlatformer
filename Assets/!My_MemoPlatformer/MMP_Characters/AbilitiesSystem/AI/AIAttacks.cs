@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Drawing;
 using UnityEngine;
 
 namespace My_MemoPlatformer
@@ -44,6 +45,20 @@ namespace My_MemoPlatformer
             {
                 control.ATTACK_DATA.attackTriggered = true;
                 control.attack = false;
+            }
+        }
+        public bool ProceedFlyingKick(CharacterControl control)
+        {
+            if (control.AICONTROLLER_DATA.doFlyingKick && control.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform())
+            {
+                ColorDebugLog.Log("FlyingKick", KnownColor.Aqua);
+                control.attack = true;
+                return true;
+            }
+            else
+            {
+                control.attack = false;
+                return false;
             }
         }
         public void SetRandomFlyingKick()

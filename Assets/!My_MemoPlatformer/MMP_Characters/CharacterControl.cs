@@ -72,10 +72,10 @@ namespace My_MemoPlatformer
             boxCollider = GetComponent<BoxCollider>();
             navMeshObstacle = GetComponent<NavMeshObstacle>();
             
-            if (navMeshObstacle != null)
-            {
-                navMeshObstacle.carving = true;
-            }
+            //if (navMeshObstacle != null)
+            //{
+            //    navMeshObstacle.carving = true;
+            //}
 
             RegisterCharacter();
             InitCharactersStates(skinnedMeshAnimator);

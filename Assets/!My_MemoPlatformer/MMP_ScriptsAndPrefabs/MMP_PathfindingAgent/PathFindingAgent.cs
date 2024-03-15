@@ -14,7 +14,7 @@ namespace My_MemoPlatformer
         public GameObject startSphere;
         public GameObject endSphere;
         public GameObject testSphere;
-        public bool hasFinishedPathfind;
+        //public bool hasFinishedPathfind;
         public List<Vector3> meshLinks = new List<Vector3>();
 
         public CharacterControl owner = null; //OLD
@@ -36,13 +36,14 @@ namespace My_MemoPlatformer
 
             _navMeshAgent.enabled = true;
             _navMeshAgent.isStopped = false;
-            hasFinishedPathfind = false;
+            //hasFinishedPathfind = false;
 
 
             Debug.Log("STARTED OnDestinationCheck_Routine");
 
 
-            while (hasFinishedPathfind != true)
+            //while (hasFinishedPathfind != true)
+            while (true)
             {
                 _navMeshAgent.SetDestination(target.transform.position);
                 if (_navMeshAgent.isOnOffMeshLink)
@@ -71,12 +72,13 @@ namespace My_MemoPlatformer
 
                     _navMeshAgent.isStopped = true;
                     owner.navMeshObstacle.carving = true;
-                    hasFinishedPathfind = true;
+                    //hasFinishedPathfind = true;
                     Debug.Log("PA hasFinishedPathfind");
+                    yield break;
                 }
                 ColorDebugLog.Log($"{_navMeshAgent.CalculatePath(target.transform.position, new NavMeshPath())}", System.Drawing.KnownColor.RosyBrown);
                 Debug.Log("End of OnDestinationCheck_Routine");
-                yield return new WaitForEndOfFrame();   //DONT CHANGE OR IT WILL GET THROUGH PUCKIN MESH LINKS WAAAAAGHHHHHH!!!!!!!
+                yield return new WaitForSeconds(0.01f);   //DONT CHANGE OR IT WILL GET THROUGH PUCKIN MESH LINKS WAAAAAGHHHHHH!!!!!!!
             }
         }
         private void OnDestroy()

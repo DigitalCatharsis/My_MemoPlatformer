@@ -2001,7 +2001,7 @@ GameObject:
   - component: {fileID: 7380562134504746961}
   - component: {fileID: 4393799060532377242}
   - component: {fileID: 3788960335484008632}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: UpBlockChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}

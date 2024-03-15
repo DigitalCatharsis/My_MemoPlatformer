@@ -22,7 +22,7 @@ namespace My_MemoPlatformer
             if (characterState.AI_CONTROLLER_DATA.aIConditions.IsRestartWalkCondition())
             {
                 characterState.AI_CONTROLLER_DATA.InitializeAI();
-                characterState.characterControl.AICONTROLLER_DATA.aIBehavior.StartAi();
+                characterState.characterControl.AICONTROLLER_DATA.aIBehavior.OLD_SEND_PA();
             }
 
             //fix from jumping after failed to ledgegrab
@@ -36,7 +36,7 @@ namespace My_MemoPlatformer
                 characterState.characterControl.moveDown = false;
 
                 characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
-                characterState.characterControl.AICONTROLLER_DATA.aIBehavior.StartAi();
+                characterState.characterControl.AICONTROLLER_DATA.aIBehavior.OLD_SEND_PA();
             }
 
             if (characterState.AI_CONTROLLER_DATA.aIConditions.IsInAttackingAnimation())
@@ -51,7 +51,7 @@ namespace My_MemoPlatformer
                     characterState.characterControl.moveRight = false;
                     characterState.characterControl.moveDown = false;
                     characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
-                    characterState.characterControl.AICONTROLLER_DATA.aIBehavior.StartAi();
+                    characterState.characterControl.AICONTROLLER_DATA.aIBehavior.OLD_SEND_PA();
                 }
             }
 
@@ -94,7 +94,7 @@ namespace My_MemoPlatformer
                         characterState.characterControl.moveRight = false;
                         characterState.characterControl.moveDown = false;
                         characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
-                        characterState.characterControl.AICONTROLLER_DATA.aIBehavior.StartAi();
+                        characterState.characterControl.AICONTROLLER_DATA.aIBehavior.OLD_SEND_PA();
                     }
                 }
             }
@@ -114,7 +114,7 @@ namespace My_MemoPlatformer
                     characterState.characterControl.moveRight = false;
                     characterState.characterControl.moveDown = false;
                     characterState.characterControl.AICONTROLLER_DATA.InitializeAI();
-                    characterState.characterControl.AICONTROLLER_DATA.aIBehavior.StartAi();
+                    characterState.characterControl.AICONTROLLER_DATA.aIBehavior.OLD_SEND_PA();
                 }
             }
         }

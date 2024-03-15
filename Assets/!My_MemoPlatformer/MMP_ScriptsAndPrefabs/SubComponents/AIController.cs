@@ -1,29 +1,29 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Android;
 using static My_MemoPlatformer.AIController_Data;
 
 namespace My_MemoPlatformer
 {
     public enum Ai_Status
     {
-        Initializing,
+        InitializingAI,
         Restarting_AI,
         Starting_AI,
         Starting_To_Walk,
         Idle,
-        Walking_To_StartSphere,
-        Walking_To_EndSphere,
+        Moving_To_StartSphere,
+        Moving_To_EndSphere,
         Running_To_Point,
         Jumping,
         LedgeClimbing,
         Attacking,
         Triggering_AI_State,
         Sending_Pathfinding_Agent,
-        Repositioning_Destination,
+        ResetingPASpheresPosition,
+        StopingCharacter,
+        StartingAiProcessor,
+        RestartingProcessorCycle,
     }
     public enum AI_State_Name
     {
@@ -74,8 +74,9 @@ namespace My_MemoPlatformer
                 pathfindingAgent = null,
                 aiType = control.aiType,
                 blockingCharacter = null,
+                flyingKickProbability = _flyingKickProbability,
 
-                InitializeAI = InitializeAI,
+            InitializeAI = InitializeAI,
             };
 
             if (aIController_Data.aiType != AI_Type.Player)
@@ -103,9 +104,8 @@ namespace My_MemoPlatformer
 
         public void InitializeAI() //TODO: Check all calls
         {
-            aIController_Data.aiStatus = Ai_Status.Initializing.ToString();
+            aIController_Data.aiStatus = Ai_Status.InitializingAI.ToString();
             aIController_Data.aiType = AI_Type.Bot;
-            aIController_Data.flyingKickProbability = _flyingKickProbability;
 
             aIController_Data.listGroundAttacks = new List<GroundAttack>
             {
@@ -118,13 +118,13 @@ namespace My_MemoPlatformer
                 aIController_Data.pathfindingAgent = Instantiate(Resources.Load("PathfindingAgent", typeof(GameObject)) as GameObject).GetComponent<PathFindingAgent>();
             }
 
-            if (control.aiType == AI_Type.Bot)
-            {
-                if (control.navMeshObstacle != null)
-                {
-                    control.navMeshObstacle.carving = false;
-                }
-            }
+            //if (control.aiType == AI_Type.Bot)
+            //{
+            //    if (control.navMeshObstacle != null)
+            //    {
+            //        control.navMeshObstacle.carving = false;
+            //    }
+            //}
         }
 
         //TODO: replace and parse. Happens every update, have to fix

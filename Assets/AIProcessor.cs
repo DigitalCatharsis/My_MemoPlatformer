@@ -1,8 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using static UnityEngine.UI.GridLayoutGroup;
 
 namespace My_MemoPlatformer
 {
@@ -10,7 +9,6 @@ namespace My_MemoPlatformer
     {
         private CharacterControl _control;
         private PathFindingAgent _pathFindingAgent;
-        [SerializeField] private bool _aiHasReachedDestination = true;
         [SerializeField] private bool _finishedToClimb = true;
 
         private const float _minimumDistanceToStartSphereForJump = 0.1f;
@@ -27,6 +25,7 @@ namespace My_MemoPlatformer
 
         private IEnumerator ProcessAI_Routine()
         {
+            _control.AICONTROLLER_DATA.aiStatus = Ai_Status.StartingAiProcessor.ToString();
             Debug.Log("Started AI: " + _control.name);
             yield return null;
 
@@ -37,6 +36,7 @@ namespace My_MemoPlatformer
 
             while (true)
             {
+                _control.AICONTROLLER_DATA.aiStatus = Ai_Status.RestartingProcessorCycle.ToString();
                 Debug.Log("AIProcessot: new cycle");
                 //Init PA
                 if (_pathFindingAgent == null)
@@ -48,12 +48,21 @@ namespace My_MemoPlatformer
                 if (_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Landing)))
                 {
                     _control.AICONTROLLER_DATA.aIBehavior.StopCharacter(); //get rid from MoveUp after jump
-                    _aiHasReachedDestination = true;
                     yield return null;
                     continue;
                 }
 
                 //Attack?
+                _control.AICONTROLLER_DATA.aIAttacks.SetRandomFlyingKick();
+
+                if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() < 8f 
+                    && _control.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() > 3f
+                    && _control.AICONTROLLER_DATA.aIConditions.IsFacingTarget())
+                {
+                    _control.AICONTROLLER_DATA.aIAttacks.ProceedFlyingKick(_control);
+                    yield return new WaitForEndOfFrame();
+                }
+
                 if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() <= 1f)
                 {
                     _control.AICONTROLLER_DATA.aIBehavior.ProcessAttack();
@@ -65,12 +74,9 @@ namespace My_MemoPlatformer
                 //Send PA
                 if (_control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(_control)
                     && _control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(CharacterManager.Instance.GetPlayableCharacter())
-                    //&& _aiHasReachedDestination
-                    && _pathFindingAgent.hasFinishedPathfind
-                    && !_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(JumpPrep))
-                    && !_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(LockTransition)))
+                    && !_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(JumpPrep)))
                 {
-                    yield return new WaitForSeconds(0.1f);
+                    _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Sending_Pathfinding_Agent.ToString();
                     yield return StartCoroutine(_pathFindingAgent.ReinitAndSendPA(_control));
                 }
 
@@ -92,6 +98,7 @@ namespace My_MemoPlatformer
                             if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToStartSphere() <= _minimumDistanceToStartSphereForJump) //how close are we to the checkpoint    //Здесь часто бывает баг (когда иди бегает вокруг Start Point) из-за разных смещений платформы или ИИ относительно друг друга. Увелич да < 0.1f для дебага
                             {
                                 _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                                _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Jumping.ToString();
                                 _control.jump = true;
                                 _control.moveUp = true;
                                 yield return StartCoroutine(OnJumpingToPlatform_Routine());
@@ -118,7 +125,22 @@ namespace My_MemoPlatformer
                 {
                     Debug.Log("AIPROCESSOT: REACHED END SPHERE!");
                     _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
-                    _aiHasReachedDestination = true;
+                }
+
+                //If someone blocking - restart PA
+                SetFrontBlockedCharacter();
+                if (_control.AICONTROLLER_DATA.blockingCharacter != null)
+                {
+                    if (_control.GROUND_DATA.ground != null)
+                    {
+                        if (!_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Jump)) &&
+                            !_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(JumpPrep)))
+                        {
+                            _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                            yield return null;
+                            continue;
+                        }
+                    }
                 }
 
                 //We should update spheres for keeping AI move
@@ -131,18 +153,67 @@ namespace My_MemoPlatformer
             }
         }
 
+        private void SetFrontBlockedCharacter()
+        {
+            if (_control.BLOCKING_OBJ_DATA.frontBlockingDictionaryCount == 0)
+            {
+                _control.AICONTROLLER_DATA.blockingCharacter = null;
+            }
+            else
+            {
+                List<GameObject> objs = _control.BLOCKING_OBJ_DATA.GetFrontBlockingCharactersList();
+
+                foreach (GameObject o in objs)
+                {
+                    CharacterControl blockingChar = CharacterManager.Instance.GetCharacter(o);
+
+                    if (blockingChar != null)
+                    {
+                        _control.AICONTROLLER_DATA.blockingCharacter = blockingChar;
+                    }
+                    else
+                    {
+                        _control.AICONTROLLER_DATA.blockingCharacter = null;
+                    }
+                }
+            }
+        }
+
+        private bool CheckForStartSphereHeightForWalkingCondition()
+        {
+            if (_control.GROUND_DATA.ground != null &&
+                !_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Jump)) &&
+                !_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(WallJump_Prep)))
+            {
+                var height = _control.AICONTROLLER_DATA.aiLogistic.GetStartSphereHeight();
+                if (height > 0.1f)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private void MoveToStartSphere()
         {
+            if (CheckForStartSphereHeightForWalkingCondition() == false)
+            {
+                _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                return;
+            }
+
             _control.AICONTROLLER_DATA.aIBehavior.MoveToTheStartSphere();
 
             if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToStartSphere() <= _minimumDistanceToStartSphereForJump)
             {
-                _aiHasReachedDestination = true;
                 _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
-            }
-            else
-            {
-                _aiHasReachedDestination = false;
             }
         }
         private IEnumerator OnJumpingToPlatform_Routine()
@@ -181,21 +252,11 @@ namespace My_MemoPlatformer
                     if (platformDistance.y < 0.3f)
                     {
                         _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
-                        _aiHasReachedDestination = true;
                         _finishedToClimb = true;
                     }
                 }
                 yield return null;
             }
-        }
-
-        private bool AreSpheresAtTheSamePosition()
-        {
-            if (_pathFindingAgent.startSphere.transform.position == _pathFindingAgent.startSphere.transform.position)
-            {
-                return true;
-            }
-            return false;
         }
     }
 }

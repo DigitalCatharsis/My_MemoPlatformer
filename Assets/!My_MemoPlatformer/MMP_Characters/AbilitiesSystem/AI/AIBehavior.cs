@@ -13,7 +13,7 @@ namespace My_MemoPlatformer
             _control = GetComponentInParent<CharacterControl>();
         }
 
-        public void StartAi()
+        public void OLD_SEND_PA()
         {
             _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Starting_AI.ToString();
             _control.AICONTROLLER_DATA.aiAnimator.Play(HashManager.Instance.arrAIStateNames[(int)AI_State_Name.SendPathfindingAgent], 0);
@@ -21,7 +21,7 @@ namespace My_MemoPlatformer
 
         public void ResetPASpheresPosition()
         {
-            _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Repositioning_Destination.ToString();
+            _control.AICONTROLLER_DATA.aiStatus = Ai_Status.ResetingPASpheresPosition.ToString();
             //TODO: часто тут застревает
             _control.AICONTROLLER_DATA.pathfindingAgent.startSphere.transform.position = _control.AICONTROLLER_DATA.pathfindingAgent.target.transform.position;
             _control.AICONTROLLER_DATA.pathfindingAgent.endSphere.transform.position = _control.AICONTROLLER_DATA.pathfindingAgent.target.transform.position;
@@ -44,7 +44,7 @@ namespace My_MemoPlatformer
 
         public void MoveToTheStartSphere()
         {
-            _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Walking_To_StartSphere.ToString();
+            _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Moving_To_StartSphere.ToString();
             _targetDir = _control.AICONTROLLER_DATA.pathfindingAgent.startSphere.transform.position - _control.transform.position;
 
             _control.turbo = _control.AICONTROLLER_DATA.aIConditions.IsRunningCondition();
@@ -62,7 +62,7 @@ namespace My_MemoPlatformer
         }
         public void MoveToTheEndSphere()
         {
-            _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Walking_To_EndSphere.ToString();
+            _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Moving_To_EndSphere.ToString();
 
             _targetDir = _control.AICONTROLLER_DATA.pathfindingAgent.endSphere.transform.position - _control.transform.position;
 
@@ -80,12 +80,12 @@ namespace My_MemoPlatformer
 
         public void StopCharacter()
         {
+            _control.AICONTROLLER_DATA.aiStatus = Ai_Status.StopingCharacter.ToString();
+            _control.jump = false;
             _control.moveUp = false;
             _control.moveRight = false;
             _control.moveLeft = false;
-            _control.attack = false;
             _control.turbo = false;
-            _control.jump = false;
         }
     }
 }
