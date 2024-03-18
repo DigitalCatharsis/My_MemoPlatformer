@@ -25,18 +25,20 @@ namespace My_MemoPlatformer
 
         private IEnumerator ProcessAI_Routine()
         {
+            ResultWrapper<bool> finishedMoveRoutine = new();
+
             _control.AICONTROLLER_DATA.aiStatus = Ai_Status.StartingAiProcessor.ToString();
             Debug.Log("Started AI: " + _control.name);
-            yield return null;
+            yield return null; //get time to find PA
 
             _pathFindingAgent = _control.AICONTROLLER_DATA.pathfindingAgent;
             _pathFindingAgent.target = CharacterManager.Instance.GetPlayableCharacter().gameObject;
 
-            yield return StartCoroutine(_pathFindingAgent.ReinitAndSendPA(_control));
-
             while (true)
             {
                 _control.AICONTROLLER_DATA.aiStatus = Ai_Status.RestartingProcessorCycle.ToString();
+
+                finishedMoveRoutine.Result = true;
                 Debug.Log("AIProcessot: new cycle");
                 //Init PA
                 if (_pathFindingAgent == null)
@@ -55,12 +57,11 @@ namespace My_MemoPlatformer
                 //Attack?
                 _control.AICONTROLLER_DATA.aIAttacks.SetRandomFlyingKick();
 
-                if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() < 8f 
+                if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() < 8f
                     && _control.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() > 3f
                     && _control.AICONTROLLER_DATA.aIConditions.IsFacingTarget())
                 {
                     _control.AICONTROLLER_DATA.aIAttacks.ProceedFlyingKick(_control);
-                    yield return new WaitForEndOfFrame();
                 }
 
                 if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() <= 1f)
@@ -84,39 +85,65 @@ namespace My_MemoPlatformer
                 if (_control.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform())
                 {
                     Debug.Log("AIPROCESSOR: moving to start sphere");
-                    MoveToStartSphere();
+                    yield return StartCoroutine(MoveToStartSphere_Routine(finishedMoveRoutine));
                 }
 
                 //Another Platform
-                if (!_control.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform())
+                if (!_control.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform()
+                    && _control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(_control)
+                    && !_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(JumpPrep)))
                 {
-                    if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToStartSphere() <= 1f)
+                    while (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToStartSphere() >= 1f)
                     {
-                        Debug.Log("AIPROCESSOR: jump?");
-                        if (_control.AICONTROLLER_DATA.aIConditions.EndSphereIsHigherThanStartSphere())
+                        yield return StartCoroutine(MoveToStartSphere_Routine(finishedMoveRoutine));
+                        if (finishedMoveRoutine.Result == true)
                         {
-                            if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToStartSphere() <= _minimumDistanceToStartSphereForJump) //how close are we to the checkpoint    //Здесь часто бывает баг (когда иди бегает вокруг Start Point) из-за разных смещений платформы или ИИ относительно друг друга. Увелич да < 0.1f для дебага
-                            {
-                                _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
-                                _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Jumping.ToString();
-                                _control.jump = true;
-                                _control.moveUp = true;
-                                yield return StartCoroutine(OnJumpingToPlatform_Routine());
-                            }
-                            else if (_control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(_control))
-                            {
-                                MoveToStartSphere();
-                            }
+                            _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                            //yield return null;
                         }
                         else
                         {
-                            _control.AICONTROLLER_DATA.aIBehavior.MoveToTheEndSphere();
+                            break;
+                        }
+                    }
+                    if(finishedMoveRoutine.Result == false)
+                    {
+                        _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                        yield return null;
+                        continue;
+                    }
+
+
+                    Debug.Log("AIPROCESSOR: jump?");
+                    if (_control.AICONTROLLER_DATA.aIConditions.EndSphereIsHigherThanStartSphere())
+                    {
+                        if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToStartSphere() <= _minimumDistanceToStartSphereForJump) //how close are we to the checkpoint    //Здесь часто бывает баг (когда иди бегает вокруг Start Point) из-за разных смещений платформы или ИИ относительно друг друга. Увелич да < 0.1f для дебага
+                        {
+                            _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                            _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Jumping.ToString();
+                            _control.jump = true;
+                            _control.moveUp = true;
+                            yield return StartCoroutine(OnJumpingToPlatform_Routine());
+                        }
+                        else if (_control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(_control))
+                        {
+                            yield return StartCoroutine(MoveToStartSphere_Routine(finishedMoveRoutine));
+                            if (finishedMoveRoutine.Result == true)
+                            {
+                                _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                                //yield return null;
+                            }
+                            else
+                            {
+                                _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                                yield return null;
+                                continue;
+                            }
                         }
                     }
                     else
                     {
-                        Debug.Log("AIPROCESSOR: moving to start sphere");
-                        MoveToStartSphere();
+                        _control.AICONTROLLER_DATA.aIBehavior.MoveToTheEndSphere();
                     }
                 }
 
@@ -127,22 +154,6 @@ namespace My_MemoPlatformer
                     _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
                 }
 
-                //If someone blocking - restart PA
-                SetFrontBlockedCharacter();
-                if (_control.AICONTROLLER_DATA.blockingCharacter != null)
-                {
-                    if (_control.GROUND_DATA.ground != null)
-                    {
-                        if (!_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Jump)) &&
-                            !_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(JumpPrep)))
-                        {
-                            _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
-                            yield return null;
-                            continue;
-                        }
-                    }
-                }
-
                 //We should update spheres for keeping AI move
                 if (_control.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform())
                 {
@@ -151,6 +162,25 @@ namespace My_MemoPlatformer
                 }
                 yield return null;
             }
+        }
+
+        private bool FrontBlockedByCharacter()
+        {
+            //If someone blocking - restart PA
+            SetFrontBlockedCharacter();
+            if (_control.AICONTROLLER_DATA.blockingCharacter != null)
+            {
+                if (_control.GROUND_DATA.ground != null)
+                {
+                    if (!_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Jump)) &&
+                        !_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(JumpPrep)))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         private void SetFrontBlockedCharacter()
@@ -179,42 +209,45 @@ namespace My_MemoPlatformer
             }
         }
 
-        private bool CheckForStartSphereHeightForWalkingCondition()
+        private bool IsStartSphereOnSameY()
         {
-            if (_control.GROUND_DATA.ground != null &&
-                !_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Jump)) &&
-                !_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(WallJump_Prep)))
-            {
-                var height = _control.AICONTROLLER_DATA.aiLogistic.GetStartSphereHeight();
-                if (height > 0.1f)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            else
+            var height = _control.AICONTROLLER_DATA.aiLogistic.GetStartSphereABSHeight();
+            if (height > 0.1f)
             {
                 return false;
             }
+            else
+            {
+                return true;
+            }
         }
 
-        private void MoveToStartSphere()
+        private bool IsMoveToStartSphereCondition()
         {
-            if (CheckForStartSphereHeightForWalkingCondition() == false)
+            if (IsStartSphereOnSameY() == false || FrontBlockedByCharacter() == true)
             {
-                _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
-                return;
+                return false;
             }
 
-            _control.AICONTROLLER_DATA.aIBehavior.MoveToTheStartSphere();
+            return true;
+        }
 
-            if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToStartSphere() <= _minimumDistanceToStartSphereForJump)
+        private IEnumerator MoveToStartSphere_Routine(ResultWrapper<bool> finishedRoutine)
+        {
+            while (IsMoveToStartSphereCondition() == true)
             {
-                _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                _control.AICONTROLLER_DATA.aIBehavior.MoveToTheStartSphere();
+
+                if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToStartSphere() <= _minimumDistanceToStartSphereForJump)
+                {
+                    finishedRoutine.Result = true;
+                    _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                    yield break;
+                }
+                yield return null;
             }
+            finishedRoutine.Result = false;
+            yield break;
         }
         private IEnumerator OnJumpingToPlatform_Routine()
         {
@@ -224,7 +257,7 @@ namespace My_MemoPlatformer
             {
                 if (_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Landing)))
                 {
-                    yield break;
+                     yield break;
                 }
                 //Diffirence betwen character's top sphere (coliistion emulation) and End sphere of the pathfinding agent            
                 var platformDistance = _pathFindingAgent.endSphere.transform.position
@@ -258,6 +291,10 @@ namespace My_MemoPlatformer
                 yield return null;
             }
         }
+    }
+    class ResultWrapper<T>
+    {
+        public T Result { get; set; }
     }
 }
 

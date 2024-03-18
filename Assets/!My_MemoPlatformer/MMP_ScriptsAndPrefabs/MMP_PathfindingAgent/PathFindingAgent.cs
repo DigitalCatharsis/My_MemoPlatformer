@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -29,10 +31,10 @@ namespace My_MemoPlatformer
         public IEnumerator ReinitAndSendPA(CharacterControl owner)
         {
             Debug.Log("PA: ProceedingPA");
+            owner.navMeshObstacle.carving = false; //to prevent bug when carving forbids agent to move
             meshLinks.Clear();
             _navMeshAgent.Warp(owner.transform.position + (Vector3.up * 0.5f));
 
-            owner.navMeshObstacle.carving = false; //to prevent bug when carving forbids agent to move
 
             _navMeshAgent.enabled = true;
             _navMeshAgent.isStopped = false;
@@ -43,21 +45,24 @@ namespace My_MemoPlatformer
 
 
             //while (hasFinishedPathfind != true)
+            var cycleCounter = -1; //temp
             while (true)
             {
+                cycleCounter++;
                 _navMeshAgent.SetDestination(target.transform.position);
-                if (_navMeshAgent.isOnOffMeshLink)
+                if (_navMeshAgent.isOnOffMeshLink && meshLinks.Count == 0)
                 {
-                    if (meshLinks.Count == 0)
-                    {
-                        meshLinks.Add(_navMeshAgent.currentOffMeshLinkData.startPos);
-                        meshLinks.Add(_navMeshAgent.currentOffMeshLinkData.endPos);
-                    }
+                    meshLinks.Add(_navMeshAgent.currentOffMeshLinkData.startPos);
+                    meshLinks.Add(_navMeshAgent.currentOffMeshLinkData.endPos);
                 }
 
-                var dist = transform.position - _navMeshAgent.destination;  //между навигатором и его точкой назначения, а не control
+                // Вывод каждого узла пути в консоль
+                StartCoroutine(SimulateWaypoints(cycleCounter));
+
+
+                var distanceToDestination = transform.position - _navMeshAgent.destination;  //между навигатором и его точкой назначения, а не control
                 testSphere.transform.position = _navMeshAgent.destination;
-                if (Vector3.SqrMagnitude(dist) < 0.5f)
+                if (Vector3.SqrMagnitude(distanceToDestination) < 0.5f)
                 {
                     if (meshLinks.Count > 0)
                     {
@@ -74,10 +79,11 @@ namespace My_MemoPlatformer
                     owner.navMeshObstacle.carving = true;
                     //hasFinishedPathfind = true;
                     Debug.Log("PA hasFinishedPathfind");
+                    //yield return new WaitForSeconds(0.5f);
                     yield break;
                 }
-                ColorDebugLog.Log($"{_navMeshAgent.CalculatePath(target.transform.position, new NavMeshPath())}", System.Drawing.KnownColor.RosyBrown);
-                Debug.Log("End of OnDestinationCheck_Routine");
+                //ColorDebugLog.Log($"{_navMeshAgent.CalculatePath(target.transform.position, new NavMeshPath())}", System.Drawing.KnownColor.RosyBrown);
+                //Debug.Log("Restart of OnDestinationCheck_Routine");
                 yield return new WaitForSeconds(0.01f);   //DONT CHANGE OR IT WILL GET THROUGH PUCKIN MESH LINKS WAAAAAGHHHHHH!!!!!!!
             }
         }
@@ -90,6 +96,32 @@ namespace My_MemoPlatformer
 
         public void ReinitAgent_And_CheckDestination()
         {
+        }
+
+        private IEnumerator SimulateWaypoints(int cycleCounter)
+        {
+            var spheresArray = new List<GameObject>();
+
+            NavMeshPath path = new NavMeshPath();
+            _navMeshAgent.CalculatePath(target.transform.position, path);
+            var i = 0;
+            foreach (Vector3 waypoint in path.corners)
+            {
+                i++;
+                var testSphere = Instantiate(Resources.Load<GameObject>("TestSphere"));
+                spheresArray.Add(testSphere);
+                testSphere.transform.position = waypoint;
+                ColorDebugLog.Log("Cycle " + cycleCounter.ToString(), System.Drawing.KnownColor.Aquamarine);
+                ColorDebugLog.Log("Waypoint " + i++ + " " + waypoint.ToString(), System.Drawing.KnownColor.Aquamarine);
+            }
+            //Debug.Break();
+            yield return new WaitForSeconds(0.3f);
+            foreach (var sphere in spheresArray)
+            {
+                Destroy(sphere.gameObject);
+            }
+
+            yield break;
         }
     }
 }

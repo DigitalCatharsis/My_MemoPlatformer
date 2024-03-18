@@ -104,7 +104,7 @@ namespace My_MemoPlatformer
                 !characterState.Player_Animation_Data.IsRunning(typeof(Jump)) &&
                 !characterState.Player_Animation_Data.IsRunning(typeof(WallJump_Prep)))
             {
-                var height = characterState.characterControl.AICONTROLLER_DATA.aiLogistic.GetStartSphereHeight();
+                var height = characterState.characterControl.AICONTROLLER_DATA.aiLogistic.GetStartSphereABSHeight();
                 if (height > 0.1f)
                 {
                     characterState.characterControl.turbo = false;

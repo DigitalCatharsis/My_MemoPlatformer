@@ -10,16 +10,13 @@ namespace My_MemoPlatformer
         {
             _control = GetComponentInParent<CharacterControl>();
         }
-        public bool IsRestartWalkCondition()
+        public bool IsRestartWalkCondition() //old
         {
             if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToEndSphere() < 1f)
             {
                 if (_control.AICONTROLLER_DATA.aiLogistic.TargetDistanceToEndSphere() > 0.5f)
                 {
-                    if (_control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(CharacterManager.Instance.GetPlayableCharacter()))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
             return false;

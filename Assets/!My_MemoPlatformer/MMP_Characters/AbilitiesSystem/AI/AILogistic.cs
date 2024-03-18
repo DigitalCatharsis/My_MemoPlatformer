@@ -15,7 +15,7 @@ namespace My_MemoPlatformer
         {
             return Vector3.SqrMagnitude(_control.AICONTROLLER_DATA.pathfindingAgent.endSphere.transform.position - _control.AICONTROLLER_DATA.pathfindingAgent.target.transform.position);
         }
-        public float GetStartSphereHeight()
+        public float GetStartSphereABSHeight()
         {
             var result = Mathf.Abs((_control.transform.position - _control.AICONTROLLER_DATA.pathfindingAgent.startSphere.transform.position).y);
 
