@@ -145,15 +145,15 @@ namespace My_MemoPlatformer
             control.rigidBody.useGravity = false;
             control.rigidBody.velocity = Vector3.zero;
 
-            int layer = 1 << 11; //ground
+            //int layer = 1 << 11; //ground
 
-            RaycastHit hit;
-            var startPoint = new Vector3(0f, colliderBot.GetComponent<BoxCollider>().bounds.min.y, colliderBot.transform.position.z);
-            Physics.Raycast(startPoint, colliderBot.transform.forward, out hit, 3, layer);
-            if (hit.point.z == 0)
-            {
-                Debug.DrawRay(colliderBot.transform.position, colliderBot.transform.forward, Color.cyan, 3f);
-            }
+            //RaycastHit hit;
+            //var startPoint = new Vector3(0f, colliderBot.GetComponent<BoxCollider>().bounds.min.y, colliderBot.transform.position.z);
+            //Physics.Raycast(startPoint, colliderBot.transform.forward, out hit, 3, layer);
+            //if (hit.point.z == 0)
+            //{
+            //    Debug.DrawRay(colliderBot.transform.position, colliderBot.transform.forward, Color.cyan, 3f);
+            //}
 
             //var platformEdge = new Vector3(0, boxCollider.bounds.max.y, hit.point.z);
             var platformEdge = new Vector3(0, boxCollider.ClosestPointOnBounds(colliderBot.transform.position).y, boxCollider.ClosestPointOnBounds(colliderBot.transform.position).z);

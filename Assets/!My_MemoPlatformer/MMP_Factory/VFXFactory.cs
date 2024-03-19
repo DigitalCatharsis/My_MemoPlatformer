@@ -5,18 +5,18 @@ namespace My_MemoPlatformer
 {
     public enum VFXType
     {
-        VFX_HammerDown,
+        VFX_Shouryken,
         VFX_Damage_White,
     }
 
     public class VFXFactory : MonoBehaviour, ICoreFactory<VFXType>
     {
-        [SerializeField] private GameObject VFX_HammerDown;
+        [SerializeField] private GameObject GO_VFX_Shouryken;
         [SerializeField] private GameObject damageWhite_VFX;
 
         public VFXFactory()
         {
-            VFX_HammerDown = Resources.Load(VFXType.VFX_HammerDown.ToString()) as GameObject;
+            GO_VFX_Shouryken = Resources.Load(VFXType.VFX_Shouryken.ToString()) as GameObject;
             damageWhite_VFX = Resources.Load(VFXType.VFX_Damage_White.ToString()) as GameObject;
         }
 
@@ -24,9 +24,9 @@ namespace My_MemoPlatformer
         {
             switch (VFX_Type)
             {
-                case VFXType.VFX_HammerDown:
+                case VFXType.VFX_Shouryken:
                     {
-                        return Instantiate(VFX_HammerDown, position, rotation);
+                        return Instantiate(GO_VFX_Shouryken, position, rotation);
                     }
                 case VFXType.VFX_Damage_White:
                     {

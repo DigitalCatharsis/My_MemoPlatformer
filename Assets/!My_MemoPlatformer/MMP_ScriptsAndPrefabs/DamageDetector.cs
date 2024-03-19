@@ -223,7 +223,7 @@ namespace My_MemoPlatformer
             {
                 if (attackCondition_Info.attackAbility.collateralDamageInfo.createCollateral)
                 {
-                    ShowHitParticles(attackCondition_Info.attacker, attackCondition_Info.attackAbility.particleType);
+                    control.INTERACTION_DATA.SpawnPointHitParticle(attackCondition_Info.attacker, attackCondition_Info.attackAbility.particleType);
                     ProcessFlyingRagdoll(attackCondition_Info);
                 }
 
@@ -301,31 +301,9 @@ namespace My_MemoPlatformer
                 {
                     if (info.attackAbility.particleType.ToString().Contains(_VFX_Prefix))
                     {
-                        ShowHitParticles(info.attacker, info.attackAbility.particleType);
+                        control.INTERACTION_DATA.SpawnPointHitParticle(info.attacker, info.attackAbility.particleType);
                     }
                 }
-            }
-        }
-
-        private void ShowHitParticles(CharacterControl attacker, VFXType effectsType)
-        {
-            var vfx = PoolManager.Instance.GetObject
-                (
-                    effectsType,
-                    PoolManager.Instance.vfxPoolDictionary,
-                    position: control.DAMAGE_DATA.damageTaken.DAMAGED_TG.triggerCollider.bounds.center,
-                    Quaternion.identity
-                );
-
-            vfx.SetActive(true);
-
-            if (attacker.ROTATION_DATA.IsFacingForward())
-            {
-                vfx.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            }
-            else
-            {
-                vfx.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
             }
         }
 

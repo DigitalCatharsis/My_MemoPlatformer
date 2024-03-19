@@ -52,6 +52,8 @@ namespace My_MemoPlatformer
             if (list.Count > 0)
             {
                 var obj = list[0];
+                obj.transform.position = position;
+                obj.transform.rotation = rotation;
                 list.RemoveAt(0);
                 return obj;
             }

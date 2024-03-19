@@ -81,8 +81,8 @@ namespace My_MemoPlatformer
                 //On same platform
                 if (_control.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform())
                 {
-                    Debug.Log("AIPROCESSOR: moving to start sphere");
-                    yield return StartCoroutine(MoveToStartSphere_Routine(finishedMoveRoutine));
+                    //Debug.Log("AIPROCESSOR: moving to start sphere");
+                    StartCoroutine(MoveToStartSphere_Routine(finishedMoveRoutine));
                 }
 
                 //On another Platform
@@ -102,6 +102,7 @@ namespace My_MemoPlatformer
                             break;
                         }
                     }
+
                     if(finishedMoveRoutine.Result == false)
                     {
                         _control.AICONTROLLER_DATA.aIBehaviors.StopCharacter();
@@ -162,7 +163,9 @@ namespace My_MemoPlatformer
 
         private bool IsMoveToStartSphereCondition()
         {
-            if (_control.AICONTROLLER_DATA.aIConditions.IsStartSphereOnSameY() == false || _control.AICONTROLLER_DATA.aIConditions.FrontBlockedByCharacter() == true)
+            if (_control.AICONTROLLER_DATA.aIConditions.IsStartSphereOnSameY() == false 
+                || _control.AICONTROLLER_DATA.aIConditions.FrontBlockedByCharacter() == true
+                || _control.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() <= 1f)
             {
                 return false;
             }

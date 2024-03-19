@@ -4875,7 +4875,7 @@ GameObject:
   - component: {fileID: 2170643027879816159}
   - component: {fileID: -863755073075303931}
   m_Layer: 0
-  m_Name: VFX_HammerDown
+  m_Name: VFX_Shouryken
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

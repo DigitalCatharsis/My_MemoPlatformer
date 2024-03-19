@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SO_Player_Shoryken_Down_SpawnVFX
   m_EditorClassIdentifier: 
   objectType: 0
-  spawnTiming: 0.3
+  spawnTiming: 0
   parentObjectName: HammerDown
-  stickToParent: 1
+  stickToParent: 0
+  delayBeforeSpawn: 0.272
