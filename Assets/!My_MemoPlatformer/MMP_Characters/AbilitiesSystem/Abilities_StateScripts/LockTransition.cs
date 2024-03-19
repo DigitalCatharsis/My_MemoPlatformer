@@ -26,6 +26,7 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            characterState.characterControl.PLAYER_ANIMATION_DATA.lockTransition = false; //on being forcefully changing state. 
         }
     }
 
