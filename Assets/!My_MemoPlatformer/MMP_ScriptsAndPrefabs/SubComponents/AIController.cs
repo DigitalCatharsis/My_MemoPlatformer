@@ -53,12 +53,12 @@ namespace My_MemoPlatformer
         [Header("Parameters Setup")]
         [Space(10)]
         [SerializeField] private AILogistics _aiLogistic;
-        [SerializeField] private Animator _aiAnimator;
+        //[SerializeField] private Animator _aiAnimator;
         [Range(0f, 1f)][SerializeField] private float _flyingKickProbability;
 
         public override void OnComponentEnabled()
         {
-            control.InitCharactersStates(_aiAnimator);
+            //control.InitCharactersStates(_aiAnimator);
 
             aIController_Data = new AIController_Data
             {
@@ -70,7 +70,7 @@ namespace My_MemoPlatformer
                 listGroundAttacks = new List<GroundAttack>(),
                 doFlyingKick = false,
                 aiStatus = null,
-                aiAnimator = _aiAnimator,
+                //aiAnimator = _aiAnimator,
                 pathfindingAgent = null,
                 aiType = control.aiType,
                 blockingCharacter = null,
@@ -132,7 +132,7 @@ namespace My_MemoPlatformer
         {
             if (subComponentProcessor.gameObject.activeSelf && aIController_Data.aiType != AI_Type.Player)
             {
-                _aiAnimator.enabled = false;
+                //_aiAnimator.enabled = false;
                 Destroy(aIController_Data.pathfindingAgent.startSphere.gameObject);
                 Destroy(aIController_Data.pathfindingAgent.endSphere.gameObject);
                 Destroy(aIController_Data.pathfindingAgent.gameObject);

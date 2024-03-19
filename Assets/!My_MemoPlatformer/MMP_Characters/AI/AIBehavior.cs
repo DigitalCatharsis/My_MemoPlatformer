@@ -42,16 +42,15 @@ namespace My_MemoPlatformer
             while (true)
             {
                 _control.AICONTROLLER_DATA.aiStatus = Ai_Status.RestartingProcessorCycle.ToString();
-
                 finishedMoveRoutine.Result = true;
-                Debug.Log("AIProcessot: new cycle");
+
                 //Init PA
                 if (_pathFindingAgent == null)
                 {
                     _pathFindingAgent = _control.AICONTROLLER_DATA.pathfindingAgent;
                 }
 
-                //Rest if landing
+                //Restart if landing
                 if (_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Landing)))
                 {
                     _control.AICONTROLLER_DATA.aIBehaviors.StopCharacter(); //get rid from MoveUp after jump
@@ -60,14 +59,7 @@ namespace My_MemoPlatformer
                 }
 
                 //Attack?
-                _control.AICONTROLLER_DATA.aIAttacks.SetRandomFlyingKick();
-
-                if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() < 8f
-                    && _control.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() > 3f
-                    && _control.AICONTROLLER_DATA.aIConditions.IsFacingTarget())
-                {
-                    _control.AICONTROLLER_DATA.aIAttacks.ProceedFlyingKick(_control);
-                }
+                _control.AICONTROLLER_DATA.aIBehaviors.TryProcessFlyingKick();
 
                 if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() <= 1f)
                 {
@@ -86,21 +78,14 @@ namespace My_MemoPlatformer
                     yield return StartCoroutine(_pathFindingAgent.ReinitAndSendPA(_control));
                 }
 
-                //Same platform
+                //On same platform
                 if (_control.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform())
                 {
                     Debug.Log("AIPROCESSOR: moving to start sphere");
                     yield return StartCoroutine(MoveToStartSphere_Routine(finishedMoveRoutine));
-
-                    //if (finishedMoveRoutine.Result == false)
-                    //{
-                    //    _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
-                    //    yield return null;
-                    //    continue;
-                    //}
                 }
 
-                //Another Platform
+                //On another Platform
                 if (!_control.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform()
                     && _control.AICONTROLLER_DATA.aIConditions.CharacterIsGrounded(_control)
                     && !_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(JumpPrep)))
@@ -111,7 +96,6 @@ namespace My_MemoPlatformer
                         if (finishedMoveRoutine.Result == true)
                         {
                             _control.AICONTROLLER_DATA.aIBehaviors.StopCharacter();
-                            //yield return null;
                         }
                         else
                         {
@@ -125,7 +109,7 @@ namespace My_MemoPlatformer
                         continue;
                     }
 
-
+                    //Check for jump or try to go to the startSphere
                     Debug.Log("AIPROCESSOR: jump?");
                     if (_control.AICONTROLLER_DATA.aIConditions.EndSphereIsHigherThanStartSphere())
                     {
@@ -159,84 +143,26 @@ namespace My_MemoPlatformer
                     }
                 }
 
-                //Stop if we reach target
+                //Stop if we reach end sphere
                 if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToEndSphere() < 1f)
                 {
-                    Debug.Log("AIPROCESSOT: REACHED END SPHERE!");
+                    //Debug.Log("AIPROCESSOT: REACHED END SPHERE!");
                     _control.AICONTROLLER_DATA.aIBehaviors.StopCharacter();
                 }
 
-                //We should update spheres for keeping AI move
+                //Should update spheres for keeping AI move
                 if (_control.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform())
                 {
-                    Debug.Log("AIProcessor: UPDATING SPHERES POSITION!");
+                    //Debug.Log("AIProcessor: UPDATING SPHERES POSITION!");
                     _control.AICONTROLLER_DATA.aIBehaviors.ResetPASpheresPosition();
                 }
                 yield return null;
             }
         }
 
-        private bool FrontBlockedByCharacter()
-        {
-            //If someone blocking - restart PA
-            SetFrontBlockedCharacter();
-            if (_control.AICONTROLLER_DATA.blockingCharacter != null)
-            {
-                if (_control.GROUND_DATA.ground != null)
-                {
-                    if (!_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Jump)) &&
-                        !_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(JumpPrep)))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        private void SetFrontBlockedCharacter()
-        {
-            if (_control.BLOCKING_OBJ_DATA.frontBlockingDictionaryCount == 0)
-            {
-                _control.AICONTROLLER_DATA.blockingCharacter = null;
-            }
-            else
-            {
-                List<GameObject> objs = _control.BLOCKING_OBJ_DATA.GetFrontBlockingCharactersList();
-
-                foreach (GameObject o in objs)
-                {
-                    CharacterControl blockingChar = CharacterManager.Instance.GetCharacter(o);
-
-                    if (blockingChar != null)
-                    {
-                        _control.AICONTROLLER_DATA.blockingCharacter = blockingChar;
-                    }
-                    else
-                    {
-                        _control.AICONTROLLER_DATA.blockingCharacter = null;
-                    }
-                }
-            }
-        }
-
-        private bool IsStartSphereOnSameY()
-        {
-            var height = _control.AICONTROLLER_DATA.aiLogistic.GetStartSphereABSHeight();
-            if (height > 0.1f)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
         private bool IsMoveToStartSphereCondition()
         {
-            if (IsStartSphereOnSameY() == false || FrontBlockedByCharacter() == true)
+            if (_control.AICONTROLLER_DATA.aIConditions.IsStartSphereOnSameY() == false || _control.AICONTROLLER_DATA.aIConditions.FrontBlockedByCharacter() == true)
             {
                 return false;
             }

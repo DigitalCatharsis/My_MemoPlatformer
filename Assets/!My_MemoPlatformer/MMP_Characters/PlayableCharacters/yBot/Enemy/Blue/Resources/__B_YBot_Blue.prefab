@@ -73,10 +73,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1614951800250864923, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
-      propertyPath: _aiAnimator
-      value: 
-      objectReference: {fileID: 7513265251122846832}
-    - target: {fileID: 1614951800250864923, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: _playerType
       value: 2
       objectReference: {fileID: 0}
@@ -150,7 +146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3372119544377188092, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3372119544377188092, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_LocalPosition.x
@@ -463,12 +459,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6583600971012616426, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1581819518519131321}
-    - targetCorrespondingSourceObject: {fileID: 456771901857731864, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7513265251122846832}
-    - targetCorrespondingSourceObject: {fileID: 456771901857731864, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4211718568367362699}
   m_SourcePrefab: {fileID: 100100000, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
 --- !u!1 &555484109281424539 stripped
 GameObject:
@@ -616,45 +606,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1260156243, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
   m_PrefabInstance: {fileID: 7184928491295747288}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7341775567036365248 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 456771901857731864, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
-  m_PrefabInstance: {fileID: 7184928491295747288}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &7513265251122846832
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7341775567036365248}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a191ca705374bed47a33f44e1083e628, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
---- !u!114 &4211718568367362699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7341775567036365248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84fad483ef3a3c6419cd39eef37e1fa0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _aiHasReachedDestination: 1
-  _finishedToClimb: 1
 --- !u!1 &7790803363405079563 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1129136888719444179, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}

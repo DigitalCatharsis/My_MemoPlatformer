@@ -155,7 +155,8 @@ namespace My_MemoPlatformer
                 Debug.DrawRay(colliderBot.transform.position, colliderBot.transform.forward, Color.cyan, 3f);
             }
 
-            var platformEdge = new Vector3(0, boxCollider.bounds.max.y, hit.point.z);
+            //var platformEdge = new Vector3(0, boxCollider.bounds.max.y, hit.point.z);
+            var platformEdge = new Vector3(0, boxCollider.ClosestPointOnBounds(colliderBot.transform.position).y, boxCollider.ClosestPointOnBounds(colliderBot.transform.position).z);
 
             if (control.ROTATION_DATA.IsFacingForward())
             {

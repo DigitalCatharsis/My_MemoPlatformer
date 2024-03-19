@@ -13,16 +13,21 @@ namespace My_MemoPlatformer
             _control = GetComponentInParent<CharacterControl>();
         }
 
-        public void OLD_SEND_PA()
+        public void TryProcessFlyingKick()
         {
-            _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Starting_AI.ToString();
-            _control.AICONTROLLER_DATA.aiAnimator.Play(HashManager.Instance.arrAIStateNames[(int)AI_State_Name.SendPathfindingAgent], 0);
+            _control.AICONTROLLER_DATA.aIAttacks.SetRandomFlyingKick();
+
+            if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() < 8f
+                && _control.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() > 3f
+                && _control.AICONTROLLER_DATA.aIConditions.IsFacingTarget())
+            {
+                _control.AICONTROLLER_DATA.aIAttacks.ProceedFlyingKick(_control);
+            }
         }
 
         public void ResetPASpheresPosition()
         {
             _control.AICONTROLLER_DATA.aiStatus = Ai_Status.ResetingPASpheresPosition.ToString();
-            //TODO: часто тут застревает
             _control.AICONTROLLER_DATA.pathfindingAgent.startSphere.transform.position = _control.AICONTROLLER_DATA.pathfindingAgent.target.transform.position;
             _control.AICONTROLLER_DATA.pathfindingAgent.endSphere.transform.position = _control.AICONTROLLER_DATA.pathfindingAgent.target.transform.position;
         }
@@ -34,12 +39,6 @@ namespace My_MemoPlatformer
         private int RandomizeNextAttack()
         {
             return Random.Range(0, _control.AICONTROLLER_DATA.listGroundAttacks.Count);
-        }
-
-        public void TriggerAttackState(CharacterControl control)
-        {
-            _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Triggering_AI_State.ToString();
-            control.AICONTROLLER_DATA.aiAnimator.Play(HashManager.Instance.arrAIStateNames[(int)AI_State_Name.AI_Attack], 0);
         }
 
         public void MoveToTheStartSphere()

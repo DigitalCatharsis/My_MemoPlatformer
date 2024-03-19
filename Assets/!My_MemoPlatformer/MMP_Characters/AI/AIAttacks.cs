@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Drawing;
 using UnityEngine;
 
@@ -65,7 +64,6 @@ namespace My_MemoPlatformer
         {
             if (Random.Range(0f, 1f) < _control.AICONTROLLER_DATA.flyingKickProbability)
             {
-                //TODO: ??????????????
                 _control.AICONTROLLER_DATA.doFlyingKick = true;
             }
             else

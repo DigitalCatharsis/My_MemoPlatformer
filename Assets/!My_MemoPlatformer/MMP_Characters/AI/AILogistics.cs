@@ -11,10 +11,10 @@ namespace My_MemoPlatformer
             _control = GetComponentInParent<CharacterControl>();
         }
 
-        public float TargetDistanceToEndSphere()
-        {
-            return Vector3.SqrMagnitude(_control.AICONTROLLER_DATA.pathfindingAgent.endSphere.transform.position - _control.AICONTROLLER_DATA.pathfindingAgent.target.transform.position);
-        }
+        //public float TargetDistanceToEndSphere()
+        //{
+        //    return Vector3.SqrMagnitude(_control.AICONTROLLER_DATA.pathfindingAgent.endSphere.transform.position - _control.AICONTROLLER_DATA.pathfindingAgent.target.transform.position);
+        //}
         public float GetStartSphereABSHeight()
         {
             var result = Mathf.Abs((_control.transform.position - _control.AICONTROLLER_DATA.pathfindingAgent.startSphere.transform.position).y);
@@ -22,12 +22,12 @@ namespace My_MemoPlatformer
             return result;
         }
 
-        public float GetEndSphereHeight()
-        {
-            var result = Mathf.Abs((_control.transform.position - _control.AICONTROLLER_DATA.pathfindingAgent.endSphere.transform.position).y);
+        //public float GetEndSphereHeight()
+        //{
+        //    var result = Mathf.Abs((_control.transform.position - _control.AICONTROLLER_DATA.pathfindingAgent.endSphere.transform.position).y);
 
-            return result;
-        }
+        //    return result;
+        //}
 
         public float AIDistanceToTarget()
         {

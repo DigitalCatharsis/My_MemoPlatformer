@@ -10,8 +10,6 @@ namespace My_MemoPlatformer
     //4. CharacterControl contains actual fields about character moving etc.
     public class CharacterControl : MonoBehaviour
     {
-        //public List<PoolObjectType> poolObjectList = new List<PoolObjectType>();
-
         [Header("Input")]
         public bool moveUp;
         public bool moveDown;
@@ -25,13 +23,13 @@ namespace My_MemoPlatformer
         [Header("SubComponents")]
         public SubComponentProcessor subComponentProcessor;
 
-        //have to dispose
-        //public AIProgress aiProgress;
-        //public AIController aiController;
-
+        [Header("Runtime")]
+        public Rigidbody rigidBody;
         public BoxCollider boxCollider;
-
         public NavMeshObstacle navMeshObstacle;
+
+        private Dictionary<string, GameObject> _childObjects = new Dictionary<string, GameObject>();
+
 
         public BlockingObj_Data BLOCKING_OBJ_DATA => subComponentProcessor.blockingObj_Data;
         public LedgeGrab_Data LEDGE_GRAB_DATA => subComponentProcessor.ledgeGrab_Data;
@@ -51,6 +49,7 @@ namespace My_MemoPlatformer
         public Interaction_Data INTERACTION_DATA => subComponentProcessor.interaction_Data;
         public AIController_Data AICONTROLLER_DATA => subComponentProcessor.aIController_Data;
 
+
         [Header("Setup")]
         public PlayableCharacterType playableCharacterType;
         public AI_Type aiType;
@@ -61,9 +60,7 @@ namespace My_MemoPlatformer
         public GameObject leftFoot_Attack;
         public GameObject rightFoot_Attack;
 
-        private Dictionary<string, GameObject> _childObjects = new Dictionary<string, GameObject>();
 
-        public Rigidbody rigidBody;
 
         private void Awake()
         {

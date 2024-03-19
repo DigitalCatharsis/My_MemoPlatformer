@@ -3375,14 +3375,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8492813072649468355, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
-      propertyPath: _flyingKickProbability
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8492813072649468355, guid: 19e982c28f9ada642bdd112f79f1710b, type: 3}
-      propertyPath: aIController_Data.flyingKickProbability
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
