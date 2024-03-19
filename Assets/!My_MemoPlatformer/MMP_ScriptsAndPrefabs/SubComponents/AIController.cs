@@ -102,7 +102,7 @@ namespace My_MemoPlatformer
             }
         }
 
-        public void InitializeAI() //TODO: Check all calls
+        public void InitializeAI()
         {
             aIController_Data.aiStatus = Ai_Status.InitializingAI.ToString();
             aIController_Data.aiType = AI_Type.Bot;
@@ -117,14 +117,6 @@ namespace My_MemoPlatformer
             {
                 aIController_Data.pathfindingAgent = Instantiate(Resources.Load("PathfindingAgent", typeof(GameObject)) as GameObject).GetComponent<PathFindingAgent>();
             }
-
-            //if (control.aiType == AI_Type.Bot)
-            //{
-            //    if (control.navMeshObstacle != null)
-            //    {
-            //        control.navMeshObstacle.carving = false;
-            //    }
-            //}
         }
 
         //TODO: replace and parse. Happens every update, have to fix

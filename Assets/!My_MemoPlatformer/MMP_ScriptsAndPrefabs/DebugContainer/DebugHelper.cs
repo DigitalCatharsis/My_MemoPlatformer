@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace My_MemoPlatformer
 {
@@ -35,61 +31,15 @@ namespace My_MemoPlatformer
 
         #region TODO
         /*
-         * 1. Пофиксить AI 
-         *      (Сбивается PathFind)
-         *      (Застревает в Jump)
          * 5. Оптимизировать управление, убрать ненужный Pull(Momentum)
          * 6. Переделать текущий дебагер (избавиться от Update и слелать Editor класс)
          * 7. Сменить анимации прыжка, падения, бега
          * 8. Уеличить скорость атаки
-         * 9. Перенести сцену со стола на комод. Сделать маршрут.
-         * 10. Сделать фабрику для спавна и сам спавн противников рядом с игроком
          * 11. Рыдать от безысходности
          * 12. Left Right Up Down в стейт машиине?
          * 13. Исправить приближение камеры
          */
         #endregion
-
-        private void Start()
-        {
-            //for (var i = 0; i < 10; i++)
-            //{
-            //    testListOfLists.instance.Add(
-            //        new Serializable_SubList<StatesHashData>
-            //        {
-            //            subList = new List<StatesHashData>()
-            //            {
-            //                new StatesHashData
-            //                {
-            //                    stateName = "SubList_Data_" + i,
-            //                    hashedNameValue = i,
-
-            //                },
-            //            },
-            //        }); ;
-            //} 
-
-            //var HN = new int[] { 0,1, 2 };
-            //var SN = new string[] { "0","1","2"};
-
-            //AddValuesToTestOfLists(HN, SN);
-
-        }
-
-        //public void AddValuesToTestOfLists(int[] hashesNames, string[] stateNamess)
-        //{
-        //    testListOfLists.instance.Add(new Serializable_SubList<StatesHashData>());
-
-        //    for (int i = 0; i < hashesNames.Length; i++)
-        //    {
-        //        testListOfLists.instance.Last().subList.Add(new StatesHashData { hashedNameValue = hashesNames[i], stateName = stateNamess[i] });
-        //    }
-        //}
-
-        public void UpdateDebugHelpersDict()
-        {
-
-        }
 
         private void Update()
         {

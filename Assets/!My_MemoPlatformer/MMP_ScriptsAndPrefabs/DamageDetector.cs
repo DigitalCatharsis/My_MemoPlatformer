@@ -12,9 +12,6 @@ namespace My_MemoPlatformer
         [Header("HP Setup")]
         [SerializeField] private float _hp;
 
-        //TODO: static?
-        private static string _VFX_Prefix = "VFX";
-
         public override void OnComponentEnabled()
         {
 
@@ -237,7 +234,7 @@ namespace My_MemoPlatformer
 
         private void OnTakeDamage(AttackCondition attackCondition_Info)
         {
-            ProcessHitParticlesAndShakeCamera(attackCondition_Info);
+            ProcessHitParticles(attackCondition_Info);
 
             attackCondition_Info.currentHits++;
             _damage_Data.currentHp -= attackCondition_Info.attackAbility.damage;
@@ -291,18 +288,15 @@ namespace My_MemoPlatformer
             }
         }
 
-        private void ProcessHitParticlesAndShakeCamera(AttackCondition info)
+        private void ProcessHitParticles(AttackCondition info)
         {
             if (info.mustCollide)
             {
-                CameraManager.Instance.ShakeCamera(0.3f);
+                //CameraManager.Instance.ShakeCamera(0.3f);
 
                 if (info.attackAbility.useDeathParticles)
                 {
-                    if (info.attackAbility.particleType.ToString().Contains(_VFX_Prefix))
-                    {
-                        control.INTERACTION_DATA.SpawnPointHitParticle(info.attacker, info.attackAbility.particleType);
-                    }
+                    control.INTERACTION_DATA.SpawnPointHitParticle(info.attacker, info.attackAbility.particleType);
                 }
             }
         }

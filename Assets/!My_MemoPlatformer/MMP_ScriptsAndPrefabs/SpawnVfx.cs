@@ -10,10 +10,10 @@ namespace My_MemoPlatformer
         public float spawnTiming;
         public string parentObjectName = string.Empty;
         public bool stickToParent;
+
         [Range(0f, 1f)]
         [SerializeField] private float delayBeforeSpawn;
 
-        //TODO: передлать условия спауна, т.к тут оно делает отдельно
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             characterState.characterControl.INTERACTION_DATA.SpawnParticle(characterState.characterControl, objectType, parentObjectName, stickToParent, delayBeforeSpawn);
@@ -21,16 +21,10 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            //if (stateInfo.normalizedTime >= spawnTiming)
-            //{
-            //    characterState.characterControl.INTERACTION_DATA.SpawnParticle(characterState.characterControl, objectType, parentObjectName, stickToParent);
-            //}
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
         }
-
-
     }
 }

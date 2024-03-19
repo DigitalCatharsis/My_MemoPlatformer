@@ -90,5 +90,11 @@ namespace My_MemoPlatformer
             _spawnedVFX.SetActive(true);
             yield break;
         }
+
+        public void ShakeCamera(float shakeDuration)
+        {
+            CameraManager.Instance.ShakeCamera(shakeDuration);
+        }
+
     }
 }

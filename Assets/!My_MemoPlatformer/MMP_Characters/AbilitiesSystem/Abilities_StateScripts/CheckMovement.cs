@@ -12,7 +12,7 @@ namespace My_MemoPlatformer
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            CheckLeftRightUpDown(characterState.characterControl);
+            Check_OnRunToTurn_LeftRightUpDown(characterState.characterControl);
 
             if (characterState.characterControl.moveLeft || characterState.characterControl.moveRight)
             {
@@ -35,52 +35,49 @@ namespace My_MemoPlatformer
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
+            characterState.characterControl.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.RunToTurn_Left], false);
+            characterState.characterControl.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.RunToTurn_Right], false);
+            characterState.characterControl.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.RunToTurn_Up], false);
+            characterState.characterControl.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.RunToTurn_Down], false);
         }
 
-        void CheckLeftRightUpDown(CharacterControl control)
+        void Check_OnRunToTurn_LeftRightUpDown(CharacterControl control)
         {
             if (control.moveLeft)
             {
-                control.skinnedMeshAnimator.
-                    SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Left], true);
+                control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.RunToTurn_Left], true);
             }
             else
             {
-                control.skinnedMeshAnimator.
-                    SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Left], false);
+                control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.RunToTurn_Left], false);
             }
 
             if (control.moveRight)
             {
                 control.skinnedMeshAnimator.
-                    SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Right], true);
+                    SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.RunToTurn_Right], true);
             }
             else
             {
-                control.skinnedMeshAnimator.
-                    SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Right], false);
+                control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.RunToTurn_Right], false);
             }
 
             if (control.moveUp)
             {
-                control.skinnedMeshAnimator.
-                    SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Up], true);
+                control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.RunToTurn_Up], true);
             }
             else
             {
-                control.skinnedMeshAnimator.
-                    SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Up], false);
+                control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.RunToTurn_Up], false);
             }
 
             if (control.moveDown)
             {
-                control.skinnedMeshAnimator.
-                    SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Down], true);
+                control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.RunToTurn_Down], true);
             }
             else
             {
-                control.skinnedMeshAnimator.
-                    SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.Down], false);
+                control.skinnedMeshAnimator.SetBool(HashManager.Instance.arrMainParams[(int)MainParameterType.RunToTurn_Down], false);
             }
         }
     }

@@ -6,11 +6,6 @@ namespace My_MemoPlatformer
     {
         public CharacterType poolObjectType;
 
-        private void OnEnable()                //Есть бага, когда объект не апдейтится, объект пула перестает деактивироваться. Это FailSafe
-        {
-        }
-
-        //TODO: implement turn off properly
         public void TurnOff()
         {
             this.transform.parent = null;

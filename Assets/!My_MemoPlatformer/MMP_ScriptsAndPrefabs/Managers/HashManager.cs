@@ -113,10 +113,10 @@ namespace My_MemoPlatformer
     public enum MainParameterType
     {
         Move,
-        Left,
-        Right,
-        Up,
-        Down,
+        RunToTurn_Left,   //TODO: implement logic. Prevent keeping acrion of you pressed a new one. (running lefr + up then running right + up, will still roll to left)
+        RunToTurn_Right,
+        RunToTurn_Up,
+        RunToTurn_Down,
         Jump,
         ForceTransition,
         Grounded,

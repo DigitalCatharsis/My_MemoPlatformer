@@ -206,7 +206,6 @@ namespace My_MemoPlatformer
 
                 if (platformDistance.y > 0.5f)
                 {
-                    //TODO Добавить проверку относительно стартовой сферы??
 
                     if (_pathFindingAgent.startSphere.transform.position.z <
                         _pathFindingAgent.endSphere.transform.position.z)
