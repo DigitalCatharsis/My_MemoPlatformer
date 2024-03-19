@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    public class AIProcessor : MonoBehaviour
+    public class AIBehavior : MonoBehaviour
     {
         private CharacterControl _control;
         private PathFindingAgent _pathFindingAgent;
@@ -25,6 +25,11 @@ namespace My_MemoPlatformer
 
         private IEnumerator ProcessAI_Routine()
         {
+            if (_control.AICONTROLLER_DATA.aiType == AI_Type.Player)
+            {
+                yield break;
+            }
+
             ResultWrapper<bool> finishedMoveRoutine = new();
 
             _control.AICONTROLLER_DATA.aiStatus = Ai_Status.StartingAiProcessor.ToString();
@@ -49,7 +54,7 @@ namespace My_MemoPlatformer
                 //Rest if landing
                 if (_control.PLAYER_ANIMATION_DATA.IsRunning(typeof(Landing)))
                 {
-                    _control.AICONTROLLER_DATA.aIBehavior.StopCharacter(); //get rid from MoveUp after jump
+                    _control.AICONTROLLER_DATA.aIBehaviors.StopCharacter(); //get rid from MoveUp after jump
                     yield return null;
                     continue;
                 }
@@ -66,7 +71,7 @@ namespace My_MemoPlatformer
 
                 if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToTarget() <= 1f)
                 {
-                    _control.AICONTROLLER_DATA.aIBehavior.ProcessAttack();
+                    _control.AICONTROLLER_DATA.aIBehaviors.ProcessAttack();
                     _control.turbo = false;
                     yield return new WaitForSeconds(0.2f); //не делай маленьким, или пешка будет дергаться
                     continue;
@@ -86,6 +91,13 @@ namespace My_MemoPlatformer
                 {
                     Debug.Log("AIPROCESSOR: moving to start sphere");
                     yield return StartCoroutine(MoveToStartSphere_Routine(finishedMoveRoutine));
+
+                    //if (finishedMoveRoutine.Result == false)
+                    //{
+                    //    _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                    //    yield return null;
+                    //    continue;
+                    //}
                 }
 
                 //Another Platform
@@ -98,7 +110,7 @@ namespace My_MemoPlatformer
                         yield return StartCoroutine(MoveToStartSphere_Routine(finishedMoveRoutine));
                         if (finishedMoveRoutine.Result == true)
                         {
-                            _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                            _control.AICONTROLLER_DATA.aIBehaviors.StopCharacter();
                             //yield return null;
                         }
                         else
@@ -108,7 +120,7 @@ namespace My_MemoPlatformer
                     }
                     if(finishedMoveRoutine.Result == false)
                     {
-                        _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                        _control.AICONTROLLER_DATA.aIBehaviors.StopCharacter();
                         yield return null;
                         continue;
                     }
@@ -119,7 +131,7 @@ namespace My_MemoPlatformer
                     {
                         if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToStartSphere() <= _minimumDistanceToStartSphereForJump) //how close are we to the checkpoint    //Здесь часто бывает баг (когда иди бегает вокруг Start Point) из-за разных смещений платформы или ИИ относительно друг друга. Увелич да < 0.1f для дебага
                         {
-                            _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                            _control.AICONTROLLER_DATA.aIBehaviors.StopCharacter();
                             _control.AICONTROLLER_DATA.aiStatus = Ai_Status.Jumping.ToString();
                             _control.jump = true;
                             _control.moveUp = true;
@@ -130,12 +142,12 @@ namespace My_MemoPlatformer
                             yield return StartCoroutine(MoveToStartSphere_Routine(finishedMoveRoutine));
                             if (finishedMoveRoutine.Result == true)
                             {
-                                _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                                _control.AICONTROLLER_DATA.aIBehaviors.StopCharacter();
                                 //yield return null;
                             }
                             else
                             {
-                                _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                                _control.AICONTROLLER_DATA.aIBehaviors.StopCharacter();
                                 yield return null;
                                 continue;
                             }
@@ -143,7 +155,7 @@ namespace My_MemoPlatformer
                     }
                     else
                     {
-                        _control.AICONTROLLER_DATA.aIBehavior.MoveToTheEndSphere();
+                        _control.AICONTROLLER_DATA.aIBehaviors.MoveToTheEndSphere();
                     }
                 }
 
@@ -151,14 +163,14 @@ namespace My_MemoPlatformer
                 if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToEndSphere() < 1f)
                 {
                     Debug.Log("AIPROCESSOT: REACHED END SPHERE!");
-                    _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                    _control.AICONTROLLER_DATA.aIBehaviors.StopCharacter();
                 }
 
                 //We should update spheres for keeping AI move
                 if (_control.AICONTROLLER_DATA.aIConditions.TargetIsOnTheSamePlatform())
                 {
                     Debug.Log("AIProcessor: UPDATING SPHERES POSITION!");
-                    _control.AICONTROLLER_DATA.aIBehavior.ResetPASpheresPosition();
+                    _control.AICONTROLLER_DATA.aIBehaviors.ResetPASpheresPosition();
                 }
                 yield return null;
             }
@@ -236,12 +248,12 @@ namespace My_MemoPlatformer
         {
             while (IsMoveToStartSphereCondition() == true)
             {
-                _control.AICONTROLLER_DATA.aIBehavior.MoveToTheStartSphere();
+                _control.AICONTROLLER_DATA.aIBehaviors.MoveToTheStartSphere();
 
                 if (_control.AICONTROLLER_DATA.aiLogistic.AIDistanceToStartSphere() <= _minimumDistanceToStartSphereForJump)
                 {
                     finishedRoutine.Result = true;
-                    _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                    _control.AICONTROLLER_DATA.aIBehaviors.StopCharacter();
                     yield break;
                 }
                 yield return null;
@@ -284,7 +296,7 @@ namespace My_MemoPlatformer
                 {
                     if (platformDistance.y < 0.3f)
                     {
-                        _control.AICONTROLLER_DATA.aIBehavior.StopCharacter();
+                        _control.AICONTROLLER_DATA.aIBehaviors.StopCharacter();
                         _finishedToClimb = true;
                     }
                 }

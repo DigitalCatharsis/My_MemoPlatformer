@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    public class AILogistic : MonoBehaviour
+    public class AILogistics : MonoBehaviour
     {
         private CharacterControl _control;
 

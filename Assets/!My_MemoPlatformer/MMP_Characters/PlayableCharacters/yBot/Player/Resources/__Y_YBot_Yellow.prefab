@@ -219,9 +219,10 @@ GameObject:
   - component: {fileID: 7255453056516695933}
   - component: {fileID: 1614951800250864923}
   - component: {fileID: 9215528708244499142}
-  - component: {fileID: 2150334102477219733}
   - component: {fileID: 8664558090355761590}
   - component: {fileID: 484652006543390627}
+  - component: {fileID: 4258659679838287598}
+  - component: {fileID: 7041291375661243042}
   m_Layer: 9
   m_Name: __M_AIController
   m_TagString: Untagged
@@ -263,13 +264,13 @@ MonoBehaviour:
     doFlyingKick: 0
     flyingKickProbability: 0
     aIAttacks: {fileID: 0}
-    aIBehavior: {fileID: 0}
+    aIBehaviors: {fileID: 0}
     aIConditions: {fileID: 0}
     aiLogistic: {fileID: 0}
     pathfindingAgent: {fileID: 0}
     aiAnimator: {fileID: 0}
   _aIAttacks: {fileID: 9215528708244499142}
-  _aIBehavior: {fileID: 2150334102477219733}
+  _aIBehaviors: {fileID: 4258659679838287598}
   _aIConditions: {fileID: 8664558090355761590}
   _aiLogistic: {fileID: 484652006543390627}
   _aiAnimator: {fileID: 2428127011527154921}
@@ -284,18 +285,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afff62456aa6e7c49b07b32045dd11b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2150334102477219733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 456771901857731864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 212379e11f0ec35458b60845aac462f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8664558090355761590
@@ -322,6 +311,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08977be64a098f3439627e72c44c2a40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4258659679838287598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456771901857731864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 212379e11f0ec35458b60845aac462f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7041291375661243042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456771901857731864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84fad483ef3a3c6419cd39eef37e1fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _finishedToClimb: 1
 --- !u!1 &708256176615141862
 GameObject:
   m_ObjectHideFlags: 0
@@ -4456,7 +4470,7 @@ GameObject:
   - component: {fileID: 2838286670764771645}
   - component: {fileID: 7446479350593793540}
   m_Layer: 9
-  m_Name: SubComponent_Processor
+  m_Name: __CSubComponent_Processor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4594,7 +4608,7 @@ MonoBehaviour:
     doFlyingKick: 0
     flyingKickProbability: 0
     aIAttacks: {fileID: 0}
-    aIBehavior: {fileID: 0}
+    aIBehaviors: {fileID: 0}
     aIConditions: {fileID: 0}
     aiLogistic: {fileID: 0}
     pathfindingAgent: {fileID: 0}

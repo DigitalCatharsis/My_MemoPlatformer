@@ -16,9 +16,9 @@ namespace My_MemoPlatformer
         public float flyingKickProbability;
 
         public AIAttacks aIAttacks;
-        public AIBehavior aIBehavior;
+        public AIBehaviors aIBehaviors;
         public AIConditions aIConditions;
-        public AILogistic aiLogistic;
+        public AILogistics aiLogistic;
 
         public PathFindingAgent pathfindingAgent;
         public Animator aiAnimator;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace My_MemoPlatformer
 {
-    public class AIBehavior : MonoBehaviour
+    public class AIBehaviors : MonoBehaviour
     {
         private Vector3 _targetDir;
         private CharacterControl _control;

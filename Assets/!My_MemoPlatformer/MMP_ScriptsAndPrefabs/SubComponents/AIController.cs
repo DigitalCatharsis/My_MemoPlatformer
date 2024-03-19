@@ -47,12 +47,12 @@ namespace My_MemoPlatformer
 
         [Header("Method Classes Setup")]
         [SerializeField] private AIAttacks _aIAttacks;
-        [SerializeField] private AIBehavior _aIBehavior;
+        [SerializeField] private AIBehaviors _aIBehaviors;
         [SerializeField] private AIConditions _aIConditions;
 
         [Header("Parameters Setup")]
         [Space(10)]
-        [SerializeField] private AILogistic _aiLogistic;
+        [SerializeField] private AILogistics _aiLogistic;
         [SerializeField] private Animator _aiAnimator;
         [Range(0f, 1f)][SerializeField] private float _flyingKickProbability;
 
@@ -63,7 +63,7 @@ namespace My_MemoPlatformer
             aIController_Data = new AIController_Data
             {
                 aIAttacks = _aIAttacks,
-                aIBehavior = _aIBehavior,
+                aIBehaviors = _aIBehaviors,
                 aIConditions = _aIConditions,
                 aiLogistic = _aiLogistic,
 

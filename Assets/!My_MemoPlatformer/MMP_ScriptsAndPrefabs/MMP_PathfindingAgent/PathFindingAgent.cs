@@ -7,6 +7,7 @@ using UnityEngine.AI;
 
 namespace My_MemoPlatformer
 {
+    //Dont make speed of PA more than 45, or it will be insane sometimes
     public class PathFindingAgent : MonoBehaviour
     {
         public bool targetPlayableCharacter;
@@ -30,26 +31,19 @@ namespace My_MemoPlatformer
         }
         public IEnumerator ReinitAndSendPA(CharacterControl owner)
         {
-            Debug.Log("PA: ProceedingPA");
             owner.navMeshObstacle.carving = false; //to prevent bug when carving forbids agent to move
             meshLinks.Clear();
             _navMeshAgent.Warp(owner.transform.position + (Vector3.up * 0.5f));
-
-
             _navMeshAgent.enabled = true;
             _navMeshAgent.isStopped = false;
-            //hasFinishedPathfind = false;
-
-
-            Debug.Log("STARTED OnDestinationCheck_Routine");
-
-
-            //while (hasFinishedPathfind != true)
             var cycleCounter = -1; //temp
+
             while (true)
             {
                 cycleCounter++;
                 _navMeshAgent.SetDestination(target.transform.position);
+                //StartCoroutine(SimulateWaypoints(cycleCounter));
+
                 if (_navMeshAgent.isOnOffMeshLink && meshLinks.Count == 0)
                 {
                     meshLinks.Add(_navMeshAgent.currentOffMeshLinkData.startPos);
@@ -57,8 +51,6 @@ namespace My_MemoPlatformer
                 }
 
                 // Вывод каждого узла пути в консоль
-                StartCoroutine(SimulateWaypoints(cycleCounter));
-
 
                 var distanceToDestination = transform.position - _navMeshAgent.destination;  //между навигатором и его точкой назначения, а не control
                 testSphere.transform.position = _navMeshAgent.destination;
@@ -77,9 +69,6 @@ namespace My_MemoPlatformer
 
                     _navMeshAgent.isStopped = true;
                     owner.navMeshObstacle.carving = true;
-                    //hasFinishedPathfind = true;
-                    Debug.Log("PA hasFinishedPathfind");
-                    //yield return new WaitForSeconds(0.5f);
                     yield break;
                 }
                 //ColorDebugLog.Log($"{_navMeshAgent.CalculatePath(target.transform.position, new NavMeshPath())}", System.Drawing.KnownColor.RosyBrown);
@@ -114,7 +103,6 @@ namespace My_MemoPlatformer
                 ColorDebugLog.Log("Cycle " + cycleCounter.ToString(), System.Drawing.KnownColor.Aquamarine);
                 ColorDebugLog.Log("Waypoint " + i++ + " " + waypoint.ToString(), System.Drawing.KnownColor.Aquamarine);
             }
-            //Debug.Break();
             yield return new WaitForSeconds(0.3f);
             foreach (var sphere in spheresArray)
             {

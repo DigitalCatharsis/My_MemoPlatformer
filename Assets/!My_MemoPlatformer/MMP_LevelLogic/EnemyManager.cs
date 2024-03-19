@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Networking.PlayerConnection;
-using static UnityEngine.Networking.UnityWebRequest;
 
 namespace My_MemoPlatformer
 {

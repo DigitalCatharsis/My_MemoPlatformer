@@ -57,7 +57,7 @@ namespace My_MemoPlatformer
             else if (obj != null && obj.name.StartsWith("__C", System.StringComparison.Ordinal))    //Every gameobject which starts with __- gonna be painted and have a shadow label
             {
                 EditorGUI.DrawRect(selectionRect, Color.cyan);
-                EditorGUI.DropShadowLabel(selectionRect, obj.name.Replace("__Y", "").ToString());
+                EditorGUI.DropShadowLabel(selectionRect, obj.name.Replace("__C", "").ToString());
             }
             else if (obj != null && obj.name.StartsWith($"{typeof(HierarchyLabel).Namespace}.", System.StringComparison.Ordinal))    //Every gameobject which starts with __- gonna be painted and have a shadow label
             {
