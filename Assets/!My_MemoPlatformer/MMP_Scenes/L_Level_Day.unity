@@ -1114,10 +1114,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpikeTrap
       objectReference: {fileID: 0}
-    - target: {fileID: 4504840144500689385, guid: ce24d9eb4cf33b34b875c0e4540e44b8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4508613592354138047, guid: ce24d9eb4cf33b34b875c0e4540e44b8, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -5569,29 +5565,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408238357}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1451103479 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6869183844350479270, guid: 5034b64b3b8d735469f1eb40c94047c7, type: 3}
-  m_PrefabInstance: {fileID: 1130227061988587411}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1451103483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1451103479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e98c657ca39797a43815785f3e8fb5f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  farObject: {fileID: 2099931837}
-  distanceBetweenObjects: 6.799795
-  SqrMagnitude: 46.237213
-  vectorToObject: {x: 0.7929999, y: -0.40899992, z: -6.741}
-  target_WorldPosition: {x: -1.29, y: -4.471, z: 3.578}
-  farObject_WorldPosition: {x: -1.29, y: -4.471, z: 3.578}
 --- !u!1 &1470717423
 GameObject:
   m_ObjectHideFlags: 0
@@ -6029,7 +6002,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3046520408400585082, guid: adff31e199afa174c9c544399732b118, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.37
       objectReference: {fileID: 0}
     - target: {fileID: 3046520408400585082, guid: adff31e199afa174c9c544399732b118, type: 3}
       propertyPath: m_LocalPosition.y
@@ -16827,10 +16800,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1818861626715108669, guid: 5034b64b3b8d735469f1eb40c94047c7, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6001402891942558346, guid: 5034b64b3b8d735469f1eb40c94047c7, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -16875,6 +16844,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6047962989593178191, guid: 5034b64b3b8d735469f1eb40c94047c7, type: 3}
+      propertyPath: farObject
+      value: 
+      objectReference: {fileID: 2099931837}
     - target: {fileID: 6869183844350479270, guid: 5034b64b3b8d735469f1eb40c94047c7, type: 3}
       propertyPath: m_Name
       value: Melee_Pickup_BladeKnife
@@ -16882,10 +16855,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6869183844350479270, guid: 5034b64b3b8d735469f1eb40c94047c7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1451103483}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5034b64b3b8d735469f1eb40c94047c7, type: 3}
 --- !u!4 &1135634332356859636
 Transform:
@@ -37990,10 +37960,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 353884409588067293, guid: 27c6ede939c39d247ac0894bd4f38a02, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5454991035804638131, guid: 27c6ede939c39d247ac0894bd4f38a02, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -38041,22 +38007,6 @@ PrefabInstance:
     - target: {fileID: 6003055764504077593, guid: 27c6ede939c39d247ac0894bd4f38a02, type: 3}
       propertyPath: m_Name
       value: __M_LevelLogic
-      objectReference: {fileID: 0}
-    - target: {fileID: 6329450125771097236, guid: 27c6ede939c39d247ac0894bd4f38a02, type: 3}
-      propertyPath: _maxEnemyNumber
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6329450125771097236, guid: 27c6ede939c39d247ac0894bd4f38a02, type: 3}
-      propertyPath: _timeBetweenSpawn
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6850378854998594764, guid: 27c6ede939c39d247ac0894bd4f38a02, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6850378854998594764, guid: 27c6ede939c39d247ac0894bd4f38a02, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

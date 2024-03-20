@@ -11908,7 +11908,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3870206860424991385, guid: fc7ff9bf0acaf7b4eb9fa2e6d6c0cfad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4157020017600787572, guid: fc7ff9bf0acaf7b4eb9fa2e6d6c0cfad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5949002013363698332, guid: fc7ff9bf0acaf7b4eb9fa2e6d6c0cfad, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -12061,6 +12069,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 456771901857731864, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 744158901061891061, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -12111,6 +12123,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3372119544377188092, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7020094712125406493, guid: b1d69009993d5704f91acacefd9a5a73, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -12187,6 +12203,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 156029864679371698, guid: c4c6c4fa53fa8e445ad3b76e94a56acb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5587307409623535699, guid: c4c6c4fa53fa8e445ad3b76e94a56acb, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -12234,6 +12254,10 @@ PrefabInstance:
     - target: {fileID: 5587307409623535703, guid: c4c6c4fa53fa8e445ad3b76e94a56acb, type: 3}
       propertyPath: m_Name
       value: YBot - Green Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7282585822138325943, guid: c4c6c4fa53fa8e445ad3b76e94a56acb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7572237849621757274, guid: c4c6c4fa53fa8e445ad3b76e94a56acb, type: 3}
       propertyPath: m_IsActive

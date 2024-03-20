@@ -1403,7 +1403,7 @@ Transform:
   - {fileID: 1148098826670130111}
   - {fileID: 5599618454028797243}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!33 &4536963981737174303
 MeshFilter:
@@ -1516,6 +1516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listOfCharacter: []
+  listOfSpikeVictims: []
   listOfSpikes: []
   spikeDeathAnimator: {fileID: 9100000, guid: dd6b231f70869be44a41a2a6ca0bd5bc, type: 2}
 --- !u!1 &4721074372285216589
